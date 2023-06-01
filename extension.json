@@ -1,0 +1,46 @@
+{
+	"name": "IncidentReporting",
+	"author": [
+		"[https://www.mediawiki.org/wiki/Trust_and_Safety_Tools Wikimedia Trust and Safety Tools team]",
+		"Ellen Rayfield",
+		"Essex Igyan",
+		"Julia Kieserman"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:IncidentReporting",
+	"descriptionmsg": "incidentreporting-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.41.0"
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\IncidentReporting\\": "src/"
+	},
+	"config": {
+	},
+	"HookHandlers": {
+		"IncidentReportingHooks": {
+			"class": "MediaWiki\\Extension\\IncidentReporting\\Hooks"
+		}
+	},
+	"Hooks": {
+	},
+	"MessagesDirs": {
+		"IncidentReporting": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"ext.incidentreporting": {
+			"localBasePath": "resources/ext.incidentreporting",
+			"remoteExtPath": "IncidentReporting/resources/ext.incidentreporting",
+			"dependencies": [],
+			"styles": [],
+			"packageFiles": [
+				"init.js"
+			],
+			"messages": []
+		}
+	},
+	"manifest_version": 2
+}
