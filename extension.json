@@ -17,6 +17,22 @@
 		"MediaWiki\\Extension\\IncidentReporting\\": "src/"
 	},
 	"config": {
+		"IncidentReportingEnabled": {
+			"value": true,
+			"description": "Whether Incident Reporting is enabled or not."
+		},
+		"IncidentReportingEnabledSkins": {
+			"value": [
+				"minerva", "vector", "vector-2022"
+			],
+			"description": "Feature flag to determine skins the Incident Reporting will run in. This should contain an array of skin names."
+		},
+		"IncidentReportingEnabledNamespaces": {
+			"value": [
+				3
+			],
+			"description": "Determines what namespaces the Incident Reporting tool will render within. The default is 3 which defaults to the NS_USER_TALK namespace"
+		}
 	},
 	"HookHandlers": {
 		"IncidentReportingHooks": {
@@ -24,22 +40,41 @@
 		}
 	},
 	"Hooks": {
+		"BeforePageDisplay": [
+			"IncidentReportingHooks"
+		]
 	},
 	"MessagesDirs": {
 		"IncidentReporting": [
 			"i18n"
 		]
 	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources/ext.incidentReporting",
+		"remoteExtPath": "IncidentReporting/resources/ext.incidentReporting"
+	},
 	"ResourceModules": {
-		"ext.incidentreporting": {
-			"localBasePath": "resources/ext.incidentreporting",
-			"remoteExtPath": "IncidentReporting/resources/ext.incidentreporting",
-			"dependencies": [],
-			"styles": [],
+		"ext.incidentReporting": {
 			"packageFiles": [
-				"init.js"
+				"init.js",
+				"components/App.vue"
 			],
-			"messages": []
+			"messages": [
+				"ext-incidentreporting-desc",
+				"ext-incidentreporting-report-btn-label",
+				"ext-incidentreporting-dialog-info-header",
+				"ext-incidentreporting-dialog-close-btn"
+			],
+			"dependencies": [
+				"mediawiki.Uri",
+				"mediawiki.jqueryMsg",
+				"mediawiki.api",
+				"mediawiki.storage",
+				"mediawiki.user",
+				"vue",
+				"pinia",
+				"@wikimedia/codex"
+			]
 		}
 	},
 	"manifest_version": 2

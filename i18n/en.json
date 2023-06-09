@@ -1,4 +1,13 @@
 {
-	"@metadata": {},
-	"incidentreporting-desc": "Private Incident Reporting System extension."
+	"@metadata": {
+		"authors": [
+			"Ellen Rayfield",
+			"Essex Igyan",
+			"Julia Kieserman"
+		] },
+	"ext-incidentreporting-desc": "Private Incident Reporting System extension.",
+	"ext-incidentreporting-report-btn-label": "Report",
+	"ext-incidentreporting-dialog-info-header": "File a report",
+	"ext-incidentreporting-dialog-close-btn": "Close"
+
 }

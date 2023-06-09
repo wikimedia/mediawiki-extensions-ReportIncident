@@ -19,5 +19,29 @@
 
 namespace MediaWiki\Extension\IncidentReporting;
 
-class Hooks {
+use MediaWiki\Hook\BeforePageDisplayHook;
+use OutputPage;
+use Skin;
+
+class Hooks implements BeforePageDisplayHook {
+
+	/**
+	 * @param OutputPage $out
+	 * @param Skin $skin
+	 * Hook: BeforePageDisplay
+	 */
+	public function onBeforePageDisplay( $out, $skin ): void {
+		/** If IncidentReporting is not enabled do nothing. */
+		if ( !$out->getConfig()->get( 'IncidentReportingEnabled' ) ) {
+			return;
+		}
+
+		/** If IncidentReporting is enabled check we are in correct namespace and skin then add modules */
+		if ( in_array( $out->getTitle()->getNamespace(),
+				$out->getConfig()->get( 'IncidentReportingEnabledNamespaces' ) ) &&
+			in_array( $skin->getSkinName(), $out->getConfig()->get( 'IncidentReportingEnabledSkins' ) ) ) {
+			$out->addModules( [ 'ext.incidentReporting' ] );
+			$out->addHtml( '<div id="ext-incidentreporting-app"></div>' );
+		}
+	}
 }

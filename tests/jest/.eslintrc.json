@@ -1,0 +1,28 @@
+{
+	"root": true,
+	"extends": [
+		"wikimedia/jquery",
+		"wikimedia/client-es6",
+		"wikimedia/mediawiki"
+	],
+	"rules": {
+		"compat/compat": "off",
+		"max-len": [
+			"error",
+			{
+				"code": 120,
+				"tabWidth": 4,
+				"ignorePattern": "^// eslint-.+",
+				"ignoreUrls": true,
+				"ignoreComments": false,
+				"ignoreRegExpLiterals": true,
+				"ignoreStrings": true,
+				"ignoreTemplateLiterals": true
+			}
+		]
+	},
+	"env": {
+		"jest": true,
+		"browser": true
+	}
+}
