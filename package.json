@@ -2,7 +2,8 @@
 	"name": "ReportIncident",
 	"private": true,
 	"scripts": {
-		"test": "npm run test:grunt",
+		"test": "npm run test:grunt && npm run test:unit",
+		"coverage": "nyc --reporter=lcov npm -s run test:unit",
 		"test:grunt": "grunt test",
 		"test:unit": "jest",
 		"lint:fix": "grunt fix"
@@ -19,10 +20,11 @@
 		"grunt-banana-checker": "0.10.0",
 		"grunt-eslint": "24.0.1",
 		"grunt-stylelint": "0.18.0",
-		"jquery": "3.6.1",
 		"jest": "27.4.7",
-		"vue": "3.2.37",
-		"pinia": "2.0.16"
+		"jquery": "3.6.1",
+		"nyc": "^15.1.0",
+		"pinia": "2.0.16",
+		"vue": "3.2.37"
 	},
 	"eslintIgnore": [
 		"vendor/**"
