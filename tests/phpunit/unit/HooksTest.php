@@ -18,7 +18,7 @@ class HooksTest extends \MediaWikiUnitTestCase {
 	 */
 	public function testRlModuleIsNotLoadedIfFeatureFlagIsOff() {
 		$config = new HashConfig( [
-			"IncidentReportingEnabled" => [ "value" => true ],
+			"IncidentReportingReportButtonEnabled" => [ "value" => true ],
 			"IncidentReportingEnabledSkins" => [ "value" => 'minerva' ],
 			"IncidentReportingEnabledNamespaces" => [ "value" => NS_USER_TALK ],
 		] );

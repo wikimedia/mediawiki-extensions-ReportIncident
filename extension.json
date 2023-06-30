@@ -17,9 +17,9 @@
 		"MediaWiki\\Extension\\IncidentReporting\\": "src/"
 	},
 	"config": {
-		"IncidentReportingEnabled": {
+		"IncidentReportingReportButtonEnabled": {
 			"value": true,
-			"description": "Whether Incident Reporting is enabled or not."
+			"description": "Whether to display the report button on configured namespaces and skins."
 		},
 		"IncidentReportingEnabledSkins": {
 			"value": [

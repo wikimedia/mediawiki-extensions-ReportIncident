@@ -32,7 +32,7 @@ class Hooks implements BeforePageDisplayHook {
 	 */
 	public function onBeforePageDisplay( $out, $skin ): void {
 		/** If IncidentReporting is not enabled do nothing. */
-		if ( !$out->getConfig()->get( 'IncidentReportingEnabled' ) ) {
+		if ( !$out->getConfig()->get( 'IncidentReportingReportButtonEnabled' ) ) {
 			return;
 		}
 
