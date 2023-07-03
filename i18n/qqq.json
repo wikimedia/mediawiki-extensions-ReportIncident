@@ -5,8 +5,8 @@
 			"Essex Igyan",
 			"Julia Kieserman"
 		] },
-	"ext-incidentreporting-desc": "{{desc|name=IncidentReporting|url=https://www.mediawiki.org/wiki/Extension:IncidentReporting}}",
-	"ext-incidentreporting-report-btn-label": "The text for the report button.",
-	"ext-incidentreporting-dialog-info-header": "The header text for the dialog information component",
-	"ext-incidentreporting-dialog-close-btn": "The tooltip text to use with the close button for a dialog"
+	"reportincident-desc": "{{desc|name=ReportIncident|url=https://www.mediawiki.org/wiki/Extension:ReportIncident}}",
+	"reportincident-report-btn-label": "The text for the report button.",
+	"reportincident-dialog-info-header": "The header text for the dialog information component",
+	"reportincident-dialog-close-btn": "The tooltip text to use with the close button for a dialog"
 }

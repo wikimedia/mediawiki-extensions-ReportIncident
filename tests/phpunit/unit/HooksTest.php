@@ -1,23 +1,23 @@
 <?php
 
-namespace MediaWiki\Extension\IncidentReporting\Tests\Unit;
+namespace MediaWiki\Extension\ReportIncident\Tests\Unit;
 
 use HashConfig;
-use MediaWiki\Extension\IncidentReporting\Hooks;
+use MediaWiki\Extension\ReportIncident\Hooks;
 use OutputPage;
 use Skin;
 use Title;
 
 /**
- * @covers \MediaWiki\Extension\IncidentReporting\Hooks
+ * @covers \MediaWiki\Extension\ReportIncident\Hooks
  */
 class HooksTest extends \MediaWikiUnitTestCase {
 
 	public function testFeatureFlagDisabled() {
 		$config = new HashConfig( [
-			'IncidentReportingReportButtonEnabled' => false,
-			'IncidentReportingEnabledSkins' => [ 'minerva' ],
-			'IncidentReportingEnabledNamespaces' => [ NS_USER_TALK ],
+			'ReportIncidentReportButtonEnabled' => false,
+			'ReportIncidentEnabledSkins' => [ 'minerva' ],
+			'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$outputPageMock->method( 'getConfig' )->willReturn( $config );
@@ -28,9 +28,9 @@ class HooksTest extends \MediaWikiUnitTestCase {
 
 	public function testConfigEnabledCorrectNamespaceAndSkin() {
 		$config = new HashConfig( [
-			'IncidentReportingReportButtonEnabled' => true,
-			'IncidentReportingEnabledSkins' => [ 'minerva' ],
-			'IncidentReportingEnabledNamespaces' => [ NS_USER_TALK ],
+			'ReportIncidentReportButtonEnabled' => true,
+			'ReportIncidentEnabledSkins' => [ 'minerva' ],
+			'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$title = $this->createMock( Title::class );
@@ -48,9 +48,9 @@ class HooksTest extends \MediaWikiUnitTestCase {
 
 	public function testConfigEnabledIncorrectNamespaceCorrectSkin() {
 		$config = new HashConfig( [
-			'IncidentReportingReportButtonEnabled' => true,
-			'IncidentReportingEnabledSkins' => [ 'minerva' ],
-			'IncidentReportingEnabledNamespaces' => [ NS_PROJECT_TALK ],
+			'ReportIncidentReportButtonEnabled' => true,
+			'ReportIncidentEnabledSkins' => [ 'minerva' ],
+			'ReportIncidentEnabledNamespaces' => [ NS_PROJECT_TALK ],
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$title = $this->createMock( Title::class );
@@ -67,9 +67,9 @@ class HooksTest extends \MediaWikiUnitTestCase {
 
 	public function testConfigEnabledCorrectNamespaceIncorrectSkin() {
 		$config = new HashConfig( [
-			'IncidentReportingReportButtonEnabled' => true,
-			'IncidentReportingEnabledSkins' => [ 'minerva' ],
-			'IncidentReportingEnabledNamespaces' => [ NS_USER_TALK ],
+			'ReportIncidentReportButtonEnabled' => true,
+			'ReportIncidentEnabledSkins' => [ 'minerva' ],
+			'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$title = $this->createMock( Title::class );

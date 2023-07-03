@@ -1,33 +1,33 @@
 {
-	"name": "IncidentReporting",
+	"name": "ReportIncident",
 	"author": [
 		"[https://www.mediawiki.org/wiki/Trust_and_Safety_Tools Wikimedia Trust and Safety Tools team]",
 		"Ellen Rayfield",
 		"Essex Igyan",
 		"Julia Kieserman"
 	],
-	"url": "https://www.mediawiki.org/wiki/Extension:IncidentReporting",
-	"descriptionmsg": "incidentreporting-desc",
+	"url": "https://www.mediawiki.org/wiki/Extension:ReportIncident",
+	"descriptionmsg": "ReportIncident-desc",
 	"license-name": "GPL-2.0-or-later",
 	"type": "other",
 	"requires": {
 		"MediaWiki": ">= 1.41.0"
 	},
 	"AutoloadNamespaces": {
-		"MediaWiki\\Extension\\IncidentReporting\\": "src/"
+		"MediaWiki\\Extension\\ReportIncident\\": "src/"
 	},
 	"config": {
-		"IncidentReportingReportButtonEnabled": {
+		"ReportIncidentReportButtonEnabled": {
 			"value": true,
 			"description": "Whether to display the report button on configured namespaces and skins."
 		},
-		"IncidentReportingEnabledSkins": {
+		"ReportIncidentEnabledSkins": {
 			"value": [
 				"minerva", "vector", "vector-2022"
 			],
 			"description": "Feature flag to determine skins the Incident Reporting will run in. This should contain an array of skin names."
 		},
-		"IncidentReportingEnabledNamespaces": {
+		"ReportIncidentEnabledNamespaces": {
 			"value": [
 				3
 			],
@@ -35,35 +35,35 @@
 		}
 	},
 	"HookHandlers": {
-		"IncidentReportingHooks": {
-			"class": "MediaWiki\\Extension\\IncidentReporting\\Hooks"
+		"ReportIncidentHooks": {
+			"class": "MediaWiki\\Extension\\ReportIncident\\Hooks"
 		}
 	},
 	"Hooks": {
 		"BeforePageDisplay": [
-			"IncidentReportingHooks"
+			"ReportIncidentHooks"
 		]
 	},
 	"MessagesDirs": {
-		"IncidentReporting": [
+		"ReportIncident": [
 			"i18n"
 		]
 	},
 	"ResourceFileModulePaths": {
-		"localBasePath": "resources/ext.incidentReporting",
-		"remoteExtPath": "IncidentReporting/resources/ext.incidentReporting"
+		"localBasePath": "resources/ext.reportIncident",
+		"remoteExtPath": "ReportIncident/resources/ext.reportIncident"
 	},
 	"ResourceModules": {
-		"ext.incidentReporting": {
+		"ext.reportIncident": {
 			"packageFiles": [
 				"init.js",
 				"components/App.vue"
 			],
 			"messages": [
-				"ext-incidentreporting-desc",
-				"ext-incidentreporting-report-btn-label",
-				"ext-incidentreporting-dialog-info-header",
-				"ext-incidentreporting-dialog-close-btn"
+				"reportincident-desc",
+				"reportincident-report-btn-label",
+				"reportincident-dialog-info-header",
+				"reportincident-dialog-close-btn"
 			],
 			"dependencies": [
 				"mediawiki.Uri",

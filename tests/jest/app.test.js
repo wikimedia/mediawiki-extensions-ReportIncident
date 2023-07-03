@@ -1,6 +1,6 @@
 'use strict';
 
-const Main = require( '../../resources/ext.incidentReporting/components/App.vue' );
+const Main = require( '../../resources/ext.reportIncident/components/App.vue' );
 const utils = require( '@vue/test-utils' );
 
 describe( 'Main Component Test Suite', () => {

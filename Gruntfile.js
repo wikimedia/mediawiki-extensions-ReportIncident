@@ -2,7 +2,7 @@
 
 module.exports = function ( grunt ) {
 	const conf = grunt.file.readJSON( 'extension.json' ),
-		messageDirs = conf.MessagesDirs.IncidentReporting;
+		messageDirs = conf.MessagesDirs.ReportIncident;
 
 	grunt.loadNpmTasks( 'grunt-eslint' );
 	grunt.loadNpmTasks( 'grunt-banana-checker' );

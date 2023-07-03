@@ -1,5 +1,5 @@
 {
-	"name": "IncidentReporting",
+	"name": "ReportIncident",
 	"private": true,
 	"scripts": {
 		"test": "npm run test:grunt",

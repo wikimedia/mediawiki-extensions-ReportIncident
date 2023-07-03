@@ -17,7 +17,7 @@
  * @file
  */
 
-namespace MediaWiki\Extension\IncidentReporting;
+namespace MediaWiki\Extension\ReportIncident;
 
 use MediaWiki\Hook\BeforePageDisplayHook;
 use OutputPage;
@@ -31,17 +31,18 @@ class Hooks implements BeforePageDisplayHook {
 	 * Hook: BeforePageDisplay
 	 */
 	public function onBeforePageDisplay( $out, $skin ): void {
-		/** If IncidentReporting is not enabled do nothing. */
-		if ( !$out->getConfig()->get( 'IncidentReportingReportButtonEnabled' ) ) {
+		// If the button is disabled, don't do anything.
+		// FIXME: Replace this hook implementation with DiscussionTools integration (T340137)
+		if ( !$out->getConfig()->get( 'ReportIncidentReportButtonEnabled' ) ) {
 			return;
 		}
 
-		/** If IncidentReporting is enabled check we are in correct namespace and skin then add modules */
+		// Only add button if in configured namespace and skin
 		if ( in_array( $out->getTitle()->getNamespace(),
-				$out->getConfig()->get( 'IncidentReportingEnabledNamespaces' ) ) &&
-			in_array( $skin->getSkinName(), $out->getConfig()->get( 'IncidentReportingEnabledSkins' ) ) ) {
-			$out->addModules( [ 'ext.incidentReporting' ] );
-			$out->addHtml( '<div id="ext-incidentreporting-app"></div>' );
+				$out->getConfig()->get( 'ReportIncidentEnabledNamespaces' ) ) &&
+			in_array( $skin->getSkinName(), $out->getConfig()->get( 'ReportIncidentEnabledSkins' ) ) ) {
+			$out->addModules( [ 'ext.reportIncident' ] );
+			$out->addHtml( '<div id="ext-reportincident-app"></div>' );
 		}
 	}
 }
