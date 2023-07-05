@@ -57,13 +57,23 @@
 		"ext.reportIncident": {
 			"packageFiles": [
 				"init.js",
-				"components/App.vue"
+				"Constants.js",
+				"components/App.vue",
+				"components/ReportIncidentDialog.vue",
+				"components/ReportIncidentDialogStep1.vue",
+				"components/ReportIncidentDialogStep2.vue"
 			],
 			"messages": [
 				"reportincident-desc",
 				"reportincident-report-btn-label",
-				"reportincident-dialog-info-header",
-				"reportincident-dialog-close-btn"
+				"reportincident-dialog-close-btn",
+				"reportincident-dialog-proceed-btn",
+				"reportincident-dialog-back-btn",
+				"reportincident-dialog-submit-btn",
+				"reportincident-dialog-title",
+				"reportincident-dialog-first-step-cancel-btn",
+				"reportincident-dialog-code-of-conduct",
+				"reportincident-dialog-harassment-type-label"
 			],
 			"dependencies": [
 				"mediawiki.Uri",

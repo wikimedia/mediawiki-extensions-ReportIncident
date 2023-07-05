@@ -7,6 +7,12 @@
 		] },
 	"reportincident-desc": "{{desc|name=ReportIncident|url=https://www.mediawiki.org/wiki/Extension:ReportIncident}}",
 	"reportincident-report-btn-label": "The text for the report button.",
-	"reportincident-dialog-info-header": "The header text for the dialog information component",
-	"reportincident-dialog-close-btn": "The tooltip text to use with the close button for a dialog"
+	"reportincident-dialog-close-btn": "The tooltip text to use with the close button for a dialog",
+	"reportincident-dialog-proceed-btn": "The text for the button to move from the information page to the form submission page",
+	"reportincident-dialog-back-btn": "The text for the button to go back",
+	"reportincident-dialog-submit-btn": "The text for the button to submit a report",
+	"reportincident-dialog-title": "The title for the report incident dialog",
+	"reportincident-dialog-first-step-cancel-btn": "The text for the button to cancel filing a report",
+	"reportincident-dialog-code-of-conduct": "The text for the link to the Wikimedia Universal Code of Conduct",
+	"reportincident-dialog-harassment-type-label": "Label for multiple choice to choose harassment type"
 }

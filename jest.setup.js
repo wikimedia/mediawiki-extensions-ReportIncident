@@ -1,6 +1,9 @@
 /* eslint-disable no-undef */
 const { config } = require( '@vue/test-utils' );
-// Mock Vue plugins in test suites
+const mockMediaWiki = require( '@wikimedia/mw-node-qunit/src/mockMediaWiki.js' );
+
+global.mw = mockMediaWiki();// Mock Vue plugins in test suites
+
 config.global.mocks = {
 	$i18n: ( str ) => {
 		return {

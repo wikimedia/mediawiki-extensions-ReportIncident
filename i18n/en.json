@@ -7,7 +7,12 @@
 		] },
 	"reportincident-desc": "Private Incident Reporting System extension.",
 	"reportincident-report-btn-label": "Report",
-	"reportincident-dialog-info-header": "File a report",
-	"reportincident-dialog-close-btn": "Close"
-
+	"reportincident-dialog-close-btn": "Close",
+	"reportincident-dialog-proceed-btn": "Proceed to file a report",
+	"reportincident-dialog-back-btn": "Back",
+	"reportincident-dialog-submit-btn": "Submit",
+	"reportincident-dialog-title": "Report Harassment",
+	"reportincident-dialog-first-step-cancel-btn": "I dont want to file a report",
+	"reportincident-dialog-code-of-conduct": "Universal Code of Conduct",
+	"reportincident-dialog-harassment-type-label": "What type of harassment?"
 }

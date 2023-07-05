@@ -13,6 +13,7 @@
 		"@vue/test-utils": "2.3.2",
 		"@vue/vue3-jest": "27.0.0-alpha.4",
 		"@wikimedia/codex": "0.12.0",
+		"@wikimedia/mw-node-qunit": "^7.1.0",
 		"babel-core": "6.26.3",
 		"eslint": "8.32.0",
 		"eslint-config-wikimedia": "0.25.0",

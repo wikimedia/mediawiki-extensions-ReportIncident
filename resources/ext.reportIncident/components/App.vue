@@ -1,20 +1,26 @@
 <template>
-	<cdx-button @click="open = true">
+	<cdx-button
+		id="ext-reportincident-dialog-button"
+		@click="open = true"
+	>
 		{{ $i18n( 'reportincident-report-btn-label' ).text() }}
 	</cdx-button>
-	<cdx-dialog
-		v-model:open="open"
-		:title="$i18n( 'reportincident-dialog-info-header' ).text()"
-		:show-dividers="true"
-		:close-button-label="$i18n( 'reportincident-dialog-close-btn' ).text()"
-		@default="open = false"
-	>
-	</cdx-dialog>
+	<report-incident-dialog v-model:open="open">
+		<template #dialog_step_1>
+			<report-incident-dialog-step-1></report-incident-dialog-step-1>
+		</template>
+		<template #dialog_step_2>
+			<report-incident-dialog-step-2></report-incident-dialog-step-2>
+		</template>
+	</report-incident-dialog>
 </template>
 
 <script>
 const { ref } = require( 'vue' ),
-	{ CdxButton, CdxDialog } = require( '@wikimedia/codex' );
+	{ CdxButton } = require( '@wikimedia/codex' ),
+	ReportIncidentDialog = require( './ReportIncidentDialog.vue' ),
+	ReportIncidentDialogStep1 = require( './ReportIncidentDialogStep1.vue' ),
+	ReportIncidentDialogStep2 = require( './ReportIncidentDialogStep2.vue' );
 
 // @vue/component
 module.exports = exports = {
@@ -27,7 +33,9 @@ module.exports = exports = {
 	},
 	components: {
 		'cdx-button': CdxButton,
-		'cdx-dialog': CdxDialog
+		'report-incident-dialog': ReportIncidentDialog,
+		'report-incident-dialog-step-1': ReportIncidentDialogStep1,
+		'report-incident-dialog-step-2': ReportIncidentDialogStep2
 	},
 	setup() {
 		const open = ref( false );
