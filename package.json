@@ -10,6 +10,7 @@
 	},
 	"devDependencies": {
 		"@babel/preset-env": "7.16.11",
+		"@pinia/testing": "0.0.12",
 		"@vue/test-utils": "2.3.2",
 		"@vue/vue3-jest": "27.0.0-alpha.4",
 		"@wikimedia/codex": "0.12.0",

@@ -1,6 +1,6 @@
 'use strict';
 
-const ReportIncidentDialogStep1 = require( '../../resources/ext.reportIncident/components/ReportIncidentDialogStep1.vue' ),
+const ReportIncidentDialogStep1 = require( '../../../resources/ext.reportIncident/components/ReportIncidentDialogStep1.vue' ),
 	utils = require( '@vue/test-utils' );
 
 describe( 'Report Incident Dialog', () => {

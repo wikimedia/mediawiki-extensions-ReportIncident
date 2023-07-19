@@ -14,5 +14,16 @@
 	"reportincident-dialog-title": "Report Harassment",
 	"reportincident-dialog-first-step-cancel-btn": "I don't want to file a report",
 	"reportincident-dialog-code-of-conduct": "Universal Code of Conduct",
-	"reportincident-dialog-harassment-type-label": "What type of harassment?"
+	"reportincident-dialog-harassment-type-label": "What type of harassment?",
+	"reportincident-dialog-email-helper-text": "We need your email in case the Administrator who reads your report needs to contact you for a followup",
+	"reportincident-dialog-email-input-label": "Your email",
+	"reportincident-dialog-additional-details-input-label": "Additional details",
+	"reportincident-dialog-optional-label": "optional",
+	"reportincident-dialog-links-evidence-label": "Links to evidence of incident",
+	"reportincident-dialog-violator-label": "Username you would like to report",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Hate speech or discrimination",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Sexual harassment",
+	"reportincident-dialog-harassment-type-threats-of-violence": "Threats of violence",
+	"reportincident-dialog-harassment-type-intimidation": "Intimidation, agression, name calling",
+	"reportincident-dialog-harassment-type-something-else": "Something else"
 }

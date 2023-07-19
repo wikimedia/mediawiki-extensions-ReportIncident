@@ -1,8 +1,9 @@
 'use strict';
 
-const ReportIncidentDialog = require( '../../resources/ext.reportIncident/components/ReportIncidentDialog.vue' ),
-	Constants = require( '../../resources/ext.reportIncident/Constants.js' ),
-	utils = require( '@vue/test-utils' );
+const ReportIncidentDialog = require( '../../../resources/ext.reportIncident/components/ReportIncidentDialog.vue' ),
+	Constants = require( '../../../resources/ext.reportIncident/Constants.js' ),
+	utils = require( '@vue/test-utils' ),
+	{ createTestingPinia } = require( '@pinia/testing' );
 
 const steps = {
 	[ Constants.DIALOG_STEP_1 ]: '<p>Step 1</p>',
@@ -13,6 +14,9 @@ const renderComponent = ( props, slots ) => {
 	const defaultProps = { open: false, showPaginator: false };
 	const defaultSlots = { title: '<h3>Report Harassment</h3>' };
 	const wrapper = utils.mount( ReportIncidentDialog, {
+		global: {
+			plugins: [ createTestingPinia( { stubActions: false } ) ]
+		},
 		props: Object.assign( {}, defaultProps, props ),
 		slots: Object.assign( {}, defaultSlots, slots )
 	} );
@@ -21,7 +25,7 @@ const renderComponent = ( props, slots ) => {
 
 describe( 'Report Incident Dialog', () => {
 	it( 'mounts the component', () => {
-		const wrapper = utils.shallowMount( ReportIncidentDialog );
+		const wrapper = renderComponent( { open: true } );
 		expect( wrapper.find( '.ext-reportincident-dialog' ).exists() ).toBe( true );
 	} );
 

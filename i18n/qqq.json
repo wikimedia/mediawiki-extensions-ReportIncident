@@ -14,5 +14,16 @@
 	"reportincident-dialog-title": "The title for the report incident dialog",
 	"reportincident-dialog-first-step-cancel-btn": "The text for the button to cancel filing a report",
 	"reportincident-dialog-code-of-conduct": "The text for the link to the Wikimedia Universal Code of Conduct",
-	"reportincident-dialog-harassment-type-label": "Label for multiple choice to choose harassment type"
+	"reportincident-dialog-harassment-type-label": "Label for multiple choice to choose harassment type",
+	"reportincident-dialog-email-helper-text": "The text explaining why email is collected with a report",
+	"reportincident-dialog-email-input-label": "Label for email input on report form",
+	"reportincident-dialog-additional-details-input-label": "Label for additional details input on report form",
+	"reportincident-dialog-optional-label": "Label for optional field on report form",
+	"reportincident-dialog-links-evidence-label": "Label for evidence links on report form",
+	"reportincident-dialog-violator-label": "Label for who is being reported input on report form",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Label for type of harassment: Hate speech or discrimination",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Label for type of harassment: Sexual harassment",
+	"reportincident-dialog-harassment-type-threats-of-violence": "Label for type of harassment: Threats of violence",
+	"reportincident-dialog-harassment-type-intimidation": "Label for type of harassment: Intimidation, agression, name calling",
+	"reportincident-dialog-harassment-type-something-else": "Label for type of harassment: Something else"
 }

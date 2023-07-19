@@ -61,7 +61,8 @@
 				"components/App.vue",
 				"components/ReportIncidentDialog.vue",
 				"components/ReportIncidentDialogStep1.vue",
-				"components/ReportIncidentDialogStep2.vue"
+				"components/ReportIncidentDialogStep2.vue",
+				"stores/Form.js"
 			],
 			"messages": [
 				"reportincident-desc",
@@ -73,7 +74,18 @@
 				"reportincident-dialog-title",
 				"reportincident-dialog-first-step-cancel-btn",
 				"reportincident-dialog-code-of-conduct",
-				"reportincident-dialog-harassment-type-label"
+				"reportincident-dialog-harassment-type-label",
+				"reportincident-dialog-email-helper-text",
+				"reportincident-dialog-email-input-label",
+				"reportincident-dialog-additional-details-input-label",
+				"reportincident-dialog-optional-label",
+				"reportincident-dialog-links-evidence-label",
+				"reportincident-dialog-violator-label",
+				"reportincident-dialog-harassment-type-hate-speech-or-discrimination",
+				"reportincident-dialog-harassment-type-sexual-harassment",
+				"reportincident-dialog-harassment-type-threats-of-violence",
+				"reportincident-dialog-harassment-type-intimidation",
+				"reportincident-dialog-harassment-type-something-else"
 			],
 			"dependencies": [
 				"mediawiki.Uri",
