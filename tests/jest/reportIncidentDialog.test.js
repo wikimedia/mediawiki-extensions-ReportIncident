@@ -44,7 +44,7 @@ describe( 'Report Incident Dialog', () => {
 			const wrapper = renderComponent( { open: true } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 
-			wrapper.get( '#ext-reportincident-dialog-next-btn' ).trigger( 'click' ).then( function () {
+			wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 			} );
 		} );
@@ -53,7 +53,7 @@ describe( 'Report Incident Dialog', () => {
 			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
-			wrapper.get( '#ext-reportincident-dialog-back-btn' ).trigger( 'click' ).then( function () {
+			wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( function () {
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 			} );
 		} );

@@ -12,7 +12,7 @@
 	"reportincident-dialog-back-btn": "Back",
 	"reportincident-dialog-submit-btn": "Submit",
 	"reportincident-dialog-title": "Report Harassment",
-	"reportincident-dialog-first-step-cancel-btn": "I dont want to file a report",
+	"reportincident-dialog-first-step-cancel-btn": "I don't want to file a report",
 	"reportincident-dialog-code-of-conduct": "Universal Code of Conduct",
 	"reportincident-dialog-harassment-type-label": "What type of harassment?"
 }

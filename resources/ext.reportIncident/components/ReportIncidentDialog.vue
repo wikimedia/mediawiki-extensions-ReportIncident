@@ -12,20 +12,22 @@
 
 		<!-- dialog footer -->
 		<template #footer>
-			<cdx-button
-				id="ext-reportincident-dialog-back-btn"
-				@click="navigatePrevious"
-			>
-				{{ defaultButtonLabel }}
-			</cdx-button>
-			<cdx-button
-				id="ext-reportincident-dialog-next-btn"
-				weight="primary"
-				action="progressive"
-				@click="navigateNext"
-			>
-				{{ primaryButtonLabel }}
-			</cdx-button>
+			<div class="ext-reportincident-dialog-footer">
+				<cdx-button
+					class="ext-reportincident-dialog-footer__back-btn"
+					@click="navigatePrevious"
+				>
+					{{ defaultButtonLabel }}
+				</cdx-button>
+				<cdx-button
+					class="ext-reportincident-dialog-footer__next-btn"
+					weight="primary"
+					action="progressive"
+					@click="navigateNext"
+				>
+					{{ primaryButtonLabel }}
+				</cdx-button>
+			</div>
 		</template>
 	</cdx-dialog>
 </template>
@@ -104,3 +106,25 @@ module.exports = exports = {
 	}
 };
 </script>
+
+<style lang="less">
+@import ( reference ) '../../../resources/lib/codex-design-tokens/theme-wikimedia-ui.less';
+
+.ext-reportincident-dialog {
+	.ext-reportincident-dialog-footer {
+		float: right;
+	}
+	@media screen and ( max-width: @width-breakpoint-tablet ) {
+		.ext-reportincident-dialog-footer {
+			&__back-btn {
+				width: 100%;
+			}
+
+			&__next-btn {
+				margin-top: @spacing-35;
+				width: 100%;
+			}
+		}
+	}
+}
+</style>
