@@ -1,18 +1,89 @@
 <template>
 	<div class="ext-reportincident-dialog-step1">
-		<!-- TODO: should this link be localized to the user's current wiki? -->
-		<a
-			target="_blank"
-			href="https://en.wikipedia.org/wiki/Code_of_conduct"
-		>
-			<span> {{ $i18n( 'reportincident-dialog-code-of-conduct' ).text() }}</span>
-		</a>
+		<!-- Harassment explainer -->
+		<div>
+			<span>
+				{{ $i18n( 'reportincident-dialog-harassment-intro-text' ).text() }}
+				{{ $i18n(
+					'reportincident-dialog-harassment-lead-in-to-harassment-examples'
+				).text() }}
+			</span>
+			<ul>
+				<li>
+					{{ $i18n( 'reportincident-dialog-harassment-example-insults' ).text() }}
+				</li>
+				<li>
+					{{
+						$i18n( 'reportincident-dialog-harassment-example-sexual-harassment' ).text()
+					}}
+				</li>
+				<li>
+					{{ $i18n( 'reportincident-dialog-harassment-example-threats' ).text() }}
+				</li>
+				<li>
+					{{ $i18n(
+						'reportincident-dialog-harassment-example-encouraging-harm'
+					).text() }}
+				</li>
+				<li>
+					{{ $i18n( 'reportincident-dialog-harassment-example-doxing' ).text() }}
+				</li>
+				<li>
+					{{ $i18n( 'reportincident-dialog-harassment-example-hounding' ).text() }}
+				</li>
+				<li>
+					{{ $i18n( 'reportincident-dialog-harassment-example-trolling' ).text() }}
+				</li>
+			</ul>
+		</div>
+
+		<!-- Universal code of conduct -->
+		<div class="ext-reportincident-dialog-step1__text-block">
+			<span
+				v-i18n-html:reportincident-dialog-code-of-conduct-link="[ codeOfConductLink ]">
+			</span>
+		</div>
+
+		<!-- How to engage in dialog section -->
+		<div class="ext-reportincident-dialog-step1__text-block">
+			<div class="ext-reportincident-dialog__text-header">
+				{{ $i18n( 'reportincident-dialog-engage-header' ).text() }}
+			</div>
+			<span> {{ $i18n( 'reportincident-dialog-engage-text' ).text() }}</span>
+		</div>
+		<div class="ext-reportincident-dialog-step1__text-block">
+			<span
+				v-i18n-html:reportincident-dialog-admin-review="[ adminLink ]"
+				class="ext-reportincident-dialog__text-subtext">
+			</span>
+		</div>
 	</div>
 </template>
 
 <script>
 // @vue/component
 module.exports = exports = {
-	name: 'ReportIncidentDialogStep1'
+	name: 'ReportIncidentDialogStep1',
+	setup() {
+
+		// TODO(T343382): should this link be localized to the user's current wiki? -->
+		const adminLink = 'https://en.wikipedia.org/wiki/Wikipedia:Administrators';
+		const codeOfConductLink = 'https://en.wikipedia.org/wiki/Code_of_conduct';
+
+		return {
+			adminLink,
+			codeOfConductLink
+		};
+	}
 };
 </script>
+
+<style lang="less">
+@import ( reference ) '../../../resources/lib/codex-design-tokens/theme-wikimedia-ui.less';
+
+.ext-reportincident-dialog-step1 {
+	&__text-block {
+		margin-top: @spacing-125;
+	}
+}
+</style>

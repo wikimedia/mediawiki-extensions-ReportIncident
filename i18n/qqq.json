@@ -13,7 +13,7 @@
 	"reportincident-dialog-submit-btn": "The text for the button to submit a report",
 	"reportincident-dialog-title": "The title for the report incident dialog",
 	"reportincident-dialog-first-step-cancel-btn": "The text for the button to cancel filing a report",
-	"reportincident-dialog-code-of-conduct": "The text for the link to the Wikimedia Universal Code of Conduct",
+	"reportincident-dialog-code-of-conduct-link": "The text for the link to the Wikimedia Universal Code of Conduct",
 	"reportincident-dialog-harassment-type-label": "Label for multiple choice to choose harassment type",
 	"reportincident-dialog-email-helper-text": "The text explaining why email is collected with a report",
 	"reportincident-dialog-email-input-label": "Label for email input on report form",
@@ -25,5 +25,17 @@
 	"reportincident-dialog-harassment-type-sexual-harassment": "Label for type of harassment: Sexual harassment",
 	"reportincident-dialog-harassment-type-threats-of-violence": "Label for type of harassment: Threats of violence",
 	"reportincident-dialog-harassment-type-intimidation": "Label for type of harassment: Intimidation, agression, name calling",
-	"reportincident-dialog-harassment-type-something-else": "Label for type of harassment: Something else"
+	"reportincident-dialog-harassment-type-something-else": "Label for type of harassment: Something else",
+	"reportincident-dialog-harassment-intro-text": "Message about Wikipedia's stance on harassment",
+	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Lead-in to a list of not tolerated behavior on Wikipedia",
+	"reportincident-dialog-harassment-example-insults": "Insults, as an example of behavior not tolerated on Wikipedia",
+	"reportincident-dialog-harassment-example-sexual-harassment": "Sexual harassment, as an example of behavior not tolerated on Wikipedia",
+	"reportincident-dialog-harassment-example-threats": "Threats, as an example of behavior not tolerated on Wikipedia",
+	"reportincident-dialog-harassment-example-encouraging-harm": "Encouraging harm to others, as an example of behavior not tolerated on Wikipedia",
+	"reportincident-dialog-harassment-example-doxing": "Doxing (disclosure of personal data), as an example of behavior not tolerated on Wikipedia",
+	"reportincident-dialog-harassment-example-hounding": "Hounding, as an example of behavior not tolerated on Wikipedia",
+	"reportincident-dialog-harassment-example-trolling": "Trolling, as an example of behavior not tolerated on Wikipedia",
+	"reportincident-dialog-engage-header": "Header for text explaining how to engage in dialog",
+	"reportincident-dialog-engage-text": "Information on how to engage in dialog",
+	"reportincident-dialog-admin-review": "Explainer text and link of who will review reports"
 }

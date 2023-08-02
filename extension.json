@@ -55,6 +55,9 @@
 	},
 	"ResourceModules": {
 		"ext.reportIncident": {
+			"styles": [
+				"ext.reportincident.less"
+			],
 			"packageFiles": [
 				"init.js",
 				"Constants.js",
@@ -73,7 +76,7 @@
 				"reportincident-dialog-submit-btn",
 				"reportincident-dialog-title",
 				"reportincident-dialog-first-step-cancel-btn",
-				"reportincident-dialog-code-of-conduct",
+				"reportincident-dialog-code-of-conduct-link",
 				"reportincident-dialog-harassment-type-label",
 				"reportincident-dialog-email-helper-text",
 				"reportincident-dialog-email-input-label",
@@ -85,7 +88,19 @@
 				"reportincident-dialog-harassment-type-sexual-harassment",
 				"reportincident-dialog-harassment-type-threats-of-violence",
 				"reportincident-dialog-harassment-type-intimidation",
-				"reportincident-dialog-harassment-type-something-else"
+				"reportincident-dialog-harassment-type-something-else",
+				"reportincident-dialog-harassment-intro-text",
+				"reportincident-dialog-harassment-lead-in-to-harassment-examples",
+				"reportincident-dialog-harassment-example-insults",
+				"reportincident-dialog-harassment-example-sexual-harassment",
+				"reportincident-dialog-harassment-example-threats",
+				"reportincident-dialog-harassment-example-encouraging-harm",
+				"reportincident-dialog-harassment-example-doxing",
+				"reportincident-dialog-harassment-example-hounding",
+				"reportincident-dialog-harassment-example-trolling",
+				"reportincident-dialog-engage-header",
+				"reportincident-dialog-engage-text",
+				"reportincident-dialog-admin-review"
 			],
 			"dependencies": [
 				"mediawiki.Uri",

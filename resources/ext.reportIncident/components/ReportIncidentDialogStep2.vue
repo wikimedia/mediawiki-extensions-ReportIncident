@@ -1,7 +1,7 @@
 <template>
 	<div class="ext-reportincident-dialog-step2">
 		<!-- type of harassment -->
-		<span class="ext-reportincident-dialog-step2__text-label">
+		<span class="ext-reportincident-dialog__text-label">
 			{{ $i18n( 'reportincident-dialog-harassment-type-label' ).text() }}
 		</span>
 		<div class="ext-reportincident-dialog-step2__harassment-options">
@@ -28,7 +28,7 @@
 			class="ext-reportincident-dialog-step2__form-item
 			ext-reportincident-dialog-step2__violator-name"
 		>
-			<span class="ext-reportincident-dialog-step2__text-label">
+			<span class="ext-reportincident-dialog__text-label">
 				{{ $i18n( 'reportincident-dialog-violator-label' ).text() }}
 			</span>
 			<cdx-text-input v-model="inputViolator"></cdx-text-input>
@@ -39,7 +39,7 @@
 			class="ext-reportincident-dialog-step2__form-item
 			ext-reportincident-dialog-step2__evidence-links"
 		>
-			<span class="ext-reportincident-dialog-step2__text-label">
+			<span class="ext-reportincident-dialog__text-label">
 				{{ $i18n( 'reportincident-dialog-links-evidence-label' ).text() }}
 			</span>
 			<cdx-text-input v-model="inputEvidence"></cdx-text-input>
@@ -50,10 +50,10 @@
 			class="ext-reportincident-dialog-step2__form-item
 			ext-reportincident-dialog-step2__additional-details"
 		>
-			<span class="ext-reportincident-dialog-step2__text-label">
+			<span class="ext-reportincident-dialog__text-label">
 				{{ $i18n( 'reportincident-dialog-additional-details-input-label' ).text() }}
 			</span>
-			<span class="ext-reportincident-dialog-step2__text-subtext">
+			<span class="ext-reportincident-dialog__text-subtext">
 				{{ optionalLabel }}
 			</span>
 			<cdx-text-area v-model="inputDetails"></cdx-text-area>
@@ -64,11 +64,11 @@
 			class="ext-reportincident-dialog-step2__form-item
 			ext-reportincident-dialog-step2__reporter-email"
 		>
-			<span class="ext-reportincident-dialog-step2__text-label">
+			<span class="ext-reportincident-dialog__text-label">
 				{{ $i18n( 'reportincident-dialog-email-input-label' ).text() }}
 			</span>
 			<cdx-text-input v-model="inputEmail"></cdx-text-input>
-			<span class="ext-reportincident-dialog-step2__text-subtext">
+			<span class="ext-reportincident-dialog__text-subtext">
 				{{ $i18n( 'reportincident-dialog-email-helper-text' ).text() }}
 			</span>
 		</div>
@@ -111,7 +111,7 @@ module.exports = exports = {
 				value: Constants.harassmentTypes.SEXUAL_HARASSMENT
 			},
 			{
-				label: mw.msg( 'reportincident-dialog-harassment-type-threats-or-violence' ),
+				label: mw.msg( 'reportincident-dialog-harassment-type-threats-of-violence' ),
 				value: Constants.harassmentTypes.THREATS_OR_VIOLENCE
 			},
 			{
@@ -152,19 +152,6 @@ module.exports = exports = {
 .ext-reportincident-dialog-step2 {
 	&__form-item {
 		margin-top: @spacing-75;
-	}
-
-	&__text-label {
-		font-family: @font-family-base;
-		font-weight: @font-weight-bold;
-		color: @color-base;
-		font-size: @font-size-small;
-	}
-
-	&__text-subtext {
-		color: @color-subtle;
-		font-weight: @font-weight-normal;
-		font-size: @font-size-small;
 	}
 }
 </style>
