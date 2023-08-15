@@ -100,6 +100,10 @@
 				"reportincident-dialog-harassment-example-trolling",
 				"reportincident-dialog-engage-header",
 				"reportincident-dialog-engage-text",
+				"reportincident-dialog-additional-details-input-placeholder",
+				"reportincident-dialog-violator-placeholder-text",
+				"reportincident-dialog-links-evidence-placeholder",
+				"reportincident-dialog-email-placeholder-text",
 				"reportincident-dialog-admin-review"
 			],
 			"dependencies": [

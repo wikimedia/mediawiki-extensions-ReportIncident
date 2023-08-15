@@ -1,9 +1,9 @@
 <template>
 	<div class="ext-reportincident-dialog-step2">
 		<!-- type of harassment -->
-		<span class="ext-reportincident-dialog__text-label">
+		<div class="ext-reportincident-dialog__text-label">
 			{{ $i18n( 'reportincident-dialog-harassment-type-label' ).text() }}
-		</span>
+		</div>
 		<div class="ext-reportincident-dialog-step2__harassment-options">
 			<cdx-checkbox
 				v-for="checkbox in harassmentOptions"
@@ -31,7 +31,12 @@
 			<span class="ext-reportincident-dialog__text-label">
 				{{ $i18n( 'reportincident-dialog-violator-label' ).text() }}
 			</span>
-			<cdx-text-input v-model="inputViolator"></cdx-text-input>
+			<cdx-text-input
+				v-model="inputViolator"
+				:placeholder="$i18n( 'reportincident-dialog-violator-placeholder-text' )
+					.text()"
+			>
+			</cdx-text-input>
 		</div>
 
 		<!-- links -->
@@ -42,7 +47,11 @@
 			<span class="ext-reportincident-dialog__text-label">
 				{{ $i18n( 'reportincident-dialog-links-evidence-label' ).text() }}
 			</span>
-			<cdx-text-input v-model="inputEvidence"></cdx-text-input>
+			<cdx-text-input
+				v-model="inputEvidence"
+				:placeholder="$i18n( 'reportincident-dialog-links-evidence-placeholder' ).text()"
+			>
+			</cdx-text-input>
 		</div>
 
 		<!-- Additional details -->
@@ -56,7 +65,11 @@
 			<span class="ext-reportincident-dialog__text-subtext">
 				{{ optionalLabel }}
 			</span>
-			<cdx-text-area v-model="inputDetails"></cdx-text-area>
+			<cdx-text-area
+				v-model="inputDetails"
+				:placeholder="$i18n( 'reportincident-dialog-additional-details-input-placeholder' )
+					.text()">
+			</cdx-text-area>
 		</div>
 
 		<!-- Email -->
@@ -67,7 +80,11 @@
 			<span class="ext-reportincident-dialog__text-label">
 				{{ $i18n( 'reportincident-dialog-email-input-label' ).text() }}
 			</span>
-			<cdx-text-input v-model="inputEmail"></cdx-text-input>
+			<cdx-text-input
+				v-model="inputEmail"
+				:placeholder="$i18n( 'reportincident-dialog-email-placeholder-text' ).text()"
+			>
+			</cdx-text-input>
 			<span class="ext-reportincident-dialog__text-subtext">
 				{{ $i18n( 'reportincident-dialog-email-helper-text' ).text() }}
 			</span>
@@ -153,7 +170,12 @@ module.exports = exports = {
 
 .ext-reportincident-dialog-step2 {
 	&__form-item {
-		margin-top: @spacing-75;
+		margin-top: @spacing-125;
+		margin-bottom: @spacing-125;
+	}
+
+	.ext-reportincident-dialog__text-label {
+		margin-bottom: @spacing-100;
 	}
 }
 </style>

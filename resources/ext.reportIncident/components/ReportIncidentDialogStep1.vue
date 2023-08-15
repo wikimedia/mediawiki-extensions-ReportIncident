@@ -85,5 +85,11 @@ module.exports = exports = {
 	&__text-block {
 		margin-top: @spacing-125;
 	}
+	ul {
+		&, li {
+			margin-top: @spacing-12;
+			margin-bottom: @spacing-12;
+		}
+	}
 }
 </style>

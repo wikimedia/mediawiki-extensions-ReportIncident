@@ -116,8 +116,12 @@ module.exports = exports = {
 	}
 	@media screen and ( max-width: @width-breakpoint-tablet ) {
 		.ext-reportincident-dialog-footer {
+			display: flex;
+			flex-direction: column-reverse;
+			width: 100%;
 			&__back-btn {
 				width: 100%;
+				margin-top: @spacing-35;
 			}
 
 			&__next-btn {
@@ -127,4 +131,5 @@ module.exports = exports = {
 		}
 	}
 }
+
 </style>
