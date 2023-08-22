@@ -8,6 +8,8 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 
 	const inputViolator = ref( '' );
 	const inputEvidence = ref( '' );
+	const inputDetails = ref( '' );
+	const inputSomethingElseDetails = ref( '' );
 	const inputEmail = ref( '' );
 
 	const isFormValid = computed( () => {
@@ -26,6 +28,8 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	return {
 		inputHarassments,
 		inputViolator,
+		inputDetails,
+		inputSomethingElseDetails,
 		inputEvidence,
 		inputEmail,
 		isFormValid

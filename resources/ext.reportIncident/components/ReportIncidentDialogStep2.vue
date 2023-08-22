@@ -97,6 +97,7 @@ module.exports = exports = {
 			inputHarassments,
 			inputViolator,
 			inputEvidence,
+			inputSomethingElseDetails,
 			inputDetails,
 			inputEmail
 		} = storeToRefs( store );
@@ -138,6 +139,7 @@ module.exports = exports = {
 			inputViolator,
 			inputEvidence,
 			inputDetails,
+			inputSomethingElseDetails,
 			inputEmail,
 			optionalLabel,
 			collectSomethingElseDetails
