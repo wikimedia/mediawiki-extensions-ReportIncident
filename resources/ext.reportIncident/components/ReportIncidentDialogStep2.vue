@@ -5,15 +5,17 @@
 			{{ $i18n( 'reportincident-dialog-harassment-type-label' ).text() }}
 		</div>
 		<div class="ext-reportincident-dialog-step2__harassment-options">
-			<cdx-checkbox
-				v-for="checkbox in harassmentOptions"
-				:id="'ext-reportincident-dialog-option__' + checkbox.value"
-				:key="'checkbox-' + checkbox.value"
-				v-model="inputHarassments"
-				:input-value="checkbox.value"
-			>
-				{{ checkbox.label }}
-			</cdx-checkbox>
+			<cdx-field :is-fieldset="true">
+				<cdx-checkbox
+					v-for="checkbox in harassmentOptions"
+					:id="'ext-reportincident-dialog-option__' + checkbox.value"
+					:key="'checkbox-' + checkbox.value"
+					v-model="inputHarassments"
+					:input-value="checkbox.value"
+				>
+					{{ checkbox.label }}
+				</cdx-checkbox>
+			</cdx-field>
 		</div>
 
 		<cdx-text-area
@@ -95,7 +97,7 @@
 <script>
 const Constants = require( '../Constants.js' );
 const useFormStore = require( '../stores/Form.js' );
-const { CdxCheckbox, CdxTextInput, CdxTextArea } = require( '@wikimedia/codex' );
+const { CdxCheckbox, CdxField, CdxTextInput, CdxTextArea } = require( '@wikimedia/codex' );
 const { storeToRefs } = require( 'pinia' );
 const { computed } = require( 'vue' );
 
@@ -104,6 +106,7 @@ module.exports = exports = {
 	name: 'ReportIncidentDialogStep2',
 	components: {
 		CdxCheckbox,
+		CdxField,
 		CdxTextInput,
 		CdxTextArea
 	},
