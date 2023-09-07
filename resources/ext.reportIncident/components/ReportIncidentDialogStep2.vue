@@ -1,11 +1,11 @@
 <template>
 	<div class="ext-reportincident-dialog-step2">
 		<!-- type of harassment -->
-		<div class="ext-reportincident-dialog__text-label">
-			{{ $i18n( 'reportincident-dialog-harassment-type-label' ).text() }}
-		</div>
 		<div class="ext-reportincident-dialog-step2__harassment-options">
 			<cdx-field :is-fieldset="true">
+				<template #label>
+					{{ $i18n( 'reportincident-dialog-harassment-type-label' ).text() }}
+				</template>
 				<cdx-checkbox
 					v-for="checkbox in harassmentOptions"
 					:id="'ext-reportincident-dialog-option__' + checkbox.value"
