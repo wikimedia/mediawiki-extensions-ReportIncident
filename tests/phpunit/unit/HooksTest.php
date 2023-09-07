@@ -18,6 +18,7 @@ class HooksTest extends \MediaWikiUnitTestCase {
 			'ReportIncidentReportButtonEnabled' => false,
 			'ReportIncidentEnabledSkins' => [ 'minerva' ],
 			'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
+			'ReportIncidentAdministratorsPage' => 'Main_Page'
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$outputPageMock->method( 'getConfig' )->willReturn( $config );
@@ -31,6 +32,7 @@ class HooksTest extends \MediaWikiUnitTestCase {
 			'ReportIncidentReportButtonEnabled' => true,
 			'ReportIncidentEnabledSkins' => [ 'minerva' ],
 			'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
+			'ReportIncidentAdministratorsPage' => 'Main_Page',
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$title = $this->createMock( Title::class );
@@ -51,6 +53,7 @@ class HooksTest extends \MediaWikiUnitTestCase {
 			'ReportIncidentReportButtonEnabled' => true,
 			'ReportIncidentEnabledSkins' => [ 'minerva' ],
 			'ReportIncidentEnabledNamespaces' => [ NS_PROJECT_TALK ],
+			'ReportIncidentAdministratorsPage' => 'Main_Page',
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$title = $this->createMock( Title::class );
@@ -70,6 +73,7 @@ class HooksTest extends \MediaWikiUnitTestCase {
 			'ReportIncidentReportButtonEnabled' => true,
 			'ReportIncidentEnabledSkins' => [ 'minerva' ],
 			'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
+			'ReportIncidentAdministratorsPage' => 'Main_Page',
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$title = $this->createMock( Title::class );

@@ -66,8 +66,7 @@ module.exports = exports = {
 	name: 'ReportIncidentDialogStep1',
 	setup() {
 
-		// TODO(T343382): should this link be localized to the user's current wiki? -->
-		const adminLink = 'https://en.wikipedia.org/wiki/Wikipedia:Administrators';
+		const adminLink = mw.util.getUrl( mw.config.get( 'wgReportIncidentAdministratorsPage' ) );
 		const codeOfConductLink = 'https://foundation.wikimedia.org/wiki/Special:MyLanguage/Universal_Code_of_Conduct';
 
 		return {

@@ -32,6 +32,10 @@
 				3
 			],
 			"description": "Determines what namespaces the Incident Reporting tool will render within. The default is 3 which defaults to the NS_USER_TALK namespace"
+		},
+		"ReportIncidentAdministratorsPage": {
+			"value": "Main_Page",
+			"description": "The page the report incident form links to when specifying who will review an incident report. This value will be passed to mw.util.getUrl(); a DB prefix is allowed, e.g. Wikipedia:Administrators"
 		}
 	},
 	"HookHandlers": {
