@@ -68,7 +68,7 @@ module.exports = exports = {
 
 		// TODO(T343382): should this link be localized to the user's current wiki? -->
 		const adminLink = 'https://en.wikipedia.org/wiki/Wikipedia:Administrators';
-		const codeOfConductLink = 'https://en.wikipedia.org/wiki/Code_of_conduct';
+		const codeOfConductLink = 'https://foundation.wikimedia.org/wiki/Special:MyLanguage/Universal_Code_of_Conduct';
 
 		return {
 			adminLink,
