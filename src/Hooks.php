@@ -33,14 +33,18 @@ class Hooks implements BeforePageDisplayHook {
 	public function onBeforePageDisplay( $out, $skin ): void {
 		// If the button is disabled, don't do anything.
 		// FIXME: Replace this hook implementation with DiscussionTools integration (T340137)
-		if ( !$out->getConfig()->get( 'ReportIncidentReportButtonEnabled' ) ) {
+		$config = $out->getConfig();
+		if ( !$config->get( 'ReportIncidentReportButtonEnabled' ) ) {
 			return;
 		}
 
 		// Only add button if in configured namespace and skin
 		if ( in_array( $out->getTitle()->getNamespace(),
-				$out->getConfig()->get( 'ReportIncidentEnabledNamespaces' ) ) &&
-			in_array( $skin->getSkinName(), $out->getConfig()->get( 'ReportIncidentEnabledSkins' ) ) ) {
+				$config->get( 'ReportIncidentEnabledNamespaces' ) ) &&
+			in_array( $skin->getSkinName(), $config->get( 'ReportIncidentEnabledSkins' ) ) ) {
+			$out->addJsConfigVars( [
+				'wgReportIncidentAdministratorsPage' => $config->get( 'ReportIncidentAdministratorsPage' )
+			] );
 			$out->addModules( [ 'ext.reportIncident' ] );
 			$out->addHtml( '<div id="ext-reportincident-app"></div>' );
 		}
