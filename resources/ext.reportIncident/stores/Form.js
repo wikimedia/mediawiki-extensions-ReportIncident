@@ -25,6 +25,16 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		return isValid;
 	} );
 
+	// Build an object that we can pass to the REST endpoint.
+	const restPayload = computed( () => {
+		return {
+			reportedUserId: inputViolator.value,
+			link: inputEvidence.value,
+			details: inputDetails.value,
+			behaviors: inputHarassments.value
+		};
+	} );
+
 	return {
 		inputHarassments,
 		inputViolator,
@@ -32,7 +42,8 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		inputSomethingElseDetails,
 		inputEvidence,
 		inputEmail,
-		isFormValid
+		isFormValid,
+		restPayload
 	};
 } );
 

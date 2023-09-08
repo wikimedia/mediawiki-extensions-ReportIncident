@@ -33,6 +33,8 @@
 </template>
 
 <script>
+
+const useFormStore = require( '../stores/Form.js' );
 const { toRef, ref, computed } = require( 'vue' );
 const { CdxButton, CdxDialog, useModelWrapper } = require( '@wikimedia/codex' );
 const Constants = require( '../Constants.js' );
@@ -78,10 +80,17 @@ module.exports = exports = {
 			if ( currentStep.value === Constants.DIALOG_STEP_1 ) {
 				currentStep.value = Constants.DIALOG_STEP_2;
 			} else {
-				// if on the second page, close the dialog
-				// TODO: eventually this will call the email endpoint
+				// if on the second page, validate, then POST the data
 				wrappedOpen.value = false;
 				currentStep.value = Constants.DIALOG_STEP_1;
+				const store = useFormStore();
+				const restPayload = store.restPayload;
+				restPayload.revisionId = mw.config.get( 'wgCurRevisionId' );
+				// TODO: Validate
+				new mw.Rest().post(
+					'/reportincident/v0/report',
+					restPayload
+				);
 			}
 		}
 
