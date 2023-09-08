@@ -10,7 +10,7 @@
 					v-for="checkbox in harassmentOptions"
 					:id="'ext-reportincident-dialog-option__' + checkbox.value"
 					:key="'checkbox-' + checkbox.value"
-					v-model="inputHarassments"
+					v-model="inputBehaviors"
 					:input-value="checkbox.value"
 				>
 					{{ checkbox.label }}
@@ -34,7 +34,7 @@
 				{{ $i18n( 'reportincident-dialog-violator-label' ).text() }}
 			</span>
 			<cdx-text-input
-				v-model="inputViolator"
+				v-model="inputReportedUser"
 				:placeholder="$i18n( 'reportincident-dialog-violator-placeholder-text' )
 					.text()"
 			>
@@ -50,7 +50,7 @@
 				{{ $i18n( 'reportincident-dialog-links-evidence-label' ).text() }}
 			</span>
 			<cdx-text-input
-				v-model="inputEvidence"
+				v-model="inputLink"
 				:placeholder="$i18n( 'reportincident-dialog-links-evidence-placeholder' ).text()"
 			>
 			</cdx-text-input>
@@ -114,9 +114,9 @@ module.exports = exports = {
 		const store = useFormStore();
 
 		const {
-			inputHarassments,
-			inputViolator,
-			inputEvidence,
+			inputBehaviors,
+			inputReportedUser,
+			inputLink,
 			inputSomethingElseDetails,
 			inputDetails,
 			inputEmail
@@ -148,16 +148,16 @@ module.exports = exports = {
 		const optionalLabel = ' (' + mw.msg( 'reportincident-dialog-optional-label' ) + ')';
 
 		const collectSomethingElseDetails = computed( () => {
-			return inputHarassments.value.filter(
+			return inputBehaviors.value.filter(
 				( input ) => input === Constants.harassmentTypes.OTHER
 			).length > 0;
 		} );
 
 		return {
 			harassmentOptions,
-			inputHarassments,
-			inputViolator,
-			inputEvidence,
+			inputBehaviors,
+			inputReportedUser,
+			inputLink,
 			inputDetails,
 			inputSomethingElseDetails,
 			inputEmail,
