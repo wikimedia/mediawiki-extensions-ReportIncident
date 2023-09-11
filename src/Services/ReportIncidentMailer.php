@@ -99,6 +99,18 @@ class ReportIncidentMailer {
 		$reportedUserPage = $this->titleFactory->newFromText(
 			$incidentReport->getReportedUser()->getName(), NS_USER
 		);
+		$behaviors = $incidentReport->getBehaviors();
+		if ( $incidentReport->getSomethingElseDetails() ) {
+			$somethingElseIndex = array_search( 'something-else', $behaviors );
+			if ( $somethingElseIndex ) {
+				$behaviors[$somethingElseIndex] = $this->textFormatter->format(
+					new MessageValue(
+						'reportincident-email-something-else',
+						[ $incidentReport->getSomethingElseDetails() ]
+					)
+				);
+			}
+		}
 		$body = $this->textFormatter->format(
 			new MessageValue(
 				'reportincident-email-body',
@@ -107,7 +119,7 @@ class ReportIncidentMailer {
 					$reportedUserPage->getPrefixedDBkey(),
 					$linkToPageAtRevision,
 					$incidentReport->getLink(),
-					implode( ', ', $incidentReport->getBehaviors() ),
+					implode( ', ', $behaviors ),
 					$incidentReport->getDetails(),
 				]
 			)

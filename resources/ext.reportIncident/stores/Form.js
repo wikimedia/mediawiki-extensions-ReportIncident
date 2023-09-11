@@ -30,6 +30,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 			reportedUserId: inputReportedUser.value,
 			link: inputLink.value,
 			details: inputDetails.value,
+			somethingElseDetails: inputSomethingElseDetails.value,
 			behaviors: inputBehaviors.value
 		};
 	} );
