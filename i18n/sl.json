@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"reportincident-dialog-close-btn": "Zapri",
+	"reportincident-dialog-back-btn": "Nazaj",
+	"reportincident-dialog-additional-details-input-label": "Dodatne podrobnosti",
+	"reportincident-dialog-optional-label": "izbirno",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Spolno nadlegovanje",
+	"reportincident-dialog-harassment-type-threats-of-violence": "Grožnje z nasiljem",
+	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "V skladu s Splošnim kodeksom ravnanja nesprejemljivo vedenje vključuje, vendar ni omejeno na:",
+	"reportincident-dialog-harassment-example-insults": "Večkratna žalitev",
+	"reportincident-dialog-harassment-example-sexual-harassment": "Spolno nadlegovanje",
+	"reportincident-dialog-harassment-example-threats": "Grožnje",
+	"reportincident-dialog-harassment-example-doxing": "Razkritje osebnih podatkov (doksanje)",
+	"reportincident-dialog-harassment-example-trolling": "Trolanje",
+	"reportincident-dialog-engage-header": "Kako sodelovati v dialogu"
+}
