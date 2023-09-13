@@ -40,5 +40,5 @@
 	"reportincident-dialog-harassment-example-trolling": "Trolowanie",
 	"reportincident-dialog-engage-header": "Jak nawiązać dialog",
 	"reportincident-dialog-engage-text": "Jeśli czujesz się dość {{GENDER:|bezpiecznie}}, możesz spróbować porozmawiać z osobą, która sprawia ci problemy. Poinformuj tę osobą o Powszechnych Zasadach Postępowania na Wikipedii, oraz o tym, że jej zachowanie nie jest akceptowalne. Może to pomóc powstrzymać dalsze niewłaściwe zachowanie.",
-	"reportincident-dialog-admin-review": "{{GENDER:|Twoje}} zgłoszenie zostanie wysłane do [$1 administratora] do weryfikacji"
+	"reportincident-dialog-admin-review": "{{GENDER:|Twoje}} zgłoszenie zostanie wysłane do [$1 administratora] w celu weryfikacji"
 }
