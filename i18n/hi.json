@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abijeet Patro"
+		]
+	},
+	"reportincident-dialog-close-btn": "बंद करें",
+	"reportincident-dialog-back-btn": "पीछे",
+	"reportincident-dialog-submit-btn": "जमा करें",
+	"reportincident-dialog-harassment-example-threats": "धमकियां"
+}
