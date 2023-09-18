@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"No se"
+		]
+	},
+	"reportincident-dialog-close-btn": "Cerrar",
+	"reportincident-dialog-back-btn": "Atrás",
+	"reportincident-dialog-additional-details-input-label": "Detalles adicionales",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Acoso sexual",
+	"reportincident-dialog-harassment-type-something-else": "Algo más",
+	"reportincident-dialog-harassment-example-sexual-harassment": "Acoso sexual",
+	"reportincident-dialog-harassment-example-threats": "Amenazas"
+}

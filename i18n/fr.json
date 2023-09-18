@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gomoko"
+			"Gomoko",
+			"Obscaeris"
 		]
 	},
 	"reportincident-desc": "Extension système de signalisation d’incident privé",
@@ -20,7 +21,7 @@
 	"reportincident-dialog-additional-details-input-label": "Détails supplémentaires",
 	"reportincident-dialog-additional-details-input-placeholder": "Ajouter le contexte qui peut être utile pour un relecteur",
 	"reportincident-dialog-optional-label": "facultatif",
-	"reportincident-dialog-links-evidence-label": "Liens pour la preuve de l’incident",
+	"reportincident-dialog-links-evidence-label": "Liens vers la preuve de l’incident",
 	"reportincident-dialog-links-evidence-placeholder": "Fournir un lien vers le harcèlement",
 	"reportincident-dialog-violator-label": "L’utilisateur, {{GENDER:|vous}}, aimerait signaler",
 	"reportincident-dialog-violator-placeholder-text": "Qui signalez-{{GENDER:|vous}} ?",
