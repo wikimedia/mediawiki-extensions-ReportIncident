@@ -1,8 +1,7 @@
 'use strict';
 
 module.exports = function ( grunt ) {
-	const conf = grunt.file.readJSON( 'extension.json' ),
-		messageDirs = conf.MessagesDirs.ReportIncident;
+	const conf = grunt.file.readJSON( 'extension.json' );
 
 	grunt.loadNpmTasks( 'grunt-eslint' );
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
@@ -24,16 +23,10 @@ module.exports = function ( grunt ) {
 				'modules/**/*.{less,vue}'
 			]
 		},
-		banana: {
-			docs: {
-				files: {
-					src: messageDirs
-				}
-			}
-		}
+		banana: conf.MessagesDirs
 	} );
 
-	grunt.registerTask( 'test', [ 'eslint', 'banana:docs', 'stylelint' ] );
+	grunt.registerTask( 'test', [ 'eslint', 'banana', 'stylelint' ] );
 	grunt.registerTask( 'default', 'test' );
 	grunt.registerTask( 'fix', function () {
 		grunt.config.set( 'eslint.options.fix', true );
