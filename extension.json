@@ -21,6 +21,10 @@
 			"value": true,
 			"description": "Whether to display the report button on configured namespaces and skins."
 		},
+		"ReportIncidentApiEnabled": {
+			"value": true,
+			"description": "When set to true, the REST API endpoint for ingesting reports is available."
+		},
 		"ReportIncidentEnabledSkins": {
 			"value": [
 				"minerva", "vector", "vector-2022"
@@ -122,5 +126,21 @@
 			]
 		}
 	},
+	"RestRoutes": [
+		{
+			"path": "/reportincident/v0/report",
+			"method": "POST",
+			"class": "MediaWiki\\Extension\\ReportIncident\\Api\\Rest\\Handler\\ReportHandler",
+			"services": [
+				"MainConfig",
+				"RevisionStore",
+				"UserFactory",
+				"ReportIncidentManager"
+			]
+		}
+	],
+	"ServiceWiringFiles": [
+		"src/ServiceWiring.php"
+	],
 	"manifest_version": 2
 }
