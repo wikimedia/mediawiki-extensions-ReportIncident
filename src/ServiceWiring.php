@@ -5,7 +5,7 @@ use MediaWiki\MediaWikiServices;
 
 // PHP unit does not understand code coverage for this file
 // as the @covers annotation cannot cover a specific file
-// This is fully tested in ReportIncidentServiceWiringTest.php
+// See ReportIncidentServiceWiringTest.php for relevant tests.
 // @codeCoverageIgnoreStart
 
 return [
