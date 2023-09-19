@@ -20,7 +20,7 @@
 	"reportincident-dialog-email-input-label": "{{GENDER:|Your}} email",
 	"reportincident-dialog-additional-details-input-label": "Additional details",
 	"reportincident-dialog-additional-details-input-placeholder": "Add context that could be helpful for a reviewer",
-	"reportincident-dialog-optional-label": "optional",
+	"reportincident-dialog-optional-label": "(optional)",
 	"reportincident-dialog-links-evidence-label": "Links to evidence of incident",
 	"reportincident-dialog-links-evidence-placeholder": "Provide a link to the harassment",
 	"reportincident-dialog-violator-label": "Username {{GENDER:|you}} would like to report",

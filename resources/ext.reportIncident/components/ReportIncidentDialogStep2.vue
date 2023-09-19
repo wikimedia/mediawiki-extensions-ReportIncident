@@ -57,7 +57,7 @@
 				{{ $i18n( 'reportincident-dialog-additional-details-input-label' ).text() }}
 			</template>
 			<template #help-text>
-				{{ optionalLabel }}
+				{{ $i18n( 'reportincident-dialog-optional-label' ).text() }}
 			</template>
 			<cdx-text-area
 				v-model="inputDetails"
@@ -137,8 +137,6 @@ module.exports = exports = {
 			}
 		];
 
-		const optionalLabel = ' (' + mw.msg( 'reportincident-dialog-optional-label' ) + ')';
-
 		const collectSomethingElseDetails = computed( () => {
 			return inputBehaviors.value.filter(
 				( input ) => input === Constants.harassmentTypes.OTHER
@@ -153,7 +151,6 @@ module.exports = exports = {
 			inputDetails,
 			inputSomethingElseDetails,
 			inputEmail,
-			optionalLabel,
 			collectSomethingElseDetails
 		};
 	}
