@@ -83,6 +83,19 @@
 			"i18n"
 		]
 	},
+	"RateLimits": {
+		"reportincident": {
+			"&can-bypass": false,
+			"user": [
+				5,
+				86400
+			],
+			"newbie": [
+				1,
+				86400
+			]
+		}
+	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "resources/ext.reportIncident",
 		"remoteExtPath": "ReportIncident/resources/ext.reportIncident"

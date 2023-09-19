@@ -5,6 +5,7 @@ namespace MediaWiki\Extension\ReportIncident\Tests\Unit;
 use HashConfig;
 use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
+use MediaWiki\Permissions\RateLimiter;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Rest\Validator\JsonBodyValidator;
@@ -13,6 +14,7 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWiki\Tests\Unit\Permissions\MockAuthorityTrait;
+use MediaWiki\User\User;
 use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserIdentityValue;
 use MediaWikiUnitTestCase;
@@ -157,7 +159,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			[],
 			[],
 			$data,
-			$this->mockRegisteredUltimateAuthority()
+			$this->mockRegisteredAuthorityWithPermissions( [ 'reportincident' ] )
 		);
 		$this->assertSame( 204, $response->getStatusCode() );
 	}
@@ -224,5 +226,56 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				true,
 			]
 		];
+	}
+
+	public function testRateLimitTrip() {
+		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
+		$revisionStore = $this->createMock( RevisionStore::class );
+		$reportManager = $this->createMock( ReportIncidentManager::class );
+		$userFactory = $this->createMock( UserFactory::class );
+		$user = $this->createMock( User::class );
+		$user->method( 'isRegistered' )->willReturn( true );
+		$handler = new ReportHandler( $config, $revisionStore, $userFactory, $reportManager );
+		$this->expectExceptionObject(
+			new LocalizedHttpException( new MessageValue( 'apierror-ratelimited' ), 429 )
+		);
+		$rateLimiter = $this->createMock( RateLimiter::class );
+		$rateLimiter->method( 'limit' )->willReturn( true );
+		$rateLimiter->method( 'isLimitable' )->with( 'reportincident' )->willReturn( true );
+		$authority = $this->newUserAuthority( [
+			'actor' => $user,
+			'rateLimiter' => $rateLimiter,
+			'permissions' => [ 'reportincident' ]
+		] );
+		$this->executeHandler(
+			$handler,
+			new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			[],
+			[],
+			[],
+			[ 'revisionId' => 1 ],
+			$authority
+		);
+	}
+
+	public function testActionUnauthorized() {
+		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
+		$revisionStore = $this->createMock( RevisionStore::class );
+		$reportManager = $this->createMock( ReportIncidentManager::class );
+		$userFactory = $this->createMock( UserFactory::class );
+		$handler = new ReportHandler( $config, $revisionStore, $userFactory, $reportManager );
+		$this->expectExceptionObject(
+			new LocalizedHttpException( new MessageValue( 'apierror-permissiondenied' ), 403 )
+		);
+		$authority = $this->mockRegisteredAuthorityWithoutPermissions( [ 'reportincident' ] );
+		$this->executeHandler(
+			$handler,
+			new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			[],
+			[],
+			[],
+			[ 'revisionId' => 1 ],
+			$authority
+		);
 	}
 }

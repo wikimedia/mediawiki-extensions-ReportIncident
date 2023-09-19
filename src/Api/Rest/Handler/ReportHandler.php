@@ -6,12 +6,14 @@ use Config;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\Validator\JsonBodyValidator;
 use MediaWiki\Rest\Validator\UnsupportedContentTypeBodyValidator;
 use MediaWiki\Revision\RevisionStore;
 use MediaWiki\User\UserFactory;
+use Psr\Log\LoggerInterface;
 use TypeError;
 use Wikimedia\Message\MessageValue;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -25,6 +27,7 @@ class ReportHandler extends SimpleHandler {
 	private ReportIncidentManager $reportIncidentManager;
 	private RevisionStore $revisionStore;
 	private UserFactory $userFactory;
+	private LoggerInterface $logger;
 
 	/**
 	 * @param Config $config
@@ -42,6 +45,7 @@ class ReportHandler extends SimpleHandler {
 		$this->reportIncidentManager = $reportIncidentManager;
 		$this->revisionStore = $revisionStore;
 		$this->userFactory = $userFactory;
+		$this->logger = LoggerFactory::getInstance( 'ReportIncident' );
 	}
 
 	public function run() {
@@ -56,6 +60,29 @@ class ReportHandler extends SimpleHandler {
 			throw new LocalizedHttpException(
 				new MessageValue( 'rest-permission-denied-anon' ), 401
 			);
+		}
+
+		$status = PermissionStatus::newEmpty();
+		if ( !$this->getAuthority()->authorizeAction( 'reportincident', $status ) ) {
+			if ( $status->hasMessage( 'actionthrottledtext' ) ) {
+				$this->logger->warning(
+					'User "{user}" tripped rate limits for "reportincident".',
+					[ 'user' => $this->getAuthority()->getUser()->getName() ]
+				);
+				throw new LocalizedHttpException(
+					new MessageValue( 'apierror-ratelimited' ),
+					429
+				);
+			} else {
+				$this->logger->warning(
+					'User "{user}" without permissions attempted to perform "reportincident".',
+					[ 'user' => $this->getAuthority()->getUser()->getName() ]
+				);
+				throw new LocalizedHttpException(
+					new MessageValue( 'apierror-permissiondenied', [ 'reportincident' ] ),
+					403
+				);
+			}
 		}
 		$body = $this->getValidatedBody();
 		$revisionId = $body['revisionId'];
