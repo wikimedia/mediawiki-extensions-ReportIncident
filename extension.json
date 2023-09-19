@@ -40,6 +40,14 @@
 		"ReportIncidentAdministratorsPage": {
 			"value": "Main_Page",
 			"description": "The page the report incident form links to when specifying who will review an incident report. This value will be passed to mw.util.getUrl(); a DB prefix is allowed, e.g. Wikipedia:Administrators"
+		},
+		"ReportIncidentRecipientEmails": {
+			"value": [],
+			"description": "An array of email addresses that should receive reports sent via the incident report system. An empty array means that ReportIncident will not attempt to send any emails when a user files an incident report."
+		},
+		"ReportIncidentEmailFromAddress": {
+			"value": "",
+			"description": "Email to use as the 'from' address for emails that ReportIncident sends. If not set, ReportIncident cannot send emails when users file an incident report."
 		}
 	},
 	"HookHandlers": {

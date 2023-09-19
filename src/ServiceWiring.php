@@ -1,6 +1,9 @@
 <?php
 
+use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Extension\ReportIncident\Services\ReportIncidentMailer;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
 // PHP unit does not understand code coverage for this file
@@ -12,7 +15,23 @@ return [
 	'ReportIncidentManager' => static function (
 		MediaWikiServices $services
 	): ReportIncidentManager {
-		return new ReportIncidentManager();
+		return new ReportIncidentManager(
+			$services->getService( 'ReportIncidentMailer' )
+		);
+	},
+	'ReportIncidentMailer' => static function (
+		MediaWikiServices $services
+	): ReportIncidentMailer {
+		return new ReportIncidentMailer(
+			new ServiceOptions( ReportIncidentMailer::CONSTRUCTOR_OPTIONS, $services->getMainConfig() ),
+			$services->getUrlUtils(),
+			$services->getTitleFactory(),
+			$services->getMessageFormatterFactory()->getTextFormatter(
+				$services->getContentLanguage()->getCode()
+			),
+			$services->getEmailer(),
+			LoggerFactory::getInstance( 'ReportIncident' )
+		);
 	},
 ];
 // @codeCoverageIgnoreEnd

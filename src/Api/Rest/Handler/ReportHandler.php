@@ -82,6 +82,16 @@ class ReportHandler extends SimpleHandler {
 		}
 		$status = $this->reportIncidentManager->record( $incidentReport );
 		if ( $status->isGood() ) {
+			// TODO: If/when we store the reports in a DB table, we can move sending the email
+			// into a deferred update, so the user doesn't need to wait. For now, this is our
+			// only signal that a report was processed, so check the status of the sendEmail
+			// method
+			$status = $this->reportIncidentManager->notify( $incidentReport );
+			if ( !$status->isGood() ) {
+				throw new LocalizedHttpException(
+					new MessageValue( 'reportincident-unable-to-send' )
+				);
+			}
 			return $this->getResponseFactory()->createNoContent();
 		} else {
 			throw new LocalizedHttpException(
