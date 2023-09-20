@@ -40,6 +40,6 @@
 	"reportincident-dialog-harassment-example-hounding": "Hounding",
 	"reportincident-dialog-harassment-example-trolling": "Trolling",
 	"reportincident-dialog-engage-header": "How to engage in dialogue",
-	"reportincident-dialog-engage-text": "If {{GENDER:|you}} feel safe doing so, {{GENDER:|you}} can try talking to the person bothering {{GENDER:|you}}. Inform them of the Universal Code of Conduct on Wikipedia and that their behavior is unacceptable. This can sometimes help stop the harassment.",
+	"reportincident-dialog-engage-text": "If {{GENDER:|you}} feel safe doing so, {{GENDER:|you}} can try talking to the person bothering {{GENDER:|you}}. Inform them of the Universal Code of Conduct on {{SITENAME}} and that they must be respectful. This can sometimes help stop the harassment.",
 	"reportincident-dialog-admin-review": "{{GENDER:|Your}} report will be sent to [$1 an admin] to review."
 }
