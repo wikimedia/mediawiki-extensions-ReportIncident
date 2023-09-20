@@ -11,9 +11,9 @@ describe( 'Form Store', () => {
 		const form = useFormStore();
 		expect( form.isFormValid ).toBe( false );
 
-		form.inputHarassments = [ Constants.harassmentTypes.HATE_SPEECH ];
-		form.inputViolator = 'test value';
-		form.inputEvidence = 'test evidence';
+		form.inputBehaviors = [ Constants.harassmentTypes.HATE_SPEECH ];
+		form.inputReportedUser = 'test value';
+		form.inputLink = 'test evidence';
 		form.inputEmail = 'test email';
 
 		expect( form.isFormValid ).toBe( true );
