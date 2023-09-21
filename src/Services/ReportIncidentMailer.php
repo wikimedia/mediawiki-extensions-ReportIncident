@@ -111,16 +111,21 @@ class ReportIncidentMailer {
 				);
 			}
 		}
+		$emailUrl = $this->titleFactory->newFromText( 'Special:EmailUser' )
+			->getSubpage( $reportingUserPage->getDBkey() )
+			->getFullURL();
+
 		$body = $this->textFormatter->format(
 			new MessageValue(
 				'reportincident-email-body',
 				[
-					$reportingUserPage->getPrefixedDBkey(),
-					$reportedUserPage->getPrefixedDBkey(),
+					$reportingUserPage->getDBkey(),
+					$reportedUserPage->getDBkey(),
 					$linkToPageAtRevision,
 					$incidentReport->getLink(),
 					implode( ', ', $behaviors ),
 					$incidentReport->getDetails(),
+					$emailUrl
 				]
 			)
 		);
