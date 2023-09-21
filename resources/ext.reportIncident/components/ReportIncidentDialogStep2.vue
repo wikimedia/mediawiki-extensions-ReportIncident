@@ -1,93 +1,88 @@
 <template>
-	<form id="reportincident-form">
-		<div
-			class="ext-reportincident-dialog-step2
-						ext-reportincident-dialog-step2__harassment-options">
-			<!-- type of harassment -->
-			<cdx-field :is-fieldset="true">
-				<template #label>
-					{{ $i18n( 'reportincident-dialog-harassment-type-label' ).text() }}
-				</template>
-				<cdx-checkbox
-					v-for="checkbox in harassmentOptions"
-					:id="'ext-reportincident-dialog-option__' + checkbox.value"
-					:key="'checkbox-' + checkbox.value"
-					v-model="inputBehaviors"
-					:input-value="checkbox.value"
-				>
-					{{ checkbox.label }}
-				</cdx-checkbox>
-			</cdx-field>
-
+	<form id="reportincident-form" class="ext-reportincident-dialog-step2">
+		<!-- type of harassment -->
+		<cdx-field
+			:is-fieldset="true"
+			class="ext-reportincident-dialog-step2__harassment-options">
+			<template #label>
+				{{ $i18n( 'reportincident-dialog-harassment-type-label' ).text() }}
+			</template>
+			<cdx-checkbox
+				v-for="checkbox in harassmentOptions"
+				:id="'ext-reportincident-dialog-option__' + checkbox.value"
+				:key="'checkbox-' + checkbox.value"
+				v-model="inputBehaviors"
+				:input-value="checkbox.value">
+				{{ checkbox.label }}
+			</cdx-checkbox>
 			<cdx-text-area
 				v-if="collectSomethingElseDetails"
 				v-model="inputSomethingElseDetails"
-				class="ext-reportincident-dialog-step2__form-item"
 			></cdx-text-area>
+		</cdx-field>
 
-			<!-- who is violating behavior guidelines -->
-			<div
-				class="ext-reportincident-dialog-step2__form-item
+		<!-- who is violating behavior guidelines -->
+		<cdx-field
+			class="ext-reportincident-dialog-step2__form-item
 							ext-reportincident-dialog-step2__violator-name">
-				<span class="ext-reportincident-dialog__text-label">
-					{{ $i18n( 'reportincident-dialog-violator-label' ).text() }}
-				</span>
-				<cdx-text-input
-					v-model="inputReportedUser"
-					:placeholder="$i18n( 'reportincident-dialog-violator-placeholder-text' ).text()"
-				></cdx-text-input>
-			</div>
+			<template #label>
+				{{ $i18n( 'reportincident-dialog-violator-label' ).text() }}
+			</template>
+			<cdx-text-input
+				v-model="inputReportedUser"
+				:placeholder="$i18n( 'reportincident-dialog-violator-placeholder-text' ).text()"
+			></cdx-text-input>
+		</cdx-field>
 
-			<!-- links -->
-			<div
-				class="ext-reportincident-dialog-step2__form-item
+		<!-- links -->
+		<cdx-field
+			class="ext-reportincident-dialog-step2__form-item
 							ext-reportincident-dialog-step2__evidence-links">
-				<span class="ext-reportincident-dialog__text-label">
-					{{ $i18n( 'reportincident-dialog-links-evidence-label' ).text() }}
-				</span>
-				<cdx-text-input
-					v-model="inputLink"
-					:placeholder="$i18n(
-						'reportincident-dialog-links-evidence-placeholder'
-					).text()"
-				></cdx-text-input>
-			</div>
+			<template #label>
+				{{ $i18n( 'reportincident-dialog-links-evidence-label' ).text() }}
+			</template>
+			<cdx-text-input
+				v-model="inputLink"
+				:placeholder="$i18n(
+					'reportincident-dialog-links-evidence-placeholder'
+				).text()"
+			></cdx-text-input>
+		</cdx-field>
 
-			<!-- Additional details -->
-			<div
-				class="ext-reportincident-dialog-step2__form-item
+		<!-- Additional details -->
+		<cdx-field
+			class="ext-reportincident-dialog-step2__form-item
 							ext-reportincident-dialog-step2__additional-details">
-				<span class="ext-reportincident-dialog__text-label">
-					{{ $i18n( 'reportincident-dialog-additional-details-input-label' ).text() }}
-				</span>
-				<span class="ext-reportincident-dialog__text-subtext">
-					{{ optionalLabel }}
-				</span>
-				<cdx-text-area
-					v-model="inputDetails"
-					:placeholder="$i18n(
-						'reportincident-dialog-additional-details-input-placeholder'
-					).text()">
-				</cdx-text-area>
-			</div>
+			<template #label>
+				{{ $i18n( 'reportincident-dialog-additional-details-input-label' ).text() }}
+			</template>
+			<template #help-text>
+				{{ optionalLabel }}
+			</template>
+			<cdx-text-area
+				v-model="inputDetails"
+				:placeholder="$i18n(
+					'reportincident-dialog-additional-details-input-placeholder'
+				).text()">
+			</cdx-text-area>
+		</cdx-field>
 
-			<!-- Email -->
-			<div
-				class="ext-reportincident-dialog-step2__form-item
+		<!-- Email -->
+		<cdx-field
+			class="ext-reportincident-dialog-step2__form-item
 							ext-reportincident-dialog-step2__reporter-email">
-				<span class="ext-reportincident-dialog__text-label">
-					{{ $i18n( 'reportincident-dialog-email-input-label' ).text() }}
-				</span>
-				<cdx-text-input
-					v-model="inputEmail"
-					:placeholder="$i18n( 'reportincident-dialog-email-placeholder-text' ).text()"
-				>
-				</cdx-text-input>
-				<span class="ext-reportincident-dialog__text-subtext">
-					{{ $i18n( 'reportincident-dialog-email-helper-text' ).text() }}
-				</span>
-			</div>
-		</div>
+			<template #label>
+				{{ $i18n( 'reportincident-dialog-email-input-label' ).text() }}
+			</template>
+			<template #help-text>
+				{{ $i18n( 'reportincident-dialog-email-helper-text' ).text() }}
+			</template>
+			<cdx-text-input
+				v-model="inputEmail"
+				:placeholder="$i18n( 'reportincident-dialog-email-placeholder-text' ).text()"
+			>
+			</cdx-text-input>
+		</cdx-field>
 	</form>
 </template>
 
@@ -172,10 +167,6 @@ module.exports = exports = {
 	&__form-item {
 		margin-top: @spacing-125;
 		margin-bottom: @spacing-125;
-	}
-
-	.ext-reportincident-dialog__text-label {
-		margin-bottom: @spacing-100;
 	}
 }
 </style>
