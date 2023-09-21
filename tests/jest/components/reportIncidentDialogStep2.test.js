@@ -25,6 +25,5 @@ describe( 'Report Incident Dialog Step 2', () => {
 		expect( wrapper.find( '.ext-reportincident-dialog-step2__violator-name' ).exists() ).toBe( true );
 		expect( wrapper.find( '.ext-reportincident-dialog-step2__evidence-links' ).exists() ).toBe( true );
 		expect( wrapper.find( '.ext-reportincident-dialog-step2__additional-details' ).exists() ).toBe( true );
-		expect( wrapper.find( '.ext-reportincident-dialog-step2__reporter-email' ).exists() ).toBe( true );
 	} );
 } );

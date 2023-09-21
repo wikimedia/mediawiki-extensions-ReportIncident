@@ -9,7 +9,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const inputLink = ref( '' );
 	const inputDetails = ref( '' );
 	const inputSomethingElseDetails = ref( '' );
-	const inputEmail = ref( '' );
 
 	const isFormValid = computed( () => {
 		// every form item must be filled out except for additional details, which is optional
@@ -19,7 +18,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		isValid = inputBehaviors.value.length > 0;
 		isValid = isValid && inputReportedUser.value !== '';
 		isValid = isValid && inputLink.value !== '';
-		isValid = isValid && inputEmail.value !== '';
 
 		return isValid;
 	} );
@@ -44,7 +42,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		inputDetails,
 		inputSomethingElseDetails,
 		inputLink,
-		inputEmail,
 		isFormValid,
 		restPayload
 	};

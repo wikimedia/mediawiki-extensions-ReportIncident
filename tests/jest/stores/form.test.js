@@ -14,7 +14,6 @@ describe( 'Form Store', () => {
 		form.inputBehaviors = [ Constants.harassmentTypes.HATE_SPEECH ];
 		form.inputReportedUser = 'test value';
 		form.inputLink = 'test evidence';
-		form.inputEmail = 'test email';
 
 		expect( form.isFormValid ).toBe( true );
 	} );

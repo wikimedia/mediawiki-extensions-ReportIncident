@@ -93,8 +93,6 @@
 				"reportincident-dialog-title",
 				"reportincident-dialog-first-step-cancel-btn",
 				"reportincident-dialog-harassment-type-label",
-				"reportincident-dialog-email-helper-text",
-				"reportincident-dialog-email-input-label",
 				"reportincident-dialog-additional-details-input-label",
 				"reportincident-dialog-optional-label",
 				"reportincident-dialog-links-evidence-label",
@@ -118,7 +116,6 @@
 				"reportincident-dialog-additional-details-input-placeholder",
 				"reportincident-dialog-violator-placeholder-text",
 				"reportincident-dialog-links-evidence-placeholder",
-				"reportincident-dialog-email-placeholder-text",
 				"reportincident-dialog-admin-review"
 			],
 			"dependencies": [

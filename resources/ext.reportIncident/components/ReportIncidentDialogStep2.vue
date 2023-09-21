@@ -64,23 +64,6 @@
 				).text()">
 			</cdx-text-area>
 		</cdx-field>
-
-		<!-- Email -->
-		<cdx-field
-			class="ext-reportincident-dialog-step2__form-item
-							ext-reportincident-dialog-step2__reporter-email">
-			<template #label>
-				{{ $i18n( 'reportincident-dialog-email-input-label' ).text() }}
-			</template>
-			<template #help-text>
-				{{ $i18n( 'reportincident-dialog-email-helper-text' ).text() }}
-			</template>
-			<cdx-text-input
-				v-model="inputEmail"
-				:placeholder="$i18n( 'reportincident-dialog-email-placeholder-text' ).text()"
-			>
-			</cdx-text-input>
-		</cdx-field>
 	</form>
 </template>
 
@@ -108,8 +91,7 @@ module.exports = exports = {
 			inputReportedUser,
 			inputLink,
 			inputSomethingElseDetails,
-			inputDetails,
-			inputEmail
+			inputDetails
 		} = storeToRefs( store );
 
 		const harassmentOptions = [
@@ -148,7 +130,6 @@ module.exports = exports = {
 			inputLink,
 			inputDetails,
 			inputSomethingElseDetails,
-			inputEmail,
 			collectSomethingElseDetails
 		};
 	}
