@@ -45,5 +45,6 @@
 	"reportincident-dialog-admin-review": "Explainer text and link of who will review reports",
 	"reportincident-unable-to-send": "Error message sent via the REST API if emailing an incident report fails.",
 	"reportincident-email-subject": "Email subject line for reports sent to moderators. Parameters:\n$1 - the username of the user who filed the report.",
-	"reportincident-email-body": "Email body for reports sent to moderators. Parameters:\n* $1 - The username of the user who filed the report.\n* $2 - the username of the user being reported.\n* $3 - The link to the revision of the page, at the time the report was filed.\n* $4 - the link to evidence of the incident.\n* $5 - a comma-separated list of behaviors defined in the form.\n* $6 - additional text supplied by the reporter"
+	"reportincident-email-body": "Email body for reports sent to moderators. Parameters:\n* $1 - The username of the user who filed the report.\n* $2 - the username of the user being reported.\n* $3 - The link to the revision of the page, at the time the report was filed.\n* $4 - the link to evidence of the incident.\n* $5 - a comma-separated list of behaviors defined in the form.\n* $6 - additional text supplied by the reporter",
+	"reportincident-email-something-else": "Value of the freetext \"something else\" list in an emailed report to moderators.\nParameters:\n* $1 - The text supplied by the user in the \"something else\" field."
 }

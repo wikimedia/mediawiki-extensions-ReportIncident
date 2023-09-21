@@ -44,5 +44,6 @@
 	"reportincident-dialog-admin-review": "{{GENDER:|Your}} report will be sent to [$1 an admin] to review.",
 	"reportincident-unable-to-send": "Unable to email send incident report.",
 	"reportincident-email-subject": "{{SITENAME}}: New incident report from \"$1\"",
-	"reportincident-email-body": "Reporting user: $1\nReported user: $2\nLink to page: $3\nReported link: $4\nBehaviors: $5\nDetails: $6"
+	"reportincident-email-body": "Reporting user: $1\nReported user: $2\nLink to page: $3\nReported link: $4\nBehaviors: $5\nDetails: $6",
+	"reportincident-email-something-else": "Something else: \"$1\""
 }
