@@ -39,6 +39,6 @@
 	"reportincident-dialog-harassment-example-hounding": "רדיפה",
 	"reportincident-dialog-harassment-example-trolling": "טרלול",
 	"reportincident-dialog-engage-header": "איך לנהל דו־שיח",
-	"reportincident-dialog-engage-text": "אם {{GENDER:|אתה מרגיש בטוח|את מרגישה בטוחה}} לעשות את זה, {{GENDER:|אתה יכול|את יכולה}} לנסות לדבר עם האדם שמטריד אותך. יש להודיע להם על קוד ההתנהגות האוניברסלי בוויקיפדיה ועל כך שהתנהגות שלו אינה מקובלת. זה יכול לפעמים לעזור לעצור את ההטרדה.",
-	"reportincident-dialog-admin-review": "הדו\"ח {{GENDER:|שלך}} יישלח אל [$1 מפעיל מערכת] לבדיקה"
+	"reportincident-dialog-engage-text": "אם {{GENDER:|אתה מרגיש בטוח|את מרגישה בטוחה}} לעשות את זה, {{GENDER:|אתה יכול|את יכולה}} לנסות לדבר עם האדם שמטריד אותך. יש להודיע לו על קוד ההתנהגות האוניברסלי שתקף באתר {{SITENAME}} ושחובה להתנהג בכבוד. זה יכול לפעמים לעזור לעצור את ההטרדה.",
+	"reportincident-dialog-admin-review": "הדו\"ח {{GENDER:|שלך}} יישלח אל [$1 מפעיל מערכת] לבדיקה."
 }

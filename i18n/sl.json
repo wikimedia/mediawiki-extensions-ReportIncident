@@ -40,5 +40,5 @@
 	"reportincident-dialog-harassment-example-trolling": "Trolanje",
 	"reportincident-dialog-engage-header": "Kako sodelovati v dialogu",
 	"reportincident-dialog-engage-text": "Če se {{GENDER:|počutite}} varno, se lahko {{GENDER:|poskusite}} pogovoriti z osebo, ki {{GENDER:|vas}} moti. Seznanite jo s Splošnim kodeksom ravnanja v Wikipediji in ji povejte, da je njeno vedenje nesprejemljivo. To lahko včasih pomaga preprečiti nadlegovanje.",
-	"reportincident-dialog-admin-review": "{{GENDER:|Vaše}} poročilo bo poslano v pregled [$1 administratorju]"
+	"reportincident-dialog-admin-review": "{{GENDER:|Vaše}} poročilo bo poslano v pregled [$1 administratorju]."
 }

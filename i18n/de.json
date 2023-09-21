@@ -37,6 +37,6 @@
 	"reportincident-dialog-harassment-example-hounding": "Hounding",
 	"reportincident-dialog-harassment-example-trolling": "Trollen",
 	"reportincident-dialog-engage-header": "Wie man einen Dialog führt",
-	"reportincident-dialog-engage-text": "Wenn {{GENDER:|du}} dich dabei sicher fühlst, kannst {{GENDER:|du}} versuchen, mit der Person zu sprechen, die {{GENDER:|dich}} belästigt. Informiere sie über den Universellen Verhaltenskodex auf Wikipedia und darüber, dass ihr Verhalten inakzeptabel ist. Dies kann manchmal helfen, die Belästigung zu stoppen.",
-	"reportincident-dialog-admin-review": "{{GENDER:|Dein}} Bericht wird zur Überprüfung an [$1 an einen Adminstrator] gesendet"
+	"reportincident-dialog-engage-text": "Wenn {{GENDER:|du}} dich dabei sicher fühlst, kannst {{GENDER:|du}} versuchen, mit der Person zu sprechen, die {{GENDER:|dich}} belästigt. Informiere sie über den Universellen Verhaltenskodex auf {{SITENAME}} und dass sie sich respektvoll verhalten muss. Dies kann manchmal helfen, die Belästigung zu stoppen.",
+	"reportincident-dialog-admin-review": "{{GENDER:|Dein}} Bericht wird zur Überprüfung an [$1 an einen Adminstrator] gesendet."
 }

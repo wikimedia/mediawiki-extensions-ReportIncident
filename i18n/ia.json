@@ -39,6 +39,6 @@
 	"reportincident-dialog-harassment-example-hounding": "Persecution",
 	"reportincident-dialog-harassment-example-trolling": "Trolling",
 	"reportincident-dialog-engage-header": "Como ingagiar in dialogo",
-	"reportincident-dialog-engage-text": "Si tu te senti secur a facer lo, tu pote essayar parlar con le persona que te vexa. Informa le sur le Codice Universal de Conducta in Wikipedia e que su comportamento es inacceptabile. Isto occasionalmente pote adjutar a stoppar le molestia.",
-	"reportincident-dialog-admin-review": "Tu reporto essera inviate a [$1 un administrator] pro revision"
+	"reportincident-dialog-engage-text": "Si tu te senti secur a facer lo, tu pote essayar parlar con le persona que te vexa. Informa le sur le Codice Universal de Conducta sur {{SITENAME}} e que ille debe esser respectuose. Isto occasionalmente pote adjutar a stoppar le molestia.",
+	"reportincident-dialog-admin-review": "Tu reporto essera inviate a [$1 un administrator] pro revision."
 }
