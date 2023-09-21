@@ -7,7 +7,7 @@
 		"Julia Kieserman"
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:ReportIncident",
-	"descriptionmsg": "ReportIncident-desc",
+	"descriptionmsg": "reportincident-desc",
 	"license-name": "GPL-2.0-or-later",
 	"type": "other",
 	"requires": {
