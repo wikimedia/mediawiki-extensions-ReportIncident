@@ -78,7 +78,12 @@ class ReportIncidentMailer {
 				'ReportIncidentEmailFromAddress configuration is empty, not sending an email.'
 			);
 		}
-		$from = new MailAddress( $this->options->get( 'ReportIncidentEmailFromAddress' ) );
+		$from = new MailAddress(
+			$this->options->get( 'ReportIncidentEmailFromAddress' ),
+			$this->textFormatter->format(
+				new MessageValue( 'emailsender' )
+			)
+		);
 		$reportingUserPage = $this->titleFactory->newFromText(
 			$incidentReport->getReportingUser()->getName(), NS_USER
 		);
