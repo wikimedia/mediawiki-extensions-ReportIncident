@@ -112,7 +112,13 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 	/**
 	 * @dataProvider provideTestRestPayload
 	 */
-	public function testRestPayload( array $data, StatusValue $recordStatus, bool $expectException ) {
+	public function testRestPayload(
+		array $data,
+		StatusValue $recordStatus,
+		StatusValue $notifyStatus,
+		bool $expectRecordException,
+		bool $expectNotifyException
+	) {
 		if ( is_int( $data['revisionId'] ) ) {
 			$revisionRecord = $this->createMock( RevisionRecord::class );
 			$revisionRecord->method( 'getId' )->willReturn( $data['revisionId'] );
@@ -127,14 +133,19 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
 		$reportManager = $this->createMock( ReportIncidentManager::class );
 		$reportManager->method( 'record' )->willReturn( $recordStatus );
+		$reportManager->method( 'notify' )->willReturn( $notifyStatus );
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionRecord = $this->createMock( RevisionRecord::class );
 		$revisionStore->method( 'getRevisionById' )->willReturn( $revisionRecord );
 		$userFactory = $this->createMock( UserFactory::class );
 		$handler = new ReportHandler( $config, $revisionStore, $userFactory, $reportManager );
-		if ( $expectException ) {
+		if ( $expectRecordException ) {
 			$this->expectExceptionObject(
 				new LocalizedHttpException( new MessageValue( $recordStatus->getErrors()[0]['message'] ), 400 )
+			);
+		} elseif ( $expectNotifyException ) {
+			$this->expectExceptionObject(
+				new LocalizedHttpException( new MessageValue( $notifyStatus->getErrors()[0]['message'] ), 500 )
 			);
 		}
 		$response = $this->executeHandler(
@@ -163,7 +174,9 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'details' => 'More details'
 				],
 				StatusValue::newGood(),
-				false
+				StatusValue::newGood(),
+				false,
+				false,
 			],
 			'correct values, empty details' => [
 				[
@@ -173,7 +186,9 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'behaviors' => [ 'something', 'something_else' ],
 				],
 				StatusValue::newGood(),
-				false
+				StatusValue::newGood(),
+				false,
+				false,
 			],
 			'trigger a TypeError' => [
 				[
@@ -183,7 +198,9 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'behaviors' => 3
 				],
 				StatusValue::newFatal( 'rest-bad-json-body' ),
-				true
+				StatusValue::newGood(),
+				true,
+				false,
 			],
 			'record fails' => [
 				[
@@ -193,7 +210,21 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'behaviors' => [ 'test' ]
 				],
 				StatusValue::newFatal( 'rest-bad-json-body' ),
-				true
+				StatusValue::newGood(),
+				true,
+				false,
+			],
+			'notify fails' => [
+				[
+					'reportedUserId' => 1,
+					'revisionId' => 1,
+					'link' => 'https://foo.bar',
+					'behaviors' => [ 'test' ],
+				],
+				StatusValue::newGood(),
+				StatusValue::newFatal( 'reportincident-unable-to-send' ),
+				false,
+				true,
 			]
 		];
 	}
