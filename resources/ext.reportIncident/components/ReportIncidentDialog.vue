@@ -12,6 +12,11 @@
 
 		<!-- dialog footer -->
 		<template #footer>
+			<p
+				v-if="showFooterHelpText"
+				v-i18n-html:reportincident-dialog-admin-review="[ adminLink ]"
+				class="ext-reportincident-dialog__text-subtext">
+			</p>
 			<div class="ext-reportincident-dialog-footer">
 				<cdx-button
 					class="ext-reportincident-dialog-footer__back-btn"
@@ -62,6 +67,9 @@ module.exports = exports = {
 		const currentStep = ref( props.initialStep );
 
 		const currentSlotName = computed( () => `${currentStep.value}` );
+		const showFooterHelpText = computed( () => {
+			return currentStep.value === Constants.DIALOG_STEP_1;
+		} );
 
 		const primaryButtonLabel = computed( () => {
 			return currentStep.value === Constants.DIALOG_STEP_1 ?
@@ -104,13 +112,17 @@ module.exports = exports = {
 			}
 		}
 
+		const adminLink = mw.util.getUrl( mw.config.get( 'wgReportIncidentAdministratorsPage' ) );
+
 		return {
 			wrappedOpen,
 			primaryButtonLabel,
 			defaultButtonLabel,
 			currentSlotName,
 			navigateNext,
-			navigatePrevious
+			navigatePrevious,
+			adminLink,
+			showFooterHelpText
 		};
 	}
 };

@@ -51,12 +51,6 @@
 			</div>
 			<span> {{ $i18n( 'reportincident-dialog-engage-text' ).text() }}</span>
 		</div>
-		<div class="ext-reportincident-dialog-step1__text-block">
-			<span
-				v-i18n-html:reportincident-dialog-admin-review="[ adminLink ]"
-				class="ext-reportincident-dialog__text-subtext">
-			</span>
-		</div>
 	</div>
 </template>
 
@@ -65,12 +59,8 @@
 module.exports = exports = {
 	name: 'ReportIncidentDialogStep1',
 	setup() {
-
-		const adminLink = mw.util.getUrl( mw.config.get( 'wgReportIncidentAdministratorsPage' ) );
 		const codeOfConductLink = 'https://foundation.wikimedia.org/wiki/Special:MyLanguage/Universal_Code_of_Conduct';
-
 		return {
-			adminLink,
 			codeOfConductLink
 		};
 	}
