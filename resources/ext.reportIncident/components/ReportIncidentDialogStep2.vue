@@ -51,13 +51,11 @@
 
 		<!-- Additional details -->
 		<cdx-field
+			:optional-flag="$i18n( 'reportincident-dialog-optional-label' ).text()"
 			class="ext-reportincident-dialog-step2__form-item
 							ext-reportincident-dialog-step2__additional-details">
 			<template #label>
 				{{ $i18n( 'reportincident-dialog-additional-details-input-label' ).text() }}
-			</template>
-			<template #help-text>
-				{{ $i18n( 'reportincident-dialog-optional-label' ).text() }}
 			</template>
 			<cdx-text-area
 				v-model="inputDetails"
