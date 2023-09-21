@@ -4,9 +4,8 @@
 		<div>
 			<span>
 				{{ $i18n( 'reportincident-dialog-harassment-intro-text' ).text() }}
-				{{ $i18n(
-					'reportincident-dialog-harassment-lead-in-to-harassment-examples'
-				).text() }}
+			</span>
+			<span v-i18n-html:reportincident-dialog-harassment-lead-in-to-harassment-examples>
 			</span>
 			<ul>
 				<li>
@@ -37,13 +36,6 @@
 			</ul>
 		</div>
 
-		<!-- Universal code of conduct -->
-		<div class="ext-reportincident-dialog-step1__text-block">
-			<span
-				v-i18n-html:reportincident-dialog-code-of-conduct-link="[ codeOfConductLink ]">
-			</span>
-		</div>
-
 		<!-- How to engage in dialog section -->
 		<div class="ext-reportincident-dialog-step1__text-block">
 			<div class="ext-reportincident-dialog__text-header">
@@ -57,13 +49,7 @@
 <script>
 // @vue/component
 module.exports = exports = {
-	name: 'ReportIncidentDialogStep1',
-	setup() {
-		const codeOfConductLink = 'https://foundation.wikimedia.org/wiki/Special:MyLanguage/Universal_Code_of_Conduct';
-		return {
-			codeOfConductLink
-		};
-	}
+	name: 'ReportIncidentDialogStep1'
 };
 </script>
 
