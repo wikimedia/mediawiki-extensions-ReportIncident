@@ -10,7 +10,6 @@
 	"reportincident-dialog-proceed-btn": "অভিযোগ দাখিল করতে অগ্রসর হোন",
 	"reportincident-dialog-back-btn": "পিছনে",
 	"reportincident-dialog-submit-btn": "জমা দিন",
-	"reportincident-dialog-email-input-label": "{{GENDER:|আপনার}} ইমেইল",
 	"reportincident-dialog-additional-details-input-label": "অতিরিক্ত তথ্য",
 	"reportincident-dialog-optional-label": "ঐচ্ছিক",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "বিদ্বেষমূলক বক্তব্য বা বৈষম্য",

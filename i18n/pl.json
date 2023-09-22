@@ -12,11 +12,7 @@
 	"reportincident-dialog-submit-btn": "Wyślij",
 	"reportincident-dialog-title": "Zgłos incydent",
 	"reportincident-dialog-first-step-cancel-btn": "Nie chcę wysłać zgłoszenia",
-	"reportincident-dialog-code-of-conduct-link": "Zobacz [$1 Powszechne Zasady Postępowania]",
 	"reportincident-dialog-harassment-type-label": "Jaki rodzaj zachowania zgłaszasz?",
-	"reportincident-dialog-email-helper-text": "Podanie adresu e-mail pozwoli zespołowi odpowiadającemu na zgłoszenia na podjęcie dalszych działań.",
-	"reportincident-dialog-email-placeholder-text": "Podaj {{GENDER:|swój}} adres e-mail",
-	"reportincident-dialog-email-input-label": "{{GENDER:|Twój}} e-mail",
 	"reportincident-dialog-additional-details-input-label": "Dodatkowe informacje",
 	"reportincident-dialog-additional-details-input-placeholder": "Podaj kontekst, który pomoże osobie weryfikującej zgłoszenie",
 	"reportincident-dialog-optional-label": "opcjonalne",
@@ -39,6 +35,6 @@
 	"reportincident-dialog-harassment-example-hounding": "Nękanie",
 	"reportincident-dialog-harassment-example-trolling": "Trolowanie",
 	"reportincident-dialog-engage-header": "Jak nawiązać dialog",
-	"reportincident-dialog-engage-text": "Jeśli czujesz się dość {{GENDER:|bezpiecznie}}, możesz spróbować porozmawiać z osobą, która sprawia ci problemy. Poinformuj tę osobą o Powszechnych Zasadach Postępowania na Wikipedii, oraz o tym, że jej zachowanie nie jest akceptowalne. Może to pomóc powstrzymać dalsze niewłaściwe zachowanie.",
-	"reportincident-dialog-admin-review": "{{GENDER:|Twoje}} zgłoszenie zostanie wysłane do [$1 administratora] w celu weryfikacji"
+	"reportincident-dialog-engage-text": "Jeśli czujesz się dość {{GENDER:|bezpiecznie}}, możesz spróbować porozmawiać z osobą, która sprawia ci problemy. Poinformuj tę osobą o Powszechnych Zasadach Postępowania na {{GRAMMAR:MS.lp|{{SITENAME}}}}, oraz o tym, że musi zachowywać się odpowiednio. Może to pomóc powstrzymać dalsze niewłaściwe zachowanie.",
+	"reportincident-dialog-admin-review": "{{GENDER:|Twoje}} zgłoszenie zostanie wysłane do [$1 administratora] w celu weryfikacji."
 }
