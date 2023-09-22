@@ -57,14 +57,14 @@ module.exports = exports = {
 @import ( reference ) '../../../resources/lib/codex-design-tokens/theme-wikimedia-ui.less';
 
 .ext-reportincident-dialog-step1 {
+	font-size: @font-size-large;
+	line-height: @line-height-medium;
 	&__text-block {
 		margin-top: @spacing-125;
 	}
-	ul {
-		&, li {
-			margin-top: @spacing-12;
-			margin-bottom: @spacing-12;
-		}
+	ul, li  {
+		list-style: inside;
+		margin-left: @spacing-25;
 	}
 }
 </style>
