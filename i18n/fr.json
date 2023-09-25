@@ -16,7 +16,7 @@
 	"reportincident-dialog-harassment-type-label": "Quel type de comportement ?",
 	"reportincident-dialog-additional-details-input-label": "Détails supplémentaires",
 	"reportincident-dialog-additional-details-input-placeholder": "Ajouter le contexte qui peut être utile pour un relecteur",
-	"reportincident-dialog-optional-label": "facultatif",
+	"reportincident-dialog-optional-label": "(facultatif)",
 	"reportincident-dialog-links-evidence-label": "Liens vers la preuve de l’incident",
 	"reportincident-dialog-links-evidence-placeholder": "Fournir un lien vers le harcèlement",
 	"reportincident-dialog-violator-label": "L’utilisateur, {{GENDER:|vous}}, aimerait signaler",
@@ -27,7 +27,7 @@
 	"reportincident-dialog-harassment-type-intimidation": "Intimidation, agression, injures",
 	"reportincident-dialog-harassment-type-something-else": "Quelque chose d’autre",
 	"reportincident-dialog-harassment-intro-text": "Un comportement inapproprié n’est pas toléré sur {{SITENAME}}.",
-	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Selon le code universel de conduite, un comportement inacceptable inclut, sans y être limité :",
+	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Selon le [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct|code universel de conduite]], un comportement inacceptable inclut, sans y être limité :",
 	"reportincident-dialog-harassment-example-insults": "les insultes répétées",
 	"reportincident-dialog-harassment-example-sexual-harassment": "le harcèlement sexuel",
 	"reportincident-dialog-harassment-example-threats": "les menaces",
@@ -36,6 +36,10 @@
 	"reportincident-dialog-harassment-example-hounding": "Le traquage",
 	"reportincident-dialog-harassment-example-trolling": "Le troll",
 	"reportincident-dialog-engage-header": "Comment engager le dialogue",
-	"reportincident-dialog-engage-text": "Si {{GENDER:|vous}} vous sentez à l’aise en le faisant, {{GENDER:|vous}} pouvez essayer de parler à la personne qui {{GENDER:|vous}} ennuie. Informez-la du code de conduite universel sur Wikipédia et que son comportement est inacceptable. Cela peut parfois aider à arrêter le harcèlement.",
-	"reportincident-dialog-admin-review": "{{GENDER:|Votre}} signalement sera envoyé à [$1 un administrateur] pour vérification"
+	"reportincident-dialog-engage-text": "Si {{GENDER:|vous}} vous sentez à l’aise en le faisant, {{GENDER:|vous}} pouvez essayer de parler à la personne qui {{GENDER:|vous}} ennuie. Informez-la du code de conduite universel sur {{SITENAME}} et qu’elle doit être respectueuse. Cela peut parfois aider à arrêter le harcèlement.",
+	"reportincident-dialog-admin-review": "{{GENDER:|Votre}} signalement sera envoyé à [$1 un administrateur] pour vérification.",
+	"reportincident-unable-to-send": "Impossible d’envoyer par courriel le rapport d’incident.",
+	"reportincident-email-subject": "{{SITENAME}} : Nouveau rapport d’incident de « $1 »",
+	"reportincident-email-body": "Utilisateur faisant le signalement : $1\nUtilisateur signalé : $2\nLien vers la page : $3\nLien signalé : $4\nComportements : $5\nDétails : $6",
+	"reportincident-email-something-else": "Quelque chose d’autre : « $1 »"
 }

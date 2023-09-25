@@ -8,5 +8,7 @@
 	"reportincident-dialog-close-btn": "बंद करें",
 	"reportincident-dialog-back-btn": "पीछे",
 	"reportincident-dialog-submit-btn": "जमा करें",
-	"reportincident-dialog-harassment-example-threats": "धमकियां"
+	"reportincident-dialog-optional-label": "(वैकल्पिक)",
+	"reportincident-dialog-harassment-example-threats": "धमकियां",
+	"reportincident-email-something-else": "कुछ और: \"$1\""
 }

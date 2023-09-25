@@ -39,6 +39,6 @@
 	"reportincident-dialog-admin-review": "{{GENDER:|Vaše}} poročilo bo poslano v pregled [$1 administratorju].",
 	"reportincident-unable-to-send": "Poročila o incidentu ni bilo mogoče poslati po e-pošti.",
 	"reportincident-email-subject": "{{SITENAME}}: Novo poročilo o incidentu od »$1«",
-	"reportincident-email-body": "Uporabnik prijavitelj: $1 \nPrijavljeni uporabnik: $2 \nPovezava do strani: $3 \nPrijavljena povezava: $4 \nVedenje: $5 \nPodrobnosti: $6",
+	"reportincident-email-body": "Uporabnik prijavitelj: $1 \nPrijavljeni uporabnik: $2 \nPovezava do strani: $3 \nPrijavljena povezava: $4 \nVedenje: $5 \nPodrobnosti: $6\n\nE-naslov $1: $7",
 	"reportincident-email-something-else": "Nekaj drugega: »$1«"
 }

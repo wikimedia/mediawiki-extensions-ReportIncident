@@ -39,6 +39,6 @@
 	"reportincident-dialog-admin-review": "הדו\"ח {{GENDER:|שלך}} יישלח אל [$1 מפעיל מערכת] לבדיקה.",
 	"reportincident-unable-to-send": "לא ניתן לשלוח דו\"ח תקרית בדואר אלקטרוני.",
 	"reportincident-email-subject": "{{SITENAME}}: דו\"ח תקרית חדש מחשבון \"$1\"",
-	"reportincident-email-body": "משתמש ששולח את הדו\"ח: $1 \nמשתמש שהוא נושא הדו\"ח: $2 \nקישור לדף: $3 \nקישור מדווח: $4 \nהתנהגויות: $5 \nפרטים: $6",
+	"reportincident-email-body": "משתמש ששולח את הדו\"ח: $1 \nמשתמש שהוא נושא הדו\"ח: $2 \nקישור לדף: $3 \nקישור מדווח: $4 \nהתנהגויות: $5 \nפרטים: $6\n\nדואר אלקטרונו: $7",
 	"reportincident-email-something-else": "משהו אחר: \"$1\""
 }

@@ -37,6 +37,6 @@
 	"reportincident-dialog-admin-review": "{{GENDER:|Dein}} Bericht wird zur Überprüfung an [$1 an einen Adminstrator] gesendet.",
 	"reportincident-unable-to-send": "Vorfallbericht kann nicht per E-Mail gesendet werden.",
 	"reportincident-email-subject": "{{SITENAME}}: Neuer Vorfallbericht von „$1“",
-	"reportincident-email-body": "Meldender Benutzer: $1 \nGemeldeter Benutzer: $2 \nLink zur Seite: $3 \nGemeldeter Link: $4 \nVerhalten: $5 \nDetails: $6",
+	"reportincident-email-body": "Meldender Benutzer: $1 \nGemeldeter Benutzer: $2 \nLink zur Seite: $3 \nGemeldeter Link: $4 \nVerhalten: $5 \nDetails: $6\n\nE-Mail $1: $7",
 	"reportincident-email-something-else": "Etwas anderes: „$1“"
 }

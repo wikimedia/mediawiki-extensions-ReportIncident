@@ -39,6 +39,6 @@
 	"reportincident-dialog-admin-review": "Tu reporto essera inviate a [$1 un administrator] pro revision.",
 	"reportincident-unable-to-send": "Le reporto de incidente non pote esser inviate per e-mail.",
 	"reportincident-email-subject": "{{SITENAME}}: Nove incidente reportate per $1",
-	"reportincident-email-body": "Usator reportante: $1\nUsator reportate: $2\nLigamine al pagina: $3\nLigamine reportate: $4\nComportamento: $5\nDetalios: $6",
+	"reportincident-email-body": "Usator reportante: $1\nUsator reportate: $2\nLigamine al pagina: $3\nLigamine reportate: $4\nComportamento: $5\nDetalios: $6\n\nE-mail de $1: $7",
 	"reportincident-email-something-else": "Altere cosa: “$1”"
 }

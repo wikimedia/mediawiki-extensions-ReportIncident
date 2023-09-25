@@ -4,5 +4,7 @@
 			"Beta16"
 		]
 	},
-	"reportincident-dialog-close-btn": "Chiudi"
+	"reportincident-dialog-close-btn": "Chiudi",
+	"reportincident-dialog-optional-label": "(opzionale)",
+	"reportincident-email-something-else": "Qualcos'altro: \"$1\""
 }
