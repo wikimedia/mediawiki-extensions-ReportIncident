@@ -15,7 +15,7 @@
 	"reportincident-dialog-harassment-type-label": "Каков вид на однесување?",
 	"reportincident-dialog-additional-details-input-label": "Дополнителни поединости",
 	"reportincident-dialog-additional-details-input-placeholder": "Додајте контекст кој би бил од помош за разгледувач",
-	"reportincident-dialog-optional-label": "незадолжително",
+	"reportincident-dialog-optional-label": "(незадолжително)",
 	"reportincident-dialog-links-evidence-label": "Врски до докази за инцидентот",
 	"reportincident-dialog-links-evidence-placeholder": "Ставете врска до вознемирувањето",
 	"reportincident-dialog-violator-label": "Корисничкото име кое би {{GENDER:|сакале}} да го пријавите",
@@ -26,7 +26,7 @@
 	"reportincident-dialog-harassment-type-intimidation": "Заплашување, агресија, прозивка",
 	"reportincident-dialog-harassment-type-something-else": "Нешто друго",
 	"reportincident-dialog-harassment-intro-text": "Неумесното однесување не се толерира на {{SITENAME}}.",
-	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Согласно Унверзалниот правилник на однесување, под неприфатливо однесување се подразбира (но не е ограничено на):",
+	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Согласно [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct|Унверзалниот правилник на однесување]], под неприфатливо однесување се подразбира (но не е ограничено на):",
 	"reportincident-dialog-harassment-example-insults": "Повторени навреди",
 	"reportincident-dialog-harassment-example-sexual-harassment": "Сексуално вознемирување",
 	"reportincident-dialog-harassment-example-threats": "Закани",
@@ -35,6 +35,10 @@
 	"reportincident-dialog-harassment-example-hounding": "Прогонување",
 	"reportincident-dialog-harassment-example-trolling": "Тролање",
 	"reportincident-dialog-engage-header": "Како да стапите во дијалог",
-	"reportincident-dialog-engage-text": "Ако {{GENDER:|се}} чувствувате безбедни, {{GENDER:|можете}} да се обидете да поразговарате со лицето што {{GENDER:|ве}} вознемирува. Посочете му го Универзалниот правилник на однесување на Википедија и дека неговото однесување е неприфатливо. Ова понекогаш може да помогне да се запре вознемирувањето.",
-	"reportincident-dialog-admin-review": "{{GENDER:|Вашата}} пријава ќе биде испратена на [$1 администратор] за разгледување"
+	"reportincident-dialog-engage-text": "Ако {{GENDER:|се}} чувствувате безбедни, {{GENDER:|можете}} да се обидете да поразговарате со лицето што {{GENDER:|ве}} вознемирува. Посочете му го Универзалниот правилник на однесување на {{SITENAME}} и соопштете му дека мора да ги почитува другите. Ова понекогаш може да помогне да се запре вознемирувањето.",
+	"reportincident-dialog-admin-review": "{{GENDER:|Вашата}} пријава ќе биде испратена на [$1 администратор] за разгледување.",
+	"reportincident-unable-to-send": "Не можев да ја испратам пријавата за инцидент по е-пошта.",
+	"reportincident-email-subject": "{{SITENAME}}: Нова пријава за инцидент од „$1“",
+	"reportincident-email-body": "Пријавувач: $1\nПријавен: $2\nВрска до страница: $3\nПријавена врска: $4\nПоведенија: $5\nПоединости: $6\n\nЕ-пошта до $1: $7",
+	"reportincident-email-something-else": "Нешто друго: „$1“"
 }
