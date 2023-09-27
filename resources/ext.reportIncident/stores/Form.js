@@ -120,17 +120,31 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	 * Resets the form data to it's initial state, which
 	 * is all text fields as an empty string and no
 	 * checkboxes selected.
+	 *
+	 * This also configures the required field checks to
+	 * be disabled until the field is un-focused or an
+	 * attempt is submitted as is done for the first use
+	 * of the form.
 	 */
 	function $reset() {
+		// Reset the form data
 		inputBehaviors.value = [ ];
 		inputReportedUser.value = '';
 		inputDetails.value = '';
 		inputSomethingElseDetails.value = '';
 		inputLink.value = '';
+		// Disable the required fields error again until
+		// that required field is un-focused or a submit
+		// is attempted.
+		displayReportedUserRequiredError.value = false;
+		displayBehaviorsRequiredError.value = false;
+		displaySomethingElseTextboxRequiredError.value = false;
+		displayLinkRequiredError.value = false;
 	}
 
 	return {
 		inputBehaviors,
+		displayBehaviorsRequiredError,
 		inputReportedUser,
 		displayReportedUserRequiredError,
 		inputDetails,

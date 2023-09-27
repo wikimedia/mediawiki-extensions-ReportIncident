@@ -27,13 +27,24 @@ describe( 'Form Store', () => {
 		form.inputLink = 'test evidence';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
+		form.displayReportedUserRequiredError = true;
+		form.displayLinkRequiredError = true;
+		form.displaySomethingElseTextboxRequiredError = true;
+		form.displayBehaviorsRequiredError = true;
 
 		form.$reset();
+		// Form fields should be empty
 		expect( form.inputBehaviors ).toStrictEqual( [] );
 		expect( form.inputReportedUser ).toBe( '' );
 		expect( form.inputLink ).toBe( '' );
 		expect( form.inputDetails ).toBe( '' );
 		expect( form.inputSomethingElseDetails ).toBe( '' );
+		// Required field checks should be disabled again (they are enabled on
+		// pressing submit or un-focusing that required field).
+		expect( form.displayReportedUserRequiredError ).toBe( false );
+		expect( form.displayLinkRequiredError ).toBe( false );
+		expect( form.displaySomethingElseTextboxRequiredError ).toBe( false );
+		expect( form.displayBehaviorsRequiredError ).toBe( false );
 	} );
 
 	it( 'Generates correct rest data', () => {
