@@ -3,6 +3,8 @@
 		<!-- type of harassment -->
 		<cdx-field
 			:is-fieldset="true"
+			:status="harassmentStatus"
+			:messages="formErrorMessages.inputBehaviors"
 			class="ext-reportincident-dialog-step2__harassment-options">
 			<template #label>
 				{{ $i18n( 'reportincident-dialog-harassment-type-label' ).text() }}
@@ -18,24 +20,31 @@
 			<cdx-text-area
 				v-if="collectSomethingElseDetails"
 				v-model="inputSomethingElseDetails"
+				@focusout="displaySomethingElseTextboxRequiredError = true"
 			></cdx-text-area>
 		</cdx-field>
 
 		<!-- who is violating behavior guidelines -->
 		<cdx-field
 			class="ext-reportincident-dialog-step2__form-item
-							ext-reportincident-dialog-step2__violator-name">
+							ext-reportincident-dialog-step2__violator-name"
+			:status="reportedUserStatus"
+			:messages="formErrorMessages.inputReportedUser"
+		>
 			<template #label>
 				{{ $i18n( 'reportincident-dialog-violator-label' ).text() }}
 			</template>
 			<cdx-text-input
 				v-model="inputReportedUser"
 				:placeholder="$i18n( 'reportincident-dialog-violator-placeholder-text' ).text()"
+				@focusout="displayReportedUserRequiredError = true"
 			></cdx-text-input>
 		</cdx-field>
 
 		<!-- links -->
 		<cdx-field
+			:status="linksStatus"
+			:messages="formErrorMessages.inputLink"
 			class="ext-reportincident-dialog-step2__form-item
 							ext-reportincident-dialog-step2__evidence-links">
 			<template #label>
@@ -46,6 +55,7 @@
 				:placeholder="$i18n(
 					'reportincident-dialog-links-evidence-placeholder'
 				).text()"
+				@focusout="displayLinkRequiredError = true"
 			></cdx-text-input>
 		</cdx-field>
 
@@ -68,6 +78,7 @@
 </template>
 
 <script>
+
 const Constants = require( '../Constants.js' );
 const useFormStore = require( '../stores/Form.js' );
 const { CdxCheckbox, CdxField, CdxTextInput, CdxTextArea } = require( '@wikimedia/codex' );
@@ -89,8 +100,11 @@ module.exports = exports = {
 		const {
 			inputBehaviors,
 			inputReportedUser,
+			displayReportedUserRequiredError,
 			inputLink,
+			displayLinkRequiredError,
 			inputSomethingElseDetails,
+			displaySomethingElseTextboxRequiredError,
 			inputDetails
 		} = storeToRefs( store );
 
@@ -117,6 +131,26 @@ module.exports = exports = {
 			}
 		];
 
+		const harassmentStatus = computed( () => {
+			return store.formErrorMessages.inputBehaviors ? 'error' : 'default';
+		} );
+
+		const linksStatus = computed( () => {
+			return store.formErrorMessages.inputLink ? 'error' : 'default';
+		} );
+
+		const reportedUserStatus = computed( () => {
+			return store.formErrorMessages.inputReportedUser ? 'error' : 'default';
+		} );
+
+		const formErrorMessages = computed( () => {
+			return store.formErrorMessages;
+		} );
+
+		/**
+		 * Whether the "Something else" textbox value should be sent
+		 * in the request body to the REST endpoint on form submission.
+		 */
 		const collectSomethingElseDetails = computed( () => {
 			return inputBehaviors.value.filter(
 				( input ) => input === Constants.harassmentTypes.OTHER
@@ -127,10 +161,17 @@ module.exports = exports = {
 			harassmentOptions,
 			inputBehaviors,
 			inputReportedUser,
+			displayReportedUserRequiredError,
 			inputLink,
+			displayLinkRequiredError,
 			inputDetails,
 			inputSomethingElseDetails,
-			collectSomethingElseDetails
+			displaySomethingElseTextboxRequiredError,
+			collectSomethingElseDetails,
+			formErrorMessages,
+			harassmentStatus,
+			linksStatus,
+			reportedUserStatus
 		};
 	}
 };

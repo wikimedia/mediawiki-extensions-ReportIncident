@@ -116,7 +116,11 @@
 				"reportincident-dialog-additional-details-input-placeholder",
 				"reportincident-dialog-violator-placeholder-text",
 				"reportincident-dialog-links-evidence-placeholder",
-				"reportincident-dialog-admin-review"
+				"reportincident-dialog-admin-review",
+				"reportincident-dialog-violator-empty",
+				"reportincident-dialog-something-else-empty",
+				"reportincident-dialog-harassment-empty",
+				"reportincident-dialog-links-empty"
 			],
 			"dependencies": [
 				"mediawiki.Uri",

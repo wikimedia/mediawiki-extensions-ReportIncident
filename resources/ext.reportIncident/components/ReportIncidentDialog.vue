@@ -89,16 +89,22 @@ module.exports = exports = {
 				currentStep.value = Constants.DIALOG_STEP_2;
 			} else {
 				// if on the second page, validate, then POST the data
-				wrappedOpen.value = false;
-				currentStep.value = Constants.DIALOG_STEP_1;
 				const store = useFormStore();
 				const restPayload = store.restPayload;
 				restPayload.revisionId = mw.config.get( 'wgCurRevisionId' );
-				// TODO: Validate
-				new mw.Rest().post(
-					'/reportincident/v0/report',
-					restPayload
-				);
+				if ( store.isFormValidForSubmission() ) {
+					// TODO: Add error message if REST API call fails.
+					new mw.Rest().post(
+						'/reportincident/v0/report',
+						restPayload
+					).then(
+						() => {
+							wrappedOpen.value = false;
+							currentStep.value = Constants.DIALOG_STEP_1;
+							store.$reset();
+						}
+					);
+				}
 			}
 		}
 
