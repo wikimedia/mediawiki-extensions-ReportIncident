@@ -58,7 +58,8 @@
 	"Hooks": {
 		"BeforePageDisplay": "ReportIncidentHooks",
 		"SidebarBeforeOutput": "ReportIncidentHooks",
-		"SkinTemplateNavigation::Universal": "ReportIncidentHooks"
+		"SkinTemplateNavigation::Universal": "ReportIncidentHooks",
+		"DiscussionToolsAddOverflowMenuItems": "ReportIncidentHooks"
 	},
 	"MessagesDirs": {
 		"ReportIncident": [

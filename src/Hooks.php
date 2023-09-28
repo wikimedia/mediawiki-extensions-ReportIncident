@@ -19,31 +19,35 @@
 
 namespace MediaWiki\Extension\ReportIncident;
 
+use IContextSource;
 use MediaWiki\Config\Config;
+use MediaWiki\Extension\DiscussionTools\Hooks\DiscussionToolsAddOverflowMenuItemsHook;
+use MediaWiki\Extension\DiscussionTools\OverflowMenuItem;
 use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\Hook\SidebarBeforeOutputHook;
 use MediaWiki\Hook\SkinTemplateNavigation__UniversalHook;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\User\User;
 
 class Hooks implements
 	BeforePageDisplayHook,
 	SidebarBeforeOutputHook,
-	SkinTemplateNavigation__UniversalHook
+	SkinTemplateNavigation__UniversalHook,
+	DiscussionToolsAddOverflowMenuItemsHook
 {
 
 	/** @inheritDoc */
 	public function onBeforePageDisplay( $out, $skin ): void {
-		// If the button is disabled, don't do anything.
-		// FIXME: Replace this hook implementation with DiscussionTools integration (T340137)
+		// If the button feature flag is disabled, don't do anything.
 		$config = $out->getConfig();
 		if ( !$config->get( 'ReportIncidentReportButtonEnabled' ) ) {
 			return;
 		}
 
-		// Only add button if in configured namespace and skin
-		if ( in_array( $out->getTitle()->getNamespace(),
-				$config->get( 'ReportIncidentEnabledNamespaces' ) ) &&
-			in_array( $skin->getSkinName(), $config->get( 'ReportIncidentEnabledSkins' ) ) ) {
+		// Only add HTML if in configured namespace and skin.
+		// Named user check happens in DiscussionTools and menu tools hooks.
+		if ( $this->shouldShowButtonForNamespace( $out->getTitle()->getNamespace(), $config ) &&
+			$this->shouldShowButtonForSkin( $skin->getSkinName(), $config ) ) {
 			$out->addHtml( '<div id="ext-reportincident-app"></div>' );
 		}
 	}
@@ -59,10 +63,10 @@ class Hooks implements
 		// * The user is not named
 		if (
 			!$config->get( 'ReportIncidentReportButtonEnabled' ) ||
-			!in_array( $skin->getTitle()->getNamespace(), $config->get( 'ReportIncidentEnabledNamespaces' ) ) ||
+			!$this->shouldShowButtonForNamespace( $skin->getTitle()->getNamespace(), $config ) ||
 			$skin->getSkinName() !== 'minerva' ||
-			!in_array( $skin->getSkinName(), $config->get( 'ReportIncidentEnabledSkins' ) ) ||
-			!$skin->getUser()->isNamed()
+			!$this->shouldShowButtonForSkin( $skin->getSkinName(), $config ) ||
+			!$this->shouldShowButtonForUser( $skin->getUser() )
 		) {
 			return;
 		}
@@ -89,9 +93,9 @@ class Hooks implements
 		// * The user is not named.
 		if (
 			!$config->get( 'ReportIncidentReportButtonEnabled' ) ||
-			!in_array( $sktemplate->getTitle()->getNamespace(), $config->get( 'ReportIncidentEnabledNamespaces' ) ) ||
-			!in_array( $sktemplate->getSkinName(), $config->get( 'ReportIncidentEnabledSkins' ) ) ||
-			!$sktemplate->getUser()->isNamed()
+			!$this->shouldShowButtonForNamespace( $sktemplate->getTitle()->getNamespace(), $config ) ||
+			!$this->shouldShowButtonForSkin( $sktemplate->getSkinName(), $config ) ||
+			!$this->shouldShowButtonForUser( $sktemplate->getUser() )
 		) {
 			return;
 		}
@@ -128,5 +132,46 @@ class Hooks implements
 			// in the overflow menu.
 			$output->addModuleStyles( 'ext.reportIncident.minervaicons' );
 		}
+	}
+
+	/** @inheritDoc */
+	public function onDiscussionToolsAddOverflowMenuItems(
+		array &$overflowMenuItems,
+		array &$resourceLoaderModules,
+		bool $sectionHeadingIsEditable,
+		array $threadItemData,
+		IContextSource $contextSource
+	) {
+		$config = $contextSource->getConfig();
+		$title = $contextSource->getTitle();
+		$skin = $contextSource->getSkin();
+		$user = $contextSource->getUser();
+		if ( !$config->get( 'ReportIncidentReportButtonEnabled' ) ) {
+			return;
+		}
+		if ( $this->shouldShowButtonForNamespace( $title->getNamespace(), $config ) &&
+			$this->shouldShowButtonForSkin( $skin->getSkinName(), $config ) &&
+			$this->shouldShowButtonForUser( $user ) ) {
+			$overflowMenuItems[] = new OverflowMenuItem(
+				'reportincident',
+				'flag',
+				$contextSource->msg( 'reportincident-report-btn-label' ),
+				0,
+				[ 'thread-id' => $threadItemData['id'] ]
+			);
+			$resourceLoaderModules[] = 'ext.reportIncident';
+		}
+	}
+
+	private function shouldShowButtonForNamespace( int $namespace, Config $config ): bool {
+		return in_array( $namespace, $config->get( 'ReportIncidentEnabledNamespaces' ) );
+	}
+
+	private function shouldShowButtonForSkin( string $skin, Config $config ): bool {
+		return in_array( $skin, $config->get( 'ReportIncidentEnabledSkins' ) );
+	}
+
+	private function shouldShowButtonForUser( User $user ): bool {
+		return $user->isNamed();
 	}
 }

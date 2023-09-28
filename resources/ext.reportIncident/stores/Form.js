@@ -4,6 +4,7 @@ const Pinia = require( 'pinia' );
 const { ref, computed } = require( 'vue' );
 
 const useFormStore = Pinia.defineStore( 'form', () => {
+	const overflowMenuData = ref( {} );
 	const inputBehaviors = ref( [ ] );
 	const displayBehaviorsRequiredError = ref( false );
 	const inputReportedUser = ref( '' );
@@ -127,6 +128,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	}
 
 	return {
+		overflowMenuData,
 		inputBehaviors,
 		displayBehaviorsRequiredError,
 		inputReportedUser,

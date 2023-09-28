@@ -10,10 +10,11 @@
 </template>
 
 <script>
-const { ref } = require( 'vue' ),
+const { ref, onMounted } = require( 'vue' ),
 	ReportIncidentDialog = require( './ReportIncidentDialog.vue' ),
 	ReportIncidentDialogStep1 = require( './ReportIncidentDialogStep1.vue' ),
-	ReportIncidentDialogStep2 = require( './ReportIncidentDialogStep2.vue' );
+	ReportIncidentDialogStep2 = require( './ReportIncidentDialogStep2.vue' ),
+	useFormStore = require( '../stores/Form.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -40,6 +41,15 @@ module.exports = exports = {
 			open.value = true;
 		} );
 
+		onMounted( () => {
+			const store = useFormStore();
+			mw.hook( 'discussionToolsOverflowMenuOnChoose' ).add( function ( id, menuItem ) {
+				if ( id === 'reportincident' ) {
+					store.overflowMenuData = menuItem.getData();
+					open.value = true;
+				}
+			} );
+		} );
 		return {
 			open
 		};

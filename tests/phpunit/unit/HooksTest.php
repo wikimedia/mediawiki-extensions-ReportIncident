@@ -3,13 +3,14 @@
 namespace MediaWiki\Extension\ReportIncident\Tests\Unit;
 
 use HashConfig;
+use IContextSource;
 use MediaWiki\Extension\ReportIncident\Hooks;
+use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiUnitTestCase;
 use Message;
 use OutputPage;
 use Skin;
-use Title;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -47,6 +48,9 @@ class HooksTest extends MediaWikiUnitTestCase {
 			->willReturn( NS_USER_TALK );
 		$outputPageMock->method( 'getConfig' )->willReturn( $config );
 		$outputPageMock->method( 'getTitle' )->willReturn( $title );
+		$user = $this->createMock( User::class );
+		$user->method( 'isNamed' )->willReturn( true );
+		$outputPageMock->method( 'getUser' )->willReturn( $user );
 		$skinMock = $this->createMock( Skin::class );
 		$skinMock->method( 'getSkinName' )->willReturn( 'minerva' );
 		$outputPageMock->expects( $this->once() )->method( 'addHTML' );
@@ -329,4 +333,110 @@ class HooksTest extends MediaWikiUnitTestCase {
 			],
 		];
 	}
+
+	/**
+	 * @dataProvider provideOnDiscussionToolsAddOverflowMenuItems
+	 */
+	public function testOnDiscussionToolsAddOverflowMenuItems(
+		bool $expectOverflowMenuItemAdded,
+		bool $expectResourceLoaderModuleAdded,
+		bool $titleIsEditable,
+		array $threadItemData,
+		int $titleNamespace,
+		string $skinName,
+		bool $userIsNamed,
+		array $config
+	) {
+		$overflowMenuItems = [];
+		$resourceLoaderModules = [];
+
+		$title = $this->createMock( Title::class );
+		$title->method( 'getNamespace' )->willReturn( $titleNamespace );
+
+		$config = new HashConfig( $config );
+		$skin = $this->createMock( Skin::class );
+		$skin->method( 'getSkinName' )->willReturn( $skinName );
+
+		$user = $this->createMock( User::class );
+		$user->method( 'isNamed' )->willReturn( $userIsNamed );
+
+		$contextSource = $this->createMock( IContextSource::class );
+		$contextSource->method( 'getTitle' )->willReturn( $title );
+		$contextSource->method( 'getUser' )->willReturn( $user );
+		$contextSource->method( 'getConfig' )->willReturn( $config );
+		$contextSource->method( 'getSkin' )->willReturn( $skin );
+		$contextSource->method( 'msg' )->willReturn( 'Report' );
+
+		( new Hooks() )->onDiscussionToolsAddOverflowMenuItems(
+			$overflowMenuItems,
+			$resourceLoaderModules,
+			$titleIsEditable,
+			$threadItemData,
+			$contextSource
+		);
+		$found = false;
+		foreach ( $overflowMenuItems as $overflowMenuItem ) {
+			if ( $overflowMenuItem->getId() === 'reportincident' ) {
+				$found = true;
+			}
+		}
+		if ( $expectOverflowMenuItemAdded ) {
+			$this->assertTrue( $found );
+		} else {
+			$this->assertFalse( $found );
+		}
+		if ( $expectResourceLoaderModuleAdded ) {
+			$this->assertContains( 'ext.reportIncident', $resourceLoaderModules );
+		} else {
+			$this->assertNotContains( 'ext.reportIncident', $resourceLoaderModules );
+		}
+	}
+
+	public static function provideOnDiscussionToolsAddOverflowMenuItems(): array {
+		return [
+			'shows for named user in configured namespace and skin' => [
+				true,
+				true,
+				true,
+				[ 'id' => 'foo' ],
+				NS_USER_TALK,
+				'minerva',
+				true,
+				[
+					'ReportIncidentReportButtonEnabled' => true,
+					'ReportIncidentEnabledNamespaces' => [ 3 ],
+					'ReportIncidentEnabledSkins' => [ 'minerva', 'vector' ]
+				]
+			],
+			'does not show for temp or anon user' => [
+				false,
+				false,
+				true,
+				[],
+				NS_USER_TALK,
+				'minerva',
+				false,
+				[
+					'ReportIncidentReportButtonEnabled' => true,
+					'ReportIncidentEnabledNamespaces' => [ 3 ],
+					'ReportIncidentEnabledSkins' => [ 'minerva', 'vector' ]
+				]
+			],
+			'does not show if global feature flag is off' => [
+				false,
+				false,
+				true,
+				[],
+				NS_USER_TALK,
+				'minerva',
+				true,
+				[
+					'ReportIncidentReportButtonEnabled' => false,
+					'ReportIncidentEnabledNamespaces' => [ 3 ],
+					'ReportIncidentEnabledSkins' => [ 'minerva', 'vector' ]
+				]
+			]
+		];
+	}
+
 }
