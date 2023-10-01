@@ -5,7 +5,7 @@
 			"Essex Igyan",
 			"Julia Kieserman"
 		] },
-	"reportincident-desc": "Private Incident Reporting System extension.",
+	"reportincident-desc": "Incident Reporting System extension.",
 	"reportincident-report-btn-label": "Report",
 	"reportincident-dialog-close-btn": "Close",
 	"reportincident-dialog-proceed-btn": "Proceed to file a report",
