@@ -2,7 +2,7 @@
 	"@metadata": {
 		"authors": []
 	},
-	"reportincident-desc": "Erweiterung um ein privates Meldesystem für Zwischenfälle.",
+	"reportincident-desc": "Erweiterung um ein Meldesystem für Zwischenfälle.",
 	"reportincident-report-btn-label": "Bericht",
 	"reportincident-dialog-close-btn": "Schließen",
 	"reportincident-dialog-proceed-btn": "Fahre mit der Einreichung eines Berichts fort",
@@ -35,6 +35,10 @@
 	"reportincident-dialog-engage-header": "Wie man einen Dialog führt",
 	"reportincident-dialog-engage-text": "Wenn {{GENDER:|du}} dich dabei sicher fühlst, kannst {{GENDER:|du}} versuchen, mit der Person zu sprechen, die {{GENDER:|dich}} belästigt. Informiere sie über den Universellen Verhaltenskodex auf {{SITENAME}} und dass sie sich respektvoll verhalten muss. Dies kann manchmal helfen, die Belästigung zu stoppen.",
 	"reportincident-dialog-admin-review": "{{GENDER:|Dein}} Bericht wird zur Überprüfung an [$1 an einen Adminstrator] gesendet.",
+	"reportincident-dialog-harassment-empty": "{{GENDER:|Du}} musst mindestens ein Verhalten auswählen.",
+	"reportincident-dialog-violator-empty": "{{GENDER:|Du}} musst zum Melden einen Benutzernamen angeben.",
+	"reportincident-dialog-links-empty": "{{GENDER:|Du}} musst Links zu Beweisen für den Vorfall bereitstellen.",
+	"reportincident-dialog-something-else-empty": "Bitte beschreibe das Verhalten kurz.",
 	"reportincident-unable-to-send": "Vorfallbericht kann nicht per E-Mail gesendet werden.",
 	"reportincident-email-subject": "{{SITENAME}}: Neuer Vorfallbericht von „$1“",
 	"reportincident-email-body": "Meldender Benutzer: $1 \nGemeldeter Benutzer: $2 \nLink zur Seite: $3 \nGemeldeter Link: $4 \nVerhalten: $5 \nDetails: $6\n\nE-Mail $1: $7",
