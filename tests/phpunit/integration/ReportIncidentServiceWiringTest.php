@@ -7,6 +7,7 @@ use MediaWikiIntegrationTestCase;
 
 /**
  * @coversNothing
+ * @group ReportIncident
  * @group Database
  */
 class ReportIncidentServiceWiringTest extends MediaWikiIntegrationTestCase {

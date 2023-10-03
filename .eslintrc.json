@@ -4,7 +4,6 @@
 		"wikimedia/jquery",
 		"wikimedia/client-es6",
 		"wikimedia/mediawiki"
-
 	],
 	"overrides": [
 		{

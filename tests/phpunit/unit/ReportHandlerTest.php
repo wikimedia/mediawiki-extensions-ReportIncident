@@ -20,6 +20,8 @@ use StatusValue;
 use Wikimedia\Message\MessageValue;
 
 /**
+ * @group ReportIncident
+ *
  * @covers MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler
  */
 class ReportHandlerTest extends MediaWikiUnitTestCase {

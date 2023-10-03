@@ -13,6 +13,8 @@ use MediaWikiUnitTestCase;
 use Psr\Log\LoggerInterface;
 
 /**
+ * @group ReportIncident
+ *
  * @covers MediaWiki\Extension\ReportIncident\Services\ReportIncidentMailer
  */
 class ReportIncidentMailerTest extends MediaWikiUnitTestCase {

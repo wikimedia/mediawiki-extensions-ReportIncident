@@ -56,9 +56,9 @@
 		}
 	},
 	"Hooks": {
-		"BeforePageDisplay": [
-			"ReportIncidentHooks"
-		]
+		"BeforePageDisplay": "ReportIncidentHooks",
+		"SidebarBeforeOutput": "ReportIncidentHooks",
+		"SkinTemplateNavigation::Universal": "ReportIncidentHooks"
 	},
 	"MessagesDirs": {
 		"ReportIncident": [
@@ -132,6 +132,13 @@
 				"pinia",
 				"@wikimedia/codex"
 			]
+		},
+		"ext.reportIncident.minervaicons": {
+			"selectorWithoutVariant": ".mw-ui-icon-minerva-{name}:before",
+			"useDataURI": false,
+			"defaultColor": "#54595d",
+			"class": "ResourceLoaderOOUIIconPackModule",
+			"icons": [ "flag" ]
 		}
 	},
 	"RestRoutes": [

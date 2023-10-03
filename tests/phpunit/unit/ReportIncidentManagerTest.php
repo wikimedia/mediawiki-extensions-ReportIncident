@@ -10,6 +10,8 @@ use MediaWiki\User\UserIdentityValue;
 use MediaWikiUnitTestCase;
 
 /**
+ * @group ReportIncident
+ *
  * @covers MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager
  */
 class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
