@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Hanna Tardos",
 			"Tacsipacsi"
 		]
 	},
@@ -33,5 +34,5 @@
 	"reportincident-dialog-harassment-example-trolling": "A trollkodás",
 	"reportincident-dialog-engage-header": "Párbeszéd kezdeményezése",
 	"reportincident-dialog-engage-text": "Ha nem érzed magad kényelmetlenül, megpróbálhatsz párbeszédet kezdeményezni a téged zavaró személlyel. Tájékoztasd őt az általános viselkedési szabályzatról és arról, hogy a viselkedése elfogadhatatlan. Néha ezzel megállítható a zaklatás.",
-	"reportincident-dialog-admin-review": "A jelentésed el lesz küldve egy [$1 adminisztrátornak] átnézésre"
+	"reportincident-dialog-admin-review": "Jelentésed egy [$1 adminisztrátorhoz] kerül, átnézésre."
 }
