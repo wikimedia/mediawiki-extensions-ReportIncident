@@ -110,9 +110,15 @@ module.exports = exports = {
 		}
 
 		function navigatePrevious() {
-			// if on the first page, close the dialog
 			if ( currentStep.value === Constants.DIALOG_STEP_1 ) {
+				// if on the first page, close the dialog
 				wrappedOpen.value = false;
+				// Also clear any form data, as the user has had to
+				// navigate back from the second page to the first to
+				// cancel which suggests they don't want to submit this
+				// report.
+				const store = useFormStore();
+				store.$reset();
 			} else {
 				// if on the second page, navigate back to the first page
 				currentStep.value = Constants.DIALOG_STEP_1;

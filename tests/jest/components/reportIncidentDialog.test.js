@@ -62,6 +62,28 @@ describe( 'Report Incident Dialog', () => {
 			} );
 		} );
 
+		it( 'Clears any form data if navigating back twice from STEP 2', () => {
+			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+
+			const store = useFormStore();
+
+			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+			store.inputReportedUser = 'test user';
+
+			wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( function () {
+				// Clicking back once should put us on STEP 1
+				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+
+				wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( function () {
+					// Clicking back should clear the form store data
+					// as the dialog was closed.
+					expect( store.inputBehaviors ).toHaveLength( 0 );
+					expect( store.inputReportedUser ).toBe( '' );
+				} );
+			} );
+		} );
+
 		it( 'attempts to submit form when next is clicked on STEP 2 and has invalid form data', () => {
 			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
