@@ -195,11 +195,16 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 	public function testAddModulesAndConfigVarsForMinerva() {
 		$config = new HashConfig( [
 			'ReportIncidentAdministratorsPage' => 'Main_Page',
+			'ReportIncidentDeveloperMode' => false,
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
+		$userMock = $this->createMock( User::class );
+		$userMock->method( 'isEmailConfirmed' )->willReturn( true );
+		$outputPageMock->method( 'getUser' )->willReturn( $userMock );
 		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
 			->with( [
 				'wgReportIncidentAdministratorsPage' => 'Main_Page',
+				'wgReportIncidentUserHasConfirmedEmail' => true
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -221,11 +226,47 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 	public function testAddModulesAndConfigVars() {
 		$config = new HashConfig( [
 			'ReportIncidentAdministratorsPage' => 'Main_Page',
+			'ReportIncidentDeveloperMode' => false,
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
+		$userMock = $this->createMock( User::class );
+		$userMock->method( 'isEmailConfirmed' )->willReturn( true );
+		$outputPageMock->method( 'getUser' )->willReturn( $userMock );
 		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
 			->with( [
 				'wgReportIncidentAdministratorsPage' => 'Main_Page',
+				'wgReportIncidentUserHasConfirmedEmail' => true
+			] );
+		$outputPageMock->expects( $this->once() )->method( 'addModules' )
+			->with( 'ext.reportIncident' );
+		$outputPageMock->expects( $this->never() )->method( 'addModuleStyles' )
+			->with( 'ext.reportIncident.menuStyles' );
+		// Mock the methods used to get the current skin name to return "vector"
+		$mockSkin = $this->createMock( Skin::class );
+		$mockSkin->method( 'getSkinName' )
+			->willReturn( 'vector' );
+		$outputPageMock->expects( $this->once() )->method( 'getSkin' )
+			->willReturn( $mockSkin );
+		/** @var ReportIncidentController $objectUnderTest */
+		$objectUnderTest = $this->newServiceInstance( ReportIncidentController::class, [
+			'config' => $config
+		] );
+		$objectUnderTest->addModulesAndConfigVars( $outputPageMock );
+	}
+
+	public function testAddModulesAndConfigVarsNoConfirmedEmail() {
+		$config = new HashConfig( [
+			'ReportIncidentAdministratorsPage' => 'Main_Page',
+			'ReportIncidentDeveloperMode' => false,
+		] );
+		$outputPageMock = $this->createMock( OutputPage::class );
+		$userMock = $this->createMock( User::class );
+		$userMock->method( 'isEmailConfirmed' )->willReturn( false );
+		$outputPageMock->method( 'getUser' )->willReturn( $userMock );
+		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
+			->with( [
+				'wgReportIncidentAdministratorsPage' => 'Main_Page',
+				'wgReportIncidentUserHasConfirmedEmail' => false
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );

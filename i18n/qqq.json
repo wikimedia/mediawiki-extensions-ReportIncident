@@ -47,5 +47,10 @@
 	"reportincident-email-body": "Email body for reports sent to moderators. Parameters:\n* $1 - The username of the user who filed the report.\n* $2 - the username of the user being reported.\n* $3 - The link to the revision of the page, at the time the report was filed.\n* $4 - a comma-separated list of behaviors defined in the form.\n* $5 - additional text supplied by the reporter\n* $6 - a link to Special:EmailUser for the user with username in $1",
 	"reportincident-email-something-else": "Value of the freetext \"something else\" list in an emailed report to moderators.\nParameters:\n* $1 - The text supplied by the user in the \"something else\" field.",
 	"right-reportincident": "{{doc-right|reportincident}}",
-	"action-reportincident": "{{doc-action|reportincident}}"
+	"action-reportincident": "{{doc-action|reportincident}}",
+	"reportincident-emaildialog-title": "Title to show in dialog when user does not have a verified email address",
+	"reportincident-emaildialog-close-button": "Text to show in button label to close dialog, when user does not have a verified email address.",
+	"reportincident-emaildialog-content": "Text to show in content region of a dialog shown when user does not have a verified email addres.",
+	"reportincident-emaildialog-primary": "Text to show in button label for primary action in dialog shown when user does not have a verified email address.",
+	"reportincident-confirmedemail-required": "Message to show in API response when user submits an API request without a confirmed email."
 }

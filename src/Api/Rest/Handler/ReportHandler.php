@@ -12,6 +12,7 @@ use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\Validator\JsonBodyValidator;
 use MediaWiki\Rest\Validator\UnsupportedContentTypeBodyValidator;
 use MediaWiki\Revision\RevisionStore;
+use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserIdentityLookup;
 use MediaWiki\User\UserIdentityValue;
 use MediaWiki\User\UserNameUtils;
@@ -31,6 +32,7 @@ class ReportHandler extends SimpleHandler {
 	private UserNameUtils $userNameUtils;
 	private UserIdentityLookup $userIdentityLookup;
 	private LoggerInterface $logger;
+	private UserFactory $userFactory;
 
 	/**
 	 * @param Config $config
@@ -38,13 +40,15 @@ class ReportHandler extends SimpleHandler {
 	 * @param UserNameUtils $userNameUtils
 	 * @param UserIdentityLookup $userIdentityLookup
 	 * @param ReportIncidentManager $reportIncidentManager
+	 * @param UserFactory $userFactory
 	 */
 	public function __construct(
 		Config $config,
 		RevisionStore $revisionStore,
 		UserNameUtils $userNameUtils,
 		UserIdentityLookup $userIdentityLookup,
-		ReportIncidentManager $reportIncidentManager
+		ReportIncidentManager $reportIncidentManager,
+		UserFactory $userFactory
 	) {
 		$this->config = $config;
 		$this->reportIncidentManager = $reportIncidentManager;
@@ -52,6 +56,7 @@ class ReportHandler extends SimpleHandler {
 		$this->userNameUtils = $userNameUtils;
 		$this->userIdentityLookup = $userIdentityLookup;
 		$this->logger = LoggerFactory::getInstance( 'ReportIncident' );
+		$this->userFactory = $userFactory;
 	}
 
 	public function run() {
@@ -65,6 +70,14 @@ class ReportHandler extends SimpleHandler {
 		if ( !$user->isRegistered() ) {
 			throw new LocalizedHttpException(
 				new MessageValue( 'rest-permission-denied-anon' ), 401
+			);
+		}
+
+		$user = $this->userFactory->newFromUserIdentity( $user );
+		$isDeveloperMode = $this->config->get( 'ReportIncidentDeveloperMode' );
+		if ( !$isDeveloperMode && !$user->isEmailConfirmed() ) {
+			throw new LocalizedHttpException(
+				new MessageValue( 'reportincident-confirmedemail-required' ), 403
 			);
 		}
 

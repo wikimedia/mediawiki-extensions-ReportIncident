@@ -21,8 +21,8 @@ class ReportIncidentPage extends Page {
 	get somethingElseOption() { return $( 'input[value="something-else"]', this.harassmentOptionsFormFieldset ); }
 	get somethingElseTextbox() { return $( '.ext-reportincident-dialog-step2__something-else-textarea textarea', this.harassmentOptionsFormFieldset ); }
 
-	async open() {
-		await super.openTitle( 'User talk:Admin' );
+	async open( query ) {
+		await super.openTitle( 'User talk:Admin', query );
 	}
 }
 

@@ -13,6 +13,19 @@ const renderComponent = () => {
 };
 
 describe( 'Main Component Test Suite', () => {
+	beforeEach( () => {
+		global.mw.config.get = jest.fn();
+		global.mw.config.get.mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wgReportIncidentAdministratorsPage':
+					return 'Wikipedia:Administrators';
+				case 'wgReportIncidentUserHasConfirmedEmail':
+					return true;
+				default:
+					throw new Error( 'Unknown key: ' + key );
+			}
+		} );
+	} );
 	it( 'renders correctly', () => {
 		const wrapper = renderComponent();
 		expect( wrapper.exists() ).toEqual( true );

@@ -25,6 +25,10 @@
 			"value": true,
 			"description": "When set to true, the REST API endpoint for ingesting reports is available."
 		},
+		"ReportIncidentDeveloperMode": {
+			"value": true,
+			"description": "When set to true, some developer-friendly features are enabled to facilitate testing and QA."
+		},
 		"ReportIncidentEnabledSkins": {
 			"value": [
 				"minerva", "vector", "vector-2022"
@@ -109,6 +113,7 @@
 				"init.js",
 				"Constants.js",
 				"components/App.vue",
+				"components/EmailAlertDialog.vue",
 				"components/ReportIncidentDialog.vue",
 				"components/ReportIncidentDialogStep1.vue",
 				"components/ReportIncidentDialogStep2.vue",
@@ -149,7 +154,11 @@
 				"reportincident-dialog-admin-review",
 				"reportincident-dialog-violator-empty",
 				"reportincident-dialog-something-else-empty",
-				"reportincident-dialog-harassment-empty"
+				"reportincident-dialog-harassment-empty",
+				"reportincident-emaildialog-title",
+				"reportincident-emaildialog-close-button",
+				"reportincident-emaildialog-content",
+				"reportincident-emaildialog-primary"
 			],
 			"dependencies": [
 				"mediawiki.Uri",
@@ -178,7 +187,8 @@
 				"RevisionStore",
 				"UserNameUtils",
 				"UserIdentityLookup",
-				"ReportIncidentManager"
+				"ReportIncidentManager",
+				"UserFactory"
 			]
 		}
 	],

@@ -9,7 +9,7 @@ describe( 'ReportIncident dialog', function () {
 		await LoginPage.loginAdmin();
 	} );
 	beforeEach( async () => {
-		await ReportIncidentPage.open();
+		await ReportIncidentPage.open( { withconfirmedemail: 1 } );
 	} );
 	it( 'Should open the dialog if the tools menu is used', async function () {
 		// The tools link should exist, otherwise fail.

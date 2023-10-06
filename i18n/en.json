@@ -45,5 +45,10 @@
 	"reportincident-email-body": "Reporting user: $1\nReported user: $2\nLink to page: $3\n\nBehaviors: $4\nDetails: $5\n\nEmail $1: $6",
 	"reportincident-email-something-else": "Something else: \"$1\"",
 	"right-reportincident": "Report an incident",
-	"action-reportincident": "report an incident"
+	"action-reportincident": "report an incident",
+	"reportincident-emaildialog-title": "Verified email address required",
+	"reportincident-emaildialog-close-button": "Cancel",
+	"reportincident-emaildialog-content": "We need {{GENDER:|your}} verified email address to provide updates on the report or follow up if necessary. Please add or verify {{GENDER:|your}} email address from {{GENDER:|your}} user account settings before filing a report.",
+	"reportincident-emaildialog-primary": "Go to settings",
+	"reportincident-confirmedemail-required": "A confirmed email address is required to submit an incident report."
 }

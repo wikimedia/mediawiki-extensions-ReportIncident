@@ -16,6 +16,7 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWiki\Tests\Unit\MockServiceDependenciesTrait;
 use MediaWiki\Tests\Unit\Permissions\MockAuthorityTrait;
 use MediaWiki\User\User;
+use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserIdentityLookup;
 use MediaWiki\User\UserNameUtils;
@@ -70,7 +71,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testRevisionDoesntExist() {
-		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+		] );
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionStore->method( 'getRevisionById' )
 			->with( 1 )
@@ -91,6 +95,84 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			[ 'revisionId' => 1 ],
 			$this->mockRegisteredUltimateAuthority()
 		);
+	}
+
+	public function testDenyWithoutConfirmedEmail() {
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => false,
+		] );
+		$revisionStore = $this->createMock( RevisionStore::class );
+		$revisionStore->method( 'getRevisionById' )->willReturn( null );
+		$userFactory = $this->createMock( UserFactory::class );
+		$user = $this->createMock( User::class );
+		$user->method( 'isEmailConfirmed' )->willReturn( false );
+		$userFactory->method( 'newFromUserIdentity' )->willReturn( $user );
+		/** @var ReportHandler $handler */
+		$handler = $this->newServiceInstance( ReportHandler::class,
+			[
+				'config' => $config,
+				'revisionStore' => $revisionStore,
+				'userFactory' => $userFactory,
+			]
+		);
+		$this->expectExceptionObject(
+			new LocalizedHttpException( new MessageValue( 'reportincident-confirmedemail-required' ), 403 )
+		);
+		$this->executeHandler(
+			$handler,
+			new RequestData(),
+			[],
+			[],
+			[],
+			[ 'revisionId' => 1 ],
+			$this->mockRegisteredUltimateAuthority()
+		);
+	}
+
+	public function testAllowWithoutConfirmedEmailWhenDeveloperMode() {
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+		] );
+		$revisionStore = $this->createMock( RevisionStore::class );
+		$revisionStore->method( 'getRevisionById' )->willReturn( $this->createMock( RevisionRecord::class ) );
+		$reportManager = $this->createMock( ReportIncidentManager::class );
+		$reportManager->method( 'record' )->willReturn( StatusValue::newGood() );
+		$reportManager->method( 'notify' )->willReturn( StatusValue::newGood() );
+		$userFactory = $this->createMock( UserFactory::class );
+		$userIdentityLookup = $this->createMock( UserIdentityLookup::class );
+		$registeredUserMock = $this->createMock( User::class );
+		$registeredUserMock->method( 'isRegistered' )->willReturn( true );
+		$userIdentityLookup->method( 'getUserIdentityByName' )->willReturn( $registeredUserMock );
+		$user = $this->createMock( User::class );
+		$user->method( 'isEmailConfirmed' )->willReturn( false );
+		$userFactory->method( 'newFromUserIdentity' )->willReturn( $user );
+		/** @var ReportHandler $handler */
+		$handler = $this->newServiceInstance( ReportHandler::class,
+			[
+				'config' => $config,
+				'revisionStore' => $revisionStore,
+				'userFactory' => $userFactory,
+				'reportIncidentManager' => $reportManager,
+				'userIdentityLookup' => $userIdentityLookup
+			]
+		);
+		$response = $this->executeHandler(
+			$handler,
+			new RequestData(),
+			[],
+			[],
+			[],
+			[
+				'reportedUser' => 'Foo',
+				'revisionId' => 1,
+				'behaviors' => [ 'something', 'something_else' ],
+				'details' => 'More details'
+			],
+			$this->mockRegisteredUltimateAuthority()
+		);
+		$this->assertSame( 204, $response->getStatusCode() );
 	}
 
 	public function testGetBodyValidatorInvalidContentType() {
@@ -122,7 +204,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		bool $expectNotifyException
 	) {
 		// Mock the config to enable the API
-		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+		] );
 		// Mock the return value of ReportIncidentManager::record and ::notify
 		$reportManager = $this->createMock( ReportIncidentManager::class );
 		$reportManager->method( 'record' )->willReturn( $recordStatus );
@@ -244,7 +329,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testRateLimitTrip() {
-		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+		] );
 		$user = $this->createMock( User::class );
 		$user->method( 'isRegistered' )->willReturn( true );
 		/** @var ReportHandler $handler */
@@ -272,7 +360,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testActionUnauthorized() {
-		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+		] );
 		/** @var ReportHandler $handler */
 		$handler = $this->newServiceInstance( ReportHandler::class, [ 'config' => $config ] );
 		$this->expectExceptionObject(
@@ -291,7 +382,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testInvalidReportedUsername() {
-		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+		] );
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionStore->method( 'getRevisionById' )
 			->willReturn( $this->createMock( RevisionRecord::class ) );
@@ -328,7 +422,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testNonExistingUsername() {
-		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+		] );
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionStore->method( 'getRevisionById' )
 			->willReturn( $this->createMock( RevisionRecord::class ) );
@@ -365,14 +462,18 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testBodyFailedValidationButStillRan() {
-		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+		] );
 		$handler = $this->getMockBuilder( ReportHandler::class )
 			->setConstructorArgs( [
 				$config,
 				$this->createMock( RevisionStore::class ),
 				$this->createMock( UserNameUtils::class ),
 				$this->createMock( UserIdentityLookup::class ),
-				$this->createMock( ReportIncidentManager::class )
+				$this->createMock( ReportIncidentManager::class ),
+				$this->createMock( UserFactory::class )
 			] )
 			->onlyMethods( [ 'getValidatedBody' ] )
 			->getMock();
@@ -389,14 +490,19 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testBodyFailsValidationOnFormDataSubmitted() {
-		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+		] );
+
 		$handler = $this->getMockBuilder( ReportHandler::class )
 			->setConstructorArgs( [
 				$config,
 				$this->createMock( RevisionStore::class ),
 				$this->createMock( UserNameUtils::class ),
 				$this->createMock( UserIdentityLookup::class ),
-				$this->createMock( ReportIncidentManager::class )
+				$this->createMock( ReportIncidentManager::class ),
+				$this->createMock( UserFactory::class )
 			] )
 			->onlyMethods( [ 'getValidatedBody' ] )
 			->getMock();

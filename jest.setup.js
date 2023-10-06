@@ -19,6 +19,7 @@ config.global.directives = {
 };
 // Assign things to "global" here if you want them to be globally available during tests
 global.$ = require( 'jquery' );
+global.mw = mw;
 
 // Ignore all "teleport" behavior for the purpose of testing Dialog;
 // see https://test-utils.vuejs.org/guide/advanced/teleport.html
