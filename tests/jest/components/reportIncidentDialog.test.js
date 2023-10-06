@@ -101,5 +101,31 @@ describe( 'Report Incident Dialog', () => {
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 			} );
 		} );
+
+		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data but gets a non-good response', () => {
+			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+
+			const store = useFormStore();
+
+			mw.Rest = jest.fn().mockImplementation( () => {
+				return {
+					post: () => {
+						return Promise.reject();
+					}
+				};
+			} );
+
+			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+			store.inputLink = 'test';
+			store.inputReportedUser = 'test user';
+			expect( store.isFormValidForSubmission() ).toBe( true );
+
+			wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+				// Should be dialog step two as the REST API call returned a rejected promise
+				// which indicates a failure.
+				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+			} );
+		} );
 	} );
 } );

@@ -102,7 +102,8 @@ module.exports = exports = {
 							wrappedOpen.value = false;
 							currentStep.value = Constants.DIALOG_STEP_1;
 							store.$reset();
-						}
+						},
+						() => {}
 					);
 				}
 			}
