@@ -19,8 +19,6 @@
 	"reportincident-dialog-additional-details-input-label": "Label for additional details input on report form",
 	"reportincident-dialog-additional-details-input-placeholder": "Placeholder text for additional details input on report form",
 	"reportincident-dialog-optional-label": "Text used to indicate that a field is optional on the report form with parentheses wrapping the word.",
-	"reportincident-dialog-links-evidence-label": "Label for evidence links on report form",
-	"reportincident-dialog-links-evidence-placeholder": "Placeholder to explain what links should be reported",
 	"reportincident-dialog-violator-label": "Label for who is being reported input on report form",
 	"reportincident-dialog-violator-placeholder-text": "Placeholder text for the field where a user enters the user they are reporting.",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Label for type of harassment: Hate speech or discrimination",
@@ -42,10 +40,9 @@
 	"reportincident-dialog-admin-review": "Explains who will review the submitted report and provides a link to a page that describes these users.\nParameters:\n* $1 - The page name of the page that describes these users.",
 	"reportincident-dialog-harassment-empty": "Error message shown to the user when they have not selected one of the items in the behavior list.",
 	"reportincident-dialog-violator-empty": "Error message shown to the user when they have not specified the user they are reporting.",
-	"reportincident-dialog-links-empty": "Error message shown to the user when they have not provided links as evidence for the report.",
 	"reportincident-dialog-something-else-empty": "Error message shown to the user when they have not specified anything in the 'Something else' textbox.",
 	"reportincident-unable-to-send": "Error message sent back via the REST API if emailing an incident report fails.",
 	"reportincident-email-subject": "Email subject line for reports sent to moderators. Parameters:\n* $1 - the username of the user who filed the report.",
-	"reportincident-email-body": "Email body for reports sent to moderators. Parameters:\n* $1 - The username of the user who filed the report.\n* $2 - the username of the user being reported.\n* $3 - The link to the revision of the page, at the time the report was filed.\n* $4 - the link to evidence of the incident.\n* $5 - a comma-separated list of behaviors defined in the form.\n* $6 - additional text supplied by the reporter\n* $7 - a link to Special:EmailUser for the user with username in $1",
+	"reportincident-email-body": "Email body for reports sent to moderators. Parameters:\n* $1 - The username of the user who filed the report.\n* $2 - the username of the user being reported.\n* $3 - The link to the revision of the page, at the time the report was filed.\n* $4 - a comma-separated list of behaviors defined in the form.\n* $5 - additional text supplied by the reporter\n* $6 - a link to Special:EmailUser for the user with username in $1",
 	"reportincident-email-something-else": "Value of the freetext \"something else\" list in an emailed report to moderators.\nParameters:\n* $1 - The text supplied by the user in the \"something else\" field."
 }

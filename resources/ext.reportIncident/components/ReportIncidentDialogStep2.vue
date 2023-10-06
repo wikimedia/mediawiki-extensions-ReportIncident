@@ -41,24 +41,6 @@
 			></cdx-text-input>
 		</cdx-field>
 
-		<!-- links -->
-		<cdx-field
-			:status="linksStatus"
-			:messages="formErrorMessages.inputLink"
-			class="ext-reportincident-dialog-step2__form-item
-							ext-reportincident-dialog-step2__evidence-links">
-			<template #label>
-				{{ $i18n( 'reportincident-dialog-links-evidence-label' ).text() }}
-			</template>
-			<cdx-text-input
-				v-model="inputLink"
-				:placeholder="$i18n(
-					'reportincident-dialog-links-evidence-placeholder'
-				).text()"
-				@focusout="displayLinkRequiredError = true"
-			></cdx-text-input>
-		</cdx-field>
-
 		<!-- Additional details -->
 		<cdx-field
 			:optional-flag="$i18n( 'reportincident-dialog-optional-label' ).text()"
@@ -101,8 +83,6 @@ module.exports = exports = {
 			inputBehaviors,
 			inputReportedUser,
 			displayReportedUserRequiredError,
-			inputLink,
-			displayLinkRequiredError,
 			inputSomethingElseDetails,
 			displaySomethingElseTextboxRequiredError,
 			inputDetails
@@ -135,10 +115,6 @@ module.exports = exports = {
 			return store.formErrorMessages.inputBehaviors ? 'error' : 'default';
 		} );
 
-		const linksStatus = computed( () => {
-			return store.formErrorMessages.inputLink ? 'error' : 'default';
-		} );
-
 		const reportedUserStatus = computed( () => {
 			return store.formErrorMessages.inputReportedUser ? 'error' : 'default';
 		} );
@@ -162,15 +138,12 @@ module.exports = exports = {
 			inputBehaviors,
 			inputReportedUser,
 			displayReportedUserRequiredError,
-			inputLink,
-			displayLinkRequiredError,
 			inputDetails,
 			inputSomethingElseDetails,
 			displaySomethingElseTextboxRequiredError,
 			collectSomethingElseDetails,
 			formErrorMessages,
 			harassmentStatus,
-			linksStatus,
 			reportedUserStatus
 		};
 	}

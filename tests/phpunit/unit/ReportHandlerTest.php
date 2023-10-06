@@ -171,7 +171,6 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				[
 					'reportedUserId' => 2,
 					'revisionId' => 1,
-					'link' => 'https://foo.bar',
 					'behaviors' => [ 'something', 'something_else' ],
 					'details' => 'More details'
 				],
@@ -184,7 +183,6 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				[
 					'reportedUserId' => 2,
 					'revisionId' => 1,
-					'link' => 'https://foo.bar',
 					'behaviors' => [ 'something', 'something_else' ],
 				],
 				StatusValue::newGood(),
@@ -196,7 +194,6 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				[
 					'reportedUserId' => 1,
 					'revisionId' => 'foo',
-					'link' => 1,
 					'behaviors' => 3
 				],
 				StatusValue::newFatal( 'rest-bad-json-body' ),
@@ -208,7 +205,6 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				[
 					'reportedUserId' => 1,
 					'revisionId' => 1,
-					'link' => 'https://foo.bar',
 					'behaviors' => [ 'test' ]
 				],
 				StatusValue::newFatal( 'rest-bad-json-body' ),
@@ -220,7 +216,6 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				[
 					'reportedUserId' => 1,
 					'revisionId' => 1,
-					'link' => 'https://foo.bar',
 					'behaviors' => [ 'test' ],
 				],
 				StatusValue::newGood(),

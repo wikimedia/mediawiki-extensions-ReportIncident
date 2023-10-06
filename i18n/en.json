@@ -17,8 +17,6 @@
 	"reportincident-dialog-additional-details-input-label": "Additional details",
 	"reportincident-dialog-additional-details-input-placeholder": "Add context that could be helpful for a reviewer",
 	"reportincident-dialog-optional-label": "(optional)",
-	"reportincident-dialog-links-evidence-label": "Links to evidence of incident",
-	"reportincident-dialog-links-evidence-placeholder": "Provide a link to the harassment",
 	"reportincident-dialog-violator-label": "Username {{GENDER:|you}} would like to report",
 	"reportincident-dialog-violator-placeholder-text": "Who are {{GENDER:|you}} reporting?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Hate speech or discrimination",
@@ -40,10 +38,9 @@
 	"reportincident-dialog-admin-review": "{{GENDER:|Your}} report will be sent to [$1 an admin] to review.",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|You}} must select at least one behavior.",
 	"reportincident-dialog-violator-empty": "{{GENDER:|You}} must specify a username to report.",
-	"reportincident-dialog-links-empty": "{{GENDER:|You}} must provide link(s) to evidence of the incident.",
 	"reportincident-dialog-something-else-empty": "Please provide a short description of the behavior.",
 	"reportincident-unable-to-send": "Unable to email send incident report.",
 	"reportincident-email-subject": "{{SITENAME}}: New incident report from \"$1\"",
-	"reportincident-email-body": "Reporting user: $1\nReported user: $2\nLink to page: $3\nReported link: $4\nBehaviors: $5\nDetails: $6\n\nEmail $1: $7",
+	"reportincident-email-body": "Reporting user: $1\nReported user: $2\nLink to page: $3\n\nBehaviors: $4\nDetails: $5\n\nEmail $1: $6",
 	"reportincident-email-something-else": "Something else: \"$1\""
 }

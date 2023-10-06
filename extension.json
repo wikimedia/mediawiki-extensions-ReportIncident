@@ -95,7 +95,6 @@
 				"reportincident-dialog-harassment-type-label",
 				"reportincident-dialog-additional-details-input-label",
 				"reportincident-dialog-optional-label",
-				"reportincident-dialog-links-evidence-label",
 				"reportincident-dialog-violator-label",
 				"reportincident-dialog-harassment-type-hate-speech-or-discrimination",
 				"reportincident-dialog-harassment-type-sexual-harassment",
@@ -115,12 +114,10 @@
 				"reportincident-dialog-engage-text",
 				"reportincident-dialog-additional-details-input-placeholder",
 				"reportincident-dialog-violator-placeholder-text",
-				"reportincident-dialog-links-evidence-placeholder",
 				"reportincident-dialog-admin-review",
 				"reportincident-dialog-violator-empty",
 				"reportincident-dialog-something-else-empty",
-				"reportincident-dialog-harassment-empty",
-				"reportincident-dialog-links-empty"
+				"reportincident-dialog-harassment-empty"
 			],
 			"dependencies": [
 				"mediawiki.Uri",

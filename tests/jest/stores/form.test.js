@@ -13,7 +13,6 @@ describe( 'Form Store', () => {
 
 		form.inputBehaviors = [ Constants.harassmentTypes.HATE_SPEECH ];
 		form.inputReportedUser = 'test value';
-		form.inputLink = 'test evidence';
 
 		expect( form.isFormValidForSubmission() ).toBe( true );
 	} );
@@ -24,11 +23,9 @@ describe( 'Form Store', () => {
 			Constants.harassmentTypes.HATE_SPEECH, Constants.harassmentTypes.INTIMIDATION_AGGRESSION
 		];
 		form.inputReportedUser = 'test value';
-		form.inputLink = 'test evidence';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
 		form.displayReportedUserRequiredError = true;
-		form.displayLinkRequiredError = true;
 		form.displaySomethingElseTextboxRequiredError = true;
 		form.displayBehaviorsRequiredError = true;
 
@@ -36,13 +33,11 @@ describe( 'Form Store', () => {
 		// Form fields should be empty
 		expect( form.inputBehaviors ).toStrictEqual( [] );
 		expect( form.inputReportedUser ).toBe( '' );
-		expect( form.inputLink ).toBe( '' );
 		expect( form.inputDetails ).toBe( '' );
 		expect( form.inputSomethingElseDetails ).toBe( '' );
 		// Required field checks should be disabled again (they are enabled on
 		// pressing submit or un-focusing that required field).
 		expect( form.displayReportedUserRequiredError ).toBe( false );
-		expect( form.displayLinkRequiredError ).toBe( false );
 		expect( form.displaySomethingElseTextboxRequiredError ).toBe( false );
 		expect( form.displayBehaviorsRequiredError ).toBe( false );
 	} );
@@ -53,14 +48,12 @@ describe( 'Form Store', () => {
 			Constants.harassmentTypes.HATE_SPEECH, Constants.harassmentTypes.INTIMIDATION_AGGRESSION
 		];
 		form.inputReportedUser = 'test value';
-		form.inputLink = 'test evidence';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
 
 		// Something else details should not be specified as it is not in the behaviours array
 		expect( form.restPayload ).toStrictEqual( {
 			reportedUserId: 'test value',
-			link: 'test evidence',
 			details: 'test details',
 			behaviors: [
 				Constants.harassmentTypes.HATE_SPEECH, Constants.harassmentTypes.INTIMIDATION_AGGRESSION
@@ -70,7 +63,6 @@ describe( 'Form Store', () => {
 		form.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
 		expect( form.restPayload ).toStrictEqual( {
 			reportedUserId: 'test value',
-			link: 'test evidence',
 			details: 'test details',
 			behaviors: [ Constants.harassmentTypes.OTHER ],
 			somethingElseDetails: 'test something else details'
@@ -93,23 +85,15 @@ describe( 'Form Store', () => {
 			Constants.harassmentTypes.HATE_SPEECH, Constants.harassmentTypes.INTIMIDATION_AGGRESSION
 		];
 		form.inputReportedUser = 'test value';
-		form.inputLink = 'test evidence';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
 		expect( form.formErrorMessages ).toStrictEqual( {} );
-
-		// Test that emptying some of the required fields causes errors for only those fields.
-		form.inputLink = '';
-		expect( form.formErrorMessages ).toStrictEqual( {
-			inputLink: { error: mw.msg( 'reportincident-dialog-links-empty' ) }
-		} );
 
 		// Test that emptying all the required fields generates error messages
 		form.inputReportedUser = '';
 		form.inputBehaviors = [];
 		expect( form.formErrorMessages ).toStrictEqual( {
 			inputBehaviors: { error: mw.msg( 'reportincident-dialog-harassment-empty' ) },
-			inputLink: { error: mw.msg( 'reportincident-dialog-links-empty' ) },
 			inputReportedUser: { error: mw.msg( 'reportincident-dialog-violator-empty' ) }
 		} );
 	} );
@@ -120,7 +104,6 @@ describe( 'Form Store', () => {
 		// behaviour causes an error
 		form.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
 		form.inputReportedUser = 'test value';
-		form.inputLink = 'test evidence';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
 		form.isFormValidForSubmission();

@@ -21,7 +21,6 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 			new UserIdentityValue( 1, 'Reporter' ),
 			new UserIdentityValue( 2, 'Reported' ),
 			$this->createMock( RevisionRecord::class ),
-			'https://foo.bar',
 			[ 'foo' ],
 			'Details'
 		);
@@ -36,7 +35,6 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 			new UserIdentityValue( 1, 'Reporter' ),
 			new UserIdentityValue( 2, 'Reported' ),
 			$this->createMock( RevisionRecord::class ),
-			'https://foo.bar',
 			[ 'foo' ],
 			'Details'
 		);

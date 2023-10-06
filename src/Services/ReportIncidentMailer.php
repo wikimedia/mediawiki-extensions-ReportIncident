@@ -127,7 +127,6 @@ class ReportIncidentMailer {
 					$reportingUserPage->getDBkey(),
 					$reportedUserPage->getDBkey(),
 					$linkToPageAtRevision,
-					$incidentReport->getLink(),
 					implode( ', ', $behaviors ),
 					$incidentReport->getDetails(),
 					$emailUrl

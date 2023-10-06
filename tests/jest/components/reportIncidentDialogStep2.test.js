@@ -25,7 +25,6 @@ describe( 'Report Incident Dialog Step 2', () => {
 
 		expect( wrapper.find( '.ext-reportincident-dialog-step2__harassment-options' ).exists() ).toBe( true );
 		expect( wrapper.find( '.ext-reportincident-dialog-step2__violator-name' ).exists() ).toBe( true );
-		expect( wrapper.find( '.ext-reportincident-dialog-step2__evidence-links' ).exists() ).toBe( true );
 		expect( wrapper.find( '.ext-reportincident-dialog-step2__additional-details' ).exists() ).toBe( true );
 	} );
 
@@ -46,7 +45,6 @@ describe( 'Report Incident Dialog Step 2', () => {
 		// or focuses out of the required field.
 		expect( wrapper.vm.harassmentStatus ).toBe( 'default' );
 		expect( wrapper.vm.reportedUserStatus ).toBe( 'default' );
-		expect( wrapper.vm.linksStatus ).toBe( 'default' );
 
 		// Call method used to indicate that form is about to be submitted.
 		store.isFormValidForSubmission();
@@ -55,7 +53,6 @@ describe( 'Report Incident Dialog Step 2', () => {
 		// specifying required fields.
 		expect( wrapper.vm.harassmentStatus ).toBe( 'error' );
 		expect( wrapper.vm.reportedUserStatus ).toBe( 'error' );
-		expect( wrapper.vm.linksStatus ).toBe( 'error' );
 	} );
 
 	it( 'Should not collect something else details', () => {

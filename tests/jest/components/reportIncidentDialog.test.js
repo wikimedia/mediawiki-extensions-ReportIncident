@@ -69,7 +69,6 @@ describe( 'Report Incident Dialog', () => {
 			const store = useFormStore();
 
 			store.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
-			store.inputLink = 'test';
 			expect( store.isFormValidForSubmission() ).toBe( false );
 
 			wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
@@ -92,7 +91,6 @@ describe( 'Report Incident Dialog', () => {
 			} );
 
 			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
-			store.inputLink = 'test';
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
 

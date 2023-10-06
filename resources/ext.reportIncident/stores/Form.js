@@ -8,8 +8,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const displayBehaviorsRequiredError = ref( false );
 	const inputReportedUser = ref( '' );
 	const displayReportedUserRequiredError = ref( false );
-	const inputLink = ref( '' );
-	const displayLinkRequiredError = ref( false );
 	const inputDetails = ref( '' );
 	const inputSomethingElseDetails = ref( '' );
 	const displaySomethingElseTextboxRequiredError = ref( false );
@@ -59,16 +57,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 			// If text has been entered for this field, then now display errors for empty field.
 			displayReportedUserRequiredError.value = true;
 		}
-		// Validate the input link has some content
-		// TODO: Validate this is actually a link?
-		if ( inputLink.value === '' ) {
-			if ( displayLinkRequiredError.value ) {
-				formErrors.inputLink = { error: mw.msg( 'reportincident-dialog-links-empty' ) };
-			}
-		} else {
-			// If text has been entered for this field, then now display errors for empty field.
-			displayLinkRequiredError.value = true;
-		}
 
 		return formErrors;
 	} );
@@ -93,7 +81,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 			displaySomethingElseTextboxRequiredError.value = true;
 		}
 		displayBehaviorsRequiredError.value = true;
-		displayLinkRequiredError.value = true;
 		displayReportedUserRequiredError.value = true;
 		// The form is valid if the formErrorMessages has no items.
 		return Object.keys( formErrorMessages.value ).length === 0;
@@ -106,7 +93,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const restPayload = computed( () => {
 		const restData = {
 			reportedUserId: inputReportedUser.value,
-			link: inputLink.value,
 			details: inputDetails.value,
 			behaviors: inputBehaviors.value
 		};
@@ -132,14 +118,12 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		inputReportedUser.value = '';
 		inputDetails.value = '';
 		inputSomethingElseDetails.value = '';
-		inputLink.value = '';
 		// Disable the required fields error again until
 		// that required field is un-focused or a submit
 		// is attempted.
 		displayReportedUserRequiredError.value = false;
 		displayBehaviorsRequiredError.value = false;
 		displaySomethingElseTextboxRequiredError.value = false;
-		displayLinkRequiredError.value = false;
 	}
 
 	return {
@@ -150,8 +134,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		inputDetails,
 		inputSomethingElseDetails,
 		displaySomethingElseTextboxRequiredError,
-		inputLink,
-		displayLinkRequiredError,
 		restPayload,
 		formErrorMessages,
 		isFormValidForSubmission,

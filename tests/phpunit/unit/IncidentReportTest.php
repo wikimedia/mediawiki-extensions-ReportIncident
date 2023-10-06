@@ -19,7 +19,6 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 			new UserIdentityValue( 1, 'Reporter' ),
 			new UserIdentityValue( 2, 'Reported' ),
 			$this->createMock( RevisionRecord::class ),
-			'https://foo.bar',
 			[ 'foo' ],
 			'SomethingElse',
 			'Details'
@@ -33,7 +32,6 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 			[
 				'reportedUser' => new UserIdentityValue( 2, 'Reported' ),
 				'revision' => $this->createMock( RevisionRecord::class ),
-				'link' => 'https://foo.bar',
 				'behaviors' => [ 'foo' ],
 				'somethingElseDetails' => 'blah',
 				'details' => 'Details'
@@ -45,7 +43,6 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 		$reportingUser = new UserIdentityValue( 1, 'Reporter' );
 		$reportedUser = new UserIdentityValue( 2, 'Reported' );
 		$revisionRecord = $this->createMock( RevisionRecord::class );
-		$link = 'https://foo.bar';
 		$behaviors = [ 'foo' ];
 		$somethingElseDetails = 'Something else';
 		$details = 'Details';
@@ -53,7 +50,6 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 			$reportingUser,
 			$reportedUser,
 			$revisionRecord,
-			$link,
 			$behaviors,
 			$somethingElseDetails,
 			$details
@@ -61,7 +57,6 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 		$this->assertSame( $reportingUser, $incidentReport->getReportingUser() );
 		$this->assertSame( $reportedUser, $incidentReport->getReportedUser() );
 		$this->assertSame( $revisionRecord, $incidentReport->getRevisionRecord() );
-		$this->assertSame( $link, $incidentReport->getLink() );
 		$this->assertSame( $behaviors, $incidentReport->getBehaviors() );
 		$this->assertSame( $somethingElseDetails, $incidentReport->getSomethingElseDetails() );
 		$this->assertSame( $details, $incidentReport->getDetails() );
