@@ -14,8 +14,6 @@
 	"reportincident-dialog-additional-details-input-label": "Zusätzliche Details",
 	"reportincident-dialog-additional-details-input-placeholder": "Füge Kontext ein, der für einen Prüfer hilfreich sein könnte",
 	"reportincident-dialog-optional-label": "(optional)",
-	"reportincident-dialog-links-evidence-label": "Links zu Beweisen für den Vorfall",
-	"reportincident-dialog-links-evidence-placeholder": "Gib bitte einen Link zur Belästigung an",
 	"reportincident-dialog-violator-label": "Benutzername, den {{GENDER:|du}} melden möchtest",
 	"reportincident-dialog-violator-placeholder-text": "Wen meldest {{GENDER:|du}}?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Hassrede oder Diskriminierung",
@@ -37,10 +35,9 @@
 	"reportincident-dialog-admin-review": "{{GENDER:|Dein}} Bericht wird zur Überprüfung an [$1 an einen Adminstrator] gesendet.",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|Du}} musst mindestens ein Verhalten auswählen.",
 	"reportincident-dialog-violator-empty": "{{GENDER:|Du}} musst zum Melden einen Benutzernamen angeben.",
-	"reportincident-dialog-links-empty": "{{GENDER:|Du}} musst Links zu Beweisen für den Vorfall bereitstellen.",
 	"reportincident-dialog-something-else-empty": "Bitte beschreibe das Verhalten kurz.",
 	"reportincident-unable-to-send": "Vorfallbericht kann nicht per E-Mail gesendet werden.",
 	"reportincident-email-subject": "{{SITENAME}}: Neuer Vorfallbericht von „$1“",
-	"reportincident-email-body": "Meldender Benutzer: $1 \nGemeldeter Benutzer: $2 \nLink zur Seite: $3 \nGemeldeter Link: $4 \nVerhalten: $5 \nDetails: $6\n\nE-Mail $1: $7",
+	"reportincident-email-body": "Meldender Benutzer: $1\nGemeldeter Benutzer: $2\nLink zur Seite: $3\n\nVerhalten: $4\nDetails: $5\n\nE-Mail $1: $6",
 	"reportincident-email-something-else": "Etwas anderes: „$1“"
 }

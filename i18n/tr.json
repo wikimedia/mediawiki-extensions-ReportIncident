@@ -16,8 +16,6 @@
 	"reportincident-dialog-additional-details-input-label": "Ek detaylar",
 	"reportincident-dialog-additional-details-input-placeholder": "Bir incelemeci için yararlı olabilecek bağlamı ekleyin",
 	"reportincident-dialog-optional-label": "(isteğe bağlı)",
-	"reportincident-dialog-links-evidence-label": "Olay kanıtlarına bağlantılar",
-	"reportincident-dialog-links-evidence-placeholder": "Tacizin bağlantısını edinin",
 	"reportincident-dialog-violator-label": "Bildirmek istediğiniz kullanıcı adı",
 	"reportincident-dialog-violator-placeholder-text": "Kimi bildiriyorsunuz?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Nefret söylemi veya ayrımcılık",

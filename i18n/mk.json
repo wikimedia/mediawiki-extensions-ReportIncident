@@ -4,7 +4,7 @@
 			"Bjankuloski06"
 		]
 	},
-	"reportincident-desc": "Системски додаток за приватно пријавување на инциденти",
+	"reportincident-desc": "Системски додаток за пријавување на инциденти",
 	"reportincident-report-btn-label": "Пријави",
 	"reportincident-dialog-close-btn": "Затвори",
 	"reportincident-dialog-proceed-btn": "Продолжете кон поднесувањето на пријава",
@@ -16,8 +16,6 @@
 	"reportincident-dialog-additional-details-input-label": "Дополнителни поединости",
 	"reportincident-dialog-additional-details-input-placeholder": "Додајте контекст кој би бил од помош за разгледувач",
 	"reportincident-dialog-optional-label": "(незадолжително)",
-	"reportincident-dialog-links-evidence-label": "Врски до докази за инцидентот",
-	"reportincident-dialog-links-evidence-placeholder": "Ставете врска до вознемирувањето",
 	"reportincident-dialog-violator-label": "Корисничкото име кое би {{GENDER:|сакале}} да го пријавите",
 	"reportincident-dialog-violator-placeholder-text": "Кого {{GENDER:|пријавувате}}?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Говор на омраза или дискриминација",
@@ -39,10 +37,9 @@
 	"reportincident-dialog-admin-review": "{{GENDER:|Вашата}} пријава ќе биде испратена на [$1 администратор] за разгледување.",
 	"reportincident-dialog-harassment-empty": "Ќе мора да {{GENDER:|изберете}} барем едно поведение.",
 	"reportincident-dialog-violator-empty": "Ќе мора да {{GENDER:|укажете}} корисничко име за пријавување.",
-	"reportincident-dialog-links-empty": "Ќе мора да {{GENDER:|дадете}} врска/ки како доказ за инцидентот.",
 	"reportincident-dialog-something-else-empty": "Напишете краток опис на поведението.",
 	"reportincident-unable-to-send": "Не можев да ја испратам пријавата за инцидент по е-пошта.",
 	"reportincident-email-subject": "{{SITENAME}}: Нова пријава за инцидент од „$1“",
-	"reportincident-email-body": "Пријавувач: $1\nПријавен: $2\nВрска до страница: $3\nПријавена врска: $4\nПоведенија: $5\nПоединости: $6\n\nЕ-пошта до $1: $7",
+	"reportincident-email-body": "Пријавувач: $1\nПријавен: $2\nВрска до страница: $3\nПријавена врска: $4\n\nПоведенија: $5\nПоединости: $6\n\n\nЕ-пошта на $1: $6",
 	"reportincident-email-something-else": "Нешто друго: „$1“"
 }

@@ -16,8 +16,6 @@
 	"reportincident-dialog-additional-details-input-label": "Detalios additional",
 	"reportincident-dialog-additional-details-input-placeholder": "Adde contexto que poterea esser utile pro un revisor",
 	"reportincident-dialog-optional-label": "(optional)",
-	"reportincident-dialog-links-evidence-label": "Ligamines al evidentia del incidente",
-	"reportincident-dialog-links-evidence-placeholder": "Forni un ligamine al molestia",
 	"reportincident-dialog-violator-label": "Le nomine de usator que tu vole denunciar",
 	"reportincident-dialog-violator-placeholder-text": "Qui denuncia tu?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Odio o discrimination",
@@ -39,10 +37,9 @@
 	"reportincident-dialog-admin-review": "Tu reporto essera inviate a [$1 un administrator] pro revision.",
 	"reportincident-dialog-harassment-empty": "Tu debe seliger al minus un comportamento.",
 	"reportincident-dialog-violator-empty": "Tu debe specificar un nomine de usator a reportar.",
-	"reportincident-dialog-links-empty": "Tu debe fornir ligamine(s) a evidentia del incidente.",
 	"reportincident-dialog-something-else-empty": "Per favor forni un curte description del comportamento.",
 	"reportincident-unable-to-send": "Le reporto de incidente non pote esser inviate per e-mail.",
 	"reportincident-email-subject": "{{SITENAME}}: Nove incidente reportate per $1",
-	"reportincident-email-body": "Usator reportante: $1\nUsator reportate: $2\nLigamine al pagina: $3\nLigamine reportate: $4\nComportamento: $5\nDetalios: $6\n\nE-mail de $1: $7",
+	"reportincident-email-body": "Usator reportante: $1\nUsator reportate: $2\nLigamine al pagina: $3\n\nComportamentos: $4\nDetalios: $5\n\nE-mail a $1: $6",
 	"reportincident-email-something-else": "Altere cosa: “$1”"
 }

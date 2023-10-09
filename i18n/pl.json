@@ -16,8 +16,6 @@
 	"reportincident-dialog-additional-details-input-label": "Dodatkowe informacje",
 	"reportincident-dialog-additional-details-input-placeholder": "Podaj kontekst, który pomoże osobie weryfikującej zgłoszenie",
 	"reportincident-dialog-optional-label": "opcjonalne",
-	"reportincident-dialog-links-evidence-label": "Link do dowodu zaistnienia incydentu",
-	"reportincident-dialog-links-evidence-placeholder": "Podaj link do miejsca, gdzie miało miejsce nękanie",
 	"reportincident-dialog-violator-label": "Nazwa użytkownika, którego zachowanie {{GENDER:|pragniesz}} zgłosić",
 	"reportincident-dialog-violator-placeholder-text": "Kogo {{GENDER:|zgłaszasz}}?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Mowa nienawiści bądź dyskryminacja",

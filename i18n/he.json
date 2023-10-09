@@ -16,8 +16,6 @@
 	"reportincident-dialog-additional-details-input-label": "פרטים נוספים",
 	"reportincident-dialog-additional-details-input-placeholder": "הוספת הקשר שיכול להועיל למבקר",
 	"reportincident-dialog-optional-label": "(לא חובה)",
-	"reportincident-dialog-links-evidence-label": "קישורים לראיות לאירוע",
-	"reportincident-dialog-links-evidence-placeholder": "נא לספק קישור להטרדה",
 	"reportincident-dialog-violator-label": "שם המשתמש {{GENDER:|שאתה|שאת}} רוצה לדווח",
 	"reportincident-dialog-violator-placeholder-text": "את מי {{GENDER:|אתה מדווח|את מדווחת}}?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "דברי שטנה או אפליה",
@@ -39,10 +37,9 @@
 	"reportincident-dialog-admin-review": "הדו\"ח {{GENDER:|שלך}} יישלח אל [$1 מפעיל מערכת] לבדיקה.",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|אתה חייב|את חייבת}} לבחור התנהגות אחת לפחות.",
 	"reportincident-dialog-violator-empty": "{{GENDER:|אתה חייב|את חייבת}} לציין שם משתמש לדיווח.",
-	"reportincident-dialog-links-empty": "{{GENDER:|אתה חייב|את חייבת}} לספק קישור אחד או יותר לראיות לאירוע.",
 	"reportincident-dialog-something-else-empty": "נא לספק תיאור קצר של ההתנהגות.",
 	"reportincident-unable-to-send": "לא ניתן לשלוח דו\"ח תקרית בדואר אלקטרוני.",
 	"reportincident-email-subject": "{{SITENAME}}: דו\"ח תקרית חדש מחשבון \"$1\"",
-	"reportincident-email-body": "משתמש ששולח את הדו\"ח: $1 \nמשתמש שהוא נושא הדו\"ח: $2 \nקישור לדף: $3 \nקישור מדווח: $4 \nהתנהגויות: $5 \nפרטים: $6\n\nדואר אלקטרונו: $7",
+	"reportincident-email-body": "המשתמש ששולח את הדו\"ח: $1 \nהמשתמש שהדו\"ח עוסק בו: $2 \nקישור לדף: $3 \n\nהתנהגויות: $4\nפרטים: $5\n\nלשליחת דואר אלקטרוני למשתמש $1 יש ללחוץ כאן: $6",
 	"reportincident-email-something-else": "משהו אחר: \"$1\""
 }

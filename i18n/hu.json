@@ -16,8 +16,6 @@
 	"reportincident-dialog-additional-details-input-label": "További részletek",
 	"reportincident-dialog-additional-details-input-placeholder": "Adj kontextust, ami hasznos lehet a jelentésed átnézőjének",
 	"reportincident-dialog-optional-label": "(nem kötelező)",
-	"reportincident-dialog-links-evidence-label": "Linkek az incidens bizonyítékaira",
-	"reportincident-dialog-links-evidence-placeholder": "Adj meg egy linket a zaklatáshoz",
 	"reportincident-dialog-violator-label": "Felhasználónév, akit jelenteni szeretnél",
 	"reportincident-dialog-violator-placeholder-text": "Kit jelentesz?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Gyűlöletbeszéd vagy diszkrimináció",
