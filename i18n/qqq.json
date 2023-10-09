@@ -26,6 +26,7 @@
 	"reportincident-dialog-harassment-type-threats-of-violence": "Label for type of harassment: Threats of violence",
 	"reportincident-dialog-harassment-type-intimidation": "Label for type of harassment: Intimidation, aggression, name calling",
 	"reportincident-dialog-harassment-type-something-else": "Label for type of harassment: Something else. If selected a extra box appears for the user to enter free text to describe the something else.",
+	"reportincident-dialog-something-else-input-placeholder": "Placeholder text for the 'Something else' text input that is shown when a user has selected the 'Something else' harassment type.",
 	"reportincident-dialog-harassment-intro-text": "A message about the wiki's stance on inappropriate behavior, including harassment.",
 	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Lead-in to a list of not tolerated behaviors on the wiki.",
 	"reportincident-dialog-harassment-example-insults": "Insults, as an example of behavior not tolerated on Wikipedia",

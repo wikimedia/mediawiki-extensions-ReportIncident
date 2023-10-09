@@ -21,6 +21,9 @@
 				v-if="collectSomethingElseDetails"
 				v-model="inputSomethingElseDetails"
 				class="ext-reportincident-dialog-step2__something-else-textarea"
+				:placeholder="$i18n(
+					'reportincident-dialog-something-else-input-placeholder'
+				).text()"
 				@focusout="displaySomethingElseTextboxRequiredError = true"
 			></cdx-text-area>
 		</cdx-field>
