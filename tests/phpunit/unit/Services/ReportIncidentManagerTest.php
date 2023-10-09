@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaWiki\Extension\ReportIncident\Tests\Unit;
+namespace MediaWiki\Extension\ReportIncident\Tests\Unit\Services;
 
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentMailer;

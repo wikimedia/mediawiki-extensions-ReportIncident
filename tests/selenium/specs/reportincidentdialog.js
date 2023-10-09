@@ -88,7 +88,7 @@ describe( 'ReportIncident dialog', function () {
 		// body, url and method.
 		await browser.waitUntil(
 			async () => ( await browser.getRequests( { includePending: true } ) ).length !== 0,
-			{ timeout: 5 * 1000, timeoutMsg: 'API failed to respond in a reasonable time.' }
+			{ timeout: 2 * 1000, timeoutMsg: 'API was not called in a reasonable time.' }
 		);
 		// Get the REST API request information (which will be the request at index 0
 		// as no other requests are made in the interim).
@@ -101,7 +101,7 @@ describe( 'ReportIncident dialog', function () {
 		assert.deepStrictEqual(
 			request.body,
 			{
-				reportedUserId: 'Admin',
+				reportedUser: 'Admin',
 				details: 'Additional details.',
 				behaviors: [ 'hate-speech-or-discrimination', 'something-else' ],
 				somethingElseDetails: 'Testing1234',

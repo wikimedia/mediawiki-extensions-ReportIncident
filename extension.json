@@ -176,7 +176,8 @@
 			"services": [
 				"MainConfig",
 				"RevisionStore",
-				"UserFactory",
+				"UserNameUtils",
+				"UserIdentityLookup",
 				"ReportIncidentManager"
 			]
 		}

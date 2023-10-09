@@ -49,7 +49,8 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 			displayBehaviorsRequiredError.value = true;
 		}
 		// Validate the reported user field has some content.
-		// TODO: Validate this is actually a valid username.
+		// TODO: Link up server-side validation of the username to the error
+		//  state of the form on submission.
 		if ( inputReportedUser.value === '' ) {
 			if ( displayReportedUserRequiredError.value ) {
 				formErrors.inputReportedUser = { error: mw.msg( 'reportincident-dialog-violator-empty' ) };
@@ -93,7 +94,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	 */
 	const restPayload = computed( () => {
 		const restData = {
-			reportedUserId: inputReportedUser.value,
+			reportedUser: inputReportedUser.value,
 			details: inputDetails.value,
 			behaviors: inputBehaviors.value
 		};

@@ -47,13 +47,13 @@ describe( 'Form Store', () => {
 		form.inputBehaviors = [
 			Constants.harassmentTypes.HATE_SPEECH, Constants.harassmentTypes.INTIMIDATION_AGGRESSION
 		];
-		form.inputReportedUser = 'test value';
+		form.inputReportedUser = 'test user';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
 
-		// Something else details should not be specified as it is not in the behaviours array
+		// Something else details should not be specified as it is not in the behaviours array.
 		expect( form.restPayload ).toStrictEqual( {
-			reportedUserId: 'test value',
+			reportedUser: 'test user',
 			details: 'test details',
 			behaviors: [
 				Constants.harassmentTypes.HATE_SPEECH, Constants.harassmentTypes.INTIMIDATION_AGGRESSION
@@ -62,7 +62,7 @@ describe( 'Form Store', () => {
 
 		form.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
 		expect( form.restPayload ).toStrictEqual( {
-			reportedUserId: 'test value',
+			reportedUser: 'test user',
 			details: 'test details',
 			behaviors: [ Constants.harassmentTypes.OTHER ],
 			somethingElseDetails: 'test something else details'

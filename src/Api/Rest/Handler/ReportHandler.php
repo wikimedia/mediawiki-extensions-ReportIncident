@@ -12,7 +12,9 @@ use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\Validator\JsonBodyValidator;
 use MediaWiki\Rest\Validator\UnsupportedContentTypeBodyValidator;
 use MediaWiki\Revision\RevisionStore;
-use MediaWiki\User\UserFactory;
+use MediaWiki\User\UserIdentityLookup;
+use MediaWiki\User\UserIdentityValue;
+use MediaWiki\User\UserNameUtils;
 use Psr\Log\LoggerInterface;
 use TypeError;
 use Wikimedia\Message\MessageValue;
@@ -26,25 +28,29 @@ class ReportHandler extends SimpleHandler {
 	private Config $config;
 	private ReportIncidentManager $reportIncidentManager;
 	private RevisionStore $revisionStore;
-	private UserFactory $userFactory;
+	private UserNameUtils $userNameUtils;
+	private UserIdentityLookup $userIdentityLookup;
 	private LoggerInterface $logger;
 
 	/**
 	 * @param Config $config
 	 * @param RevisionStore $revisionStore
-	 * @param UserFactory $userFactory
+	 * @param UserNameUtils $userNameUtils
+	 * @param UserIdentityLookup $userIdentityLookup
 	 * @param ReportIncidentManager $reportIncidentManager
 	 */
 	public function __construct(
 		Config $config,
 		RevisionStore $revisionStore,
-		UserFactory $userFactory,
+		UserNameUtils $userNameUtils,
+		UserIdentityLookup $userIdentityLookup,
 		ReportIncidentManager $reportIncidentManager
 	) {
 		$this->config = $config;
 		$this->reportIncidentManager = $reportIncidentManager;
 		$this->revisionStore = $revisionStore;
-		$this->userFactory = $userFactory;
+		$this->userNameUtils = $userNameUtils;
+		$this->userIdentityLookup = $userIdentityLookup;
 		$this->logger = LoggerFactory::getInstance( 'ReportIncident' );
 	}
 
@@ -85,6 +91,25 @@ class ReportHandler extends SimpleHandler {
 			}
 		}
 		$body = $this->getValidatedBody();
+		// $body should be an array, but can be null when validation
+		// failed and/or when the content type was form data.
+		if ( !is_array( $body ) ) {
+			// Taken from Validator::validateBody
+			[ $contentType ] = explode( ';', $this->getRequest()->getHeaderLine( 'Content-Type' ), 2 );
+			$contentType = strtolower( trim( $contentType ) );
+			if ( $contentType !== 'application/json' ) {
+				// Same exception as used in UnsupportedContentTypeBodyValidator
+				throw new LocalizedHttpException(
+					new MessageValue( 'rest-unsupported-content-type', [ $contentType ] ),
+					415
+				);
+			} else {
+				// Should be caught by JsonBodyValidator::validateBody, but if this
+				// point is reached a non-array still indicates a problem with the
+				// data submitted by the client and thus a 400 error is appropriate.
+				throw new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 );
+			}
+		}
 		$revisionId = $body['revisionId'];
 		$revision = $this->revisionStore->getRevisionById( $revisionId );
 		if ( !$revision ) {
@@ -92,8 +117,21 @@ class ReportHandler extends SimpleHandler {
 				new MessageValue( 'rest-nonexistent-revision', [ $revisionId ] ), 404 );
 		}
 		$body['revision'] = $revision;
-		$reportedUser = $this->userFactory->newFromId( (int)$body['reportedUserId'] );
-		$body['reportedUser'] = $reportedUser;
+		// Validate that the user is either an IP or an existing user
+		/** @var string $reportedUser */
+		$reportedUser = $body['reportedUser'];
+		'@phan-var string $reportedUser';
+		if ( $this->userNameUtils->isIP( $reportedUser ) ) {
+			$reportedUserIdentity = UserIdentityValue::newAnonymous( $reportedUser );
+		} else {
+			$reportedUserIdentity = $this->userIdentityLookup->getUserIdentityByName( $reportedUser );
+			if ( !$reportedUserIdentity || !$reportedUserIdentity->isRegistered() ) {
+				throw new LocalizedHttpException(
+					new MessageValue( 'rest-nonexistent-user', [ $reportedUser ] ), 404
+				);
+			}
+		}
+		$body['reportedUser'] = $reportedUserIdentity;
 		try {
 			$incidentReport = IncidentReport::newFromRestPayload(
 				$this->getAuthority()->getUser(),
@@ -139,14 +177,10 @@ class ReportHandler extends SimpleHandler {
 		return new JsonBodyValidator( self::getBodyParamSettings() );
 	}
 
-	public function needsWriteAccess(): bool {
-		return true;
-	}
-
 	public function getBodyParamSettings(): array {
 		return [
-			'reportedUserId' => [
-				ParamValidator::PARAM_TYPE => 'integer',
+			'reportedUser' => [
+				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'revisionId' => [

@@ -34,15 +34,20 @@
 							ext-reportincident-dialog-step2__violator-name"
 			:status="reportedUserStatus"
 			:messages="formErrorMessages.inputReportedUser"
+			@focusout="displayReportedUserRequiredError = true"
 		>
 			<template #label>
 				{{ $i18n( 'reportincident-dialog-violator-label' ).text() }}
 			</template>
-			<cdx-text-input
-				v-model="inputReportedUser"
+			<cdx-lookup
+				v-model:selected="inputReportedUserSelection"
 				:placeholder="$i18n( 'reportincident-dialog-violator-placeholder-text' ).text()"
-				@focusout="displayReportedUserRequiredError = true"
-			></cdx-text-input>
+				:menu-items="inputReportedUserMenuItems"
+				:menu-config="reportedUserLookupMenuConfig"
+				@input="onReportedUserInput"
+				@update:selected="onReportedUserSelected"
+			>
+			</cdx-lookup>
 		</cdx-field>
 
 		<!-- Additional details -->
@@ -67,9 +72,9 @@
 
 const Constants = require( '../Constants.js' );
 const useFormStore = require( '../stores/Form.js' );
-const { CdxCheckbox, CdxField, CdxTextInput, CdxTextArea } = require( '@wikimedia/codex' );
+const { CdxCheckbox, CdxField, CdxLookup, CdxTextArea } = require( '@wikimedia/codex' );
 const { storeToRefs } = require( 'pinia' );
-const { computed } = require( 'vue' );
+const { computed, ref, onMounted, onUnmounted } = require( 'vue' );
 
 // @vue/component
 module.exports = exports = {
@@ -77,7 +82,7 @@ module.exports = exports = {
 	components: {
 		CdxCheckbox,
 		CdxField,
-		CdxTextInput,
+		CdxLookup,
 		CdxTextArea
 	},
 	setup() {
@@ -91,6 +96,36 @@ module.exports = exports = {
 			displaySomethingElseTextboxRequiredError,
 			inputDetails
 		} = storeToRefs( store );
+
+		const inputReportedUserSelection = ref( '' );
+		const windowHeight = ref( window.innerHeight );
+		const suggestedUsernames = ref( [] );
+
+		let debounce = null;
+
+		/**
+		 * Called when the browser window is resized.
+		 *
+		 * This function updates the reference containing
+		 * the current height of the window to adjust the
+		 * number of menu items shown.
+		 */
+		function onWindowResize() {
+			windowHeight.value = window.innerHeight;
+		}
+
+		// Call the onWindowResize on the "resize" event once the
+		// second step is mounted.
+		onMounted( () => {
+			window.addEventListener( 'resize', onWindowResize );
+		} );
+
+		// Stop calling the onWindowResize method when the component
+		// is unmounted (after successful submission, closing the dialog,
+		// or navigating back to the first step).
+		onUnmounted( () => {
+			window.removeEventListener( 'resize', onWindowResize );
+		} );
 
 		const harassmentOptions = [
 			{
@@ -137,18 +172,135 @@ module.exports = exports = {
 			).length > 0;
 		} );
 
+		/**
+		 * The menu items for the reported user Codex Lookup component.
+		 */
+		const inputReportedUserMenuItems = computed( () => {
+			return suggestedUsernames.value.map( ( user ) => {
+				return { value: user.name };
+			} );
+		} );
+
+		/**
+		 * The configuration settings for the Codex Lookup reported username
+		 * component.
+		 *
+		 * This sets the visibleItemLimit to a proportion of the height such
+		 * that the dropdown menu should not overflow the bottom of the dialog.
+		 */
+		const reportedUserLookupMenuConfig = computed( () => {
+			return {
+				visibleItemLimit: Math.min(
+					Math.max(
+						Math.floor( windowHeight.value / 150 ),
+						2
+					),
+					5
+				)
+			};
+		} );
+
+		/**
+		 * Load username suggestions for the username lookup component
+		 * using the 'allusers' query API. The results are set as the
+		 * suggestedUsernames reference for further use.
+		 *
+		 * Calling this method repeatedly is safe as the API call is
+		 * debounced using a 100ms delay.
+		 */
+		function loadSuggestedUsernames() {
+			// Clear any other yet to be run API calls to get the suggested usernames.
+			clearTimeout( debounce );
+			const currentValue = inputReportedUser.value;
+			// Do nothing if we have no input.
+			if ( !currentValue ) {
+				suggestedUsernames.value = [];
+				return;
+			}
+
+			// Debounce the API calls using a 100ms delay.
+			debounce = setTimeout( () => {
+				new mw.Api().get( {
+					action: 'query',
+					list: 'allusers',
+					auprefix: currentValue,
+					limit: '10'
+				} ).then( function ( data ) {
+					// If the current value of inputReportedUser
+					// has been changed since the API call was first
+					// made then ignore this response.
+					if ( inputReportedUser.value !== currentValue ) {
+						return;
+					}
+
+					// If the API errors or returns an unexpected structure,
+					// then just display no suggestions.
+					if (
+						!data ||
+						!data.query ||
+						!data.query.allusers ||
+						!Array.isArray( data.query.allusers ) ||
+						data.query.allusers.length === 0
+					) {
+						suggestedUsernames.value = [];
+						return;
+					}
+
+					suggestedUsernames.value = data.query.allusers;
+				} ).catch( function ( error ) {
+					suggestedUsernames.value = [];
+					mw.log.error( error );
+				} );
+			}, 100 );
+		}
+
+		/**
+		 * Called when the reported username component has an "input" event fired.
+		 * This function updates the form state and asks for username suggestions
+		 * for the lookup dropdown.
+		 *
+		 * @param {string} value The new value of the reported username component.
+		 */
+		function onReportedUserInput( value ) {
+			// Keep a track of the actual text in the input for the form store.
+			inputReportedUser.value = value;
+			// Load suggestions based on the input already entered.
+			loadSuggestedUsernames();
+		}
+
+		/**
+		 * Called when a suggested username is selected by the user
+		 * from the items in the dropdown menu.
+		 *
+		 * This disables the required field error and updates the
+		 * form state.
+		 */
+		function onReportedUserSelected() {
+			displayReportedUserRequiredError.value = false;
+			inputReportedUser.value = inputReportedUserSelection.value;
+		}
+
 		return {
 			harassmentOptions,
 			inputBehaviors,
-			inputReportedUser,
-			displayReportedUserRequiredError,
 			inputDetails,
 			inputSomethingElseDetails,
+			inputReportedUserSelection,
+			inputReportedUserMenuItems,
+			reportedUserLookupMenuConfig,
 			displaySomethingElseTextboxRequiredError,
+			displayReportedUserRequiredError,
 			collectSomethingElseDetails,
 			formErrorMessages,
 			harassmentStatus,
-			reportedUserStatus
+			reportedUserStatus,
+			onReportedUserInput,
+			onReportedUserSelected,
+			// Used in tests, so needs to be passed out here.
+			/* eslint-disable vue/no-unused-properties */
+			windowHeight,
+			suggestedUsernames
+			/* eslint-enable vue/no-unused-properties */
 		};
 	}
 };
