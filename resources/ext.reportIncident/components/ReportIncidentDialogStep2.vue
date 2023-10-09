@@ -20,6 +20,7 @@
 			<cdx-text-area
 				v-if="collectSomethingElseDetails"
 				v-model="inputSomethingElseDetails"
+				class="ext-reportincident-dialog-step2__something-else-textarea"
 				@focusout="displaySomethingElseTextboxRequiredError = true"
 			></cdx-text-area>
 		</cdx-field>
