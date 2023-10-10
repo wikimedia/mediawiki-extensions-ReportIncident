@@ -9,5 +9,5 @@
 	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Per the [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct|Universal Code of Conduct]], unacceptable behaviour includes but is not limited to:",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|You}} must select at least one behaviour.",
 	"reportincident-dialog-something-else-empty": "Please provide a short description of the behaviour.",
-	"reportincident-email-body": "Reporting user: $1\nReported user: $2\nLink to page: $3\nReported link: $4\nBehaviours: $5\nDetails: $6\n\nEmail $1: $7"
+	"reportincident-email-body": "Reporting user: $1\nReported user: $2\nLink to page: $3\n\nBehaviours: $4\nDetails: $5\n\nEmail $1: $6"
 }
