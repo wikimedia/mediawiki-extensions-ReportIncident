@@ -132,12 +132,10 @@
 				"@wikimedia/codex"
 			]
 		},
-		"ext.reportIncident.minervaicons": {
-			"selectorWithoutVariant": ".minerva-icon--flag",
-			"useDataURI": false,
-			"defaultColor": "#54595d",
-			"class": "ResourceLoaderOOUIIconPackModule",
-			"icons": [ "flag" ]
+		"ext.reportIncident.menuStyles": {
+			"skinStyles": {
+				"minerva": "menuStyles.minerva.less"
+			}
 		}
 	},
 	"RestRoutes": [

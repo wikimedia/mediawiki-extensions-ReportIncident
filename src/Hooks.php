@@ -128,9 +128,9 @@ class Hooks implements
 		// Add the ReportIncident module, including the JS and Vue code for the dialog.
 		$output->addModules( 'ext.reportIncident' );
 		if ( $skinName === 'minerva' ) {
-			// If the current skin is minerva, then load the minerva icons for use
-			// in the overflow menu.
-			$output->addModuleStyles( 'ext.reportIncident.minervaicons' );
+			// Load custom menu styles for Minerva; see the 'skinStyles' property of the RL module
+			// loaded below.
+			$output->addModuleStyles( 'ext.reportIncident.menuStyles' );
 		}
 	}
 
