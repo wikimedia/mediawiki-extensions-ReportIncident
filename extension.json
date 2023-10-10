@@ -133,7 +133,7 @@
 			]
 		},
 		"ext.reportIncident.minervaicons": {
-			"selectorWithoutVariant": ".mw-ui-icon-minerva-{name}:before",
+			"selectorWithoutVariant": ".minerva-icon--flag",
 			"useDataURI": false,
 			"defaultColor": "#54595d",
 			"class": "ResourceLoaderOOUIIconPackModule",
