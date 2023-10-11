@@ -109,7 +109,7 @@ class HooksTest extends MediaWikiUnitTestCase {
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
 		$outputPageMock->expects( $this->once() )->method( 'addModuleStyles' )
-			->with( 'ext.reportIncident.minervaicons' );
+			->with( 'ext.reportIncident.menuStyles' );
 		TestingAccessWrapper::newFromObject( new Hooks() )
 			->addModulesAndConfigVars( $outputPageMock, $config, 'minerva' );
 	}
@@ -125,7 +125,8 @@ class HooksTest extends MediaWikiUnitTestCase {
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
-		$outputPageMock->expects( $this->never() )->method( 'addModuleStyles' );
+		$outputPageMock->expects( $this->never() )->method( 'addModuleStyles' )
+			->with( 'ext.reportIncident.menuStyles' );
 		TestingAccessWrapper::newFromObject( new Hooks() )
 			->addModulesAndConfigVars( $outputPageMock, $config, 'vector' );
 	}
