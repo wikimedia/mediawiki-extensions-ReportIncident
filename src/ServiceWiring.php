@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentMailer;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Logger\LoggerFactory;
@@ -33,5 +34,10 @@ return [
 			LoggerFactory::getInstance( 'ReportIncident' )
 		);
 	},
+	'ReportIncidentController' => static function (
+		MediaWikiServices $services
+	): ReportIncidentController {
+		return new ReportIncidentController( $services->getMainConfig() );
+	}
 ];
 // @codeCoverageIgnoreEnd
