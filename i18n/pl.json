@@ -33,6 +33,6 @@
 	"reportincident-dialog-harassment-example-hounding": "Nękanie",
 	"reportincident-dialog-harassment-example-trolling": "Trolowanie",
 	"reportincident-dialog-engage-header": "Jak nawiązać dialog",
-	"reportincident-dialog-engage-text": "Jeśli czujesz się dość {{GENDER:|bezpiecznie}}, możesz spróbować porozmawiać z osobą, która sprawia ci problemy. Poinformuj tę osobą o Powszechnych Zasadach Postępowania na {{GRAMMAR:MS.lp|{{SITENAME}}}}, oraz o tym, że musi zachowywać się odpowiednio. Może to pomóc powstrzymać dalsze niewłaściwe zachowanie.",
+	"reportincident-dialog-engage-text": "Jeśli czujesz się dość {{GENDER:|bezpiecznie}}, możesz spróbować porozmawiać z osobą, którą zgłaszasz. Poinformuj tę osobą o Powszechnych Zasadach Postępowania na {{GRAMMAR:MS.lp|{{SITENAME}}}}, oraz o tym, że musi zachowywać się odpowiednio. Może to pomóc powstrzymać dalsze niewłaściwe zachowanie.",
 	"reportincident-dialog-admin-review": "{{GENDER:|Twoje}} zgłoszenie zostanie wysłane do [$1 administratora] w celu weryfikacji."
 }

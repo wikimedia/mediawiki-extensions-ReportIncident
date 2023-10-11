@@ -24,6 +24,7 @@
 	"reportincident-dialog-harassment-type-threats-of-violence": "Amenazas de violencia",
 	"reportincident-dialog-harassment-type-intimidation": "Intimidación, agresión, insultos",
 	"reportincident-dialog-harassment-type-something-else": "Algo más",
+	"reportincident-dialog-something-else-input-placeholder": "Especifique los comportamientos que no figuran en la lista anterior.",
 	"reportincident-dialog-harassment-intro-text": "No se tolera el comportamiento inapropiado en {{SITENAME}}.",
 	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Según el [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct|código universal de conducta]], se consideran comportamientos inaceptables, entre otros, los siguientes:",
 	"reportincident-dialog-harassment-example-insults": "Insultos reiterados",

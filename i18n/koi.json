@@ -4,5 +4,6 @@
 			"Римма"
 		]
 	},
+	"reportincident-dialog-additional-details-input-placeholder": "Содтӧ контекст, кӧда отсалас доналісьлӧ.",
 	"reportincident-email-body": "Отчет сетісь вӧдитчись:$1\n\nГижсьӧтӧм вӧдитчись:$2\n\nЛистбок вылӧ ыстісьӧм:$3\n\nАсьтӧ кутӧм :$4\n\nСодтӧт:$5\n\nЭлектроннӧй почта $1: $6"
 }
