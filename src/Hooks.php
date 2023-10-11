@@ -138,7 +138,7 @@ class Hooks implements
 	public function onDiscussionToolsAddOverflowMenuItems(
 		array &$overflowMenuItems,
 		array &$resourceLoaderModules,
-		bool $sectionHeadingIsEditable,
+		bool $isSectionEditable,
 		array $threadItemData,
 		IContextSource $contextSource
 	) {
