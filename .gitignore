@@ -4,3 +4,4 @@
 .eslintcache
 /coverage
 .nyc_output
+/tests/selenium/log
