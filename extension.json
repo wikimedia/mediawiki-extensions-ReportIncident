@@ -50,6 +50,14 @@
 			"description": "Email to use as the 'from' address for emails that ReportIncident sends. If not set, ReportIncident cannot send emails when users file an incident report."
 		}
 	},
+	"AvailableRights": [
+		"reportincident"
+	],
+	"GroupPermissions": {
+		"user": {
+			"reportincident": true
+		}
+	},
 	"HookHandlers": {
 		"ReportIncidentHooks": {
 			"class": "MediaWiki\\Extension\\ReportIncident\\Hooks"

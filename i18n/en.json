@@ -43,5 +43,7 @@
 	"reportincident-unable-to-send": "Unable to email send incident report.",
 	"reportincident-email-subject": "{{SITENAME}}: New incident report from \"$1\"",
 	"reportincident-email-body": "Reporting user: $1\nReported user: $2\nLink to page: $3\n\nBehaviors: $4\nDetails: $5\n\nEmail $1: $6",
-	"reportincident-email-something-else": "Something else: \"$1\""
+	"reportincident-email-something-else": "Something else: \"$1\"",
+	"right-reportincident": "Report an incident",
+	"action-reportincident": "Report an incident"
 }
