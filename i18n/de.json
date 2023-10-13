@@ -42,5 +42,7 @@
 	"reportincident-unable-to-send": "Vorfallbericht kann nicht per E-Mail gesendet werden.",
 	"reportincident-email-subject": "{{SITENAME}}: Neuer Vorfallbericht von „$1“",
 	"reportincident-email-body": "Meldender Benutzer: $1\nGemeldeter Benutzer: $2\nLink zur Seite: $3\n\nVerhalten: $4\nDetails: $5\n\nE-Mail $1: $6",
-	"reportincident-email-something-else": "Etwas anderes: „$1“"
+	"reportincident-email-something-else": "Etwas anderes: „$1“",
+	"right-reportincident": "Einen Zwischenfall melden",
+	"action-reportincident": "Einen Zwischenfall melden"
 }

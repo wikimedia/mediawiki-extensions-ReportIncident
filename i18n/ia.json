@@ -42,5 +42,7 @@
 	"reportincident-unable-to-send": "Le reporto de incidente non pote esser inviate per e-mail.",
 	"reportincident-email-subject": "{{SITENAME}}: Nove incidente reportate per $1",
 	"reportincident-email-body": "Usator reportante: $1\nUsator reportate: $2\nLigamine al pagina: $3\n\nComportamentos: $4\nDetalios: $5\n\nE-mail a $1: $6",
-	"reportincident-email-something-else": "Altere cosa: “$1”"
+	"reportincident-email-something-else": "Altere cosa: “$1”",
+	"right-reportincident": "Reportar un incidente",
+	"action-reportincident": "reportar un incidente"
 }

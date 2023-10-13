@@ -42,5 +42,7 @@
 	"reportincident-unable-to-send": "Не можев да ја испратам пријавата за инцидент по е-пошта.",
 	"reportincident-email-subject": "{{SITENAME}}: Нова пријава за инцидент од „$1“",
 	"reportincident-email-body": "Пријавувач: $1\nПријавен: $2\nВрска до страница: $3\nПријавена врска: $4\n\nПоведенија: $5\nПоединости: $6\n\n\nЕ-пошта на $1: $6",
-	"reportincident-email-something-else": "Нешто друго: „$1“"
+	"reportincident-email-something-else": "Нешто друго: „$1“",
+	"right-reportincident": "Пријавување на инцидент",
+	"action-reportincident": "Пријавување на инцидент"
 }
