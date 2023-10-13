@@ -60,14 +60,23 @@
 	},
 	"HookHandlers": {
 		"ReportIncidentHooks": {
-			"class": "MediaWiki\\Extension\\ReportIncident\\Hooks"
+			"class": "MediaWiki\\Extension\\ReportIncident\\Hooks\\Handlers\\MainHooksHandler",
+			"services": [
+				"ReportIncidentController"
+			]
+		},
+		"DiscussionToolsHooks": {
+			"class": "MediaWiki\\Extension\\ReportIncident\\Hooks\\Handlers\\DiscussionToolsHandler",
+			"services": [
+				"ReportIncidentController"
+			]
 		}
 	},
 	"Hooks": {
 		"BeforePageDisplay": "ReportIncidentHooks",
 		"SidebarBeforeOutput": "ReportIncidentHooks",
 		"SkinTemplateNavigation::Universal": "ReportIncidentHooks",
-		"DiscussionToolsAddOverflowMenuItems": "ReportIncidentHooks"
+		"DiscussionToolsAddOverflowMenuItems": "DiscussionToolsHooks"
 	},
 	"MessagesDirs": {
 		"ReportIncident": [
