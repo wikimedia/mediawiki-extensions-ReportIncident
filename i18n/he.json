@@ -42,5 +42,7 @@
 	"reportincident-unable-to-send": "לא ניתן לשלוח דו\"ח תקרית בדואר אלקטרוני.",
 	"reportincident-email-subject": "{{SITENAME}}: דו\"ח תקרית חדש מחשבון \"$1\"",
 	"reportincident-email-body": "המשתמש ששולח את הדו\"ח: $1 \nהמשתמש שהדו\"ח עוסק בו: $2 \nקישור לדף: $3 \n\nהתנהגויות: $4\nפרטים: $5\n\nלשליחת דואר אלקטרוני למשתמש $1 יש ללחוץ כאן: $6",
-	"reportincident-email-something-else": "משהו אחר: \"$1\""
+	"reportincident-email-something-else": "משהו אחר: \"$1\"",
+	"right-reportincident": "דיווח על תקרית",
+	"action-reportincident": "לדווח על תקרית"
 }

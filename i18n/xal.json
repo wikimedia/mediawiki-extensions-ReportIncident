@@ -1,11 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ukhant Erdemt"
+			"Ukhant Erdemt",
+			"Алия"
 		]
 	},
 	"reportincident-desc": "Осл медүлх системин өргҗлт",
 	"reportincident-dialog-additional-details-input-placeholder": "Шүүмҗлгчд туста болх контекстиг немх.",
 	"reportincident-dialog-something-else-input-placeholder": "Деер дурдад уга заң-үүлиг зааҗ өгтн.",
-	"reportincident-dialog-engage-text": "Кемр {{GENDER:|та}} бийән аюл уга бәәнә гиҗ бодхла, {{GENDER:|та}} һундҗах әмтнлә {{GENDER:|та}} күүндҗ чадҗанат. Теднд {{SITENAME}} сайтын Ниитин йосн-дүрмиг медүләд, нег-негән күндлхд хандултн. Эннь зәрмдән дармтыг зогсахд туслна."
+	"reportincident-dialog-engage-text": "Кемр {{GENDER:|та}} бийән аюл уга бәәнә гиҗ бодхла, {{GENDER:|та}} һундҗах әмтнлә {{GENDER:|та}} күүндҗ чадҗанат. Теднд {{SITENAME}} сайтын Ниитин йосн-дүрмиг медүләд, нег-негән күндлхд хандултн. Эннь зәрмдән дармтыг зогсахд туслна.",
+	"reportincident-dialog-harassment-empty": "{{GENDER:|Та}} дор бәәх нег үүл-йовциг суңһх йоста.",
+	"reportincident-dialog-violator-empty": "{{GENDER:|Та}} медүлхин төлә керглгчин нериг зааҗ өгх йоста.",
+	"reportincident-dialog-something-else-empty": "Үүл-йовцин талар товч тәәлвр өгтн.",
+	"reportincident-email-body": "Медәлҗәх керглгч: $1\nМедәлсн керглгч: $2\nХалхин холвасн: $3\n\nЗаң төлв: $4 \nДелгрңгү: $5 \n\n$1 цәкм хайг: $6",
+	"right-reportincident": "Зөрцлин талар медүлх",
+	"action-reportincident": "Зөрцлин талар медүлх"
 }
