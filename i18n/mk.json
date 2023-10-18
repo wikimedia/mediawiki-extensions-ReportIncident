@@ -33,7 +33,7 @@
 	"reportincident-dialog-harassment-example-hounding": "Прогонување",
 	"reportincident-dialog-harassment-example-trolling": "Тролање",
 	"reportincident-dialog-engage-header": "Како да стапите во дијалог",
-	"reportincident-dialog-engage-text": "Ако {{GENDER:|се}} чувствувате безбедни, {{GENDER:|можете}} да се обидете да поразговарате со лицето што {{GENDER:|ве}} вознемирува. Посочете му го Универзалниот правилник на однесување на {{SITENAME}} и соопштете му дека мора да ги почитува другите. Ова понекогаш може да помогне да се запре вознемирувањето.",
+	"reportincident-dialog-engage-text": "Ако {{GENDER:|се}} чувствувате безбедни, {{GENDER:|можете}} да се обидете да поразговарате со лицето кое {{GENDER:|го}} пријавувате. Посочете му го Универзалниот правилник на однесување на {{SITENAME}} и соопштете му дека мора да ги почитува другите. Ова понекогаш може да помогне да се запре вознемирувањето.",
 	"reportincident-dialog-admin-review": "{{GENDER:|Вашата}} пријава ќе биде испратена на [$1 администратор] за разгледување.",
 	"reportincident-dialog-harassment-empty": "Ќе мора да {{GENDER:|изберете}} барем едно поведение.",
 	"reportincident-dialog-violator-empty": "Ќе мора да {{GENDER:|укажете}} корисничко име за пријавување.",

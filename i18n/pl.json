@@ -15,7 +15,7 @@
 	"reportincident-dialog-harassment-type-label": "Jaki rodzaj zachowania zgłaszasz?",
 	"reportincident-dialog-additional-details-input-label": "Dodatkowe informacje",
 	"reportincident-dialog-additional-details-input-placeholder": "Podaj kontekst, który pomoże osobie weryfikującej zgłoszenie",
-	"reportincident-dialog-optional-label": "opcjonalne",
+	"reportincident-dialog-optional-label": "(opcjonalne)",
 	"reportincident-dialog-violator-label": "Nazwa użytkownika, którego zachowanie {{GENDER:|pragniesz}} zgłosić",
 	"reportincident-dialog-violator-placeholder-text": "Kogo {{GENDER:|zgłaszasz}}?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Mowa nienawiści bądź dyskryminacja",
@@ -24,7 +24,7 @@
 	"reportincident-dialog-harassment-type-intimidation": "Zastraszanie, agresja bądź używanie wyzwisk",
 	"reportincident-dialog-harassment-type-something-else": "Coś innego",
 	"reportincident-dialog-harassment-intro-text": "Niestosowne zachowanie nie jest tolerowane na {{GRAMMAR:MS.lp|{{SITENAME}}}}.",
-	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Zgodnie z Powszechnymi Zasadami Postępowania, nieakceptowalne zachowanie to na przykład:",
+	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Zgodnie z [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct|Powszechnymi Zasadami Postępowania]], nieakceptowalne zachowanie to na przykład:",
 	"reportincident-dialog-harassment-example-insults": "Powtarzające się używanie obelg",
 	"reportincident-dialog-harassment-example-sexual-harassment": "Napastowanie seksualne",
 	"reportincident-dialog-harassment-example-threats": "Używanie gróźb",
@@ -33,6 +33,13 @@
 	"reportincident-dialog-harassment-example-hounding": "Nękanie",
 	"reportincident-dialog-harassment-example-trolling": "Trolowanie",
 	"reportincident-dialog-engage-header": "Jak nawiązać dialog",
-	"reportincident-dialog-engage-text": "Jeśli czujesz się dość {{GENDER:|bezpiecznie}}, możesz spróbować porozmawiać z osobą, która sprawia ci problemy. Poinformuj tę osobą o Powszechnych Zasadach Postępowania na {{GRAMMAR:MS.lp|{{SITENAME}}}}, oraz o tym, że musi zachowywać się odpowiednio. Może to pomóc powstrzymać dalsze niewłaściwe zachowanie.",
-	"reportincident-dialog-admin-review": "{{GENDER:|Twoje}} zgłoszenie zostanie wysłane do [$1 administratora] w celu weryfikacji."
+	"reportincident-dialog-engage-text": "Jeśli czujesz się dość {{GENDER:|bezpiecznie}}, możesz spróbować porozmawiać z osobą, którą zgłaszasz. Poinformuj tę osobą o Powszechnych Zasadach Postępowania na {{GRAMMAR:MS.lp|{{SITENAME}}}}, oraz o tym, że musi zachowywać się odpowiednio. Może to pomóc powstrzymać dalsze niewłaściwe zachowanie.",
+	"reportincident-dialog-admin-review": "{{GENDER:|Twoje}} zgłoszenie zostanie wysłane do [$1 administratora] w celu weryfikacji.",
+	"reportincident-dialog-harassment-empty": "{{GENDER:|Musisz}} wybrać co najmniej jedno zachowanie.",
+	"reportincident-dialog-violator-empty": "{{GENDER:|Musisz}} określić nazwę zgłaszanego użytkownika.",
+	"reportincident-dialog-something-else-empty": "Napisz krótki opis zgłaszanego zachowania.",
+	"reportincident-unable-to-send": "Nie udało się wysłać wiadomości e-mail ze zgłoszeniem incydentu.",
+	"reportincident-email-subject": "{{SITENAME}}: Nowe zgłoszenie incydentu od „$1”",
+	"reportincident-email-body": "Zgłaszający użytkownik: $1\nZgłoszony użytkownik: $2\nLink do strony: $3\n\nZachowania: $4\nOpis: $5\n\nNapisz e-mail do $1: $6",
+	"reportincident-email-something-else": "Coś jeszcze: „$1”"
 }

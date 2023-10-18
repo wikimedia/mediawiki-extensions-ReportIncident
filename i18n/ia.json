@@ -33,7 +33,7 @@
 	"reportincident-dialog-harassment-example-hounding": "Persecution",
 	"reportincident-dialog-harassment-example-trolling": "Trolling",
 	"reportincident-dialog-engage-header": "Como ingagiar in dialogo",
-	"reportincident-dialog-engage-text": "Si tu te senti secur a facer lo, tu pote essayar parlar con le persona que te vexa. Informa le sur le Codice Universal de Conducta sur {{SITENAME}} e que ille debe esser respectuose. Isto occasionalmente pote adjutar a stoppar le molestia.",
+	"reportincident-dialog-engage-text": "Si tu te senti secur a facer lo, tu pote essayar parlar con le persona que tu signala. Informa le sur le Codice Universal de Conducta sur {{SITENAME}} e que ille debe esser respectuose. Isto occasionalmente pote adjutar a stoppar le molestia.",
 	"reportincident-dialog-admin-review": "Tu reporto essera inviate a [$1 un administrator] pro revision.",
 	"reportincident-dialog-harassment-empty": "Tu debe seliger al minus un comportamento.",
 	"reportincident-dialog-violator-empty": "Tu debe specificar un nomine de usator a reportar.",

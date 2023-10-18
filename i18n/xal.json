@@ -1,8 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ukhant Erdemt"
+			"Ukhant Erdemt",
+			"Алия"
 		]
 	},
-	"reportincident-desc": "Осл медүлх системин өргҗлт"
+	"reportincident-desc": "Осл медүлх системин өргҗлт",
+	"reportincident-dialog-engage-text": "Кемр {{GENDER:|та}} бийән аюл уга бәәнә гиҗ бодхла, {{GENDER:|та}} һундҗах әмтнлә {{GENDER:|та}} күүндҗ чадҗанат. Теднд {{SITENAME}} сайтын Ниитин йосн-дүрмиг медүләд, нег-негән күндлхд хандултн. Эннь зәрмдән дармтыг зогсахд туслна.",
+	"reportincident-dialog-harassment-empty": "{{GENDER:|Та}} дор бәәх нег үүл-йовциг суңһх йоста.",
+	"reportincident-dialog-violator-empty": "{{GENDER:|Та}} медүлхин төлә кергләчин нериг зааҗ өгх йоста.",
+	"reportincident-dialog-something-else-empty": "Үүл-йовцин талар товч тәәлвр өгтн.",
+	"reportincident-email-body": "Медәлҗәх кергләч: $1\nМедәлсн кергләч: $2\nХалхин холвасн: $3\n\nҮүл-йовц: $4 \nДелгрңгү: $5 \n\n$1 цәкм хәәрцг: $6"
 }
