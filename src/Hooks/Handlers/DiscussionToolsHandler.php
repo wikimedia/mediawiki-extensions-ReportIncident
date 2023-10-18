@@ -36,7 +36,6 @@ class DiscussionToolsHandler implements DiscussionToolsAddOverflowMenuItemsHook 
 	public function onDiscussionToolsAddOverflowMenuItems(
 		array &$overflowMenuItems,
 		array &$resourceLoaderModules,
-		bool $isSectionEditable,
 		array $threadItemData,
 		IContextSource $contextSource
 	) {

@@ -19,7 +19,6 @@ class DiscussionToolsHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testOnDiscussionToolsAddOverflowMenuItems(
 		bool $expectOverflowMenuItemAdded,
 		bool $expectResourceLoaderModuleAdded,
-		bool $titleIsEditable,
 		array $threadItemData,
 		bool $shouldAddMenuItemMockResult
 	) {
@@ -41,7 +40,6 @@ class DiscussionToolsHandlerTest extends MediaWikiIntegrationTestCase {
 		( new DiscussionToolsHandler( $mockReportIncidentController ) )->onDiscussionToolsAddOverflowMenuItems(
 			$overflowMenuItems,
 			$resourceLoaderModules,
-			$titleIsEditable,
 			$threadItemData,
 			$contextSource
 		);
@@ -68,14 +66,12 @@ class DiscussionToolsHandlerTest extends MediaWikiIntegrationTestCase {
 			'Shows when ReportIncidentController::shouldAddMenuItem returns true' => [
 				true,
 				true,
-				true,
 				[ 'id' => 'foo' ],
 				true,
 			],
 			'Does not show when ReportIncidentController::shouldAddMenuItem returns false' => [
 				false,
 				false,
-				true,
 				[],
 				false,
 			]
