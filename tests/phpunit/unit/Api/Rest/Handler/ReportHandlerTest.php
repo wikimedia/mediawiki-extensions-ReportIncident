@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\ReportIncident\Tests\Unit\Api\Rest\Handler;
 
 use HashConfig;
+use MediaWiki\Block\AbstractBlock;
 use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Permissions\RateLimiter;
@@ -72,6 +73,39 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		] );
 		$this->expectExceptionObject(
 			new LocalizedHttpException( new MessageValue( 'apierror-permissiondenied' ), 403 )
+		);
+		$authority = $this->newUserAuthority( [
+			'actor' => $reportingUser,
+		] );
+		$this->executeHandler(
+			$handler,
+			new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			[],
+			[],
+			[],
+			[],
+			$authority
+		);
+	}
+
+	public function testDenyUserWithBlock() {
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+		] );
+
+		$userFactory = $this->createMock( UserFactory::class );
+		$reportingUser = $this->createMock( User::class );
+		$reportingUser->method( 'isRegistered' )->willReturn( true );
+		$reportingUser->method( 'getBlock' )->willReturn( $this->createMock( AbstractBlock::class ) );
+		$userFactory->method( 'newFromUserIdentity' )->willReturn( $reportingUser );
+
+		/** @var ReportHandler $handler */
+		$handler = $this->newServiceInstance( ReportHandler::class, [
+			'config' => $config,
+			'userFactory' => $userFactory,
+		] );
+		$this->expectExceptionObject(
+			new LocalizedHttpException( new MessageValue( 'apierror-blocked' ), 403 )
 		);
 		$authority = $this->newUserAuthority( [
 			'actor' => $reportingUser,

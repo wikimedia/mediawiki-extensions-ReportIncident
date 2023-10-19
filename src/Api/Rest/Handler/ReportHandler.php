@@ -86,6 +86,17 @@ class ReportHandler extends SimpleHandler {
 			);
 		}
 
+		if ( $user->getBlock() ) {
+			$this->logger->warning(
+				'Blocked user "{user}" attempted to perform "reportincident".',
+				[ 'user' => $this->getAuthority()->getUser()->getName() ]
+			);
+			throw new LocalizedHttpException(
+				new MessageValue( 'apierror-blocked', [ 'reportincident' ] ),
+				403
+			);
+		}
+
 		$isDeveloperMode = $this->config->get( 'ReportIncidentDeveloperMode' );
 		if ( !$isDeveloperMode && !$user->isEmailConfirmed() ) {
 			throw new LocalizedHttpException(
