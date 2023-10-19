@@ -13,6 +13,7 @@ use MediaWiki\Rest\Validator\JsonBodyValidator;
 use MediaWiki\Rest\Validator\UnsupportedContentTypeBodyValidator;
 use MediaWiki\Revision\RevisionStore;
 use MediaWiki\User\UserFactory;
+use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserIdentityLookup;
 use MediaWiki\User\UserIdentityValue;
 use MediaWiki\User\UserNameUtils;
@@ -68,6 +69,38 @@ class ReportHandler extends SimpleHandler {
 			);
 		}
 		$user = $this->getAuthority()->getUser();
+		$this->validateUserCanSubmitReport( $user );
+		$incidentReport = $this->getIncidentReportObjectFromValidatedBody( $this->getValidatedBody() );
+		$this->authorizeIncidentReport( $user );
+		$status = $this->reportIncidentManager->record( $incidentReport );
+		if ( $status->isGood() ) {
+			// TODO: If/when we store the reports in a DB table, we can move sending the email
+			// into a deferred update, so the user doesn't need to wait. For now, this is our
+			// only signal that a report was processed, so check the status of the sendEmail
+			// method
+			$status = $this->reportIncidentManager->notify( $incidentReport );
+			if ( !$status->isGood() ) {
+				throw new LocalizedHttpException(
+					new MessageValue( 'reportincident-unable-to-send' )
+				);
+			}
+			return $this->getResponseFactory()->createNoContent();
+		} else {
+			throw new LocalizedHttpException(
+				new MessageValue( $status->getErrors()[0]['message'] ), 400
+			);
+		}
+	}
+
+	/**
+	 * Validates that a user can submit an incident report using the API.
+	 * If the validation fails, a LocalizedHttpException will be thrown.
+	 *
+	 * @param UserIdentity $user The UserIdentity associated with the authority.
+	 * @return void The method will return nothing if validation succeeds (and error otherwise).
+	 * @throws LocalizedHttpException If validation fails
+	 */
+	private function validateUserCanSubmitReport( $user ): void {
 		if ( !$user->isRegistered() ) {
 			throw new LocalizedHttpException(
 				new MessageValue( 'rest-permission-denied-anon' ), 401
@@ -123,38 +156,19 @@ class ReportHandler extends SimpleHandler {
 				new MessageValue( 'reportincident-confirmedemail-required' ), 403
 			);
 		}
+	}
 
-		$status = PermissionStatus::newEmpty();
-		if ( !$this->getAuthority()->authorizeAction( 'reportincident', $status ) ) {
-			if ( $status->hasMessage( 'actionthrottledtext' ) ) {
-				$this->logger->warning(
-					'User "{user}" tripped rate limits for "reportincident".',
-					[ 'user' => $this->getAuthority()->getUser()->getName() ]
-				);
-				throw new LocalizedHttpException(
-					new MessageValue( 'apierror-ratelimited' ),
-					429
-				);
-			} else {
-				if ( $user->isTemp() ) {
-					// We'll deny temp users later on in the authorizeAction check below.
-					$this->logger->warning(
-						'Temporary user "{user}" attempted to perform "reportincident".',
-						[ 'user' => $this->getAuthority()->getUser()->getName() ]
-					);
-				} else {
-					$this->logger->warning(
-						'User "{user}" without permissions attempted to perform "reportincident".',
-						[ 'user' => $this->getAuthority()->getUser()->getName() ]
-					);
-				}
-				throw new LocalizedHttpException(
-					new MessageValue( 'apierror-permissiondenied', [ 'reportincident' ] ),
-					403
-				);
-			}
-		}
-		$body = $this->getValidatedBody();
+	/**
+	 * Gets the IncidentReport object from the request body
+	 * after performing validation on the request data. If
+	 * validation fails a LocalizedHttpException will be
+	 * thrown.
+	 *
+	 * @param mixed $body The value of $this->getValidatedBody()
+	 * @return IncidentReport If the validation succeeds
+	 * @throws LocalizedHttpException If the validation fails
+	 */
+	private function getIncidentReportObjectFromValidatedBody( $body ): IncidentReport {
 		// $body should be an array, but can be null when validation
 		// failed and/or when the content type was form data.
 		if ( !is_array( $body ) ) {
@@ -197,7 +211,7 @@ class ReportHandler extends SimpleHandler {
 		}
 		$body['reportedUser'] = $reportedUserIdentity;
 		try {
-			$incidentReport = IncidentReport::newFromRestPayload(
+			return IncidentReport::newFromRestPayload(
 				$this->getAuthority()->getUser(),
 				$body
 			);
@@ -209,23 +223,51 @@ class ReportHandler extends SimpleHandler {
 			] );
 			throw new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 );
 		}
-		$status = $this->reportIncidentManager->record( $incidentReport );
-		if ( $status->isGood() ) {
-			// TODO: If/when we store the reports in a DB table, we can move sending the email
-			// into a deferred update, so the user doesn't need to wait. For now, this is our
-			// only signal that a report was processed, so check the status of the sendEmail
-			// method
-			$status = $this->reportIncidentManager->notify( $incidentReport );
-			if ( !$status->isGood() ) {
+	}
+
+	/**
+	 * Authorises the incident report. If the authorisation fails, a LocalizedHttpException
+	 * is thrown. Otherwise the authorisation succeeded.
+	 *
+	 * Should be called just before an attempt to record and notify is made as this
+	 * will increase the rate limit. Doing this before form validation checks would
+	 * mean reports that were not sent would be counted towards the rate limit.
+	 *
+	 * @param UserIdentity $user The UserIdentity associated with the authority.
+	 * @return void
+	 * @throws LocalizedHttpException On authorisation failure.
+	 */
+	private function authorizeIncidentReport( $user ): void {
+		$user = $this->userFactory->newFromUserIdentity( $user );
+		$status = PermissionStatus::newEmpty();
+		if ( !$this->getAuthority()->authorizeAction( 'reportincident', $status ) ) {
+			if ( $status->hasMessage( 'actionthrottledtext' ) ) {
+				$this->logger->warning(
+					'User "{user}" tripped rate limits for "reportincident".',
+					[ 'user' => $this->getAuthority()->getUser()->getName() ]
+				);
 				throw new LocalizedHttpException(
-					new MessageValue( 'reportincident-unable-to-send' )
+					new MessageValue( 'apierror-ratelimited' ),
+					429
+				);
+			} else {
+				if ( $user->isTemp() ) {
+					// We'll deny temp users later on in the authorizeAction check below.
+					$this->logger->warning(
+						'Temporary user "{user}" attempted to perform "reportincident".',
+						[ 'user' => $this->getAuthority()->getUser()->getName() ]
+					);
+				} else {
+					$this->logger->warning(
+						'User "{user}" without permissions attempted to perform "reportincident".',
+						[ 'user' => $this->getAuthority()->getUser()->getName() ]
+					);
+				}
+				throw new LocalizedHttpException(
+					new MessageValue( 'apierror-permissiondenied', [ 'reportincident' ] ),
+					403
 				);
 			}
-			return $this->getResponseFactory()->createNoContent();
-		} else {
-			throw new LocalizedHttpException(
-				new MessageValue( $status->getErrors()[0]['message'] ), 400
-			);
 		}
 	}
 

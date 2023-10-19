@@ -22,8 +22,10 @@ use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserIdentityLookup;
 use MediaWiki\User\UserNameUtils;
 use MediaWikiUnitTestCase;
+use Psr\Log\LoggerInterface;
 use StatusValue;
 use Wikimedia\Message\MessageValue;
+use Wikimedia\TestingAccessWrapper;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
@@ -442,10 +444,26 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentDeveloperMode' => true,
 			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
+		// Pass the performer registered check
 		$user = $this->createMock( User::class );
 		$user->method( 'isRegistered' )->willReturn( true );
+		// Pass the revision check
+		$revisionStore = $this->createMock( RevisionStore::class );
+		$revision = $this->createMock( RevisionRecord::class );
+		$revisionStore->method( 'getRevisionById' )
+			->willReturn( $revision );
+		// Pass the reported user is IP check
+		$userNameUtils = $this->createMock( UserNameUtils::class );
+		$userNameUtils->method( 'isIP' )
+			->willReturn( true );
 		/** @var ReportHandler $handler */
-		$handler = $this->newServiceInstance( ReportHandler::class, [ 'config' => $config ] );
+		$handler = $this->newServiceInstance( ReportHandler::class,
+			[
+				'config' => $config,
+				'revisionStore' => $revisionStore,
+				'userNameUtils' => $userNameUtils,
+			]
+		);
 		$this->expectExceptionObject(
 			new LocalizedHttpException( new MessageValue( 'apierror-ratelimited' ), 429 )
 		);
@@ -463,7 +481,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			[],
 			[],
 			[],
-			[ 'revisionId' => 1 ],
+			[ 'revisionId' => 1, 'reportedUser' => '127.0.0.1', 'behaviors' => [ 'test' ] ],
 			$authority
 		);
 	}
@@ -474,8 +492,23 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentDeveloperMode' => true,
 			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
+		// Pass the revision check
+		$revisionStore = $this->createMock( RevisionStore::class );
+		$revision = $this->createMock( RevisionRecord::class );
+		$revisionStore->method( 'getRevisionById' )
+			->willReturn( $revision );
+		// Pass the reported user is IP check
+		$userNameUtils = $this->createMock( UserNameUtils::class );
+		$userNameUtils->method( 'isIP' )
+			->willReturn( true );
 		/** @var ReportHandler $handler */
-		$handler = $this->newServiceInstance( ReportHandler::class, [ 'config' => $config ] );
+		$handler = $this->newServiceInstance( ReportHandler::class,
+			[
+				'config' => $config,
+				'revisionStore' => $revisionStore,
+				'userNameUtils' => $userNameUtils,
+			]
+		);
 		$this->expectExceptionObject(
 			new LocalizedHttpException( new MessageValue( 'apierror-permissiondenied' ), 403 )
 		);
@@ -486,7 +519,68 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			[],
 			[],
 			[],
-			[ 'revisionId' => 1 ],
+			[ 'revisionId' => 1, 'reportedUser' => '127.0.0.1', 'behaviors' => [ 'test' ] ],
+			$authority
+		);
+	}
+
+	public function testAuthorizeIncidentReportForTemporaryUser() {
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
+		] );
+		// Pass the revision check
+		$revisionStore = $this->createMock( RevisionStore::class );
+		$revision = $this->createMock( RevisionRecord::class );
+		$revisionStore->method( 'getRevisionById' )
+			->willReturn( $revision );
+		// Pass the reported user is IP check
+		$userNameUtils = $this->createMock( UserNameUtils::class );
+		$userNameUtils->method( 'isIP' )
+			->willReturn( true );
+		// Create a mock user that is indicates it is a temporary account
+		$user = $this->createMock( User::class );
+		$user->method( 'isTemp' )->willReturn( true );
+		$user->method( 'isRegistered' )->willReturn( true );
+		$user->method( 'getName' )->willReturn( '*Unregistered 123' );
+		// Mock that the UserFactory returns the User object created above
+		$userFactory = $this->createMock( UserFactory::class );
+		$userFactory->method( 'newFromUserIdentity' )
+			->with( $user )
+			->willReturnArgument( 0 );
+		// Mock that the LoggerInterface indicates this was a temporary account
+		// that attempted to submit a report
+		$mockLogger = $this->createMock( LoggerInterface::class );
+		$mockLogger->expects( $this->once() )->method( 'warning' )
+			->with(
+				'Temporary user "{user}" attempted to perform "reportincident".',
+				[ 'user' => $user->getName() ]
+			);
+		/** @var ReportHandler $handler */
+		$handler = $this->newServiceInstance( ReportHandler::class,
+			[
+				'config' => $config,
+				'revisionStore' => $revisionStore,
+				'userNameUtils' => $userNameUtils,
+				'userFactory' => $userFactory,
+			]
+		);
+		$handler = TestingAccessWrapper::newFromObject( $handler );
+		$handler->logger = $mockLogger;
+		$this->expectExceptionObject(
+			new LocalizedHttpException( new MessageValue( 'apierror-permissiondenied' ), 403 )
+		);
+		$authority = $this->newUserAuthority( [
+			'actor' => $user,
+		] );
+		$this->executeHandler(
+			$handler->object,
+			new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			[],
+			[],
+			[],
+			[ 'revisionId' => 1, 'reportedUser' => '127.0.0.1', 'behaviors' => [ 'test' ] ],
 			$authority
 		);
 	}
