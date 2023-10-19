@@ -54,6 +54,39 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		);
 	}
 
+	public function testDenyTemporaryUsers() {
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+		] );
+
+		$userFactory = $this->createMock( UserFactory::class );
+		$reportingUser = $this->createMock( User::class );
+		$reportingUser->method( 'isRegistered' )->willReturn( true );
+		$reportingUser->method( 'isTemp' )->willReturn( true );
+		$userFactory->method( 'newFromUserIdentity' )->willReturn( $reportingUser );
+
+		/** @var ReportHandler $handler */
+		$handler = $this->newServiceInstance( ReportHandler::class, [
+			'config' => $config,
+			'userFactory' => $userFactory,
+		] );
+		$this->expectExceptionObject(
+			new LocalizedHttpException( new MessageValue( 'apierror-permissiondenied' ), 403 )
+		);
+		$authority = $this->newUserAuthority( [
+			'actor' => $reportingUser,
+		] );
+		$this->executeHandler(
+			$handler,
+			new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			[],
+			[],
+			[],
+			[],
+			$authority
+		);
+	}
+
 	public function testConfigDisabled() {
 		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => false ] );
 		/** @var ReportHandler $handler */
