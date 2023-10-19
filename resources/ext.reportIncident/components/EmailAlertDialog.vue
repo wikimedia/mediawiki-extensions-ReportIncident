@@ -36,7 +36,7 @@ module.exports = exports = {
 
 		function onPrimaryAction() {
 			wrappedOpen.value = false;
-			window.location.href = mw.Title.newFromText( 'Special:ChangeEmail' ).getUrl();
+			window.location.assign( mw.Title.newFromText( 'Special:ChangeEmail' ).getUrl() );
 		}
 
 		function onDefaultAction() {
