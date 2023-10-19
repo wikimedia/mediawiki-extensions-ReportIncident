@@ -75,6 +75,17 @@ class ReportHandler extends SimpleHandler {
 
 		$user = $this->userFactory->newFromUserIdentity( $user );
 
+		if ( $user->getEditCount() === 0 ) {
+			$this->logger->warning(
+				'User "{user}" with zero edits attempted to perform "reportincident".',
+				[ 'user' => $this->getAuthority()->getUser()->getName() ]
+			);
+			throw new LocalizedHttpException(
+				new MessageValue( 'apierror-permissiondenied', [ 'reportincident' ] ),
+				403
+			);
+		}
+
 		$isDeveloperMode = $this->config->get( 'ReportIncidentDeveloperMode' );
 		if ( !$isDeveloperMode && !$user->isEmailConfirmed() ) {
 			throw new LocalizedHttpException(
