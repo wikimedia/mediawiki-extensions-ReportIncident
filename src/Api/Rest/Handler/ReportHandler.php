@@ -20,6 +20,7 @@ use Psr\Log\LoggerInterface;
 use TypeError;
 use Wikimedia\Message\MessageValue;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * REST handler for /reportincident/v0/report
@@ -98,6 +99,25 @@ class ReportHandler extends SimpleHandler {
 		}
 
 		$isDeveloperMode = $this->config->get( 'ReportIncidentDeveloperMode' );
+
+		$now = (int)ConvertibleTimestamp::now();
+		$registrationTime = (int)$user->getRegistration();
+		$reportIncidentMinimumAccountAgeInSeconds = $this->config->get( 'ReportIncidentMinimumAccountAgeInSeconds' );
+		if ( $registrationTime &&
+			$reportIncidentMinimumAccountAgeInSeconds &&
+			!$isDeveloperMode &&
+			( ( $now - $registrationTime ) < $reportIncidentMinimumAccountAgeInSeconds ) ) {
+			$this->logger->warning(
+				'User "{user}" whose account is under wgReportIncidentMinimumAccountAgeInSeconds' .
+				' threshold attempted to perform "reportincident".',
+				[ 'user' => $this->getAuthority()->getUser()->getName() ]
+			);
+			throw new LocalizedHttpException(
+				new MessageValue( 'apierror-permissiondenied', [ 'reportincident' ] ),
+				403
+			);
+		}
+
 		if ( !$isDeveloperMode && !$user->isEmailConfirmed() ) {
 			throw new LocalizedHttpException(
 				new MessageValue( 'reportincident-confirmedemail-required' ), 403

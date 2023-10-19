@@ -24,6 +24,7 @@ use MediaWiki\User\UserNameUtils;
 use MediaWikiUnitTestCase;
 use StatusValue;
 use Wikimedia\Message\MessageValue;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * @group ReportIncident
@@ -121,6 +122,42 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		);
 	}
 
+	public function testAccountsUnderReportIncidentMinimumAccountAgeInSecondsThreshold() {
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => 101,
+			'ReportIncidentDeveloperMode' => false,
+		] );
+
+		$userFactory = $this->createMock( UserFactory::class );
+		$reportingUser = $this->createMock( User::class );
+		$reportingUser->method( 'isRegistered' )->willReturn( true );
+		ConvertibleTimestamp::setFakeTime( '20231019120100' );
+		$reportingUser->method( 'getRegistration' )->willReturn( '20231019120000' );
+		$userFactory->method( 'newFromUserIdentity' )->willReturn( $reportingUser );
+
+		/** @var ReportHandler $handler */
+		$handler = $this->newServiceInstance( ReportHandler::class, [
+			'config' => $config,
+			'userFactory' => $userFactory,
+		] );
+		$this->expectExceptionObject(
+			new LocalizedHttpException( new MessageValue( 'apierror-permissiondenied' ), 403 )
+		);
+		$authority = $this->newUserAuthority( [
+			'actor' => $reportingUser,
+		] );
+		$this->executeHandler(
+			$handler,
+			new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			[],
+			[],
+			[],
+			[],
+			$authority
+		);
+	}
+
 	public function testConfigDisabled() {
 		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => false ] );
 		/** @var ReportHandler $handler */
@@ -141,6 +178,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionStore->method( 'getRevisionById' )
@@ -168,6 +206,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => false,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionStore->method( 'getRevisionById' )->willReturn( null );
@@ -201,6 +240,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionStore->method( 'getRevisionById' )->willReturn( $this->createMock( RevisionRecord::class ) );
@@ -274,6 +314,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
 		// Mock the return value of ReportIncidentManager::record and ::notify
 		$reportManager = $this->createMock( ReportIncidentManager::class );
@@ -399,6 +440,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
 		$user = $this->createMock( User::class );
 		$user->method( 'isRegistered' )->willReturn( true );
@@ -430,6 +472,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
 		/** @var ReportHandler $handler */
 		$handler = $this->newServiceInstance( ReportHandler::class, [ 'config' => $config ] );
@@ -452,6 +495,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionStore->method( 'getRevisionById' )
@@ -492,6 +536,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionStore->method( 'getRevisionById' )
@@ -532,6 +577,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
 		$handler = $this->getMockBuilder( ReportHandler::class )
 			->setConstructorArgs( [
@@ -560,6 +606,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
 
 		$handler = $this->getMockBuilder( ReportHandler::class )

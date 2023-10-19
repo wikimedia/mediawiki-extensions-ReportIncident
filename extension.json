@@ -52,6 +52,10 @@
 		"ReportIncidentEmailFromAddress": {
 			"value": "",
 			"description": "Email to use as the 'from' address for emails that ReportIncident sends. If not set, ReportIncident cannot send emails when users file an incident report."
+		},
+		"ReportIncidentMinimumAccountAgeInSeconds": {
+			"value": 10800,
+			"description": "User accounts must be older than this value in order to submit a report. The default is 3 hours."
 		}
 	},
 	"AvailableRights": [
