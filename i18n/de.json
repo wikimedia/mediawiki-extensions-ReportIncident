@@ -16,7 +16,7 @@
 	"reportincident-dialog-additional-details-input-label": "Zusätzliche Details",
 	"reportincident-dialog-additional-details-input-placeholder": "Füge Kontext ein, der für einen Prüfer hilfreich sein könnte.",
 	"reportincident-dialog-optional-label": "(optional)",
-	"reportincident-dialog-violator-label": "Benutzername, den {{GENDER:|du}} melden möchtest",
+	"reportincident-dialog-violator-label": "Den Benutzer, den {{GENDER:|du}} melden möchtest",
 	"reportincident-dialog-violator-placeholder-text": "Wen meldest {{GENDER:|du}}?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Hassrede oder Diskriminierung",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Sexuelle Belästigung",
@@ -44,5 +44,10 @@
 	"reportincident-email-body": "Meldender Benutzer: $1\nGemeldeter Benutzer: $2\nLink zur Seite: $3\n\nVerhalten: $4\nDetails: $5\n\nE-Mail $1: $6",
 	"reportincident-email-something-else": "Etwas anderes: „$1“",
 	"right-reportincident": "Einen Zwischenfall melden",
-	"action-reportincident": "einen Zwischenfall zu melden"
+	"action-reportincident": "einen Zwischenfall zu melden",
+	"reportincident-emaildialog-title": "Verifizierte E-Mail-Adresse erforderlich",
+	"reportincident-emaildialog-close-button": "Abbrechen",
+	"reportincident-emaildialog-content": "Wir benötigen {{GENDER:|deine}} bestätigte E-Mail-Adresse, um Aktualisierungen zum Bericht bereitzustellen oder bei Bedarf nachzufassen. Bitte füge die E-Mail-Adresse von {{GENDER:|dir}} in den Benutzerkontoeinstellungen von {{GENDER:|dir}} hinzu oder bestätige diese, bevor du eine Meldung einreichst.",
+	"reportincident-emaildialog-primary": "Gehe zu den Einstellungen",
+	"reportincident-confirmedemail-required": "Für die Übermittlung eines Vorfallberichts ist eine bestätigte E-Mail-Adresse erforderlich."
 }
