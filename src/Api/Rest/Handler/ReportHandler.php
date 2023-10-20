@@ -75,17 +75,6 @@ class ReportHandler extends SimpleHandler {
 
 		$user = $this->userFactory->newFromUserIdentity( $user );
 
-		if ( $user->isTemp() ) {
-			$this->logger->warning(
-				'Temporary user "{user}" attempted to perform "reportincident".',
-				[ 'user' => $this->getAuthority()->getUser()->getName() ]
-			);
-			throw new LocalizedHttpException(
-				new MessageValue( 'apierror-permissiondenied', [ 'reportincident' ] ),
-				403
-			);
-		}
-
 		$isDeveloperMode = $this->config->get( 'ReportIncidentDeveloperMode' );
 		if ( !$isDeveloperMode && !$user->isEmailConfirmed() ) {
 			throw new LocalizedHttpException(
@@ -105,10 +94,18 @@ class ReportHandler extends SimpleHandler {
 					429
 				);
 			} else {
-				$this->logger->warning(
-					'User "{user}" without permissions attempted to perform "reportincident".',
-					[ 'user' => $this->getAuthority()->getUser()->getName() ]
-				);
+				if ( $user->isTemp() ) {
+					// We'll deny temp users later on in the authorizeAction check below.
+					$this->logger->warning(
+						'Temporary user "{user}" attempted to perform "reportincident".',
+						[ 'user' => $this->getAuthority()->getUser()->getName() ]
+					);
+				} else {
+					$this->logger->warning(
+						'User "{user}" without permissions attempted to perform "reportincident".',
+						[ 'user' => $this->getAuthority()->getUser()->getName() ]
+					);
+				}
 				throw new LocalizedHttpException(
 					new MessageValue( 'apierror-permissiondenied', [ 'reportincident' ] ),
 					403
