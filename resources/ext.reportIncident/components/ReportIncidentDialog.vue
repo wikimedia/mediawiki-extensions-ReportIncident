@@ -83,6 +83,30 @@ module.exports = exports = {
 				mw.msg( 'reportincident-dialog-back-btn' );
 		} );
 
+		/**
+		 * Prints the email that was sent or failed to send
+		 * at the stage of calling IEmailer::send. This is
+		 * only returned by the server when in developer
+		 * mode, so this should not cause spam in production.
+		 *
+		 * @param {Object} response
+		 */
+		function printEmailToConsole( response ) {
+			if ( response && response.sentEmail ) {
+				// Display the email sent to the administrators if in
+				// developer mode.
+				/* eslint-disable no-console */
+				console.log( 'An email has been sent for this report' );
+				console.log( 'Sent from:\n' + response.sentEmail.from.address );
+				console.log( 'Sent to:\n' + response.sentEmail.to.map( function ( item ) {
+					return item.address;
+				} ).join( ', ' ) );
+				console.log( 'Subject of the email:\n' + response.sentEmail.subject );
+				console.log( 'Body of the email:\n' + response.sentEmail.body );
+				/* eslint-enable no-console */
+			}
+		}
+
 		function navigateNext() {
 			// if on the first page, navigate to the second page
 			if ( currentStep.value === Constants.DIALOG_STEP_1 ) {
@@ -98,12 +122,15 @@ module.exports = exports = {
 						'/reportincident/v0/report',
 						restPayload
 					).then(
-						() => {
+						( response ) => {
+							printEmailToConsole( response );
 							wrappedOpen.value = false;
 							currentStep.value = Constants.DIALOG_STEP_1;
 							store.$reset();
 						},
-						() => {}
+						( _err, errObject ) => {
+							printEmailToConsole( errObject.xhr.responseJSON );
+						}
 					);
 				}
 			}

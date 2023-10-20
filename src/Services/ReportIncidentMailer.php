@@ -5,6 +5,7 @@ namespace MediaWiki\Extension\ReportIncident\Services;
 use MailAddress;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
+use MediaWiki\Extension\ReportIncident\IncidentReportEmailStatus;
 use MediaWiki\Mail\IEmailer;
 use MediaWiki\Title\TitleFactory;
 use MediaWiki\Utils\UrlUtils;
@@ -56,13 +57,13 @@ class ReportIncidentMailer {
 
 	/**
 	 * @param IncidentReport $incidentReport
-	 * @return StatusValue
+	 * @return IncidentReportEmailStatus
 	 */
 	public function sendEmail( IncidentReport $incidentReport ): StatusValue {
 		$recipientEmails = $this->options->get( 'ReportIncidentRecipientEmails' );
 		if ( !$recipientEmails || !is_array( $recipientEmails ) ) {
 			$this->logger->warning( 'Not sending an email because ReportIncidentRecipientEmails is not defined.' );
-			return StatusValue::newFatal(
+			return IncidentReportEmailStatus::newFatal(
 				'rawmessage',
 				'ReportIncidentRecipientEmails configuration is empty or not an array, not sending an email.'
 			);
@@ -73,7 +74,7 @@ class ReportIncidentMailer {
 
 		if ( !$this->options->get( 'ReportIncidentEmailFromAddress' ) ) {
 			$this->logger->warning( 'Not sending an email because ReportIncidentEmailFromAddress is not defined.' );
-			return StatusValue::newFatal(
+			return IncidentReportEmailStatus::newFatal(
 				'rawmessage',
 				'ReportIncidentEmailFromAddress configuration is empty, not sending an email.'
 			);
@@ -133,11 +134,22 @@ class ReportIncidentMailer {
 				]
 			)
 		);
-		return $this->emailer->send(
-			$to,
-			$from,
-			$subject,
-			$body
+		$reportIncidentEmailStatus = IncidentReportEmailStatus::newGood();
+		$reportIncidentEmailStatus->emailContents = [
+			'to' => $to,
+			'from' => $from,
+			'subject' => $subject,
+			'body' => $body,
+		];
+		$reportIncidentEmailStatus->merge(
+			$this->emailer->send(
+				$to,
+				$from,
+				$subject,
+				$body
+			),
+			true
 		);
+		return $reportIncidentEmailStatus;
 	}
 }

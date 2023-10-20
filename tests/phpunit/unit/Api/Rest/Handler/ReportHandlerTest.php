@@ -2,13 +2,18 @@
 
 namespace MediaWiki\Extension\ReportIncident\Tests\Unit\Api\Rest\Handler;
 
+use FormatJson;
 use HashConfig;
 use MediaWiki\Block\AbstractBlock;
 use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
+use MediaWiki\Extension\ReportIncident\IncidentReport;
+use MediaWiki\Extension\ReportIncident\IncidentReportEmailStatus;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Permissions\RateLimiter;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Rest\RequestData;
+use MediaWiki\Rest\Response;
+use MediaWiki\Rest\ResponseFactory;
 use MediaWiki\Rest\Validator\JsonBodyValidator;
 use MediaWiki\Rest\Validator\UnsupportedContentTypeBodyValidator;
 use MediaWiki\Revision\RevisionRecord;
@@ -248,7 +253,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$revisionStore->method( 'getRevisionById' )->willReturn( $this->createMock( RevisionRecord::class ) );
 		$reportManager = $this->createMock( ReportIncidentManager::class );
 		$reportManager->method( 'record' )->willReturn( StatusValue::newGood() );
-		$reportManager->method( 'notify' )->willReturn( StatusValue::newGood() );
+		$reportManager->method( 'notify' )->willReturn( IncidentReportEmailStatus::newGood() );
 		$userFactory = $this->createMock( UserFactory::class );
 		$userIdentityLookup = $this->createMock( UserIdentityLookup::class );
 		$registeredUserMock = $this->createMock( User::class );
@@ -281,7 +286,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			],
 			$this->mockRegisteredUltimateAuthority()
 		);
-		$this->assertSame( 204, $response->getStatusCode() );
+		$this->assertSame( 200, $response->getStatusCode() );
 	}
 
 	public function testGetBodyValidatorInvalidContentType() {
@@ -308,7 +313,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 	public function testRestPayload(
 		array $data,
 		StatusValue $recordStatus,
-		StatusValue $notifyStatus,
+		IncidentReportEmailStatus $notifyStatus,
 		bool $expectRecordException,
 		bool $expectNotifyException
 	) {
@@ -371,7 +376,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			$data,
 			$this->mockRegisteredAuthorityWithPermissions( [ 'reportincident' ] )
 		);
-		$this->assertSame( 204, $response->getStatusCode() );
+		$this->assertSame( 200, $response->getStatusCode() );
 	}
 
 	/**
@@ -387,7 +392,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'details' => 'More details'
 				],
 				StatusValue::newGood(),
-				StatusValue::newGood(),
+				IncidentReportEmailStatus::newGood(),
 				false,
 				false,
 			],
@@ -398,7 +403,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'behaviors' => [ 'something', 'something_else' ],
 				],
 				StatusValue::newGood(),
-				StatusValue::newGood(),
+				IncidentReportEmailStatus::newGood(),
 				false,
 				false,
 			],
@@ -409,7 +414,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'behaviors' => 3
 				],
 				StatusValue::newFatal( 'rest-bad-json-body' ),
-				StatusValue::newGood(),
+				IncidentReportEmailStatus::newGood(),
 				true,
 				false,
 			],
@@ -420,7 +425,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'behaviors' => [ 'test' ]
 				],
 				StatusValue::newFatal( 'rest-bad-json-body' ),
-				StatusValue::newGood(),
+				IncidentReportEmailStatus::newGood(),
 				true,
 				false,
 			],
@@ -431,11 +436,80 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'behaviors' => [ 'test' ],
 				],
 				StatusValue::newGood(),
-				StatusValue::newFatal( 'reportincident-unable-to-send' ),
+				IncidentReportEmailStatus::newFatal( 'reportincident-unable-to-send' ),
 				false,
 				true,
 			]
 		];
+	}
+
+	public function testSubmitIncidentReportWithDeveloperMode() {
+		$config = new HashConfig( [
+			'ReportIncidentDeveloperMode' => true,
+		] );
+		$reportManager = $this->createMock( ReportIncidentManager::class );
+		$incidentReport = $this->createMock( IncidentReport::class );
+		// Mock that the ::notify and ::record methods both return good statuses.
+		$incidentReportEmailStatus = IncidentReportEmailStatus::newGood();
+		$incidentReportEmailStatus->emailContents = [
+			'to' => 'test@test.com',
+			'from' => [ 'test@testing.com' ],
+			'subject' => 'testing',
+			'body' => "testing.\ntest"
+		];
+		$reportManager->method( 'notify' )->with( $incidentReport )
+			->willReturn( $incidentReportEmailStatus );
+		$reportManager->method( 'record' )->with( $incidentReport )
+			->willReturn( StatusValue::newGood() );
+		/** @var ReportHandler $handler */
+		$handler = $this->newServiceInstance( ReportHandler::class,
+			[
+				'config' => $config,
+				'reportIncidentManager' => $reportManager,
+			]
+		);
+		$handler = TestingAccessWrapper::newFromObject( $handler );
+		$handler->responseFactory = new ResponseFactory( [] );
+		/** @var Response $response */
+		$response = $handler->submitIncidentReport( $incidentReport );
+		$this->assertSame( 200, $response->getStatusCode() );
+		$this->assertArrayEquals(
+			[ 'sentEmail' => (object)[
+				'to' => 'test@test.com',
+				'from' => [ 'test@testing.com' ],
+				'subject' => 'testing',
+				'body' => "testing.\ntest"
+			] ],
+			(array)FormatJson::decode( $response->getBody() ),
+			true,
+			true,
+			'Response body did not contain email details on successful response.'
+		);
+	}
+
+	public function testSubmitIncidentReportWithoutDeveloperMode() {
+		$config = new HashConfig( [
+			'ReportIncidentDeveloperMode' => false,
+		] );
+		$reportManager = $this->createMock( ReportIncidentManager::class );
+		$incidentReport = $this->createMock( IncidentReport::class );
+		// Mock that the ::notify and ::record methods both return good statuses.
+		$reportManager->method( 'notify' )->with( $incidentReport )
+			->willReturn( IncidentReportEmailStatus::newGood() );
+		$reportManager->method( 'record' )->with( $incidentReport )
+			->willReturn( StatusValue::newGood() );
+		/** @var ReportHandler $handler */
+		$handler = $this->newServiceInstance( ReportHandler::class,
+			[
+				'config' => $config,
+				'reportIncidentManager' => $reportManager,
+			]
+		);
+		$handler = TestingAccessWrapper::newFromObject( $handler );
+		$handler->responseFactory = new ResponseFactory( [] );
+		/** @var Response $response */
+		$response = $handler->submitIncidentReport( $incidentReport );
+		$this->assertSame( 204, $response->getStatusCode() );
 	}
 
 	public function testRateLimitTrip() {
