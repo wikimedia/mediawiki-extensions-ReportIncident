@@ -22,5 +22,8 @@
 	"reportincident-dialog-harassment-example-threats": "Претње",
 	"reportincident-dialog-harassment-example-hounding": "Прогањање",
 	"reportincident-dialog-harassment-example-trolling": "Троловање",
-	"reportincident-email-something-else": "Нешто друго: „$1“"
+	"reportincident-email-something-else": "Нешто друго: „$1“",
+	"reportincident-emaildialog-title": "Потребна верификована имејл адреса",
+	"reportincident-emaildialog-close-button": "Откажи",
+	"reportincident-emaildialog-primary": "Иди у подешавања"
 }

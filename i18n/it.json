@@ -6,5 +6,7 @@
 	},
 	"reportincident-dialog-close-btn": "Chiudi",
 	"reportincident-dialog-optional-label": "(opzionale)",
-	"reportincident-email-something-else": "Qualcos'altro: \"$1\""
+	"reportincident-email-something-else": "Qualcos'altro: \"$1\"",
+	"reportincident-emaildialog-close-button": "Annulla",
+	"reportincident-emaildialog-primary": "Vai alle impostazioni"
 }

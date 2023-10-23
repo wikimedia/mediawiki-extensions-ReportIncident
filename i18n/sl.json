@@ -16,7 +16,7 @@
 	"reportincident-dialog-additional-details-input-label": "Dodatne podrobnosti",
 	"reportincident-dialog-additional-details-input-placeholder": "Dodajte kontekst, ki bi lahko bil koristen za pregledovalca.",
 	"reportincident-dialog-optional-label": "(izbirno)",
-	"reportincident-dialog-violator-label": "Uporabniško ime, ki ga {{GENDER:|želite}} prijaviti",
+	"reportincident-dialog-violator-label": "Uporabnik, ki ga {{GENDER:|želite}} prijaviti",
 	"reportincident-dialog-violator-placeholder-text": "Koga {{GENDER:|prijavljate}}?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Sovražni govor ali diskriminacija",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Spolno nadlegovanje",
@@ -44,5 +44,10 @@
 	"reportincident-email-body": "Uporabnik prijavitelj: $1 \nPrijavljeni uporabnik: $2 \nPovezava do strani: $3 \n\nVedenje: $4\nPodrobnosti: $5\n\nE-naslov $1: $6",
 	"reportincident-email-something-else": "Nekaj drugega: »$1«",
 	"right-reportincident": "Prijavljanje incidentov",
-	"action-reportincident": "prijavljanje incidentov"
+	"action-reportincident": "prijavljanje incidentov",
+	"reportincident-emaildialog-title": "Potreben je preverjen e-poštni naslov",
+	"reportincident-emaildialog-close-button": "Prekliči",
+	"reportincident-emaildialog-content": "Za pošiljanje posodobitev o poročilu ali nadaljnje ukrepanje, če je potrebno, potrebujemo {{GENDER:|vaš}} preverjen e-poštni naslov. Preden oddate poročilo, v nastavitvah uporabniškega računa dodajte ali preverite {{GENDER:|svoj}} e-poštni naslov.",
+	"reportincident-emaildialog-primary": "Pojdi v nastavitve",
+	"reportincident-confirmedemail-required": "Za oddajo poročila o incidentu je potreben potrjen e-poštni naslov."
 }

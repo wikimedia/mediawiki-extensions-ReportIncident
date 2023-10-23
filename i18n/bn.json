@@ -23,5 +23,8 @@
 	"reportincident-dialog-harassment-example-encouraging-harm": "অন্যের ক্ষতিকরণে উৎসাহিত করা",
 	"reportincident-dialog-harassment-example-doxing": "ব্যক্তিগত তথ্য প্রকাশ (ডক্সিং)",
 	"reportincident-dialog-harassment-example-trolling": "ট্রোল করা",
-	"reportincident-dialog-engage-header": "কিভাবে সংলাপে অংশ নেবেন"
+	"reportincident-dialog-engage-header": "কিভাবে সংলাপে অংশ নেবেন",
+	"reportincident-emaildialog-title": "যাচাইকৃত ইমেইল ঠিকানা প্রয়োজন",
+	"reportincident-emaildialog-close-button": "বাতিল",
+	"reportincident-emaildialog-primary": "সেটিংসে যান"
 }

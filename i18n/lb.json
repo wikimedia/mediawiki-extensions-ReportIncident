@@ -12,5 +12,8 @@
 	"reportincident-dialog-harassment-type-something-else": "Eppes anescht",
 	"reportincident-dialog-harassment-example-sexual-harassment": "Sexuell Belästegung",
 	"reportincident-dialog-harassment-example-threats": "Droungen",
-	"reportincident-email-something-else": "Eppes anescht: „$1“"
+	"reportincident-email-something-else": "Eppes anescht: „$1“",
+	"reportincident-emaildialog-title": "Verifizéiert E-Mail-Adress néideg",
+	"reportincident-emaildialog-close-button": "Ofbriechen",
+	"reportincident-emaildialog-primary": "Gitt bei d'Astellungen"
 }

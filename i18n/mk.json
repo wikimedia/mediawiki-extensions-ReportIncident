@@ -16,7 +16,7 @@
 	"reportincident-dialog-additional-details-input-label": "Дополнителни поединости",
 	"reportincident-dialog-additional-details-input-placeholder": "Додајте контекст кој би бил од помош за разгледувач.",
 	"reportincident-dialog-optional-label": "(незадолжително)",
-	"reportincident-dialog-violator-label": "Корисничкото име кое би {{GENDER:|сакале}} да го пријавите",
+	"reportincident-dialog-violator-label": "Корисникот што {{GENDER:|сакате}} да го пријавите",
 	"reportincident-dialog-violator-placeholder-text": "Кого {{GENDER:|пријавувате}}?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Говор на омраза или дискриминација",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Сексуално вознемирување",
@@ -44,5 +44,10 @@
 	"reportincident-email-body": "Пријавувач: $1\nПријавен: $2\nВрска до страница: $3\nПријавена врска: $4\n\nПоведенија: $5\nПоединости: $6\n\n\nЕ-пошта на $1: $6",
 	"reportincident-email-something-else": "Нешто друго: „$1“",
 	"right-reportincident": "Пријавување на инцидент",
-	"action-reportincident": "Пријавување на инцидент"
+	"action-reportincident": "пријавување на инцидент",
+	"reportincident-emaildialog-title": "Се бара заверена е-поштенска адреса",
+	"reportincident-emaildialog-close-button": "Откажи",
+	"reportincident-emaildialog-content": "Ни треба {{GENDER:|вашата}} заверена е-поштенска адреса за да ве известуваме за развојот или да ги проследиме нештата, ако е потребно. Додајте или заверете ја {{GENDER:|вашата}} е-поштенска адреса од нагодувањта на {{GENDER:|вашата}} корисничка сметка пред да поднесувате пријава.",
+	"reportincident-emaildialog-primary": "Оди во нагодувањата",
+	"reportincident-confirmedemail-required": "Потребна е потврдена е-поштенска адреса за поднесување на извештаи за инциденти."
 }
