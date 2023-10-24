@@ -12,6 +12,7 @@
 	"action-reportincident": "Юӧртӧ зык йылісь",
 	"reportincident-emaildialog-title": "Колӧ электроннӧй почталӧн вынсьӧтӧм адрес",
 	"reportincident-emaildialog-close-button": "Дугдӧтны",
+	"reportincident-emaildialog-content": "Миянлӧ колӧ {{GENDER:|your}}электроннӧй почталӧн вынсьӧтӧм адрес, медбы сетны вильмӧтӧм отчет или,колӧ кӧ,керны одзлань оськӧв.Пожалуйста,отчет мӧдӧтӧм одзас{{GENDER:|your}} содтӧ или вынсьӧтӧ {{GENDER:|your}} электроннӧй почталісь адрес водитчисьлӧн аккаунт лӧсьӧтаннэзын.",
 	"reportincident-emaildialog-primary": "Пырӧ лӧсьӧтаннэзӧ",
 	"reportincident-confirmedemail-required": "Зык йылісь отчёт ыстӧм вылӧ колӧ электроннӧй почталӧн вынсьӧтӧм адрес"
 }
