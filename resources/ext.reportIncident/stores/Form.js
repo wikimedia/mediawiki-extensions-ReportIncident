@@ -8,6 +8,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const inputBehaviors = ref( [ ] );
 	const displayBehaviorsRequiredError = ref( false );
 	const inputReportedUser = ref( '' );
+	const inputReportedUserDisabled = ref( false );
 	const displayReportedUserRequiredError = ref( false );
 	const inputDetails = ref( '' );
 	const inputSomethingElseDetails = ref( '' );
@@ -120,12 +121,15 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		inputReportedUser.value = '';
 		inputDetails.value = '';
 		inputSomethingElseDetails.value = '';
+		overflowMenuData.value = {};
 		// Disable the required fields error again until
 		// that required field is un-focused or a submit
 		// is attempted.
 		displayReportedUserRequiredError.value = false;
 		displayBehaviorsRequiredError.value = false;
 		displaySomethingElseTextboxRequiredError.value = false;
+		// Re-enable the username field if it was disabled
+		inputReportedUserDisabled.value = false;
 	}
 
 	return {
@@ -133,6 +137,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		inputBehaviors,
 		displayBehaviorsRequiredError,
 		inputReportedUser,
+		inputReportedUserDisabled,
 		displayReportedUserRequiredError,
 		inputDetails,
 		inputSomethingElseDetails,

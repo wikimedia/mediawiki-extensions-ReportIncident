@@ -41,11 +41,13 @@
 			</template>
 			<cdx-lookup
 				v-model:selected="inputReportedUserSelection"
+				v-model="inputReportedUser"
+				:disabled="inputReportedUserDisabled"
 				:placeholder="$i18n( 'reportincident-dialog-violator-placeholder-text' ).text()"
 				:menu-items="inputReportedUserMenuItems"
 				:menu-config="reportedUserLookupMenuConfig"
 				@input="onReportedUserInput"
-				@update:selected="onReportedUserSelected"
+				@update:selected="displayReportedUserRequiredError = false"
 			>
 			</cdx-lookup>
 		</cdx-field>
@@ -91,6 +93,7 @@ module.exports = exports = {
 		const {
 			inputBehaviors,
 			inputReportedUser,
+			inputReportedUserDisabled,
 			displayReportedUserRequiredError,
 			inputSomethingElseDetails,
 			displaySomethingElseTextboxRequiredError,
@@ -268,23 +271,13 @@ module.exports = exports = {
 			loadSuggestedUsernames();
 		}
 
-		/**
-		 * Called when a suggested username is selected by the user
-		 * from the items in the dropdown menu.
-		 *
-		 * This disables the required field error and updates the
-		 * form state.
-		 */
-		function onReportedUserSelected() {
-			displayReportedUserRequiredError.value = false;
-			inputReportedUser.value = inputReportedUserSelection.value;
-		}
-
 		return {
 			harassmentOptions,
 			inputBehaviors,
 			inputDetails,
 			inputSomethingElseDetails,
+			inputReportedUser,
+			inputReportedUserDisabled,
 			inputReportedUserSelection,
 			inputReportedUserMenuItems,
 			reportedUserLookupMenuConfig,
@@ -295,7 +288,6 @@ module.exports = exports = {
 			harassmentStatus,
 			reportedUserStatus,
 			onReportedUserInput,
-			onReportedUserSelected,
 			// Used in tests, so needs to be passed out here.
 			/* eslint-disable vue/no-unused-properties */
 			windowHeight,

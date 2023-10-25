@@ -25,6 +25,8 @@ describe( 'Form Store', () => {
 		form.inputReportedUser = 'test value';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
+		form.overflowMenuData = { test: 'testing' };
+		form.inputReportedUserDisabled = true;
 		form.displayReportedUserRequiredError = true;
 		form.displaySomethingElseTextboxRequiredError = true;
 		form.displayBehaviorsRequiredError = true;
@@ -35,11 +37,15 @@ describe( 'Form Store', () => {
 		expect( form.inputReportedUser ).toBe( '' );
 		expect( form.inputDetails ).toBe( '' );
 		expect( form.inputSomethingElseDetails ).toBe( '' );
+		// DiscussionTools overflowMenuData should be empty
+		expect( form.overflowMenuData ).toStrictEqual( {} );
 		// Required field checks should be disabled again (they are enabled on
 		// pressing submit or un-focusing that required field).
 		expect( form.displayReportedUserRequiredError ).toBe( false );
 		expect( form.displaySomethingElseTextboxRequiredError ).toBe( false );
 		expect( form.displayBehaviorsRequiredError ).toBe( false );
+		// Username field should be un-disabled
+		expect( form.inputReportedUserDisabled ).toBe( false );
 	} );
 
 	it( 'Generates correct rest data', () => {

@@ -3,6 +3,7 @@
 const ReportIncidentDialogStep2 = require( '../../../resources/ext.reportIncident/components/ReportIncidentDialogStep2.vue' ),
 	utils = require( '@vue/test-utils' ),
 	{ createTestingPinia } = require( '@pinia/testing' ),
+	{ mockApiGet } = require( '../utils.js' ),
 	Constants = require( '../../../resources/ext.reportIncident/Constants.js' ),
 	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' );
 
@@ -13,6 +14,17 @@ const renderComponent = () => {
 		}
 	} );
 };
+
+/**
+ * Mocks mw.log.error() and returns a jest.fn() for error()
+ *
+ * @return {jest.fn}
+ */
+function mockErrorLogger() {
+	const mwLogError = jest.fn();
+	mw.log.error = mwLogError;
+	return mwLogError;
+}
 
 /**
  * Wait until the debounce performed by loadSuggestedUsernames
@@ -52,7 +64,7 @@ describe( 'Report Incident Dialog Step 2', () => {
 		expect( wrapper.vm.formErrorMessages ).toStrictEqual( store.formErrorMessages );
 	} );
 
-	it( 'Sets correct status values', () => {
+	it( 'Sets correct status values', async () => {
 		const wrapper = renderComponent();
 		const store = useFormStore();
 
@@ -112,140 +124,106 @@ describe( 'Report Incident Dialog Step 2', () => {
 		expect( wrapper.vm.reportedUserLookupMenuConfig.visibleItemLimit ).toBe( 3 );
 	} );
 
-	it( 'Should update form store on call to onReportedUserSelected', () => {
+	it( 'Should query allusers API on call to onReportedUserInput', async () => {
+		const apiGet = mockApiGet(
+			Promise.resolve(
+				{ query: { allusers: [
+					{ userid: 1, name: 'testing' },
+					{ userid: 2, name: 'testing1' },
+					{ userid: 3, name: 'testing2' }
+				] } }
+			)
+		);
 		const wrapper = renderComponent();
-		const store = useFormStore();
-
-		// Set displayReportedUserRequiredError to true so that the function can update it
-		store.displayReportedUserRequiredError = true;
-		// Set inputReportedUserSelection to a different value to inputReportedUser to
-		// so that the function can update the inputReportedUser
-		store.inputReportedUser = 'test';
-		wrapper.vm.inputReportedUserSelection = 'testing';
-		// store.inputReportedUser should be unchanged until onReportedUserSelected is called.
-		expect( store.inputReportedUser ).toBe( 'test' );
-		wrapper.vm.onReportedUserSelected();
-		// store.inputReportedUser should now be the value of inputReportedUserSelection
-		expect( store.inputReportedUser ).toBe( 'testing' );
-		// The required field check for the user field should now be disabled.
-		expect( store.displayReportedUserRequiredError ).toBe( false );
-	} );
-
-	it( 'Should query allusers API on call to onReportedUserInput', () => {
-		const wrapper = renderComponent();
-
-		mw.Rest = jest.fn().mockImplementation( () => {
-			return {
-				get: ( data ) => {
-					expect( data ).toStrictEqual( {
-						action: 'query',
-						list: 'allusers',
-						auprefix: 'testing',
-						limit: '10'
-					} );
-					return Promise.resolve(
-						{ query: { allusers: [
-							{ userid: 1, name: 'testing' },
-							{ userid: 2, name: 'testing1' },
-							{ userid: 3, name: 'testing2' }
-						] } }
-					);
-				}
-			};
-		} );
-
 		// Call the method under test
 		wrapper.vm.onReportedUserInput( 'testing' );
 		// Wait until the debounce time has expired and add around 20ms to be sure it has run.
-		waitUntilDebounceComplete().then( () => {
-			// The suggestions should now be set.
-			expect( wrapper.vm.inputReportedUserMenuItems ).toStrictEqual( [
-				{ value: 'testing' },
-				{ value: 'testing1' },
-				{ value: 'testing2' }
-			] );
+		await waitUntilDebounceComplete();
+		// The suggestions should now be set.
+		expect( wrapper.vm.inputReportedUserMenuItems ).toStrictEqual( [
+			{ value: 'testing' },
+			{ value: 'testing1' },
+			{ value: 'testing2' }
+		] );
+		expect( apiGet ).toHaveBeenCalledWith( {
+			action: 'query',
+			list: 'allusers',
+			auprefix: 'testing',
+			limit: '10'
 		} );
 	} );
 
-	it( 'Call to onReportedUserInput but API promise rejects', () => {
+	it( 'Call to onReportedUserInput but API promise rejects', async () => {
+		const rejectedPromise = Promise.reject( 'error' );
+		// Catch the rejected promise in a function that does nothing to
+		// allow the tests to run (otherwise they fail with an
+		// ERR_UNHANDLED_REJECTION error).
+		rejectedPromise.catch( () => {} );
+		const apiGet = mockApiGet( rejectedPromise );
+		const mwLogError = mockErrorLogger();
 		const wrapper = renderComponent();
-
-		mw.Rest = jest.fn().mockImplementation( () => {
-			return {
-				get: ( data ) => {
-					expect( data ).toStrictEqual( {
-						action: 'query',
-						list: 'allusers',
-						auprefix: 'testing',
-						limit: '10'
-					} );
-					return Promise.reject();
-				}
-			};
-		} );
 		// Call the method under test
 		wrapper.vm.onReportedUserInput( 'testing' );
 		// Wait until the debounce time has expired and add around 20ms to be sure it has run.
-		waitUntilDebounceComplete().then( () => {
-			// The suggestions should now be set.
-			expect( wrapper.vm.inputReportedUserMenuItems ).toStrictEqual( [] );
+		await waitUntilDebounceComplete();
+		// The suggestions should now be set.
+		expect( wrapper.vm.inputReportedUserMenuItems ).toStrictEqual( [] );
+		// Expect that mw.log.error() was called
+		expect( mwLogError ).toHaveBeenCalledWith( 'error' );
+		expect( apiGet ).toHaveBeenCalledWith( {
+			action: 'query',
+			list: 'allusers',
+			auprefix: 'testing',
+			limit: '10'
 		} );
 	} );
 
-	it( 'Call to onReportedUserInput but input is updated before API request finished', () => {
+	it( 'Call to onReportedUserInput but input is updated before API request finished', async () => {
+		const apiGet = mockApiGet(
+			Promise.resolve(
+				{ query: { allusers: [
+					{ userid: 1, name: 'testing' },
+					{ userid: 2, name: 'testing1' },
+					{ userid: 3, name: 'testing2' }
+				] } }
+			)
+		);
 		const wrapper = renderComponent();
 		const store = useFormStore();
-
-		mw.Rest = jest.fn().mockImplementation( () => {
-			return {
-				get: ( data ) => {
-					expect( data ).toStrictEqual( {
-						action: 'query',
-						list: 'allusers',
-						auprefix: 'testingabc',
-						limit: '10'
-					} );
-					return Promise.reject();
-				}
-			};
-		} );
 		// Update the value of inputReportedUserMenuItems so that the test can verify it empties on a failed request.
-		wrapper.vm.suggestedUsernames = [ { name: 'test123123123123123' } ];
+		wrapper.vm.suggestedUsernames.value = [ { name: 'test123123123123123' } ];
 		// Call the method under test
 		wrapper.vm.onReportedUserInput( 'testingabc' );
 		// Update the value of store.inputReportedUser before the debounce timer has finished.
 		store.inputReportedUser = 'testing1234';
 		// Wait until the debounce time has expired and add around 20ms to be sure it has run.
-		waitUntilDebounceComplete().then( () => {
-			// The suggestions should now be set.
-			expect( wrapper.vm.inputReportedUserMenuItems ).toStrictEqual( [] );
+		await waitUntilDebounceComplete();
+		// The suggestions should now be set.
+		expect( wrapper.vm.inputReportedUserMenuItems ).toStrictEqual( [] );
+		expect( apiGet ).toHaveBeenCalledWith( {
+			action: 'query',
+			list: 'allusers',
+			auprefix: 'testingabc',
+			limit: '10'
 		} );
 	} );
 
-	it( 'Call to onReportedUserInput but API returns unparsable response', () => {
+	it( 'Call to onReportedUserInput but API returns unparsable response', async () => {
+		const apiGet = mockApiGet( Promise.resolve( { test: 'test' } ) );
 		const wrapper = renderComponent();
-
-		mw.Rest = jest.fn().mockImplementation( () => {
-			return {
-				get: ( data ) => {
-					expect( data ).toStrictEqual( {
-						action: 'query',
-						list: 'allusers',
-						auprefix: 'testing12',
-						limit: '10'
-					} );
-					return Promise.resolve( { test: 'test' } );
-				}
-			};
-		} );
 		// Update the value of inputReportedUserMenuItems so that the test can verify it empties on a failed request.
 		wrapper.vm.suggestedUsernames = [ { name: 'testing123123' } ];
 		// Call the method under test
 		wrapper.vm.onReportedUserInput( 'testing12' );
 		// Wait until the debounce time has expired and add around 20ms to be sure it has run.
-		waitUntilDebounceComplete().then( () => {
-			// The suggestions should now be set.
-			expect( wrapper.vm.inputReportedUserMenuItems ).toStrictEqual( [] );
+		await waitUntilDebounceComplete();
+		// The suggestions should now be set.
+		expect( wrapper.vm.inputReportedUserMenuItems ).toStrictEqual( [] );
+		expect( apiGet ).toHaveBeenCalledWith( {
+			action: 'query',
+			list: 'allusers',
+			auprefix: 'testing12',
+			limit: '10'
 		} );
 	} );
 
@@ -259,43 +237,35 @@ describe( 'Report Incident Dialog Step 2', () => {
 		expect( wrapper.vm.inputReportedUserMenuItems ).toStrictEqual( [] );
 	} );
 
-	it( 'Call to onReportedUserInput twice within the debounce period', () => {
+	it( 'Call to onReportedUserInput twice within the debounce period', async () => {
+		const apiGet = mockApiGet(
+			Promise.resolve(
+				{ query: { allusers: [
+					{ userid: 1, name: 'testing123' },
+					{ userid: 2, name: 'testing1234' },
+					{ userid: 3, name: 'testing12345' }
+				] } }
+			)
+		);
 		const wrapper = renderComponent();
-
-		mw.Rest = jest.fn().mockImplementation( () => {
-			return {
-				get: ( data ) => {
-					// The get method should only be called once as the debounce
-					// should prevent the duplicate API call.
-					expect( data ).toStrictEqual( {
-						action: 'query',
-						list: 'allusers',
-						auprefix: 'testing123',
-						limit: '10'
-					} );
-					return Promise.resolve(
-						{ query: { allusers: [
-							{ userid: 1, name: 'testing123' },
-							{ userid: 2, name: 'testing1234' },
-							{ userid: 3, name: 'testing12345' }
-						] } }
-					);
-				}
-			};
-		} );
 
 		// Call the method under test
 		wrapper.vm.onReportedUserInput( 'testing12' );
 		// Call the method under test again.
 		wrapper.vm.onReportedUserInput( 'testing123' );
 		// Wait until the debounce time has expired and add around 20ms to be sure it has run.
-		waitUntilDebounceComplete().then( () => {
-			// The suggestions should now be set.
-			expect( wrapper.vm.inputReportedUserMenuItems ).toStrictEqual( [
-				{ value: 'testing123' },
-				{ value: 'testing1234' },
-				{ value: 'testing12345' }
-			] );
+		await waitUntilDebounceComplete();
+		// The suggestions should now be set.
+		expect( wrapper.vm.inputReportedUserMenuItems ).toStrictEqual( [
+			{ value: 'testing123' },
+			{ value: 'testing1234' },
+			{ value: 'testing12345' }
+		] );
+		expect( apiGet ).toHaveBeenCalledWith( {
+			action: 'query',
+			list: 'allusers',
+			auprefix: 'testing123',
+			limit: '10'
 		} );
 	} );
 } );

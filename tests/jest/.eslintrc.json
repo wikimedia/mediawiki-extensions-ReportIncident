@@ -19,11 +19,15 @@
 				"ignoreStrings": true,
 				"ignoreTemplateLiterals": true
 			}
-		]
+		],
+		"es-x/no-async-functions": "off"
 	},
 	"env": {
 		"jest": true,
 		"node": true,
 		"browser": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2022
 	}
 }
