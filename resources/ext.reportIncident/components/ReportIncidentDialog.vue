@@ -142,28 +142,28 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-@import ( reference ) '../../../resources/lib/codex-design-tokens/theme-wikimedia-ui.less';
+@import ( reference ) 'mediawiki.skin.variables.less';
 
 .ext-reportincident-dialog {
 	.ext-reportincident-dialog-footer {
 		float: right;
 	}
-	@media screen and ( max-width: @width-breakpoint-tablet ) {
+	@media screen and ( max-width: @max-width-breakpoint-mobile ) {
 		.ext-reportincident-dialog-footer {
 			display: flex;
 			flex-direction: column-reverse;
 			width: 100%;
+
 			&__back-btn {
 				width: 100%;
 				margin-top: @spacing-35;
 			}
 
 			&__next-btn {
-				margin-top: @spacing-35;
 				width: 100%;
+				margin-top: @spacing-35;
 			}
 		}
 	}
 }
-
 </style>

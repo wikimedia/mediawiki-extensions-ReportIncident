@@ -54,7 +54,7 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-@import ( reference ) '../../../resources/lib/codex-design-tokens/theme-wikimedia-ui.less';
+@import ( reference ) 'mediawiki.skin.variables.less';
 
 .ext-reportincident-dialog-step1 {
 	font-size: @font-size-large;
