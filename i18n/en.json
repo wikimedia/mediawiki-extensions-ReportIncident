@@ -15,7 +15,7 @@
 	"reportincident-dialog-first-step-cancel-btn": "I don't want to file a report",
 	"reportincident-dialog-harassment-type-label": "What type of behavior?",
 	"reportincident-dialog-additional-details-input-label": "Additional details",
-	"reportincident-dialog-additional-details-input-placeholder": "Add context that could be helpful for a reviewer.",
+	"reportincident-dialog-additional-details-input-placeholder": "Add context that could be helpful for a reviewer. You may include links that highlight the incident.",
 	"reportincident-dialog-optional-label": "(optional)",
 	"reportincident-dialog-violator-label": "The user {{GENDER:|you}} would like to report",
 	"reportincident-dialog-violator-placeholder-text": "Who are {{GENDER:|you}} reporting?",
