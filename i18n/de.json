@@ -14,7 +14,7 @@
 	"reportincident-dialog-first-step-cancel-btn": "Ich möchte keinen Bericht einreichen",
 	"reportincident-dialog-harassment-type-label": "Welche Art von Verhalten?",
 	"reportincident-dialog-additional-details-input-label": "Zusätzliche Details",
-	"reportincident-dialog-additional-details-input-placeholder": "Füge Kontext ein, der für einen Prüfer hilfreich sein könnte.",
+	"reportincident-dialog-additional-details-input-placeholder": "Füge Kontext ein, der für einen Prüfer hilfreich sein könnte. Du kannst Links einfügen, die den Vorfall verdeutlichen.",
 	"reportincident-dialog-optional-label": "(optional)",
 	"reportincident-dialog-violator-label": "Den Benutzer, den {{GENDER:|du}} melden möchtest",
 	"reportincident-dialog-violator-placeholder-text": "Wen meldest {{GENDER:|du}}?",

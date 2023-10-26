@@ -14,7 +14,7 @@
 	"reportincident-dialog-first-step-cancel-btn": "Ne želim prijaviti",
 	"reportincident-dialog-harassment-type-label": "Kakšno vedenje?",
 	"reportincident-dialog-additional-details-input-label": "Dodatne podrobnosti",
-	"reportincident-dialog-additional-details-input-placeholder": "Dodajte kontekst, ki bi lahko bil koristen za pregledovalca.",
+	"reportincident-dialog-additional-details-input-placeholder": "Dodajte kontekst, ki bi lahko bil koristen za pregledovalca. Vključite lahko povezave, ki osvetljujejo incident.",
 	"reportincident-dialog-optional-label": "(izbirno)",
 	"reportincident-dialog-violator-label": "Uporabnik, ki ga {{GENDER:|želite}} prijaviti",
 	"reportincident-dialog-violator-placeholder-text": "Koga {{GENDER:|prijavljate}}?",
