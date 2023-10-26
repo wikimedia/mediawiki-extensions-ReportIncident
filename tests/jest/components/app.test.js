@@ -97,7 +97,7 @@ describe( 'Main Component Test Suite', () => {
 	it( 'mounts the report incident dialog on report link click', async () => {
 		const wrapper = renderComponent();
 		const store = useFormStore();
-		// Set DiscussionTools data that will be reset as this link is not comment specific.
+		// Set DiscussionTools data that will be reset as this link is not comment/topic specific.
 		store.overflowMenuData = { test: 'test' };
 		store.inputReportedUserDisabled = true;
 		store.inputReportedUser = 'test';

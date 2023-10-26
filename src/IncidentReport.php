@@ -15,6 +15,7 @@ class IncidentReport {
 	private array $behaviors;
 	private ?string $somethingElseDetails;
 	private ?string $details;
+	private ?string $threadId;
 
 	/**
 	 * @param UserIdentity $reportingUser
@@ -23,6 +24,7 @@ class IncidentReport {
 	 * @param array $behaviors
 	 * @param string|null $somethingElseDetails
 	 * @param string|null $details
+	 * @param string|null $threadId
 	 */
 	public function __construct(
 		UserIdentity $reportingUser,
@@ -30,7 +32,8 @@ class IncidentReport {
 		RevisionRecord $revisionRecord,
 		array $behaviors,
 		?string $somethingElseDetails = null,
-		?string $details = null
+		?string $details = null,
+		?string $threadId = null
 	) {
 		$this->reportingUser = $reportingUser;
 		$this->reportedUser = $reportedUser;
@@ -38,6 +41,7 @@ class IncidentReport {
 		$this->behaviors = $behaviors;
 		$this->somethingElseDetails = $somethingElseDetails;
 		$this->details = $details;
+		$this->threadId = $threadId;
 	}
 
 	public static function newFromRestPayload(
@@ -50,7 +54,8 @@ class IncidentReport {
 			$data['revision'],
 			$data['behaviors'],
 			$data['somethingElseDetails'] ?? null,
-			$data['details'] ?? null
+			$data['details'] ?? null,
+			$data['threadId'] ?? null
 		);
 	}
 
@@ -76,5 +81,9 @@ class IncidentReport {
 
 	public function getSomethingElseDetails(): ?string {
 		return $this->somethingElseDetails;
+	}
+
+	public function getThreadId(): ?string {
+		return $this->threadId;
 	}
 }

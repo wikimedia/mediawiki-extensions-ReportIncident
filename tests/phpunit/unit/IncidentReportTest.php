@@ -21,7 +21,8 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 			$this->createMock( RevisionRecord::class ),
 			[ 'foo' ],
 			'SomethingElse',
-			'Details'
+			'Details',
+			'thread-id'
 		);
 		$this->assertInstanceOf( IncidentReport::class, $incidentReport );
 	}
@@ -34,7 +35,8 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 				'revision' => $this->createMock( RevisionRecord::class ),
 				'behaviors' => [ 'foo' ],
 				'somethingElseDetails' => 'blah',
-				'details' => 'Details'
+				'details' => 'Details',
+				'threadId' => 'test'
 			]
 		) );
 	}
@@ -46,13 +48,15 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 		$behaviors = [ 'foo' ];
 		$somethingElseDetails = 'Something else';
 		$details = 'Details';
+		$threadId = 'test-thread-id';
 		$incidentReport = new IncidentReport(
 			$reportingUser,
 			$reportedUser,
 			$revisionRecord,
 			$behaviors,
 			$somethingElseDetails,
-			$details
+			$details,
+			$threadId
 		);
 		$this->assertSame( $reportingUser, $incidentReport->getReportingUser() );
 		$this->assertSame( $reportedUser, $incidentReport->getReportedUser() );
@@ -60,5 +64,6 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 		$this->assertSame( $behaviors, $incidentReport->getBehaviors() );
 		$this->assertSame( $somethingElseDetails, $incidentReport->getSomethingElseDetails() );
 		$this->assertSame( $details, $incidentReport->getDetails() );
+		$this->assertSame( $threadId, $incidentReport->getThreadId() );
 	}
 }

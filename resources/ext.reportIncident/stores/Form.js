@@ -102,6 +102,9 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		if ( inputBehaviors.value.indexOf( 'something-else' ) !== -1 ) {
 			restData.somethingElseDetails = inputSomethingElseDetails.value;
 		}
+		if ( Object.keys( overflowMenuData.value ).indexOf( 'thread-id' ) !== -1 ) {
+			restData.threadId = overflowMenuData.value[ 'thread-id' ];
+		}
 		return restData;
 	} );
 
