@@ -14,7 +14,7 @@
 	"reportincident-dialog-first-step-cancel-btn": "אינני רוצה להגיש דו\"ח",
 	"reportincident-dialog-harassment-type-label": "איזה סוג התנהגות?",
 	"reportincident-dialog-additional-details-input-label": "פרטים נוספים",
-	"reportincident-dialog-additional-details-input-placeholder": "הוספת הקשר שיכול להועיל לסוקר.",
+	"reportincident-dialog-additional-details-input-placeholder": "הוספת הקשר שיכול להועיל לסוקר. באפשרותך לכלול קישורים שמדגישים את התקרית.",
 	"reportincident-dialog-optional-label": "(לא חובה)",
 	"reportincident-dialog-violator-label": "המשתמש {{GENDER:|שאתה|שאת}} רוצה לדווח",
 	"reportincident-dialog-violator-placeholder-text": "את מי {{GENDER:|אתה מדווח|את מדווחת}}?",
