@@ -8,6 +8,7 @@ use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Rest\LocalizedHttpException;
+use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\Validator\JsonBodyValidator;
 use MediaWiki\Rest\Validator\UnsupportedContentTypeBodyValidator;
@@ -72,24 +73,7 @@ class ReportHandler extends SimpleHandler {
 		$this->validateUserCanSubmitReport( $user );
 		$incidentReport = $this->getIncidentReportObjectFromValidatedBody( $this->getValidatedBody() );
 		$this->authorizeIncidentReport( $user );
-		$status = $this->reportIncidentManager->record( $incidentReport );
-		if ( $status->isGood() ) {
-			// TODO: If/when we store the reports in a DB table, we can move sending the email
-			// into a deferred update, so the user doesn't need to wait. For now, this is our
-			// only signal that a report was processed, so check the status of the sendEmail
-			// method
-			$status = $this->reportIncidentManager->notify( $incidentReport );
-			if ( !$status->isGood() ) {
-				throw new LocalizedHttpException(
-					new MessageValue( 'reportincident-unable-to-send' )
-				);
-			}
-			return $this->getResponseFactory()->createNoContent();
-		} else {
-			throw new LocalizedHttpException(
-				new MessageValue( $status->getErrors()[0]['message'] ), 400
-			);
-		}
+		return $this->submitIncidentReport( $incidentReport );
 	}
 
 	/**
@@ -268,6 +252,45 @@ class ReportHandler extends SimpleHandler {
 					403
 				);
 			}
+		}
+	}
+
+	/**
+	 * Submits an incident report given using the
+	 * IncidentReport object. Does not perform
+	 * any validation checks.
+	 *
+	 * @param IncidentReport $incidentReport The IncidentReport object generated from the request
+	 * @return Response The Response object to be returned by ::run.
+	 */
+	private function submitIncidentReport( IncidentReport $incidentReport ): Response {
+		$status = $this->reportIncidentManager->record( $incidentReport );
+		if ( $status->isGood() ) {
+			// TODO: If/when we store the reports in a DB table, we can move sending the email
+			// into a deferred update, so the user doesn't need to wait. For now, this is our
+			// only signal that a report was processed, so check the status of the sendEmail
+			// method
+			$status = $this->reportIncidentManager->notify( $incidentReport );
+			if ( !$status->isGood() ) {
+				$extraData = [];
+				if ( $this->config->get( 'ReportIncidentDeveloperMode' ) ) {
+					$extraData = [ 'sentEmail' => $status->getEmailContents() ];
+				}
+				throw new LocalizedHttpException(
+					new MessageValue( 'reportincident-unable-to-send' ),
+					500,
+					$extraData
+				);
+			}
+			if ( $this->config->get( 'ReportIncidentDeveloperMode' ) ) {
+				return $this->getResponseFactory()->createJson( [ 'sentEmail' => $status->getEmailContents() ] );
+			} else {
+				return $this->getResponseFactory()->createNoContent();
+			}
+		} else {
+			throw new LocalizedHttpException(
+				new MessageValue( $status->getErrors()[0]['message'] ), 400
+			);
 		}
 	}
 

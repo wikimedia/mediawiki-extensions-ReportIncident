@@ -32,7 +32,7 @@ describe( 'Report Incident Dialog', () => {
 	it( 'should open the dialog based on "open" prop state', () => {
 		const wrapper = renderComponent();
 		expect( wrapper.find( '.ext-reportincident-dialog__content' ).exists() ).toBe( false );
-		wrapper.setProps( { open: true } ).then( () => {
+		return wrapper.setProps( { open: true } ).then( () => {
 			expect( wrapper.find( '.ext-reportincident-dialog__content' ).exists() ).toBe( true );
 		} );
 	} );
@@ -48,7 +48,7 @@ describe( 'Report Incident Dialog', () => {
 			const wrapper = renderComponent( { open: true } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 
-			wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 			} );
 		} );
@@ -57,7 +57,7 @@ describe( 'Report Incident Dialog', () => {
 			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
-			wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( function () {
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 			} );
 		} );
@@ -71,7 +71,7 @@ describe( 'Report Incident Dialog', () => {
 			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
 			store.inputReportedUser = 'test user';
 
-			wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( function () {
 				// Clicking back once should put us on STEP 1
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 
@@ -93,7 +93,7 @@ describe( 'Report Incident Dialog', () => {
 			store.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
 			expect( store.isFormValidForSubmission() ).toBe( false );
 
-			wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 			} );
 		} );
@@ -103,6 +103,8 @@ describe( 'Report Incident Dialog', () => {
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
 			const store = useFormStore();
+
+			const consoleSpy = jest.spyOn( console, 'log' );
 
 			mw.Rest = jest.fn().mockImplementation( () => {
 				return {
@@ -116,22 +118,102 @@ describe( 'Report Incident Dialog', () => {
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
 
-			wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
 				// Should be dialog step one if the form submitted correctly.
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+				expect( consoleSpy ).not.toHaveBeenCalled();
 			} );
 		} );
 
-		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data but gets a non-good response', () => {
+		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data in developer mode', () => {
 			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
 			const store = useFormStore();
 
+			const consoleSpy = jest.spyOn( console, 'log' );
+
 			mw.Rest = jest.fn().mockImplementation( () => {
 				return {
 					post: () => {
-						return Promise.reject();
+						return Promise.resolve( { sentEmail: {
+							to: [ { address: 'test@test.com' }, { address: 'testing@example.com' } ],
+							from: { address: 'b@example.com' },
+							subject: 'Testing subject',
+							body: 'Testing email body.\nTesting.'
+						} } );
+					}
+				};
+			} );
+
+			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+			store.inputReportedUser = 'test user';
+			expect( store.isFormValidForSubmission() ).toBe( true );
+
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+				// Should be dialog step one if the form submitted correctly.
+				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+				// Should have outputted the form data to the console.
+				expect( consoleSpy ).toHaveBeenNthCalledWith( 1, 'An email has been sent for this report' );
+				expect( consoleSpy ).toHaveBeenNthCalledWith( 2, 'Sent from:\nb@example.com' );
+				expect( consoleSpy ).toHaveBeenNthCalledWith( 3, 'Sent to:\ntest@test.com, testing@example.com' );
+				expect( consoleSpy ).toHaveBeenNthCalledWith( 4, 'Subject of the email:\nTesting subject' );
+				expect( consoleSpy ).toHaveBeenNthCalledWith( 5, 'Body of the email:\nTesting email body.\nTesting.' );
+			} );
+		} );
+
+		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data', () => {
+			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+
+			const store = useFormStore();
+
+			const consoleSpy = jest.spyOn( console, 'log' );
+
+			mw.Rest = jest.fn().mockImplementation( () => {
+				return {
+					post: () => {
+						return Promise.resolve();
+					}
+				};
+			} );
+
+			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+			store.inputReportedUser = 'test user';
+			expect( store.isFormValidForSubmission() ).toBe( true );
+
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+				// Should be dialog step one if the form submitted correctly.
+				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+				// Should have outputted the form data to the console.
+				expect( consoleSpy ).not.toHaveBeenCalled();
+			} );
+		} );
+
+		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data but API rejects in developer mode', () => {
+			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+
+			const store = useFormStore();
+
+			const consoleSpy = jest.spyOn( console, 'log' );
+
+			mw.Rest = jest.fn().mockImplementation( () => {
+				return {
+					post: () => {
+						return {
+							then: ( _resolveHandler, rejectHandler ) => {
+								rejectHandler(
+									'http',
+									{ xhr: { responseJSON: { sentEmail: {
+										to: [ { address: 'test@test.com' }, { address: 'testing@example.com' } ],
+										from: { address: 'b@example.com' },
+										subject: 'Testing subject',
+										body: 'Testing email body.\nTesting.'
+									} } } }
+								);
+							}
+						};
 					}
 				};
 			} );
@@ -141,10 +223,51 @@ describe( 'Report Incident Dialog', () => {
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
 
-			wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
 				// Should be dialog step two as the REST API call returned a rejected promise
 				// which indicates a failure.
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+				// Should have outputted the form data to the console.
+				expect( consoleSpy ).toHaveBeenNthCalledWith( 1, 'An email has been sent for this report' );
+				expect( consoleSpy ).toHaveBeenNthCalledWith( 2, 'Sent from:\nb@example.com' );
+				expect( consoleSpy ).toHaveBeenNthCalledWith( 3, 'Sent to:\ntest@test.com, testing@example.com' );
+				expect( consoleSpy ).toHaveBeenNthCalledWith( 4, 'Subject of the email:\nTesting subject' );
+				expect( consoleSpy ).toHaveBeenNthCalledWith( 5, 'Body of the email:\nTesting email body.\nTesting.' );
+			} );
+		} );
+
+		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data but API rejects', () => {
+			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+
+			const store = useFormStore();
+
+			const consoleSpy = jest.spyOn( console, 'log' );
+
+			mw.Rest = jest.fn().mockImplementation( () => {
+				return {
+					post: () => {
+						return {
+							then: ( _resolveHandler, rejectHandler ) => {
+								rejectHandler(
+									'http',
+									{ xhr: { responseJSON: {} } }
+								);
+							}
+						};
+					}
+				};
+			} );
+
+			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+			store.inputReportedUser = 'test user';
+			expect( store.isFormValidForSubmission() ).toBe( true );
+
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+				// Should be dialog step one if the form submitted correctly.
+				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+				// Should have outputted the form data to the console.
+				expect( consoleSpy ).not.toHaveBeenCalled();
 			} );
 		} );
 	} );

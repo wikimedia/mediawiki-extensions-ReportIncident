@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\ReportIncident\Services;
 
 use MediaWiki\Extension\ReportIncident\IncidentReport;
+use MediaWiki\Extension\ReportIncident\IncidentReportEmailStatus;
 use StatusValue;
 
 /**
@@ -32,7 +33,7 @@ class ReportIncidentManager {
 
 	/**
 	 * @param IncidentReport $incidentReport
-	 * @return StatusValue
+	 * @return IncidentReportEmailStatus
 	 */
 	public function notify( IncidentReport $incidentReport ): StatusValue {
 		return $this->incidentMailer->sendEmail( $incidentReport );
