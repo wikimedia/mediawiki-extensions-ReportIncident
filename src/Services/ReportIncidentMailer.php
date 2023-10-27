@@ -108,7 +108,7 @@ class ReportIncidentMailer {
 		$behaviors = $incidentReport->getBehaviors();
 		if ( $incidentReport->getSomethingElseDetails() ) {
 			$somethingElseIndex = array_search( 'something-else', $behaviors );
-			if ( $somethingElseIndex ) {
+			if ( $somethingElseIndex !== false ) {
 				$behaviors[$somethingElseIndex] = $this->textFormatter->format(
 					new MessageValue(
 						'reportincident-email-something-else',

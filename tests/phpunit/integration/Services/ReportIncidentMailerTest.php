@@ -81,7 +81,7 @@ class ReportIncidentMailerTest extends MediaWikiIntegrationTestCase {
 				new ScalarParam( ParamType::TEXT, $mockReportingUserPageTitle->getDBkey() ),
 				new ScalarParam( ParamType::TEXT, $mockReportedUserPageTitle->getDBkey() ),
 				new ScalarParam( ParamType::TEXT, 'revision-link?oldid=1' ),
-				new ScalarParam( ParamType::TEXT, implode( ', ', [ 'something-else', 'foo' ] ) ),
+				new ScalarParam( ParamType::TEXT, implode( ', ', [ 'reportincident-email-something-else', 'foo' ] ) ),
 				new ScalarParam( ParamType::TEXT, $incidentReport->getDetails() ),
 				new ScalarParam( ParamType::TEXT, 'special-email-link' ),
 			],
