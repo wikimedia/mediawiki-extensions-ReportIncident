@@ -17,7 +17,7 @@ class ReportIncidentPage extends Page {
 	get hateSpeechOrDiscriminationOption() { return $( 'input[value="hate-speech-or-discrimination"]', this.harassmentOptionsFormFieldset ); }
 	get sexualHarassmentOption() { return $( 'input[value="sexual-harassment"]', this.harassmentOptionsFormFieldset ); }
 	get threatsOrViolenceOption() { return $( 'input[value="threats-or-violence"]', this.harassmentOptionsFormFieldset ); }
-	get intimidationAggressionOption() { return $( 'input[value="intimidation-agression"]', this.harassmentOptionsFormFieldset ); }
+	get intimidationAggressionOption() { return $( 'input[value="intimidation-aggression"]', this.harassmentOptionsFormFieldset ); }
 	get somethingElseOption() { return $( 'input[value="something-else"]', this.harassmentOptionsFormFieldset ); }
 	get somethingElseTextbox() { return $( '.ext-reportincident-dialog-step2__something-else-textarea textarea', this.harassmentOptionsFormFieldset ); }
 
