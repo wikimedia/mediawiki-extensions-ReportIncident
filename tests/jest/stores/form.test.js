@@ -73,6 +73,15 @@ describe( 'Form Store', () => {
 			behaviors: [ Constants.harassmentTypes.OTHER ],
 			somethingElseDetails: 'test something else details'
 		} );
+
+		form.overflowMenuData = { 'thread-id': 'c-test_user-20230605040302' };
+		expect( form.restPayload ).toStrictEqual( {
+			reportedUser: 'test user',
+			details: 'test details',
+			behaviors: [ Constants.harassmentTypes.OTHER ],
+			somethingElseDetails: 'test something else details',
+			threadId: 'c-test_user-20230605040302'
+		} );
 	} );
 
 	it( 'Generates no error messages before user has interacted with the form', () => {

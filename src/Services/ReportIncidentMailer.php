@@ -56,29 +56,24 @@ class ReportIncidentMailer {
 	}
 
 	/**
-	 * @param IncidentReport $incidentReport
-	 * @return IncidentReportEmailStatus
+	 * Sends an email to the administrators using the
+	 * provided IncidentReport object as the data to
+	 * send.
+	 *
+	 * @param IncidentReport $incidentReport The IncidentReport object containing the data to send in the email.
+	 * @return IncidentReportEmailStatus The result of attempting to email the administrators. A good status indicates
+	 *   an email was sent.
 	 */
 	public function sendEmail( IncidentReport $incidentReport ): StatusValue {
-		$recipientEmails = $this->options->get( 'ReportIncidentRecipientEmails' );
-		if ( !$recipientEmails || !is_array( $recipientEmails ) ) {
-			$this->logger->warning( 'Not sending an email because ReportIncidentRecipientEmails is not defined.' );
-			return IncidentReportEmailStatus::newFatal(
-				'rawmessage',
-				'ReportIncidentRecipientEmails configuration is empty or not an array, not sending an email.'
-			);
+		$reportIncidentEmailStatus = $this->validateConfig();
+		if ( !$reportIncidentEmailStatus->isGood() ) {
+			// Return early if the config was not valid.
+			return $reportIncidentEmailStatus;
 		}
+		// Get MailAddress objects for the to emails and from email.
 		$to = array_map( static function ( $address ) {
 			return new MailAddress( $address );
-		}, $recipientEmails );
-
-		if ( !$this->options->get( 'ReportIncidentEmailFromAddress' ) ) {
-			$this->logger->warning( 'Not sending an email because ReportIncidentEmailFromAddress is not defined.' );
-			return IncidentReportEmailStatus::newFatal(
-				'rawmessage',
-				'ReportIncidentEmailFromAddress configuration is empty, not sending an email.'
-			);
-		}
+		}, $this->options->get( 'ReportIncidentRecipientEmails' ) );
 		$from = new MailAddress(
 			$this->options->get( 'ReportIncidentEmailFromAddress' ),
 			$this->textFormatter->format(
@@ -94,17 +89,14 @@ class ReportIncidentMailer {
 				[ $reportingUserPage->getPrefixedDBkey() ]
 			)
 		);
-		$revision = $incidentReport->getRevisionRecord();
-		// In theory UrlUtils::expand() could return null, this seems pretty unlikely in practice;
-		// cast to string to make Phan happy.
-		$entrypointUrl = (string)$this->urlUtils->expand( wfScript() );
-		$linkToPageAtRevision = wfAppendQuery(
-			$entrypointUrl,
-			[ 'oldid' => $revision->getId() ]
-		);
+
+		[ $linkPrefixText, $linkToPageAtRevision ] = $this->getLinkToReportedContent( $incidentReport );
+
 		$reportedUserPage = $this->titleFactory->newFromText(
 			$incidentReport->getReportedUser()->getName(), NS_USER
 		);
+		// Get the behaviors and substitute the 'something-else' behavior
+		// with the text submitted in the Something else textbox.
 		$behaviors = $incidentReport->getBehaviors();
 		if ( $incidentReport->getSomethingElseDetails() ) {
 			$somethingElseIndex = array_search( 'something-else', $behaviors );
@@ -127,6 +119,7 @@ class ReportIncidentMailer {
 				[
 					$reportingUserPage->getDBkey(),
 					$reportedUserPage->getDBkey(),
+					$linkPrefixText,
 					$linkToPageAtRevision,
 					implode( ', ', $behaviors ),
 					$incidentReport->getDetails(),
@@ -134,7 +127,6 @@ class ReportIncidentMailer {
 				]
 			)
 		);
-		$reportIncidentEmailStatus = IncidentReportEmailStatus::newGood();
 		$reportIncidentEmailStatus->emailContents = [
 			'to' => $to,
 			'from' => $from,
@@ -151,5 +143,69 @@ class ReportIncidentMailer {
 			true
 		);
 		return $reportIncidentEmailStatus;
+	}
+
+	/**
+	 * Validates the configuration settings wgReportIncidentRecipientEmails
+	 * and wgReportIncidentEmailFromAddress. If invalid this method returns
+	 * a fatal status. Otherwise a good status is returned.
+	 *
+	 *
+	 * @return IncidentReportEmailStatus
+	 */
+	private function validateConfig(): IncidentReportEmailStatus {
+		$recipientEmails = $this->options->get( 'ReportIncidentRecipientEmails' );
+		if ( !$recipientEmails || !is_array( $recipientEmails ) ) {
+			$this->logger->warning( 'Not sending an email because ReportIncidentRecipientEmails is not defined.' );
+			return IncidentReportEmailStatus::newFatal(
+				'rawmessage',
+				'ReportIncidentRecipientEmails configuration is empty or not an array, not sending an email.'
+			);
+		}
+		if ( !$this->options->get( 'ReportIncidentEmailFromAddress' ) ) {
+			$this->logger->warning( 'Not sending an email because ReportIncidentEmailFromAddress is not defined.' );
+			return IncidentReportEmailStatus::newFatal(
+				'rawmessage',
+				'ReportIncidentEmailFromAddress configuration is empty, not sending an email.'
+			);
+		}
+		return IncidentReportEmailStatus::newGood();
+	}
+
+	/**
+	 * Gets a link to the reported content. This returns a link to
+	 * the permalink of the page, and if the report entry point was
+	 * via DiscussionTools the link includes an anchor to the topic
+	 * or comment that was reported.
+	 *
+	 * @param IncidentReport $incidentReport The IncidentReport object provided to ::sendEmail
+	 * @return array First item being the prefix text for the link to be used in the email
+	 *   and the second item being the URL to the reported content.
+	 */
+	private function getLinkToReportedContent( IncidentReport $incidentReport ): array {
+		$revision = $incidentReport->getRevisionRecord();
+		// In theory UrlUtils::expand() could return null, this seems pretty unlikely in practice;
+		// cast to string to make Phan happy.
+		$entrypointUrl = (string)$this->urlUtils->expand( wfScript() );
+		$linkToPageAtRevision = wfAppendQuery(
+			$entrypointUrl,
+			[ 'oldid' => $revision->getId() ]
+		);
+		$threadId = $incidentReport->getThreadId();
+		if ( $threadId ) {
+			// If a thread ID is defined, then add it to the link to the page at revision
+			// as an anchor in the URL. Currently this is only provided by DiscussionTools.
+			$linkToPageAtRevision .= '#' . urlencode( $threadId );
+			// If the threadId starts with 'h-', then the threadId refers to a topic/section header
+			// and as such the link prefix text should indicate this instead of saying it is a comment.
+			if ( substr( $threadId, 0, 2 ) === 'h-' ) {
+				$linkPrefixText = new MessageValue( 'reportincident-email-link-to-topic-prefix' );
+			} else {
+				$linkPrefixText = new MessageValue( 'reportincident-email-link-to-comment-prefix' );
+			}
+		} else {
+			$linkPrefixText = new MessageValue( 'reportincident-email-link-to-page-prefix' );
+		}
+		return [ $linkPrefixText, $linkToPageAtRevision ];
 	}
 }
