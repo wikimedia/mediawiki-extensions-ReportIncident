@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kly"
+		]
+	},
+	"reportincident-report-btn-label": "報告",
+	"reportincident-dialog-close-btn": "關閉",
+	"reportincident-dialog-proceed-btn": "繼續提出報告",
+	"reportincident-dialog-back-btn": "返回",
+	"reportincident-dialog-submit-btn": "提交",
+	"reportincident-dialog-title": "報告事件",
+	"reportincident-dialog-first-step-cancel-btn": "我不想提出報告",
+	"reportincident-dialog-harassment-type-label": "什麼類型的行為？",
+	"reportincident-dialog-additional-details-input-label": "額外細節",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "仇恨言論或歧視",
+	"reportincident-dialog-harassment-type-sexual-harassment": "性騷擾",
+	"reportincident-dialog-harassment-type-threats-of-violence": "暴力威脅",
+	"reportincident-dialog-harassment-type-intimidation": "恐嚇、侵犯、辱罵",
+	"reportincident-dialog-harassment-type-something-else": "其他情況",
+	"reportincident-dialog-something-else-input-placeholder": "具體說明上述未列出的行為。",
+	"reportincident-dialog-harassment-example-sexual-harassment": "性騷擾",
+	"reportincident-dialog-harassment-example-threats": "威脅",
+	"reportincident-emaildialog-close-button": "取消",
+	"reportincident-emaildialog-primary": "前往設定"
+}
