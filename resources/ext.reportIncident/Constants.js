@@ -5,7 +5,7 @@ const Constants = {
 		HATE_SPEECH: 'hate-speech-or-discrimination',
 		SEXUAL_HARASSMENT: 'sexual-harassment',
 		THREATS_OR_VIOLENCE: 'threats-or-violence',
-		INTIMIDATION_AGGRESSION: 'intimidation-agression',
+		INTIMIDATION_AGGRESSION: 'intimidation-aggression',
 		OTHER: 'something-else'
 	}
 };
