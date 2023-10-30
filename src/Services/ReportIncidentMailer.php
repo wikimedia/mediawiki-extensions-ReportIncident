@@ -127,22 +127,7 @@ class ReportIncidentMailer {
 				]
 			)
 		);
-		$reportIncidentEmailStatus->emailContents = [
-			'to' => $to,
-			'from' => $from,
-			'subject' => $subject,
-			'body' => $body,
-		];
-		$reportIncidentEmailStatus->merge(
-			$this->emailer->send(
-				$to,
-				$from,
-				$subject,
-				$body
-			),
-			true
-		);
-		return $reportIncidentEmailStatus;
+		return $this->actuallySendEmail( $to, $from, $subject, $body, $reportIncidentEmailStatus );
 	}
 
 	/**
@@ -156,14 +141,16 @@ class ReportIncidentMailer {
 	private function validateConfig(): IncidentReportEmailStatus {
 		$recipientEmails = $this->options->get( 'ReportIncidentRecipientEmails' );
 		if ( !$recipientEmails || !is_array( $recipientEmails ) ) {
-			$this->logger->warning( 'Not sending an email because ReportIncidentRecipientEmails is not defined.' );
+			$this->logger->error(
+				'ReportIncidentRecipientEmails configuration is empty or not an array, not sending an email.'
+			);
 			return IncidentReportEmailStatus::newFatal(
 				'rawmessage',
 				'ReportIncidentRecipientEmails configuration is empty or not an array, not sending an email.'
 			);
 		}
 		if ( !$this->options->get( 'ReportIncidentEmailFromAddress' ) ) {
-			$this->logger->warning( 'Not sending an email because ReportIncidentEmailFromAddress is not defined.' );
+			$this->logger->error( 'ReportIncidentEmailFromAddress configuration is empty, not sending an email.' );
 			return IncidentReportEmailStatus::newFatal(
 				'rawmessage',
 				'ReportIncidentEmailFromAddress configuration is empty, not sending an email.'
@@ -207,5 +194,54 @@ class ReportIncidentMailer {
 			$linkPrefixText = new MessageValue( 'reportincident-email-link-to-page-prefix' );
 		}
 		return [ $linkPrefixText, $linkToPageAtRevision ];
+	}
+
+	/**
+	 * Actually sends the email when provided with the
+	 * 'to' email address, 'from' email addresses, the subject,
+	 * and the body of the email.
+	 *
+	 * @param MailAddress[] $to
+	 * @param MailAddress $from
+	 * @param string $subject
+	 * @param string $body
+	 * @param IncidentReportEmailStatus $incidentReportEmailStatus Should be a status with no errors.
+	 * @return IncidentReportEmailStatus
+	 */
+	private function actuallySendEmail(
+		array $to,
+		MailAddress $from,
+		string $subject,
+		string $body,
+		IncidentReportEmailStatus $incidentReportEmailStatus
+	) {
+		// Call IEmailer::send and merge the status returned with the
+		// existing $incidentReportEmailStatus status.
+		$incidentReportEmailStatus->merge(
+			$this->emailer->send(
+				$to,
+				$from,
+				$subject,
+				$body
+			),
+			true
+		);
+		// Add the email contents to $incidentReportEmailStatus
+		$incidentReportEmailStatus->emailContents = [
+			'to' => $to,
+			'from' => $from,
+			'subject' => $subject,
+			'body' => $body,
+		];
+		if ( !$incidentReportEmailStatus->isGood() ) {
+			// Log an error if the IEmailer::send method returns a fatal status.
+			$this->logger->error(
+				'Unable to send report incident email. IEmailer::send returned the following: {emailer-message}',
+				[
+					'emailer-message' => $incidentReportEmailStatus->getMessage( false, false, 'en' ),
+				]
+			);
+		}
+		return $incidentReportEmailStatus;
 	}
 }
