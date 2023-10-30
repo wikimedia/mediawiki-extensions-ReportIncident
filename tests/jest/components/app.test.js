@@ -102,6 +102,8 @@ describe( 'Main Component Test Suite', () => {
 		store.inputReportedUserDisabled = true;
 		store.inputReportedUser = 'test';
 		store.displayReportedUserRequiredError = true;
+		// Fake that the form was previously successfully submitted.
+		store.formSuccessfullySubmitted = true;
 		// Fire the handler.
 		wrapper.vm.reportLinkInToolsMenuHandler( { preventDefault: jest.fn() } );
 		await nextTick();
@@ -112,6 +114,8 @@ describe( 'Main Component Test Suite', () => {
 		expect( store.inputReportedUserDisabled ).toBe( false );
 		expect( store.inputReportedUser ).toBe( '' );
 		expect( store.displayReportedUserRequiredError ).toBe( false );
+		// Expect that the form being successfully submitted is now reset as a new submission is being made
+		expect( store.formSuccessfullySubmitted ).toBe( false );
 	} );
 
 	it( 'Shows the email dialog on report link click with unconfirmed email', async () => {

@@ -10,9 +10,11 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const inputReportedUser = ref( '' );
 	const inputReportedUserDisabled = ref( false );
 	const displayReportedUserRequiredError = ref( false );
+	const reportedUserDoesNotExist = ref( false );
 	const inputDetails = ref( '' );
 	const inputSomethingElseDetails = ref( '' );
 	const displaySomethingElseTextboxRequiredError = ref( false );
+	const formSuccessfullySubmitted = ref( false );
 
 	/**
 	 * A dictionary of error messages for display in step 2 of the dialog.
@@ -23,7 +25,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	 */
 	const formErrorMessages = computed( () => {
 		// every form item must be filled out except for additional details, which is optional
-		// TODO (T338818): additional validation needed
 		const formErrors = {};
 		// Validate that the "Something else" box is filled if something-else
 		// is selected as a behaviour.
@@ -50,8 +51,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 			displayBehaviorsRequiredError.value = true;
 		}
 		// Validate the reported user field has some content.
-		// TODO: Link up server-side validation of the username to the error
-		//  state of the form on submission.
 		if ( inputReportedUser.value === '' ) {
 			if ( displayReportedUserRequiredError.value ) {
 				formErrors.inputReportedUser = { error: mw.msg( 'reportincident-dialog-violator-empty' ) };
@@ -59,6 +58,9 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		} else {
 			// If text has been entered for this field, then now display errors for empty field.
 			displayReportedUserRequiredError.value = true;
+			if ( reportedUserDoesNotExist.value ) {
+				formErrors.inputReportedUser = { error: mw.msg( 'reportincident-dialog-violator-nonexistent' ) };
+			}
 		}
 
 		return formErrors;
@@ -133,6 +135,9 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		displaySomethingElseTextboxRequiredError.value = false;
 		// Re-enable the username field if it was disabled
 		inputReportedUserDisabled.value = false;
+		// The username is now empty, so the username not
+		// existing error is no longer applicable.
+		reportedUserDoesNotExist.value = false;
 	}
 
 	return {
@@ -142,11 +147,13 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		inputReportedUser,
 		inputReportedUserDisabled,
 		displayReportedUserRequiredError,
+		reportedUserDoesNotExist,
 		inputDetails,
 		inputSomethingElseDetails,
 		displaySomethingElseTextboxRequiredError,
 		restPayload,
 		formErrorMessages,
+		formSuccessfullySubmitted,
 		isFormValidForSubmission,
 		$reset
 	};
