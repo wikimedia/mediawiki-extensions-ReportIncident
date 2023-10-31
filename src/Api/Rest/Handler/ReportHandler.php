@@ -180,9 +180,13 @@ class ReportHandler extends SimpleHandler {
 		}
 		$body['revision'] = $revision;
 		// Validate that the user is either an IP or an existing user
-		/** @var string $reportedUser */
 		$reportedUser = $body['reportedUser'];
-		'@phan-var string $reportedUser';
+		if ( !is_string( $reportedUser ) ) {
+			// Should be caught by JsonBodyValidator::validateBody, but that doesn't validate
+			// parameters yet (T305973).
+			LoggerFactory::getInstance( 'ReportIncident' )->error( 'reportedUser field was not a string.' );
+			throw new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 );
+		}
 		if ( $this->userNameUtils->isIP( $reportedUser ) ) {
 			$reportedUserIdentity = UserIdentityValue::newAnonymous( $reportedUser );
 		} else {

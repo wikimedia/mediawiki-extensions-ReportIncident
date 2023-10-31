@@ -209,6 +209,30 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		);
 	}
 
+	public function testBodyFailsValidationOnObjectAsReportedUser() {
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
+		] );
+		$revisionStore = $this->createMock( RevisionStore::class );
+		$revisionStore->method( 'getRevisionById' )
+			->with( 1 )
+			->willReturn( $this->createMock( RevisionRecord::class ) );
+		$handler = $this->newServiceInstance( ReportHandler::class, [
+			'config' => $config,
+			'revisionStore' => $revisionStore
+		] );
+		$this->expectExceptionObject(
+			new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 )
+		);
+		$this->executeHandler(
+			$handler, new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			[], [], [], [ 'revisionId' => 1, 'reportedUser' => [ 'test' => 'testing' ] ],
+			$this->mockRegisteredUltimateAuthority()
+		);
+	}
+
 	public function testDenyWithoutConfirmedEmail() {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
