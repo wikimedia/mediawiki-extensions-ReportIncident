@@ -22,6 +22,23 @@ function mockApiGet( returnValue ) {
 	return apiGet;
 }
 
+/**
+ * Mocks mediawiki.String so that require calls work.
+ * Returns a jest.fn() for the codePointLength function.
+ *
+ * @return {jest.fn}
+ */
+function mockCodePointLength() {
+	const codePointLength = jest.fn();
+	jest.mock( 'mediawiki.String', () => {
+		return {
+			codePointLength: codePointLength
+		};
+	}, { virtual: true } );
+	return codePointLength;
+}
+
 module.exports = {
-	mockApiGet: mockApiGet
+	mockApiGet: mockApiGet,
+	mockCodePointLength: mockCodePointLength
 };

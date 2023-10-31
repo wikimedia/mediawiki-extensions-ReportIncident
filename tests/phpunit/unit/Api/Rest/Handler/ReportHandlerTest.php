@@ -4,7 +4,9 @@ namespace MediaWiki\Extension\ReportIncident\Tests\Unit\Api\Rest\Handler;
 
 use FormatJson;
 use HashConfig;
+use Language;
 use MediaWiki\Block\AbstractBlock;
+use MediaWiki\Config\Config;
 use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\IncidentReportEmailStatus;
@@ -230,6 +232,114 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			$handler, new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
 			[], [], [], [ 'revisionId' => 1, 'reportedUser' => [ 'test' => 'testing' ] ],
 			$this->mockRegisteredUltimateAuthority()
+		);
+	}
+
+	public function testBodyFailsValidationOnObjectAsDetails() {
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
+		] );
+		$revisionStore = $this->createMock( RevisionStore::class );
+		$revisionStore->method( 'getRevisionById' )
+			->with( 1 )
+			->willReturn( $this->createMock( RevisionRecord::class ) );
+		$userNameUtils = $this->createMock( UserNameUtils::class );
+		$userNameUtils->method( 'isIP' )
+			->willReturn( true );
+		$handler = $this->newServiceInstance( ReportHandler::class, [
+			'config' => $config,
+			'revisionStore' => $revisionStore,
+			'userNameUtils' => $userNameUtils,
+		] );
+		$this->expectExceptionObject(
+			new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 )
+		);
+		$this->executeHandler(
+			$handler, new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			[], [], [], [ 'revisionId' => 1, 'reportedUser' => '1.2.3.4', 'details' => [ 'test' => 'testing' ] ],
+			$this->mockRegisteredUltimateAuthority()
+		);
+	}
+
+	public function testBodyFailsValidationOnObjectAsSomethingElseDetails() {
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
+		] );
+		$revisionStore = $this->createMock( RevisionStore::class );
+		$revisionStore->method( 'getRevisionById' )
+			->with( 1 )
+			->willReturn( $this->createMock( RevisionRecord::class ) );
+		$userNameUtils = $this->createMock( UserNameUtils::class );
+		$userNameUtils->method( 'isIP' )
+			->willReturn( true );
+		$handler = $this->newServiceInstance( ReportHandler::class, [
+			'config' => $config,
+			'revisionStore' => $revisionStore,
+			'userNameUtils' => $userNameUtils,
+		] );
+		$this->expectExceptionObject(
+			new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 )
+		);
+		$this->executeHandler(
+			$handler, new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			[], [], [],
+			[ 'revisionId' => 1, 'reportedUser' => '1.2.3.4', 'somethingElseDetails' => [ 'test' => 'testing' ] ],
+			$this->mockRegisteredUltimateAuthority()
+		);
+	}
+
+	public function testTruncationOfTextareaFields() {
+		$revisionStore = $this->createMock( RevisionStore::class );
+		$revisionStore->method( 'getRevisionById' )
+			->with( 1 )
+			->willReturn( $this->createMock( RevisionRecord::class ) );
+		$userNameUtils = $this->createMock( UserNameUtils::class );
+		$userNameUtils->method( 'isIP' )
+			->willReturn( true );
+		// Return the text from Language::truncateForVisual with "-truncated" added
+		// to the end.
+		$contentLanguage = $this->createMock( Language::class );
+		$contentLanguage
+			->expects( $this->exactly( 2 ) )
+			->method( 'truncateForVisual' )
+			->withConsecutive( [ 'testing-details' ], [ 'testing-something-else' ] )
+			->willReturnOnConsecutiveCalls( 'testing-details-truncated', 'testing-something-else-truncated' );
+		$handler = $this->getMockBuilder( ReportHandler::class )
+			->setConstructorArgs( [
+				$this->createMock( Config::class ),
+				$revisionStore,
+				$userNameUtils,
+				$this->createMock( UserIdentityLookup::class ),
+				$this->createMock( ReportIncidentManager::class ),
+				$this->createMock( UserFactory::class ),
+				$contentLanguage,
+			] )
+			->onlyMethods( [ 'getAuthority' ] )
+			->getMock();
+		$handler->method( 'getAuthority' )
+			->willReturn( $this->mockRegisteredUltimateAuthority() );
+		$handler = TestingAccessWrapper::newFromObject( $handler );
+		/** @var IncidentReport $incidentReportObject */
+		$incidentReportObject = $handler->getIncidentReportObjectFromValidatedBody( [
+			'revisionId' => 1,
+			'reportedUser' => '1.2.3.4',
+			'somethingElseDetails' => 'testing-something-else',
+			'details' => 'testing-details',
+			'behaviors' => [ 'test' ]
+		] );
+		$this->assertSame(
+			'testing-something-else-truncated',
+			$incidentReportObject->getSomethingElseDetails(),
+			'Something else textarea data was not truncated.'
+		);
+		$this->assertSame(
+			'testing-details-truncated',
+			$incidentReportObject->getDetails(),
+			'Additional details textarea data was not truncated.'
 		);
 	}
 
@@ -778,7 +888,8 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				$this->createMock( UserNameUtils::class ),
 				$this->createMock( UserIdentityLookup::class ),
 				$this->createMock( ReportIncidentManager::class ),
-				$this->createMock( UserFactory::class )
+				$this->createMock( UserFactory::class ),
+				$this->createMock( Language::class ),
 			] )
 			->onlyMethods( [ 'getValidatedBody' ] )
 			->getMock();
@@ -808,7 +919,8 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				$this->createMock( UserNameUtils::class ),
 				$this->createMock( UserIdentityLookup::class ),
 				$this->createMock( ReportIncidentManager::class ),
-				$this->createMock( UserFactory::class )
+				$this->createMock( UserFactory::class ),
+				$this->createMock( Language::class ),
 			] )
 			->onlyMethods( [ 'getValidatedBody' ] )
 			->getMock();

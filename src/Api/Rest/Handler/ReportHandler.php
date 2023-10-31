@@ -3,6 +3,8 @@
 namespace MediaWiki\Extension\ReportIncident\Api\Rest\Handler;
 
 use Config;
+use Language;
+use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Logger\LoggerFactory;
@@ -36,6 +38,7 @@ class ReportHandler extends SimpleHandler {
 	private UserIdentityLookup $userIdentityLookup;
 	private LoggerInterface $logger;
 	private UserFactory $userFactory;
+	private Language $contentLanguage;
 
 	/**
 	 * @param Config $config
@@ -44,6 +47,7 @@ class ReportHandler extends SimpleHandler {
 	 * @param UserIdentityLookup $userIdentityLookup
 	 * @param ReportIncidentManager $reportIncidentManager
 	 * @param UserFactory $userFactory
+	 * @param Language $contentLanguage
 	 */
 	public function __construct(
 		Config $config,
@@ -51,7 +55,8 @@ class ReportHandler extends SimpleHandler {
 		UserNameUtils $userNameUtils,
 		UserIdentityLookup $userIdentityLookup,
 		ReportIncidentManager $reportIncidentManager,
-		UserFactory $userFactory
+		UserFactory $userFactory,
+		Language $contentLanguage
 	) {
 		$this->config = $config;
 		$this->reportIncidentManager = $reportIncidentManager;
@@ -60,6 +65,7 @@ class ReportHandler extends SimpleHandler {
 		$this->userIdentityLookup = $userIdentityLookup;
 		$this->logger = LoggerFactory::getInstance( 'ReportIncident' );
 		$this->userFactory = $userFactory;
+		$this->contentLanguage = $contentLanguage;
 	}
 
 	public function run() {
@@ -198,6 +204,30 @@ class ReportHandler extends SimpleHandler {
 			}
 		}
 		$body['reportedUser'] = $reportedUserIdentity;
+		// Truncate the Something else details and Additional details fields.
+		if ( array_key_exists( 'details', $body ) && $body['details'] !== null ) {
+			if ( !is_string( $body['details'] ) ) {
+				// Should be caught by JsonBodyValidator::validateBody, but that doesn't validate
+				// parameters yet (T305973).
+				LoggerFactory::getInstance( 'ReportIncident' )->error( 'details field was not a string.' );
+				throw new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 );
+			}
+			$body['details'] = $this->contentLanguage->truncateForVisual(
+				$body['details'], CommentStore::COMMENT_CHARACTER_LIMIT
+			);
+		}
+		if ( array_key_exists( 'somethingElseDetails', $body ) && $body['somethingElseDetails'] !== null ) {
+			if ( !is_string( $body['somethingElseDetails'] ) ) {
+				// Should be caught by JsonBodyValidator::validateBody, but that doesn't validate
+				// parameters yet (T305973).
+				LoggerFactory::getInstance( 'ReportIncident' )
+					->error( 'somethingElseDetails field was not a string.' );
+				throw new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 );
+			}
+			$body['somethingElseDetails'] = $this->contentLanguage->truncateForVisual(
+				$body['somethingElseDetails'], CommentStore::COMMENT_CHARACTER_LIMIT
+			);
+		}
 		try {
 			return IncidentReport::newFromRestPayload(
 				$this->getAuthority()->getUser(),
