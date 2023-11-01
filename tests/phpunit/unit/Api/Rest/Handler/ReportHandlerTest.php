@@ -687,7 +687,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			]
 		);
 		$this->expectExceptionObject(
-			new LocalizedHttpException( new MessageValue( 'rest-nonexistent-user' ), 404 )
+			new LocalizedHttpException( new MessageValue( 'reportincident-dialog-violator-nonexistent' ), 404 )
 		);
 		$this->executeHandler(
 			$handler,
@@ -728,7 +728,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			]
 		);
 		$this->expectExceptionObject(
-			new LocalizedHttpException( new MessageValue( 'rest-nonexistent-user' ), 404 )
+			new LocalizedHttpException( new MessageValue( 'reportincident-dialog-violator-nonexistent' ), 404 )
 		);
 		$this->executeHandler(
 			$handler,

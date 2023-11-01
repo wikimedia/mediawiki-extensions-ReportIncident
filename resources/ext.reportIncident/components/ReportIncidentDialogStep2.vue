@@ -95,6 +95,7 @@ module.exports = exports = {
 			inputReportedUser,
 			inputReportedUserDisabled,
 			displayReportedUserRequiredError,
+			reportedUserDoesNotExist,
 			inputSomethingElseDetails,
 			displaySomethingElseTextboxRequiredError,
 			inputDetails
@@ -267,6 +268,10 @@ module.exports = exports = {
 		function onReportedUserInput( value ) {
 			// Keep a track of the actual text in the input for the form store.
 			inputReportedUser.value = value;
+			// A change to the reported user input means that if the
+			// server said the reported user doesn't exist it no
+			// longer applies.
+			reportedUserDoesNotExist.value = false;
 			// Load suggestions based on the input already entered.
 			loadSuggestedUsernames();
 		}

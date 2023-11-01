@@ -30,6 +30,7 @@ describe( 'Form Store', () => {
 		form.displayReportedUserRequiredError = true;
 		form.displaySomethingElseTextboxRequiredError = true;
 		form.displayBehaviorsRequiredError = true;
+		form.reportedUserDoesNotExist = true;
 
 		form.$reset();
 		// Form fields should be empty
@@ -46,6 +47,8 @@ describe( 'Form Store', () => {
 		expect( form.displayBehaviorsRequiredError ).toBe( false );
 		// Username field should be un-disabled
 		expect( form.inputReportedUserDisabled ).toBe( false );
+		// Reported user field shouldn't have the username doesn't exist error
+		expect( form.reportedUserDoesNotExist ).toBe( false );
 	} );
 
 	it( 'Generates correct rest data', () => {
@@ -92,7 +95,7 @@ describe( 'Form Store', () => {
 		expect( form.formErrorMessages ).toStrictEqual( {} );
 	} );
 
-	it( 'Generates correct error messages', () => {
+	it( 'Generates correct error messages for required fields', () => {
 		const form = useFormStore();
 
 		// Test that no error messages are generated when the data is correct
@@ -125,6 +128,18 @@ describe( 'Form Store', () => {
 		form.inputSomethingElseDetails = '';
 		expect( form.formErrorMessages ).toStrictEqual( {
 			inputBehaviors: { error: mw.msg( 'reportincident-dialog-something-else-empty' ) }
+		} );
+	} );
+
+	it( 'Generates correct error message for non-existent user', () => {
+		const form = useFormStore();
+
+		// Test that when reportedUserDoesNotExist is true and inputReportedUser is
+		// not an empty string, the error message is displayed.
+		form.inputReportedUser = 'test';
+		form.reportedUserDoesNotExist = true;
+		expect( form.formErrorMessages ).toStrictEqual( {
+			inputReportedUser: { error: mw.msg( 'reportincident-dialog-violator-nonexistent' ) }
 		} );
 	} );
 } );

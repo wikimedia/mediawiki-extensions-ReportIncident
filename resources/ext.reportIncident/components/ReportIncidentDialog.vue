@@ -17,6 +17,13 @@
 				v-i18n-html:reportincident-dialog-admin-review="[ adminLink ]"
 				class="ext-reportincident-dialog__text-subtext">
 			</p>
+			<cdx-message
+				v-if="showFooterErrorText"
+				type="error"
+				inline
+				class="ext-reportincident-dialog__form-error-text">
+				{{ footerErrorMessage }}
+			</cdx-message>
 			<div class="ext-reportincident-dialog-footer">
 				<cdx-button
 					class="ext-reportincident-dialog-footer__back-btn"
@@ -41,7 +48,7 @@
 
 const useFormStore = require( '../stores/Form.js' );
 const { toRef, ref, computed } = require( 'vue' );
-const { CdxButton, CdxDialog, useModelWrapper } = require( '@wikimedia/codex' );
+const { CdxButton, CdxDialog, CdxMessage, useModelWrapper } = require( '@wikimedia/codex' );
 const Constants = require( '../Constants.js' );
 
 // @vue/component
@@ -50,7 +57,8 @@ module.exports = exports = {
 
 	components: {
 		CdxButton,
-		CdxDialog
+		CdxDialog,
+		CdxMessage
 	},
 
 	props: {
@@ -65,10 +73,14 @@ module.exports = exports = {
 	setup( props, { emit } ) {
 		const wrappedOpen = useModelWrapper( toRef( props, 'open' ), emit, 'update:open' );
 		const currentStep = ref( props.initialStep );
+		const footerErrorMessage = ref( '' );
 
 		const currentSlotName = computed( () => `${currentStep.value}` );
 		const showFooterHelpText = computed( () => {
 			return currentStep.value === Constants.DIALOG_STEP_1;
+		} );
+		const showFooterErrorText = computed( () => {
+			return currentStep.value === Constants.DIALOG_STEP_2 && footerErrorMessage.value !== '';
 		} );
 
 		const primaryButtonLabel = computed( () => {
@@ -107,6 +119,72 @@ module.exports = exports = {
 			}
 		}
 
+		/**
+		 * Function called when the POST request to the
+		 * ReportIncident reporting REST API succeeds.
+		 *
+		 * @param {Object} response
+		 */
+		function onReportSubmitSuccess( response ) {
+			const store = useFormStore();
+			printEmailToConsole( response );
+			wrappedOpen.value = false;
+			currentStep.value = Constants.DIALOG_STEP_1;
+			store.$reset();
+			store.formSuccessfullySubmitted = true;
+		}
+
+		/**
+		 * Function called when the POST request to the
+		 * ReportIncident reporting REST API fails.
+		 *
+		 * @param {string} _err
+		 * @param {Object} errObject
+		 */
+		function onReportSubmitFailure( _err, errObject ) {
+			const store = useFormStore();
+			let errorKey = null;
+			if (
+				errObject.xhr.responseJSON
+			) {
+				printEmailToConsole( errObject.xhr.responseJSON );
+				if ( errObject.xhr.responseJSON.errorKey ) {
+					errorKey = errObject.xhr.responseJSON.errorKey;
+				}
+			}
+			if ( errorKey === 'reportincident-dialog-violator-nonexistent' ) {
+				// Show the server error next to the correct field.
+				store.reportedUserDoesNotExist = true;
+				// Remove any existing footer error message as a field
+				// specific one exists.
+				footerErrorMessage.value = '';
+				// Re-enable the field if is disabled as the server has said
+				// the user does not exist, so it will need to be fixed.
+				store.inputReportedUserDisabled = false;
+			} else {
+				let message;
+				if ( !navigator.onLine ) {
+					// If the navigator.onLine is false, the user is definitely
+					// offline so display the internet disconnected error. The user
+					// may still be offline if this property is true and in this
+					// case the generic error will be shown.
+					message = mw.msg( 'reportincident-dialog-internet-disconnected-error' );
+				} else if (
+					errObject.xhr.status >= 500 &&
+					errObject.xhr.status < 600
+				) {
+					// If the HTTP status code starts with 5, then this is a
+					// server error and the footer error message should indicate
+					// it is the server that was the problem.
+					message = mw.msg( 'reportincident-dialog-server-error' );
+				} else {
+					// Otherwise use the generic error.
+					message = mw.msg( 'reportincident-dialog-generic-error' );
+				}
+				footerErrorMessage.value = message;
+			}
+		}
+
 		function navigateNext() {
 			// if on the first page, navigate to the second page
 			if ( currentStep.value === Constants.DIALOG_STEP_1 ) {
@@ -117,21 +195,13 @@ module.exports = exports = {
 				const restPayload = store.restPayload;
 				restPayload.revisionId = mw.config.get( 'wgCurRevisionId' );
 				if ( store.isFormValidForSubmission() ) {
-					// TODO: Add error message if REST API call fails.
 					new mw.Rest().post(
 						'/reportincident/v0/report',
 						restPayload
-					).then(
-						( response ) => {
-							printEmailToConsole( response );
-							wrappedOpen.value = false;
-							currentStep.value = Constants.DIALOG_STEP_1;
-							store.$reset();
-						},
-						( _err, errObject ) => {
-							printEmailToConsole( errObject.xhr.responseJSON );
-						}
-					);
+					).then( onReportSubmitSuccess, onReportSubmitFailure );
+				} else {
+					// Clear footer error messages as the form-specific ones will be set.
+					footerErrorMessage.value = '';
 				}
 			}
 		}
@@ -162,7 +232,13 @@ module.exports = exports = {
 			navigateNext,
 			navigatePrevious,
 			adminLink,
-			showFooterHelpText
+			footerErrorMessage,
+			showFooterHelpText,
+			showFooterErrorText,
+			// Used in tests, so needs to be passed out here.
+			/* eslint-disable vue/no-unused-properties */
+			onReportSubmitFailure
+			/* eslint-enable vue/no-unused-properties */
 		};
 	}
 };

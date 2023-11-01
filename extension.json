@@ -121,6 +121,7 @@
 				"components/ReportIncidentDialog.vue",
 				"components/ReportIncidentDialogStep1.vue",
 				"components/ReportIncidentDialogStep2.vue",
+				"components/SuccessConfirmationBanner.vue",
 				"stores/Form.js"
 			],
 			"messages": [
@@ -157,12 +158,17 @@
 				"reportincident-dialog-violator-placeholder-text",
 				"reportincident-dialog-admin-review",
 				"reportincident-dialog-violator-empty",
+				"reportincident-dialog-violator-nonexistent",
 				"reportincident-dialog-something-else-empty",
 				"reportincident-dialog-harassment-empty",
+				"reportincident-dialog-generic-error",
+				"reportincident-dialog-server-error",
+				"reportincident-dialog-internet-disconnected-error",
 				"reportincident-emaildialog-title",
 				"reportincident-emaildialog-close-button",
 				"reportincident-emaildialog-content",
-				"reportincident-emaildialog-primary"
+				"reportincident-emaildialog-primary",
+				"reportincident-success-message"
 			],
 			"dependencies": [
 				"mediawiki.Uri",

@@ -189,7 +189,7 @@ class ReportHandler extends SimpleHandler {
 			$reportedUserIdentity = $this->userIdentityLookup->getUserIdentityByName( $reportedUser );
 			if ( !$reportedUserIdentity || !$reportedUserIdentity->isRegistered() ) {
 				throw new LocalizedHttpException(
-					new MessageValue( 'rest-nonexistent-user', [ $reportedUser ] ), 404
+					new MessageValue( 'reportincident-dialog-violator-nonexistent', [ $reportedUser ] ), 404
 				);
 			}
 		}
