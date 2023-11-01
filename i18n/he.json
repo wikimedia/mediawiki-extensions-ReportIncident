@@ -41,13 +41,16 @@
 	"reportincident-dialog-something-else-empty": "נא לספק תיאור קצר של ההתנהגות.",
 	"reportincident-unable-to-send": "לא ניתן לשלוח דו\"ח תקרית בדואר אלקטרוני.",
 	"reportincident-email-subject": "{{SITENAME}}: דו\"ח תקרית חדש מחשבון \"$1\"",
-	"reportincident-email-body": "המשתמש ששולח את הדו\"ח: $1 \nהמשתמש שהדו\"ח עוסק בו: $2 \nקישור לדף: $3 \n\nהתנהגויות: $4\nפרטים: $5\n\nלשליחת דואר אלקטרוני למשתמש $1 יש ללחוץ כאן: $6",
+	"reportincident-email-body": "המשתמש ששולח את הדו\"ח: $1 \nהמשתמש שהדו\"ח עוסק בו: $2 \n$3: $4 \n\nהתנהגויות: $5\nפרטים: $6\n\nלשליחת דואר אלקטרוני למשתמש $1 יש ללחוץ כאן: $7",
+	"reportincident-email-link-to-page-prefix": "קישור לדף",
+	"reportincident-email-link-to-comment-prefix": "קישור לתגובה המדווחת",
+	"reportincident-email-link-to-topic-prefix": "קישור לנושא המדווח",
 	"reportincident-email-something-else": "משהו אחר: \"$1\"",
 	"right-reportincident": "דיווח על תקרית",
 	"action-reportincident": "לדווח על תקרית",
 	"reportincident-emaildialog-title": "נדרשת כתובת דוא\"ל מאומתת",
 	"reportincident-emaildialog-close-button": "ביטול",
-	"reportincident-emaildialog-content": "אנו זקוקים לכתובת הדוא\"ל המאומתת של {{GENDER:|שלך}} כדי לספק עדכונים על הדו\"ח או לשלוח עדכון אם זה נחוץ. נא להוסיף או לאמת את כתובת הדוא\"ל שלך בהגדרות חשבון המשתמש שלך לפני הגשת דו\"ח.",
+	"reportincident-emaildialog-content": "אנו זקוקים לכתובת הדוא\"ל המאומתת {{GENDER:|שלך}} כדי לספק עדכונים על הדו\"ח או לשלוח עדכון אם זה נחוץ. נא להוסיף או לאמת את כתובת הדוא\"ל שלך בהגדרות חשבון המשתמש שלך לפני הגשת דו\"ח.",
 	"reportincident-emaildialog-primary": "לעבור להגדרות",
 	"reportincident-confirmedemail-required": "נדרשת כתובת דוא\"ל מאומתת כדי לשלוח דו\"ח תקרית."
 }
