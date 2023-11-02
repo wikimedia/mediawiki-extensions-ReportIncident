@@ -174,7 +174,9 @@
 				"mediawiki.Uri",
 				"mediawiki.jqueryMsg",
 				"mediawiki.api",
+				"mediawiki.language",
 				"mediawiki.storage",
+				"mediawiki.String",
 				"mediawiki.user",
 				"vue",
 				"pinia",
@@ -198,7 +200,8 @@
 				"UserNameUtils",
 				"UserIdentityLookup",
 				"ReportIncidentManager",
-				"UserFactory"
+				"UserFactory",
+				"ContentLanguage"
 			]
 		}
 	],

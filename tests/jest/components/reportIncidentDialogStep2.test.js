@@ -1,16 +1,24 @@
 'use strict';
 
+const { mockCodePointLength } = require( '../utils.js' );
+
+// Need to run this here as the import of ReportIncidentDialogStep2.vue
+// without mediawiki.String defined causes errors in running these tests.
+const mockMediaWikiStringCodePointLength = mockCodePointLength();
+
 const ReportIncidentDialogStep2 = require( '../../../resources/ext.reportIncident/components/ReportIncidentDialogStep2.vue' ),
 	utils = require( '@vue/test-utils' ),
 	{ createTestingPinia } = require( '@pinia/testing' ),
 	{ mockApiGet } = require( '../utils.js' ),
+	{ nextTick, ref } = require( 'vue' ),
 	Constants = require( '../../../resources/ext.reportIncident/Constants.js' ),
 	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' );
 
-const renderComponent = () => {
+const renderComponent = ( testingPinia ) => {
 	return utils.mount( ReportIncidentDialogStep2, {
 		global: {
-			plugins: [ createTestingPinia( { stubActions: false } ) ]
+			// eslint-disable-next-line es-x/no-nullish-coalescing-operators
+			plugins: [ testingPinia ?? createTestingPinia( { stubActions: false } ) ]
 		}
 	} );
 };
@@ -24,6 +32,18 @@ function mockErrorLogger() {
 	const mwLogError = jest.fn();
 	mw.log.error = mwLogError;
 	return mwLogError;
+}
+
+/**
+ * Mocks mw.language.convertNumber() and returns a jest.fn() for convertNumber()
+ *
+ * @return {jest.fn}
+ */
+function mockConvertNumber() {
+	const mwConvertNumber = jest.fn();
+	mwConvertNumber.mockImplementation( ( number ) => number );
+	mw.language.convertNumber = mwConvertNumber;
+	return mwConvertNumber;
 }
 
 /**
@@ -42,9 +62,26 @@ const waitUntilDebounceComplete = () => {
 };
 
 describe( 'Report Incident Dialog Step 2', () => {
+	let jQueryCodePointLimitMock;
+	beforeEach( () => {
+		// Mock the codePointLimit which is added by a plugin.
+		jQueryCodePointLimitMock = jest.fn();
+		global.$.prototype.codePointLimit = jQueryCodePointLimitMock;
+		// Mock wgCommentCodePointLimit to the default value of 500.
+		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wgCommentCodePointLimit':
+					return 500;
+			}
+		} );
+	} );
+
 	it( 'renders correctly', () => {
 		const wrapper = renderComponent();
 		expect( wrapper.find( '.ext-reportincident-dialog-step2' ).exists() ).toBe( true );
+		// Expect that the value of wgCommentCodePointLimit is passed to the codePointLimit call
+		// for the additional details field.
+		expect( jQueryCodePointLimitMock ).toHaveBeenCalledWith( 500 );
 	} );
 
 	it( 'has all default form elements loaded', () => {
@@ -105,6 +142,128 @@ describe( 'Report Incident Dialog Step 2', () => {
 			Constants.harassmentTypes.HATE_SPEECH
 		];
 		expect( wrapper.vm.collectSomethingElseDetails ).toBe( true );
+	} );
+
+	it( 'Should apply codePointLimit on something else textarea on open', async () => {
+		const wrapper = renderComponent();
+		const store = useFormStore();
+
+		store.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
+		expect( wrapper.vm.collectSomethingElseDetails ).toBe( true );
+		// Wait until the watch on collectSomethingElseDetails has run.
+		await nextTick();
+		// Wait until the next tick so that the call inside a nextTick call of the code under-test
+		// is complete.
+		return nextTick( () => {
+			// codePointLimit should have been called twice (additional details and something else fields)
+			expect( jQueryCodePointLimitMock ).toHaveBeenCalledTimes( 2 );
+			expect( jQueryCodePointLimitMock ).toHaveBeenNthCalledWith( 1, 500 );
+			expect( jQueryCodePointLimitMock ).toHaveBeenNthCalledWith( 2, 500 );
+		} );
+	} );
+
+	it( 'Should apply codePointLimit on something else textarea if open on mount', async () => {
+		const testingPinia = createTestingPinia( { stubActions: false } );
+		const store = useFormStore();
+
+		store.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
+		const wrapper = renderComponent( testingPinia );
+		expect( wrapper.vm.collectSomethingElseDetails ).toBe( true );
+		// codePointLimit should have been called twice (additional details and something else fields)
+		expect( jQueryCodePointLimitMock ).toHaveBeenCalledTimes( 2 );
+		expect( jQueryCodePointLimitMock ).toHaveBeenNthCalledWith( 1, 500 );
+		expect( jQueryCodePointLimitMock ).toHaveBeenNthCalledWith( 2, 500 );
+	} );
+
+	it( 'showSomethingElseCharacterCount should be false when something else field hidden', () => {
+		const wrapper = renderComponent();
+		wrapper.vm.somethingElseDetailsCharacterCountLeft = 1;
+		return nextTick( () => {
+			expect( wrapper.vm.showSomethingElseCharacterCount ).toBe( false );
+		} );
+	} );
+
+	it( 'showSomethingElseCharacterCount should be false when counter is the empty string', () => {
+		const wrapper = renderComponent();
+		const store = useFormStore();
+		store.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
+		wrapper.vm.somethingElseDetailsCharacterCountLeft = '';
+		return nextTick( () => {
+			expect( wrapper.vm.showSomethingElseCharacterCount ).toBe( false );
+		} );
+	} );
+
+	it( 'showSomethingElseCharacterCount should be true when counter is a number and the something else field is shown', () => {
+		const wrapper = renderComponent();
+		const store = useFormStore();
+		store.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
+		wrapper.vm.somethingElseDetailsCharacterCountLeft = 2;
+		return nextTick( () => {
+			expect( wrapper.vm.showSomethingElseCharacterCount ).toBe( true );
+		} );
+	} );
+
+	it( 'showAdditionalDetailsCharacterCount should be false when counter is the empty string', () => {
+		const wrapper = renderComponent();
+		wrapper.vm.additionalDetailsCharacterCountLeft = '';
+		return nextTick( () => {
+			expect( wrapper.vm.showAdditionalDetailsCharacterCount ).toBe( false );
+		} );
+	} );
+
+	it( 'showAdditionalDetailsCharacterCount should be true when counter is a number', () => {
+		const wrapper = renderComponent();
+		wrapper.vm.additionalDetailsCharacterCountLeft = 2;
+		return nextTick( () => {
+			expect( wrapper.vm.showAdditionalDetailsCharacterCount ).toBe( true );
+		} );
+	} );
+
+	it( 'Updates count to empty string on call to updateCharacterCount with more than 99 characters left', () => {
+		const wrapper = renderComponent();
+		const counterRef = ref( 1 );
+		mockMediaWikiStringCodePointLength.mockReturnValueOnce( 10 );
+		wrapper.vm.updateCharacterCount( 'test', counterRef );
+		expect( counterRef.value ).toBe( '' );
+		expect( mockMediaWikiStringCodePointLength ).toHaveBeenLastCalledWith( 'test' );
+	} );
+
+	it( 'Updates count to a number on call to updateCharacterCount with fewer than 99 characters left', () => {
+		const wrapper = renderComponent();
+		const counterRef = ref( '' );
+		mockConvertNumber();
+		mockMediaWikiStringCodePointLength.mockReturnValueOnce( 451 );
+		wrapper.vm.updateCharacterCount( 'testing', counterRef );
+		expect( counterRef.value ).toBe( 49 );
+		expect( mockMediaWikiStringCodePointLength ).toHaveBeenLastCalledWith( 'testing' );
+	} );
+
+	it( 'Updates count 0 on call to updateCharacterCount with no characters left', () => {
+		const wrapper = renderComponent();
+		const counterRef = ref( '' );
+		mockConvertNumber();
+		mockMediaWikiStringCodePointLength.mockReturnValueOnce( 500 );
+		wrapper.vm.updateCharacterCount( 'testing', counterRef );
+		expect( counterRef.value ).toBe( 0 );
+		expect( mockMediaWikiStringCodePointLength ).toHaveBeenLastCalledWith( 'testing' );
+	} );
+
+	it( 'Updates character count on call to onSomethingElseDetailsInput', async () => {
+		const wrapper = renderComponent();
+		const store = useFormStore();
+		store.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
+		mockConvertNumber();
+		mockMediaWikiStringCodePointLength.mockReturnValueOnce( 450 );
+		wrapper.vm.onSomethingElseDetailsInput( { target: { value: 'test' } } );
+		expect( wrapper.vm.somethingElseDetailsCharacterCountLeft ).toBe( 50 );
+	} );
+
+	it( 'Updates character count on call to onAdditionalDetailsInput', () => {
+		const wrapper = renderComponent();
+		mockConvertNumber();
+		mockMediaWikiStringCodePointLength.mockReturnValueOnce( 450 );
+		wrapper.vm.onAdditionalDetailsInput( { target: { value: 'test' } } );
+		expect( wrapper.vm.additionalDetailsCharacterCountLeft ).toBe( 50 );
 	} );
 
 	it( 'Should update menu config on change in window height', () => {

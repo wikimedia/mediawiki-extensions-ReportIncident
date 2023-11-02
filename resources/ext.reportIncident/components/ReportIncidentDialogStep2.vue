@@ -19,13 +19,18 @@
 			</cdx-checkbox>
 			<cdx-text-area
 				v-if="collectSomethingElseDetails"
+				ref="somethingElseDetailsField"
 				v-model="inputSomethingElseDetails"
 				class="ext-reportincident-dialog-step2__something-else-textarea"
 				:placeholder="$i18n(
 					'reportincident-dialog-something-else-input-placeholder'
 				).text()"
 				@focusout="displaySomethingElseTextboxRequiredError = true"
+				@input="onSomethingElseDetailsInput"
 			></cdx-text-area>
+			<template v-if="showSomethingElseCharacterCount" #help-text>
+				{{ somethingElseDetailsCharacterCountLeft }}
+			</template>
 		</cdx-field>
 
 		<!-- who is violating behavior guidelines -->
@@ -61,11 +66,17 @@
 				{{ $i18n( 'reportincident-dialog-additional-details-input-label' ).text() }}
 			</template>
 			<cdx-text-area
+				ref="additionalDetailsField"
 				v-model="inputDetails"
 				:placeholder="$i18n(
 					'reportincident-dialog-additional-details-input-placeholder'
-				).text()">
+				).text()"
+				@input="onAdditionalDetailsInput"
+			>
 			</cdx-text-area>
+			<template v-if="showAdditionalDetailsCharacterCount" #help-text>
+				{{ additionalDetailsCharacterCountLeft }}
+			</template>
 		</cdx-field>
 	</form>
 </template>
@@ -76,7 +87,8 @@ const Constants = require( '../Constants.js' );
 const useFormStore = require( '../stores/Form.js' );
 const { CdxCheckbox, CdxField, CdxLookup, CdxTextArea } = require( '@wikimedia/codex' );
 const { storeToRefs } = require( 'pinia' );
-const { computed, ref, onMounted, onUnmounted } = require( 'vue' );
+const { computed, ref, onMounted, onUnmounted, watch, nextTick } = require( 'vue' );
+const { codePointLength } = require( 'mediawiki.String' );
 
 // @vue/component
 module.exports = exports = {
@@ -105,7 +117,24 @@ module.exports = exports = {
 		const windowHeight = ref( window.innerHeight );
 		const suggestedUsernames = ref( [] );
 
+		const additionalDetailsCharacterCountLeft = ref( '' );
+		const somethingElseDetailsCharacterCountLeft = ref( '' );
+		const additionalDetailsField = ref( null );
+		const somethingElseDetailsField = ref( null );
+
+		const codePointLimit = mw.config.get( 'wgCommentCodePointLimit' );
+
 		let debounce = null;
+
+		/**
+		 * Whether the "Something else" textbox value should be sent
+		 * in the request body to the REST endpoint on form submission.
+		 */
+		const collectSomethingElseDetails = computed( () => {
+			return inputBehaviors.value.filter(
+				( input ) => input === Constants.harassmentTypes.OTHER
+			).length > 0;
+		} );
 
 		/**
 		 * Called when the browser window is resized.
@@ -118,9 +147,43 @@ module.exports = exports = {
 			windowHeight.value = window.innerHeight;
 		}
 
-		// Call the onWindowResize on the "resize" event once the
-		// second step is mounted.
+		/**
+		 * Applies the code point limit to the field given via a
+		 * ref to the codex textarea component.
+		 *
+		 * @param {Object} fieldRef A ref to the codex textarea component
+		 */
+		function applyCodePointLimitToField( fieldRef ) {
+			const $textarea = $( fieldRef.value.textarea );
+			$textarea.codePointLimit( codePointLimit );
+			$textarea.on( 'change', () => {
+				// Needed because Vue cannot listen to JQuery events, so
+				// a native JS input event is needed to cause an update.
+				$textarea[ 0 ].dispatchEvent( new CustomEvent( 'input' ) );
+			} );
+		}
+
 		onMounted( () => {
+			// Enforce the code point limit on the additional details field.
+			applyCodePointLimitToField( additionalDetailsField );
+			// If the Something else textbox is already shown, then apply
+			// the code point limit to it. Otherwise, watch for it being
+			// created to add the code point limit.
+			if ( collectSomethingElseDetails.value ) {
+				applyCodePointLimitToField( somethingElseDetailsField );
+			} else {
+				watch( collectSomethingElseDetails, ( newValue, oldValue ) => {
+					if ( oldValue !== newValue && newValue ) {
+						nextTick( () => {
+							// Once the next tick has occurred, the Something else details textbox
+							// has been shown and enforcement of the character limit can be added.
+							applyCodePointLimitToField( somethingElseDetailsField );
+						} );
+					}
+				} );
+			}
+			// Run onWindowResize on the "resize" event once the
+			// second step is mounted.
 			window.addEventListener( 'resize', onWindowResize );
 		} );
 
@@ -167,22 +230,20 @@ module.exports = exports = {
 		} );
 
 		/**
-		 * Whether the "Something else" textbox value should be sent
-		 * in the request body to the REST endpoint on form submission.
-		 */
-		const collectSomethingElseDetails = computed( () => {
-			return inputBehaviors.value.filter(
-				( input ) => input === Constants.harassmentTypes.OTHER
-			).length > 0;
-		} );
-
-		/**
 		 * The menu items for the reported user Codex Lookup component.
 		 */
 		const inputReportedUserMenuItems = computed( () => {
 			return suggestedUsernames.value.map( ( user ) => {
 				return { value: user.name };
 			} );
+		} );
+
+		const showSomethingElseCharacterCount = computed( () => {
+			return somethingElseDetailsCharacterCountLeft.value !== '' && collectSomethingElseDetails.value;
+		} );
+
+		const showAdditionalDetailsCharacterCount = computed( () => {
+			return additionalDetailsCharacterCountLeft.value !== '';
 		} );
 
 		/**
@@ -276,6 +337,48 @@ module.exports = exports = {
 			loadSuggestedUsernames();
 		}
 
+		/**
+		 * Updates the count in the provided ref that stores how many characters
+		 * left there are for a given field.
+		 *
+		 * @param {string} value The current value of the field
+		 * @param {Object} counterRef The ref that stores the characters left count for the field
+		 */
+		function updateCharacterCount( value, counterRef ) {
+			let remaining;
+			remaining = codePointLimit - codePointLength( value );
+			if ( remaining > 99 ) {
+				remaining = '';
+			} else {
+				remaining = mw.language.convertNumber( remaining );
+			}
+			counterRef.value = remaining;
+		}
+
+		/**
+		 * Called when the Something else details textbox has the "input" event.
+		 * This function calls updateCharacterCount to update the character count
+		 * shown below the Something else details field.
+		 *
+		 * @param {Event} event
+		 * @listens input
+		 */
+		function onSomethingElseDetailsInput( event ) {
+			updateCharacterCount( event.target.value, somethingElseDetailsCharacterCountLeft );
+		}
+
+		/**
+		 * Called when the Additional details textbox has the "input" event.
+		 * This function calls updateCharacterCount to update the character count
+		 * shown below the Additional details field.
+		 *
+		 * @param {Event} event
+		 * @listens input
+		 */
+		function onAdditionalDetailsInput( event ) {
+			updateCharacterCount( event.target.value, additionalDetailsCharacterCountLeft );
+		}
+
 		return {
 			harassmentOptions,
 			inputBehaviors,
@@ -292,11 +395,20 @@ module.exports = exports = {
 			formErrorMessages,
 			harassmentStatus,
 			reportedUserStatus,
+			showAdditionalDetailsCharacterCount,
+			additionalDetailsCharacterCountLeft,
+			showSomethingElseCharacterCount,
+			somethingElseDetailsCharacterCountLeft,
+			additionalDetailsField,
+			somethingElseDetailsField,
+			onSomethingElseDetailsInput,
+			onAdditionalDetailsInput,
 			onReportedUserInput,
 			// Used in tests, so needs to be passed out here.
 			/* eslint-disable vue/no-unused-properties */
 			windowHeight,
-			suggestedUsernames
+			suggestedUsernames,
+			updateCharacterCount
 			/* eslint-enable vue/no-unused-properties */
 		};
 	}

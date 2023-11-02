@@ -1,5 +1,11 @@
 'use strict';
 
+const { mockCodePointLength } = require( '../utils.js' );
+
+// Need to run this here as the import of App.vue without
+// mediawiki.String defined causes errors in running these tests.
+mockCodePointLength();
+
 const Main = require( '../../../resources/ext.reportIncident/components/App.vue' ),
 	mount = require( '@vue/test-utils' ).mount,
 	{ nextTick } = require( 'vue' ),
