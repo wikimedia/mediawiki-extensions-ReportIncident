@@ -178,6 +178,7 @@
 				"mediawiki.storage",
 				"mediawiki.String",
 				"mediawiki.user",
+				"jquery.lengthLimit",
 				"vue",
 				"pinia",
 				"@wikimedia/codex"
