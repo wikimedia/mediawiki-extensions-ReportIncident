@@ -6,6 +6,7 @@
 	},
 	"reportincident-dialog-close-btn": "Chiudi",
 	"reportincident-dialog-optional-label": "(opzionale)",
+	"reportincident-success-message-close": "Chiudi",
 	"reportincident-email-link-to-page-prefix": "Collegamento alla pagina",
 	"reportincident-email-something-else": "Qualcos'altro: \"$1\"",
 	"reportincident-emaildialog-close-button": "Annulla",

@@ -24,6 +24,8 @@
 	"reportincident-dialog-harassment-example-trolling": "Троловање",
 	"reportincident-success-message-close": "Затвори",
 	"reportincident-email-body": "Подносилац пријаве: $1\nПријављени корисник: $2\n$3: $4\n\nПонашање: $5\nДетаљи: $6\n\nИмејл $1: $7",
+	"reportincident-email-link-to-page-prefix": "Веза ка страници",
+	"reportincident-email-link-to-comment-prefix": "Веза ка пријављеном коментару",
 	"reportincident-email-something-else": "Нешто друго: „$1“",
 	"reportincident-emaildialog-title": "Потребна верификована имејл адреса",
 	"reportincident-emaildialog-close-button": "Откажи",
