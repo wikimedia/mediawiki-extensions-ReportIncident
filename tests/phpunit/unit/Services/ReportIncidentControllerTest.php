@@ -45,30 +45,6 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		];
 	}
 
-	/** @dataProvider provideShouldShowButtonForSkin */
-	public function testShouldShowButtonForSkin( $skin, $supportedSkins, $expectedReturnValue ) {
-		$config = new HashConfig( [
-			'ReportIncidentEnabledSkins' => $supportedSkins,
-		] );
-		$objectUnderTest = $this->newServiceInstance( ReportIncidentController::class, [
-			'config' => $config
-		] );
-		$objectUnderTest = TestingAccessWrapper::newFromObject( $objectUnderTest );
-		$this->assertSame(
-			$expectedReturnValue,
-			$objectUnderTest->shouldShowButtonForSkin( $skin, $config ),
-			'::shouldShowButtonForNamespace did not return the expected boolean.'
-		);
-	}
-
-	public static function provideShouldShowButtonForSkin() {
-		return [
-			'Skin is supported' => [ 'minerva', [ 'minerva', 'vector' ], true ],
-			'Skin is not supported' => [ 'timeless', [ 'vector' ], false ],
-			'Skin is null' => [ null, [ 'vector' ], false ],
-		];
-	}
-
 	/** @dataProvider provideShouldShowButtonForUser */
 	public function testShouldShowButtonForUser( $isUserNamed ) {
 		$mockUser = $this->createMock( User::class );
@@ -126,7 +102,6 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'All checks should fail' => [
 				new HashConfig( [
 					'ReportIncidentReportButtonEnabled' => false,
-					'ReportIncidentEnabledSkins' => [ 'vector' ],
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 				] ),
 				NS_TEMPLATE,
@@ -137,7 +112,6 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'Feature flag disabled' => [
 				new HashConfig( [
 					'ReportIncidentReportButtonEnabled' => false,
-					'ReportIncidentEnabledSkins' => [ 'vector' ],
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 				] ),
 				NS_USER_TALK,
@@ -148,7 +122,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'Unsupported namespace' => [
 				new HashConfig( [
 					'ReportIncidentReportButtonEnabled' => true,
-					'ReportIncidentEnabledSkins' => [ 'vector' ],
+					'ReportIncident' => [ 'vector' ],
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 				] ),
 				NS_TEMPLATE,
@@ -156,32 +130,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				true,
 				false,
 			],
-			'Unsupported skin' => [
-				new HashConfig( [
-					'ReportIncidentReportButtonEnabled' => true,
-					'ReportIncidentEnabledSkins' => [ 'vector' ],
-					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
-				] ),
-				NS_USER_TALK,
-				'minerva',
-				true,
-				false,
-			],
-			'All skins are enabled' => [
-				new HashConfig( [
-					'ReportIncidentReportButtonEnabled' => true,
-					'ReportIncidentEnabledSkins' => [ '*' ],
-					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
-				] ),
-				NS_USER_TALK,
-				'timeless',
-				true,
-				true,
-			],
 			'User is not named' => [
 				new HashConfig( [
 					'ReportIncidentReportButtonEnabled' => true,
-					'ReportIncidentEnabledSkins' => [ 'vector' ],
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 				] ),
 				NS_USER_TALK,
@@ -192,7 +143,6 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'All checks should pass' => [
 				new HashConfig( [
 					'ReportIncidentReportButtonEnabled' => true,
-					'ReportIncidentEnabledSkins' => [ 'vector' ],
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 				] ),
 				NS_USER_TALK,

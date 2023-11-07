@@ -41,7 +41,6 @@ class DiscussionToolsHandler implements DiscussionToolsAddOverflowMenuItemsHook 
 	) {
 		// Only add overflow menu link if the:
 		// * page is in a supported namespace,
-		// * skin being used is supported,
 		// * link is to be shown to the current user, and
 		// * feature flag is enabled.
 		if ( $this->controller->shouldAddMenuItem( $contextSource ) ) {

@@ -40,7 +40,7 @@ class MainHooksHandler implements
 	public function onBeforePageDisplay( $out, $skin ): void {
 		// Only add HTML if the:
 		// * page is in a supported namespace,
-		// * skin is minerva and is also supported,
+		// * skin is minerva
 		// * link is to be shown to the current user, and
 		// * feature flag is enabled.
 		if ( $this->controller->shouldAddMenuItem( $out->getContext() ) ) {
@@ -52,7 +52,7 @@ class MainHooksHandler implements
 	public function onSidebarBeforeOutput( $skin, &$sidebar ): void {
 		// Show the link to report in minerva overflow menu if the:
 		// * page is in a supported namespace,
-		// * skin is minerva and is also supported,
+		// * skin is minerva
 		// * link is to be shown to the current user, and
 		// * feature flag is enabled.
 		if (
@@ -76,7 +76,6 @@ class MainHooksHandler implements
 	public function onSkinTemplateNavigation__Universal( $sktemplate, &$links ): void {
 		// Show the reporting link in the "Tools" menu if the:
 		// * page is in a supported namespace,
-		// * skin being used is supported,
 		// * link is to be shown to the current user, and
 		// * feature flag is enabled.
 		if ( $this->controller->shouldAddMenuItem( $sktemplate->getContext() ) ) {

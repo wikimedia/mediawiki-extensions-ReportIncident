@@ -29,25 +29,6 @@ class ReportIncidentController {
 	}
 
 	/**
-	 * Should the reporting link / button be shown for the current skin.
-	 * The name of the skin can be got from Skin::getSkinName.
-	 *
-	 * @param ?string $skin Supports null to be compatible with Skin::getSkinName that could
-	 *   return null. On null, this method always returns false.
-	 * @return bool
-	 */
-	private function shouldShowButtonForSkin( ?string $skin ): bool {
-		$enabledSkins = $this->config->get( 'ReportIncidentEnabledSkins' );
-		if ( in_array( '*', $enabledSkins ) ) {
-			return true;
-		}
-		if ( $skin === null ) {
-			return false;
-		}
-		return in_array( $skin, $enabledSkins );
-	}
-
-	/**
 	 * Should the reporting link / button be shown for the current user
 	 *
 	 * @param User $user
@@ -68,7 +49,7 @@ class ReportIncidentController {
 
 	/**
 	 * Should the reporting link / button be shown for the current
-	 * namespace, skin and user.
+	 * namespace and user.
 	 *
 	 * This can also be used to determine whether to add the HTML
 	 * for the reporting dialog in a given request.
@@ -79,7 +60,6 @@ class ReportIncidentController {
 	public function shouldAddMenuItem( IContextSource $context ): bool {
 		return $this->isButtonEnabled() &&
 			$this->shouldShowButtonForNamespace( $context->getTitle()->getNamespace() ) &&
-			$this->shouldShowButtonForSkin( $context->getSkin()->getSkinName() ) &&
 			$this->shouldShowButtonForUser( $context->getUser() );
 	}
 
