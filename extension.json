@@ -111,6 +111,10 @@
 			"styles": [
 				"ext.reportincident.less"
 			],
+			"skinStyles": {
+				"timeless": "ext.reportincident.timeless.less",
+				"monobook": "ext.reportincident.monobook.less"
+			},
 			"packageFiles": [
 				"init.js",
 				"Constants.js",
