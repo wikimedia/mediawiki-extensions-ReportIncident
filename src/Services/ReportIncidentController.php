@@ -37,10 +37,14 @@ class ReportIncidentController {
 	 * @return bool
 	 */
 	private function shouldShowButtonForSkin( ?string $skin ): bool {
+		$enabledSkins = $this->config->get( 'ReportIncidentEnabledSkins' );
+		if ( in_array( '*', $enabledSkins ) ) {
+			return true;
+		}
 		if ( $skin === null ) {
 			return false;
 		}
-		return in_array( $skin, $this->config->get( 'ReportIncidentEnabledSkins' ) );
+		return in_array( $skin, $enabledSkins );
 	}
 
 	/**

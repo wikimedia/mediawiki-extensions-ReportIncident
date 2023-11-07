@@ -30,10 +30,8 @@
 			"description": "When set to true, some developer-friendly features are enabled to facilitate testing and QA."
 		},
 		"ReportIncidentEnabledSkins": {
-			"value": [
-				"minerva", "vector", "vector-2022"
-			],
-			"description": "Feature flag to determine skins the Incident Reporting will run in. This should contain an array of skin names."
+			"value": [ "*" ],
+			"description": "Feature flag to determine skins the Incident Reporting will run in. This should contain an array of skin names. The value \"*\" indicates to display for any skin."
 		},
 		"ReportIncidentEnabledNamespaces": {
 			"value": [

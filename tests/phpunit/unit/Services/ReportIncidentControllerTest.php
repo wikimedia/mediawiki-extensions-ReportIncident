@@ -167,6 +167,17 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				true,
 				false,
 			],
+			'All skins are enabled' => [
+				new HashConfig( [
+					'ReportIncidentReportButtonEnabled' => true,
+					'ReportIncidentEnabledSkins' => [ '*' ],
+					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
+				] ),
+				NS_USER_TALK,
+				'timeless',
+				true,
+				true,
+			],
 			'User is not named' => [
 				new HashConfig( [
 					'ReportIncidentReportButtonEnabled' => true,
