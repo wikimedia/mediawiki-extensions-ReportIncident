@@ -31,7 +31,7 @@
 		},
 		"ReportIncidentEnabledNamespaces": {
 			"value": [
-				3
+				1, 3, 5, 7, 9, 11, 13, 15
 			],
 			"description": "Determines what namespaces the Incident Reporting tool will render within. The default is 3 which defaults to the NS_USER_TALK namespace"
 		},
