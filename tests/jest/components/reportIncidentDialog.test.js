@@ -17,6 +17,9 @@ const steps = {
  * be used to expect that the post() method is
  * called with the correct arguments.
  *
+ * If a function is provided as the returnValue,
+ * the return value of that function is used.
+ *
  * @param {*} returnValue
  * @return {jest.fn}
  */
@@ -24,6 +27,9 @@ function mockRestPost( returnValue ) {
 	mw.Rest = () => {};
 	const restPost = jest.fn();
 	restPost.mockImplementation( () => {
+		if ( returnValue instanceof Function ) {
+			return returnValue();
+		}
 		return returnValue;
 	} );
 	jest.spyOn( mw, 'Rest' ).mockImplementation( () => {
@@ -302,11 +308,18 @@ describe( 'Report Incident Dialog', () => {
 
 			const store = useFormStore();
 			const consoleSpy = jest.spyOn( console, 'log' );
-			const restPost = mockRestPost( Promise.resolve() );
+			const restPost = mockRestPost( () => {
+				// Form should be in submission when the REST API is called.
+				expect( wrapper.vm.formSubmissionInProgress ).toBe( true );
+				return Promise.resolve();
+			} );
 
 			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
+
+			// Form should not be in submission if the form was not submitted yet.
+			expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
 
 			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
 				// Should be dialog step one if the form submitted correctly.
@@ -320,6 +333,8 @@ describe( 'Report Incident Dialog', () => {
 						reportedUser: 'test user', revisionId: 1
 					}
 				);
+				// Form should not be in submission if the form has finished submitting.
+				expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
 			} );
 		} );
 
@@ -329,18 +344,22 @@ describe( 'Report Incident Dialog', () => {
 
 			const store = useFormStore();
 			const consoleSpy = jest.spyOn( console, 'log' );
-			const restPost = mockRestPost( {
-				then: ( _resolveHandler, rejectHandler ) => {
-					rejectHandler(
-						'http',
-						{ xhr: { responseJSON: { sentEmail: {
-							to: [ { address: 'test@test.com' }, { address: 'testing@example.com' } ],
-							from: { address: 'b@example.com' },
-							subject: 'Testing subject',
-							body: 'Testing email body.\nTesting.'
-						} } } }
-					);
-				}
+			const restPost = mockRestPost( () => {
+				// Form should be in submission when the REST API is called.
+				expect( wrapper.vm.formSubmissionInProgress ).toBe( true );
+				return {
+					then: ( _resolveHandler, rejectHandler ) => {
+						rejectHandler(
+							'http',
+							{ xhr: { responseJSON: { sentEmail: {
+								to: [ { address: 'test@test.com' }, { address: 'testing@example.com' } ],
+								from: { address: 'b@example.com' },
+								subject: 'Testing subject',
+								body: 'Testing email body.\nTesting.'
+							} } } }
+						);
+					}
+				};
 			} );
 
 			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
@@ -374,18 +393,24 @@ describe( 'Report Incident Dialog', () => {
 
 			const store = useFormStore();
 			const consoleSpy = jest.spyOn( console, 'log' );
-			const restPost = mockRestPost( {
-				then: ( _resolveHandler, rejectHandler ) => {
-					rejectHandler(
-						'http',
-						{ xhr: { responseJSON: {} } }
-					);
-				}
+			const restPost = mockRestPost( () => {
+				// Form should be in submission when the REST API is called.
+				expect( wrapper.vm.formSubmissionInProgress ).toBe( true );
+				return {
+					then: ( _resolveHandler, rejectHandler ) => {
+						rejectHandler(
+							'http',
+							{ xhr: { responseJSON: {} } }
+						);
+					}
+				};
 			} );
 
 			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
+
+			expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
 
 			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
 				// Should be dialog step one if the form submitted correctly.
@@ -399,6 +424,8 @@ describe( 'Report Incident Dialog', () => {
 						reportedUser: 'test user', revisionId: 1
 					}
 				);
+				// Form should not be in submission if the form has finished submitting.
+				expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
 			} );
 		} );
 	} );

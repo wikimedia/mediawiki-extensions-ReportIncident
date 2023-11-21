@@ -27,6 +27,7 @@
 			<div class="ext-reportincident-dialog-footer">
 				<cdx-button
 					class="ext-reportincident-dialog-footer__back-btn"
+					:disabled="formSubmissionInProgress || null"
 					@click="navigatePrevious"
 				>
 					{{ defaultButtonLabel }}
@@ -35,6 +36,7 @@
 					class="ext-reportincident-dialog-footer__next-btn"
 					weight="primary"
 					action="progressive"
+					:disabled="formSubmissionInProgress || null"
 					@click="navigateNext"
 				>
 					{{ primaryButtonLabel }}
@@ -74,6 +76,7 @@ module.exports = exports = {
 		const wrappedOpen = useModelWrapper( toRef( props, 'open' ), emit, 'update:open' );
 		const currentStep = ref( props.initialStep );
 		const footerErrorMessage = ref( '' );
+		const formSubmissionInProgress = ref( false );
 
 		const currentSlotName = computed( () => `${currentStep.value}` );
 		const showFooterHelpText = computed( () => {
@@ -132,6 +135,7 @@ module.exports = exports = {
 			currentStep.value = Constants.DIALOG_STEP_1;
 			store.$reset();
 			store.formSuccessfullySubmitted = true;
+			formSubmissionInProgress.value = false;
 		}
 
 		/**
@@ -183,6 +187,7 @@ module.exports = exports = {
 				}
 				footerErrorMessage.value = message;
 			}
+			formSubmissionInProgress.value = false;
 		}
 
 		function navigateNext() {
@@ -195,6 +200,7 @@ module.exports = exports = {
 				const restPayload = store.restPayload;
 				restPayload.revisionId = mw.config.get( 'wgCurRevisionId' );
 				if ( store.isFormValidForSubmission() ) {
+					formSubmissionInProgress.value = true;
 					new mw.Rest().post(
 						'/reportincident/v0/report',
 						restPayload
@@ -235,6 +241,7 @@ module.exports = exports = {
 			footerErrorMessage,
 			showFooterHelpText,
 			showFooterErrorText,
+			formSubmissionInProgress,
 			// Used in tests, so needs to be passed out here.
 			/* eslint-disable vue/no-unused-properties */
 			onReportSubmitFailure
