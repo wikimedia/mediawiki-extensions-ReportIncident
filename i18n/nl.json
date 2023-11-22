@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"reportincident-desc": "Uitbreiding voor een incidentmeldingssysteem.",
+	"reportincident-report-btn-label": "Melden",
+	"reportincident-dialog-close-btn": "Sluiten",
+	"reportincident-dialog-proceed-btn": "Een melding indienen",
+	"reportincident-dialog-back-btn": "Terug",
+	"reportincident-dialog-submit-btn": "Verzenden",
+	"reportincident-dialog-title": "Een incident melden",
+	"reportincident-dialog-first-step-cancel-btn": "Ik wil geen melding indienen",
+	"reportincident-dialog-harassment-type-label": "Welke soort gedrag?",
+	"reportincident-dialog-additional-details-input-label": "Aanvullende details",
+	"reportincident-dialog-optional-label": "(optioneel)",
+	"reportincident-dialog-violator-placeholder-text": "Wie meldt u?",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Aanzetten tot haat of discriminatie",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Seksuele intimidatie",
+	"reportincident-dialog-harassment-type-threats-of-violence": "Bedreigingen met geweld",
+	"reportincident-dialog-harassment-type-intimidation": "Intimidatie, agressie, schelden",
+	"reportincident-dialog-harassment-type-something-else": "Iets anders",
+	"reportincident-dialog-harassment-intro-text": "Ongepast gedrag wordt op {{SITENAME}} niet getolereerd.",
+	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Volgens de [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct|Universele gedragscode]] omvat onaanvaardbaar gedrag onder meer:",
+	"reportincident-dialog-harassment-example-insults": "Herhaalde beledigingen",
+	"reportincident-dialog-harassment-example-sexual-harassment": "Seksuele intimidatie",
+	"reportincident-dialog-harassment-example-threats": "Bedreigingen",
+	"reportincident-dialog-harassment-example-encouraging-harm": "Het aanmoedigen van schade aan anderen",
+	"reportincident-dialog-harassment-example-doxing": "Openbaarmaking van persoonsgegevens (doxxing)",
+	"reportincident-dialog-harassment-example-hounding": "Achtervolgen",
+	"reportincident-dialog-harassment-example-trolling": "Trollen",
+	"reportincident-dialog-engage-header": "Hoe u een dialoog aangaat",
+	"reportincident-dialog-engage-text": "Als u zich daar veilig bij voelt, kunt u proberen te praten met de persoon die u meldt. Vertel over de Universele Gedragscode op {{SITENAME}} en dat het verplicht is anderen met respect te bejegenen. Soms helpt dit het lastigvallen te stoppen.",
+	"reportincident-dialog-admin-review": "Uw melding wordt ter beoordeling naar [$1 een moderator] gestuurd.",
+	"reportincident-dialog-harassment-empty": "Selecteer ten minste één gedrag.",
+	"reportincident-dialog-violator-empty": "Geef een te melden gebruikersnaam op.",
+	"reportincident-dialog-something-else-empty": "Geef een korte beschrijving van het gedrag.",
+	"reportincident-email-subject": "{{SITENAME}}: Nieuwe incidentmelding van “$1”",
+	"reportincident-email-something-else": "Iets anders: “$1”"
+}
