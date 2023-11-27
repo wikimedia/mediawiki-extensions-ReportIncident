@@ -306,8 +306,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$contentLanguage
 			->expects( $this->exactly( 2 ) )
 			->method( 'truncateForVisual' )
-			->withConsecutive( [ 'testing-details' ], [ 'testing-something-else' ] )
-			->willReturnOnConsecutiveCalls( 'testing-details-truncated', 'testing-something-else-truncated' );
+			->willReturnCallback( static fn ( $str ) => "$str-truncated" );
 		$handler = $this->getMockBuilder( ReportHandler::class )
 			->setConstructorArgs( [
 				$this->createMock( Config::class ),

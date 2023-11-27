@@ -122,17 +122,12 @@ class ReportIncidentMailerTest extends MediaWikiIntegrationTestCase {
 			->expects( $this->once() )
 			->method( 'getFullURL' )
 			->willReturn( 'special-email-link' );
-		// Mock the TitleFactory::newFromText method to return the associated
-		// title objects in the order they are called.
 		$titleFactory->method( 'newFromText' )
-			->withConsecutive(
-				[ $incidentReport->getReportingUser()->getName(), NS_USER ],
-				[ $incidentReport->getReportedUser()->getName(), NS_USER ],
-				[ 'Special:EmailUser' ]
-			)
-			->willReturnOnConsecutiveCalls(
-				$mockReportingUserPageTitle, $mockReportedUserPageTitle, $mockSpecialEmailTitle
-			);
+			->willReturnMap( [
+				[ $incidentReport->getReportingUser()->getName(), NS_USER, $mockReportingUserPageTitle ],
+				[ $incidentReport->getReportedUser()->getName(), NS_USER, $mockReportedUserPageTitle ],
+				[ 'Special:EmailUser', NS_MAIN, $mockSpecialEmailTitle ],
+			] );
 		// Mock the UrlUtils::expand method to return a pre-defined string for ease of testing.
 		$urlUtils = $this->createMock( UrlUtils::class );
 		$urlUtils->method( 'expand' )
