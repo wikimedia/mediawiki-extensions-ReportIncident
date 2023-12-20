@@ -4,6 +4,7 @@
 			"Kly"
 		]
 	},
+	"reportincident-desc": "事件報告系統擴充。",
 	"reportincident-report-btn-label": "報告",
 	"reportincident-dialog-close-btn": "關閉",
 	"reportincident-dialog-proceed-btn": "繼續提出報告",
@@ -13,6 +14,9 @@
 	"reportincident-dialog-first-step-cancel-btn": "我不想提出報告",
 	"reportincident-dialog-harassment-type-label": "什麼類型的行為？",
 	"reportincident-dialog-additional-details-input-label": "額外細節",
+	"reportincident-dialog-optional-label": "(選填)",
+	"reportincident-dialog-violator-label": "{{GENDER:|您}}想要報告的使用者",
+	"reportincident-dialog-violator-placeholder-text": "{{GENDER:|您}}要對誰報告？",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "仇恨言論或歧視",
 	"reportincident-dialog-harassment-type-sexual-harassment": "性騷擾",
 	"reportincident-dialog-harassment-type-threats-of-violence": "暴力威脅",
@@ -21,6 +25,13 @@
 	"reportincident-dialog-something-else-input-placeholder": "具體說明上述未列出的行為。",
 	"reportincident-dialog-harassment-example-sexual-harassment": "性騷擾",
 	"reportincident-dialog-harassment-example-threats": "威脅",
+	"reportincident-success-message-close": "關閉",
+	"reportincident-unable-to-send": "無法透過電子郵件發送事件報告。",
+	"reportincident-email-link-to-page-prefix": "連結到頁面",
+	"reportincident-email-link-to-comment-prefix": "連結到報告的意見",
+	"reportincident-email-link-to-topic-prefix": "連結到報告的主題",
+	"right-reportincident": "報告事件",
+	"action-reportincident": "報告事件",
 	"reportincident-emaildialog-close-button": "取消",
 	"reportincident-emaildialog-primary": "前往設定"
 }

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Rail"
+			"Rail",
+			"Woytecr"
 		]
 	},
 	"reportincident-desc": "Rozszerzenie Systemu Raportowania Incydentów",
@@ -14,9 +15,9 @@
 	"reportincident-dialog-first-step-cancel-btn": "Nie chcę wysłać zgłoszenia",
 	"reportincident-dialog-harassment-type-label": "Jaki rodzaj zachowania zgłaszasz?",
 	"reportincident-dialog-additional-details-input-label": "Dodatkowe informacje",
-	"reportincident-dialog-additional-details-input-placeholder": "Podaj kontekst, który pomoże osobie weryfikującej zgłoszenie.",
+	"reportincident-dialog-additional-details-input-placeholder": "Podaj kontekst, który pomoże osobie weryfikującej zgłoszenie. Możesz dołączyć linki, które pomogą nakreślić zdarzenie.",
 	"reportincident-dialog-optional-label": "(opcjonalne)",
-	"reportincident-dialog-violator-label": "Nazwa użytkownika, którego zachowanie {{GENDER:|pragniesz}} zgłosić",
+	"reportincident-dialog-violator-label": "Użytkownik, którego zachowanie {{GENDER:|pragniesz}} zgłosić",
 	"reportincident-dialog-violator-placeholder-text": "Kogo {{GENDER:|zgłaszasz}}?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Mowa nienawiści bądź dyskryminacja",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Napastowanie seksualne",
@@ -39,10 +40,24 @@
 	"reportincident-dialog-harassment-empty": "{{GENDER:|Musisz}} wybrać co najmniej jedno zachowanie.",
 	"reportincident-dialog-violator-empty": "{{GENDER:|Musisz}} określić nazwę zgłaszanego użytkownika.",
 	"reportincident-dialog-something-else-empty": "Napisz krótki opis zgłaszanego zachowania.",
+	"reportincident-dialog-violator-nonexistent": "{{GENDER:|Musisz}} podać nazwę istniejącego użytkownika, aby go zgłosić.",
+	"reportincident-dialog-internet-disconnected-error": "Wygląda na to, że nie masz połączenia z internetem. Spróbuj przesłać ponownie, gdy połączenie zostanie przywrócone.",
+	"reportincident-dialog-server-error": "Przepraszamy, wygląda na to, że nasz serwer nie odpowiada. Spróbuj przesłać ponownie.",
+	"reportincident-dialog-generic-error": "Nie udało się przesłać formularza z powodu błędu. Spróbuj przesłać ponownie.",
+	"reportincident-success-message": "Zgłoszenie zostało pomyślnie wysłane. Administrator sprawdzi i ustali, czy zgłaszane zdarzenie narusza nasze zasady. Dziękujemy, że pomagasz nam chronić witrynę {{SITENAME}}.",
+	"reportincident-success-message-close": "Zamknij",
 	"reportincident-unable-to-send": "Nie udało się wysłać wiadomości e-mail ze zgłoszeniem incydentu.",
 	"reportincident-email-subject": "{{SITENAME}}: Nowe zgłoszenie incydentu od „$1”",
-	"reportincident-email-body": "Zgłaszający użytkownik: $1\nZgłoszony użytkownik: $2\nLink do strony: $3\n\nZachowania: $4\nOpis: $5\n\nNapisz e-mail do $1: $6",
+	"reportincident-email-body": "Zgłaszający użytkownik: $1\nZgłoszony użytkownik: $2\n$3: $4\n\nZachowania: $5\nOpis: $6\n\nNapisz e-mail do $1: $7",
+	"reportincident-email-link-to-page-prefix": "Link do strony",
+	"reportincident-email-link-to-comment-prefix": "Link do zgłoszonego komentarza",
+	"reportincident-email-link-to-topic-prefix": "Link do zgłoszonego wątku",
 	"reportincident-email-something-else": "Coś jeszcze: „$1”",
 	"right-reportincident": "Zgłaszanie incydentów",
-	"action-reportincident": "zgłaszania incydentów"
+	"action-reportincident": "zgłaszania incydentów",
+	"reportincident-emaildialog-title": "Wymagana jest weryfikacja adresu e-mail",
+	"reportincident-emaildialog-close-button": "Anuluj",
+	"reportincident-emaildialog-content": "Potrzebujemy {{GENDER:|Twojego}} zweryfikowanego adresu e-mail, aby przesyłać aktualne informacje o Twoim zgłoszeniu, na przykład informacje o podjętych dalszych krokach. Przed wysłaniem zgłoszenia dodaj lub zweryfikuj adres {{GENDER:|swój}} adres e-mail w {{GENDER:|swoich}} ustawieniach konta użytkownika.",
+	"reportincident-emaildialog-primary": "Przejdź do ustawień",
+	"reportincident-confirmedemail-required": "Do przesłania raportu o zdarzeniu wymagany jest potwierdzony adres e-mail."
 }
