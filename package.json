@@ -20,7 +20,7 @@
 		"@wdio/local-runner": "7.16.13",
 		"@wdio/mocha-framework": "7.16.13",
 		"@wdio/spec-reporter": "7.16.13",
-		"@wikimedia/codex": "0.18.0",
+		"@wikimedia/codex": "1.2.0",
 		"@wikimedia/mw-node-qunit": "^7.1.0",
 		"babel-core": "6.26.3",
 		"eslint": "8.32.0",
