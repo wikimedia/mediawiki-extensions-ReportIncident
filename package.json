@@ -32,7 +32,7 @@
 		"jest": "27.4.7",
 		"jquery": "3.7.1",
 		"pinia": "2.0.16",
-		"vue": "3.2.37",
+		"vue": "3.3.9",
 		"wdio-intercept-service": "4.4.0",
 		"wdio-mediawiki": "2.1.0"
 	},
