@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Beta16"
+			"Beta16",
+			"Ontsed"
 		]
 	},
 	"reportincident-dialog-close-btn": "Chiudi",
 	"reportincident-dialog-optional-label": "(opzionale)",
+	"reportincident-dialog-harassment-example-doxing": "Divulgazione dei dati personali (doxing)",
 	"reportincident-email-something-else": "Qualcos'altro: \"$1\""
 }
