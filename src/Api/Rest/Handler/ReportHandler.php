@@ -2,9 +2,9 @@
 
 namespace MediaWiki\Extension\ReportIncident\Api\Rest\Handler;
 
-use Config;
 use Language;
 use MediaWiki\CommentStore\CommentStore;
+use MediaWiki\Config\Config;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Logger\LoggerFactory;

@@ -3,10 +3,10 @@
 namespace MediaWiki\Extension\ReportIncident\Tests\Unit\Api\Rest\Handler;
 
 use FormatJson;
-use HashConfig;
 use Language;
 use MediaWiki\Block\AbstractBlock;
 use MediaWiki\Config\Config;
+use MediaWiki\Config\HashConfig;
 use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\IncidentReportEmailStatus;

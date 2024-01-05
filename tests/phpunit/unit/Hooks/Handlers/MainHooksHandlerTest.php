@@ -5,9 +5,9 @@ namespace MediaWiki\Extension\ReportIncident\Tests\Unit;
 use IContextSource;
 use MediaWiki\Extension\ReportIncident\Hooks\Handlers\MainHooksHandler;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
+use MediaWiki\Output\OutputPage;
 use MediaWikiUnitTestCase;
 use Message;
-use OutputPage;
 use Skin;
 
 /**
