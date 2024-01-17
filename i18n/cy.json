@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Afalau"
+		]
+	},
+	"reportincident-report-btn-label": "Adrodd",
+	"reportincident-dialog-close-btn": "Cau",
+	"reportincident-dialog-proceed-btn": "Ymlaen i ffeilio adroddiad",
+	"reportincident-dialog-back-btn": "Nôl",
+	"reportincident-dialog-submit-btn": "Cyflwyno",
+	"reportincident-dialog-title": "Rhoi gwybod am ddigwyddiad",
+	"reportincident-dialog-first-step-cancel-btn": "Dydw i ddim eisiau ffeilio adroddiad",
+	"reportincident-dialog-harassment-type-label": "Pa fath o ymddygiad?",
+	"reportincident-dialog-additional-details-input-label": "Manylion ychwanegol",
+	"reportincident-dialog-optional-label": "(dewisol)",
+	"reportincident-dialog-violator-placeholder-text": "Pwy ydych {{GENDER:|chi}}'n adrodd?",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Casineb neu wahaniaethu",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Aflonyddu rhywiol",
+	"reportincident-dialog-harassment-type-threats-of-violence": "Bygythiadau trais",
+	"reportincident-dialog-harassment-type-intimidation": "Bygythiad, ymosodiad, galw enwau",
+	"reportincident-dialog-harassment-type-something-else": "Rhywbeth arall",
+	"reportincident-dialog-harassment-intro-text": "Nid oes lle am ymddygiad anaddas ar {{SITENAME}}.",
+	"reportincident-dialog-harassment-example-insults": "Sarhad ailadroddus",
+	"reportincident-dialog-harassment-example-sexual-harassment": "Aflonyddu Rhywiol",
+	"reportincident-dialog-harassment-example-threats": "Bygythiadau",
+	"reportincident-dialog-harassment-example-encouraging-harm": "Annog niwed i eraill",
+	"reportincident-dialog-harassment-example-doxing": "Rhannu data personol (Saesneg: Doxing)",
+	"reportincident-dialog-harassment-example-hounding": "Aflonyddu",
+	"reportincident-dialog-harassment-example-trolling": "Trolio",
+	"reportincident-dialog-engage-header": "Sut i gymryd rhan mewn trafodaeth",
+	"reportincident-email-something-else": "Rhywbeth arall: \"$1\""
+}

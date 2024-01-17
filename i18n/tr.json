@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hedda"
+			"Hedda",
+			"Joseph"
 		]
 	},
-	"reportincident-desc": "Özel Olay Raporlama Sistemi uzantısı.",
+	"reportincident-desc": "Olay Bildirim Sistemi uzantısı.",
 	"reportincident-report-btn-label": "Bildir",
 	"reportincident-dialog-close-btn": "Kapat",
 	"reportincident-dialog-proceed-btn": "Bildiride bulunmaya devam edin",
