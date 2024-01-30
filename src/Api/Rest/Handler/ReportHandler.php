@@ -8,6 +8,7 @@ use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Rest\SimpleHandler;
+use MediaWiki\Rest\TokenAwareHandlerTrait;
 use MediaWiki\Rest\Validator\JsonBodyValidator;
 use MediaWiki\Rest\Validator\UnsupportedContentTypeBodyValidator;
 use MediaWiki\Revision\RevisionStore;
@@ -20,6 +21,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  * REST handler for /reportincident/v0/report
  */
 class ReportHandler extends SimpleHandler {
+
+	use TokenAwareHandlerTrait;
 
 	private Config $config;
 	private ReportIncidentManager $reportIncidentManager;
@@ -57,6 +60,8 @@ class ReportHandler extends SimpleHandler {
 				new MessageValue( 'rest-permission-denied-anon' ), 401
 			);
 		}
+		// Validate the CSRF token in the request body.
+		$this->validateToken();
 		$body = $this->getValidatedBody();
 		$revisionId = $body['revisionId'];
 		$revision = $this->revisionStore->getRevisionById( $revisionId );
@@ -138,7 +143,6 @@ class ReportHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
-		];
+		] + $this->getTokenParamDefinition();
 	}
-
 }

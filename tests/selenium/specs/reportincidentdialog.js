@@ -97,7 +97,10 @@ describe( 'ReportIncident dialog', function () {
 		assert.strictEqual( request.url, '/rest.php/reportincident/v0/report' );
 		// Assert that the request method is POST.
 		assert.strictEqual( request.method, 'POST' );
-		// Assert that the request body matches the data entered in the form.
+		const requestBody = request.body;
+		// Remove the token from our verification as it will be different each time.
+		delete requestBody.token;
+		// Assert that the request body matches the data entered in the form
 		assert.deepStrictEqual(
 			request.body,
 			{
