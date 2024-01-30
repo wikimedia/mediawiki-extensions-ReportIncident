@@ -199,6 +199,9 @@ module.exports = exports = {
 				const store = useFormStore();
 				const restPayload = store.restPayload;
 				restPayload.revisionId = mw.config.get( 'wgCurRevisionId' );
+				// TODO: Simulate mw.Api.postWithToken() by re-trying if the REST API call fails
+				// because the CSRF token does not match.
+				restPayload.token = mw.user.tokens.get( 'csrfToken' );
 				if ( store.isFormValidForSubmission() ) {
 					formSubmissionInProgress.value = true;
 					new mw.Rest().post(

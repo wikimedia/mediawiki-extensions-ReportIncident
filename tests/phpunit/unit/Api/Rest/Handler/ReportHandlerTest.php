@@ -317,10 +317,12 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				$this->createMock( UserFactory::class ),
 				$contentLanguage,
 			] )
-			->onlyMethods( [ 'getAuthority' ] )
+			->onlyMethods( [ 'getAuthority', 'validateToken' ] )
 			->getMock();
 		$handler->method( 'getAuthority' )
 			->willReturn( $this->mockRegisteredUltimateAuthority() );
+		$handler->expects( $this->once() )
+			->method( 'validateToken' );
 		$handler = TestingAccessWrapper::newFromObject( $handler );
 		/** @var IncidentReport $incidentReportObject */
 		$incidentReportObject = $handler->getIncidentReportObjectFromValidatedBody( [

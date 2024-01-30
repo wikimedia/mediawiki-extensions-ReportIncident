@@ -12,6 +12,7 @@ use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
+use MediaWiki\Rest\TokenAwareHandlerTrait;
 use MediaWiki\Rest\Validator\JsonBodyValidator;
 use MediaWiki\Rest\Validator\UnsupportedContentTypeBodyValidator;
 use MediaWiki\Revision\RevisionStore;
@@ -30,6 +31,8 @@ use Wikimedia\Timestamp\ConvertibleTimestamp;
  * REST handler for /reportincident/v0/report
  */
 class ReportHandler extends SimpleHandler {
+
+	use TokenAwareHandlerTrait;
 
 	private Config $config;
 	private ReportIncidentManager $reportIncidentManager;
@@ -178,6 +181,9 @@ class ReportHandler extends SimpleHandler {
 				throw new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 );
 			}
 		}
+		// Validate the CSRF token in the request body.
+		$this->validateToken();
+		// Validate that the revision with the given ID exists.
 		$revisionId = $body['revisionId'];
 		$revision = $this->revisionStore->getRevisionById( $revisionId );
 		if ( !$revision ) {
@@ -366,7 +372,7 @@ class ReportHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
-		];
+		] + $this->getTokenParamDefinition();
 	}
 
 }

@@ -308,6 +308,14 @@ describe( 'Report Incident Dialog', () => {
 
 			const store = useFormStore();
 			const consoleSpy = jest.spyOn( console, 'log' );
+			const userTokensSpy = jest.spyOn( mw.user.tokens, 'get' ).mockImplementation( ( tokenType ) => {
+				switch ( tokenType ) {
+					case 'csrfToken':
+						return 'csrf-token';
+					default:
+						throw new Error( 'Unknown token type: ' + tokenType );
+				}
+			} );
 			const restPost = mockRestPost( () => {
 				// Form should be in submission when the REST API is called.
 				expect( wrapper.vm.formSubmissionInProgress ).toBe( true );
@@ -326,11 +334,12 @@ describe( 'Report Incident Dialog', () => {
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 				// Should not have outputted the form data to the console.
 				expect( consoleSpy ).not.toHaveBeenCalled();
+				expect( userTokensSpy ).toHaveBeenCalledWith( 'csrfToken' );
 				expect( restPost ).toHaveBeenCalledWith(
 					'/reportincident/v0/report',
 					{
 						behaviors: [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ], details: '',
-						reportedUser: 'test user', revisionId: 1
+						reportedUser: 'test user', revisionId: 1, token: 'csrf-token'
 					}
 				);
 				// Form should not be in submission if the form has finished submitting.
@@ -344,6 +353,14 @@ describe( 'Report Incident Dialog', () => {
 
 			const store = useFormStore();
 			const consoleSpy = jest.spyOn( console, 'log' );
+			const userTokensSpy = jest.spyOn( mw.user.tokens, 'get' ).mockImplementation( ( tokenType ) => {
+				switch ( tokenType ) {
+					case 'csrfToken':
+						return 'csrf-token';
+					default:
+						throw new Error( 'Unknown token type: ' + tokenType );
+				}
+			} );
 			const restPost = mockRestPost( () => {
 				// Form should be in submission when the REST API is called.
 				expect( wrapper.vm.formSubmissionInProgress ).toBe( true );
@@ -377,11 +394,13 @@ describe( 'Report Incident Dialog', () => {
 				expect( consoleSpy ).toHaveBeenNthCalledWith( 3, 'Sent to:\ntest@test.com, testing@example.com' );
 				expect( consoleSpy ).toHaveBeenNthCalledWith( 4, 'Subject of the email:\nTesting subject' );
 				expect( consoleSpy ).toHaveBeenNthCalledWith( 5, 'Body of the email:\nTesting email body.\nTesting.' );
+				// Should have asked for a CSRF token.
+				expect( userTokensSpy ).toHaveBeenCalledWith( 'csrfToken' );
 				expect( restPost ).toHaveBeenCalledWith(
 					'/reportincident/v0/report',
 					{
 						behaviors: [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ], details: '',
-						reportedUser: 'test user', revisionId: 1
+						reportedUser: 'test user', revisionId: 1, token: 'csrf-token'
 					}
 				);
 			} );
@@ -393,6 +412,14 @@ describe( 'Report Incident Dialog', () => {
 
 			const store = useFormStore();
 			const consoleSpy = jest.spyOn( console, 'log' );
+			const userTokensSpy = jest.spyOn( mw.user.tokens, 'get' ).mockImplementation( ( tokenType ) => {
+				switch ( tokenType ) {
+					case 'csrfToken':
+						return 'csrf-token';
+					default:
+						throw new Error( 'Unknown token type: ' + tokenType );
+				}
+			} );
 			const restPost = mockRestPost( () => {
 				// Form should be in submission when the REST API is called.
 				expect( wrapper.vm.formSubmissionInProgress ).toBe( true );
@@ -421,9 +448,10 @@ describe( 'Report Incident Dialog', () => {
 					'/reportincident/v0/report',
 					{
 						behaviors: [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ], details: '',
-						reportedUser: 'test user', revisionId: 1
+						reportedUser: 'test user', revisionId: 1, token: 'csrf-token'
 					}
 				);
+				expect( userTokensSpy ).toHaveBeenCalledWith( 'csrfToken' );
 				// Form should not be in submission if the form has finished submitting.
 				expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
 			} );
