@@ -25,7 +25,7 @@
 	"reportincident-dialog-harassment-type-intimidation": "Gözdağı, saldırganlık, isim takma",
 	"reportincident-dialog-harassment-type-something-else": "Başka bir şey",
 	"reportincident-dialog-harassment-intro-text": "{{SITENAME}} sitesinde uygunsuz davranışlara tolerans gösterilmiyor.",
-	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Evrensel Davranış Kuralları uyarınca kabul edilemez davranışlar aşağıdakileri içerir ancak bunlarla sınırlı değildir:",
+	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct|Evrensel Davranış Kuralları]] uyarınca kabul edilemez davranışlar aşağıdakileri içerir ancak bunlarla sınırlı değildir:",
 	"reportincident-dialog-harassment-example-insults": "Tekrarlanan hakaretler",
 	"reportincident-dialog-harassment-example-sexual-harassment": "Cinsel taciz",
 	"reportincident-dialog-harassment-example-threats": "Tehditler",
