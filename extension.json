@@ -173,7 +173,8 @@
 				"reportincident-emaildialog-close-button",
 				"reportincident-emaildialog-content",
 				"reportincident-emaildialog-primary",
-				"reportincident-success-message"
+				"reportincident-success-message",
+				"reportincident-success-message-close"
 			],
 			"dependencies": [
 				"mediawiki.Uri",
