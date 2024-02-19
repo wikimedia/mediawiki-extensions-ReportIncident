@@ -43,7 +43,7 @@
 	"reportincident-dialog-internet-disconnected-error": "Videti je, da nimate internetne povezave. Poskusite znova poslati, ko bo povezava spet vzpostavljena.",
 	"reportincident-dialog-server-error": "Žal se zdi, da se naš strežnik ne odziva. Poskusite  oddati znova.",
 	"reportincident-dialog-generic-error": "{{GENDER:|Vašega}} zahtevka ni bilo mogoče poslati zaradi napake. Poskusite oddati znova.",
-	"reportincident-success-message": "Prijava je uspešno vložena. Skrbnik jo bo pregledal in ugotovil, ali incident krši naše pravilnike. Hvala, ker nam pomagate ohranjati projekt {{SITENAME}} varen.",
+	"reportincident-success-message": "Prijava je uspešno vložena. Administrator jo bo pregledal in ugotovil, ali incident krši naša pravila. Hvala, ker nam pomagate ohranjati projekt {{SITENAME}} varen.",
 	"reportincident-success-message-close": "Zapri",
 	"reportincident-unable-to-send": "Poročila o incidentu ni bilo mogoče poslati.",
 	"reportincident-email-subject": "{{SITENAME}}: Novo poročilo o incidentu od »$1«",
