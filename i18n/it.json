@@ -6,7 +6,7 @@
 		]
 	},
 	"reportincident-dialog-close-btn": "Chiudi",
-	"reportincident-dialog-optional-label": "(opzionale)",
+	"reportincident-dialog-optional-label": "(facoltativo)",
 	"reportincident-dialog-harassment-example-doxing": "Divulgazione dei dati personali (doxing)",
 	"reportincident-email-something-else": "Qualcos'altro: \"$1\""
 }
