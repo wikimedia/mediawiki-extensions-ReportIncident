@@ -361,7 +361,6 @@ module.exports = exports = {
 		 * shown below the Something else details field.
 		 *
 		 * @param {Event} event
-		 * @listens input
 		 */
 		function onSomethingElseDetailsInput( event ) {
 			updateCharacterCount( event.target.value, somethingElseDetailsCharacterCountLeft );
@@ -373,7 +372,6 @@ module.exports = exports = {
 		 * shown below the Additional details field.
 		 *
 		 * @param {Event} event
-		 * @listens input
 		 */
 		function onAdditionalDetailsInput( event ) {
 			updateCharacterCount( event.target.value, additionalDetailsCharacterCountLeft );
