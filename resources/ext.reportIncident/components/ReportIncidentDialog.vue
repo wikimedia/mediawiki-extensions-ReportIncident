@@ -78,7 +78,7 @@ module.exports = exports = {
 		const footerErrorMessage = ref( '' );
 		const formSubmissionInProgress = ref( false );
 
-		const currentSlotName = computed( () => `${currentStep.value}` );
+		const currentSlotName = computed( () => `${ currentStep.value }` );
 		const showFooterHelpText = computed( () => {
 			return currentStep.value === Constants.DIALOG_STEP_1;
 		} );

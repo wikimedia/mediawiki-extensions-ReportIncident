@@ -167,7 +167,9 @@ describe( 'Main Component Test Suite', () => {
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
 			'reportincident',
 			{
-				getData: () => { return { 'thread-id': 'c-1.2.3.4-20230504030201' }; }
+				getData: () => {
+					return { 'thread-id': 'c-1.2.3.4-20230504030201' };
+				}
 			},
 			{
 				author: null
@@ -201,7 +203,9 @@ describe( 'Main Component Test Suite', () => {
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
 			'reportincident',
 			{
-				getData: () => { return { 'thread-id': 'c-1.2.3.4-20230504030201' }; }
+				getData: () => {
+					return { 'thread-id': 'c-1.2.3.4-20230504030201' };
+				}
 			},
 			{
 				author: '1.2.3.4'
@@ -238,7 +242,9 @@ describe( 'Main Component Test Suite', () => {
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
 			'reportincident',
 			{
-				getData: () => { return { 'thread-id': 'c-testuser-20230504030201' }; }
+				getData: () => {
+					return { 'thread-id': 'c-testuser-20230504030201' };
+				}
 			},
 			{
 				author: 'testuser'
@@ -271,7 +277,9 @@ describe( 'Main Component Test Suite', () => {
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
 			'reportincident',
 			{
-				getData: () => { return { 'thread-id': 'c-testuser-20230504030201' }; }
+				getData: () => {
+					return { 'thread-id': 'c-testuser-20230504030201' };
+				}
 			},
 			{
 				author: 'testuser'
@@ -309,7 +317,9 @@ describe( 'Main Component Test Suite', () => {
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
 			'reportincident',
 			{
-				getData: () => { return { 'thread-id': 'c-testuser-20230504030201' }; }
+				getData: () => {
+					return { 'thread-id': 'c-testuser-20230504030201' };
+				}
 			},
 			{
 				author: 'testuser'
@@ -347,7 +357,9 @@ describe( 'Main Component Test Suite', () => {
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
 			'reportincident',
 			{
-				getData: () => { return { 'thread-id': 'c-testuser-20230504030201' }; }
+				getData: () => {
+					return { 'thread-id': 'c-testuser-20230504030201' };
+				}
 			},
 			{
 				author: 'testuser'
