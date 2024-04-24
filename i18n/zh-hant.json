@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kly",
-			"Winston Sung"
+			"Winston Sung",
+			"沈澄心"
 		]
 	},
 	"reportincident-desc": "事件報告系統擴充。",
@@ -16,7 +17,7 @@
 	"reportincident-dialog-harassment-type-label": "什麼類型的行為？",
 	"reportincident-dialog-additional-details-input-label": "額外細節",
 	"reportincident-dialog-optional-label": "（非必填）",
-	"reportincident-dialog-violator-placeholder-text": "{{GENDER:|您}}要對誰報告？",
+	"reportincident-dialog-violator-placeholder-text": "{{GENDER:|您}}要報告誰？",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "仇恨言論或歧視",
 	"reportincident-dialog-harassment-type-sexual-harassment": "性騷擾",
 	"reportincident-dialog-harassment-type-threats-of-violence": "暴力威脅",
