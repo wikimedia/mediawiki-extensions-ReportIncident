@@ -16,8 +16,6 @@ use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseFactory;
-use MediaWiki\Rest\Validator\JsonBodyValidator;
-use MediaWiki\Rest\Validator\UnsupportedContentTypeBodyValidator;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
@@ -87,9 +85,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$authority = $this->newUserAuthority( [
 			'actor' => $reportingUser,
 		] );
+		$dummyBody = [ 'reportedUser' => 'user', 'revisionId' => 123, 'behaviors' => [] ];
 		$this->executeHandler(
 			$handler,
-			new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			new RequestData( [ 'parsedBody' => $dummyBody ] ),
 			[],
 			[],
 			[],
@@ -120,9 +119,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$authority = $this->newUserAuthority( [
 			'actor' => $reportingUser,
 		] );
+		$dummyBody = [ 'reportedUser' => 'user', 'revisionId' => 123, 'behaviors' => [] ];
 		$this->executeHandler(
 			$handler,
-			new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			new RequestData( [ 'parsedBody' => $dummyBody ] ),
 			[],
 			[],
 			[],
@@ -156,9 +156,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$authority = $this->newUserAuthority( [
 			'actor' => $reportingUser,
 		] );
+		$dummyBody = [ 'reportedUser' => 'user', 'revisionId' => 123, 'behaviors' => [] ];
 		$this->executeHandler(
 			$handler,
-			new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			new RequestData( [ 'parsedBody' => $dummyBody ] ),
 			[],
 			[],
 			[],
@@ -226,13 +227,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			'revisionStore' => $revisionStore
 		] );
 		$this->expectExceptionObject(
-			new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 )
+			new LocalizedHttpException( new MessageValue( 'rest-body-validation-error' ), 400 )
 		);
-		$this->executeHandler(
-			$handler, new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
-			[], [], [], [ 'revisionId' => 1, 'reportedUser' => [ 'test' => 'testing' ] ],
-			$this->mockRegisteredUltimateAuthority()
-		);
+		$dummyBody = [ 'reportedUser' => [ 'test' => 'testing' ], 'revisionId' => 123, 'behaviors' => [] ];
+		$this->executeHandler( $handler, new RequestData( [ 'parsedBody' => $dummyBody ] ) );
 	}
 
 	public function testBodyFailsValidationOnObjectAsDetails() {
@@ -254,13 +252,11 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			'userNameUtils' => $userNameUtils,
 		] );
 		$this->expectExceptionObject(
-			new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 )
+			new LocalizedHttpException( new MessageValue( 'rest-body-validation-error' ), 400 )
 		);
-		$this->executeHandler(
-			$handler, new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
-			[], [], [], [ 'revisionId' => 1, 'reportedUser' => '1.2.3.4', 'details' => [ 'test' => 'testing' ] ],
-			$this->mockRegisteredUltimateAuthority()
-		);
+		$dummyBody = [ 'reportedUser' => 'user', 'revisionId' => 123, 'behaviors' => [],
+			'details' => [ 'test' => 'testing' ] ];
+		$this->executeHandler( $handler, new RequestData( [ 'parsedBody' => $dummyBody ] ) );
 	}
 
 	public function testBodyFailsValidationOnObjectAsSomethingElseDetails() {
@@ -282,14 +278,11 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			'userNameUtils' => $userNameUtils,
 		] );
 		$this->expectExceptionObject(
-			new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 )
+			new LocalizedHttpException( new MessageValue( 'rest-body-validation-error' ), 400 )
 		);
-		$this->executeHandler(
-			$handler, new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
-			[], [], [],
-			[ 'revisionId' => 1, 'reportedUser' => '1.2.3.4', 'somethingElseDetails' => [ 'test' => 'testing' ] ],
-			$this->mockRegisteredUltimateAuthority()
-		);
+		$dummyBody = [ 'reportedUser' => 'user', 'revisionId' => 123, 'behaviors' => [],
+			'somethingElseDetails' => [ 'test' => 'testing' ] ];
+		$this->executeHandler( $handler, new RequestData( [ 'parsedBody' => $dummyBody ] ) );
 	}
 
 	public function testTruncationOfTextareaFields() {
@@ -424,24 +417,6 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$this->assertSame( 200, $response->getStatusCode() );
 	}
 
-	public function testGetBodyValidatorInvalidContentType() {
-		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
-		/** @var ReportHandler $handler */
-		$handler = $this->newServiceInstance( ReportHandler::class, [ 'config' => $config ] );
-		$this->assertInstanceOf(
-			UnsupportedContentTypeBodyValidator::class,
-			$handler->getBodyValidator( 'application/text' )
-		);
-	}
-
-	public function testGetBodyValidator() {
-		$config = new HashConfig( [ 'ReportIncidentApiEnabled' => true ] );
-		/** @var ReportHandler $handler */
-		$handler = $this->newServiceInstance( ReportHandler::class, [ 'config' => $config ] );
-		$validator = $handler->getBodyValidator( 'application/json' );
-		$this->assertInstanceOf( JsonBodyValidator::class, $validator );
-	}
-
 	/**
 	 * @dataProvider provideTestRestPayload
 	 */
@@ -546,7 +521,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				[
 					'reportedUser' => 'testing12234',
 					'revisionId' => 'foo',
-					'behaviors' => 3
+					'behaviors' => [ [], [] ]
 				],
 				StatusValue::newFatal( 'rest-bad-json-body' ),
 				IncidentReportEmailStatus::newGood(),
@@ -876,64 +851,4 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		);
 	}
 
-	public function testBodyFailedValidationButStillRan() {
-		$config = new HashConfig( [
-			'ReportIncidentApiEnabled' => true,
-			'ReportIncidentDeveloperMode' => true,
-			'ReportIncidentMinimumAccountAgeInSeconds' => null,
-		] );
-		$handler = $this->getMockBuilder( ReportHandler::class )
-			->setConstructorArgs( [
-				$config,
-				$this->createMock( RevisionStore::class ),
-				$this->createMock( UserNameUtils::class ),
-				$this->createMock( UserIdentityLookup::class ),
-				$this->createMock( ReportIncidentManager::class ),
-				$this->createMock( UserFactory::class ),
-				$this->createMock( Language::class ),
-			] )
-			->onlyMethods( [ 'getValidatedBody' ] )
-			->getMock();
-		$handler->method( 'getValidatedBody' )
-			->willReturn( null );
-		$this->expectExceptionObject(
-			new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 )
-		);
-		$this->executeHandler(
-			$handler, new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ), [], [], [],
-			[ 'revisionId' => 1, 'reportedUser' => 'testing' ],
-			$this->mockRegisteredUltimateAuthority()
-		);
-	}
-
-	public function testBodyFailsValidationOnFormDataSubmitted() {
-		$config = new HashConfig( [
-			'ReportIncidentApiEnabled' => true,
-			'ReportIncidentDeveloperMode' => true,
-			'ReportIncidentMinimumAccountAgeInSeconds' => null,
-		] );
-
-		$handler = $this->getMockBuilder( ReportHandler::class )
-			->setConstructorArgs( [
-				$config,
-				$this->createMock( RevisionStore::class ),
-				$this->createMock( UserNameUtils::class ),
-				$this->createMock( UserIdentityLookup::class ),
-				$this->createMock( ReportIncidentManager::class ),
-				$this->createMock( UserFactory::class ),
-				$this->createMock( Language::class ),
-			] )
-			->onlyMethods( [ 'getValidatedBody' ] )
-			->getMock();
-		$handler->method( 'getValidatedBody' )
-			->willReturn( null );
-		$this->expectExceptionObject(
-			new LocalizedHttpException( new MessageValue( 'rest-unsupported-content-type' ), 415 )
-		);
-		$this->executeHandler(
-			$handler, new RequestData( [ 'headers' => [ 'Content-Type' => 'application/x-www-form-urlencoded' ] ] ),
-			[], [], [], [ 'revisionId' => 1, 'reportedUser' => 'testing' ],
-			$this->mockRegisteredUltimateAuthority()
-		);
-	}
 }

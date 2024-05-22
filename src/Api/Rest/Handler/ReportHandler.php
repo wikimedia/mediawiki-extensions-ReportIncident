@@ -13,8 +13,6 @@ use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\TokenAwareHandlerTrait;
-use MediaWiki\Rest\Validator\JsonBodyValidator;
-use MediaWiki\Rest\Validator\UnsupportedContentTypeBodyValidator;
 use MediaWiki\Revision\RevisionStore;
 use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserIdentity;
@@ -22,7 +20,6 @@ use MediaWiki\User\UserIdentityLookup;
 use MediaWiki\User\UserIdentityValue;
 use MediaWiki\User\UserNameUtils;
 use Psr\Log\LoggerInterface;
-use TypeError;
 use Wikimedia\Message\MessageValue;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
@@ -162,25 +159,6 @@ class ReportHandler extends SimpleHandler {
 	 * @throws LocalizedHttpException If the validation fails
 	 */
 	private function getIncidentReportObjectFromValidatedBody( $body ): IncidentReport {
-		// $body should be an array, but can be null when validation
-		// failed and/or when the content type was form data.
-		if ( !is_array( $body ) ) {
-			// Taken from Validator::validateBody
-			[ $contentType ] = explode( ';', $this->getRequest()->getHeaderLine( 'Content-Type' ), 2 );
-			$contentType = strtolower( trim( $contentType ) );
-			if ( $contentType !== 'application/json' ) {
-				// Same exception as used in UnsupportedContentTypeBodyValidator
-				throw new LocalizedHttpException(
-					new MessageValue( 'rest-unsupported-content-type', [ $contentType ] ),
-					415
-				);
-			} else {
-				// Should be caught by JsonBodyValidator::validateBody, but if this
-				// point is reached a non-array still indicates a problem with the
-				// data submitted by the client and thus a 400 error is appropriate.
-				throw new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 );
-			}
-		}
 		// Validate the CSRF token in the request body.
 		$this->validateToken();
 		// Validate that the revision with the given ID exists.
@@ -193,12 +171,7 @@ class ReportHandler extends SimpleHandler {
 		$body['revision'] = $revision;
 		// Validate that the user is either an IP or an existing user
 		$reportedUser = $body['reportedUser'];
-		if ( !is_string( $reportedUser ) ) {
-			// Should be caught by JsonBodyValidator::validateBody, but that doesn't validate
-			// parameters yet (T305973).
-			LoggerFactory::getInstance( 'ReportIncident' )->error( 'reportedUser field was not a string.' );
-			throw new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 );
-		}
+		'@phan-var string $reportedUser';
 		if ( $this->userNameUtils->isIP( $reportedUser ) ) {
 			$reportedUserIdentity = UserIdentityValue::newAnonymous( $reportedUser );
 		} else {
@@ -212,41 +185,19 @@ class ReportHandler extends SimpleHandler {
 		$body['reportedUser'] = $reportedUserIdentity;
 		// Truncate the Something else details and Additional details fields.
 		if ( array_key_exists( 'details', $body ) && $body['details'] !== null ) {
-			if ( !is_string( $body['details'] ) ) {
-				// Should be caught by JsonBodyValidator::validateBody, but that doesn't validate
-				// parameters yet (T305973).
-				LoggerFactory::getInstance( 'ReportIncident' )->error( 'details field was not a string.' );
-				throw new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 );
-			}
 			$body['details'] = $this->contentLanguage->truncateForVisual(
 				$body['details'], CommentStore::COMMENT_CHARACTER_LIMIT
 			);
 		}
 		if ( array_key_exists( 'somethingElseDetails', $body ) && $body['somethingElseDetails'] !== null ) {
-			if ( !is_string( $body['somethingElseDetails'] ) ) {
-				// Should be caught by JsonBodyValidator::validateBody, but that doesn't validate
-				// parameters yet (T305973).
-				LoggerFactory::getInstance( 'ReportIncident' )
-					->error( 'somethingElseDetails field was not a string.' );
-				throw new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 );
-			}
 			$body['somethingElseDetails'] = $this->contentLanguage->truncateForVisual(
 				$body['somethingElseDetails'], CommentStore::COMMENT_CHARACTER_LIMIT
 			);
 		}
-		try {
-			return IncidentReport::newFromRestPayload(
-				$this->getAuthority()->getUser(),
-				$body
-			);
-		} catch ( TypeError $typeError ) {
-			// Should be caught by JsonBodyValidator::validateBody, but that doesn't validate
-			// parameters yet (T305973).
-			LoggerFactory::getInstance( 'ReportIncident' )->error( 'Invalid type specified: {message}', [
-				'message' => $typeError->getMessage()
-			] );
-			throw new LocalizedHttpException( new MessageValue( 'rest-bad-json-body' ), 400 );
-		}
+		return IncidentReport::newFromRestPayload(
+			$this->getAuthority()->getUser(),
+			$body
+		);
 	}
 
 	/**
@@ -334,41 +285,35 @@ class ReportHandler extends SimpleHandler {
 		}
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ) {
-		if ( $contentType !== 'application/json' ) {
-			return new UnsupportedContentTypeBodyValidator( $contentType );
-		}
-		// FIXME: JsonBodyValidator doesn't actually validate params
-		// yet, see T305973
-		return new JsonBodyValidator( self::getBodyParamSettings() );
-	}
-
 	public function getBodyParamSettings(): array {
 		return [
 			'reportedUser' => [
+				static::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'revisionId' => [
+				static::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'integer',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'behaviors' => [
+				static::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'details' => [
+				static::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'somethingElseDetails' => [
+				static::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'threadId' => [
+				static::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
