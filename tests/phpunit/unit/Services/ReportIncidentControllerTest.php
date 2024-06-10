@@ -2,9 +2,9 @@
 
 namespace MediaWiki\Extension\ReportIncident\Tests\Unit;
 
-use IContextSource;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\HashConfig;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Tests\Unit\MockServiceDependenciesTrait;

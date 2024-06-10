@@ -8,12 +8,12 @@ use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\IncidentReportEmailStatus;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentMailer;
 use MediaWiki\Mail\IEmailer;
+use MediaWiki\Message\Message;
 use MediaWiki\Message\TextFormatter;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\TitleFactory;
 use MediaWiki\Utils\UrlUtils;
 use MediaWikiUnitTestCase;
-use Message;
 use Psr\Log\LoggerInterface;
 use Wikimedia\TestingAccessWrapper;
 

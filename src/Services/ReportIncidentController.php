@@ -2,8 +2,8 @@
 
 namespace MediaWiki\Extension\ReportIncident\Services;
 
-use IContextSource;
 use MediaWiki\Config\Config;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\User\User;
 

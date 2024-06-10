@@ -2,7 +2,7 @@
 
 namespace MediaWiki\Extension\ReportIncident\Tests\Integration\Hooks\Handlers;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Extension\ReportIncident\Hooks\Handlers\DiscussionToolsHandler;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
 use MediaWikiIntegrationTestCase;

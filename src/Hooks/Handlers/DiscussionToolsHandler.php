@@ -19,7 +19,7 @@
 
 namespace MediaWiki\Extension\ReportIncident\Hooks\Handlers;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Extension\DiscussionTools\Hooks\DiscussionToolsAddOverflowMenuItemsHook;
 use MediaWiki\Extension\DiscussionTools\OverflowMenuItem;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;

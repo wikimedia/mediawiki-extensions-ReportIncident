@@ -2,12 +2,12 @@
 
 namespace MediaWiki\Extension\ReportIncident\Tests\Unit;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Extension\ReportIncident\Hooks\Handlers\MainHooksHandler;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
+use MediaWiki\Message\Message;
 use MediaWiki\Output\OutputPage;
 use MediaWikiUnitTestCase;
-use Message;
 use Skin;
 
 /**
