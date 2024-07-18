@@ -15,6 +15,7 @@
 	"reportincident-dialog-additional-details-input-label": "Manylion ychwanegol",
 	"reportincident-dialog-additional-details-input-placeholder": "Ychwanegwch gyd-destun a allai fod yn ddefnyddiol i adolygydd. Gallwch chi gynnwys dolenni sy'n amlygu'r digwyddiad.",
 	"reportincident-dialog-optional-label": "(dewisol)",
+	"reportincident-dialog-violator-label": "Y defnyddiwch {{GENDER:|eich}} bod eisiau ei adrodd",
 	"reportincident-dialog-violator-placeholder-text": "Pwy ydych {{GENDER:|chi}}'n adrodd?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Casineb neu wahaniaethu",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Aflonyddu rhywiol",
