@@ -4,7 +4,8 @@
 			"BlueCamille",
 			"Gomoko",
 			"Obscaeris",
-			"Urhixidur"
+			"Urhixidur",
+			"MacOS Weed"
 		]
 	},
 	"reportincident-desc": "Extension système de signalisation d’incident privé",
@@ -43,7 +44,7 @@
 	"reportincident-dialog-something-else-empty": "Veuillez fournir une courte description du comportement.",
 	"reportincident-unable-to-send": "Impossible d’envoyer par courriel le rapport d’incident.",
 	"reportincident-email-subject": "{{SITENAME}} : Nouveau rapport d’incident de « $1 »",
-	"reportincident-email-body": "Utilisateur faisant le signalement : $1\nUtilisateur signalé : $2\nLien vers la page : $3\nLien signalé : $4\nComportements : $5\nDétails : $6\n\nAdresse de messagerie de $1 : $7",
+	"reportincident-email-body": "Utilisateur faisant le signalement : $1\nUtilisateur signalé : $2\n$3 : $4\n\nComportements : $5\nDétails : $6\n\nAdresse de messagerie de $1 : $7",
 	"reportincident-email-something-else": "Quelque chose d’autre : « $1 »",
 	"action-reportincident": "Signaler un incident",
 	"reportincident-emaildialog-title": "Une adresse électronique vérifiée est requise",
