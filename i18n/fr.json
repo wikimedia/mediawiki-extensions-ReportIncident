@@ -5,6 +5,7 @@
 			"Gomoko",
 			"MacOS Weed",
 			"Obscaeris",
+			"SleaY",
 			"Urhixidur"
 		]
 	},
@@ -46,6 +47,7 @@
 	"reportincident-email-subject": "{{SITENAME}} : Nouveau rapport d’incident de « $1 »",
 	"reportincident-email-body": "Utilisateur faisant le signalement : $1\nUtilisateur signalé : $2\n$3 : $4\n\nComportements : $5\nDétails : $6\n\nAdresse de messagerie de $1 : $7",
 	"reportincident-email-something-else": "Quelque chose d’autre : « $1 »",
+	"right-reportincident": "Signaler un incident",
 	"action-reportincident": "Signaler un incident",
 	"reportincident-emaildialog-title": "Une adresse électronique vérifiée est requise",
 	"reportincident-emaildialog-close-button": "Annuler",
