@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Inkowik",
 			"McDutchie"
 		]
 	},
 	"reportincident-desc": "Erweiterung um ein Meldesystem für Zwischenfälle.",
-	"reportincident-report-btn-label": "Bericht",
+	"reportincident-report-btn-label": "Melden",
 	"reportincident-dialog-close-btn": "Schließen",
-	"reportincident-dialog-proceed-btn": "Fahre mit der Einreichung eines Berichts fort",
+	"reportincident-dialog-proceed-btn": "Fahre mit dem Einreichen einer Meldung fort",
 	"reportincident-dialog-back-btn": "Zurück",
 	"reportincident-dialog-submit-btn": "Speichern",
 	"reportincident-dialog-title": "Einen Zwischenfall melden",
