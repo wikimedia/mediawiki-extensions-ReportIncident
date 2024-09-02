@@ -27,6 +27,7 @@
 	"reportincident-dialog-something-else-input-placeholder": "具體說明上述未列出的行為。",
 	"reportincident-dialog-harassment-example-sexual-harassment": "性騷擾",
 	"reportincident-dialog-harassment-example-threats": "威脅",
+	"reportincident-dialog-server-error": "很抱歉，看起來我們的伺服器沒有回應。請嘗試重新提交。",
 	"reportincident-success-message-close": "關閉",
 	"reportincident-unable-to-send": "無法透過電子郵件發送事件報告。",
 	"reportincident-email-link-to-page-prefix": "連結到頁面",
