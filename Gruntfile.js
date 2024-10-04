@@ -20,7 +20,10 @@ module.exports = function ( grunt ) {
 		},
 		stylelint: {
 			all: [
-				'modules/**/*.{less,vue}'
+				'**/*.{css,less,vue}',
+				'!node_modules/**',
+				'!vendor/**',
+				'!coverage/**'
 			]
 		},
 		banana: conf.MessagesDirs

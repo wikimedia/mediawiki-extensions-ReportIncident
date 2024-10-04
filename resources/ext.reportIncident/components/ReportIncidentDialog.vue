@@ -261,6 +261,7 @@ module.exports = exports = {
 	.ext-reportincident-dialog-footer {
 		float: right;
 	}
+
 	@media screen and ( max-width: @max-width-breakpoint-mobile ) {
 		.ext-reportincident-dialog-footer {
 			display: flex;

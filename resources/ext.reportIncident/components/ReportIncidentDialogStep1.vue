@@ -59,10 +59,13 @@ module.exports = exports = {
 .ext-reportincident-dialog-step1 {
 	font-size: @font-size-large;
 	line-height: @line-height-medium;
+
 	&__text-block {
 		margin-top: @spacing-125;
 	}
-	ul, li  {
+
+	ul,
+	li {
 		list-style: inside;
 		margin-left: @spacing-25;
 	}
