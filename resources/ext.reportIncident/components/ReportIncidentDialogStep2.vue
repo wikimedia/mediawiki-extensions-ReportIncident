@@ -232,11 +232,8 @@ module.exports = exports = {
 		/**
 		 * The menu items for the reported user Codex Lookup component.
 		 */
-		const inputReportedUserMenuItems = computed( () => {
-			return suggestedUsernames.value.map( ( user ) => {
-				return { value: user.name };
-			} );
-		} );
+		const inputReportedUserMenuItems =
+			computed( () => suggestedUsernames.value.map( ( user ) => ( { value: user.name } ) ) );
 
 		const showSomethingElseCharacterCount = computed( () => {
 			return somethingElseDetailsCharacterCountLeft.value !== '' && collectSomethingElseDetails.value;
