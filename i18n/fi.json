@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Samoasambia"
+			"Samoasambia",
+			"Yupik"
 		]
 	},
 	"reportincident-report-btn-label": "Ilmoita",
@@ -12,6 +13,7 @@
 	"reportincident-dialog-first-step-cancel-btn": "En halua tehdä ilmoitusta",
 	"reportincident-dialog-harassment-type-label": "Millaisesta käytöksestä on kyse?",
 	"reportincident-dialog-additional-details-input-label": "Lisätietoja",
+	"reportincident-dialog-optional-label": "(valinnainen)",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Vihapuhe tai syrjintä",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Seksuaalinen häirintä",
 	"reportincident-dialog-harassment-type-threats-of-violence": "Väkivallalla uhkailu",
