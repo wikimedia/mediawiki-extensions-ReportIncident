@@ -13,13 +13,11 @@ const Main = require( '../../../resources/ext.reportIncident/components/App.vue'
 	{ mockApiGet } = require( '../utils.js' ),
 	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' );
 
-const renderComponent = () => {
-	return mount( Main, {
-		global: {
-			plugins: [ createTestingPinia( { stubActions: false } ) ]
-		}
-	} );
-};
+const renderComponent = () => mount( Main, {
+	global: {
+		plugins: [ createTestingPinia( { stubActions: false } ) ]
+	}
+} );
 
 /**
  * Expects that for a given jest.fn() mock of mw.Api().get()
@@ -70,9 +68,7 @@ function mockHookAdd( hookName ) {
  */
 function mockIsIPAddress( returnValue ) {
 	const isIPAddress = jest.fn();
-	isIPAddress.mockImplementation( () => {
-		return returnValue;
-	} );
+	isIPAddress.mockImplementation( () => returnValue );
 	mw.util.isIPAddress = isIPAddress;
 	return isIPAddress;
 }
@@ -167,9 +163,7 @@ describe( 'Main Component Test Suite', () => {
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
 			'reportincident',
 			{
-				getData: () => {
-					return { 'thread-id': 'c-1.2.3.4-20230504030201' };
-				}
+				getData: () => ( { 'thread-id': 'c-1.2.3.4-20230504030201' } )
 			},
 			{
 				author: null
@@ -203,9 +197,7 @@ describe( 'Main Component Test Suite', () => {
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
 			'reportincident',
 			{
-				getData: () => {
-					return { 'thread-id': 'c-1.2.3.4-20230504030201' };
-				}
+				getData: () => ( { 'thread-id': 'c-1.2.3.4-20230504030201' } )
 			},
 			{
 				author: '1.2.3.4'
@@ -242,9 +234,7 @@ describe( 'Main Component Test Suite', () => {
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
 			'reportincident',
 			{
-				getData: () => {
-					return { 'thread-id': 'c-testuser-20230504030201' };
-				}
+				getData: () => ( { 'thread-id': 'c-testuser-20230504030201' } )
 			},
 			{
 				author: 'testuser'
@@ -277,9 +267,7 @@ describe( 'Main Component Test Suite', () => {
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
 			'reportincident',
 			{
-				getData: () => {
-					return { 'thread-id': 'c-testuser-20230504030201' };
-				}
+				getData: () => ( { 'thread-id': 'c-testuser-20230504030201' } )
 			},
 			{
 				author: 'testuser'
@@ -317,9 +305,7 @@ describe( 'Main Component Test Suite', () => {
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
 			'reportincident',
 			{
-				getData: () => {
-					return { 'thread-id': 'c-testuser-20230504030201' };
-				}
+				getData: () => ( { 'thread-id': 'c-testuser-20230504030201' } )
 			},
 			{
 				author: 'testuser'
@@ -357,9 +343,7 @@ describe( 'Main Component Test Suite', () => {
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
 			'reportincident',
 			{
-				getData: () => {
-					return { 'thread-id': 'c-testuser-20230504030201' };
-				}
+				getData: () => ( { 'thread-id': 'c-testuser-20230504030201' } )
 			},
 			{
 				author: 'testuser'

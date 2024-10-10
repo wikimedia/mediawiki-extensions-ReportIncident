@@ -130,11 +130,9 @@ module.exports = exports = {
 		 * Whether the "Something else" textbox value should be sent
 		 * in the request body to the REST endpoint on form submission.
 		 */
-		const collectSomethingElseDetails = computed( () => {
-			return inputBehaviors.value.filter(
-				( input ) => input === Constants.harassmentTypes.OTHER
-			).length > 0;
-		} );
+		const collectSomethingElseDetails = computed( () => inputBehaviors.value.filter(
+			( input ) => input === Constants.harassmentTypes.OTHER
+		).length > 0 );
 
 		/**
 		 * Called when the browser window is resized.
@@ -217,17 +215,11 @@ module.exports = exports = {
 			}
 		];
 
-		const harassmentStatus = computed( () => {
-			return store.formErrorMessages.inputBehaviors ? 'error' : 'default';
-		} );
+		const harassmentStatus = computed( () => store.formErrorMessages.inputBehaviors ? 'error' : 'default' );
 
-		const reportedUserStatus = computed( () => {
-			return store.formErrorMessages.inputReportedUser ? 'error' : 'default';
-		} );
+		const reportedUserStatus = computed( () => store.formErrorMessages.inputReportedUser ? 'error' : 'default' );
 
-		const formErrorMessages = computed( () => {
-			return store.formErrorMessages;
-		} );
+		const formErrorMessages = computed( () => store.formErrorMessages );
 
 		/**
 		 * The menu items for the reported user Codex Lookup component.
@@ -235,13 +227,9 @@ module.exports = exports = {
 		const inputReportedUserMenuItems =
 			computed( () => suggestedUsernames.value.map( ( user ) => ( { value: user.name } ) ) );
 
-		const showSomethingElseCharacterCount = computed( () => {
-			return somethingElseDetailsCharacterCountLeft.value !== '' && collectSomethingElseDetails.value;
-		} );
+		const showSomethingElseCharacterCount = computed( () => somethingElseDetailsCharacterCountLeft.value !== '' && collectSomethingElseDetails.value );
 
-		const showAdditionalDetailsCharacterCount = computed( () => {
-			return additionalDetailsCharacterCountLeft.value !== '';
-		} );
+		const showAdditionalDetailsCharacterCount = computed( () => additionalDetailsCharacterCountLeft.value !== '' );
 
 		/**
 		 * The configuration settings for the Codex Lookup reported username
@@ -250,17 +238,15 @@ module.exports = exports = {
 		 * This sets the visibleItemLimit to a proportion of the height such
 		 * that the dropdown menu should not overflow the bottom of the dialog.
 		 */
-		const reportedUserLookupMenuConfig = computed( () => {
-			return {
-				visibleItemLimit: Math.min(
-					Math.max(
-						Math.floor( windowHeight.value / 150 ),
-						2
-					),
-					5
-				)
-			};
-		} );
+		const reportedUserLookupMenuConfig = computed( () => ( {
+			visibleItemLimit: Math.min(
+				Math.max(
+					Math.floor( windowHeight.value / 150 ),
+					2
+				),
+				5
+			)
+		} ) );
 
 		/**
 		 * Load username suggestions for the username lookup component
@@ -287,7 +273,7 @@ module.exports = exports = {
 					list: 'allusers',
 					auprefix: currentValue,
 					limit: '10'
-				} ).then( function ( data ) {
+				} ).then( ( data ) => {
 					// If the current value of inputReportedUser
 					// has been changed since the API call was first
 					// made then ignore this response.
@@ -309,7 +295,7 @@ module.exports = exports = {
 					}
 
 					suggestedUsernames.value = data.query.allusers;
-				} ).catch( function ( error ) {
+				} ).catch( ( error ) => {
 					suggestedUsernames.value = [];
 					mw.log.error( error );
 				} );

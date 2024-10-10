@@ -6,13 +6,11 @@ const SuccessConfirmationBanner = require( '../../../resources/ext.reportInciden
 	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' ),
 	{ nextTick } = require( 'vue' );
 
-const renderComponent = () => {
-	return utils.mount( SuccessConfirmationBanner, {
-		global: {
-			plugins: [ createTestingPinia( { stubActions: false } ) ]
-		}
-	} );
-};
+const renderComponent = () => utils.mount( SuccessConfirmationBanner, {
+	global: {
+		plugins: [ createTestingPinia( { stubActions: false } ) ]
+	}
+} );
 
 describe( 'Success confirmation banner', () => {
 	it( 'Is displayed when store.formSuccessfullySubmitted is true', async () => {

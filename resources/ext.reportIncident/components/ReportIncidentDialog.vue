@@ -79,24 +79,16 @@ module.exports = exports = {
 		const formSubmissionInProgress = ref( false );
 
 		const currentSlotName = computed( () => `${ currentStep.value }` );
-		const showFooterHelpText = computed( () => {
-			return currentStep.value === Constants.DIALOG_STEP_1;
-		} );
-		const showFooterErrorText = computed( () => {
-			return currentStep.value === Constants.DIALOG_STEP_2 && footerErrorMessage.value !== '';
-		} );
+		const showFooterHelpText = computed( () => currentStep.value === Constants.DIALOG_STEP_1 );
+		const showFooterErrorText = computed( () => currentStep.value === Constants.DIALOG_STEP_2 && footerErrorMessage.value !== '' );
 
-		const primaryButtonLabel = computed( () => {
-			return currentStep.value === Constants.DIALOG_STEP_1 ?
-				mw.msg( 'reportincident-dialog-proceed-btn' ) :
-				mw.msg( 'reportincident-dialog-submit-btn' );
-		} );
+		const primaryButtonLabel = computed( () => currentStep.value === Constants.DIALOG_STEP_1 ?
+			mw.msg( 'reportincident-dialog-proceed-btn' ) :
+			mw.msg( 'reportincident-dialog-submit-btn' ) );
 
-		const defaultButtonLabel = computed( () => {
-			return currentStep.value === Constants.DIALOG_STEP_1 ?
-				mw.msg( 'reportincident-dialog-first-step-cancel-btn' ) :
-				mw.msg( 'reportincident-dialog-back-btn' );
-		} );
+		const defaultButtonLabel = computed( () => currentStep.value === Constants.DIALOG_STEP_1 ?
+			mw.msg( 'reportincident-dialog-first-step-cancel-btn' ) :
+			mw.msg( 'reportincident-dialog-back-btn' ) );
 
 		/**
 		 * Prints the email that was sent or failed to send
@@ -113,9 +105,7 @@ module.exports = exports = {
 				/* eslint-disable no-console */
 				console.log( 'An email has been sent for this report' );
 				console.log( 'Sent from:\n' + response.sentEmail.from.address );
-				console.log( 'Sent to:\n' + response.sentEmail.to.map( function ( item ) {
-					return item.address;
-				} ).join( ', ' ) );
+				console.log( 'Sent to:\n' + response.sentEmail.to.map( ( item ) => item.address ).join( ', ' ) );
 				console.log( 'Subject of the email:\n' + response.sentEmail.subject );
 				console.log( 'Body of the email:\n' + response.sentEmail.body );
 				/* eslint-enable no-console */

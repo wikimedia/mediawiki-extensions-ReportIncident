@@ -14,14 +14,12 @@ const ReportIncidentDialogStep2 = require( '../../../resources/ext.reportInciden
 	Constants = require( '../../../resources/ext.reportIncident/Constants.js' ),
 	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' );
 
-const renderComponent = ( testingPinia ) => {
-	return utils.mount( ReportIncidentDialogStep2, {
-		global: {
-			// eslint-disable-next-line es-x/no-nullish-coalescing-operators
-			plugins: [ testingPinia ?? createTestingPinia( { stubActions: false } ) ]
-		}
-	} );
-};
+const renderComponent = ( testingPinia ) => utils.mount( ReportIncidentDialogStep2, {
+	global: {
+		// eslint-disable-next-line es-x/no-nullish-coalescing-operators
+		plugins: [ testingPinia ?? createTestingPinia( { stubActions: false } ) ]
+	}
+} );
 
 /**
  * Mocks mw.log.error() and returns a jest.fn() for error()
@@ -53,13 +51,11 @@ function mockConvertNumber() {
  *
  * @return {Promise}
  */
-const waitUntilDebounceComplete = () => {
-	return new Promise( ( resolve ) => {
-		setTimeout( () => {
-			resolve();
-		}, 120 );
-	} );
-};
+const waitUntilDebounceComplete = () => new Promise( ( resolve ) => {
+	setTimeout( () => {
+		resolve();
+	}, 120 );
+} );
 
 describe( 'Report Incident Dialog Step 2', () => {
 	let jQueryCodePointLimitMock;

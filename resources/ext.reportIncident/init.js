@@ -1,6 +1,6 @@
 'use strict';
 // TODO: Include this file in test coverage and test it?
-$( function () {
+$( () => {
 	const Vue = require( 'vue' );
 	const App = require( './components/App.vue' );
 	const SuccessConfirmationBanner = require( './components/SuccessConfirmationBanner.vue' );

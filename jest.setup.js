@@ -5,12 +5,10 @@ const mockMediaWiki = require( '@wikimedia/mw-node-qunit/src/mockMediaWiki.js' )
 global.mw = mockMediaWiki();// Mock Vue plugins in test suites
 
 config.global.mocks = {
-	$i18n: ( str ) => {
-		return {
-			text: () => str,
-			parse: () => str
-		};
-	}
+	$i18n: ( str ) => ( {
+		text: () => str,
+		parse: () => str
+	} )
 };
 config.global.directives = {
 	'i18n-html': ( el, binding ) => {

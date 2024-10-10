@@ -4,14 +4,14 @@ const assert = require( 'assert' ),
 	LoginPage = require( 'wdio-mediawiki/LoginPage.js' ),
 	ReportIncidentPage = require( '../pageobjects/reportincident.page' );
 
-describe( 'ReportIncident dialog', function () {
+describe( 'ReportIncident dialog', () => {
 	before( async () => {
 		await LoginPage.loginAdmin();
 	} );
 	beforeEach( async () => {
 		await ReportIncidentPage.open( { withconfirmedemail: 1 } );
 	} );
-	it( 'Should open the dialog if the tools menu is used', async function () {
+	it( 'Should open the dialog if the tools menu is used', async () => {
 		// The tools link should exist, otherwise fail.
 		assert( await ReportIncidentPage.reportLinkInToolsMenu.isExisting() );
 		// Initially the dialog should not be open
@@ -24,7 +24,7 @@ describe( 'ReportIncident dialog', function () {
 		assert( await ReportIncidentPage.dialogFooterNextButton.isExisting() );
 		assert( await ReportIncidentPage.dialogFooterBackButton.isExisting() );
 	} );
-	it( 'Should be able to advance to step 2 and see a form with the expected fields', async function () {
+	it( 'Should be able to advance to step 2 and see a form with the expected fields', async () => {
 		// Click the report link in the tools menu
 		await ReportIncidentPage.reportLinkInToolsMenu.click();
 		// Advance to step 2.
@@ -41,7 +41,7 @@ describe( 'ReportIncident dialog', function () {
 		assert( await ReportIncidentPage.additionalContentFormInput.isExisting() );
 		assert( await ReportIncidentPage.violatorFormInput.isExisting() );
 	} );
-	it( 'Should display form errors when submit attempted with no form data', async function () {
+	it( 'Should display form errors when submit attempted with no form data', async () => {
 		// Click the report link in the tools menu
 		await ReportIncidentPage.reportLinkInToolsMenu.click();
 		// Advance to step 2.
@@ -60,7 +60,7 @@ describe( 'ReportIncident dialog', function () {
 		// Assert that the dialog still exists.
 		assert( await ReportIncidentPage.reportIncidentDialog.isExisting() );
 	} );
-	it( 'Should be able to submit a form with valid data', async function () {
+	it( 'Should be able to submit a form with valid data', async () => {
 		// Click the report link in the tools menu
 		await ReportIncidentPage.reportLinkInToolsMenu.click();
 		// Advance to step 2.

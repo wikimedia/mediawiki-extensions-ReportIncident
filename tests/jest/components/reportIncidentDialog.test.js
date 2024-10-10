@@ -32,11 +32,9 @@ function mockRestPost( returnValue ) {
 		}
 		return returnValue;
 	} );
-	jest.spyOn( mw, 'Rest' ).mockImplementation( () => {
-		return {
-			post: restPost
-		};
-	} );
+	jest.spyOn( mw, 'Rest' ).mockImplementation( () => ( {
+		post: restPost
+	} ) );
 	return restPost;
 }
 
@@ -180,7 +178,7 @@ describe( 'Report Incident Dialog', () => {
 			const wrapper = renderComponent( { open: true } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 
-			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 			} );
 		} );
@@ -189,7 +187,7 @@ describe( 'Report Incident Dialog', () => {
 			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
-			return wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( () => {
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 			} );
 		} );
@@ -203,11 +201,11 @@ describe( 'Report Incident Dialog', () => {
 			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
 			store.inputReportedUser = 'test user';
 
-			return wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( () => {
 				// Clicking back once should put us on STEP 1
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 
-				wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( function () {
+				wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( () => {
 					// Clicking back should clear the form store data
 					// as the dialog was closed.
 					expect( store.inputBehaviors ).toHaveLength( 0 );
@@ -229,7 +227,7 @@ describe( 'Report Incident Dialog', () => {
 			// client side validation fails after a user presses submit.
 			wrapper.vm.footerErrorMessage = 'test';
 
-			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 				expect( wrapper.vm.footerErrorMessage ).toBe( '' );
 			} );
@@ -247,7 +245,7 @@ describe( 'Report Incident Dialog', () => {
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
 
-			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
 				// Should be dialog step one if the form submitted correctly.
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 				expect( consoleSpy ).not.toHaveBeenCalled();
@@ -282,7 +280,7 @@ describe( 'Report Incident Dialog', () => {
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
 
-			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
 				// Should be dialog step one if the form submitted correctly.
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 				// Should have outputted the form data to the console.
@@ -329,7 +327,7 @@ describe( 'Report Incident Dialog', () => {
 			// Form should not be in submission if the form was not submitted yet.
 			expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
 
-			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
 				// Should be dialog step one if the form submitted correctly.
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
 				// Should not have outputted the form data to the console.
@@ -384,7 +382,7 @@ describe( 'Report Incident Dialog', () => {
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
 
-			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
 				// Should be dialog step two as the REST API call returned a rejected promise
 				// which indicates a failure.
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
@@ -439,7 +437,7 @@ describe( 'Report Incident Dialog', () => {
 
 			expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
 
-			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( function () {
+			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
 				// Should be dialog step one if the form submitted correctly.
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 				// Should have outputted the form data to the console.
