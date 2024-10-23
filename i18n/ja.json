@@ -1,9 +1,42 @@
 {
 	"@metadata": {
 		"authors": [
-			"MathXplore"
+			"MathXplore",
+			"Waki285"
 		]
 	},
+	"reportincident-desc": "インシデント報告システム拡張機能。",
+	"reportincident-report-btn-label": "報告",
 	"reportincident-dialog-close-btn": "閉じる",
-	"reportincident-dialog-submit-btn": "送信"
+	"reportincident-dialog-proceed-btn": "報告書を提出",
+	"reportincident-dialog-back-btn": "戻る",
+	"reportincident-dialog-submit-btn": "送信",
+	"reportincident-dialog-title": "インシデントを報告",
+	"reportincident-dialog-first-step-cancel-btn": "報告しない",
+	"reportincident-dialog-harassment-type-label": "どのような行動ですか？",
+	"reportincident-dialog-additional-details-input-label": "追加の詳細",
+	"reportincident-dialog-optional-label": "(省略可能)",
+	"reportincident-dialog-violator-placeholder-text": "誰を報告しますか？",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "ヘイトスピーチや差別",
+	"reportincident-dialog-harassment-type-sexual-harassment": "性的な嫌がらせ",
+	"reportincident-dialog-harassment-type-threats-of-violence": "暴力の脅迫",
+	"reportincident-dialog-harassment-type-intimidation": "脅迫、攻撃、悪口",
+	"reportincident-dialog-harassment-type-something-else": "その他",
+	"reportincident-dialog-harassment-intro-text": "{{SITENAME}} では不適切な行為は許容されません。",
+	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct|グローバル行動規範]]によれば、容認できない行為には以下のものが含まれますが、これらに限定されません。",
+	"reportincident-dialog-harassment-example-insults": "繰り返される侮辱",
+	"reportincident-dialog-harassment-example-sexual-harassment": "性的な嫌がらせ",
+	"reportincident-dialog-harassment-example-threats": "脅威となるもの",
+	"reportincident-dialog-harassment-example-encouraging-harm": "他人に危害を加えることの奨励",
+	"reportincident-dialog-harassment-example-doxing": "個人情報の開示 (晒し行為)",
+	"reportincident-dialog-harassment-example-hounding": "煽り行為",
+	"reportincident-dialog-harassment-example-trolling": "荒らし",
+	"reportincident-dialog-engage-header": "対話の進め方",
+	"reportincident-dialog-engage-text": "{{GENDER:|あなた}}が安全だと感じる場合は、報告しようとしている人物と話をしてみることもできます。{{SITENAME}}のユニバーサル行動規範と、敬意を持って行動する必要があることを伝えてください。これにより、嫌がらせを止めるのに役立つ場合があります。",
+	"reportincident-dialog-admin-review": "{{GENDER:|あなたの}}報告は確認のため[$1 管理者]に送信されます。",
+	"reportincident-dialog-harassment-empty": "少なくとも1つの行動を選択してください。",
+	"reportincident-dialog-violator-empty": "報告する利用者名を指定してください。",
+	"reportincident-dialog-something-else-empty": "行動の簡単な説明を記入してください。",
+	"reportincident-email-subject": "{{SITENAME}}:「$1」からの新しいインシデント報告",
+	"reportincident-email-something-else": "その他: 「$1」"
 }
