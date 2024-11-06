@@ -7,9 +7,15 @@ $( () => {
 	const Pinia = require( 'pinia' );
 	const pinia = Pinia.createPinia();
 
-	Vue.createMwApp( App )
+	const reportIncidentApp = Vue.createMwApp( App )
 		.use( pinia )
 		.mount( '#ext-reportincident-app' );
+
+	// eslint-disable-next-line no-jquery/no-global-selector
+	$( '.ext-reportincident-link' ).on( 'click', ( event ) => {
+		event.preventDefault();
+		reportIncidentApp.reportLinkInToolsMenuHandler();
+	} );
 
 	const $successConfirmationBanner = $( '<div>' );
 	$successConfirmationBanner.attr( 'id', 'ext-reportincident-successconfirmation' );

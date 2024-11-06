@@ -35,7 +35,6 @@ module.exports = exports = {
 		'report-incident-dialog-step-2': ReportIncidentDialogStep2
 	},
 	setup() {
-
 		const emailAlertOpen = ref( false );
 		const open = ref( false );
 
@@ -58,11 +57,8 @@ module.exports = exports = {
 		 * Handles clicks on the Report links in the Tools menu.
 		 * This opens the dialog and clears any data set by a
 		 * click on a DiscussionTools report link.
-		 *
-		 * @param {Event} event
 		 */
-		function reportLinkInToolsMenuHandler( event ) {
-			event.preventDefault();
+		function reportLinkInToolsMenuHandler() {
 			// If DiscussionTools data was set, then reset the
 			// form state as the user probably is intending
 			// to report something else.
@@ -71,10 +67,6 @@ module.exports = exports = {
 			}
 			showDialogDependingOnEmailConfirmationStatus();
 		}
-
-		// Open the dialog if the link is clicked on.
-		// eslint-disable-next-line no-jquery/no-global-selector
-		$( '.ext-reportincident-link' ).on( 'click', reportLinkInToolsMenuHandler );
 
 		/**
 		 * Calls the allusers API to check if a user
