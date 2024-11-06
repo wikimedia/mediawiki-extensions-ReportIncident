@@ -12,7 +12,7 @@
 </template>
 
 <script>
-const { ref, onMounted } = require( 'vue' );
+const { ref } = require( 'vue' );
 const EmailAlertDialog = require( './EmailAlertDialog.vue' );
 const ReportIncidentDialog = require( './ReportIncidentDialog.vue' );
 const ReportIncidentDialogStep1 = require( './ReportIncidentDialogStep1.vue' );
@@ -154,9 +154,6 @@ module.exports = exports = {
 			}
 		}
 
-		onMounted( () => {
-			mw.hook( 'discussionToolsOverflowMenuOnChoose' ).add( discussionToolsOverflowMenuOnChooseHandler );
-		} );
 		return {
 			open,
 			emailAlertOpen,

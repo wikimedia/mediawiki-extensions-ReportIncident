@@ -38,28 +38,6 @@ function expectApiGetParameters( apiGet, username ) {
 }
 
 /**
- * Mocks mw.hook().add() for a specific
- * hook name provided in the arguments.
- * Returns the jest.fn() for the add
- * method that can be used to expect that it
- * is called with the appropriate arguments.
- *
- * @param {string} hookName
- * @return {jest.fn}
- */
-function mockHookAdd( hookName ) {
-	const hookAdd = jest.fn();
-	jest.spyOn( mw, 'hook' ).mockImplementation( ( calledWith ) => {
-		if ( calledWith === hookName ) {
-			return {
-				add: hookAdd
-			};
-		}
-	} );
-	return hookAdd;
-}
-
-/**
  * Mocks mw.util.isIPAddress() and returns the jest.fn()
  * for the isIPAddress method.
  *
@@ -142,10 +120,10 @@ describe( 'Main Component Test Suite', () => {
 	} );
 
 	it( 'Does nothing when firing discussionToolsOverflowMenuOnChoose for not reportincident menu item', async () => {
-		const hookAdd = mockHookAdd( 'discussionToolsOverflowMenuOnChoose' );
 		const wrapper = renderComponent();
-		expect( hookAdd ).toHaveBeenCalledWith( wrapper.vm.discussionToolsOverflowMenuOnChooseHandler );
+
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler( 'test', {}, {} );
+
 		// nextTick call is needed because vuejs doesn't update the
 		// DOM immediately.
 		await nextTick();
@@ -154,10 +132,9 @@ describe( 'Main Component Test Suite', () => {
 	} );
 
 	it( 'Opens dialog on call to discussionToolsOverflowMenuOnChooseHandler with no author', async () => {
-		const hookAdd = mockHookAdd( 'discussionToolsOverflowMenuOnChoose' );
 		const wrapper = renderComponent();
 		const store = useFormStore();
-		expect( hookAdd ).toHaveBeenCalledWith( wrapper.vm.discussionToolsOverflowMenuOnChooseHandler );
+
 		// Call the discussionToolsOverflowMenuOnChoose hook
 		// with the reportincident ID and menu data with a thread-id defined.
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
@@ -181,17 +158,15 @@ describe( 'Main Component Test Suite', () => {
 	} );
 
 	it( 'Opens dialog on call to discussionToolsOverflowMenuOnChooseHandler with IP author', async () => {
-		const hookAdd = mockHookAdd( 'discussionToolsOverflowMenuOnChoose' );
 		const isIPAddress = mockIsIPAddress( true );
 		const wrapper = renderComponent();
 		const store = useFormStore();
+
 		// Test that calling discussionToolsOverflowMenuOnChooseHandler
 		// with no defined store.overflowMenuData causes the fields to
 		// be reset.
 		store.inputBehaviors = [ 'test' ];
-		// Expect that the discussionToolsOverflowMenuOnChooseHandler is added
-		// to the fires of discussionToolsOverflowMenuOnChoose.
-		expect( hookAdd ).toHaveBeenCalledWith( wrapper.vm.discussionToolsOverflowMenuOnChooseHandler );
+
 		// Call the discussionToolsOverflowMenuOnChoose hook
 		// with the reportincident ID and menu data with a thread-id defined.
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
@@ -219,16 +194,15 @@ describe( 'Main Component Test Suite', () => {
 	} );
 
 	it( 'Opens dialog on call to discussionToolsOverflowMenuOnChooseHandler with existing user as author', async () => {
-		const hookAdd = mockHookAdd( 'discussionToolsOverflowMenuOnChoose' );
 		const isIPAddress = mockIsIPAddress( false );
 		const wrapper = renderComponent();
 		const store = useFormStore();
-		expect( hookAdd ).toHaveBeenCalledWith( wrapper.vm.discussionToolsOverflowMenuOnChooseHandler );
 		const apiGet = mockApiGet( Promise.resolve(
 			{ query: { allusers: [
 				{ userid: 1, name: 'testuser' }
 			] } }
 		) );
+
 		// Call the discussionToolsOverflowMenuOnChoose hook
 		// with the reportincident ID and menu data with a thread-id defined.
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
@@ -256,12 +230,11 @@ describe( 'Main Component Test Suite', () => {
 	} );
 
 	it( 'Opens dialog on call to discussionToolsOverflowMenuOnChooseHandler with non-existent user as author', async () => {
-		const hookAdd = mockHookAdd( 'discussionToolsOverflowMenuOnChoose' );
 		const isIPAddress = mockIsIPAddress( false );
 		const wrapper = renderComponent();
 		const store = useFormStore();
 		const apiGet = mockApiGet( Promise.resolve( { query: { allusers: [] } } ) );
-		expect( hookAdd ).toHaveBeenCalledWith( wrapper.vm.discussionToolsOverflowMenuOnChooseHandler );
+
 		// Call the discussionToolsOverflowMenuOnChoose hook
 		// with the reportincident ID and menu data with a thread-id defined.
 		wrapper.vm.discussionToolsOverflowMenuOnChooseHandler(
@@ -289,12 +262,11 @@ describe( 'Main Component Test Suite', () => {
 	} );
 
 	it( 'Opens dialog on call to discussionToolsOverflowMenuOnChooseHandler with failed allusers API call', async () => {
-		const hookAdd = mockHookAdd( 'discussionToolsOverflowMenuOnChoose' );
 		const wrapper = renderComponent();
 		const isIPAddress = mockIsIPAddress( false );
 		const store = useFormStore();
-		expect( hookAdd ).toHaveBeenCalledWith( wrapper.vm.discussionToolsOverflowMenuOnChooseHandler );
 		const rejectedPromise = Promise.reject( 'test' );
+
 		// Catch the rejected promise in a function that does nothing to
 		// allow the tests to run (otherwise they fail with an
 		// ERR_UNHANDLED_REJECTION error).
@@ -327,12 +299,11 @@ describe( 'Main Component Test Suite', () => {
 	} );
 
 	it( 'Keeps form data on call to discussionToolsOverflowMenuOnChooseHandler for same thread-id', async () => {
-		const hookAdd = mockHookAdd( 'discussionToolsOverflowMenuOnChoose' );
 		const wrapper = renderComponent();
 		const isIPAddress = mockIsIPAddress( false );
 		const store = useFormStore();
-		expect( hookAdd ).toHaveBeenCalledWith( wrapper.vm.discussionToolsOverflowMenuOnChooseHandler );
 		const apiGet = mockApiGet( Promise.resolve() );
+
 		// Define store.overflowMenuData
 		store.overflowMenuData = { 'thread-id': 'c-testuser-20230504030201' };
 		// Define behaviours

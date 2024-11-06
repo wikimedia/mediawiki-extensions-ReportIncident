@@ -17,6 +17,9 @@ $( () => {
 		reportIncidentApp.reportLinkInToolsMenuHandler();
 	} );
 
+	mw.hook( 'discussionToolsOverflowMenuOnChoose' )
+		.add( reportIncidentApp.discussionToolsOverflowMenuOnChooseHandler );
+
 	const $successConfirmationBanner = $( '<div>' );
 	$successConfirmationBanner.attr( 'id', 'ext-reportincident-successconfirmation' );
 	// eslint-disable-next-line no-jquery/no-global-selector,no-jquery/no-class-state
