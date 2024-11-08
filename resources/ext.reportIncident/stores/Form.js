@@ -1,7 +1,7 @@
 'use strict';
 
 const Pinia = require( 'pinia' );
-const { ref, computed } = require( 'vue' );
+const { ref, computed, watch } = require( 'vue' );
 
 const useFormStore = Pinia.defineStore( 'form', () => {
 	const overflowMenuData = ref( {} );
@@ -50,20 +50,29 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 			// If text has been entered for this field, then now display errors for empty field.
 			displayBehaviorsRequiredError.value = true;
 		}
+
 		// Validate the reported user field has some content.
 		if ( inputReportedUser.value === '' ) {
 			if ( displayReportedUserRequiredError.value ) {
-				formErrors.inputReportedUser = { error: mw.msg( 'reportincident-dialog-violator-empty' ) };
+				formErrors.inputReportedUser = {
+					error: mw.msg( 'reportincident-dialog-violator-empty' )
+				};
 			}
-		} else {
-			// If text has been entered for this field, then now display errors for empty field.
-			displayReportedUserRequiredError.value = true;
-			if ( reportedUserDoesNotExist.value ) {
-				formErrors.inputReportedUser = { error: mw.msg( 'reportincident-dialog-violator-nonexistent' ) };
-			}
+		} else if ( reportedUserDoesNotExist.value ) {
+			formErrors.inputReportedUser = {
+				error: mw.msg( 'reportincident-dialog-violator-nonexistent' )
+			};
 		}
 
 		return formErrors;
+	} );
+
+	watch( inputReportedUser, ( newReportedUser ) => {
+		// Once the reported user has been filled for the first time,
+		// show an error if the value becomes empty again.
+		if ( newReportedUser.length > 0 ) {
+			displayReportedUserRequiredError.value = true;
+		}
 	} );
 
 	/**

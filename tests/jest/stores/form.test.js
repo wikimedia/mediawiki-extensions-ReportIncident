@@ -20,7 +20,8 @@ describe( 'Form Store', () => {
 	it( 'resets the form properly on call to $reset', () => {
 		const form = useFormStore();
 		form.inputBehaviors = [
-			Constants.harassmentTypes.HATE_SPEECH, Constants.harassmentTypes.INTIMIDATION_AGGRESSION
+			Constants.harassmentTypes.HATE_SPEECH,
+			Constants.harassmentTypes.INTIMIDATION_AGGRESSION
 		];
 		form.inputReportedUser = 'test value';
 		form.inputDetails = 'test details';
@@ -54,7 +55,8 @@ describe( 'Form Store', () => {
 	it( 'Generates correct rest data', () => {
 		const form = useFormStore();
 		form.inputBehaviors = [
-			Constants.harassmentTypes.HATE_SPEECH, Constants.harassmentTypes.INTIMIDATION_AGGRESSION
+			Constants.harassmentTypes.HATE_SPEECH,
+			Constants.harassmentTypes.INTIMIDATION_AGGRESSION
 		];
 		form.inputReportedUser = 'test user';
 		form.inputDetails = 'test details';
@@ -65,7 +67,8 @@ describe( 'Form Store', () => {
 			reportedUser: 'test user',
 			details: 'test details',
 			behaviors: [
-				Constants.harassmentTypes.HATE_SPEECH, Constants.harassmentTypes.INTIMIDATION_AGGRESSION
+				Constants.harassmentTypes.HATE_SPEECH,
+				Constants.harassmentTypes.INTIMIDATION_AGGRESSION
 			]
 		} );
 
@@ -99,20 +102,33 @@ describe( 'Form Store', () => {
 		const form = useFormStore();
 
 		// Test that no error messages are generated when the data is correct
+		//
 		form.inputBehaviors = [
-			Constants.harassmentTypes.HATE_SPEECH, Constants.harassmentTypes.INTIMIDATION_AGGRESSION
+			Constants.harassmentTypes.HATE_SPEECH,
+			Constants.harassmentTypes.INTIMIDATION_AGGRESSION
 		];
 		form.inputReportedUser = 'test value';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
+
+		form.isFormValidForSubmission(); // Triggers validations
+
 		expect( form.formErrorMessages ).toStrictEqual( {} );
 
 		// Test that emptying all the required fields generates error messages
+		//
 		form.inputReportedUser = '';
 		form.inputBehaviors = [];
+
+		form.isFormValidForSubmission(); // Triggers validations
+
 		expect( form.formErrorMessages ).toStrictEqual( {
-			inputBehaviors: { error: mw.msg( 'reportincident-dialog-harassment-empty' ) },
-			inputReportedUser: { error: mw.msg( 'reportincident-dialog-violator-empty' ) }
+			inputBehaviors: {
+				error: mw.msg( 'reportincident-dialog-harassment-empty' )
+			},
+			inputReportedUser: {
+				error: mw.msg( 'reportincident-dialog-violator-empty' )
+			}
 		} );
 	} );
 
@@ -124,7 +140,9 @@ describe( 'Form Store', () => {
 		form.inputReportedUser = 'test value';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
-		form.isFormValidForSubmission();
+
+		form.isFormValidForSubmission(); // Triggers validations
+
 		form.inputSomethingElseDetails = '';
 		expect( form.formErrorMessages ).toStrictEqual( {
 			inputBehaviors: { error: mw.msg( 'reportincident-dialog-something-else-empty' ) }
