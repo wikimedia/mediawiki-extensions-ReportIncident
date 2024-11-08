@@ -127,17 +127,23 @@
 				"components/ReportIncidentDialogStep1.vue",
 				"components/ReportIncidentDialogStep2.vue",
 				"components/SuccessConfirmationBanner.vue",
-				"stores/Form.js"
+				"stores/Form.js",
+				{
+					"name": "components/icons.json",
+					"callback": "MediaWiki\\ResourceLoader\\CodexModule::getIcons",
+					"callbackParam": [
+						"cdxIconLock",
+						"cdxIconUserGroup"
+					]
+				}
+
 			],
 			"messages": [
 				"reportincident-desc",
 				"reportincident-report-btn-label",
 				"reportincident-dialog-close-btn",
-				"reportincident-dialog-proceed-btn",
 				"reportincident-dialog-back-btn",
 				"reportincident-dialog-submit-btn",
-				"reportincident-dialog-title",
-				"reportincident-dialog-first-step-cancel-btn",
 				"reportincident-dialog-harassment-type-label",
 				"reportincident-dialog-additional-details-input-label",
 				"reportincident-dialog-optional-label",
@@ -148,20 +154,8 @@
 				"reportincident-dialog-harassment-type-intimidation",
 				"reportincident-dialog-harassment-type-something-else",
 				"reportincident-dialog-something-else-input-placeholder",
-				"reportincident-dialog-harassment-intro-text",
-				"reportincident-dialog-harassment-lead-in-to-harassment-examples",
-				"reportincident-dialog-harassment-example-insults",
-				"reportincident-dialog-harassment-example-sexual-harassment",
-				"reportincident-dialog-harassment-example-threats",
-				"reportincident-dialog-harassment-example-encouraging-harm",
-				"reportincident-dialog-harassment-example-doxing",
-				"reportincident-dialog-harassment-example-hounding",
-				"reportincident-dialog-harassment-example-trolling",
-				"reportincident-dialog-engage-header",
-				"reportincident-dialog-engage-text",
 				"reportincident-dialog-additional-details-input-placeholder",
 				"reportincident-dialog-violator-placeholder-text",
-				"reportincident-dialog-admin-review",
 				"reportincident-dialog-violator-empty",
 				"reportincident-dialog-violator-nonexistent",
 				"reportincident-dialog-something-else-empty",
@@ -174,7 +168,22 @@
 				"reportincident-emaildialog-content",
 				"reportincident-emaildialog-primary",
 				"reportincident-success-message",
-				"reportincident-success-message-close"
+				"reportincident-success-message-close",
+				"reportincident-dialog-describe-the-incident-title",
+				"reportincident-type-of-incident",
+				"reportincident-type-unacceptable-user-behavior",
+				"reportincident-type-immediate-threat-physical-harm",
+				"reportincident-type-immediate-threat-physical-harm-help",
+				"reportincident-choose-option",
+				"reportincident-dialog-cancel",
+				"reportincident-dialog-continue",
+				"reportincident-unacceptable-behavior-footer",
+				"reportincident-physical-harm-footer",
+				"reportincident-threats-physical-harm",
+				"reportincident-threats-self-harm",
+				"reportincident-threats-public-harm",
+				"reportincident-type-incident-required",
+				"reportincident-threat-harm-required"
 			],
 			"dependencies": [
 				"mediawiki.Uri",

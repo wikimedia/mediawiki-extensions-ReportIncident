@@ -27,6 +27,8 @@ describe( 'ReportIncident dialog', () => {
 	it( 'Should be able to advance to step 2 and see a form with the expected fields', async () => {
 		// Click the report link in the tools menu
 		await ReportIncidentPage.reportLinkInToolsMenu.click();
+
+		await ReportIncidentPage.dialogUnacceptableBehaviorsButton.click();
 		// Advance to step 2.
 		await ReportIncidentPage.dialogFooterNextButton.click();
 		// Step two content (which is the form) should exist, along with
@@ -45,6 +47,7 @@ describe( 'ReportIncident dialog', () => {
 		// Click the report link in the tools menu
 		await ReportIncidentPage.reportLinkInToolsMenu.click();
 		// Advance to step 2.
+		await ReportIncidentPage.dialogUnacceptableBehaviorsButton.click();
 		await ReportIncidentPage.dialogFooterNextButton.click();
 		// Go back to step 1.
 		await ReportIncidentPage.dialogFooterBackButton.click();
@@ -64,6 +67,7 @@ describe( 'ReportIncident dialog', () => {
 		// Click the report link in the tools menu
 		await ReportIncidentPage.reportLinkInToolsMenu.click();
 		// Advance to step 2.
+		await ReportIncidentPage.dialogUnacceptableBehaviorsButton.click();
 		await ReportIncidentPage.dialogFooterNextButton.click();
 		// Assert the dialog is on step 2.
 		assert( await ReportIncidentPage.stepTwoContent.isExisting() );

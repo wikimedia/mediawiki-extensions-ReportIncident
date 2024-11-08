@@ -11,6 +11,10 @@ class ReportIncidentPage extends Page {
 		return $( '.ext-reportincident-dialog' );
 	}
 
+	get dialogUnacceptableBehaviorsButton() {
+		return $( 'input[value="unacceptable-user-behavior"]', this.reportIncidentDialog );
+	}
+
 	get dialogFooterNextButton() {
 		return $( '.ext-reportincident-dialog-footer__next-btn', this.reportIncidentDialog );
 	}

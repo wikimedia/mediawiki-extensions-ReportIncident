@@ -1,5 +1,9 @@
 'use strict';
 
+jest.mock( '../../../resources/ext.reportIncident/components/icons.json', () => ( {
+	cdxIconLock: '',
+	cdxIconUserGroup: ''
+} ), { virtual: true } );
 const { mockCodePointLength } = require( '../utils.js' );
 
 // Need to run this here as the import of App.vue without

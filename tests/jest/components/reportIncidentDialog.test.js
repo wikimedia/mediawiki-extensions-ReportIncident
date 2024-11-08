@@ -1,10 +1,15 @@
 'use strict';
 
+jest.mock( '../../../resources/ext.reportIncident/components/icons.json', () => ( {
+	cdxIconLock: '',
+	cdxIconUserGroup: ''
+} ), { virtual: true } );
 const ReportIncidentDialog = require( '../../../resources/ext.reportIncident/components/ReportIncidentDialog.vue' ),
 	Constants = require( '../../../resources/ext.reportIncident/Constants.js' ),
 	utils = require( '@vue/test-utils' ),
 	{ createTestingPinia } = require( '@pinia/testing' ),
 	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' );
+const { storeToRefs } = require( 'pinia' );
 
 const steps = {
 	[ Constants.DIALOG_STEP_1 ]: '<p>Step 1</p>',
@@ -75,8 +80,28 @@ describe( 'Report Incident Dialog', () => {
 	} );
 
 	describe( 'footer messages', () => {
+		it( 'Should not display a footer explanation when first rendered and no radio button is selected', () => {
+			const wrapper = renderComponent( { open: true } );
+			expect( wrapper.vm.showFooterHelpText ).toBe( false );
+		} );
+
+		it( 'Should show validation errors if no incident type is selected', async () => {
+			const wrapper = renderComponent( { open: true } );
+			const store = useFormStore();
+			const { showValidationError } = storeToRefs( store );
+
+			await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
+			await wrapper.vm.$nextTick();
+
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+			expect( store.isIncidentTypeSelected() ).toBe( false );
+			expect( showValidationError.value ).toBe( true );
+		} );
+
 		it( 'Should display help text only on step 1', () => {
 			const wrapper = renderComponent( { open: true } );
+			const store = useFormStore();
+			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
 			expect( wrapper.vm.showFooterHelpText ).toBe( true );
 		} );
 
@@ -174,10 +199,12 @@ describe( 'Report Incident Dialog', () => {
 				}
 			} );
 		} );
-		it( 'navigates from STEP 1 to STEP 2 when the next button is clicked', () => {
+		it( 'navigates from STEP 1 to STEP 2 when the next button is clicked', async () => {
 			const wrapper = renderComponent( { open: true } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
-
+			const store = useFormStore();
+			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
+			await wrapper.vm.$nextTick();
 			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 			} );

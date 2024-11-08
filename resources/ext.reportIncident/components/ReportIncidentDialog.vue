@@ -1,7 +1,7 @@
 <template>
 	<cdx-dialog
 		v-model:open="wrappedOpen"
-		:title="$i18n( 'reportincident-dialog-title' ).text()"
+		:title="$i18n( 'reportincident-dialog-describe-the-incident-title' ).text()"
 		:close-button-label="$i18n( 'reportincident-dialog-close-btn' ).text()"
 		class="ext-reportincident-dialog"
 	>
@@ -12,11 +12,14 @@
 
 		<!-- dialog footer -->
 		<template #footer>
-			<p
+			<cdx-message
 				v-if="showFooterHelpText"
-				v-i18n-html:reportincident-dialog-admin-review="[ adminLink ]"
-				class="ext-reportincident-dialog__text-subtext">
-			</p>
+				:icon="footerIconName"
+				:inline="true"
+				class="ext-reportincident-dialog__footer_help">
+				<!-- eslint-disable-next-line vue/no-v-html -->
+				<span v-html="footerHelpTextMessageHtml"></span>
+			</cdx-message>
 			<cdx-message
 				v-if="showFooterErrorText"
 				type="error"
@@ -30,7 +33,7 @@
 					:disabled="formSubmissionInProgress || null"
 					@click="navigatePrevious"
 				>
-					{{ defaultButtonLabel }}
+					{{ cancelOrBackButtonLabel }}
 				</cdx-button>
 				<cdx-button
 					class="ext-reportincident-dialog-footer__next-btn"
@@ -49,8 +52,10 @@
 <script>
 
 const useFormStore = require( '../stores/Form.js' );
+const { storeToRefs } = require( 'pinia' );
 const { toRef, ref, computed } = require( 'vue' );
 const { CdxButton, CdxDialog, CdxMessage, useModelWrapper } = require( '@wikimedia/codex' );
+const icons = require( '../components/icons.json' );
 const Constants = require( '../Constants.js' );
 
 // @vue/component
@@ -78,17 +83,34 @@ module.exports = exports = {
 		const footerErrorMessage = ref( '' );
 		const formSubmissionInProgress = ref( false );
 
+		const store = useFormStore();
 		const currentSlotName = computed( () => `${ currentStep.value }` );
-		const showFooterHelpText = computed( () => currentStep.value === Constants.DIALOG_STEP_1 );
 		const showFooterErrorText = computed( () => currentStep.value === Constants.DIALOG_STEP_2 && footerErrorMessage.value !== '' );
 
+		const showFooterHelpText = computed( () => currentStep.value === Constants.DIALOG_STEP_1 && store.incidentType !== '' );
+
 		const primaryButtonLabel = computed( () => currentStep.value === Constants.DIALOG_STEP_1 ?
-			mw.msg( 'reportincident-dialog-proceed-btn' ) :
+			mw.msg( 'reportincident-dialog-continue' ) :
 			mw.msg( 'reportincident-dialog-submit-btn' ) );
 
-		const defaultButtonLabel = computed( () => currentStep.value === Constants.DIALOG_STEP_1 ?
-			mw.msg( 'reportincident-dialog-first-step-cancel-btn' ) :
-			mw.msg( 'reportincident-dialog-back-btn' ) );
+		const cancelOrBackButtonLabel = computed(
+			() => currentStep.value === Constants.DIALOG_STEP_1 ?
+				mw.msg( 'reportincident-dialog-cancel' ) :
+				mw.msg( 'reportincident-dialog-back-btn' ) );
+
+		const footerHelpTextMessageHtml = computed(
+			() => store.incidentType === 'immediate-threat-physical-harm' ?
+				mw.message( 'reportincident-physical-harm-footer' ).parse() :
+				mw.message( 'reportincident-unacceptable-behavior-footer' ).parse() );
+
+		const footerIconName = computed( () => {
+			if ( !store.incidentType ) {
+				return null;
+			}
+			return store.incidentType === 'immediate-threat-physical-harm' ?
+				icons.cdxIconLock :
+				icons.cdxIconUserGroup;
+		} );
 
 		/**
 		 * Prints the email that was sent or failed to send
@@ -119,7 +141,6 @@ module.exports = exports = {
 		 * @param {Object} response
 		 */
 		function onReportSubmitSuccess( response ) {
-			const store = useFormStore();
 			printEmailToConsole( response );
 			wrappedOpen.value = false;
 			currentStep.value = Constants.DIALOG_STEP_1;
@@ -136,7 +157,6 @@ module.exports = exports = {
 		 * @param {Object} errObject
 		 */
 		function onReportSubmitFailure( _err, errObject ) {
-			const store = useFormStore();
 			let errorKey = null;
 			if (
 				errObject.xhr.responseJSON
@@ -181,12 +201,22 @@ module.exports = exports = {
 		}
 
 		function navigateNext() {
-			// if on the first page, navigate to the second page
+			const { showValidationError } = storeToRefs( store );
+			// if on the first page, navigate to the second page, if the user has
+			// made the necessary selections
 			if ( currentStep.value === Constants.DIALOG_STEP_1 ) {
+				if ( !store.isIncidentTypeSelected() ) {
+					showValidationError.value = true;
+					return;
+				}
+				if ( store.isPhysicalHarmSelectedButNoSubtypeSelected() ) {
+					showValidationError.value = true;
+					return;
+				}
+				// Validation passed, so we can proceed to step 2.
 				currentStep.value = Constants.DIALOG_STEP_2;
 			} else {
 				// if on the second page, validate, then POST the data
-				const store = useFormStore();
 				const restPayload = store.restPayload;
 				restPayload.revisionId = mw.config.get( 'wgCurRevisionId' );
 				// TODO: Simulate mw.Api.postWithToken() by re-trying if the REST API call fails
@@ -213,7 +243,6 @@ module.exports = exports = {
 				// navigate back from the second page to the first to
 				// cancel which suggests they don't want to submit this
 				// report.
-				const store = useFormStore();
 				store.$reset();
 			} else {
 				// if on the second page, navigate back to the first page
@@ -221,21 +250,20 @@ module.exports = exports = {
 			}
 		}
 
-		const adminLink = mw.util.getUrl( mw.config.get( 'wgReportIncidentAdministratorsPage' ) );
-
 		return {
 			wrappedOpen,
 			primaryButtonLabel,
-			defaultButtonLabel,
+			cancelOrBackButtonLabel,
 			currentSlotName,
 			navigateNext,
 			navigatePrevious,
-			adminLink,
+			footerHelpTextMessageHtml,
 			footerErrorMessage,
 			showFooterHelpText,
 			showFooterErrorText,
 			formSubmissionInProgress,
-			onReportSubmitFailure
+			onReportSubmitFailure,
+			footerIconName
 		};
 	},
 	expose: [
@@ -252,6 +280,12 @@ module.exports = exports = {
 .ext-reportincident-dialog {
 	.ext-reportincident-dialog-footer {
 		float: right;
+	}
+
+	// Necessary because it isn't currently possible to have an inline CodexMessage
+	// that uses a normal font weight. That will become possible with T331623.
+	.ext-reportincident-dialog__footer_help span {
+		font-weight: normal;
 	}
 
 	@media screen and ( max-width: @max-width-breakpoint-mobile ) {

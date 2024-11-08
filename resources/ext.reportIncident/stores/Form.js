@@ -1,10 +1,13 @@
 'use strict';
 
 const Pinia = require( 'pinia' );
+const Constants = require( '../Constants.js' );
 const { ref, computed, watch } = require( 'vue' );
 
 const useFormStore = Pinia.defineStore( 'form', () => {
 	const overflowMenuData = ref( {} );
+	const incidentType = ref( '' );
+	const physicalHarmType = ref( '' );
 	const inputBehaviors = ref( [ ] );
 	const displayBehaviorsRequiredError = ref( false );
 	const inputReportedUser = ref( '' );
@@ -15,6 +18,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const inputSomethingElseDetails = ref( '' );
 	const displaySomethingElseTextboxRequiredError = ref( false );
 	const formSuccessfullySubmitted = ref( false );
+	const showValidationError = ref( false );
 
 	/**
 	 * A dictionary of error messages for display in step 2 of the dialog.
@@ -101,6 +105,27 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	}
 
 	/**
+	 * Check if an incident type is selected.
+	 *
+	 * @return {boolean} If an incident type is selected (and for immediate
+	 * threat of physical harm, if a subtype is selected)
+	 */
+	function isIncidentTypeSelected() {
+		return incidentType.value.length > 0;
+	}
+
+	/**
+	 * Check if the user selected "physical harm" as the incident type, but
+	 * did not yet select a subtype.
+	 *
+	 * @return {boolean}
+	 */
+	function isPhysicalHarmSelectedButNoSubtypeSelected() {
+		return incidentType.value === Constants.typeOfIncident.immediateThreatPhysicalHarm &&
+			physicalHarmType.value.length === 0;
+	}
+
+	/**
 	 * The form data from step 2 of the dialog in a JSON format that
 	 * can be posted to the report incident REST endpoint.
 	 */
@@ -120,7 +145,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	} );
 
 	/**
-	 * Resets the form data to it's initial state, which
+	 * Resets the form data to its initial state, which
 	 * is all text fields as an empty string and no
 	 * checkboxes selected.
 	 *
@@ -131,11 +156,14 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	 */
 	function $reset() {
 		// Reset the form data
+		incidentType.value = '';
+		physicalHarmType.value = '';
 		inputBehaviors.value = [ ];
 		inputReportedUser.value = '';
 		inputDetails.value = '';
 		inputSomethingElseDetails.value = '';
 		overflowMenuData.value = {};
+		showValidationError.value = false;
 		// Disable the required fields error again until
 		// that required field is un-focused or a submit
 		// is attempted.
@@ -151,6 +179,8 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 
 	return {
 		overflowMenuData,
+		incidentType,
+		physicalHarmType,
 		inputBehaviors,
 		displayBehaviorsRequiredError,
 		inputReportedUser,
@@ -163,6 +193,9 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		restPayload,
 		formErrorMessages,
 		formSuccessfullySubmitted,
+		showValidationError,
+		isIncidentTypeSelected,
+		isPhysicalHarmSelectedButNoSubtypeSelected,
 		isFormValidForSubmission,
 		$reset
 	};
