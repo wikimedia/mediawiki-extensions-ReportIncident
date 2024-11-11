@@ -244,7 +244,7 @@ module.exports = exports = {
 					Math.floor( windowHeight.value / 150 ),
 					2
 				),
-				5
+				4
 			)
 		} ) );
 
@@ -384,15 +384,19 @@ module.exports = exports = {
 			somethingElseDetailsField,
 			onSomethingElseDetailsInput,
 			onAdditionalDetailsInput,
-			onReportedUserInput,
-			// Used in tests, so needs to be passed out here.
-			/* eslint-disable vue/no-unused-properties */
 			windowHeight,
 			suggestedUsernames,
-			updateCharacterCount
-			/* eslint-enable vue/no-unused-properties */
+			updateCharacterCount,
+			onReportedUserInput
 		};
-	}
+	},
+	expose: [
+		// Expose internal functions and variables used in tests in order
+		// to prevent linter errors about unused properties
+		'suggestedUsernames',
+		'updateCharacterCount',
+		'windowHeight'
+	]
 };
 </script>
 

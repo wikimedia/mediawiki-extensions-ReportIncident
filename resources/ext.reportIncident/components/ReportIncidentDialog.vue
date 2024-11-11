@@ -235,12 +235,14 @@ module.exports = exports = {
 			showFooterHelpText,
 			showFooterErrorText,
 			formSubmissionInProgress,
-			// Used in tests, so needs to be passed out here.
-			/* eslint-disable vue/no-unused-properties */
 			onReportSubmitFailure
-			/* eslint-enable vue/no-unused-properties */
 		};
-	}
+	},
+	expose: [
+		// Expose internal functions called from tests in order
+		// to prevent linter errors about unused properties
+		'onReportSubmitFailure'
+	]
 };
 </script>
 
