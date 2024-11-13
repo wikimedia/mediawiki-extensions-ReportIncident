@@ -2,10 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Gomoko",
-			"Obscaeris"
+			"Obscaeris",
+			"BlueCamille",
+			"MacOS Weed",
+			"Mahabarata",
+			"SleaY",
+			"Urhixidur"
 		]
 	},
-	"reportincident-desc": "Extension système de signalisation d’incident privé",
+	"reportincident-desc": "Extension du système de signalement d’incident",
 	"reportincident-report-btn-label": "Rapport",
 	"reportincident-dialog-close-btn": "Fermer",
 	"reportincident-dialog-proceed-btn": "Procéder au dépôt d’un rapport",
@@ -34,7 +39,7 @@
 	"reportincident-dialog-harassment-example-hounding": "Le traquage",
 	"reportincident-dialog-harassment-example-trolling": "Le troll",
 	"reportincident-dialog-engage-header": "Comment engager le dialogue",
-	"reportincident-dialog-engage-text": "Si {{GENDER:|vous}} vous sentez à l’aise en le faisant, {{GENDER:|vous}} pouvez essayer de parler à la personne qui {{GENDER:|vous}} ennuie. Informez-la du code de conduite universel sur {{SITENAME}} et qu’elle doit être respectueuse. Cela peut parfois aider à arrêter le harcèlement.",
+	"reportincident-dialog-engage-text": "Si {{GENDER:|}}vous vous sentez suffisamment à l’aise, {{GENDER:|}}vous pouvez essayer de parler à la personne que {{GENDER:|}}vous voulez signaler. Informez-la du code de conduite universel sur {{SITENAME}} et qu’elle doit être respectueuse. Cela peut parfois aider à arrêter le harcèlement.",
 	"reportincident-dialog-admin-review": "{{GENDER:|Votre}} signalement sera envoyé à [$1 un administrateur] pour vérification.",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|Vous}} devez sélectionner au moins un comportement.",
 	"reportincident-dialog-violator-empty": "{{GENDER:|Vous}} devez spécifier un nom d’utilisateur à signaler.",
