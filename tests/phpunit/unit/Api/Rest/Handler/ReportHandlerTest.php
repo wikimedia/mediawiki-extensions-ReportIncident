@@ -49,7 +49,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		/** @var ReportHandler $handler */
 		$handler = $this->newServiceInstance( ReportHandler::class, [ 'config' => $config ] );
 		$this->expectExceptionObject(
-			new LocalizedHttpException( new MessageValue( 'rest-permission-denied-anon' ), 401 )
+			new LocalizedHttpException(
+				new MessageValue( 'rest-permission-denied-anon' ),
+				ReportHandler::HTTP_STATUS_FORBIDDEN
+			)
 		);
 		$authority = $this->mockAnonUltimateAuthority();
 		$this->executeHandler(
@@ -70,7 +73,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 
 		$userFactory = $this->createMock( UserFactory::class );
 		$reportingUser = $this->createMock( User::class );
-		$reportingUser->method( 'isRegistered' )->willReturn( true );
+		$reportingUser->method( 'isNamed' )->willReturn( true );
 		$reportingUser->method( 'getEditCount' )->willReturn( 0 );
 		$userFactory->method( 'newFromUserIdentity' )->willReturn( $reportingUser );
 
@@ -104,6 +107,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 
 		$userFactory = $this->createMock( UserFactory::class );
 		$reportingUser = $this->createMock( User::class );
+		$reportingUser->method( 'isNamed' )->willReturn( true );
 		$reportingUser->method( 'isRegistered' )->willReturn( true );
 		$reportingUser->method( 'getBlock' )->willReturn( $this->createMock( AbstractBlock::class ) );
 		$userFactory->method( 'newFromUserIdentity' )->willReturn( $reportingUser );
@@ -140,6 +144,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 
 		$userFactory = $this->createMock( UserFactory::class );
 		$reportingUser = $this->createMock( User::class );
+		$reportingUser->method( 'isNamed' )->willReturn( true );
 		$reportingUser->method( 'isRegistered' )->willReturn( true );
 		ConvertibleTimestamp::setFakeTime( '20231019120100' );
 		$reportingUser->method( 'getRegistration' )->willReturn( '20231019120000' );
@@ -194,9 +199,20 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$revisionStore->method( 'getRevisionById' )
 			->with( 1 )
 			->willReturn( null );
+
+		$user = $this->createMock( User::class );
+		$user->method( 'isNamed' )->willReturn( true );
+
+		$userFactory = $this->createMock( UserFactory::class );
+		$userFactory->method( 'newFromUserIdentity' )->willReturn( $user );
+
 		/** @var ReportHandler $handler */
 		$handler = $this->newServiceInstance( ReportHandler::class,
-			[ 'config' => $config, 'revisionStore' => $revisionStore ]
+			[
+				'config' => $config,
+				'revisionStore' => $revisionStore,
+				'userFactory' => $userFactory
+			]
 		);
 		$this->expectExceptionObject(
 			new LocalizedHttpException( new MessageValue( 'rest-nonexistent-revision' ), 404 )
@@ -347,6 +363,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$revisionStore->method( 'getRevisionById' )->willReturn( null );
 		$userFactory = $this->createMock( UserFactory::class );
 		$user = $this->createMock( User::class );
+		$user->method( 'isNamed' )->willReturn( true );
 		$user->method( 'isEmailConfirmed' )->willReturn( false );
 		$userFactory->method( 'newFromUserIdentity' )->willReturn( $user );
 		/** @var ReportHandler $handler */
@@ -386,9 +403,11 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$userIdentityLookup = $this->createMock( UserIdentityLookup::class );
 		$registeredUserMock = $this->createMock( User::class );
 		$registeredUserMock->method( 'isRegistered' )->willReturn( true );
+		$registeredUserMock->method( 'isNamed' )->willReturn( true );
 		$userIdentityLookup->method( 'getUserIdentityByName' )->willReturn( $registeredUserMock );
 		$user = $this->createMock( User::class );
 		$user->method( 'isEmailConfirmed' )->willReturn( false );
+		$user->method( 'isNamed' )->willReturn( true );
 		$userFactory->method( 'newFromUserIdentity' )->willReturn( $user );
 		/** @var ReportHandler $handler */
 		$handler = $this->newServiceInstance( ReportHandler::class,
@@ -444,6 +463,11 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$revisionStore->method( 'getRevisionById' )
 			->with( $data['revisionId'] )
 			->willReturn( $revisionRecord );
+
+		$reportingUser = $this->createMock( User::class );
+		$reportingUser->method( 'isNamed' )->willReturn( true );
+		$reportingUser->method( 'getEditCount' )->willReturn( 1 );
+
 		// Mock the result of UserIdentityLookup::getUserIdentityByName to always return
 		// an existing user.
 		$userIdentityLookup = $this->createMock( UserIdentityLookup::class );
@@ -452,6 +476,13 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$userIdentityLookup->method( 'getUserIdentityByName' )
 			->with( $data['reportedUser'] )
 			->willReturn( $userIdentity );
+
+		$userFactory = $this->createMock( UserFactory::class );
+		$userFactory
+			->expects( $this->atLeastOnce() )
+			->method( 'newFromUserIdentity' )
+			->willReturn( $reportingUser );
+
 		// Disable the constructor and allow calling UserNameUtils::isIP which
 		// does not rely on the object properties.
 		$userNameUtils = $this->getMockBuilder( UserNameUtils::class )
@@ -465,6 +496,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				'reportIncidentManager' => $reportManager,
 				'revisionStore' => $revisionStore,
 				'userIdentityLookup' => $userIdentityLookup,
+				'userFactory' => $userFactory,
 				'userNameUtils' => $userNameUtils,
 			]
 		);
@@ -631,6 +663,11 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		// Pass the performer registered check
 		$user = $this->createMock( User::class );
 		$user->method( 'isRegistered' )->willReturn( true );
+		$user->method( 'isNamed' )->willReturn( true );
+
+		$userFactory = $this->createMock( UserFactory::class );
+		$userFactory->method( 'newFromUserIdentity' )->willReturn( $user );
+
 		// Pass the revision check
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revision = $this->createMock( RevisionRecord::class );
@@ -645,6 +682,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			[
 				'config' => $config,
 				'revisionStore' => $revisionStore,
+				'userFactory' => $userFactory,
 				'userNameUtils' => $userNameUtils,
 			]
 		);
@@ -685,11 +723,20 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$userNameUtils = $this->createMock( UserNameUtils::class );
 		$userNameUtils->method( 'isIP' )
 			->willReturn( true );
+
+		$user = $this->createMock( User::class );
+		$user->method( 'isNamed' )->willReturn( true );
+		$user->method( 'isEmailConfirmed' )->willReturn( true );
+
+		$userFactory = $this->createMock( UserFactory::class );
+		$userFactory->method( 'newFromUserIdentity' )->willReturn( $user );
+
 		/** @var ReportHandler $handler */
 		$handler = $this->newServiceInstance( ReportHandler::class,
 			[
 				'config' => $config,
 				'revisionStore' => $revisionStore,
+				'userFactory' => $userFactory,
 				'userNameUtils' => $userNameUtils,
 			]
 		);
@@ -727,6 +774,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$user = $this->createMock( User::class );
 		$user->method( 'isTemp' )->willReturn( true );
 		$user->method( 'isRegistered' )->willReturn( true );
+		$user->method( 'isNamed' )->willReturn( true );
 		$user->method( 'getName' )->willReturn( '*Unregistered 123' );
 		// Mock that the UserFactory returns the User object created above
 		$userFactory = $this->createMock( UserFactory::class );
@@ -769,6 +817,56 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		);
 	}
 
+	public function testTempUserFailsFirstValidation(): void {
+		$config = new HashConfig( [
+			'ReportIncidentApiEnabled' => true,
+			'ReportIncidentDeveloperMode' => true,
+			'ReportIncidentMinimumAccountAgeInSeconds' => null,
+		] );
+
+		$userNameUtils = $this->createMock( UserNameUtils::class );
+		$userNameUtils->expects( $this->never() )->method( 'isIP' );
+
+		$user = $this->createMock( User::class );
+		$user->method( 'isTemp' )->willReturn( true );
+		$user->method( 'isRegistered' )->willReturn( true );
+		$user->method( 'isNamed' )->willReturn( false );
+		$user->method( 'getName' )->willReturn( '*Unregistered 123' );
+
+		// Mock that the UserFactory returns the User object created above
+		$userFactory = $this->createMock( UserFactory::class );
+		$userFactory->method( 'newFromUserIdentity' )
+			->with( $user )
+			->willReturnArgument( 0 );
+
+		$revisionStore = $this->createMock( RevisionStore::class );
+		$revisionStore->expects( $this->never() )->method( 'getRevisionById' );
+
+		/** @var ReportHandler $handler */
+		$handler = $this->newServiceInstance( ReportHandler::class,
+			[
+				'config' => $config,
+				'revisionStore' => $revisionStore,
+				'userNameUtils' => $userNameUtils,
+				'userFactory' => $userFactory,
+			]
+		);
+
+		$this->expectExceptionObject(
+			new LocalizedHttpException( new MessageValue( 'rest-permission-denied-anon' ), 403 )
+		);
+
+		$this->executeHandler(
+			$handler,
+			new RequestData( [ 'headers' => [ 'Content-Type' => 'application/json' ] ] ),
+			[],
+			[],
+			[],
+			[ 'revisionId' => 1, 'reportedUser' => '127.0.0.1', 'behaviors' => [ 'test' ] ],
+			$this->newUserAuthority( [ 'actor' => $user ] )
+		);
+	}
+
 	public function testInvalidReportedUsername() {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
@@ -787,13 +885,24 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			->method( 'getUserIdentityByName' )
 			->with( 'testing' )
 			->willReturn( null );
+
+		$reporter = $this->createMock( User::class );
+		$reporter->method( 'isTemp' )->willReturn( false );
+		$reporter->method( 'isRegistered' )->willReturn( true );
+		$reporter->method( 'isNamed' )->willReturn( true );
+
+		$userFactory = $this->createMock( UserFactory::class );
+		$userFactory->method( 'newFromUserIdentity' )
+			->willReturn( $reporter );
+
 		/** @var ReportHandler $handler */
 		$handler = $this->newServiceInstance( ReportHandler::class,
 			[
 				'config' => $config,
 				'revisionStore' => $revisionStore,
 				'userIdentityLookup' => $userIdentityLookup,
-				'userNameUtils' => $userNameUtils
+				'userFactory' => $userFactory,
+				'userNameUtils' => $userNameUtils,
 			]
 		);
 		$this->expectExceptionObject(
@@ -816,6 +925,16 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentDeveloperMode' => true,
 			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
+
+		$reporter = $this->createMock( User::class );
+		$reporter->method( 'isTemp' )->willReturn( false );
+		$reporter->method( 'isRegistered' )->willReturn( true );
+		$reporter->method( 'isNamed' )->willReturn( true );
+
+		$userFactory = $this->createMock( UserFactory::class );
+		$userFactory->method( 'newFromUserIdentity' )
+			->willReturn( $reporter );
+
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionStore->method( 'getRevisionById' )
 			->willReturn( $this->createMock( RevisionRecord::class ) );
@@ -835,6 +954,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				'revisionStore' => $revisionStore,
 				'userIdentityLookup' => $userIdentityLookup,
 				'userNameUtils' => $userNameUtils,
+				'userFactory' => $userFactory,
 			]
 		);
 		$this->expectExceptionObject(
