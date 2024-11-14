@@ -40,6 +40,9 @@ class ReportHandler extends SimpleHandler {
 	private UserFactory $userFactory;
 	private Language $contentLanguage;
 
+	public const HTTP_STATUS_FORBIDDEN = 403;
+	public const HTTP_STATUS_NOT_FOUND = 404;
+
 	/**
 	 * @param Config $config
 	 * @param RevisionStore $revisionStore
@@ -68,17 +71,24 @@ class ReportHandler extends SimpleHandler {
 		$this->contentLanguage = $contentLanguage;
 	}
 
-	public function run() {
+	/**
+	 * @throws LocalizedHttpException
+	 */
+	public function run(): Response {
 		if ( !$this->config->get( 'ReportIncidentApiEnabled' ) ) {
 			// Pretend the route doesn't exist if the feature flag is off.
 			throw new LocalizedHttpException(
-				new MessageValue( 'rest-no-match' ), 404
+				new MessageValue( 'rest-no-match' ),
+				self::HTTP_STATUS_NOT_FOUND
 			);
 		}
-		$user = $this->getAuthority()->getUser();
-		$this->validateUserCanSubmitReport( $user );
+
+		$userIdentity = $this->getAuthority()->getUser();
+		$this->validateUserCanSubmitReport( $userIdentity );
+
 		$incidentReport = $this->getIncidentReportObjectFromValidatedBody( $this->getValidatedBody() );
-		$this->authorizeIncidentReport( $user );
+		$this->authorizeIncidentReport( $userIdentity );
+
 		return $this->submitIncidentReport( $incidentReport );
 	}
 
@@ -86,18 +96,19 @@ class ReportHandler extends SimpleHandler {
 	 * Validates that a user can submit an incident report using the API.
 	 * If the validation fails, a LocalizedHttpException will be thrown.
 	 *
-	 * @param UserIdentity $user The UserIdentity associated with the authority.
+	 * @param UserIdentity $userIdentity The UserIdentity associated with the authority.
 	 * @return void The method will return nothing if validation succeeds (and error otherwise).
 	 * @throws LocalizedHttpException If validation fails
 	 */
-	private function validateUserCanSubmitReport( $user ): void {
-		if ( !$user->isRegistered() ) {
+	private function validateUserCanSubmitReport( UserIdentity $userIdentity ): void {
+		$user = $this->userFactory->newFromUserIdentity( $userIdentity );
+
+		if ( !$user->isNamed() ) {
 			throw new LocalizedHttpException(
-				new MessageValue( 'rest-permission-denied-anon' ), 401
+				new MessageValue( 'rest-permission-denied-anon' ),
+				self::HTTP_STATUS_FORBIDDEN
 			);
 		}
-
-		$user = $this->userFactory->newFromUserIdentity( $user );
 
 		if ( $user->getEditCount() === 0 ) {
 			$this->logger->warning(
@@ -106,7 +117,7 @@ class ReportHandler extends SimpleHandler {
 			);
 			throw new LocalizedHttpException(
 				new MessageValue( 'apierror-permissiondenied', [ new MessageValue( 'action-reportincident' ) ] ),
-				403
+				self::HTTP_STATUS_FORBIDDEN
 			);
 		}
 
@@ -119,7 +130,7 @@ class ReportHandler extends SimpleHandler {
 			);
 			throw new LocalizedHttpException(
 				new MessageValue( 'apierror-blocked' ),
-				403
+				self::HTTP_STATUS_FORBIDDEN
 			);
 		}
 
@@ -139,7 +150,7 @@ class ReportHandler extends SimpleHandler {
 			);
 			throw new LocalizedHttpException(
 				new MessageValue( 'apierror-permissiondenied', [ new MessageValue( 'action-reportincident' ) ] ),
-				403
+				self::HTTP_STATUS_FORBIDDEN
 			);
 		}
 
