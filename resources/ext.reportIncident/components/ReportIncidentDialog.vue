@@ -1,7 +1,7 @@
 <template>
 	<cdx-dialog
 		v-model:open="wrappedOpen"
-		:title="$i18n( 'reportincident-dialog-describe-the-incident-title' ).text()"
+		:title="title"
 		:close-button-label="$i18n( 'reportincident-dialog-close-btn' ).text()"
 		class="ext-reportincident-dialog"
 	>
@@ -82,6 +82,14 @@ module.exports = exports = {
 		const currentStep = ref( props.initialStep );
 		const footerErrorMessage = ref( '' );
 		const formSubmissionInProgress = ref( false );
+
+		const titlesByStep = {
+			[ Constants.DIALOG_STEP_1 ]: 'reportincident-dialog-describe-the-incident-title',
+			[ Constants.DIALOG_STEP_2 ]: 'reportincident-dialog-describe-the-incident-title'
+		};
+		// Possible message keys used here are listed above.
+		// eslint-disable-next-line mediawiki/msg-doc
+		const title = computed( () => mw.msg( titlesByStep[ currentStep.value ] ) );
 
 		const store = useFormStore();
 		const currentSlotName = computed( () => `${ currentStep.value }` );
@@ -270,7 +278,8 @@ module.exports = exports = {
 			showFooterErrorText,
 			formSubmissionInProgress,
 			onReportSubmitFailure,
-			footerIconName
+			footerIconName,
+			title
 		};
 	},
 	expose: [
