@@ -105,18 +105,20 @@ class ReportHandler extends SimpleHandler {
 				[ 'user' => $this->getAuthority()->getUser()->getName() ]
 			);
 			throw new LocalizedHttpException(
-				new MessageValue( 'apierror-permissiondenied', [ 'reportincident' ] ),
+				new MessageValue( 'apierror-permissiondenied', [ new MessageValue( 'action-reportincident' ) ] ),
 				403
 			);
 		}
 
+		// Prevent users targeted by any block, including unrelated partial blocks, from submitting reports.
+		// (T378778)
 		if ( $user->getBlock() ) {
 			$this->logger->warning(
 				'Blocked user "{user}" attempted to perform "reportincident".',
 				[ 'user' => $this->getAuthority()->getUser()->getName() ]
 			);
 			throw new LocalizedHttpException(
-				new MessageValue( 'apierror-blocked', [ 'reportincident' ] ),
+				new MessageValue( 'apierror-blocked' ),
 				403
 			);
 		}
@@ -136,7 +138,7 @@ class ReportHandler extends SimpleHandler {
 				[ 'user' => $this->getAuthority()->getUser()->getName() ]
 			);
 			throw new LocalizedHttpException(
-				new MessageValue( 'apierror-permissiondenied', [ 'reportincident' ] ),
+				new MessageValue( 'apierror-permissiondenied', [ new MessageValue( 'action-reportincident' ) ] ),
 				403
 			);
 		}

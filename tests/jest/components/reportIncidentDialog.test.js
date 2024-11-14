@@ -172,6 +172,36 @@ describe( 'Report Incident Dialog', () => {
 				expect( store.inputReportedUserDisabled ).toBe( false );
 			} );
 
+			it( 'Should use server-side error message on call to onReportSubmitFailure when available', () => {
+				const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+				const errMsg = 'This is some server error';
+
+				jest.spyOn( mw.config, 'get' ).mockReturnValue( 'en' );
+
+				wrapper.vm.onReportSubmitFailure( 'http', {
+					xhr: { status: 404, responseJSON: { errorKey: 'some-example-error', messageTranslations: { en: errMsg } } }
+				} );
+
+				expect( mw.config.get.mock.calls ).toEqual( [ [ 'wgUserLanguage' ] ] );
+				expect( wrapper.vm.showFooterErrorText ).toBe( true );
+				expect( wrapper.vm.footerErrorMessage ).toBe( errMsg );
+			} );
+
+			it( 'Should use generic error message on call to onReportSubmitFailure when server-side error message is unlocalized', () => {
+				const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+				const errMsg = 'This is some server error';
+
+				jest.spyOn( mw.config, 'get' ).mockReturnValue( 'de' );
+
+				wrapper.vm.onReportSubmitFailure( 'http', {
+					xhr: { status: 404, responseJSON: { errorKey: 'some-example-error', messageTranslations: { en: errMsg } } }
+				} );
+
+				expect( mw.config.get.mock.calls ).toEqual( [ [ 'wgUserLanguage' ] ] );
+				expect( wrapper.vm.showFooterErrorText ).toBe( true );
+				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-generic-error' );
+			} );
+
 			it( 'Should add footer error message on call to onReportSubmitFailure with errorKey that is not otherwise handled', () => {
 				const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
 				wrapper.vm.onReportSubmitFailure( 'http', {

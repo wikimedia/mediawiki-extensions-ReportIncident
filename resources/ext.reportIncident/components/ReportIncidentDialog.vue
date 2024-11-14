@@ -158,14 +158,17 @@ module.exports = exports = {
 		 */
 		function onReportSubmitFailure( _err, errObject ) {
 			let errorKey = null;
-			if (
-				errObject.xhr.responseJSON
-			) {
-				printEmailToConsole( errObject.xhr.responseJSON );
-				if ( errObject.xhr.responseJSON.errorKey ) {
-					errorKey = errObject.xhr.responseJSON.errorKey;
+			let errorText = null;
+			const errJson = errObject.xhr.responseJSON;
+			if ( errJson ) {
+				printEmailToConsole( errJson );
+				if ( errJson.errorKey ) {
+					errorKey = errJson.errorKey;
+					errorText = errJson.messageTranslations ?
+						errJson.messageTranslations[ mw.config.get( 'wgUserLanguage' ) ] : null;
 				}
 			}
+
 			if ( errorKey === 'reportincident-dialog-violator-nonexistent' ) {
 				// Show the server error next to the correct field.
 				store.reportedUserDoesNotExist = true;
@@ -175,6 +178,10 @@ module.exports = exports = {
 				// Re-enable the field if is disabled as the server has said
 				// the user does not exist, so it will need to be fixed.
 				store.inputReportedUserDisabled = false;
+			} else if ( errorKey && errorText ) {
+				// If a localized error message is available in the response, use that.
+				footerErrorMessage.value = errorText;
+				store.formSubmissionInProgress = false;
 			} else {
 				let message;
 				if ( !navigator.onLine ) {
