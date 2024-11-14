@@ -22,9 +22,6 @@ const useFormStore = require( '../stores/Form.js' );
 // @vue/component
 module.exports = exports = {
 	name: 'App',
-	compatConfig: {
-		MODE: 3
-	},
 	compilerOptions: {
 		whitespace: 'condense'
 	},
