@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Brettchenweber",
 			"Inkowik",
 			"McDutchie"
 		]
@@ -8,11 +9,8 @@
 	"reportincident-desc": "Erweiterung um ein Meldesystem für Zwischenfälle.",
 	"reportincident-report-btn-label": "Melden",
 	"reportincident-dialog-close-btn": "Schließen",
-	"reportincident-dialog-proceed-btn": "Fahre mit dem Einreichen einer Meldung fort",
 	"reportincident-dialog-back-btn": "Zurück",
 	"reportincident-dialog-submit-btn": "Speichern",
-	"reportincident-dialog-title": "Einen Zwischenfall melden",
-	"reportincident-dialog-first-step-cancel-btn": "Ich möchte keinen Bericht einreichen",
 	"reportincident-dialog-harassment-type-label": "Welche Art von Verhalten?",
 	"reportincident-dialog-additional-details-input-label": "Zusätzliche Details",
 	"reportincident-dialog-additional-details-input-placeholder": "Füge Kontext ein, der für einen Prüfer hilfreich sein könnte. Du kannst Links einfügen, die den Vorfall verdeutlichen.",
@@ -25,18 +23,6 @@
 	"reportincident-dialog-harassment-type-intimidation": "Einschüchterung, Aggression, Beschimpfungen",
 	"reportincident-dialog-harassment-type-something-else": "Etwas anderes",
 	"reportincident-dialog-something-else-input-placeholder": "Gib die oben nicht aufgeführten Verhaltensweisen an.",
-	"reportincident-dialog-harassment-intro-text": "Unangemessenes Verhalten wird auf {{SITENAME}} nicht toleriert.",
-	"reportincident-dialog-harassment-lead-in-to-harassment-examples": "Gemäß dem [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct|universellen Verhaltenskodex]] umfasst inakzeptables Verhalten unter anderem Folgendes:",
-	"reportincident-dialog-harassment-example-insults": "Wiederholte Beleidigungen",
-	"reportincident-dialog-harassment-example-sexual-harassment": "Sexuelle Belästigung",
-	"reportincident-dialog-harassment-example-threats": "Bedrohungen",
-	"reportincident-dialog-harassment-example-encouraging-harm": "Anstiftung zum Schaden anderer",
-	"reportincident-dialog-harassment-example-doxing": "Offenlegung personenbezogener Daten (Doxing)",
-	"reportincident-dialog-harassment-example-hounding": "Hounding",
-	"reportincident-dialog-harassment-example-trolling": "Trollen",
-	"reportincident-dialog-engage-header": "Wie man einen Dialog führt",
-	"reportincident-dialog-engage-text": "Wenn {{GENDER:|du}} dich dabei sicher fühlst, kannst {{GENDER:|du}} versuchen, mit der Person zu sprechen, die {{GENDER:|du}} meldest. Informiere sie über den universellen Verhaltenskodex auf {{SITENAME}} und dass sie sich respektvoll verhalten muss. Dies kann manchmal helfen, die Belästigung zu stoppen.",
-	"reportincident-dialog-admin-review": "{{GENDER:|Dein}} Bericht wird zur Überprüfung an [$1 an einen Adminstrator] gesendet.",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|Du}} musst mindestens ein Verhalten auswählen.",
 	"reportincident-dialog-violator-empty": "{{GENDER:|Du}} musst zum Melden einen Benutzernamen angeben.",
 	"reportincident-dialog-something-else-empty": "Bitte beschreibe das Verhalten kurz.",
@@ -59,5 +45,20 @@
 	"reportincident-emaildialog-close-button": "Abbrechen",
 	"reportincident-emaildialog-content": "Wir benötigen {{GENDER:|deine}} bestätigte E-Mail-Adresse, um Aktualisierungen zum Bericht bereitzustellen oder bei Bedarf nachzufassen. Bitte füge die E-Mail-Adresse von {{GENDER:|dir}} in den Benutzerkontoeinstellungen von {{GENDER:|dir}} hinzu oder bestätige diese, bevor du eine Meldung einreichst.",
 	"reportincident-emaildialog-primary": "Gehe zu den Einstellungen",
-	"reportincident-confirmedemail-required": "Für die Übermittlung eines Vorfallberichts ist eine bestätigte E-Mail-Adresse erforderlich."
+	"reportincident-confirmedemail-required": "Für die Übermittlung eines Vorfallberichts ist eine bestätigte E-Mail-Adresse erforderlich.",
+	"reportincident-dialog-describe-the-incident-title": "Beschreibe den Vorfall",
+	"reportincident-type-of-incident": "Art des Vorfalls",
+	"reportincident-type-unacceptable-user-behavior": "Inakzeptables Nutzerverhalten",
+	"reportincident-type-immediate-threat-physical-harm": "Unmittelbare Bedrohung durch körperliche Gewalt",
+	"reportincident-type-immediate-threat-physical-harm-help": "Die Absicht, Gewalt gegen eine Einzelperson auszuüben, sich selbst zu verletzen oder einen Akt der Massengewalt zu begehen",
+	"reportincident-choose-option": "Wähle eine Option",
+	"reportincident-dialog-cancel": "Abbrechen",
+	"reportincident-dialog-continue": "Fortfahren",
+	"reportincident-unacceptable-behavior-footer": "Unangemessenes Verhalten wird auf {{SITENAME}} [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|nicht toleriert]] und von der Community sanktioniert.",
+	"reportincident-physical-harm-footer": "Dein Bericht ist [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|privat]] und wird zur Überprüfung an das [[meta:Special:MyLanguage/Threats_of_harm|Notfallteam der Wikimedia Foundation]] gesendet.",
+	"reportincident-threats-physical-harm": "Androhung von körperlicher Gewalt",
+	"reportincident-threats-self-harm": "Androhungen von Selbstverletzung",
+	"reportincident-threats-public-harm": "Drohungen, der Allgemeinheit Schaden zuzufügen",
+	"reportincident-type-incident-required": "Bitte wähle die Art des Vorfalls",
+	"reportincident-threat-harm-required": "Die Option „Androhung von Schaden“ muss bereitgestellt werden"
 }

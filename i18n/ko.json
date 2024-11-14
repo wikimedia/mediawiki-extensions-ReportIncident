@@ -6,5 +6,8 @@
 	},
 	"reportincident-success-message-close": "닫기",
 	"reportincident-emaildialog-close-button": "취소",
-	"reportincident-emaildialog-primary": "설정으로 이동"
+	"reportincident-emaildialog-primary": "설정으로 이동",
+	"reportincident-choose-option": "옵션 선택",
+	"reportincident-dialog-cancel": "취소",
+	"reportincident-dialog-continue": "계속"
 }

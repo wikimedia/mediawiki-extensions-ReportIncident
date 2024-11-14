@@ -8,7 +8,6 @@
 	"reportincident-desc": "Осл медүлх системин өргҗлт",
 	"reportincident-dialog-additional-details-input-placeholder": "Шүүмҗләчд туста болмар  утхиг немтн. Та холвасиг хавсрулҗ чаднат.",
 	"reportincident-dialog-something-else-input-placeholder": "Деер дурдад уга заң-үүлиг зааҗ өгтн.",
-	"reportincident-dialog-engage-text": "Кемр {{GENDER:|та}} бийән аюл уга бәәнә гиҗ бодхла, {{GENDER:|та}} һундҗах әмтнлә {{GENDER:|та}} күүндҗ чадҗанат. Теднд {{SITENAME}} сайтын Ниитин йосн-дүрмиг медүләд, нег-негән күндлхд хандултн. Эннь зәрмдән дармтыг зогсахд туслна.",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|Та}} дор бәәх нег үүл-йовциг суңһх йоста.",
 	"reportincident-dialog-violator-empty": "{{GENDER:|Та}} медүлхин төлә кергләчин нериг зааҗ өгх йоста.",
 	"reportincident-dialog-something-else-empty": "Үүл-йовцин талар товч тәәлвр өгтн.",
