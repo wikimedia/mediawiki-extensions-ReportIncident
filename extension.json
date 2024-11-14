@@ -122,6 +122,7 @@
 				"init.js",
 				"Constants.js",
 				"components/App.vue",
+				"components/CharacterLimitedTextArea.vue",
 				"components/EmailAlertDialog.vue",
 				"components/ReportIncidentDialog.vue",
 				"components/ReportIncidentDialogStep1.vue",
