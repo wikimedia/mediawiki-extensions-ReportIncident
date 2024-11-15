@@ -11,7 +11,7 @@ describe( 'Form Store', () => {
 		const form = useFormStore();
 		expect( form.isFormValidForSubmission() ).toBe( false );
 
-		form.inputBehaviors = [ Constants.harassmentTypes.HATE_SPEECH ];
+		form.inputBehavior = Constants.harassmentTypes.HATE_SPEECH;
 		form.inputReportedUser = 'test value';
 
 		expect( form.isFormValidForSubmission() ).toBe( true );
@@ -19,10 +19,7 @@ describe( 'Form Store', () => {
 
 	it( 'resets the form properly on call to $reset', () => {
 		const form = useFormStore();
-		form.inputBehaviors = [
-			Constants.harassmentTypes.HATE_SPEECH,
-			Constants.harassmentTypes.INTIMIDATION_AGGRESSION
-		];
+		form.inputBehavior = Constants.harassmentTypes.HATE_SPEECH;
 		form.inputReportedUser = 'test value';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
@@ -36,8 +33,10 @@ describe( 'Form Store', () => {
 		form.funnelName = 'bar';
 
 		form.$reset();
+
 		// Form fields should be empty
 		expect( form.inputBehaviors ).toStrictEqual( [] );
+		expect( form.inputBehavior ).toStrictEqual( '' );
 		expect( form.inputReportedUser ).toBe( '' );
 		expect( form.inputDetails ).toBe( '' );
 		expect( form.inputSomethingElseDetails ).toBe( '' );
@@ -59,10 +58,7 @@ describe( 'Form Store', () => {
 
 	it( 'Generates correct rest data', () => {
 		const form = useFormStore();
-		form.inputBehaviors = [
-			Constants.harassmentTypes.HATE_SPEECH,
-			Constants.harassmentTypes.INTIMIDATION_AGGRESSION
-		];
+		form.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
 		form.inputReportedUser = 'test user';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
@@ -71,13 +67,10 @@ describe( 'Form Store', () => {
 		expect( form.restPayload ).toStrictEqual( {
 			reportedUser: 'test user',
 			details: 'test details',
-			behaviors: [
-				Constants.harassmentTypes.HATE_SPEECH,
-				Constants.harassmentTypes.INTIMIDATION_AGGRESSION
-			]
+			behaviors: [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ]
 		} );
 
-		form.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
+		form.inputBehavior = Constants.harassmentTypes.OTHER;
 		expect( form.restPayload ).toStrictEqual( {
 			reportedUser: 'test user',
 			details: 'test details',
@@ -103,15 +96,35 @@ describe( 'Form Store', () => {
 		expect( form.formErrorMessages ).toStrictEqual( {} );
 	} );
 
-	it( 'Generates correct error messages for required fields', () => {
+	it( 'Generates correct error messages for required fields (non-emergency flow)', () => {
 		const form = useFormStore();
 
 		// Test that no error messages are generated when the data is correct
 		//
-		form.inputBehaviors = [
-			Constants.harassmentTypes.HATE_SPEECH,
-			Constants.harassmentTypes.INTIMIDATION_AGGRESSION
-		];
+		form.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
+		form.inputBehavior = Constants.harassmentTypes.OTHER;
+
+		form.isFormValidForSubmission(); // Triggers validations
+
+		expect( form.formErrorMessages ).toStrictEqual( {
+			inputBehaviors: {
+				error: mw.msg( 'reportincident-dialog-something-else-empty' )
+			}
+		} );
+
+		form.inputSomethingElseDetails = 'details';
+
+		form.isFormValidForSubmission(); // Triggers validations
+
+		expect( form.formErrorMessages ).toStrictEqual( {} );
+	} );
+
+	it( 'Generates correct error messages for required fields (emergency flow)', () => {
+		const form = useFormStore();
+
+		// Test that no error messages are generated when the data is correct
+		//
+		form.incidentType = Constants.typeOfIncident.immediateThreatPhysicalHarm;
 		form.inputReportedUser = 'test value';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
@@ -120,17 +133,21 @@ describe( 'Form Store', () => {
 
 		expect( form.formErrorMessages ).toStrictEqual( {} );
 
+		form.isFormValidForSubmission(); // Triggers validations
+
+		form.inputBehavior = Constants.harassmentTypes.THREATS_OR_VIOLENCE;
+
+		form.isFormValidForSubmission(); // Triggers validations
+
+		expect( form.formErrorMessages ).toStrictEqual( {} );
+
 		// Test that emptying all the required fields generates error messages
 		//
 		form.inputReportedUser = '';
-		form.inputBehaviors = [];
 
 		form.isFormValidForSubmission(); // Triggers validations
 
 		expect( form.formErrorMessages ).toStrictEqual( {
-			inputBehaviors: {
-				error: mw.msg( 'reportincident-dialog-harassment-empty' )
-			},
 			inputReportedUser: {
 				error: mw.msg( 'reportincident-dialog-violator-empty' )
 			}
@@ -141,7 +158,7 @@ describe( 'Form Store', () => {
 		const form = useFormStore();
 		// Test that emptying the something-else field while 'Something else' is a selected
 		// behaviour causes an error
-		form.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
+		form.inputBehavior = Constants.harassmentTypes.OTHER;
 		form.inputReportedUser = 'test value';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';

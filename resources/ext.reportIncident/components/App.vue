@@ -6,7 +6,11 @@
 			<report-incident-dialog-step1></report-incident-dialog-step1>
 		</template>
 		<template #dialog_step_2>
-			<report-incident-dialog-step2></report-incident-dialog-step2>
+			<report-incident-dialog-types-of-behavior v-if="isUnacceptableBehaviorSelected">
+			</report-incident-dialog-types-of-behavior>
+
+			<report-incident-dialog-step2 v-else>
+			</report-incident-dialog-step2>
 		</template>
 		<template #dialog_step_report_immediate_harm>
 			<report-immediate-harm-step></report-immediate-harm-step>
@@ -18,15 +22,18 @@
 </template>
 
 <script>
-const { ref } = require( 'vue' );
 const EmailAlertDialog = require( './EmailAlertDialog.vue' );
 const ReportIncidentDialog = require( './ReportIncidentDialog.vue' );
 const ReportIncidentDialogStep1 = require( './ReportIncidentDialogStep1.vue' );
 const ReportIncidentDialogStep2 = require( './ReportIncidentDialogStep2.vue' );
+const ReportIncidentDialogTypesOfBehavior = require( './ReportIncidentDialogTypesOfBehavior.vue' );
 const ReportImmediateHarmStep = require( './ReportImmediateHarmStep.vue' );
 const SubmitSuccessStep = require( './SubmitSuccessStep.vue' );
 const useFormStore = require( '../stores/Form.js' );
 const useInstrument = require( '../composables/useInstrument.js' );
+const Constants = require( '../Constants.js' );
+const { storeToRefs } = require( 'pinia' );
+const { ref, computed } = require( 'vue' );
 
 // @vue/component
 module.exports = exports = {
@@ -40,6 +47,7 @@ module.exports = exports = {
 		ReportIncidentDialogStep1,
 		ReportIncidentDialogStep2,
 		ReportImmediateHarmStep,
+		ReportIncidentDialogTypesOfBehavior,
 		SubmitSuccessStep
 	},
 	props: {
@@ -50,6 +58,7 @@ module.exports = exports = {
 		const reportIncidentOpen = ref( false );
 
 		const store = useFormStore();
+		const { incidentType } = storeToRefs( store );
 		const logEvent = useInstrument();
 
 		/**
@@ -165,11 +174,20 @@ module.exports = exports = {
 			}
 		}
 
+		/**
+		 * Check if the user selected "unacceptable behavior" as the incident type.
+		 *
+		 * @return {boolean}
+		 */
+		const isUnacceptableBehaviorSelected = computed(
+			() => incidentType.value === Constants.typeOfIncident.unacceptableUserBehavior );
+
 		return {
 			emailAlertOpen,
 			reportIncidentOpen,
 			checkUsernameExists,
 			discussionToolsOverflowMenuOnChooseHandler,
+			isUnacceptableBehaviorSelected,
 			reportLinkInToolsMenuHandler
 		};
 	},

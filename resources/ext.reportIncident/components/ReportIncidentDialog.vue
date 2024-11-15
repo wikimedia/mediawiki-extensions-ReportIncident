@@ -95,6 +95,8 @@ module.exports = exports = {
 			const titlesByStep = {
 				[ Constants.DIALOG_STEP_1 ]: 'reportincident-dialog-describe-the-incident-title',
 				[ Constants.DIALOG_STEP_2 ]: 'reportincident-dialog-describe-the-incident-title',
+
+				[ Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ]: 'reportincident-type-unacceptable-user-behavior',
 				[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'reportincident-dialog-report-immediate-harm-title',
 				[ Constants.DIALOG_STEP_SUBMIT_SUCCESS ]: isEmergency ? 'reportincident-submit-emergency-dialog-title' :
 					'reportincident-submit-behavior-dialog-title'
@@ -121,18 +123,27 @@ module.exports = exports = {
 		);
 
 		const primaryButtonLabel = computed( () => {
-			if ( currentStep.value === Constants.DIALOG_STEP_1 ) {
-				return mw.msg( 'reportincident-dialog-continue' );
-			}
+			switch ( currentStep.value ) {
+				case Constants.DIALOG_STEP_1:
+					return mw.msg( 'reportincident-dialog-continue' );
 
-			if ( currentStep.value === Constants.DIALOG_STEP_SUBMIT_SUCCESS ) {
-				return mw.msg(
-					'reportincident-submit-back-to-page',
-					mw.config.get( 'wgPageName' ).replace( '_', ' ' )
-				);
-			}
+				case Constants.DIALOG_STEP_2:
+					if ( store.incidentType ===
+							Constants.typeOfIncident.unacceptableUserBehavior ) {
+						return mw.msg( 'reportincident-dialog-continue' );
+					}
 
-			return mw.msg( 'reportincident-dialog-submit-btn' );
+					return mw.msg( 'reportincident-dialog-submit-btn' );
+
+				case Constants.DIALOG_STEP_SUBMIT_SUCCESS:
+					return mw.msg(
+						'reportincident-submit-back-to-page',
+						mw.config.get( 'wgPageName' ).replace( '_', ' ' )
+					);
+
+				default:
+					return mw.msg( 'reportincident-dialog-submit-btn' );
+			}
 		} );
 
 		const cancelOrBackButtonLabel = computed(
@@ -248,8 +259,43 @@ module.exports = exports = {
 			formSubmissionInProgress.value = false;
 		}
 
+		function submitReport() {
+			const restPayload = store.restPayload;
+			restPayload.revisionId = mw.config.get( 'wgCurRevisionId' );
+			// TODO: Simulate mw.Api.postWithToken() by re-trying if the REST API call fails
+			// because the CSRF token does not match.
+
+			restPayload.token = mw.user.tokens.get( 'csrfToken' );
+
+			// @fixme Move the condition to the caller(s)
+			if ( store.isFormValidForSubmission() ) {
+				logEvent( 'click', {
+					subType: 'continue',
+					source: 'submit_report',
+					context: JSON.stringify( {
+						// eslint-disable-next-line camelcase
+						addl_info: Boolean(
+							store.inputDetails || store.inputSomethingElseDetails
+						),
+						// eslint-disable-next-line camelcase
+						reported_user: store.inputReportedUser
+					} )
+				} );
+
+				formSubmissionInProgress.value = true;
+				new mw.Rest().post(
+					'/reportincident/v0/report',
+					restPayload
+				).then( onReportSubmitSuccess, onReportSubmitFailure );
+			} else {
+				// Clear footer error messages as the form-specific ones will be set.
+				footerErrorMessage.value = '';
+			}
+		}
+
 		function navigateNext() {
 			const { showValidationError } = storeToRefs( store );
+
 			// if on the first page, navigate to the second page, if the user has
 			// made the necessary selections
 			if ( currentStep.value === Constants.DIALOG_STEP_1 ) {
@@ -278,36 +324,41 @@ module.exports = exports = {
 				wrappedOpen.value = false;
 				store.$reset();
 				currentStep.value = Constants.DIALOG_STEP_1;
+			} else if ( ( currentStep.value === Constants.DIALOG_STEP_2 ) &&
+					store.isUnacceptableBehavior() ) {
+				unacceptableBehaviorNavigateNextFromStep2();
 			} else {
 				// if on the second page, validate, then POST the data
-				const restPayload = store.restPayload;
-				restPayload.revisionId = mw.config.get( 'wgCurRevisionId' );
-				// TODO: Simulate mw.Api.postWithToken() by re-trying if the REST API call fails
-				// because the CSRF token does not match.
-				restPayload.token = mw.user.tokens.get( 'csrfToken' );
-				if ( store.isFormValidForSubmission() ) {
-					logEvent( 'click', {
-						subType: 'continue',
-						source: 'submit_report',
-						context: JSON.stringify( {
-							// eslint-disable-next-line camelcase
-							addl_info: Boolean(
-								store.inputDetails || store.inputSomethingElseDetails
-							),
-							// eslint-disable-next-line camelcase
-							reported_user: store.inputReportedUser
-						} )
-					} );
-					formSubmissionInProgress.value = true;
-					new mw.Rest().post(
-						'/reportincident/v0/report',
-						restPayload
-					).then( onReportSubmitSuccess, onReportSubmitFailure );
-				} else {
-					// Clear footer error messages as the form-specific ones will be set.
-					footerErrorMessage.value = '';
-				}
+				submitReport();
 			}
+		}
+
+		function unacceptableBehaviorNavigateNextFromStep2() {
+			const {
+				showValidationError,
+				displaySomethingElseDetailsEmptyError,
+				missingBehaviorSelection
+			} = storeToRefs( store );
+
+			if ( store.noBehaviorIsSelected() ) {
+				showValidationError.value = true;
+				missingBehaviorSelection.value = true;
+				return;
+			}
+
+			missingBehaviorSelection.value = false;
+
+			if ( store.isSomethingElse() && !store.areSomethingElseDetailsProvided() ) {
+				showValidationError.value = true;
+				displaySomethingElseDetailsEmptyError.value = true;
+				return;
+			}
+
+			// Moving forward from the second page when reporting
+			// Unacceptable Behavior leads to the "Get Support" page
+			currentStep.value = Constants.DIALOG_STEP_SUBMIT_SUCCESS;
+			showValidationError.value = false;
+			submitReport();
 		}
 
 		function navigatePrevious() {
