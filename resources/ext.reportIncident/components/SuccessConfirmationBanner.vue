@@ -16,9 +16,6 @@ const { storeToRefs } = require( 'pinia' );
 // @vue/component
 module.exports = exports = {
 	name: 'SuccessConfirmationBanner',
-	compatConfig: {
-		MODE: 3
-	},
 	compilerOptions: {
 		whitespace: 'condense'
 	},
