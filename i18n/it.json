@@ -11,5 +11,6 @@
 	"reportincident-email-link-to-page-prefix": "Collegamento alla pagina",
 	"reportincident-email-something-else": "Qualcos'altro: \"$1\"",
 	"reportincident-emaildialog-close-button": "Annulla",
-	"reportincident-emaildialog-primary": "Vai alle impostazioni"
+	"reportincident-emaildialog-primary": "Vai alle impostazioni",
+	"reportincident-choose-option": "Scegli un'opzione"
 }

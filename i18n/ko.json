@@ -7,7 +7,12 @@
 	"reportincident-success-message-close": "닫기",
 	"reportincident-emaildialog-close-button": "취소",
 	"reportincident-emaildialog-primary": "설정으로 이동",
+	"reportincident-dialog-describe-the-incident-title": "사건을 설명하세요",
+	"reportincident-type-of-incident": "사건 유형",
+	"reportincident-type-unacceptable-user-behavior": "용납할 수 없는 사용자 행동",
 	"reportincident-choose-option": "옵션 선택",
 	"reportincident-dialog-cancel": "취소",
-	"reportincident-dialog-continue": "계속"
+	"reportincident-dialog-continue": "계속",
+	"reportincident-threats-physical-harm": "신체적 해를 끼칠 위협",
+	"reportincident-type-incident-required": "사건 유형을 선택해 주십시오"
 }
