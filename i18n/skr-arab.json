@@ -9,5 +9,7 @@
 	"reportincident-dialog-submit-btn": "جمع کرواؤ",
 	"reportincident-success-message-close": "بند کرو",
 	"reportincident-emaildialog-close-button": "منسوخ",
-	"reportincident-emaildialog-primary": "ترتیباں تے ون٘ڄو"
+	"reportincident-emaildialog-primary": "ترتیباں تے ون٘ڄو",
+	"reportincident-dialog-cancel": "منسوخ",
+	"reportincident-dialog-continue": "جاری"
 }
