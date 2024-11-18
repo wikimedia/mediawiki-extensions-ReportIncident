@@ -43,5 +43,20 @@
 	"reportincident-emaildialog-close-button": "Откажи",
 	"reportincident-emaildialog-content": "Ни треба {{GENDER:|вашата}} заверена е-поштенска адреса за да ве известуваме за развојот или да ги проследиме нештата, ако е потребно. Додајте или заверете ја {{GENDER:|вашата}} е-поштенска адреса од нагодувањта на {{GENDER:|вашата}} корисничка сметка пред да поднесувате пријава.",
 	"reportincident-emaildialog-primary": "Оди во нагодувањата",
-	"reportincident-confirmedemail-required": "Потребна е потврдена е-поштенска адреса за поднесување на извештаи за инциденти."
+	"reportincident-confirmedemail-required": "Потребна е потврдена е-поштенска адреса за поднесување на извештаи за инциденти.",
+	"reportincident-dialog-describe-the-incident-title": "Опишете го инцидентот",
+	"reportincident-type-of-incident": "Вид на инцидент",
+	"reportincident-type-unacceptable-user-behavior": "Неприфатливо однесување на корисникот",
+	"reportincident-type-immediate-threat-physical-harm": "Непосредна закана за физичка повреда",
+	"reportincident-type-immediate-threat-physical-harm-help": "Намера за насилство врз поединец, самоповреда или чин на масовно насилство",
+	"reportincident-choose-option": "Изберете",
+	"reportincident-dialog-cancel": "Откажи",
+	"reportincident-dialog-continue": "Продолжи",
+	"reportincident-unacceptable-behavior-footer": "Неприкладното однесување [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|не се толерира]] на {{SITENAME}}, и со него се справува заедницата.",
+	"reportincident-physical-harm-footer": "Вашата пријава е [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|приватна]] и ќе биде испратена на разгледување кај [[meta:Special:MyLanguage/Threats_of_harm|екипата за итни случаи на Фондацијата Викимедија]].",
+	"reportincident-threats-physical-harm": "Закани за физичка повреда",
+	"reportincident-threats-self-harm": "Закани за самоповреда",
+	"reportincident-threats-public-harm": "Закани за штета врз јавноста",
+	"reportincident-type-incident-required": "Изберете вид на инцидент",
+	"reportincident-threat-harm-required": "Мора да се укаже можноста „Закана за повреда“"
 }
