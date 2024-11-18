@@ -8,6 +8,9 @@
 		<template #dialog_step_2>
 			<report-incident-dialog-step2></report-incident-dialog-step2>
 		</template>
+		<template #dialog_step_report_immediate_harm>
+			<report-immediate-harm-step></report-immediate-harm-step>
+		</template>
 	</report-incident-dialog>
 </template>
 
@@ -17,6 +20,7 @@ const EmailAlertDialog = require( './EmailAlertDialog.vue' );
 const ReportIncidentDialog = require( './ReportIncidentDialog.vue' );
 const ReportIncidentDialogStep1 = require( './ReportIncidentDialogStep1.vue' );
 const ReportIncidentDialogStep2 = require( './ReportIncidentDialogStep2.vue' );
+const ReportImmediateHarmStep = require( './ReportImmediateHarmStep.vue' );
 const useFormStore = require( '../stores/Form.js' );
 
 // @vue/component
@@ -29,7 +33,8 @@ module.exports = exports = {
 		EmailAlertDialog,
 		ReportIncidentDialog,
 		ReportIncidentDialogStep1,
-		ReportIncidentDialogStep2
+		ReportIncidentDialogStep2,
+		ReportImmediateHarmStep
 	},
 	setup() {
 		const emailAlertOpen = ref( false );

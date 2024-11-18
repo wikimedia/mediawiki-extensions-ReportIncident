@@ -13,13 +13,6 @@ describe( 'CharacterLimitedTextArea', () => {
 		// Mock the codePointLimit which is added by a plugin.
 		jQueryCodePointLimitMock = jest.fn();
 		global.$.prototype.codePointLimit = jQueryCodePointLimitMock;
-		// Mock wgCommentCodePointLimit to the default value of 500.
-		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
-			switch ( key ) {
-				case 'wgCommentCodePointLimit':
-					return 500;
-			}
-		} );
 
 		mockMediaWikiStringCodePointLength.mockImplementation( ( str ) => str.length );
 
@@ -30,7 +23,7 @@ describe( 'CharacterLimitedTextArea', () => {
 
 	it( 'should update content and character count', async () => {
 		const wrapper = mount( CharacterLimitedTextArea, {
-			props: { textContent: '', remainingCharacters: '' }
+			props: { codePointLimit: 600, textContent: '', remainingCharacters: '' }
 		} );
 
 		await wrapper.find( 'textarea' ).setValue( 'test' );
@@ -43,15 +36,8 @@ describe( 'CharacterLimitedTextArea', () => {
 	} );
 
 	it( 'should update content and character count when near limit', async () => {
-		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
-			switch ( key ) {
-				case 'wgCommentCodePointLimit':
-					return 100;
-			}
-		} );
-
 		const wrapper = mount( CharacterLimitedTextArea, {
-			props: { textContent: '', remainingCharacters: '' }
+			props: { codePointLimit: 100, textContent: '', remainingCharacters: '' }
 		} );
 
 		await wrapper.find( 'textarea' ).setValue( 'test' );
