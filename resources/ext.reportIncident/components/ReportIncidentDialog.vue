@@ -85,7 +85,8 @@ module.exports = exports = {
 
 		const titlesByStep = {
 			[ Constants.DIALOG_STEP_1 ]: 'reportincident-dialog-describe-the-incident-title',
-			[ Constants.DIALOG_STEP_2 ]: 'reportincident-dialog-describe-the-incident-title'
+			[ Constants.DIALOG_STEP_2 ]: 'reportincident-dialog-describe-the-incident-title',
+			[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'reportincident-dialog-report-immediate-harm-title'
 		};
 		// Possible message keys used here are listed above.
 		// eslint-disable-next-line mediawiki/msg-doc
@@ -95,7 +96,14 @@ module.exports = exports = {
 		const currentSlotName = computed( () => `${ currentStep.value }` );
 		const showFooterErrorText = computed( () => currentStep.value === Constants.DIALOG_STEP_2 && footerErrorMessage.value !== '' );
 
-		const showFooterHelpText = computed( () => currentStep.value === Constants.DIALOG_STEP_1 && store.incidentType !== '' );
+		const stepsWithHelpText = [
+			Constants.DIALOG_STEP_1,
+			Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM
+		];
+
+		const showFooterHelpText = computed(
+			() => stepsWithHelpText.indexOf( currentStep.value ) !== -1 && store.incidentType !== ''
+		);
 
 		const primaryButtonLabel = computed( () => currentStep.value === Constants.DIALOG_STEP_1 ?
 			mw.msg( 'reportincident-dialog-continue' ) :
@@ -229,7 +237,11 @@ module.exports = exports = {
 					return;
 				}
 				// Validation passed, so we can proceed to step 2.
-				currentStep.value = Constants.DIALOG_STEP_2;
+				if ( store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm ) {
+					currentStep.value = Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM;
+				} else {
+					currentStep.value = Constants.DIALOG_STEP_2;
+				}
 			} else {
 				// if on the second page, validate, then POST the data
 				const restPayload = store.restPayload;

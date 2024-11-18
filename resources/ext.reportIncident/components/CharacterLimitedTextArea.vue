@@ -20,6 +20,10 @@ module.exports = exports = {
 	},
 	props: {
 		/**
+		 * The maximum number of Unicode code points accepted by this textarea.
+		 */
+		codePointLimit: { type: Number, required: true },
+		/**
 		 * The value of this text field.
 		 * Must be bound with `v-model:text-content`.
 		 */
@@ -35,7 +39,7 @@ module.exports = exports = {
 		'update:text-content'
 	],
 	setup( props, ctx ) {
-		const codePointLimit = mw.config.get( 'wgCommentCodePointLimit' );
+		const codePointLimit = props.codePointLimit;
 		const textAreaRef = ref( null );
 
 		const computedTextContent = computed( {
