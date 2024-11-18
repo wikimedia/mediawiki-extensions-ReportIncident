@@ -17,7 +17,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const inputDetails = ref( '' );
 	const inputSomethingElseDetails = ref( '' );
 	const displaySomethingElseTextboxRequiredError = ref( false );
-	const formSuccessfullySubmitted = ref( false );
 	const showValidationError = ref( false );
 
 	/**
@@ -46,7 +45,8 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 			displaySomethingElseTextboxRequiredError.value = true;
 		}
 		// Validate at least one of behaviours is selected.
-		if ( inputBehaviors.value.length === 0 ) {
+		if ( incidentType.value !== Constants.typeOfIncident.immediateThreatPhysicalHarm &&
+			inputBehaviors.value.length === 0 ) {
 			if ( displayBehaviorsRequiredError.value ) {
 				formErrors.inputBehaviors = { error: mw.msg( 'reportincident-dialog-harassment-empty' ) };
 			}
@@ -192,7 +192,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		displaySomethingElseTextboxRequiredError,
 		restPayload,
 		formErrorMessages,
-		formSuccessfullySubmitted,
 		showValidationError,
 		isIncidentTypeSelected,
 		isPhysicalHarmSelectedButNoSubtypeSelected,

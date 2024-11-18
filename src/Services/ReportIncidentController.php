@@ -84,6 +84,9 @@ class ReportIncidentController {
 			// If in developer mode, pretend the user has a confirmed email if the query parameter is set to
 			// 'withconfirmedemail=1', otherwise use DB value.
 			'wgReportIncidentUserHasConfirmedEmail' => $pretendUserHasConfirmedEmail ?: $user->isEmailConfirmed(),
+			// Add wiki-specific links used by the submit success step (T379242).
+			// These will be replaced by community configuration in T374113.
+			'wgReportIncidentLocalLinks' => $this->config->get( 'ReportIncidentLocalLinks' )
 		] );
 		// Add the ReportIncident module, including the JS and Vue code for the dialog.
 		$output->addModules( 'ext.reportIncident' );
