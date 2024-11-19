@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hamilton Abreu"
+			"Hamilton Abreu",
+			"Mbs262"
 		]
 	},
 	"reportincident-desc": "Extensão para Sistema de Denúncia de Incidentes.",
@@ -10,7 +11,7 @@
 	"reportincident-dialog-back-btn": "Voltar",
 	"reportincident-dialog-submit-btn": "Enviar",
 	"reportincident-dialog-harassment-type-label": "Que tipo de comportamento?",
-	"reportincident-dialog-additional-details-input-label": "Detalhes adicionais",
+	"reportincident-dialog-additional-details-input-label": "Informações adicionais",
 	"reportincident-dialog-additional-details-input-placeholder": "Adicione contexto que possa ser útil para um investigador. Pode incluir hiperligações que destaquem o incidente.",
 	"reportincident-dialog-optional-label": "(opcional)",
 	"reportincident-dialog-violator-label": "O utilizador que pretende denunciar",

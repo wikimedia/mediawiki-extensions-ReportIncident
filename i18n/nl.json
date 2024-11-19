@@ -1,19 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
-			"McDutchie"
+			"McDutchie",
+			"Siebrand"
 		]
 	},
 	"reportincident-desc": "Uitbreiding voor een incidentmeldingssysteem.",
 	"reportincident-report-btn-label": "Melden",
 	"reportincident-dialog-close-btn": "Sluiten",
 	"reportincident-dialog-back-btn": "Terug",
-	"reportincident-dialog-submit-btn": "Verzenden",
+	"reportincident-dialog-submit-btn": "Rapport verzenden",
 	"reportincident-dialog-harassment-type-label": "Welke soort gedrag?",
-	"reportincident-dialog-additional-details-input-label": "Aanvullende details",
-	"reportincident-dialog-additional-details-input-placeholder": "Geef context die nuttig kan zijn voor een beoordelaar. U kunt koppelingen bijvoegen die het incident nader toelichten.",
+	"reportincident-dialog-additional-details-input-label": "Aanvullende informatie",
+	"reportincident-dialog-additional-details-input-placeholder": "Geef context die nuttig kan zijn voor een beoordelaar, bijvoorbeeld extra koppelingen.",
 	"reportincident-dialog-optional-label": "(optioneel)",
-	"reportincident-dialog-violator-label": "De gebruiker die u wilt melden",
+	"reportincident-dialog-violator-label": "Gebruiker die {{GENDER:|u}} wilt rapporteren",
+	"reportincident-dialog-violator-disclaimer": "De Wikimedia Foundation maakt uw identiteit niet vrijwillig bekend aan de persoon die u rapporteert.",
 	"reportincident-dialog-violator-placeholder-text": "Wie meldt u?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Aanzetten tot haat of discriminatie",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Seksuele intimidatie",
@@ -45,6 +47,7 @@
 	"reportincident-emaildialog-primary": "Naar de instellingen",
 	"reportincident-confirmedemail-required": "Voor het indienen van een incidentmelding is een bevestigd e-mailadres vereist.",
 	"reportincident-dialog-describe-the-incident-title": "Beschrijf het incident",
+	"reportincident-dialog-report-immediate-harm-title": "Meld een onmiddellijke dreiging van gevaar aan het noodhulpteam",
 	"reportincident-type-of-incident": "Soort incident",
 	"reportincident-type-unacceptable-user-behavior": "Onacceptabel gebruikersgedrag",
 	"reportincident-type-immediate-threat-physical-harm": "Directe bedreiging met fysiek geweld",
@@ -53,6 +56,7 @@
 	"reportincident-dialog-cancel": "Annuleren",
 	"reportincident-dialog-continue": "Doorgaan",
 	"reportincident-unacceptable-behavior-footer": "Ongepast gedrag wordt op {{SITENAME}} [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|niet getolereerd]] en wordt door de gemeenschap aangepakt.",
+	"reportincident-physical-harm-infotext": "Een koppeling naar het incident dat u meldt (inclusief de gerapporteerde gebruiker) en uw eigen gebruikersnaam en e-mailadres worden <b>privé gedeeld met het [[meta:Special:MyLanguage/Threats_of_harm|Wikimedia Foundation noodhulpteam]]</b> .",
 	"reportincident-physical-harm-footer": "Uw rapportage is [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|privé]] en wordt ter beoordeling naar het [[meta:Special:MyLanguage/Threats_of_harm|noodhulpteam van de Wikimedia Foundation]] gestuurd.",
 	"reportincident-threats-physical-harm": "Bedreigingen met fysiek geweld",
 	"reportincident-threats-self-harm": "Bedreigingen met zelfbeschadiging",

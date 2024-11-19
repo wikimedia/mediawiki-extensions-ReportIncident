@@ -4,6 +4,8 @@
 			"Ykhwong"
 		]
 	},
+	"reportincident-dialog-submit-btn": "보고서 제출",
+	"reportincident-dialog-additional-details-input-label": "추가 정보",
 	"reportincident-success-message-close": "닫기",
 	"reportincident-emaildialog-close-button": "취소",
 	"reportincident-emaildialog-primary": "설정으로 이동",
