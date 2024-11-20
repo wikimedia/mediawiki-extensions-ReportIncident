@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nemoralis"
+		]
+	},
+	"reportincident-desc": "Hadisə Bildiriş Sistemi uzantısı.",
+	"reportincident-report-btn-label": "Şikayət et",
+	"reportincident-dialog-close-btn": "Bağla",
+	"reportincident-dialog-back-btn": "Geriyə",
+	"reportincident-dialog-harassment-type-label": "Nə cür davranışdır?",
+	"reportincident-dialog-optional-label": "(məcburi deyil)",
+	"reportincident-dialog-violator-placeholder-text": "Kimi şikayət edirsiniz?",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Nifrət nitqi və ya ayrı-seçkilik",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Cinsi zorakılıq",
+	"reportincident-dialog-harassment-type-threats-of-violence": "Zorakılıq təhdidləri",
+	"reportincident-dialog-harassment-type-intimidation": "Hədə-qorxu, aqressiya, ad qoymaq",
+	"reportincident-dialog-harassment-type-something-else": "Başqa bir şey",
+	"reportincident-dialog-harassment-empty": "Ən azı bir davranış {{GENDER:|seçməlisiniz}}.",
+	"reportincident-dialog-violator-empty": "İstifadəçi adı göstərməlisiniz.",
+	"reportincident-dialog-something-else-empty": "Zəhmət olmasa davranışın qısa təsvirini yazın.",
+	"reportincident-email-subject": "{{SITENAME}}: \"$1\" istifadəçisindən yeni şikayət",
+	"reportincident-email-something-else": "Başqa bir şey: \"$1\""
+}
