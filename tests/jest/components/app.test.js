@@ -4,6 +4,8 @@ jest.mock( '../../../resources/ext.reportIncident/components/icons.json', () => 
 	cdxIconLock: '',
 	cdxIconUserGroup: ''
 } ), { virtual: true } );
+jest.mock( '../../../resources/ext.reportIncident/useInstrument.js' );
+
 const { mockCodePointLength } = require( '../utils.js' );
 
 // Need to run this here as the import of App.vue without
@@ -15,7 +17,8 @@ const Main = require( '../../../resources/ext.reportIncident/components/App.vue'
 	{ nextTick } = require( 'vue' ),
 	{ createTestingPinia } = require( '@pinia/testing' ),
 	{ mockApiGet } = require( '../utils.js' ),
-	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' );
+	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' ),
+	useInstrument = require( '../../../resources/ext.reportIncident/useInstrument.js' );
 
 const renderComponent = () => mount( Main, {
 	global: {
@@ -63,6 +66,7 @@ function mockIsIPAddress( returnValue ) {
 }
 
 describe( 'Main Component Test Suite', () => {
+	let logEvent;
 	beforeEach( () => {
 		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
 			switch ( key ) {
@@ -74,6 +78,10 @@ describe( 'Main Component Test Suite', () => {
 					throw new Error( 'Unknown key: ' + key );
 			}
 		} );
+
+		logEvent = jest.fn();
+
+		useInstrument.mockImplementation( () => logEvent );
 	} );
 
 	afterEach( () => {
@@ -103,6 +111,9 @@ describe( 'Main Component Test Suite', () => {
 		expect( store.inputReportedUserDisabled ).toBe( false );
 		expect( store.inputReportedUser ).toBe( '' );
 		expect( store.displayReportedUserRequiredError ).toBe( false );
+
+		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
 	it( 'Shows the email dialog on report link click with unconfirmed email', async () => {
@@ -124,6 +135,8 @@ describe( 'Main Component Test Suite', () => {
 		// DOM immediately.
 		await nextTick();
 		expect( wrapper.find( '.ext-reportincident-emaildialog' ).exists() ).toEqual( true );
+
+		expect( logEvent ).not.toHaveBeenCalled();
 	} );
 
 	it( 'Does nothing when firing discussionToolsOverflowMenuOnChoose for not reportincident menu item', async () => {
@@ -136,6 +149,8 @@ describe( 'Main Component Test Suite', () => {
 		await nextTick();
 		expect( wrapper.find( '.ext-reportincident-dialog' ).exists() ).toEqual( false );
 		expect( wrapper.find( '.ext-reportincident-emaildialog' ).exists() ).toEqual( false );
+
+		expect( logEvent ).not.toHaveBeenCalled();
 	} );
 
 	it( 'Opens dialog on call to discussionToolsOverflowMenuOnChooseHandler with no author', async () => {
@@ -162,6 +177,9 @@ describe( 'Main Component Test Suite', () => {
 		expect( store.inputReportedUser ).toBe( '' );
 		expect( store.overflowMenuData ).toStrictEqual( { 'thread-id': 'c-1.2.3.4-20230504030201' } );
 		expect( store.inputReportedUserDisabled ).toBe( false );
+
+		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
 	it( 'Opens dialog on call to discussionToolsOverflowMenuOnChooseHandler with IP author', async () => {
@@ -198,6 +216,9 @@ describe( 'Main Component Test Suite', () => {
 		expect( store.inputBehaviors ).toStrictEqual( [] );
 		// Expect that mw.util.isIPAddress was called with the correct name
 		expect( isIPAddress ).toBeCalledWith( '1.2.3.4' );
+
+		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
 	it( 'Opens dialog on call to discussionToolsOverflowMenuOnChooseHandler with existing user as author', async () => {
@@ -234,6 +255,9 @@ describe( 'Main Component Test Suite', () => {
 		expect( store.inputReportedUserDisabled ).toBe( true );
 		// Expect that mw.util.isIPAddress was called with the correct name
 		expect( isIPAddress ).toBeCalledWith( 'testuser' );
+
+		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
 	it( 'Opens dialog on call to discussionToolsOverflowMenuOnChooseHandler with non-existent user as author', async () => {
@@ -266,6 +290,9 @@ describe( 'Main Component Test Suite', () => {
 		expect( store.inputReportedUserDisabled ).toBe( false );
 		// Expect that mw.util.isIPAddress was called with the correct name
 		expect( isIPAddress ).toBeCalledWith( 'testuser' );
+
+		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
 	it( 'Opens dialog on call to discussionToolsOverflowMenuOnChooseHandler with failed allusers API call', async () => {
@@ -303,6 +330,9 @@ describe( 'Main Component Test Suite', () => {
 		expectApiGetParameters( apiGet, 'testuser' );
 		// Expect that mw.util.isIPAddress was called with the correct name
 		expect( isIPAddress ).toBeCalledWith( 'testuser' );
+
+		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
 	it( 'Keeps form data on call to discussionToolsOverflowMenuOnChooseHandler for same thread-id', async () => {
@@ -342,6 +372,9 @@ describe( 'Main Component Test Suite', () => {
 		expectApiGetParameters( apiGet, 'testuser' );
 		// Expect that mw.util.isIPAddress was called with the correct name
 		expect( isIPAddress ).toBeCalledWith( 'testuser' );
+
+		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
 	it( 'checkUsernameExists rejects on invalid API response', async () => {

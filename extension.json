@@ -129,6 +129,7 @@
 			"packageFiles": [
 				"init.js",
 				"Constants.js",
+				"useInstrument.js",
 				"components/App.vue",
 				"components/CharacterLimitedTextArea.vue",
 				"components/EmailAlertDialog.vue",

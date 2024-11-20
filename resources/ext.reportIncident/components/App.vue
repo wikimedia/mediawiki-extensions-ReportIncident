@@ -26,6 +26,7 @@ const ReportIncidentDialogStep2 = require( './ReportIncidentDialogStep2.vue' );
 const ReportImmediateHarmStep = require( './ReportImmediateHarmStep.vue' );
 const SubmitSuccessStep = require( './SubmitSuccessStep.vue' );
 const useFormStore = require( '../stores/Form.js' );
+const useInstrument = require( '../useInstrument.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -49,6 +50,7 @@ module.exports = exports = {
 		const reportIncidentOpen = ref( false );
 
 		const store = useFormStore();
+		const logEvent = useInstrument();
 
 		/**
 		 * Open the main dialog if user has confirmed email, otherwise show email alert dialog.
@@ -56,6 +58,7 @@ module.exports = exports = {
 		function showDialogDependingOnEmailConfirmationStatus() {
 			if ( mw.config.get( 'wgReportIncidentUserHasConfirmedEmail' ) ) {
 				reportIncidentOpen.value = true;
+				logEvent( 'view', { source: 'form' } );
 			} else {
 				emailAlertOpen.value = true;
 			}

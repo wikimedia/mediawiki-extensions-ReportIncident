@@ -13,6 +13,7 @@ module.exports = {
 	// An array of glob patterns indicating a set of files for
 	// which coverage information should be collected
 	collectCoverageFrom: [
+		'resources/ext.reportIncident/useInstrument.js',
 		'resources/ext.reportIncident/components/*.(js|vue)',
 		'resources/ext.reportIncident/stores/*.js'
 	],
