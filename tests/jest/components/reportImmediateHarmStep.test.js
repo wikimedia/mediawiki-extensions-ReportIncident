@@ -6,12 +6,15 @@ const { mockCodePointLength } = require( '../utils.js' );
 // without mediawiki.String defined causes errors in running these tests.
 mockCodePointLength();
 
+jest.mock( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
+
 const ReportImmediateHarmStep = require( '../../../resources/ext.reportIncident/components/ReportImmediateHarmStep.vue' ),
 	utils = require( '@vue/test-utils' ),
 	{ createTestingPinia } = require( '@pinia/testing' ),
 	{ mockApiGet } = require( '../utils.js' ),
 	Constants = require( '../../../resources/ext.reportIncident/Constants.js' ),
-	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' );
+	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' ),
+	useInstrument = require( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
 
 const renderComponent = ( testingPinia ) => utils.mount( ReportImmediateHarmStep, {
 	global: {
@@ -46,10 +49,16 @@ const waitUntilDebounceComplete = () => new Promise( ( resolve ) => {
 
 describe( 'ReportImmediateHarmStep', () => {
 	let jQueryCodePointLimitMock;
+	let logEvent;
+
 	beforeEach( () => {
 		// Mock the codePointLimit which is added by a plugin.
 		jQueryCodePointLimitMock = jest.fn();
 		global.$.prototype.codePointLimit = jQueryCodePointLimitMock;
+
+		logEvent = jest.fn();
+
+		useInstrument.mockImplementation( () => logEvent );
 	} );
 
 	it( 'renders correctly', () => {
@@ -58,6 +67,9 @@ describe( 'ReportImmediateHarmStep', () => {
 		// Expect that the value of wgCommentCodePointLimit is passed to the codePointLimit call
 		// for the additional details field.
 		expect( jQueryCodePointLimitMock ).toHaveBeenCalledWith( Constants.detailsCodepointLimit );
+
+		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'submit_report' } );
 	} );
 
 	it( 'has all default form elements loaded', () => {

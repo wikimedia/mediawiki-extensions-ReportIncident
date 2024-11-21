@@ -1,11 +1,14 @@
 'use strict';
 
+jest.mock( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
+
 const ReportIncidentDialogStep1 = require( '../../../resources/ext.reportIncident/components/ReportIncidentDialogStep1.vue' ),
 	{ createTestingPinia } = require( '@pinia/testing' ),
 	utils = require( '@vue/test-utils' ),
 	{ storeToRefs } = require( 'pinia' ),
 	Constants = require( '../../../resources/ext.reportIncident/Constants.js' ),
-	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' );
+	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' ),
+	useInstrument = require( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
 
 const renderComponent = ( testingPinia ) => utils.mount( ReportIncidentDialogStep1, {
 	global: {
@@ -14,6 +17,13 @@ const renderComponent = ( testingPinia ) => utils.mount( ReportIncidentDialogSte
 	}
 } );
 describe( 'Report Incident Dialog Step 1', () => {
+	let logEvent;
+
+	beforeEach( () => {
+		logEvent = jest.fn();
+		return useInstrument.mockImplementation( () => logEvent );
+	} );
+
 	it( 'mounts the component', () => {
 		const wrapper = renderComponent();
 		expect( wrapper.find( '.ext-reportincident-dialog-step1' ).exists() ).toBe( true );
@@ -95,5 +105,18 @@ describe( 'Report Incident Dialog Step 1', () => {
 		showValidationError.value = true;
 		physicalHarmType.value = '';
 		expect( wrapper.vm.physicalHarmTypeStatus ).toBe( 'error' );
+	} );
+
+	it( 'instruments changes to physical harm type', async () => {
+		const wrapper = renderComponent();
+		const store = useFormStore();
+
+		const { physicalHarmType } = storeToRefs( store );
+		physicalHarmType.value = Constants.physicalHarmTypes.publicHarm;
+
+		await wrapper.vm.onPhysicalHarmTypeChanged();
+
+		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledWith( 'click', { source: 'form', context: 'public' } );
 	} );
 } );

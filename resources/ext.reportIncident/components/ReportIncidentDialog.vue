@@ -53,6 +53,7 @@
 <script>
 
 const useFormStore = require( '../stores/Form.js' );
+const useInstrument = require( '../composables/useInstrument.js' );
 const { storeToRefs } = require( 'pinia' );
 const { toRef, ref, computed } = require( 'vue' );
 const { CdxButton, CdxDialog, CdxMessage, useModelWrapper } = require( '@wikimedia/codex' );
@@ -85,6 +86,7 @@ module.exports = exports = {
 		const formSubmissionInProgress = ref( false );
 
 		const store = useFormStore();
+		const logEvent = useInstrument();
 
 		const title = computed( () => {
 			const isEmergency =
@@ -183,6 +185,8 @@ module.exports = exports = {
 			printEmailToConsole( response );
 			currentStep.value = Constants.DIALOG_STEP_SUBMIT_SUCCESS;
 			formSubmissionInProgress.value = false;
+
+			logEvent( 'view', { source: 'submitted' } );
 		}
 
 		/**
@@ -274,6 +278,18 @@ module.exports = exports = {
 				// because the CSRF token does not match.
 				restPayload.token = mw.user.tokens.get( 'csrfToken' );
 				if ( store.isFormValidForSubmission() ) {
+					logEvent( 'click', {
+						subType: 'continue',
+						source: 'submit_report',
+						context: JSON.stringify( {
+							// eslint-disable-next-line camelcase
+							addl_info: Boolean(
+								store.inputDetails || store.inputSomethingElseDetails
+							),
+							// eslint-disable-next-line camelcase
+							reported_user: store.inputReportedUser
+						} )
+					} );
 					formSubmissionInProgress.value = true;
 					new mw.Rest().post(
 						'/reportincident/v0/report',

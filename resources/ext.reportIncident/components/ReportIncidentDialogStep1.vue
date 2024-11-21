@@ -27,6 +27,7 @@
 							:menu-items="physicalHarmTypes"
 							:disabled="incidentType !== 'immediate-threat-physical-harm'"
 							:default-label="$i18n( 'reportincident-choose-option' ).text()"
+							@update:selected="onPhysicalHarmTypeChanged"
 						></cdx-select>
 					</cdx-field>
 				</template>
@@ -91,6 +92,24 @@ module.exports = exports = {
 			} );
 		}
 
+		/**
+		 * Record an instrumentation event when a physical harm type is selected.
+		 */
+		function onPhysicalHarmTypeChanged() {
+			const contextsByHarmType = {
+				[ Constants.physicalHarmTypes.physicalHarm ]: 'physical',
+				[ Constants.physicalHarmTypes.selfHarm ]: 'self',
+				[ Constants.physicalHarmTypes.publicHarm ]: 'public'
+			};
+
+			const context = contextsByHarmType[ physicalHarmType.value ];
+
+			logEvent( 'click', {
+				source: 'form',
+				context
+			} );
+		}
+
 		const incidentTypes = [
 			{
 				label: mw.msg( 'reportincident-type-unacceptable-user-behavior' ),
@@ -125,7 +144,8 @@ module.exports = exports = {
 			incidentTypeMessages,
 			physicalHarmTypeStatus,
 			physicalHarmTypeMessages,
-			onChange
+			onChange,
+			onPhysicalHarmTypeChanged
 		};
 	}
 };

@@ -59,6 +59,7 @@
 
 const Constants = require( '../Constants.js' );
 const useFormStore = require( '../stores/Form.js' );
+const useInstrument = require( '../composables/useInstrument.js' );
 const { CdxField, CdxLookup, CdxMessage } = require( '@wikimedia/codex' );
 const CharacterLimitedTextArea = require( './CharacterLimitedTextArea.vue' );
 const { storeToRefs } = require( 'pinia' );
@@ -75,6 +76,7 @@ module.exports = exports = {
 	},
 	setup() {
 		const store = useFormStore();
+		const logEvent = useInstrument();
 
 		const {
 			inputReportedUser,
@@ -108,6 +110,8 @@ module.exports = exports = {
 			// Run onWindowResize on the "resize" event once the
 			// second step is mounted.
 			window.addEventListener( 'resize', onWindowResize );
+
+			logEvent( 'view', { source: 'submit_report' } );
 		} );
 
 		// Stop calling the onWindowResize method when the component
