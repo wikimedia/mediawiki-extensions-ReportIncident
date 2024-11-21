@@ -104,7 +104,7 @@ class ReportIncidentMailer {
 				$behaviors[$somethingElseIndex] = $this->textFormatter->format(
 					new MessageValue(
 						'reportincident-email-something-else',
-						[ $incidentReport->getSomethingElseDetails() ]
+						[ $incidentReport->getSomethingElseDetails() ?? '' ]
 					)
 				);
 			}
@@ -122,7 +122,7 @@ class ReportIncidentMailer {
 					$linkPrefixText,
 					$linkToPageAtRevision,
 					implode( ', ', $behaviors ),
-					$incidentReport->getDetails(),
+					$incidentReport->getDetails() ?? '',
 					$emailUrl
 				]
 			)
