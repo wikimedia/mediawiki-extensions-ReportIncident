@@ -12,12 +12,19 @@ describe( 'useInstrument', () => {
 		mw.eventLog = { newInstrument };
 	} );
 
-	it( 'should record events', () => {
+	afterEach( () => jest.resetAllMocks() );
+
+	it( 'should record events if enabled', () => {
+		const mwConfigGet = jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+
 		const logEvent = useInstrument();
 
 		logEvent( 'view' );
 		logEvent( 'click', { context: 'something' } );
 		logEvent( 'click', { source: 'form', subType: 'foo', context: 'something' } );
+
+		expect( mwConfigGet ).toHaveBeenCalledTimes( 1 );
+		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentEnableInstrumentation' );
 
 		expect( newInstrument ).toHaveBeenCalledTimes( 1 );
 		expect( newInstrument ).toHaveBeenCalledWith(
@@ -39,5 +46,19 @@ describe( 'useInstrument', () => {
 			// eslint-disable-next-line camelcase
 			action_context: 'something'
 		} );
+	} );
+
+	it( 'should not record events if enabled', () => {
+		const mwConfigGet = jest.spyOn( mw.config, 'get' ).mockImplementation( () => false );
+
+		const logEvent = useInstrument();
+
+		logEvent( 'view' );
+
+		expect( mwConfigGet ).toHaveBeenCalledTimes( 1 );
+		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentEnableInstrumentation' );
+
+		expect( newInstrument ).not.toHaveBeenCalled();
+		expect( submitInteraction ).not.toHaveBeenCalled();
 	} );
 } );

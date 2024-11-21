@@ -86,7 +86,9 @@ class ReportIncidentController {
 			'wgReportIncidentUserHasConfirmedEmail' => $pretendUserHasConfirmedEmail ?: $user->isEmailConfirmed(),
 			// Add wiki-specific links used by the submit success step (T379242).
 			// These will be replaced by community configuration in T374113.
-			'wgReportIncidentLocalLinks' => $this->config->get( 'ReportIncidentLocalLinks' )
+			'wgReportIncidentLocalLinks' => $this->config->get( 'ReportIncidentLocalLinks' ),
+			// Control whether instrumentation is enabled pending approval (T372823).
+			'wgReportIncidentEnableInstrumentation' => $this->config->get( 'ReportIncidentEnableInstrumentation' )
 		] );
 		// Add the ReportIncident module, including the JS and Vue code for the dialog.
 		$output->addModules( 'ext.reportIncident' );

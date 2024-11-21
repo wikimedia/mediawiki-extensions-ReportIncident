@@ -65,6 +65,10 @@
 				"localIncidentReport": "Project:Report an incident"
 			},
 			"description": "Local wiki pages used by the Incident Reporting tool for the non-emergency flow."
+		},
+		"ReportIncidentEnableInstrumentation": {
+			"value": false,
+			"description": "Controls whether instrumentation via EventLogging is enabled."
 		}
 	},
 	"AvailableRights": [

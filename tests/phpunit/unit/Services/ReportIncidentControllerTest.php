@@ -111,6 +111,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentReportButtonEnabled' => false,
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 					'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+					'ReportIncidentEnableInstrumentation' => true,
 				] ),
 				NS_TEMPLATE,
 				'minerva',
@@ -122,6 +123,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentReportButtonEnabled' => false,
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 					'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+					'ReportIncidentEnableInstrumentation' => true,
 				] ),
 				NS_USER_TALK,
 				'vector',
@@ -134,6 +136,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncident' => [ 'vector' ],
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 					'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+					'ReportIncidentEnableInstrumentation' => true,
 				] ),
 				NS_TEMPLATE,
 				'vector',
@@ -145,6 +148,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentReportButtonEnabled' => true,
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 					'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+					'ReportIncidentEnableInstrumentation' => true,
 				] ),
 				NS_USER_TALK,
 				'vector',
@@ -156,6 +160,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentReportButtonEnabled' => true,
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 					'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+					'ReportIncidentEnableInstrumentation' => true,
 				] ),
 				NS_USER_TALK,
 				'vector',
@@ -170,6 +175,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentAdministratorsPage' => 'Main_Page',
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+			'ReportIncidentEnableInstrumentation' => true,
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$userMock = $this->createMock( User::class );
@@ -180,6 +186,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentAdministratorsPage' => 'Main_Page',
 				'wgReportIncidentUserHasConfirmedEmail' => true,
 				'wgReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+				'wgReportIncidentEnableInstrumentation' => true,
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -203,6 +210,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentAdministratorsPage' => 'Main_Page',
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+			'ReportIncidentEnableInstrumentation' => true,
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$userMock = $this->createMock( User::class );
@@ -213,6 +221,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentAdministratorsPage' => 'Main_Page',
 				'wgReportIncidentUserHasConfirmedEmail' => true,
 				'wgReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+				'wgReportIncidentEnableInstrumentation' => true,
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -236,6 +245,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentAdministratorsPage' => 'Main_Page',
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+			'ReportIncidentEnableInstrumentation' => true,
 		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$userMock = $this->createMock( User::class );
@@ -246,6 +256,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentAdministratorsPage' => 'Main_Page',
 				'wgReportIncidentUserHasConfirmedEmail' => false,
 				'wgReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+				'wgReportIncidentEnableInstrumentation' => true,
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
