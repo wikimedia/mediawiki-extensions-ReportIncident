@@ -129,6 +129,30 @@ describe( 'useInstrument', () => {
 		expect( newInstrument.mock.calls.length ).toBeLessThanOrEqual( 1 );
 	} );
 
+	it( 'should truncate overly long context values', () => {
+		jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+
+		const logEvent = useInstrument();
+		const store = useFormStore();
+
+		logEvent( 'view', { context: 'test' } );
+		logEvent( 'view', { context: 'e'.repeat( 128 ) } );
+
+		expect( submitInteraction ).toHaveBeenCalledTimes( 2 );
+		expect( submitInteraction ).toHaveBeenNthCalledWith( 1, 'view', {
+			// eslint-disable-next-line camelcase
+			action_context: 'test',
+			// eslint-disable-next-line camelcase
+			funnel_entry_token: store.funnelEntryToken
+		} );
+		expect( submitInteraction ).toHaveBeenNthCalledWith( 2, 'view', {
+			// eslint-disable-next-line camelcase
+			action_context: 'e'.repeat( 64 ),
+			// eslint-disable-next-line camelcase
+			funnel_entry_token: store.funnelEntryToken
+		} );
+	} );
+
 	it( 'should not record events if not enabled', () => {
 		const mwConfigGet = jest.spyOn( mw.config, 'get' ).mockImplementation( () => false );
 		const store = useFormStore();

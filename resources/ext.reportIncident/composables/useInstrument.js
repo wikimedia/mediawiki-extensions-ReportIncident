@@ -77,7 +77,7 @@ const useInstrument = () => {
 
 		if ( data.context ) {
 			// eslint-disable-next-line camelcase
-			interactionData.action_context = data.context;
+			interactionData.action_context = data.context.slice( 0, 64 );
 		}
 
 		if ( funnelName.value ) {
