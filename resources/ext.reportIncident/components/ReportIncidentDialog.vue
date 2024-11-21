@@ -29,6 +29,7 @@
 			</cdx-message>
 			<div class="ext-reportincident-dialog-footer">
 				<cdx-button
+					v-if="showCancelOrBackButton"
 					class="ext-reportincident-dialog-footer__back-btn"
 					:disabled="formSubmissionInProgress || null"
 					@click="navigatePrevious"
@@ -83,18 +84,29 @@ module.exports = exports = {
 		const footerErrorMessage = ref( '' );
 		const formSubmissionInProgress = ref( false );
 
-		const titlesByStep = {
-			[ Constants.DIALOG_STEP_1 ]: 'reportincident-dialog-describe-the-incident-title',
-			[ Constants.DIALOG_STEP_2 ]: 'reportincident-dialog-describe-the-incident-title',
-			[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'reportincident-dialog-report-immediate-harm-title'
-		};
-		// Possible message keys used here are listed above.
-		// eslint-disable-next-line mediawiki/msg-doc
-		const title = computed( () => mw.msg( titlesByStep[ currentStep.value ] ) );
-
 		const store = useFormStore();
+
+		const title = computed( () => {
+			const isEmergency =
+				store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm;
+			const titlesByStep = {
+				[ Constants.DIALOG_STEP_1 ]: 'reportincident-dialog-describe-the-incident-title',
+				[ Constants.DIALOG_STEP_2 ]: 'reportincident-dialog-describe-the-incident-title',
+				[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'reportincident-dialog-report-immediate-harm-title',
+				[ Constants.DIALOG_STEP_SUBMIT_SUCCESS ]: isEmergency ? 'reportincident-submit-emergency-dialog-title' :
+					'reportincident-submit-behavior-dialog-title'
+			};
+
+			// Possible message keys used here are listed above.
+			// eslint-disable-next-line mediawiki/msg-doc
+			return mw.msg( titlesByStep[ currentStep.value ] );
+		} );
+
 		const currentSlotName = computed( () => `${ currentStep.value }` );
 		const showFooterErrorText = computed( () => currentStep.value === Constants.DIALOG_STEP_2 && footerErrorMessage.value !== '' );
+		const showCancelOrBackButton = computed(
+			() => currentStep.value !== Constants.DIALOG_STEP_SUBMIT_SUCCESS
+		);
 
 		const stepsWithHelpText = [
 			Constants.DIALOG_STEP_1,
@@ -105,9 +117,20 @@ module.exports = exports = {
 			() => stepsWithHelpText.indexOf( currentStep.value ) !== -1 && store.incidentType !== ''
 		);
 
-		const primaryButtonLabel = computed( () => currentStep.value === Constants.DIALOG_STEP_1 ?
-			mw.msg( 'reportincident-dialog-continue' ) :
-			mw.msg( 'reportincident-dialog-submit-btn' ) );
+		const primaryButtonLabel = computed( () => {
+			if ( currentStep.value === Constants.DIALOG_STEP_1 ) {
+				return mw.msg( 'reportincident-dialog-continue' );
+			}
+
+			if ( currentStep.value === Constants.DIALOG_STEP_SUBMIT_SUCCESS ) {
+				return mw.msg(
+					'reportincident-submit-back-to-page',
+					mw.config.get( 'wgPageName' ).replace( '_', ' ' )
+				);
+			}
+
+			return mw.msg( 'reportincident-dialog-submit-btn' );
+		} );
 
 		const cancelOrBackButtonLabel = computed(
 			() => currentStep.value === Constants.DIALOG_STEP_1 ?
@@ -158,10 +181,7 @@ module.exports = exports = {
 		 */
 		function onReportSubmitSuccess( response ) {
 			printEmailToConsole( response );
-			wrappedOpen.value = false;
-			currentStep.value = Constants.DIALOG_STEP_1;
-			store.$reset();
-			store.formSuccessfullySubmitted = true;
+			currentStep.value = Constants.DIALOG_STEP_SUBMIT_SUCCESS;
 			formSubmissionInProgress.value = false;
 		}
 
@@ -242,6 +262,10 @@ module.exports = exports = {
 				} else {
 					currentStep.value = Constants.DIALOG_STEP_2;
 				}
+			} else if ( currentStep.value === Constants.DIALOG_STEP_SUBMIT_SUCCESS ) {
+				wrappedOpen.value = false;
+				store.$reset();
+				currentStep.value = Constants.DIALOG_STEP_1;
 			} else {
 				// if on the second page, validate, then POST the data
 				const restPayload = store.restPayload;
@@ -286,6 +310,7 @@ module.exports = exports = {
 			navigatePrevious,
 			footerHelpTextMessageHtml,
 			footerErrorMessage,
+			showCancelOrBackButton,
 			showFooterHelpText,
 			showFooterErrorText,
 			formSubmissionInProgress,

@@ -57,6 +57,14 @@
 		"ReportIncidentMinimumAccountAgeInSeconds": {
 			"value": 10800,
 			"description": "User accounts must be older than this value in order to submit a report. The default is 3 hours."
+		},
+		"ReportIncidentLocalLinks": {
+			"value": {
+				"disputeResolution": "Project:Dispute resolution",
+				"askTheCommunity": "Project:Village pump",
+				"localIncidentReport": "Project:Report an incident"
+			},
+			"description": "Local wiki pages used by the Incident Reporting tool for the non-emergency flow."
 		}
 	},
 	"AvailableRights": [
@@ -128,7 +136,7 @@
 				"components/ReportIncidentDialogStep1.vue",
 				"components/ReportIncidentDialogStep2.vue",
 				"components/ReportImmediateHarmStep.vue",
-				"components/SuccessConfirmationBanner.vue",
+				"components/SubmitSuccessStep.vue",
 				"stores/Form.js",
 				{
 					"name": "components/icons.json",
@@ -171,8 +179,6 @@
 				"reportincident-emaildialog-close-button",
 				"reportincident-emaildialog-content",
 				"reportincident-emaildialog-primary",
-				"reportincident-success-message",
-				"reportincident-success-message-close",
 				"reportincident-dialog-describe-the-incident-title",
 				"reportincident-type-of-incident",
 				"reportincident-type-unacceptable-user-behavior",
@@ -188,7 +194,28 @@
 				"reportincident-threats-self-harm",
 				"reportincident-threats-public-harm",
 				"reportincident-type-incident-required",
-				"reportincident-threat-harm-required"
+				"reportincident-threat-harm-required",
+				"reportincident-submit-emergency-dialog-title",
+				"reportincident-submit-emergency-success",
+				"reportincident-submit-emergency-section-important-title",
+				"reportincident-submit-emergency-section-important-item-services",
+				"reportincident-submit-emergency-section-important-item-resources",
+				"reportincident-submit-emergency-section-next-title",
+				"reportincident-submit-emergency-section-next-item-team",
+				"reportincident-submit-emergency-section-next-item-review",
+				"reportincident-submit-emergency-section-next-item-faq",
+				"reportincident-submit-behavior-dialog-title",
+				"reportincident-submit-behavior-success",
+				"reportincident-submit-behavior-section-support-title",
+				"reportincident-submit-behavior-section-support-item-behavior",
+				"reportincident-submit-behavior-section-support-item-guidelines",
+				"reportincident-submit-behavior-section-support-item-dispute-resolution",
+				"reportincident-submit-behavior-section-support-item-admins",
+				"reportincident-submit-behavior-section-support-item-mentors",
+				"reportincident-submit-behavior-section-other-options-title",
+				"reportincident-submit-behavior-section-other-options-item-ask",
+				"reportincident-submit-behavior-section-other-options-item-contact-host",
+				"reportincident-submit-back-to-page"
 			],
 			"dependencies": [
 				"mediawiki.Uri",

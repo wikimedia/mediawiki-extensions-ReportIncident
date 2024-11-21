@@ -224,6 +224,8 @@ describe( 'Report Incident Dialog', () => {
 						return true;
 					case 'wgCurRevisionId':
 						return 1;
+					case 'wgPageName':
+						return 'Test_page';
 					default:
 						throw new Error( 'Unknown key: ' + key );
 				}
@@ -303,8 +305,7 @@ describe( 'Report Incident Dialog', () => {
 			expect( store.isFormValidForSubmission() ).toBe( true );
 
 			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
-				// Should be dialog step one if the form submitted correctly.
-				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
 				expect( consoleSpy ).not.toHaveBeenCalled();
 				expect( restPost ).toHaveBeenCalledWith(
 					'/reportincident/v0/report',
@@ -338,8 +339,7 @@ describe( 'Report Incident Dialog', () => {
 			expect( store.isFormValidForSubmission() ).toBe( true );
 
 			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
-				// Should be dialog step one if the form submitted correctly.
-				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
 				// Should have outputted the form data to the console.
 				expect( consoleSpy ).toHaveBeenNthCalledWith( 1, 'An email has been sent for this report' );
 				expect( consoleSpy ).toHaveBeenNthCalledWith( 2, 'Sent from:\nb@example.com' );
@@ -386,7 +386,7 @@ describe( 'Report Incident Dialog', () => {
 
 			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
 				// Should be dialog step one if the form submitted correctly.
-				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
 				// Should not have outputted the form data to the console.
 				expect( consoleSpy ).not.toHaveBeenCalled();
 				expect( userTokensSpy ).toHaveBeenCalledWith( 'csrfToken' );
@@ -400,6 +400,22 @@ describe( 'Report Incident Dialog', () => {
 				// Form should not be in submission if the form has finished submitting.
 				expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
 			} );
+		} );
+
+		it( 'should clear and close dialog when exiting from submit success screen', async () => {
+			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_SUBMIT_SUCCESS } );
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
+
+			const store = useFormStore();
+
+			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+			store.inputReportedUser = 'test user';
+
+			await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
+
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+			expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
+			expect( store.inputReportedUser ).toBe( '' );
 		} );
 
 		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data but API rejects in developer mode', () => {

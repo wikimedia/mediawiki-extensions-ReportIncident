@@ -11,6 +11,9 @@
 		<template #dialog_step_report_immediate_harm>
 			<report-immediate-harm-step></report-immediate-harm-step>
 		</template>
+		<template #dialog_step_submit_success>
+			<submit-success-step :links="localLinks"></submit-success-step>
+		</template>
 	</report-incident-dialog>
 </template>
 
@@ -21,6 +24,7 @@ const ReportIncidentDialog = require( './ReportIncidentDialog.vue' );
 const ReportIncidentDialogStep1 = require( './ReportIncidentDialogStep1.vue' );
 const ReportIncidentDialogStep2 = require( './ReportIncidentDialogStep2.vue' );
 const ReportImmediateHarmStep = require( './ReportImmediateHarmStep.vue' );
+const SubmitSuccessStep = require( './SubmitSuccessStep.vue' );
 const useFormStore = require( '../stores/Form.js' );
 
 // @vue/component
@@ -34,7 +38,11 @@ module.exports = exports = {
 		ReportIncidentDialog,
 		ReportIncidentDialogStep1,
 		ReportIncidentDialogStep2,
-		ReportImmediateHarmStep
+		ReportImmediateHarmStep,
+		SubmitSuccessStep
+	},
+	props: {
+		localLinks: { type: Object, required: true }
 	},
 	setup() {
 		const emailAlertOpen = ref( false );
@@ -46,8 +54,6 @@ module.exports = exports = {
 		 * Open the main dialog if user has confirmed email, otherwise show email alert dialog.
 		 */
 		function showDialogDependingOnEmailConfirmationStatus() {
-			// Clear the successful submission banner, as a new report is being made now.
-			store.formSuccessfullySubmitted = false;
 			if ( mw.config.get( 'wgReportIncidentUserHasConfirmedEmail' ) ) {
 				reportIncidentOpen.value = true;
 			} else {
