@@ -32,6 +32,8 @@ describe( 'Form Store', () => {
 		form.displaySomethingElseTextboxRequiredError = true;
 		form.displayBehaviorsRequiredError = true;
 		form.reportedUserDoesNotExist = true;
+		form.funnelEntryToken = 'foo';
+		form.funnelName = 'bar';
 
 		form.$reset();
 		// Form fields should be empty
@@ -50,6 +52,9 @@ describe( 'Form Store', () => {
 		expect( form.inputReportedUserDisabled ).toBe( false );
 		// Reported user field shouldn't have the username doesn't exist error
 		expect( form.reportedUserDoesNotExist ).toBe( false );
+
+		expect( form.funnelEntryToken ).toBe( '' );
+		expect( form.funnelName ).toBe( '' );
 	} );
 
 	it( 'Generates correct rest data', () => {

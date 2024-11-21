@@ -4,7 +4,7 @@ jest.mock( '../../../resources/ext.reportIncident/components/icons.json', () => 
 	cdxIconLock: '',
 	cdxIconUserGroup: ''
 } ), { virtual: true } );
-jest.mock( '../../../resources/ext.reportIncident/useInstrument.js' );
+jest.mock( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
 
 const { mockCodePointLength } = require( '../utils.js' );
 
@@ -18,7 +18,7 @@ const Main = require( '../../../resources/ext.reportIncident/components/App.vue'
 	{ createTestingPinia } = require( '@pinia/testing' ),
 	{ mockApiGet } = require( '../utils.js' ),
 	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' ),
-	useInstrument = require( '../../../resources/ext.reportIncident/useInstrument.js' );
+	useInstrument = require( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
 
 const renderComponent = () => mount( Main, {
 	global: {

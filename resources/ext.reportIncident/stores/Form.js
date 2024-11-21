@@ -18,6 +18,8 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const inputSomethingElseDetails = ref( '' );
 	const displaySomethingElseTextboxRequiredError = ref( false );
 	const showValidationError = ref( false );
+	const funnelEntryToken = ref( '' );
+	const funnelName = ref( '' );
 
 	/**
 	 * A dictionary of error messages for display in step 2 of the dialog.
@@ -175,6 +177,9 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		// The username is now empty, so the username not
 		// existing error is no longer applicable.
 		reportedUserDoesNotExist.value = false;
+
+		funnelEntryToken.value = '';
+		funnelName.value = '';
 	}
 
 	return {
@@ -196,6 +201,8 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		isIncidentTypeSelected,
 		isPhysicalHarmSelectedButNoSubtypeSelected,
 		isFormValidForSubmission,
+		funnelName,
+		funnelEntryToken,
 		$reset
 	};
 } );

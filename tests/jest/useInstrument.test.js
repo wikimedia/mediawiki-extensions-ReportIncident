@@ -1,10 +1,12 @@
-const useInstrument = require( '../../resources/ext.reportIncident/useInstrument.js' );
+const { setActivePinia, createPinia } = require( 'pinia' );
+const useInstrument = require( '../../resources/ext.reportIncident/composables/useInstrument.js' );
+const useFormStore = require( '../../resources/ext.reportIncident/stores/Form.js' );
 
 describe( 'useInstrument', () => {
 	let submitInteraction;
 	let newInstrument;
 
-	beforeEach( () => {
+	beforeAll( () => {
 		submitInteraction = jest.fn();
 		newInstrument = jest.fn( () => ( {
 			submitInteraction
@@ -12,16 +14,24 @@ describe( 'useInstrument', () => {
 		mw.eventLog = { newInstrument };
 	} );
 
+	beforeEach( () => {
+		setActivePinia( createPinia() );
+	} );
+
 	afterEach( () => jest.resetAllMocks() );
 
-	it( 'should record events if enabled', () => {
+	it( 'should record events with new funnel entry token if enabled', () => {
 		const mwConfigGet = jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+		const store = useFormStore();
 
 		const logEvent = useInstrument();
 
 		logEvent( 'view' );
 		logEvent( 'click', { context: 'something' } );
 		logEvent( 'click', { source: 'form', subType: 'foo', context: 'something' } );
+
+		expect( typeof ( store.funnelEntryToken ) ).toEqual( 'string' );
+		expect( store.funnelEntryToken.length ).toBeGreaterThan( 0 );
 
 		expect( mwConfigGet ).toHaveBeenCalledTimes( 1 );
 		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentEnableInstrumentation' );
@@ -33,10 +43,15 @@ describe( 'useInstrument', () => {
 		);
 
 		expect( submitInteraction ).toHaveBeenCalledTimes( 3 );
-		expect( submitInteraction ).toHaveBeenNthCalledWith( 1, 'view', {} );
+		expect( submitInteraction ).toHaveBeenNthCalledWith( 1, 'view', {
+			// eslint-disable-next-line camelcase
+			funnel_entry_token: store.funnelEntryToken
+		} );
 		expect( submitInteraction ).toHaveBeenNthCalledWith( 2, 'click', {
 			// eslint-disable-next-line camelcase
-			action_context: 'something'
+			action_context: 'something',
+			// eslint-disable-next-line camelcase
+			funnel_entry_token: store.funnelEntryToken
 		} );
 		expect( submitInteraction ).toHaveBeenNthCalledWith( 3, 'click', {
 			// eslint-disable-next-line camelcase
@@ -44,16 +59,85 @@ describe( 'useInstrument', () => {
 			// eslint-disable-next-line camelcase
 			action_subtype: 'foo',
 			// eslint-disable-next-line camelcase
-			action_context: 'something'
+			action_context: 'something',
+			// eslint-disable-next-line camelcase
+			funnel_entry_token: store.funnelEntryToken
 		} );
 	} );
 
-	it( 'should not record events if enabled', () => {
-		const mwConfigGet = jest.spyOn( mw.config, 'get' ).mockImplementation( () => false );
+	it( 'should reuse preexisting funnel entry token', () => {
+		jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+		const store = useFormStore();
+		store.funnelEntryToken = 'test';
 
 		const logEvent = useInstrument();
 
 		logEvent( 'view' );
+
+		expect( submitInteraction ).toHaveBeenCalledTimes( 1 );
+		expect( submitInteraction ).toHaveBeenCalledWith( 'view', {
+			// eslint-disable-next-line camelcase
+			funnel_entry_token: 'test'
+		} );
+	} );
+
+	it( 'should generate new funnel entry token if reset after setup', () => {
+		jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+		const store = useFormStore();
+		store.funnelEntryToken = 'test';
+
+		const logEvent = useInstrument();
+
+		store.funnelEntryToken = '';
+
+		logEvent( 'view' );
+
+		expect( typeof ( store.funnelEntryToken ) ).toEqual( 'string' );
+		expect( store.funnelEntryToken.length ).toBeGreaterThan( 0 );
+
+		expect( submitInteraction ).toHaveBeenCalledTimes( 1 );
+		expect( submitInteraction ).toHaveBeenCalledWith( 'view', {
+			// eslint-disable-next-line camelcase
+			funnel_entry_token: store.funnelEntryToken
+		} );
+	} );
+
+	it( 'should provide funnel name if set', () => {
+		jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+		const store = useFormStore();
+		store.funnelName = 'test';
+
+		const logEvent = useInstrument();
+
+		logEvent( 'view' );
+
+		expect( submitInteraction ).toHaveBeenCalledTimes( 1 );
+		expect( submitInteraction ).toHaveBeenCalledWith( 'view', {
+			// eslint-disable-next-line camelcase
+			funnel_entry_token: store.funnelEntryToken,
+			// eslint-disable-next-line camelcase
+			funnel_name: 'test'
+		} );
+	} );
+
+	it( 'should reuse instrument between calls', () => {
+		jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+
+		useInstrument();
+		useInstrument();
+
+		expect( newInstrument.mock.calls.length ).toBeLessThanOrEqual( 1 );
+	} );
+
+	it( 'should not record events if not enabled', () => {
+		const mwConfigGet = jest.spyOn( mw.config, 'get' ).mockImplementation( () => false );
+		const store = useFormStore();
+
+		const logEvent = useInstrument();
+
+		logEvent( 'view' );
+
+		expect( store.funnelEntryToken ).toBe( '' );
 
 		expect( mwConfigGet ).toHaveBeenCalledTimes( 1 );
 		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentEnableInstrumentation' );

@@ -42,6 +42,7 @@
 
 const { computed } = require( 'vue' );
 const useFormStore = require( '../stores/Form.js' );
+const useInstrument = require( '../composables/useInstrument.js' );
 const { storeToRefs } = require( 'pinia' );
 const Constants = require( '../Constants.js' );
 const { CdxSelect, CdxField, CdxRadio } = require( '@wikimedia/codex' );
@@ -55,7 +56,10 @@ module.exports = exports = {
 	},
 	setup() {
 		const store = useFormStore();
+		const logEvent = useInstrument();
+
 		const {
+			funnelName,
 			incidentType,
 			physicalHarmType,
 			showValidationError
@@ -71,11 +75,20 @@ module.exports = exports = {
 		function onChange() {
 			// Reset any validation errors.
 			showValidationError.value = false;
-			// If the user switched back tot unacceptable user behaviors, reset
-			// the physical harm type value.
+
 			if ( incidentType.value === Constants.typeOfIncident.unacceptableUserBehavior ) {
+				// If the user switched back to unacceptable user behaviors, reset
+				// the physical harm type value.
 				physicalHarmType.value = '';
+				funnelName.value = 'non-emergency';
+			} else {
+				funnelName.value = 'emergency';
 			}
+
+			logEvent( 'click', {
+				source: 'form',
+				context: funnelName.value
+			} );
 		}
 
 		const incidentTypes = [

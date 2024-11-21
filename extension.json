@@ -133,7 +133,6 @@
 			"packageFiles": [
 				"init.js",
 				"Constants.js",
-				"useInstrument.js",
 				"components/App.vue",
 				"components/CharacterLimitedTextArea.vue",
 				"components/EmailAlertDialog.vue",
@@ -142,6 +141,7 @@
 				"components/ReportIncidentDialogStep2.vue",
 				"components/ReportImmediateHarmStep.vue",
 				"components/SubmitSuccessStep.vue",
+				"composables/useInstrument.js",
 				"stores/Form.js",
 				{
 					"name": "components/icons.json",

@@ -26,7 +26,7 @@ const ReportIncidentDialogStep2 = require( './ReportIncidentDialogStep2.vue' );
 const ReportImmediateHarmStep = require( './ReportImmediateHarmStep.vue' );
 const SubmitSuccessStep = require( './SubmitSuccessStep.vue' );
 const useFormStore = require( '../stores/Form.js' );
-const useInstrument = require( '../useInstrument.js' );
+const useInstrument = require( '../composables/useInstrument.js' );
 
 // @vue/component
 module.exports = exports = {
