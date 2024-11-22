@@ -29,8 +29,6 @@
 	"reportincident-dialog-internet-disconnected-error": "インターネットに接続されていないようです。接続が回復したら、再度送信してください。",
 	"reportincident-dialog-server-error": "申し訳ございませんが、サーバーが応答していないようです。再度送信してください。",
 	"reportincident-dialog-generic-error": "リクエストはエラーのため送信できませんでした。再度送信してください。",
-	"reportincident-success-message": "報告が正常に提出されました。管理者が調査し、インシデントが方針に違反しているかどうかを判断します。{{SITENAME}} の安全維持にご協力いただきありがとうございます。",
-	"reportincident-success-message-close": "閉じる",
 	"reportincident-unable-to-send": "インシデント報告を電子メールで送信できません。",
 	"reportincident-email-subject": "{{SITENAME}}:「$1」からの新しいインシデント報告",
 	"reportincident-email-body": "報告した利用者: $1 \n報告された利用者: $2 \n$3: $4 \n\n行動: $5 \n詳細: $6 \n\n$1へメール: $7",

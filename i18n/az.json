@@ -29,8 +29,6 @@
 	"reportincident-dialog-internet-disconnected-error": "Deyəsən internet bağlantınız yoxdur. Zəhmət olmasa, bağlantınız bərpa edildikdə yenidən göndərməyə cəhd edin.",
 	"reportincident-dialog-server-error": "Üzr istəyirik, deyəsən serverimiz cavab vermir. Zəhmət olmasa, yenidən cəhd edin.",
 	"reportincident-dialog-generic-error": "{{GENDER:|Sizin}} sorğunuz xəta səbəbindən göndərilə bilmədi. Zəhmət olmasa, yenidən cəhd edin.",
-	"reportincident-success-message": "Şikayət uğurla göndərildi. İnzibatçılar bunun siyasətlərimizi pozub-pozmadığını yoxlayacaq və müəyyən edəcək. {{SITENAME}} saytını təhlükəsiz saxlamaqda bizə kömək etdiyiniz üçün təşəkkür edirik.",
-	"reportincident-success-message-close": "Bağla",
 	"reportincident-unable-to-send": "Şikayəti e-poçtla göndərmək mümkün deyil.",
 	"reportincident-email-subject": "{{SITENAME}}: \"$1\" istifadəçisindən yeni şikayət",
 	"reportincident-email-body": "Şikayət edən: $1\nŞikayət edilən: $2\n$3: $4\n\nDavranışlar: $5\nTəfərrüatlar: $6\n\n$1 istifadəçisinə e-poçt göndər: $7",
@@ -61,5 +59,9 @@
 	"reportincident-threats-self-harm": "Özünə zərər vermə təhdidləri",
 	"reportincident-threats-public-harm": "İctimai zərər vermə təhdidləri",
 	"reportincident-type-incident-required": "Zəhmət olmasa hadisənin növünü seçin",
-	"reportincident-threat-harm-required": "\"Zərər təhdidi\" seçimi məcburidir."
+	"reportincident-threat-harm-required": "\"Zərər təhdidi\" seçimi məcburidir.",
+	"reportincident-submit-emergency-dialog-title": "{{SITENAME}} saytını daha təhlükəsiz etmək üçün addımlar atdığınız üçün təşəkkür edirik",
+	"reportincident-submit-emergency-success": "Şikayət yoxlanılmaq üçün təqdim edilib",
+	"reportincident-submit-emergency-section-important-title": "Əhəmiyyətli",
+	"reportincident-submit-emergency-section-important-item-services": "Əgər yaralanmısınızsa və ya təhlükə altındasınızsa, [[wikipedia:List_of_emergency_telephone_numbers|yerli təcili yardım xidmətlərinə]] zəng edin."
 }

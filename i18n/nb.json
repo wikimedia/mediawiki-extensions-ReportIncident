@@ -28,8 +28,6 @@
 	"reportincident-dialog-internet-disconnected-error": "Det ser ut som om du ikke har internettforbindelse. Prøv å sende inn på nytt når forbindelsen er tilbake.",
 	"reportincident-dialog-server-error": "Beklager, det ser ut til at tjeneren vår ikke svarer. Prøv å sende inn på nytt.",
 	"reportincident-dialog-generic-error": "Forespørselen {{GENDER:|din}} kunne ikke sendes inn på grunn av en feil. Prøv å sende inn på nytt.",
-	"reportincident-success-message": "Rapporten ble sendt inn. En administrator vil gå gjennom den og avgjøre om hendelsen er et brudd på retningslinjene våre. Takk for at du hjelper oss å holde {{SITENAME}} trygt.",
-	"reportincident-success-message-close": "Lukk",
 	"reportincident-unable-to-send": "Kunne ikke sende hendelsesrapport via e-post.",
 	"reportincident-email-subject": "{{SITENAME}}: Ny hendelsesrapport fra «$1»",
 	"reportincident-email-body": "Rapportør: $1\nRapportert bruker: $2\n$3: $4\n\nOppførsel: $5\nDetaljer: $6\n\nE-post til $1: $7",

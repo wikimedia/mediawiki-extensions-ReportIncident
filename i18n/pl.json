@@ -29,8 +29,6 @@
 	"reportincident-dialog-internet-disconnected-error": "Wygląda na to, że nie masz połączenia z internetem. Spróbuj przesłać ponownie, gdy połączenie zostanie przywrócone.",
 	"reportincident-dialog-server-error": "Przepraszamy, wygląda na to, że nasz serwer nie odpowiada. Spróbuj przesłać ponownie.",
 	"reportincident-dialog-generic-error": "Nie udało się przesłać formularza z powodu błędu. Spróbuj przesłać ponownie.",
-	"reportincident-success-message": "Zgłoszenie zostało pomyślnie wysłane. Administrator sprawdzi i ustali, czy zgłaszane zdarzenie narusza nasze zasady. Dziękujemy, że pomagasz nam chronić witrynę {{SITENAME}}.",
-	"reportincident-success-message-close": "Zamknij",
 	"reportincident-unable-to-send": "Nie udało się wysłać wiadomości e-mail ze zgłoszeniem incydentu.",
 	"reportincident-email-subject": "{{SITENAME}}: Nowe zgłoszenie incydentu od „$1”",
 	"reportincident-email-body": "Zgłaszający użytkownik: $1\nZgłoszony użytkownik: $2\n$3: $4\n\nZachowania: $5\nOpis: $6\n\nNapisz e-mail do $1: $7",

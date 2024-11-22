@@ -15,7 +15,6 @@
 	"reportincident-dialog-harassment-type-threats-of-violence": "Претње насиљем",
 	"reportincident-dialog-harassment-type-intimidation": "Застрашивање, агресија, прозивање",
 	"reportincident-dialog-harassment-type-something-else": "Нешто друго",
-	"reportincident-success-message-close": "Затвори",
 	"reportincident-email-body": "Подносилац пријаве: $1\nПријављени корисник: $2\n$3: $4\n\nПонашање: $5\nДетаљи: $6\n\nИмејл $1: $7",
 	"reportincident-email-link-to-page-prefix": "Веза ка страници",
 	"reportincident-email-link-to-comment-prefix": "Веза ка пријављеном коментару",

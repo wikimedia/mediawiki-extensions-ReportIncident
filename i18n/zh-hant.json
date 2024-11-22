@@ -30,8 +30,6 @@
 	"reportincident-dialog-internet-disconnected-error": "您的網路看起來似乎沒有連線。請在連線恢復後嘗試重新提交。",
 	"reportincident-dialog-server-error": "很抱歉，看起來我們的伺服器沒有回應。請嘗試重新提交。",
 	"reportincident-dialog-generic-error": "出於錯誤無法提交{{GENDER:|您的}}請求。請嘗試重新提交。",
-	"reportincident-success-message": "已成功提出報告。管理員將審查並確定該事件是否違反我們的政策。感謝您協助我們維持{{SITENAME}}的安全。",
-	"reportincident-success-message-close": "關閉",
 	"reportincident-unable-to-send": "無法透過電子郵件發送事件報告。",
 	"reportincident-email-subject": "{{SITENAME}}：來自「$1」的新事件報告",
 	"reportincident-email-body": "舉報者：$1\n遭舉報者：$2\n$3：$4\n\n行為：$5\n詳細內容：$6\n\n電子郵件 $1：$7",

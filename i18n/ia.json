@@ -28,8 +28,6 @@
 	"reportincident-dialog-internet-disconnected-error": "Pare que tu non ha connexion a internet. Per favor tenta resubmitter quando tu connexion es restaurate.",
 	"reportincident-dialog-server-error": "Guai, pare que nostre servitor non responde. Per favor essaya resubmitter.",
 	"reportincident-dialog-generic-error": "Le requesta non poteva esser submittite a causa de un error. Per favor essaya resubmitter.",
-	"reportincident-success-message": "Le reporto ha essite submittite. Un administrator lo revidera e determinara si le incidente viola nostre politicas. Gratias pro adjutar nos a mantener {{SITENAME}} secur.",
-	"reportincident-success-message-close": "Clauder",
 	"reportincident-unable-to-send": "Le reporto de incidente non pote esser inviate per e-mail.",
 	"reportincident-email-subject": "{{SITENAME}}: Nove incidente reportate per $1",
 	"reportincident-email-body": "Usator reportante: $1\nUsator reportate: $2\n$3: $4\n\nComportamentos: $5\nDetalios: $6\n\nE-mail a $1: $7",

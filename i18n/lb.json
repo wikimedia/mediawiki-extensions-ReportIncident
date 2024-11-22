@@ -11,12 +11,13 @@
 	"reportincident-dialog-violator-label": "Benotzer, deen {{GENDER:Dir}} melle wëllt",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Sexuell Belästegung",
 	"reportincident-dialog-harassment-type-something-else": "Eppes anescht",
-	"reportincident-success-message-close": "Zoumaachen",
 	"reportincident-email-link-to-page-prefix": "Link op d'Säit",
 	"reportincident-email-something-else": "Eppes anescht: „$1“",
 	"reportincident-emaildialog-title": "Verifizéiert E-Mail-Adress néideg",
 	"reportincident-emaildialog-close-button": "Ofbriechen",
 	"reportincident-emaildialog-primary": "Gitt bei d'Astellungen",
 	"reportincident-dialog-cancel": "Ofbriechen",
-	"reportincident-dialog-continue": "Virufueren"
+	"reportincident-dialog-continue": "Virufueren",
+	"reportincident-submit-emergency-section-important-title": "Wichteg",
+	"reportincident-submit-back-to-page": "Zréck op $1"
 }

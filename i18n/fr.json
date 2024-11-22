@@ -35,8 +35,6 @@
 	"reportincident-dialog-internet-disconnected-error": "Il semblerait que vous n'ayez pas de connexion Internet. Veuillez réessayer lorsque votre connexion sera rétablie.",
 	"reportincident-dialog-server-error": "Désolé, il semblerait que notre serveur ne réponde pas. Veuillez réessayer.",
 	"reportincident-dialog-generic-error": "{{GENDER:|}}Votre demande n'a pas pu être envoyée en raison d'une erreur. Veuillez réessayer.",
-	"reportincident-success-message": "Signalement enregistré avec succès. Un administrateur examinera et déterminera si l'incident enfreint nos politiques. Merci de nous aider à assurer la sécurité de {{SITENAME}}.",
-	"reportincident-success-message-close": "Fermer",
 	"reportincident-unable-to-send": "Impossible d’envoyer par courriel le rapport d’incident.",
 	"reportincident-email-subject": "{{SITENAME}} : Nouveau rapport d’incident de « $1 »",
 	"reportincident-email-body": "Utilisateur faisant le signalement : $1\nUtilisateur signalé : $2\n$3 : $4\n\nComportements : $5\nDétails : $6\n\nAdresse de messagerie de $1 : $7",

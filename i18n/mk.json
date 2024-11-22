@@ -28,8 +28,6 @@
 	"reportincident-dialog-internet-disconnected-error": "Се чини дека не сте поврзани со семрежјето. Поднесете повторно кога ќе се обнови врската.",
 	"reportincident-dialog-server-error": "За жал, изгледа дека нашиот опслужувач не одговара. Поднесете одново.",
 	"reportincident-dialog-generic-error": "{{GENDER:|Вашето}} барање не можеше да се поднесе поради грешка. Обидете се да поднесете повторно.",
-	"reportincident-success-message": "Пријавата е успешно поднесена. Ќе биде разгледана од администратор, кој ќе утврди дали инцидентот ги прекршува нашите правила. Ви благодариме што се грижите за безбедноста на {{SITENAME}}.",
-	"reportincident-success-message-close": "Затвори",
 	"reportincident-unable-to-send": "Не можев да ја испратам пријавата за инцидент по е-пошта.",
 	"reportincident-email-subject": "{{SITENAME}}: Нова пријава за инцидент од „$1“",
 	"reportincident-email-body": "Пријавувач: $1\nПријавен: $2\n$3: $4\n\nПоведенија: $5\nПоединости: $6\n\n\nЕ-пошта на $1: $7",

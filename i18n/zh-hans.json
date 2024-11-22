@@ -22,7 +22,6 @@
 	"reportincident-dialog-harassment-type-something-else": "其他情況",
 	"reportincident-dialog-something-else-input-placeholder": "具体说明上面未列出的行为。",
 	"reportincident-dialog-something-else-empty": "请简要描述该行为。",
-	"reportincident-success-message-close": "关闭",
 	"reportincident-unable-to-send": "无法通过电子邮件发送事件报告。",
 	"right-reportincident": "报告事件",
 	"action-reportincident": "报告事件",

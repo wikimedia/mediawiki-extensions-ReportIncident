@@ -21,8 +21,6 @@
 	"reportincident-dialog-internet-disconnected-error": "মনে হচ্ছে আপনার ইন্টারনেট সংযোগ নেই। অনুগ্রহ করে আপনার সংযোগ ফিরে এলে পুনরায় জমা দেওয়ার চেষ্টা করুন।",
 	"reportincident-dialog-server-error": "দুঃখিত, মনে হচ্ছে আমাদের সার্ভার সাড়া দিচ্ছে না। অনুগ্রহ করে পুনরায় জমা দেওয়ার চেষ্টা করুন।",
 	"reportincident-dialog-generic-error": "{{GENDER:|আপনার}} অনুরোধ একটি ত্রুটির কারণে জমা দেওয়া যায়নি। অনুগ্রহ করে পুনরায় জমা দেওয়ার চেষ্টা করুন।",
-	"reportincident-success-message": "রিপোর্ট সফলভাবে দায়ের করা হয়েছে। একজন প্রশাসক শীঘ্রই পর্যালোচনা করবেন এবং এটি আমাদের নীতিমালা লঙ্ঘন করছে কিনা তা নির্ধারণ করবেন। আমাদেরকে {{SITENAME}} সুরক্ষিত রাখতে সাহায্য করার জন্য ধন্যবাদ৷",
-	"reportincident-success-message-close": "বন্ধ করুন",
 	"reportincident-email-link-to-page-prefix": "পাতার সাথে সংযুক্ত করুন",
 	"right-reportincident": "একটি ঘটনা রিপোর্ট করুন",
 	"action-reportincident": "একটি ঘটনা রিপোর্ট করুন",
