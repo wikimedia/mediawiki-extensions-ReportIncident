@@ -111,7 +111,8 @@ describe( 'Report Incident Dialog Step 1', () => {
 		const wrapper = renderComponent();
 		const store = useFormStore();
 
-		const { physicalHarmType } = storeToRefs( store );
+		const { incidentType, physicalHarmType } = storeToRefs( store );
+		incidentType.value = Constants.typeOfIncident.immediateThreatPhysicalHarm;
 		physicalHarmType.value = Constants.physicalHarmTypes.publicHarm;
 
 		await wrapper.vm.onPhysicalHarmTypeChanged();

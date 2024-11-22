@@ -60,10 +60,9 @@ const renderComponent = ( props, slots ) => {
 };
 
 describe( 'Report Incident Dialog', () => {
-	let logEvent;
+	const logEvent = jest.fn();
 
 	beforeEach( () => {
-		logEvent = jest.fn();
 		useInstrument.mockImplementation( () => logEvent );
 	} );
 
@@ -262,7 +261,7 @@ describe( 'Report Incident Dialog', () => {
 			} );
 		} );
 
-		it( 'Clears any form data if navigating back twice from STEP 2', () => {
+		it( 'Clears any form data if navigating back twice from STEP 2', async () => {
 			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
@@ -271,16 +270,23 @@ describe( 'Report Incident Dialog', () => {
 			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
 			store.inputReportedUser = 'test user';
 
-			return wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( () => {
-				// Clicking back once should put us on STEP 1
-				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+			await wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' );
 
-				wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( () => {
-					// Clicking back should clear the form store data
-					// as the dialog was closed.
-					expect( store.inputBehaviors ).toHaveLength( 0 );
-					expect( store.inputReportedUser ).toBe( '' );
-				} );
+			// Clicking back once should put us on STEP 1
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+			expect( logEvent ).not.toHaveBeenCalled();
+
+			await wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' );
+
+			// Clicking back should clear the form store data
+			// as the dialog was closed.
+			expect( store.inputBehaviors ).toHaveLength( 0 );
+			expect( store.inputReportedUser ).toBe( '' );
+
+			expect( logEvent ).toHaveBeenCalledTimes( 1 );
+			expect( logEvent ).toHaveBeenCalledWith( 'click', {
+				source: 'form',
+				subType: 'cancel'
 			} );
 		} );
 
@@ -620,4 +626,30 @@ describe( 'Report Incident Dialog', () => {
 			} );
 		} );
 	} );
+
+	const closeTestCases = [
+		[ 'STEP_1', Constants.DIALOG_STEP_1, 'form' ],
+		[ 'REPORT_IMMEDIATE_HARM', Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM, 'submit_report' ],
+		[ 'SUCCESS', Constants.DIALOG_STEP_SUBMIT_SUCCESS, 'success' ]
+	];
+
+	for ( const [ stepName, initialStep, source ] of closeTestCases ) {
+		it( `closes the dialog via the close button on step ${ stepName }`, async () => {
+			const mockConfig = {
+				wgPageName: 'test'
+			};
+			jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => mockConfig[ key ] );
+
+			const wrapper = renderComponent( { open: true, initialStep } );
+
+			await wrapper.get( '.cdx-dialog__header__close-button' ).trigger( 'click' );
+
+			expect( logEvent ).toHaveBeenCalledTimes( 1 );
+			expect( logEvent ).toHaveBeenCalledWith( 'click', {
+				source,
+				subType: 'close'
+			} );
+		} );
+	}
+
 } );

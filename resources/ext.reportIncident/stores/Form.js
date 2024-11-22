@@ -73,6 +73,23 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		return formErrors;
 	} );
 
+	const contextsByHarmType = {
+		[ Constants.physicalHarmTypes.physicalHarm ]: 'physical',
+		[ Constants.physicalHarmTypes.selfHarm ]: 'self',
+		[ Constants.physicalHarmTypes.publicHarm ]: 'public'
+	};
+
+	/**
+	 * Getter for the interaction data context associated with the current physical harm type.
+	 */
+	const physicalHarmTypeContext = computed( () => {
+		if ( incidentType.value === Constants.typeOfIncident.immediateThreatPhysicalHarm ) {
+			return contextsByHarmType[ physicalHarmType.value ] || 'na';
+		}
+
+		return 'na';
+	} );
+
 	watch( inputReportedUser, ( newReportedUser ) => {
 		// Once the reported user has been filled for the first time,
 		// show an error if the value becomes empty again.
@@ -203,6 +220,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		isFormValidForSubmission,
 		funnelName,
 		funnelEntryToken,
+		physicalHarmTypeContext,
 		$reset
 	};
 } );

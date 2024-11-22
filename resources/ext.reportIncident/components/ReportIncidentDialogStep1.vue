@@ -96,17 +96,9 @@ module.exports = exports = {
 		 * Record an instrumentation event when a physical harm type is selected.
 		 */
 		function onPhysicalHarmTypeChanged() {
-			const contextsByHarmType = {
-				[ Constants.physicalHarmTypes.physicalHarm ]: 'physical',
-				[ Constants.physicalHarmTypes.selfHarm ]: 'self',
-				[ Constants.physicalHarmTypes.publicHarm ]: 'public'
-			};
-
-			const context = contextsByHarmType[ physicalHarmType.value ];
-
 			logEvent( 'click', {
 				source: 'form',
-				context
+				context: store.physicalHarmTypeContext
 			} );
 		}
 

@@ -165,4 +165,35 @@ describe( 'Form Store', () => {
 			inputReportedUser: { error: mw.msg( 'reportincident-dialog-violator-nonexistent' ) }
 		} );
 	} );
+
+	it( 'physicalHarmTypeContext is "na" when incidentType is not set', () => {
+		const form = useFormStore();
+
+		expect( form.physicalHarmTypeContext ).toBe( 'na' );
+	} );
+
+	it( 'physicalHarmTypeContext is "na" when incidentType is not physical harm', () => {
+		const form = useFormStore();
+
+		form.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
+
+		expect( form.physicalHarmTypeContext ).toBe( 'na' );
+	} );
+
+	it( 'physicalHarmTypeContext is "na" when no harm type is selected', () => {
+		const form = useFormStore();
+
+		form.incidentType = Constants.typeOfIncident.immediateThreatPhysicalHarm;
+
+		expect( form.physicalHarmTypeContext ).toBe( 'na' );
+	} );
+
+	it( 'physicalHarmTypeContext is derived from selected harm type', () => {
+		const form = useFormStore();
+
+		form.incidentType = Constants.typeOfIncident.immediateThreatPhysicalHarm;
+		form.physicalHarmType = Constants.physicalHarmTypes.publicHarm;
+
+		expect( form.physicalHarmTypeContext ).toBe( 'public' );
+	} );
 } );

@@ -4,6 +4,7 @@
 		:title="title"
 		:close-button-label="$i18n( 'reportincident-dialog-close-btn' ).text()"
 		class="ext-reportincident-dialog"
+		@update:open="onDialogOpenStateChanged"
 	>
 		<!-- dialog content-->
 		<div class="ext-reportincident-dialog__content">
@@ -266,6 +267,13 @@ module.exports = exports = {
 				} else {
 					currentStep.value = Constants.DIALOG_STEP_2;
 				}
+
+				logEvent( 'click', {
+					// eslint-disable-next-line camelcase
+					context: JSON.stringify( { harm_option: store.physicalHarmTypeContext } ),
+					source: 'form',
+					subType: 'continue'
+				} );
 			} else if ( currentStep.value === Constants.DIALOG_STEP_SUBMIT_SUCCESS ) {
 				wrappedOpen.value = false;
 				store.$reset();
@@ -306,6 +314,12 @@ module.exports = exports = {
 			if ( currentStep.value === Constants.DIALOG_STEP_1 ) {
 				// if on the first page, close the dialog
 				wrappedOpen.value = false;
+
+				logEvent( 'click', {
+					source: 'form',
+					subType: 'cancel'
+				} );
+
 				// Also clear any form data, as the user has had to
 				// navigate back from the second page to the first to
 				// cancel which suggests they don't want to submit this
@@ -314,6 +328,26 @@ module.exports = exports = {
 			} else {
 				// if on the second page, navigate back to the first page
 				currentStep.value = Constants.DIALOG_STEP_1;
+			}
+		}
+
+		/**
+		 * Record an instrumentation event when the dialog is closed via the close button.
+		 *
+		 * @param {boolean} isOpen The new open state of the dialog.
+		 */
+		function onDialogOpenStateChanged( isOpen ) {
+			if ( !isOpen ) {
+				const sourcesByStep = {
+					[ Constants.DIALOG_STEP_1 ]: 'form',
+					[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'submit_report',
+					[ Constants.DIALOG_STEP_SUBMIT_SUCCESS ]: 'success'
+				};
+
+				logEvent( 'click', {
+					source: sourcesByStep[ currentStep.value ],
+					subType: 'close'
+				} );
 			}
 		}
 
@@ -332,7 +366,8 @@ module.exports = exports = {
 			formSubmissionInProgress,
 			onReportSubmitFailure,
 			footerIconName,
-			title
+			title,
+			onDialogOpenStateChanged
 		};
 	},
 	expose: [
