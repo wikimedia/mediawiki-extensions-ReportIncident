@@ -22,7 +22,7 @@ const Constants = {
 	/**
 	 * The number of Unicode codepoints accepted by textareas holding report details.
 	 */
-	detailsCodepointLimit: 600
+	detailsCodepointLimit: 1000
 };
 
 module.exports = Constants;

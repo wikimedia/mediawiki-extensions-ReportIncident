@@ -66,7 +66,7 @@ module.exports = exports = defineComponent( {
 						paragraphs: [
 							mw.message( 'reportincident-submit-emergency-section-next-item-team' ),
 							mw.message( 'reportincident-submit-emergency-section-next-item-review' ),
-							mw.message( 'reportincident-submit-emergency-section-next-item-faq' )
+							mw.message( 'reportincident-submit-emergency-section-next-item-email' )
 						]
 					}
 				];
