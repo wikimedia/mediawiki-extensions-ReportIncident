@@ -8,7 +8,11 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const overflowMenuData = ref( {} );
 	const incidentType = ref( '' );
 	const physicalHarmType = ref( '' );
+
+	// @todo To be deleted once ReportIncidentDialogStep2 is deleted
 	const inputBehaviors = ref( [ ] );
+
+	const inputBehavior = ref( '' );
 	const displayBehaviorsRequiredError = ref( false );
 	const inputReportedUser = ref( '' );
 	const inputReportedUserDisabled = ref( false );
@@ -16,8 +20,10 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const reportedUserDoesNotExist = ref( false );
 	const inputDetails = ref( '' );
 	const inputSomethingElseDetails = ref( '' );
+	const displaySomethingElseDetailsEmptyError = ref( false );
 	const displaySomethingElseTextboxRequiredError = ref( false );
 	const showValidationError = ref( false );
+	const missingBehaviorSelection = ref( false );
 	const funnelEntryToken = ref( '' );
 	const funnelName = ref( '' );
 
@@ -34,39 +40,44 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		// Validate that the "Something else" box is filled if something-else
 		// is selected as a behaviour.
 		if (
-			inputBehaviors.value.indexOf( 'something-else' ) !== -1 &&
+			inputBehavior.value === Constants.harassmentTypes.OTHER &&
 			inputSomethingElseDetails.value === '' &&
 			displaySomethingElseTextboxRequiredError.value
 		) {
 			displayBehaviorsRequiredError.value = true;
 			formErrors.inputBehaviors = { error: mw.msg( 'reportincident-dialog-something-else-empty' ) };
 		} else if (
-			inputBehaviors.value.indexOf( 'something-else' ) !== -1 &&
+			inputBehavior.value === Constants.harassmentTypes.OTHER &&
 			inputSomethingElseDetails.value !== ''
 		) {
 			displaySomethingElseTextboxRequiredError.value = true;
 		}
-		// Validate at least one of behaviours is selected.
-		if ( incidentType.value !== Constants.typeOfIncident.immediateThreatPhysicalHarm &&
-			inputBehaviors.value.length === 0 ) {
-			if ( displayBehaviorsRequiredError.value ) {
-				formErrors.inputBehaviors = { error: mw.msg( 'reportincident-dialog-harassment-empty' ) };
-			}
-		} else {
-			// If text has been entered for this field, then now display errors for empty field.
-			displayBehaviorsRequiredError.value = true;
-		}
 
-		// Validate the reported user field has some content.
-		if ( inputReportedUser.value === '' ) {
-			if ( displayReportedUserRequiredError.value ) {
+		// For emergencies, validate the reported user field has some content
+		if ( isEmergency() ) {
+			if ( inputReportedUser.value === '' ) {
+				if ( displayReportedUserRequiredError.value ) {
+					formErrors.inputReportedUser = {
+						error: mw.msg( 'reportincident-dialog-violator-empty' )
+					};
+				}
+			} else if ( reportedUserDoesNotExist.value ) {
 				formErrors.inputReportedUser = {
-					error: mw.msg( 'reportincident-dialog-violator-empty' )
+					error: mw.msg( 'reportincident-dialog-violator-nonexistent' )
 				};
 			}
-		} else if ( reportedUserDoesNotExist.value ) {
-			formErrors.inputReportedUser = {
-				error: mw.msg( 'reportincident-dialog-violator-nonexistent' )
+		}
+
+		if ( displaySomethingElseDetailsEmptyError.value &&
+			!areSomethingElseDetailsProvided() ) {
+			formErrors.inputBehaviors = {
+				error: mw.msg( 'reportincident-dialog-something-else-empty' )
+			};
+		}
+
+		if ( showValidationError.value && missingBehaviorSelection.value ) {
+			formErrors.inputBehaviors = {
+				error: mw.msg( 'reportincident-behavior-required' )
 			};
 		}
 
@@ -98,6 +109,24 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		}
 	} );
 
+	watch( inputSomethingElseDetails, ( newSomethingElseDetails ) => {
+		displaySomethingElseDetailsEmptyError.value = false;
+
+		if ( isUnacceptableBehavior() && isSomethingElse() ) {
+			if ( !areSomethingElseDetailsProvided( newSomethingElseDetails ) ) {
+				displaySomethingElseDetailsEmptyError.value = true;
+			}
+		}
+	} );
+
+	// eslint-disable-next-line no-unused-vars
+	watch( inputBehavior, ( _newInputBehavior ) => {
+		// If the user has just changed the type of unacceptable behavior, reset
+		// the error: If the details are left empty, they will be validated when
+		// moving forward to the next screen by isFormValidForSubmission().
+		displaySomethingElseDetailsEmptyError.value = false;
+	} );
+
 	/**
 	 * Checks whether the form on step 2 of the dialog is ready
 	 * for submission as defined by having no errors for the fields.
@@ -114,11 +143,17 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		// Because this is called when checking if the form can be submitted after
 		// the user pressed the submit button, update the form checks to check that
 		// errors appear for empty items.
-		if ( inputBehaviors.value.indexOf( 'something-else' ) !== -1 ) {
-			displaySomethingElseTextboxRequiredError.value = true;
+		displaySomethingElseTextboxRequiredError.value = isSomethingElse() &&
+			isUnacceptableBehavior() &&
+			!areSomethingElseDetailsProvided();
+
+		if ( displaySomethingElseTextboxRequiredError.value ) {
+			return false;
 		}
+
 		displayBehaviorsRequiredError.value = true;
 		displayReportedUserRequiredError.value = true;
+
 		// The form is valid if the formErrorMessages has no items.
 		return Object.keys( formErrorMessages.value ).length === 0;
 	}
@@ -134,6 +169,16 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	}
 
 	/**
+	 * Check if the user selected one of the "physical harm" incident type, i.e.
+	 * if the report is an emergency.
+	 *
+	 * @return {boolean}
+	 */
+	function isEmergency() {
+		return incidentType.value !== Constants.typeOfIncident.unacceptableUserBehavior;
+	}
+
+	/**
 	 * Check if the user selected "physical harm" as the incident type, but
 	 * did not yet select a subtype.
 	 *
@@ -145,6 +190,50 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	}
 
 	/**
+	 * Check if the user selected "unacceptable behavior" as the incident type.
+	 *
+	 * @return {boolean}
+	 */
+	function isUnacceptableBehavior() {
+		return incidentType.value === Constants.typeOfIncident.unacceptableUserBehavior;
+	}
+
+	/**
+	 * Check if the user selected "something else" as the type of unacceptable
+	 * behavior.
+	 *
+	 * @return {boolean}
+	 */
+	function isSomethingElse() {
+		return inputBehavior.value === Constants.harassmentTypes.OTHER;
+	}
+
+	/**
+	 * Check if the user provided additional details in the textbox associated
+	 * with the "something else" behavior type.
+	 *
+	 * @param {string|undefined} value
+	 * @return {boolean}
+	 */
+	function areSomethingElseDetailsProvided( value = undefined ) {
+		if ( typeof value === 'undefined' ) {
+			value = inputSomethingElseDetails.value;
+		}
+
+		return value.trim().length > 0;
+	}
+
+	/**
+	 * Check whether a behavior is selected in the list of
+	 * unacceptable behaviors types.
+	 *
+	 * @return {boolean}
+	 */
+	function noBehaviorIsSelected() {
+		return inputBehavior.value.length === 0;
+	}
+
+	/**
 	 * The form data from step 2 of the dialog in a JSON format that
 	 * can be posted to the report incident REST endpoint.
 	 */
@@ -152,9 +241,9 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		const restData = {
 			reportedUser: inputReportedUser.value,
 			details: inputDetails.value,
-			behaviors: inputBehaviors.value
+			behaviors: [ inputBehavior.value ]
 		};
-		if ( inputBehaviors.value.indexOf( 'something-else' ) !== -1 ) {
+		if ( isSomethingElse() ) {
 			restData.somethingElseDetails = inputSomethingElseDetails.value;
 		}
 		if ( Object.keys( overflowMenuData.value ).indexOf( 'thread-id' ) !== -1 ) {
@@ -178,6 +267,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		incidentType.value = '';
 		physicalHarmType.value = '';
 		inputBehaviors.value = [ ];
+		inputBehavior.value = '';
 		inputReportedUser.value = '';
 		inputDetails.value = '';
 		inputSomethingElseDetails.value = '';
@@ -189,6 +279,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		displayReportedUserRequiredError.value = false;
 		displayBehaviorsRequiredError.value = false;
 		displaySomethingElseTextboxRequiredError.value = false;
+		displaySomethingElseDetailsEmptyError.value = false;
 		// Re-enable the username field if it was disabled
 		inputReportedUserDisabled.value = false;
 		// The username is now empty, so the username not
@@ -203,7 +294,10 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		overflowMenuData,
 		incidentType,
 		physicalHarmType,
+
+		/** @deprecated To be removed together with ReportIncidentDialogStep2 */
 		inputBehaviors,
+		inputBehavior,
 		displayBehaviorsRequiredError,
 		inputReportedUser,
 		inputReportedUserDisabled,
@@ -212,11 +306,17 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		inputDetails,
 		inputSomethingElseDetails,
 		displaySomethingElseTextboxRequiredError,
+		displaySomethingElseDetailsEmptyError,
 		restPayload,
 		formErrorMessages,
 		showValidationError,
+		noBehaviorIsSelected,
+		missingBehaviorSelection,
 		isIncidentTypeSelected,
 		isPhysicalHarmSelectedButNoSubtypeSelected,
+		isUnacceptableBehavior,
+		isSomethingElse,
+		areSomethingElseDetailsProvided,
 		isFormValidForSubmission,
 		funnelName,
 		funnelEntryToken,

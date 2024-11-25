@@ -190,7 +190,7 @@ describe( 'Main Component Test Suite', () => {
 		// Test that calling discussionToolsOverflowMenuOnChooseHandler
 		// with no defined store.overflowMenuData causes the fields to
 		// be reset.
-		store.inputBehaviors = [ 'test' ];
+		store.inputBehavior = 'test';
 
 		// Call the discussionToolsOverflowMenuOnChoose hook
 		// with the reportincident ID and menu data with a thread-id defined.
@@ -212,8 +212,8 @@ describe( 'Main Component Test Suite', () => {
 		expect( store.inputReportedUser ).toBe( '1.2.3.4' );
 		expect( store.overflowMenuData ).toStrictEqual( { 'thread-id': 'c-1.2.3.4-20230504030201' } );
 		await expect( store.inputReportedUserDisabled ).toBe( true );
-		// Expect that the behaviours were reset via $reset
-		expect( store.inputBehaviors ).toStrictEqual( [] );
+		// Expect that the behaviour is reset via $reset
+		expect( store.inputBehavior ).toStrictEqual( '' );
 		// Expect that mw.util.isIPAddress was called with the correct name
 		expect( isIPAddress ).toBeCalledWith( '1.2.3.4' );
 
@@ -343,8 +343,8 @@ describe( 'Main Component Test Suite', () => {
 
 		// Define store.overflowMenuData
 		store.overflowMenuData = { 'thread-id': 'c-testuser-20230504030201' };
-		// Define behaviours
-		store.inputBehaviors = [ 'test' ];
+		// Define behaviour
+		store.inputBehavior = 'test';
 		// Call the discussionToolsOverflowMenuOnChoose hook
 		// with the reportincident ID and menu data with a thread-id defined
 		// that is the same as already in store.overflowMenuData
@@ -366,8 +366,8 @@ describe( 'Main Component Test Suite', () => {
 		expect( store.inputReportedUser ).toBe( 'testuser' );
 		expect( store.overflowMenuData ).toStrictEqual( { 'thread-id': 'c-testuser-20230504030201' } );
 		expect( store.inputReportedUserDisabled ).toBe( false );
-		// Assert that the behaviours were not reset
-		expect( store.inputBehaviors ).toStrictEqual( [ 'test' ] );
+		// Assert that the behaviour was not reset
+		expect( store.inputBehavior ).toStrictEqual( 'test' );
 		// Expect that the allusers API was called.
 		expectApiGetParameters( apiGet, 'testuser' );
 		// Expect that mw.util.isIPAddress was called with the correct name

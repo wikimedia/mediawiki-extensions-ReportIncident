@@ -3,6 +3,10 @@
 const Page = require( 'wdio-mediawiki/Page' );
 
 class ReportIncidentPage extends Page {
+	get actionsMenu() {
+		return $( '.mw-portlet-cactions' );
+	}
+
 	get reportLinkInToolsMenu() {
 		return $( '.ext-reportincident-link' );
 	}
@@ -31,6 +35,10 @@ class ReportIncidentPage extends Page {
 		return $( '.ext-reportincident-dialog-step2', this.reportIncidentDialog );
 	}
 
+	get typesOfBehviorScreenContent() {
+		return $( '.ext-reportincident-dialog-types-of-behavior', this.reportIncidentDialog );
+	}
+
 	get additionalContentFormInput() {
 		return $( '.ext-reportincident-dialog-step2__additional-details textarea', this.reportIncidentDialog );
 	}
@@ -44,7 +52,7 @@ class ReportIncidentPage extends Page {
 	}
 
 	get harassmentOptionsFormFieldset() {
-		return $( '.ext-reportincident-dialog-step2__harassment-options', this.reportIncidentDialog );
+		return $( '.ext-reportincident-dialog-types-of-behavior__harassment-options', this.reportIncidentDialog );
 	}
 
 	get harassmentOptionsFieldsetFormErrors() {
@@ -72,11 +80,11 @@ class ReportIncidentPage extends Page {
 	}
 
 	get somethingElseTextbox() {
-		return $( '.ext-reportincident-dialog-step2__something-else-textarea textarea', this.harassmentOptionsFormFieldset );
+		return $( '.ext-reportincident-dialog-types-of-behavior__something-else-textarea textarea', this.harassmentOptionsFormFieldset );
 	}
 
-	async open( query ) {
-		await super.openTitle( 'User talk:Admin', query );
+	async open( userName, query ) {
+		await super.openTitle( `User talk:${ userName }`, query );
 	}
 }
 

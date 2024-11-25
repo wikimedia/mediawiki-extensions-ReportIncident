@@ -241,6 +241,7 @@ describe( 'Report Incident Dialog', () => {
 				}
 			} );
 		} );
+
 		it( 'navigates from STEP 1 to STEP 2 when the next button is clicked', async () => {
 			const wrapper = renderComponent( { open: true } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
@@ -267,7 +268,7 @@ describe( 'Report Incident Dialog', () => {
 
 			const store = useFormStore();
 
-			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
 			store.inputReportedUser = 'test user';
 
 			await wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' );
@@ -296,7 +297,7 @@ describe( 'Report Incident Dialog', () => {
 
 			const store = useFormStore();
 
-			store.inputBehaviors = [ Constants.harassmentTypes.OTHER ];
+			store.inputBehavior = Constants.harassmentTypes.OTHER;
 			expect( store.isFormValidForSubmission() ).toBe( false );
 
 			// Set the footerErrorMessage value as it should be cleared if the
@@ -317,7 +318,7 @@ describe( 'Report Incident Dialog', () => {
 			const consoleSpy = jest.spyOn( console, 'log' );
 			const restPost = mockRestPost( Promise.resolve() );
 
-			store.inputBehaviors = [ Constants.harassmentTypes.HATE_SPEECH ];
+			store.inputBehavior = Constants.harassmentTypes.HATE_SPEECH;
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
 
@@ -356,7 +357,7 @@ describe( 'Report Incident Dialog', () => {
 			const consoleSpy = jest.spyOn( console, 'log' );
 			const restPost = mockRestPost( Promise.resolve() );
 
-			store.inputBehaviors = [ Constants.harassmentTypes.HATE_SPEECH ];
+			store.inputBehavior = Constants.harassmentTypes.HATE_SPEECH;
 			store.inputReportedUser = 'test user';
 			store.inputDetails = 'test';
 			expect( store.isFormValidForSubmission() ).toBe( true );
@@ -405,7 +406,7 @@ describe( 'Report Incident Dialog', () => {
 				} } )
 			);
 
-			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
 
@@ -448,7 +449,7 @@ describe( 'Report Incident Dialog', () => {
 				return Promise.resolve();
 			} );
 
-			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
 
@@ -536,7 +537,7 @@ describe( 'Report Incident Dialog', () => {
 				};
 			} );
 
-			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
 			store.inputLink = 'test';
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
@@ -590,7 +591,7 @@ describe( 'Report Incident Dialog', () => {
 				};
 			} );
 
-			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
 
