@@ -12,5 +12,6 @@
 	"reportincident-email-something-else": "कुछ और: \"$1\"",
 	"reportincident-emaildialog-close-button": "रद्द करें",
 	"reportincident-dialog-cancel": "रद्द करें",
-	"reportincident-dialog-continue": "आगे बढ़ें"
+	"reportincident-dialog-continue": "आगे बढ़ें",
+	"reportincident-submit-emergency-section-next-title": "आगे क्या होगा?"
 }

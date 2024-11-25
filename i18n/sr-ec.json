@@ -21,5 +21,6 @@
 	"reportincident-email-something-else": "Нешто друго: „$1“",
 	"reportincident-emaildialog-title": "Потребна верификована имејл адреса",
 	"reportincident-emaildialog-close-button": "Откажи",
-	"reportincident-emaildialog-primary": "Иди у подешавања"
+	"reportincident-emaildialog-primary": "Иди у подешавања",
+	"reportincident-submit-back-to-page": "Назад на $1"
 }
