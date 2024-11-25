@@ -1,7 +1,8 @@
 <template>
 	<form id="reportincident-form">
-		<cdx-message type="success">
-			{{ banner }}
+		<cdx-message type="notice">
+			<!-- eslint-disable vue/no-v-html -->
+			<p v-html="banner.parse()"></p>
 		</cdx-message>
 		<template v-for="section in sections" :key="section.title.key">
 			<h3 class="ext-reportincident-dialog__submit-success-section-header">
@@ -47,8 +48,8 @@ module.exports = exports = defineComponent( {
 		);
 
 		const banner = computed(
-			() => isEmergency.value ? mw.msg( 'reportincident-submit-emergency-success' ) :
-				mw.msg( 'reportincident-submit-behavior-success' )
+			() => isEmergency.value ? mw.message( 'reportincident-submit-behavior-section-other-options-item-ask' ) :
+				mw.message( 'reportincident-submit-behavior-notice', links.localIncidentReport )
 		);
 
 		const sections = computed( () => {
@@ -88,7 +89,8 @@ module.exports = exports = defineComponent( {
 							'reportincident-submit-behavior-section-support-item-admins',
 							links.localIncidentReport
 						),
-						mw.message( 'reportincident-submit-behavior-section-support-item-mentors' )
+						mw.message( 'reportincident-submit-behavior-section-support-item-mentors' ),
+						mw.message( 'reportincident-submit-behavior-section-support-item-info-is-public' )
 					]
 				},
 				{
