@@ -38,7 +38,7 @@ describe( 'useInstrument', () => {
 
 		expect( newInstrument ).toHaveBeenCalledTimes( 1 );
 		expect( newInstrument ).toHaveBeenCalledWith(
-			'mediawiki.incident_reporting_system_interaction',
+			'mediawiki.product_metrics.incident_reporting_system_interaction',
 			'/analytics/product_metrics/web/base/1.3.0'
 		);
 

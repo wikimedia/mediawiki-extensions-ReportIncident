@@ -45,7 +45,7 @@ const useInstrument = () => {
 	// to preserve event sequence positions.
 	if ( !instrument ) {
 		instrument = mw.eventLog.newInstrument(
-			'mediawiki.incident_reporting_system_interaction',
+			'mediawiki.product_metrics.incident_reporting_system_interaction',
 			'/analytics/product_metrics/web/base/1.3.0'
 		);
 	}
