@@ -55,8 +55,10 @@ class ReportIncidentMailerTest extends MediaWikiIntegrationTestCase {
 			UserIdentityValue::newRegistered( 1, 'Test' ),
 			UserIdentityValue::newRegistered( 2, 'Violator' ),
 			$mockRevisionRecord,
-			[ 'something-else', 'foo' ],
-			'something-else-details',
+			IncidentReport::THREAT_TYPE_IMMEDIATE,
+			null,
+			'threats-physical-harm',
+			null,
 			'details',
 			$hasTheadId ? 'c-violator-20230706050403' : null
 		);
@@ -77,9 +79,6 @@ class ReportIncidentMailerTest extends MediaWikiIntegrationTestCase {
 			'reportincident-email-subject' => [
 				new ScalarParam( ParamType::TEXT, $mockReportingUserPageTitle->getPrefixedDBkey() )
 			],
-			'reportincident-email-something-else' => [
-				new ScalarParam( ParamType::TEXT, $incidentReport->getSomethingElseDetails() )
-			],
 			'reportincident-email-body' => [
 				new ScalarParam( ParamType::TEXT, $mockReportingUserPageTitle->getDBkey() ),
 				new ScalarParam( ParamType::TEXT, $mockReportedUserPageTitle->getDBkey() ),
@@ -89,7 +88,7 @@ class ReportIncidentMailerTest extends MediaWikiIntegrationTestCase {
 				new ScalarParam( ParamType::TEXT, $hasTheadId ?
 					'page-link?oldid=1#c-violator-20230706050403' :
 					'page-link?oldid=1' ),
-				new ScalarParam( ParamType::TEXT, implode( ', ', [ 'reportincident-email-something-else', 'foo' ] ) ),
+				new ScalarParam( ParamType::TEXT, $incidentReport->getPhysicalHarmType() ),
 				new ScalarParam( ParamType::TEXT, $incidentReport->getDetails() ),
 				new ScalarParam( ParamType::TEXT, 'special-email-link' ),
 			],
@@ -192,8 +191,10 @@ class ReportIncidentMailerTest extends MediaWikiIntegrationTestCase {
 			UserIdentityValue::newRegistered( 1, 'Test' ),
 			UserIdentityValue::newRegistered( 2, 'Violator' ),
 			$mockRevisionRecord,
-			[ 'something-else', 'foo' ],
-			'something-else-details',
+			IncidentReport::THREAT_TYPE_IMMEDIATE,
+			null,
+			'threats-physical-harm',
+			null,
 			'details',
 			$threadId
 		);

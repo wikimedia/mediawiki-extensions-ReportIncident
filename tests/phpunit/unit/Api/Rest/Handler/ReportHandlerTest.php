@@ -2,6 +2,7 @@
 
 namespace MediaWiki\Extension\ReportIncident\Tests\Unit\Api\Rest\Handler;
 
+use Exception;
 use MediaWiki\Block\AbstractBlock;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\HashConfig;
@@ -88,7 +89,12 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$authority = $this->newUserAuthority( [
 			'actor' => $reportingUser,
 		] );
-		$dummyBody = [ 'reportedUser' => 'user', 'revisionId' => 123, 'behaviors' => [] ];
+		$dummyBody = [
+			'reportedUser' => 'user',
+			'revisionId' => 123,
+			'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+			'physicalHarmType' => 'threats-physical-harm'
+		];
 		$this->executeHandler(
 			$handler,
 			new RequestData( [ 'parsedBody' => $dummyBody ] ),
@@ -123,7 +129,12 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$authority = $this->newUserAuthority( [
 			'actor' => $reportingUser,
 		] );
-		$dummyBody = [ 'reportedUser' => 'user', 'revisionId' => 123, 'behaviors' => [] ];
+		$dummyBody = [
+			'reportedUser' => 'user',
+			'revisionId' => 123,
+			'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+			'physicalHarmType' => 'threats-physical-harm'
+		];
 		$this->executeHandler(
 			$handler,
 			new RequestData( [ 'parsedBody' => $dummyBody ] ),
@@ -161,7 +172,12 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$authority = $this->newUserAuthority( [
 			'actor' => $reportingUser,
 		] );
-		$dummyBody = [ 'reportedUser' => 'user', 'revisionId' => 123, 'behaviors' => [] ];
+		$dummyBody = [
+			'reportedUser' => 'user',
+			'revisionId' => 123,
+			'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+			'physicalHarmType' => 'threats-physical-harm'
+		];
 		$this->executeHandler(
 			$handler,
 			new RequestData( [ 'parsedBody' => $dummyBody ] ),
@@ -228,28 +244,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		);
 	}
 
-	public function testBodyFailsValidationOnObjectAsReportedUser() {
-		$config = new HashConfig( [
-			'ReportIncidentApiEnabled' => true,
-			'ReportIncidentDeveloperMode' => true,
-			'ReportIncidentMinimumAccountAgeInSeconds' => null,
-		] );
-		$revisionStore = $this->createMock( RevisionStore::class );
-		$revisionStore->method( 'getRevisionById' )
-			->with( 1 )
-			->willReturn( $this->createMock( RevisionRecord::class ) );
-		$handler = $this->newServiceInstance( ReportHandler::class, [
-			'config' => $config,
-			'revisionStore' => $revisionStore
-		] );
-		$this->expectExceptionObject(
-			new LocalizedHttpException( new MessageValue( 'rest-body-validation-error' ), 400 )
-		);
-		$dummyBody = [ 'reportedUser' => [ 'test' => 'testing' ], 'revisionId' => 123, 'behaviors' => [] ];
-		$this->executeHandler( $handler, new RequestData( [ 'parsedBody' => $dummyBody ] ) );
-	}
-
-	public function testBodyFailsValidationOnObjectAsDetails() {
+	/**
+	 * @dataProvider provideValidationErrorDetails
+	 */
+	public function testBodyFailsValidation( array $parsedBody ) {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => true,
@@ -270,12 +268,92 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$this->expectExceptionObject(
 			new LocalizedHttpException( new MessageValue( 'rest-body-validation-error' ), 400 )
 		);
-		$dummyBody = [ 'reportedUser' => 'user', 'revisionId' => 123, 'behaviors' => [],
-			'details' => [ 'test' => 'testing' ] ];
-		$this->executeHandler( $handler, new RequestData( [ 'parsedBody' => $dummyBody ] ) );
+
+		$this->executeHandler( $handler, new RequestData( [ 'parsedBody' => $parsedBody ] ) );
 	}
 
-	public function testBodyFailsValidationOnObjectAsSomethingElseDetails() {
+	public static function provideValidationErrorDetails(): iterable {
+		yield 'invalid "reportedUser" field' => [
+			[
+				'reportedUser' => [ 'test' => 'testing' ],
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+				'physicalHarmType' => '',
+			]
+		];
+
+		yield 'invalid "details" field' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+				'physicalHarmType' => '',
+				'details' => [ 'test' => 'testing' ]
+			]
+		];
+
+		yield 'invalid "somethingElseDetails" field' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+				'physicalHarmType' => '',
+				'somethingElseDetails' => [ 'test' => 'testing' ]
+			]
+		];
+
+		yield 'missing "incidentType" field' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'physicalHarmType' => '',
+			]
+		];
+
+		yield 'invalid "incidentType" field' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => 'foo',
+				'physicalHarmType' => '',
+			]
+		];
+
+		yield 'multi-value "incidentType" field' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => [
+					IncidentReport::THREAT_TYPE_IMMEDIATE,
+					IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR
+				],
+				'physicalHarmType' => '',
+			]
+		];
+
+		yield 'invalid "physicalHarmType" field' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+				'physicalHarmType' => 'foo',
+			]
+		];
+
+		yield 'invalid "behaviorType" field' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR,
+				'behaviorType' => 'bar',
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider provideIncompatibleFields
+	 */
+	public function testValidateIncompatibleFields( array $body, Exception $expected ): void {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => true,
@@ -283,22 +361,91 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		] );
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionStore->method( 'getRevisionById' )
-			->with( 1 )
+			->with( 123 )
 			->willReturn( $this->createMock( RevisionRecord::class ) );
 		$userNameUtils = $this->createMock( UserNameUtils::class );
 		$userNameUtils->method( 'isIP' )
 			->willReturn( true );
+
+		$userFactory = $this->createMock( UserFactory::class );
+		$user = $this->createMock( User::class );
+		$user->method( 'isNamed' )->willReturn( true );
+		$user->method( 'isEmailConfirmed' )->willReturn( false );
+		$userFactory->method( 'newFromUserIdentity' )->willReturn( $user );
+
 		$handler = $this->newServiceInstance( ReportHandler::class, [
 			'config' => $config,
 			'revisionStore' => $revisionStore,
 			'userNameUtils' => $userNameUtils,
+			'userFactory' => $userFactory
 		] );
-		$this->expectExceptionObject(
-			new LocalizedHttpException( new MessageValue( 'rest-body-validation-error' ), 400 )
+		$this->expectExceptionObject( $expected );
+
+		$this->executeHandler(
+			$handler,
+			new RequestData(),
+			[],
+			[],
+			[],
+			$body,
+			$this->mockRegisteredUltimateAuthority()
 		);
-		$dummyBody = [ 'reportedUser' => 'user', 'revisionId' => 123, 'behaviors' => [],
-			'somethingElseDetails' => [ 'test' => 'testing' ] ];
-		$this->executeHandler( $handler, new RequestData( [ 'parsedBody' => $dummyBody ] ) );
+	}
+
+	public static function provideIncompatibleFields(): iterable {
+		yield 'missing "physicalHarmType" field for immediate harm' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+				'physicalHarmType' => null,
+			],
+			new LocalizedHttpException(
+				new MessageValue( 'rest-missing-body-field', [ 'physicalHarmType' ] ),
+				429
+			)
+		];
+
+		yield '"behaviorType" field provided for immediate harm' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+				'behaviorType' => 'hate-speech-or-discrimination',
+				'physicalHarmType' => 'threats-self-harm',
+			],
+			new LocalizedHttpException(
+				new MessageValue( 'rest-extraneous-body-fields', [ 'behaviorType' ] ),
+				429
+			)
+		];
+
+		yield 'missing "behaviorType" field for unacceptable behavior' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR,
+				'behaviorType' => null,
+			],
+			new LocalizedHttpException(
+				new MessageValue( 'rest-missing-body-field', [ 'behaviorType' ] ),
+				429
+			)
+		];
+
+		yield '"physicalHarmType" field provided for unacceptable behavior' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR,
+				'behaviorType' => 'hate-speech-or-discrimination',
+				'physicalHarmType' => 'threats-self-harm',
+			],
+			new LocalizedHttpException(
+				new MessageValue( 'rest-extraneous-body-fields', [ 'physicalHarmType' ] ),
+				429
+			)
+		];
 	}
 
 	public function testTruncationOfTextareaFields() {
@@ -339,7 +486,8 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			'reportedUser' => '1.2.3.4',
 			'somethingElseDetails' => 'testing-something-else',
 			'details' => 'testing-details',
-			'behaviors' => [ 'test' ]
+			'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+			'physicalHarmType' => 'threats-physical-harm',
 		] );
 		$this->assertSame(
 			'testing-something-else-truncated',
@@ -426,10 +574,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			[],
 			[],
 			[
-				'reportedUser' => 'Foo',
-				'revisionId' => 1,
-				'behaviors' => [ 'something', 'something_else' ],
-				'details' => 'More details'
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+				'physicalHarmType' => 'threats-physical-harm'
 			],
 			$this->mockRegisteredUltimateAuthority()
 		);
@@ -528,10 +676,11 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		return [
 			'correct values' => [
 				[
-					'reportedUser' => 'test',
-					'revisionId' => 1,
-					'behaviors' => [ 'something', 'something_else' ],
-					'details' => 'More details'
+					'reportedUser' => 'user',
+					'revisionId' => 123,
+					'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+					'physicalHarmType' => 'threats-physical-harm',
+					'details' => 'foo',
 				],
 				StatusValue::newGood(),
 				IncidentReportEmailStatus::newGood(),
@@ -540,9 +689,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			],
 			'correct values, empty details' => [
 				[
-					'reportedUser' => '1.2.3.4',
-					'revisionId' => 1,
-					'behaviors' => [ 'something', 'something_else' ],
+					'reportedUser' => 'user',
+					'revisionId' => 123,
+					'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+					'physicalHarmType' => 'threats-physical-harm',
 				],
 				StatusValue::newGood(),
 				IncidentReportEmailStatus::newGood(),
@@ -551,9 +701,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			],
 			'trigger a TypeError' => [
 				[
-					'reportedUser' => 'testing12234',
-					'revisionId' => 'foo',
-					'behaviors' => [ [], [] ]
+					'reportedUser' => 'user',
+					'revisionId' => 123,
+					'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+					'physicalHarmType' => 'threats-physical-harm',
 				],
 				StatusValue::newFatal( 'rest-bad-json-body' ),
 				IncidentReportEmailStatus::newGood(),
@@ -562,9 +713,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			],
 			'record fails' => [
 				[
-					'reportedUser' => 'Userabc',
-					'revisionId' => 1,
-					'behaviors' => [ 'test' ]
+					'reportedUser' => 'user',
+					'revisionId' => 123,
+					'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+					'physicalHarmType' => 'threats-physical-harm',
 				],
 				StatusValue::newFatal( 'rest-bad-json-body' ),
 				IncidentReportEmailStatus::newGood(),
@@ -573,9 +725,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			],
 			'notify fails' => [
 				[
-					'reportedUser' => 'testuser',
-					'revisionId' => 1,
-					'behaviors' => [ 'test' ],
+					'reportedUser' => 'user',
+					'revisionId' => 123,
+					'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+					'physicalHarmType' => 'threats-physical-harm',
 				],
 				StatusValue::newGood(),
 				IncidentReportEmailStatus::newFatal( 'reportincident-unable-to-send' ),
@@ -703,7 +856,12 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			[],
 			[],
 			[],
-			[ 'revisionId' => 1, 'reportedUser' => '127.0.0.1', 'behaviors' => [ 'test' ] ],
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+				'physicalHarmType' => 'threats-physical-harm',
+			],
 			$authority
 		);
 	}
@@ -750,7 +908,12 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			[],
 			[],
 			[],
-			[ 'revisionId' => 1, 'reportedUser' => '127.0.0.1', 'behaviors' => [ 'test' ] ],
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+				'physicalHarmType' => 'threats-physical-harm',
+			],
 			$authority
 		);
 	}
@@ -812,7 +975,12 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			[],
 			[],
 			[],
-			[ 'revisionId' => 1, 'reportedUser' => '127.0.0.1', 'behaviors' => [ 'test' ] ],
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+				'physicalHarmType' => 'threats-physical-harm',
+			],
 			$authority
 		);
 	}

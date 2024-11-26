@@ -47,12 +47,15 @@ function mockRestPost( returnValue ) {
 	return restPost;
 }
 
-const renderComponent = ( props, slots ) => {
+const renderComponent = ( props, slots, initialState = {} ) => {
 	const defaultProps = { open: false, showPaginator: false };
 	const defaultSlots = { title: '<h3>Report Harassment</h3>' };
 	return utils.mount( ReportIncidentDialog, {
 		global: {
-			plugins: [ createTestingPinia( { stubActions: false } ) ]
+			plugins: [ createTestingPinia( {
+				initialState: { form: initialState },
+				stubActions: false
+			} ) ]
 		},
 		props: Object.assign( {}, defaultProps, props ),
 		slots: Object.assign( {}, defaultSlots, slots )
@@ -310,183 +313,128 @@ describe( 'Report Incident Dialog', () => {
 			} );
 		} );
 
-		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data', async () => {
-			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
-
-			const store = useFormStore();
-			const consoleSpy = jest.spyOn( console, 'log' );
-			const restPost = mockRestPost( Promise.resolve() );
-
-			store.inputBehavior = Constants.harassmentTypes.HATE_SPEECH;
-			store.inputReportedUser = 'test user';
-			expect( store.isFormValidForSubmission() ).toBe( true );
-
-			await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
-
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
-			expect( consoleSpy ).not.toHaveBeenCalled();
-			expect( restPost ).toHaveBeenCalledWith(
-				'/reportincident/v0/report',
-				{
-					behaviors: [ Constants.harassmentTypes.HATE_SPEECH ], details: '',
-					reportedUser: 'test user', revisionId: 1
-				}
-			);
-			expect( logEvent ).toHaveBeenCalledTimes( 2 );
-			expect( logEvent ).toHaveBeenNthCalledWith( 1, 'click', {
-				subType: 'continue',
-				source: 'submit_report',
-				context: JSON.stringify( {
-					// eslint-disable-next-line camelcase
-					addl_info: false,
-					// eslint-disable-next-line camelcase
-					reported_user: store.inputReportedUser
-				} )
-			} );
-			expect( logEvent ).toHaveBeenNthCalledWith( 2, 'view', {
-				source: 'submitted'
-			} );
-		} );
-
-		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data with details', async () => {
-			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
-
-			const store = useFormStore();
-			const consoleSpy = jest.spyOn( console, 'log' );
-			const restPost = mockRestPost( Promise.resolve() );
-
-			store.inputBehavior = Constants.harassmentTypes.HATE_SPEECH;
-			store.inputReportedUser = 'test user';
-			store.inputDetails = 'test';
-			expect( store.isFormValidForSubmission() ).toBe( true );
-
-			await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
-
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
-			expect( consoleSpy ).not.toHaveBeenCalled();
-			expect( restPost ).toHaveBeenCalledWith(
-				'/reportincident/v0/report',
-				{
-					behaviors: [ Constants.harassmentTypes.HATE_SPEECH ], details: 'test',
-					reportedUser: 'test user', revisionId: 1
-				}
-			);
-			expect( logEvent ).toHaveBeenCalledTimes( 2 );
-			expect( logEvent ).toHaveBeenNthCalledWith( 1, 'click', {
-				subType: 'continue',
-				source: 'submit_report',
-				context: JSON.stringify( {
-					// eslint-disable-next-line camelcase
-					addl_info: true,
-					// eslint-disable-next-line camelcase
-					reported_user: store.inputReportedUser
-				} )
-			} );
-			expect( logEvent ).toHaveBeenNthCalledWith( 2, 'view', {
-				source: 'submitted'
-			} );
-		} );
-
-		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data in developer mode', () => {
-			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
-
-			const store = useFormStore();
-
-			const consoleSpy = jest.spyOn( console, 'log' );
-
-			const restPost = mockRestPost(
-				Promise.resolve( { sentEmail: {
-					to: [ { address: 'test@test.com' }, { address: 'testing@example.com' } ],
-					from: { address: 'b@example.com' },
-					subject: 'Testing subject',
-					body: 'Testing email body.\nTesting.'
-				} } )
-			);
-
-			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
-			store.inputReportedUser = 'test user';
-			expect( store.isFormValidForSubmission() ).toBe( true );
-
-			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
-				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
-				// Should have outputted the form data to the console.
-				expect( consoleSpy ).toHaveBeenNthCalledWith( 1, 'An email has been sent for this report' );
-				expect( consoleSpy ).toHaveBeenNthCalledWith( 2, 'Sent from:\nb@example.com' );
-				expect( consoleSpy ).toHaveBeenNthCalledWith( 3, 'Sent to:\ntest@test.com, testing@example.com' );
-				expect( consoleSpy ).toHaveBeenNthCalledWith( 4, 'Subject of the email:\nTesting subject' );
-				expect( consoleSpy ).toHaveBeenNthCalledWith( 5, 'Body of the email:\nTesting email body.\nTesting.' );
-				// Should have called Rest().post()
-				expect( restPost ).toHaveBeenCalledWith(
-					'/reportincident/v0/report',
+		describe( 'attempts to submit form when next is clicked on STEP 2', () => {
+			const validSubmitTestCases = {
+				'valid form data': [
+					false,
 					{
-						behaviors: [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ], details: '',
-						reportedUser: 'test user', revisionId: 1
+						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+						inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
+						inputReportedUser: 'test user'
+					},
+					{
+						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+						behaviorType: Constants.harassmentTypes.HATE_SPEECH,
+						reportedUser: 'test user',
+						revisionId: 1
 					}
-				);
-			} );
-		} );
+				],
+				'valid form data in emergency flow': [
+					false,
+					{
+						incidentType: Constants.typeOfIncident.immediateThreatPhysicalHarm,
+						physicalHarmType: Constants.physicalHarmTypes.physicalHarm,
+						inputDetails: 'some details',
+						inputReportedUser: 'test user'
+					},
+					{
+						incidentType: Constants.typeOfIncident.immediateThreatPhysicalHarm,
+						physicalHarmType: Constants.physicalHarmTypes.physicalHarm,
+						details: 'some details',
+						reportedUser: 'test user',
+						revisionId: 1
+					}
+				],
+				'valid form data with "something else"': [
+					false,
+					{
+						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+						inputBehavior: Constants.harassmentTypes.OTHER,
+						inputSomethingElseDetails: 'details',
+						inputReportedUser: 'test user'
+					},
+					{
+						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+						behaviorType: Constants.harassmentTypes.OTHER,
+						somethingElseDetails: 'details',
+						reportedUser: 'test user',
+						revisionId: 1
+					}
+				],
+				'valid form data in developerMode': [
+					true,
+					{
+						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+						inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
+						inputReportedUser: 'test user'
+					},
+					{
+						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+						behaviorType: Constants.harassmentTypes.HATE_SPEECH,
+						reportedUser: 'test user',
+						revisionId: 1
+					}
+				]
+			};
 
-		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data', async () => {
-			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+			for ( const testName of Object.keys( validSubmitTestCases ) ) {
+				const [ developerMode, initialState, expectedRestPayload ] = validSubmitTestCases[ testName ];
 
-			const store = useFormStore();
-			const consoleSpy = jest.spyOn( console, 'log' );
-			const userTokensSpy = jest.spyOn( mw.user.tokens, 'get' ).mockImplementation( ( tokenType ) => {
-				switch ( tokenType ) {
-					case 'csrfToken':
-						return 'csrf-token';
-					default:
-						throw new Error( 'Unknown token type: ' + tokenType );
-				}
-			} );
-			const restPost = mockRestPost( () => {
-				// Form should be in submission when the REST API is called.
-				expect( wrapper.vm.formSubmissionInProgress ).toBe( true );
-				return Promise.resolve();
-			} );
+				it( testName, async () => {
+					const wrapper = renderComponent(
+						{ open: true, initialStep: Constants.DIALOG_STEP_2 },
+						undefined,
+						initialState
+					);
+					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
-			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
-			store.inputReportedUser = 'test user';
-			expect( store.isFormValidForSubmission() ).toBe( true );
+					const store = useFormStore();
+					const consoleSpy = jest.spyOn( console, 'log' );
 
-			// Form should not be in submission if the form was not submitted yet.
-			expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
+					const response = developerMode ? { sentEmail: {
+						to: [ { address: 'test@test.com' }, { address: 'testing@example.com' } ],
+						from: { address: 'b@example.com' },
+						subject: 'Testing subject',
+						body: 'Testing email body.\nTesting.'
+					} } : undefined;
+					const restPost = mockRestPost( Promise.resolve( response ) );
 
-			await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
+					expect( store.isFormValidForSubmission() ).toBe( true );
 
-			// Should be dialog step one if the form submitted correctly.
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
-			// Should not have outputted the form data to the console.
-			expect( consoleSpy ).not.toHaveBeenCalled();
-			expect( userTokensSpy ).toHaveBeenCalledWith( 'csrfToken' );
-			expect( restPost ).toHaveBeenCalledWith(
-				'/reportincident/v0/report',
-				{
-					behaviors: [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ], details: '',
-					reportedUser: 'test user', revisionId: 1, token: 'csrf-token'
-				}
-			);
-			// Form should not be in submission if the form has finished submitting.
-			expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
+					await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
 
-			expect( logEvent ).toHaveBeenCalledTimes( 2 );
-			expect( logEvent ).toHaveBeenNthCalledWith( 1, 'click', {
-				subType: 'continue',
-				source: 'submit_report',
-				context: JSON.stringify( {
-					// eslint-disable-next-line camelcase
-					addl_info: false,
-					// eslint-disable-next-line camelcase
-					reported_user: store.inputReportedUser
-				} )
-			} );
-			expect( logEvent ).toHaveBeenNthCalledWith( 2, 'view', {
-				source: 'submitted'
-			} );
+					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
+
+					if ( developerMode ) {
+						expect( consoleSpy ).toHaveBeenNthCalledWith( 1, 'An email has been sent for this report' );
+						expect( consoleSpy ).toHaveBeenNthCalledWith( 2, 'Sent from:\nb@example.com' );
+						expect( consoleSpy ).toHaveBeenNthCalledWith( 3, 'Sent to:\ntest@test.com, testing@example.com' );
+						expect( consoleSpy ).toHaveBeenNthCalledWith( 4, 'Subject of the email:\nTesting subject' );
+						expect( consoleSpy ).toHaveBeenNthCalledWith( 5, 'Body of the email:\nTesting email body.\nTesting.' );
+					} else {
+						expect( consoleSpy ).not.toHaveBeenCalled();
+					}
+
+					expect( restPost ).toHaveBeenCalledWith(
+						'/reportincident/v0/report',
+						expectedRestPayload
+					);
+					expect( logEvent ).toHaveBeenCalledTimes( 2 );
+					expect( logEvent ).toHaveBeenNthCalledWith( 1, 'click', {
+						subType: 'continue',
+						source: 'submit_report',
+						context: JSON.stringify( {
+							// eslint-disable-next-line camelcase
+							addl_info: !!( store.inputSomethingElseDetails || store.inputDetails ),
+							// eslint-disable-next-line camelcase
+							reported_user: store.inputReportedUser
+						} )
+					} );
+					expect( logEvent ).toHaveBeenNthCalledWith( 2, 'view', {
+						source: 'submitted'
+					} );
+				} );
+			}
 		} );
 
 		it( 'should clear and close dialog when exiting from submit success screen', async () => {
@@ -537,6 +485,7 @@ describe( 'Report Incident Dialog', () => {
 				};
 			} );
 
+			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
 			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
 			store.inputLink = 'test';
 			store.inputReportedUser = 'test user';
@@ -557,8 +506,11 @@ describe( 'Report Incident Dialog', () => {
 				expect( restPost ).toHaveBeenCalledWith(
 					'/reportincident/v0/report',
 					{
-						behaviors: [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ], details: '',
-						reportedUser: 'test user', revisionId: 1, token: 'csrf-token'
+						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+						behaviorType: Constants.harassmentTypes.INTIMIDATION_AGGRESSION,
+						reportedUser: 'test user',
+						revisionId: 1,
+						token: 'csrf-token'
 					}
 				);
 			} );
@@ -591,6 +543,7 @@ describe( 'Report Incident Dialog', () => {
 				};
 			} );
 
+			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
 			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
@@ -606,8 +559,11 @@ describe( 'Report Incident Dialog', () => {
 			expect( restPost ).toHaveBeenCalledWith(
 				'/reportincident/v0/report',
 				{
-					behaviors: [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ], details: '',
-					reportedUser: 'test user', revisionId: 1, token: 'csrf-token'
+					incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+					behaviorType: Constants.harassmentTypes.INTIMIDATION_AGGRESSION,
+					reportedUser: 'test user',
+					revisionId: 1,
+					token: 'csrf-token'
 				}
 			);
 			expect( userTokensSpy ).toHaveBeenCalledWith( 'csrfToken' );

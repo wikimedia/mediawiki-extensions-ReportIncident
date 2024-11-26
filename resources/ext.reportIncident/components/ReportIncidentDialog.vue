@@ -354,10 +354,7 @@ module.exports = exports = {
 				return;
 			}
 
-			// Moving forward from the second page when reporting
-			// Unacceptable Behavior leads to the "Get Support" page
-			currentStep.value = Constants.DIALOG_STEP_SUBMIT_SUCCESS;
-			showValidationError.value = false;
+			// Call the report API for unacceptable behavior as well for server-side event logging.
 			submitReport();
 		}
 

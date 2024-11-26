@@ -19,7 +19,8 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 			new UserIdentityValue( 1, 'Reporter' ),
 			new UserIdentityValue( 2, 'Reported' ),
 			$this->createMock( RevisionRecord::class ),
-			[ 'foo' ],
+			'foo',
+			'bar',
 			'SomethingElse',
 			'Details',
 			'thread-id'
@@ -33,8 +34,9 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 			[
 				'reportedUser' => new UserIdentityValue( 2, 'Reported' ),
 				'revision' => $this->createMock( RevisionRecord::class ),
-				'behaviors' => [ 'foo' ],
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
 				'somethingElseDetails' => 'blah',
+				'physicalHarmType' => 'foo',
 				'details' => 'Details',
 				'threadId' => 'test'
 			]
@@ -45,7 +47,8 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 		$reportingUser = new UserIdentityValue( 1, 'Reporter' );
 		$reportedUser = new UserIdentityValue( 2, 'Reported' );
 		$revisionRecord = $this->createMock( RevisionRecord::class );
-		$behaviors = [ 'foo' ];
+		$behaviorType = 'foo';
+		$physicalHarmType = 'bar';
 		$somethingElseDetails = 'Something else';
 		$details = 'Details';
 		$threadId = 'test-thread-id';
@@ -53,7 +56,9 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 			$reportingUser,
 			$reportedUser,
 			$revisionRecord,
-			$behaviors,
+			IncidentReport::THREAT_TYPE_IMMEDIATE,
+			$behaviorType,
+			$physicalHarmType,
 			$somethingElseDetails,
 			$details,
 			$threadId
@@ -61,7 +66,8 @@ class IncidentReportTest extends MediaWikiUnitTestCase {
 		$this->assertSame( $reportingUser, $incidentReport->getReportingUser() );
 		$this->assertSame( $reportedUser, $incidentReport->getReportedUser() );
 		$this->assertSame( $revisionRecord, $incidentReport->getRevisionRecord() );
-		$this->assertSame( $behaviors, $incidentReport->getBehaviors() );
+		$this->assertSame( $behaviorType, $incidentReport->getBehaviorType() );
+		$this->assertSame( $physicalHarmType, $incidentReport->getPhysicalHarmType() );
 		$this->assertSame( $somethingElseDetails, $incidentReport->getSomethingElseDetails() );
 		$this->assertSame( $details, $incidentReport->getDetails() );
 		$this->assertSame( $threadId, $incidentReport->getThreadId() );
