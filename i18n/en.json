@@ -71,7 +71,7 @@
 	"reportincident-submit-emergency-section-important-item-services": "If {{GENDER:|you}} are injured or in immediate danger, call {{GENDER:|your}} [[wikipedia:List_of_emergency_telephone_numbers|local emergency services]].",
 	"reportincident-submit-emergency-section-important-item-resources": "If {{GENDER:|you}} feel you may physically harm {{GENDER:|yourself}} or others, {{GENDER:|you}} can find a [[meta:Special:MyLanguage/Mental_health_resources|list of support resources]].",
 	"reportincident-submit-emergency-section-next-title": "What happens next?",
-	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|Your}} report has been submitted to the [[meta:Special:MyLanguage/Threats_of_harm|Wikimedia Foundation emergency team]]. The team monitors emergency reports 24/7, and {{GENDER:|your}} report will be looked into within 3 hours.",
+	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|Your}} report has been submitted to the [[meta:Special:MyLanguage/Threats_of_harm|Wikimedia Foundation emergency team]]. The team monitors emergency reports 24/7, and {{GENDER:|your}} request will be looked into within 3 hours.",
 	"reportincident-submit-emergency-section-next-item-review": "We will review it and determine whether the incident violates policies.",
 	"reportincident-submit-emergency-section-next-item-email": "If you need to submit additional details, please email [mailto:emergency@wikimedia.org emergency@wikimedia.org].",
 	"reportincident-submit-behavior-dialog-title": "Get support for an incident",
