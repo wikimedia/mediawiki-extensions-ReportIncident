@@ -95,20 +95,7 @@ class ReportIncidentMailer {
 		$reportedUserPage = $this->titleFactory->newFromText(
 			$incidentReport->getReportedUser()->getName(), NS_USER
 		);
-		// Get the behaviors and substitute the 'something-else' behavior
-		// with the text submitted in the Something else textbox.
-		$behaviors = $incidentReport->getBehaviors();
-		if ( $incidentReport->getSomethingElseDetails() ) {
-			$somethingElseIndex = array_search( 'something-else', $behaviors );
-			if ( $somethingElseIndex !== false ) {
-				$behaviors[$somethingElseIndex] = $this->textFormatter->format(
-					new MessageValue(
-						'reportincident-email-something-else',
-						[ $incidentReport->getSomethingElseDetails() ?? '' ]
-					)
-				);
-			}
-		}
+
 		$emailUrl = $this->titleFactory->newFromText( 'Special:EmailUser' )
 			->getSubpage( $reportingUserPage->getDBkey() )
 			->getFullURL();
@@ -121,7 +108,7 @@ class ReportIncidentMailer {
 					$reportedUserPage->getDBkey(),
 					$linkPrefixText,
 					$linkToPageAtRevision,
-					implode( ', ', $behaviors ),
+					$incidentReport->getPhysicalHarmType() ?? '',
 					$incidentReport->getDetails() ?? '',
 					$emailUrl
 				]

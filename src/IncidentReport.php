@@ -9,28 +9,26 @@ use MediaWiki\User\UserIdentity;
  * Plain value object containing incident report data.
  */
 class IncidentReport {
+	public const THREAT_TYPE_IMMEDIATE = 'immediate-threat-physical-harm';
+	public const THREAT_TYPE_UNACCEPTABLE_BEHAVIOR = 'unacceptable-user-behavior';
+
 	private UserIdentity $reportingUser;
 	private UserIdentity $reportedUser;
 	private RevisionRecord $revisionRecord;
-	private array $behaviors;
+	private ?string $behaviorType;
+	private ?string $physicalHarmType;
 	private ?string $somethingElseDetails;
 	private ?string $details;
 	private ?string $threadId;
+	private string $incidentType;
 
-	/**
-	 * @param UserIdentity $reportingUser
-	 * @param UserIdentity $reportedUser
-	 * @param RevisionRecord $revisionRecord
-	 * @param array $behaviors
-	 * @param string|null $somethingElseDetails
-	 * @param string|null $details
-	 * @param string|null $threadId
-	 */
 	public function __construct(
 		UserIdentity $reportingUser,
 		UserIdentity $reportedUser,
 		RevisionRecord $revisionRecord,
-		array $behaviors,
+		string $incidentType,
+		?string $behaviorType,
+		?string $physicalHarmType,
 		?string $somethingElseDetails = null,
 		?string $details = null,
 		?string $threadId = null
@@ -38,10 +36,12 @@ class IncidentReport {
 		$this->reportingUser = $reportingUser;
 		$this->reportedUser = $reportedUser;
 		$this->revisionRecord = $revisionRecord;
-		$this->behaviors = $behaviors;
+		$this->incidentType = $incidentType;
+		$this->behaviorType = $behaviorType;
 		$this->somethingElseDetails = $somethingElseDetails;
 		$this->details = $details;
 		$this->threadId = $threadId;
+		$this->physicalHarmType = $physicalHarmType;
 	}
 
 	public static function newFromRestPayload(
@@ -52,7 +52,9 @@ class IncidentReport {
 			$reportingUser,
 			$data['reportedUser'],
 			$data['revision'],
-			$data['behaviors'],
+			$data['incidentType'],
+			$data['behaviorType'] ?? null,
+			$data['physicalHarmType'] ?? null,
 			$data['somethingElseDetails'] ?? null,
 			$data['details'] ?? null,
 			$data['threadId'] ?? null
@@ -63,8 +65,16 @@ class IncidentReport {
 		return $this->reportingUser;
 	}
 
-	public function getBehaviors(): array {
-		return $this->behaviors;
+	public function getIncidentType(): string {
+		return $this->incidentType;
+	}
+
+	public function getBehaviorType(): ?string {
+		return $this->behaviorType;
+	}
+
+	public function getPhysicalHarmType(): ?string {
+		return $this->physicalHarmType;
 	}
 
 	public function getDetails(): ?string {

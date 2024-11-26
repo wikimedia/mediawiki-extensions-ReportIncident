@@ -207,6 +207,37 @@ class ReportHandler extends SimpleHandler {
 				$body['somethingElseDetails'], CommentStore::COMMENT_CHARACTER_LIMIT
 			);
 		}
+
+		if ( $body['incidentType'] === IncidentReport::THREAT_TYPE_IMMEDIATE ) {
+			if ( !isset( $body['physicalHarmType'] ) ) {
+				throw new LocalizedHttpException(
+					new MessageValue( 'rest-missing-body-field', [ 'physicalHarmType' ] ),
+					429
+				);
+			}
+
+			if ( isset( $body['behaviorType'] ) ) {
+				throw new LocalizedHttpException(
+					new MessageValue( 'rest-extraneous-body-fields', [ 'behaviorType' ] ),
+					429
+				);
+			}
+		} else {
+			if ( !isset( $body['behaviorType'] ) ) {
+				throw new LocalizedHttpException(
+					new MessageValue( 'rest-missing-body-field', [ 'physicalHarmType' ] ),
+					429
+				);
+			}
+
+			if ( isset( $body['physicalHarmType'] ) ) {
+				throw new LocalizedHttpException(
+					new MessageValue( 'rest-extraneous-body-fields', [ 'physicalHarmType' ] ),
+					429
+				);
+			}
+		}
+
 		return IncidentReport::newFromRestPayload(
 			$this->getAuthority()->getUser(),
 			$body
@@ -269,32 +300,40 @@ class ReportHandler extends SimpleHandler {
 	 */
 	private function submitIncidentReport( IncidentReport $incidentReport ): Response {
 		$status = $this->reportIncidentManager->record( $incidentReport );
-		if ( $status->isGood() ) {
-			// TODO: If/when we store the reports in a DB table, we can move sending the email
-			// into a deferred update, so the user doesn't need to wait. For now, this is our
-			// only signal that a report was processed, so check the status of the sendEmail
-			// method
-			$status = $this->reportIncidentManager->notify( $incidentReport );
-			if ( !$status->isGood() ) {
-				$extraData = [];
-				if ( $this->config->get( 'ReportIncidentDeveloperMode' ) ) {
-					$extraData = [ 'sentEmail' => $status->getEmailContents() ];
-				}
-				throw new LocalizedHttpException(
-					new MessageValue( 'reportincident-unable-to-send' ),
-					500,
-					$extraData
-				);
-			}
-			if ( $this->config->get( 'ReportIncidentDeveloperMode' ) ) {
-				return $this->getResponseFactory()->createJson( [ 'sentEmail' => $status->getEmailContents() ] );
-			} else {
-				return $this->getResponseFactory()->createNoContent();
-			}
-		} else {
+
+		if ( !$status->isGood() ) {
 			throw new LocalizedHttpException(
 				new MessageValue( $status->getErrors()[0]['message'] ), 400
 			);
+		}
+
+		// For reports of unacceptable behavior, only create a private record
+		// without notifying the emergency team.
+		if ( $incidentReport->getIncidentType() === IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR ) {
+			return $this->getResponseFactory()->createNoContent();
+		}
+
+		// TODO: If/when we store the reports in a DB table, we can move sending the email
+		// into a deferred update, so the user doesn't need to wait. For now, this is our
+		// only signal that a report was processed, so check the status of the sendEmail
+		// method
+		$status = $this->reportIncidentManager->notify( $incidentReport );
+		if ( !$status->isGood() ) {
+			$extraData = [];
+			if ( $this->config->get( 'ReportIncidentDeveloperMode' ) ) {
+				$extraData = [ 'sentEmail' => $status->getEmailContents() ];
+			}
+			throw new LocalizedHttpException(
+				new MessageValue( 'reportincident-unable-to-send' ),
+				500,
+				$extraData
+			);
+		}
+
+		if ( $this->config->get( 'ReportIncidentDeveloperMode' ) ) {
+			return $this->getResponseFactory()->createJson( [ 'sentEmail' => $status->getEmailContents() ] );
+		} else {
+			return $this->getResponseFactory()->createNoContent();
 		}
 	}
 
@@ -310,10 +349,34 @@ class ReportHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'integer',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
-			'behaviors' => [
+			'incidentType' => [
 				static::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'array',
+				ParamValidator::PARAM_TYPE => [
+					IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR,
+					IncidentReport::THREAT_TYPE_IMMEDIATE,
+				],
 				ParamValidator::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_ISMULTI => false,
+			],
+			'physicalHarmType' => [
+				static::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => [
+					'threats-physical-harm',
+					'threats-self-harm',
+					'threats-public-harm',
+				],
+				ParamValidator::PARAM_REQUIRED => false,
+			],
+			'behaviorType' => [
+				static::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => [
+					'hate-speech-or-discrimination',
+					'sexual-harassment',
+					'threats-or-violence',
+					'intimidation-aggression',
+					'something-else',
+				],
+				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'details' => [
 				static::PARAM_SOURCE => 'body',

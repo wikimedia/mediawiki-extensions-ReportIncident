@@ -210,8 +210,8 @@ describe( 'ReportIncident dialog', () => {
 			request.body,
 			{
 				reportedUser: '',
-				details: '',
-				behaviors: [ 'something-else' ],
+				incidentType: 'unacceptable-user-behavior',
+				behaviorType: 'something-else',
 				somethingElseDetails: 'Testing1234',
 				revisionId: 0
 			}

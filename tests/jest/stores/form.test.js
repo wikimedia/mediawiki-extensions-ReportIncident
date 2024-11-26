@@ -58,6 +58,7 @@ describe( 'Form Store', () => {
 
 	it( 'Generates correct rest data', () => {
 		const form = useFormStore();
+		form.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
 		form.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
 		form.inputReportedUser = 'test user';
 		form.inputDetails = 'test details';
@@ -66,24 +67,34 @@ describe( 'Form Store', () => {
 		// Something else details should not be specified as it is not in the behaviours array.
 		expect( form.restPayload ).toStrictEqual( {
 			reportedUser: 'test user',
-			details: 'test details',
-			behaviors: [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ]
+			incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+			behaviorType: Constants.harassmentTypes.INTIMIDATION_AGGRESSION
 		} );
 
 		form.inputBehavior = Constants.harassmentTypes.OTHER;
 		expect( form.restPayload ).toStrictEqual( {
 			reportedUser: 'test user',
-			details: 'test details',
-			behaviors: [ Constants.harassmentTypes.OTHER ],
+			incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+			behaviorType: Constants.harassmentTypes.OTHER,
 			somethingElseDetails: 'test something else details'
 		} );
 
 		form.overflowMenuData = { 'thread-id': 'c-test_user-20230605040302' };
 		expect( form.restPayload ).toStrictEqual( {
 			reportedUser: 'test user',
-			details: 'test details',
-			behaviors: [ Constants.harassmentTypes.OTHER ],
+			incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+			behaviorType: Constants.harassmentTypes.OTHER,
 			somethingElseDetails: 'test something else details',
+			threadId: 'c-test_user-20230605040302'
+		} );
+
+		form.incidentType = Constants.typeOfIncident.immediateThreatPhysicalHarm;
+		form.physicalHarmType = Constants.physicalHarmTypes.publicHarm;
+		expect( form.restPayload ).toStrictEqual( {
+			reportedUser: 'test user',
+			incidentType: Constants.typeOfIncident.immediateThreatPhysicalHarm,
+			physicalHarmType: Constants.physicalHarmTypes.publicHarm,
+			details: 'test details',
 			threadId: 'c-test_user-20230605040302'
 		} );
 	} );

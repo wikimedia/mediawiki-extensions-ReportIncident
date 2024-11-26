@@ -240,16 +240,28 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const restPayload = computed( () => {
 		const restData = {
 			reportedUser: inputReportedUser.value,
-			details: inputDetails.value,
-			behaviors: [ inputBehavior.value ]
+			incidentType: incidentType.value
 		};
-		if ( isSomethingElse() ) {
-			restData.somethingElseDetails = inputSomethingElseDetails.value;
-		}
+
 		if ( Object.keys( overflowMenuData.value ).indexOf( 'thread-id' ) !== -1 ) {
 			restData.threadId = overflowMenuData.value[ 'thread-id' ];
 		}
-		return restData;
+
+		if ( isEmergency() ) {
+			return Object.assign( restData, {
+				details: inputDetails.value,
+				physicalHarmType: physicalHarmType.value
+			} );
+		}
+
+		if ( isSomethingElse() ) {
+			return Object.assign( restData, {
+				somethingElseDetails: inputSomethingElseDetails.value,
+				behaviorType: inputBehavior.value
+			} );
+		}
+
+		return Object.assign( restData, { behaviorType: inputBehavior.value } );
 	} );
 
 	/**
