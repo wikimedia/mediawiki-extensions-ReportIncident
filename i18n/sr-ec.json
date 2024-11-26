@@ -8,6 +8,7 @@
 	"reportincident-dialog-close-btn": "Затвори",
 	"reportincident-dialog-back-btn": "Назад",
 	"reportincident-dialog-submit-btn": "Пошаљи",
+	"reportincident-dialog-harassment-type-label": "Врсте неприхватљивог понашања",
 	"reportincident-dialog-additional-details-input-label": "Додатне информације",
 	"reportincident-dialog-optional-label": "необавезно",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Говор мржње или дискриминација",
@@ -22,5 +23,6 @@
 	"reportincident-emaildialog-title": "Потребна верификована имејл адреса",
 	"reportincident-emaildialog-close-button": "Откажи",
 	"reportincident-emaildialog-primary": "Иди у подешавања",
+	"reportincident-submit-emergency-section-important-title": "Важно",
 	"reportincident-submit-back-to-page": "Назад на $1"
 }
