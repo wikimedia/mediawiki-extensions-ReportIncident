@@ -1,6 +1,6 @@
 <template>
 	<form id="reportincident-form">
-		<cdx-message type="notice">
+		<cdx-message :type="messageType">
 			<!-- eslint-disable vue/no-v-html -->
 			<p v-html="banner.parse()"></p>
 		</cdx-message>
@@ -48,9 +48,11 @@ module.exports = exports = defineComponent( {
 		);
 
 		const banner = computed(
-			() => isEmergency.value ? mw.message( 'reportincident-submit-behavior-section-other-options-item-ask' ) :
+			() => isEmergency.value ? mw.message( 'reportincident-submit-emergency-success' ) :
 				mw.message( 'reportincident-submit-behavior-notice', links.localIncidentReport )
 		);
+
+		const messageType = computed( () => isEmergency.value ? 'success' : 'notice' );
 
 		const sections = computed( () => {
 			if ( isEmergency.value ) {
@@ -108,7 +110,8 @@ module.exports = exports = defineComponent( {
 
 		return {
 			banner,
-			sections
+			sections,
+			messageType
 		};
 	}
 } );

@@ -48,8 +48,11 @@ describe( 'SubmitSuccessStep', () => {
 			incidentType: Constants.typeOfIncident.immediateThreatPhysicalHarm
 		} );
 
+		const message = wrapper.find( '#reportincident-form > .cdx-message' );
 		const headers = wrapper.findAll( 'h3' ).map( ( h ) => h.text() );
 
+		expect( message.classes( 'cdx-message--success' ) ).toBe( true );
+		expect( message.text() ).toBe( 'reportincident-submit-emergency-success' );
 		expect( headers ).toEqual( [
 			'reportincident-submit-emergency-section-important-title',
 			'reportincident-submit-emergency-section-next-title'
@@ -61,8 +64,11 @@ describe( 'SubmitSuccessStep', () => {
 			incidentType: Constants.typeOfIncident.unacceptableUserBehavior
 		} );
 
+		const message = wrapper.find( '#reportincident-form > .cdx-message' );
 		const headers = wrapper.findAll( 'h3' ).map( ( h ) => h.text() );
 
+		expect( message.classes( 'cdx-message--notice' ) ).toBe( true );
+		expect( message.text() ).toBe( 'reportincident-submit-behavior-notice' );
 		expect( headers ).toEqual( [
 			'reportincident-submit-behavior-section-support-title',
 			'reportincident-submit-behavior-section-other-options-title'
