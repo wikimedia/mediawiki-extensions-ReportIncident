@@ -59,7 +59,7 @@ describe( 'Form Store', () => {
 	it( 'Generates correct rest data', () => {
 		const form = useFormStore();
 		form.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
-		form.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
+		form.inputBehavior = Constants.harassmentTypes.INTIMIDATION;
 		form.inputReportedUser = 'test user';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';
@@ -68,7 +68,7 @@ describe( 'Form Store', () => {
 		expect( form.restPayload ).toStrictEqual( {
 			reportedUser: 'test user',
 			incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-			behaviorType: Constants.harassmentTypes.INTIMIDATION_AGGRESSION
+			behaviorType: Constants.harassmentTypes.INTIMIDATION
 		} );
 
 		form.inputBehavior = Constants.harassmentTypes.OTHER;
@@ -146,7 +146,7 @@ describe( 'Form Store', () => {
 
 		form.isFormValidForSubmission(); // Triggers validations
 
-		form.inputBehavior = Constants.harassmentTypes.THREATS_OR_VIOLENCE;
+		form.inputBehavior = Constants.harassmentTypes.TROLLING;
 
 		form.isFormValidForSubmission(); // Triggers validations
 

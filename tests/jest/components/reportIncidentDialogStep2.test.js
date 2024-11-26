@@ -123,7 +123,7 @@ describe( 'Report Incident Dialog Step 2', () => {
 		store.inputBehaviors = [];
 		expect( wrapper.vm.collectSomethingElseDetails ).toBe( false );
 
-		store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+		store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION ];
 		expect( wrapper.vm.collectSomethingElseDetails ).toBe( false );
 	} );
 

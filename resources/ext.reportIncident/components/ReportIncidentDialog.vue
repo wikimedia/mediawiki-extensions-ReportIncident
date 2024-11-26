@@ -197,6 +197,7 @@ module.exports = exports = {
 			printEmailToConsole( response );
 			currentStep.value = Constants.DIALOG_STEP_SUBMIT_SUCCESS;
 			formSubmissionInProgress.value = false;
+			footerErrorMessage.value = '';
 		}
 
 		/**
@@ -265,17 +266,11 @@ module.exports = exports = {
 
 			restPayload.token = mw.user.tokens.get( 'csrfToken' );
 
-			// @fixme Move the condition to the caller(s)
-			if ( store.isFormValidForSubmission() ) {
-				formSubmissionInProgress.value = true;
-				new mw.Rest().post(
-					'/reportincident/v0/report',
-					restPayload
-				).then( onReportSubmitSuccess, onReportSubmitFailure );
-			} else {
-				// Clear footer error messages as the form-specific ones will be set.
-				footerErrorMessage.value = '';
-			}
+			formSubmissionInProgress.value = true;
+			new mw.Rest().post(
+				'/reportincident/v0/report',
+				restPayload
+			).then( onReportSubmitSuccess, onReportSubmitFailure );
 		}
 
 		function navigateNext() {
@@ -327,7 +322,9 @@ module.exports = exports = {
 					} )
 				} );
 
-				submitReport();
+				if ( store.isFormValidForSubmission() ) {
+					submitReport();
+				}
 			}
 		}
 
@@ -359,7 +356,9 @@ module.exports = exports = {
 			}
 
 			// Call the report API for unacceptable behavior as well for server-side event logging.
-			submitReport();
+			if ( store.isFormValidForSubmission() ) {
+				submitReport();
+			}
 		}
 
 		function navigatePrevious() {

@@ -67,12 +67,12 @@ class ReportIncidentPage extends Page {
 		return $( 'input[value="sexual-harassment"]', this.harassmentOptionsFormFieldset );
 	}
 
-	get threatsOrViolenceOption() {
-		return $( 'input[value="threats-or-violence"]', this.harassmentOptionsFormFieldset );
+	get trollingOption() {
+		return $( 'input[value="trolling"]', this.harassmentOptionsFormFieldset );
 	}
 
-	get intimidationAggressionOption() {
-		return $( 'input[value="intimidation-aggression"]', this.harassmentOptionsFormFieldset );
+	get intimidationOption() {
+		return $( 'input[value="intimidation"]', this.harassmentOptionsFormFieldset );
 	}
 
 	get somethingElseOption() {
