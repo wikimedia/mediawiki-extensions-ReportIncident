@@ -197,8 +197,6 @@ module.exports = exports = {
 			printEmailToConsole( response );
 			currentStep.value = Constants.DIALOG_STEP_SUBMIT_SUCCESS;
 			formSubmissionInProgress.value = false;
-
-			logEvent( 'view', { source: 'submitted' } );
 		}
 
 		/**
@@ -269,19 +267,6 @@ module.exports = exports = {
 
 			// @fixme Move the condition to the caller(s)
 			if ( store.isFormValidForSubmission() ) {
-				logEvent( 'click', {
-					subType: 'continue',
-					source: 'submit_report',
-					context: JSON.stringify( {
-						// eslint-disable-next-line camelcase
-						addl_info: Boolean(
-							store.inputDetails || store.inputSomethingElseDetails
-						),
-						// eslint-disable-next-line camelcase
-						reported_user: store.inputReportedUser
-					} )
-				} );
-
 				formSubmissionInProgress.value = true;
 				new mw.Rest().post(
 					'/reportincident/v0/report',
@@ -329,6 +314,19 @@ module.exports = exports = {
 				unacceptableBehaviorNavigateNextFromStep2();
 			} else {
 				// if on the second page, validate, then POST the data
+				logEvent( 'click', {
+					subType: 'continue',
+					source: 'submit_report',
+					context: JSON.stringify( {
+						// eslint-disable-next-line camelcase
+						addl_info: Boolean(
+							store.inputDetails || store.inputSomethingElseDetails
+						),
+						// eslint-disable-next-line camelcase
+						reported_user: store.inputReportedUser
+					} )
+				} );
+
 				submitReport();
 			}
 		}
@@ -339,6 +337,12 @@ module.exports = exports = {
 				displaySomethingElseDetailsEmptyError,
 				missingBehaviorSelection
 			} = storeToRefs( store );
+
+			logEvent( 'click', {
+				context: store.inputBehavior,
+				source: 'describe_unacceptable_behavior',
+				subType: 'continue'
+			} );
 
 			if ( store.noBehaviorIsSelected() ) {
 				showValidationError.value = true;

@@ -57,8 +57,9 @@
 <script>
 
 const useFormStore = require( '../stores/Form.js' );
+const useInstrument = require( '../composables/useInstrument.js' );
 const { storeToRefs } = require( 'pinia' );
-const { computed, ref } = require( 'vue' );
+const { computed, onMounted, ref } = require( 'vue' );
 const { CdxField, CdxMessage, CdxRadio } = require( '@wikimedia/codex' );
 const CharacterLimitedTextArea = require( './CharacterLimitedTextArea.vue' );
 const Constants = require( '../Constants.js' );
@@ -75,8 +76,12 @@ module.exports = exports = {
 
 	setup() {
 		const store = useFormStore();
+		const logEvent = useInstrument();
+
 		const somethingElseDetailsCodepointLimit = Constants.detailsCodepointLimit;
 		const somethingElseDetailsCharacterCountLeft = ref( '' );
+
+		onMounted( () => logEvent( 'view', { source: 'describe_unacceptable_behavior' } ) );
 
 		const {
 			inputBehavior,
@@ -126,6 +131,11 @@ module.exports = exports = {
 		 */
 		function onRadioButtonOptionChanged() {
 			showValidationError.value = false;
+
+			logEvent( 'click', {
+				context: inputBehavior.value,
+				source: 'describe_unacceptable_behavior'
+			} );
 		}
 
 		return {

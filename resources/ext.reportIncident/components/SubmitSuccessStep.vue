@@ -1,5 +1,5 @@
 <template>
-	<form id="reportincident-form">
+	<form id="reportincident-form" ref="form">
 		<cdx-message :type="messageType">
 			<!-- eslint-disable vue/no-v-html -->
 			<p v-html="banner.parse()"></p>
@@ -26,10 +26,11 @@
 </template>
 
 <script>
-const { computed, defineComponent } = require( 'vue' );
+const { computed, defineComponent, onMounted, ref } = require( 'vue' );
 const { CdxMessage } = require( '@wikimedia/codex' );
 const Constants = require( '../Constants.js' );
 const useFormStore = require( '../stores/Form.js' );
+const useInstrument = require( '../composables/useInstrument.js' );
 
 module.exports = exports = defineComponent( {
 	name: 'SubmitSuccessStep',
@@ -42,10 +43,29 @@ module.exports = exports = defineComponent( {
 	setup( props ) {
 		const { links } = props;
 		const store = useFormStore();
+		const logEvent = useInstrument();
 
 		const isEmergency = computed(
 			() => store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm
 		);
+
+		const form = ref( null );
+
+		onMounted( () => {
+			if ( isEmergency.value ) {
+				logEvent( 'view', { source: 'submitted' } );
+				return;
+			}
+
+			logEvent( 'view', { source: 'get_support' } );
+
+			$( form.value ).find( 'a' ).on( 'click', function () {
+				logEvent( 'click', {
+					context: $( this ).attr( 'href' ),
+					source: 'get_support'
+				} );
+			} );
+		} );
 
 		const banner = computed(
 			() => isEmergency.value ? mw.message( 'reportincident-submit-emergency-success' ) :
@@ -109,6 +129,7 @@ module.exports = exports = defineComponent( {
 		} );
 
 		return {
+			form,
 			banner,
 			sections,
 			messageType

@@ -419,20 +419,26 @@ describe( 'Report Incident Dialog', () => {
 						'/reportincident/v0/report',
 						expectedRestPayload
 					);
-					expect( logEvent ).toHaveBeenCalledTimes( 2 );
-					expect( logEvent ).toHaveBeenNthCalledWith( 1, 'click', {
-						subType: 'continue',
-						source: 'submit_report',
-						context: JSON.stringify( {
-							// eslint-disable-next-line camelcase
-							addl_info: !!( store.inputSomethingElseDetails || store.inputDetails ),
-							// eslint-disable-next-line camelcase
-							reported_user: store.inputReportedUser
-						} )
-					} );
-					expect( logEvent ).toHaveBeenNthCalledWith( 2, 'view', {
-						source: 'submitted'
-					} );
+					expect( logEvent ).toHaveBeenCalledTimes( 1 );
+
+					if ( store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm ) {
+						expect( logEvent ).toHaveBeenCalledWith( 'click', {
+							subType: 'continue',
+							source: 'submit_report',
+							context: JSON.stringify( {
+								// eslint-disable-next-line camelcase
+								addl_info: !!( store.inputSomethingElseDetails || store.inputDetails ),
+								// eslint-disable-next-line camelcase
+								reported_user: store.inputReportedUser
+							} )
+						} );
+					} else {
+						expect( logEvent ).toHaveBeenCalledWith( 'click', {
+							context: store.inputBehavior,
+							source: 'describe_unacceptable_behavior',
+							subType: 'continue'
+						} );
+					}
 				} );
 			}
 		} );
@@ -572,14 +578,9 @@ describe( 'Report Incident Dialog', () => {
 
 			expect( logEvent ).toHaveBeenCalledTimes( 1 );
 			expect( logEvent ).toHaveBeenCalledWith( 'click', {
-				subType: 'continue',
-				source: 'submit_report',
-				context: JSON.stringify( {
-					// eslint-disable-next-line camelcase
-					addl_info: false,
-					// eslint-disable-next-line camelcase
-					reported_user: store.inputReportedUser
-				} )
+				context: Constants.harassmentTypes.INTIMIDATION_AGGRESSION,
+				source: 'describe_unacceptable_behavior',
+				subType: 'continue'
 			} );
 		} );
 	} );
