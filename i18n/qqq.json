@@ -36,7 +36,7 @@
 	"reportincident-dialog-internet-disconnected-error": "Error message shown to the user when they attempt to submit the form but their internet is disconnected.",
 	"reportincident-dialog-server-error": "Error message shown to the user when they attempt to submit the form but the server has an error (status code of 5XX).",
 	"reportincident-dialog-generic-error": "Error message shown to the user when they attempt to submit the form but the submission fails and no other specific message is defined.",
-	"reportincident-unable-to-send": "Error message sent back via the REST API if emailing an incident report fails.",
+	"reportincident-unable-to-send": "Error message sent back via the REST API if creating an incident report fails.",
 	"reportincident-email-subject": "Email subject line for reports sent to moderators. Parameters:\n* $1 - the username of the user who filed the report.",
 	"reportincident-email-body": "Email body for reports sent to moderators. Parameters:\n* $1 - The username of the user who filed the report.\n* $2 - the username of the user being reported.\n* $3 - One of the following messages:\n** {{msg-mw|reportincident-email-link-to-comment-prefix}}\n** {{msg-mw|reportincident-email-link-to-topic-prefix}}\n** {{msg-mw|reportincident-email-link-to-page-prefix}}\n* $4 - The link to the revision of the page at the time the report was filed, optionally linking to a specific comment or section heading.\n* $5 - a comma-separated list of behaviors defined in the form.\n* $6 - additional text supplied by the reporter\n* $7 - a link to Special:EmailUser for the user with username in $1",
 	"reportincident-email-link-to-page-prefix": "Text used to prefix a link to the page that associated with the report in {{msg-mw|Reportincident-email-body}}.",
@@ -89,5 +89,6 @@
 	"reportincident-submit-behavior-section-other-options-title": "Section header for informational text shown in the incident report dialog after successfully submitting a report.",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Paragraph with informational text shown in the incident report dialog after successfully submitting a report. Parameters:\n* $1 - title of a local wiki page used for general questions.",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Paragraph with informational text shown in the incident report dialog after successfully submitting a report.",
-	"reportincident-submit-back-to-page": "Label used for the primary button on the incident report dialog. Parameters:\n* $1 - the title of the current page."
+	"reportincident-submit-back-to-page": "Label used for the primary button on the incident report dialog. Parameters:\n* $1 - the title of the current page.",
+	"reportincident-zendesk-request-body": "{{notranslate}}"
 }

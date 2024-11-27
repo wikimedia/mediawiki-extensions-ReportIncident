@@ -1,9 +1,12 @@
 <?php
 
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Extension\ReportIncident\Services\IReportIncidentNotifier;
+use MediaWiki\Extension\ReportIncident\Services\NullReportIncidentNotifier;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentMailer;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
+use MediaWiki\Extension\ReportIncident\Services\ZendeskClient;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
@@ -16,8 +19,20 @@ return [
 	'ReportIncidentManager' => static function (
 		MediaWikiServices $services
 	): ReportIncidentManager {
-		return new ReportIncidentManager(
-			$services->getService( 'ReportIncidentMailer' )
+		return new ReportIncidentManager( $services->getService( 'ReportIncidentNotifier' ) );
+	},
+	'ReportIncidentNotifier' => static function ( MediaWikiServices $services ): IReportIncidentNotifier {
+		if ( !$services->getMainConfig()->get( 'ReportIncidentZendeskUrl' ) ) {
+			return new NullReportIncidentNotifier();
+		}
+
+		return new ZendeskClient(
+			$services->getHttpRequestFactory(),
+			$services->getMessageFormatterFactory()->getTextFormatter( 'en' ),
+			$services->getUrlUtils(),
+			$services->getUserFactory(),
+			LoggerFactory::getInstance( 'ReportIncident' ),
+			new ServiceOptions( ZendeskClient::CONSTRUCTOR_OPTIONS, $services->getMainConfig() )
 		);
 	},
 	'ReportIncidentMailer' => static function (

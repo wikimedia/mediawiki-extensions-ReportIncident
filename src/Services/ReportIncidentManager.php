@@ -3,22 +3,17 @@
 namespace MediaWiki\Extension\ReportIncident\Services;
 
 use MediaWiki\Extension\ReportIncident\IncidentReport;
-use MediaWiki\Extension\ReportIncident\IncidentReportEmailStatus;
 use StatusValue;
 
 /**
  * Manage IncidentReport objects and do things:
- * - Email recipients with the report contents
- * - ...
+ * - Create notifications for emergency reports
  */
 class ReportIncidentManager {
-	private ReportIncidentMailer $incidentMailer;
+	private IReportIncidentNotifier $notifier;
 
-	/**
-	 * @param ReportIncidentMailer $incidentMailer
-	 */
-	public function __construct( ReportIncidentMailer $incidentMailer ) {
-		$this->incidentMailer = $incidentMailer;
+	public function __construct( IReportIncidentNotifier $notifier ) {
+		$this->notifier = $notifier;
 	}
 
 	/**
@@ -31,12 +26,8 @@ class ReportIncidentManager {
 		return StatusValue::newGood();
 	}
 
-	/**
-	 * @param IncidentReport $incidentReport
-	 * @return IncidentReportEmailStatus
-	 */
 	public function notify( IncidentReport $incidentReport ): StatusValue {
-		return $this->incidentMailer->sendEmail( $incidentReport );
+		return $this->notifier->notify( $incidentReport );
 	}
 
 }

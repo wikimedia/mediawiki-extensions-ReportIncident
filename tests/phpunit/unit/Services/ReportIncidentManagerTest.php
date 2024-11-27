@@ -3,11 +3,12 @@
 namespace MediaWiki\Extension\ReportIncident\Tests\Unit\Services;
 
 use MediaWiki\Extension\ReportIncident\IncidentReport;
-use MediaWiki\Extension\ReportIncident\Services\ReportIncidentMailer;
+use MediaWiki\Extension\ReportIncident\Services\IReportIncidentNotifier;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\User\UserIdentityValue;
 use MediaWikiUnitTestCase;
+use StatusValue;
 
 /**
  * @group ReportIncident
@@ -28,7 +29,7 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 			'Details'
 		);
 		$reportIncidentManager = new ReportIncidentManager(
-			$this->createMock( ReportIncidentMailer::class ),
+			$this->createMock( IReportIncidentNotifier::class ),
 		);
 		$this->assertStatusGood( $reportIncidentManager->record( $incidentReport ) );
 	}
@@ -44,10 +45,14 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 			null,
 			'Details'
 		);
-		$reportIncidentMailer = $this->createMock( ReportIncidentMailer::class );
-		$reportIncidentMailer->method( 'sendEmail' )->willReturn( \StatusValue::newGood() );
+		$notifier = $this->createMock( IReportIncidentNotifier::class );
+		$notifier->expects( $this->once() )
+			->method( 'notify' )
+			->with( $incidentReport )
+			->willReturn( StatusValue::newGood() );
+
 		$reportIncidentManager = new ReportIncidentManager(
-			$reportIncidentMailer
+			$notifier
 		);
 		$this->assertStatusGood( $reportIncidentManager->notify( $incidentReport ) );
 	}

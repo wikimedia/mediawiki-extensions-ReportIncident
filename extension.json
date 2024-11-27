@@ -69,6 +69,18 @@
 		"ReportIncidentEnableInstrumentation": {
 			"value": false,
 			"description": "Controls whether instrumentation via EventLogging is enabled."
+		},
+		"ReportIncidentZendeskUrl": {
+			"value": "",
+			"description": "Full URL (without a trailing slash) of the Zendesk instance to send emergency reports to."
+		},
+		"ReportIncidentZendeskHTTPProxy": {
+			"value": "",
+			"description": "The HTTP proxy to use for connecting to the Zendesk instance defined in ReportIncidentZendeskUrl"
+		},
+		"ReportIncidentZendeskSubjectLine": {
+			"value": "Incident Reporting System emergency report",
+			"description": "Custom subject line to use in Zendesk requests created for emergency reports."
 		}
 	},
 	"AvailableRights": [
