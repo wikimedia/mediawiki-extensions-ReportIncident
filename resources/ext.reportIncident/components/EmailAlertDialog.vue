@@ -54,12 +54,3 @@ module.exports = exports = {
 };
 
 </script>
-
-<style lang="less">
-@import ( reference ) 'mediawiki.skin.variables.less';
-
-.ext-reportincident-emaildialog {
-	font-size: @font-size-large;
-	line-height: @line-height-medium;
-}
-</style>
