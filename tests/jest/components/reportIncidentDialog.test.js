@@ -339,7 +339,6 @@ describe( 'Report Incident Dialog', () => {
 		describe( 'attempts to submit form when next is clicked on STEP 2', () => {
 			const validSubmitTestCases = {
 				'valid form data': [
-					false,
 					{
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
@@ -353,7 +352,6 @@ describe( 'Report Incident Dialog', () => {
 					}
 				],
 				'valid form data in emergency flow': [
-					false,
 					{
 						incidentType: Constants.typeOfIncident.immediateThreatPhysicalHarm,
 						physicalHarmType: Constants.physicalHarmTypes.physicalHarm,
@@ -369,7 +367,6 @@ describe( 'Report Incident Dialog', () => {
 					}
 				],
 				'valid form data with "something else"': [
-					false,
 					{
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						inputBehavior: Constants.harassmentTypes.OTHER,
@@ -383,25 +380,11 @@ describe( 'Report Incident Dialog', () => {
 						reportedUser: 'test user',
 						revisionId: 1
 					}
-				],
-				'valid form data in developerMode': [
-					true,
-					{
-						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-						inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
-						inputReportedUser: 'test user'
-					},
-					{
-						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-						behaviorType: Constants.harassmentTypes.HATE_SPEECH,
-						reportedUser: 'test user',
-						revisionId: 1
-					}
 				]
 			};
 
 			for ( const testName of Object.keys( validSubmitTestCases ) ) {
-				const [ developerMode, initialState, expectedRestPayload ] = validSubmitTestCases[ testName ];
+				const [ initialState, expectedRestPayload ] = validSubmitTestCases[ testName ];
 
 				it( testName, async () => {
 					const wrapper = renderComponent(
@@ -412,31 +395,14 @@ describe( 'Report Incident Dialog', () => {
 					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
 					const store = useFormStore();
-					const consoleSpy = jest.spyOn( console, 'log' ).mockImplementation( () => {} );
 
-					const response = developerMode ? { sentEmail: {
-						to: [ { address: 'test@test.com' }, { address: 'testing@example.com' } ],
-						from: { address: 'b@example.com' },
-						subject: 'Testing subject',
-						body: 'Testing email body.\nTesting.'
-					} } : undefined;
-					const restPost = mockRestPost( Promise.resolve( response ) );
+					const restPost = mockRestPost( Promise.resolve() );
 
 					expect( store.isFormValidForSubmission() ).toBe( true );
 
 					await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
 
 					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
-
-					if ( developerMode ) {
-						expect( consoleSpy ).toHaveBeenNthCalledWith( 1, 'An email has been sent for this report' );
-						expect( consoleSpy ).toHaveBeenNthCalledWith( 2, 'Sent from:\nb@example.com' );
-						expect( consoleSpy ).toHaveBeenNthCalledWith( 3, 'Sent to:\ntest@test.com, testing@example.com' );
-						expect( consoleSpy ).toHaveBeenNthCalledWith( 4, 'Subject of the email:\nTesting subject' );
-						expect( consoleSpy ).toHaveBeenNthCalledWith( 5, 'Body of the email:\nTesting email body.\nTesting.' );
-					} else {
-						expect( consoleSpy ).not.toHaveBeenCalled();
-					}
 
 					expect( restPost ).toHaveBeenCalledWith(
 						'/reportincident/v0/report',
@@ -483,75 +449,12 @@ describe( 'Report Incident Dialog', () => {
 			expect( store.inputReportedUser ).toBe( '' );
 		} );
 
-		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data but API rejects in developer mode', () => {
-			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
-
-			const store = useFormStore();
-			const consoleSpy = jest.spyOn( console, 'log' ).mockImplementation( () => {} );
-			const userTokensSpy = jest.spyOn( mw.user.tokens, 'get' ).mockImplementation( ( tokenType ) => {
-				switch ( tokenType ) {
-					case 'csrfToken':
-						return 'csrf-token';
-					default:
-						throw new Error( 'Unknown token type: ' + tokenType );
-				}
-			} );
-			const restPost = mockRestPost( () => {
-				// Form should be in submission when the REST API is called.
-				expect( wrapper.vm.formSubmissionInProgress ).toBe( true );
-				return {
-					then: ( _resolveHandler, rejectHandler ) => {
-						rejectHandler(
-							'http',
-							{ xhr: { responseJSON: { sentEmail: {
-								to: [ { address: 'test@test.com' }, { address: 'testing@example.com' } ],
-								from: { address: 'b@example.com' },
-								subject: 'Testing subject',
-								body: 'Testing email body.\nTesting.'
-							} } } }
-						);
-					}
-				};
-			} );
-
-			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
-			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION;
-			store.inputLink = 'test';
-			store.inputReportedUser = 'test user';
-			expect( store.isFormValidForSubmission() ).toBe( true );
-
-			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
-				// Should be dialog step two as the REST API call returned a rejected promise
-				// which indicates a failure.
-				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
-				// Should have outputted the form data to the console.
-				expect( consoleSpy ).toHaveBeenNthCalledWith( 1, 'An email has been sent for this report' );
-				expect( consoleSpy ).toHaveBeenNthCalledWith( 2, 'Sent from:\nb@example.com' );
-				expect( consoleSpy ).toHaveBeenNthCalledWith( 3, 'Sent to:\ntest@test.com, testing@example.com' );
-				expect( consoleSpy ).toHaveBeenNthCalledWith( 4, 'Subject of the email:\nTesting subject' );
-				expect( consoleSpy ).toHaveBeenNthCalledWith( 5, 'Body of the email:\nTesting email body.\nTesting.' );
-				// Should have asked for a CSRF token.
-				expect( userTokensSpy ).toHaveBeenCalledWith( 'csrfToken' );
-				expect( restPost ).toHaveBeenCalledWith(
-					'/reportincident/v0/report',
-					{
-						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-						behaviorType: Constants.harassmentTypes.INTIMIDATION,
-						reportedUser: 'test user',
-						revisionId: 1,
-						token: 'csrf-token'
-					}
-				);
-			} );
-		} );
-
 		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data but API rejects', async () => {
 			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
 			const store = useFormStore();
-			const consoleSpy = jest.spyOn( console, 'log' ).mockImplementation( () => {} );
+
 			const userTokensSpy = jest.spyOn( mw.user.tokens, 'get' ).mockImplementation( ( tokenType ) => {
 				switch ( tokenType ) {
 					case 'csrfToken':
@@ -584,8 +487,7 @@ describe( 'Report Incident Dialog', () => {
 
 			// Should be dialog step one if the form submitted correctly.
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
-			// Should have outputted the form data to the console.
-			expect( consoleSpy ).not.toHaveBeenCalled();
+
 			expect( restPost ).toHaveBeenCalledWith(
 				'/reportincident/v0/report',
 				{

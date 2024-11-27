@@ -304,10 +304,9 @@ class ReportHandler extends SimpleHandler {
 			return $this->getResponseFactory()->createNoContent();
 		}
 
-		// TODO: If/when we store the reports in a DB table, we can move sending the email
-		// into a deferred update, so the user doesn't need to wait. For now, this is our
-		// only signal that a report was processed, so check the status of the sendEmail
-		// method
+		// TODO: Once we store the reports in a DB table (T345246), we can notify T&S about the report
+		// in a deferred update, so the user doesn't need to wait. For now, this is our
+		// only signal that a report was processed, so we need to verify it succeeded.
 		$status = $this->reportIncidentManager->notify( $incidentReport );
 		if ( !$status->isGood() ) {
 			throw new LocalizedHttpException(

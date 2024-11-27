@@ -8,7 +8,6 @@ use MediaWiki\Config\Config;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
-use MediaWiki\Extension\ReportIncident\IncidentReportEmailStatus;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Language\Language;
 use MediaWiki\Permissions\RateLimiter;
@@ -545,7 +544,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$revisionStore->method( 'getRevisionById' )->willReturn( $this->createMock( RevisionRecord::class ) );
 		$reportManager = $this->createMock( ReportIncidentManager::class );
 		$reportManager->method( 'record' )->willReturn( StatusValue::newGood() );
-		$reportManager->method( 'notify' )->willReturn( IncidentReportEmailStatus::newGood() );
+		$reportManager->method( 'notify' )->willReturn( StatusValue::newGood() );
 		$userFactory = $this->createMock( UserFactory::class );
 		$userIdentityLookup = $this->createMock( UserIdentityLookup::class );
 		$registeredUserMock = $this->createMock( User::class );
@@ -589,7 +588,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 	public function testRestPayload(
 		array $data,
 		StatusValue $recordStatus,
-		IncidentReportEmailStatus $notifyStatus,
+		StatusValue $notifyStatus,
 		bool $expectRecordException,
 		bool $expectNotifyException
 	) {
@@ -682,7 +681,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'details' => 'foo',
 				],
 				StatusValue::newGood(),
-				IncidentReportEmailStatus::newGood(),
+				StatusValue::newGood(),
 				false,
 				false,
 			],
@@ -694,7 +693,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'physicalHarmType' => 'threats-physical-harm',
 				],
 				StatusValue::newGood(),
-				IncidentReportEmailStatus::newGood(),
+				StatusValue::newGood(),
 				false,
 				false,
 			],
@@ -706,7 +705,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'physicalHarmType' => 'threats-physical-harm',
 				],
 				StatusValue::newFatal( 'rest-bad-json-body' ),
-				IncidentReportEmailStatus::newGood(),
+				StatusValue::newGood(),
 				true,
 				false,
 			],
@@ -718,7 +717,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'physicalHarmType' => 'threats-physical-harm',
 				],
 				StatusValue::newFatal( 'rest-bad-json-body' ),
-				IncidentReportEmailStatus::newGood(),
+				StatusValue::newGood(),
 				true,
 				false,
 			],
@@ -730,7 +729,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 					'physicalHarmType' => 'threats-physical-harm',
 				],
 				StatusValue::newGood(),
-				IncidentReportEmailStatus::newFatal( 'reportincident-unable-to-send' ),
+				StatusValue::newFatal( 'reportincident-unable-to-send' ),
 				false,
 				true,
 			]
@@ -745,7 +744,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$incidentReport = $this->createMock( IncidentReport::class );
 		// Mock that the ::notify and ::record methods both return good statuses.
 		$reportManager->method( 'notify' )->with( $incidentReport )
-			->willReturn( IncidentReportEmailStatus::newGood() );
+			->willReturn( StatusValue::newGood() );
 		$reportManager->method( 'record' )->with( $incidentReport )
 			->willReturn( StatusValue::newGood() );
 		/** @var ReportHandler $handler */

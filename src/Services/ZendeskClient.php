@@ -62,7 +62,7 @@ class ZendeskClient implements IReportIncidentNotifier {
 
 		$body = $this->textFormatter->format(
 			new MessageValue(
-				'reportincident-zendesk-request-body',
+				'reportincident-notification-message-body',
 				[
 					$reportingUserName,
 					$incidentReport->getReportedUser()->getName(),
@@ -166,12 +166,12 @@ class ZendeskClient implements IReportIncidentNotifier {
 			// If the threadId starts with 'h-', then the threadId refers to a topic/section header
 			// and as such the link prefix text should indicate this instead of saying it is a comment.
 			if ( substr( $threadId, 0, 2 ) === 'h-' ) {
-				$linkPrefixText = new MessageValue( 'reportincident-email-link-to-topic-prefix' );
+				$linkPrefixText = new MessageValue( 'reportincident-notification-link-to-topic-prefix' );
 			} else {
-				$linkPrefixText = new MessageValue( 'reportincident-email-link-to-comment-prefix' );
+				$linkPrefixText = new MessageValue( 'reportincident-notification-link-to-comment-prefix' );
 			}
 		} else {
-			$linkPrefixText = new MessageValue( 'reportincident-email-link-to-page-prefix' );
+			$linkPrefixText = new MessageValue( 'reportincident-notification-link-to-page-prefix' );
 		}
 		return [ $linkPrefixText, $linkToPageAtRevision ];
 	}

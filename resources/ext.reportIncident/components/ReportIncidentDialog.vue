@@ -166,35 +166,10 @@ module.exports = exports = {
 		} );
 
 		/**
-		 * Prints the email that was sent or failed to send
-		 * at the stage of calling IEmailer::send. This is
-		 * only returned by the server when in developer
-		 * mode, so this should not cause spam in production.
-		 *
-		 * @param {Object} response
-		 */
-		function printEmailToConsole( response ) {
-			if ( response && response.sentEmail ) {
-				// Display the email sent to the administrators if in
-				// developer mode.
-				/* eslint-disable no-console */
-				console.log( 'An email has been sent for this report' );
-				console.log( 'Sent from:\n' + response.sentEmail.from.address );
-				console.log( 'Sent to:\n' + response.sentEmail.to.map( ( item ) => item.address ).join( ', ' ) );
-				console.log( 'Subject of the email:\n' + response.sentEmail.subject );
-				console.log( 'Body of the email:\n' + response.sentEmail.body );
-				/* eslint-enable no-console */
-			}
-		}
-
-		/**
 		 * Function called when the POST request to the
 		 * ReportIncident reporting REST API succeeds.
-		 *
-		 * @param {Object} response
 		 */
-		function onReportSubmitSuccess( response ) {
-			printEmailToConsole( response );
+		function onReportSubmitSuccess() {
 			currentStep.value = Constants.DIALOG_STEP_SUBMIT_SUCCESS;
 			formSubmissionInProgress.value = false;
 			footerErrorMessage.value = '';
@@ -212,7 +187,6 @@ module.exports = exports = {
 			let errorText = null;
 			const errJson = errObject.xhr.responseJSON;
 			if ( errJson ) {
-				printEmailToConsole( errJson );
 				if ( errJson.errorKey ) {
 					errorKey = errJson.errorKey;
 					errorText = errJson.messageTranslations ?

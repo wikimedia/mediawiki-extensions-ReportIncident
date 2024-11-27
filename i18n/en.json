@@ -36,12 +36,10 @@
 	"reportincident-dialog-server-error": "Sorry, looks like our server is not responding. Please try re-submitting.",
 	"reportincident-dialog-generic-error": "{{GENDER:|Your}} request could not be submitted due to an error. Please try re-submitting.",
 	"reportincident-unable-to-send": "Unable to create incident report. If the issue persists, please email [mailto:emergency@wikimedia.org emergency@wikimedia.org] with {{GENDER:|your}} incident report.",
-	"reportincident-email-subject": "{{SITENAME}}: New incident report from \"$1\"",
-	"reportincident-email-body": "Reporting user: $1\nReported user: $2\n$3: $4\n\nBehaviors: $5\nDetails: $6\n\nEmail $1: $7",
-	"reportincident-email-link-to-page-prefix": "Link to page",
-	"reportincident-email-link-to-comment-prefix": "Link to reported comment",
-	"reportincident-email-link-to-topic-prefix": "Link to reported topic",
-	"reportincident-email-something-else": "Something else: \"$1\"",
+	"reportincident-notification-link-to-page-prefix": "Link to page",
+	"reportincident-notification-link-to-comment-prefix": "Link to reported comment",
+	"reportincident-notification-link-to-topic-prefix": "Link to reported topic",
+	"reportincident-notification-message-body": "Reporting user: $1\nReported user: $2\n$3: $4\n\nThreat type: $5\nDetails: $6",
 	"right-reportincident": "Report an incident",
 	"action-reportincident": "report an incident",
 	"reportincident-emaildialog-title": "Verified email address required",
@@ -88,6 +86,5 @@
 	"reportincident-submit-behavior-section-other-options-title": "Can't find what {{GENDER:|you're}} looking for?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "If {{GENDER:|your}} issue isn't covered, [[$1|please ask the community]] for help.",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "If the steps above did not help {{GENDER:|you}}, {{GENDER:|you}} can contact the [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|non-profit organization]] that hosts this website.",
-	"reportincident-submit-back-to-page": "Back to $1",
-	"reportincident-zendesk-request-body": "Reporting user: $1\nReported user: $2\n$3: $4\n\nThreat type: $5\nDetails: $6"
+	"reportincident-submit-back-to-page": "Back to $1"
 }

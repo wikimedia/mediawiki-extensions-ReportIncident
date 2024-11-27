@@ -63,16 +63,24 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 		);
 	}
 
-	public function testShouldCreateRequest(): void {
+	/**
+	 * @dataProvider provideReportData
+	 */
+	public function testShouldCreateRequest( ?string $threadId, string $expectedPageLink ): void {
+		$mockRevisionRecord = $this->createMock( RevisionRecord::class );
+		$mockRevisionRecord->method( 'getId' )
+			->willReturn( 1 );
+
 		$incidentReport = new IncidentReport(
 			new UserIdentityValue( 1, 'Reporter' ),
 			new UserIdentityValue( 2, 'Reported' ),
-			$this->createMock( RevisionRecord::class ),
+			$mockRevisionRecord,
 			IncidentReport::THREAT_TYPE_IMMEDIATE,
 			null,
 			'threats-physical-harm',
 			null,
-			'Details'
+			'Details',
+			$threadId
 		);
 
 		$fullReportingUser = $this->createMock( User::class );
@@ -96,11 +104,10 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 
 				'subject' => 'Test subject line',
 				'comment' => [
-					'body' => '<message key="reportincident-zendesk-request-body"><text>Reporter</text>' .
-						'<text>Reported</text><text><message key="reportincident-email-link-to-page-prefix">' .
-						'</message></text><text>page-link</text><text>' .
-						'<message key="reportincident-threats-physical-harm"></message></text><text>Details</text>' .
-						'</message>',
+					'body' => '<message key="reportincident-notification-message-body"><text>Reporter</text>' .
+						'<text>Reported</text>' . $expectedPageLink .
+						'<text><message key="reportincident-threats-physical-harm"></message></text>' .
+						'<text>Details</text></message>',
 				],
 			],
 		] );
@@ -122,6 +129,26 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 		$status = $this->zendeskClient->notify( $incidentReport );
 
 		$this->assertStatusGood( $status );
+	}
+
+	public static function provideReportData(): iterable {
+		yield 'no thread ID' => [
+			null,
+			'<text><message key="reportincident-notification-link-to-page-prefix"></message></text>' .
+			'<text>page-link?oldid=1</text>'
+		];
+
+		yield 'thread ID for comment' => [
+			'c-testuser-20230504030201',
+			'<text><message key="reportincident-notification-link-to-comment-prefix"></message></text>' .
+			'<text>page-link?oldid=1#c-testuser-20230504030201</text>'
+		];
+
+		yield 'thread ID for topic' => [
+			'h-testuser-20230504030201',
+			'<text><message key="reportincident-notification-link-to-topic-prefix"></message></text>' .
+			'<text>page-link?oldid=1#h-testuser-20230504030201</text>'
+		];
 	}
 
 	public function testShouldLogUnknownZendeskError(): void {
