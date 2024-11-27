@@ -14,6 +14,7 @@ const ReportIncidentDialog = require( '../../../resources/ext.reportIncident/com
 	useInstrument = require( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
 
 const { storeToRefs } = require( 'pinia' );
+const { nextTick } = require( 'vue' );
 
 const steps = {
 	[ Constants.DIALOG_STEP_1 ]: '<p>Step 1</p>',
@@ -271,7 +272,8 @@ describe( 'Report Incident Dialog', () => {
 
 			const store = useFormStore();
 
-			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
+			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
+			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION;
 			store.inputReportedUser = 'test user';
 
 			await wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' );
@@ -284,7 +286,7 @@ describe( 'Report Incident Dialog', () => {
 
 			// Clicking back should clear the form store data
 			// as the dialog was closed.
-			expect( store.inputBehaviors ).toHaveLength( 0 );
+			expect( store.inputBehavior ).toBe( '' );
 			expect( store.inputReportedUser ).toBe( '' );
 
 			expect( logEvent ).toHaveBeenCalledTimes( 1 );
@@ -294,12 +296,14 @@ describe( 'Report Incident Dialog', () => {
 			} );
 		} );
 
-		it( 'attempts to submit form when next is clicked on STEP 2 and has invalid form data', () => {
+		it( 'attempts to submit form when next is clicked on STEP 2 and has invalid form data', async () => {
 			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
 			const store = useFormStore();
+			const restPost = mockRestPost( Promise.resolve() );
 
+			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
 			store.inputBehavior = Constants.harassmentTypes.OTHER;
 			expect( store.isFormValidForSubmission() ).toBe( false );
 
@@ -307,9 +311,28 @@ describe( 'Report Incident Dialog', () => {
 			// client side validation fails after a user presses submit.
 			wrapper.vm.footerErrorMessage = 'test';
 
-			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
-				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
-				expect( wrapper.vm.footerErrorMessage ).toBe( '' );
+			// After providing the missing details, the submission succeeds
+			store.inputSomethingElseDetails = 'test details';
+
+			// Wait until the next tick so that the callback set for nextTick in
+			// the code under-test has run.
+			return nextTick( () => {
+				expect( store.isFormValidForSubmission() ).toBe( true );
+
+				return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
+					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
+					expect( wrapper.vm.footerErrorMessage ).toBe( '' );
+					expect( restPost ).toHaveBeenCalledWith(
+						'/reportincident/v0/report',
+						{
+							incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+							behaviorType: Constants.harassmentTypes.OTHER,
+							reportedUser: '',
+							somethingElseDetails: 'test details',
+							revisionId: 1
+						}
+					);
+				} );
 			} );
 		} );
 
@@ -449,7 +472,8 @@ describe( 'Report Incident Dialog', () => {
 
 			const store = useFormStore();
 
-			store.inputBehaviors = [ Constants.harassmentTypes.INTIMIDATION_AGGRESSION ];
+			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
+			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION;
 			store.inputReportedUser = 'test user';
 
 			await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
@@ -492,7 +516,7 @@ describe( 'Report Incident Dialog', () => {
 			} );
 
 			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
-			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
+			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION;
 			store.inputLink = 'test';
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
@@ -513,7 +537,7 @@ describe( 'Report Incident Dialog', () => {
 					'/reportincident/v0/report',
 					{
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-						behaviorType: Constants.harassmentTypes.INTIMIDATION_AGGRESSION,
+						behaviorType: Constants.harassmentTypes.INTIMIDATION,
 						reportedUser: 'test user',
 						revisionId: 1,
 						token: 'csrf-token'
@@ -550,7 +574,7 @@ describe( 'Report Incident Dialog', () => {
 			} );
 
 			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
-			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
+			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION;
 			store.inputReportedUser = 'test user';
 			expect( store.isFormValidForSubmission() ).toBe( true );
 
@@ -566,7 +590,7 @@ describe( 'Report Incident Dialog', () => {
 				'/reportincident/v0/report',
 				{
 					incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-					behaviorType: Constants.harassmentTypes.INTIMIDATION_AGGRESSION,
+					behaviorType: Constants.harassmentTypes.INTIMIDATION,
 					reportedUser: 'test user',
 					revisionId: 1,
 					token: 'csrf-token'
@@ -578,7 +602,7 @@ describe( 'Report Incident Dialog', () => {
 
 			expect( logEvent ).toHaveBeenCalledTimes( 1 );
 			expect( logEvent ).toHaveBeenCalledWith( 'click', {
-				context: Constants.harassmentTypes.INTIMIDATION_AGGRESSION,
+				context: Constants.harassmentTypes.INTIMIDATION,
 				source: 'describe_unacceptable_behavior',
 				subType: 'continue'
 			} );

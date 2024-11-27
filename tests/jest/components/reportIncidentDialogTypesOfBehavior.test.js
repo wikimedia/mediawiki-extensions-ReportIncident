@@ -77,7 +77,7 @@ describe( 'Report Incident Dialog Types of Behavior', () => {
 		store.inputBehavior = '';
 		expect( wrapper.vm.collectSomethingElseDetails ).toBe( false );
 
-		store.inputBehavior = Constants.harassmentTypes.INTIMIDATION_AGGRESSION;
+		store.inputBehavior = Constants.harassmentTypes.INTIMIDATION;
 		expect( wrapper.vm.collectSomethingElseDetails ).toBe( false );
 	} );
 
@@ -86,12 +86,6 @@ describe( 'Report Incident Dialog Types of Behavior', () => {
 		const store = useFormStore();
 
 		store.inputBehavior = Constants.harassmentTypes.OTHER;
-		expect( wrapper.vm.collectSomethingElseDetails ).toBe( true );
-
-		store.inputBehaviors = [
-			Constants.harassmentTypes.OTHER,
-			Constants.harassmentTypes.HATE_SPEECH
-		];
 		expect( wrapper.vm.collectSomethingElseDetails ).toBe( true );
 	} );
 

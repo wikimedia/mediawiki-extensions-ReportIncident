@@ -84,6 +84,37 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		return formErrors;
 	} );
 
+	const harassmentOptions = [
+		{
+			label: mw.msg( 'reportincident-dialog-harassment-type-intimidation' ),
+			value: Constants.harassmentTypes.INTIMIDATION
+		},
+		{
+			label: mw.msg( 'reportincident-dialog-harassment-type-sexual-harassment' ),
+			value: Constants.harassmentTypes.SEXUAL_HARASSMENT
+		},
+		{
+			label: mw.msg( 'reportincident-dialog-harassment-type-hate-speech-or-discrimination' ),
+			value: Constants.harassmentTypes.HATE_SPEECH
+		},
+		{
+			label: mw.msg( 'reportincident-dialog-harassment-type-doxing' ),
+			value: Constants.harassmentTypes.DOXING
+		},
+		{
+			label: mw.msg( 'reportincident-dialog-harassment-type-spam' ),
+			value: Constants.harassmentTypes.SPAM
+		},
+		{
+			label: mw.msg( 'reportincident-dialog-harassment-type-trolling' ),
+			value: Constants.harassmentTypes.TROLLING
+		},
+		{
+			label: mw.msg( 'reportincident-dialog-harassment-type-something-else' ),
+			value: Constants.harassmentTypes.OTHER
+		}
+	];
+
 	const contextsByHarmType = {
 		[ Constants.physicalHarmTypes.physicalHarm ]: 'physical',
 		[ Constants.physicalHarmTypes.selfHarm ]: 'self',
@@ -303,6 +334,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	}
 
 	return {
+		harassmentOptions,
 		overflowMenuData,
 		incidentType,
 		physicalHarmType,

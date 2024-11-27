@@ -68,8 +68,8 @@ describe( 'ReportIncident dialog', () => {
 		assert( await ReportIncidentPage.harassmentOptionsFormFieldset.isExisting() );
 		assert( await ReportIncidentPage.hateSpeechOrDiscriminationOption.isExisting() );
 		assert( await ReportIncidentPage.sexualHarassmentOption.isExisting() );
-		assert( await ReportIncidentPage.threatsOrViolenceOption.isExisting() );
-		assert( await ReportIncidentPage.intimidationAggressionOption.isExisting() );
+		assert( await ReportIncidentPage.trollingOption.isExisting() );
+		assert( await ReportIncidentPage.intimidationOption.isExisting() );
 		assert( await ReportIncidentPage.somethingElseOption.isExisting() );
 
 		// A textarea for additional details should not be shown, since the
@@ -78,7 +78,7 @@ describe( 'ReportIncident dialog', () => {
 
 		// Selecting an option other than "Something else" should not show the
 		// "Something else" textbox
-		await ReportIncidentPage.intimidationAggressionOption.click();
+		await ReportIncidentPage.intimidationOption.click();
 		assert( !await ReportIncidentPage.somethingElseTextbox.isExisting() );
 	} );
 	it( 'Should ask for additional details only when selecting "Something else"', async () => {
@@ -101,8 +101,8 @@ describe( 'ReportIncident dialog', () => {
 		assert( await ReportIncidentPage.harassmentOptionsFormFieldset.isExisting() );
 		assert( await ReportIncidentPage.hateSpeechOrDiscriminationOption.isExisting() );
 		assert( await ReportIncidentPage.sexualHarassmentOption.isExisting() );
-		assert( await ReportIncidentPage.threatsOrViolenceOption.isExisting() );
-		assert( await ReportIncidentPage.intimidationAggressionOption.isExisting() );
+		assert( await ReportIncidentPage.trollingOption.isExisting() );
+		assert( await ReportIncidentPage.intimidationOption.isExisting() );
 		assert( await ReportIncidentPage.somethingElseOption.isExisting() );
 
 		// A textarea for additional details should not be shown, since the

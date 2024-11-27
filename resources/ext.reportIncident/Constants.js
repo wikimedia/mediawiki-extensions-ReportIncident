@@ -15,10 +15,12 @@ const Constants = {
 		publicHarm: 'threats-public-harm'
 	},
 	harassmentTypes: {
+		DOXING: 'doxing',
 		HATE_SPEECH: 'hate-speech-or-discrimination',
+		INTIMIDATION: 'intimidation',
 		SEXUAL_HARASSMENT: 'sexual-harassment',
-		THREATS_OR_VIOLENCE: 'threats-or-violence',
-		INTIMIDATION_AGGRESSION: 'intimidation-aggression',
+		SPAM: 'spam',
+		TROLLING: 'trolling',
 		OTHER: 'something-else'
 	},
 	/**

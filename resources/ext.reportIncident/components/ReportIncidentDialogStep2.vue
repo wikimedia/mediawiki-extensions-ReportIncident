@@ -113,6 +113,8 @@ module.exports = exports = {
 			inputDetails
 		} = storeToRefs( store );
 
+		const harassmentOptions = store.harassmentOptions;
+
 		const inputReportedUserSelection = ref( '' );
 		const windowHeight = ref( window.innerHeight );
 		const suggestedUsernames = ref( [] );
@@ -191,29 +193,6 @@ module.exports = exports = {
 		onUnmounted( () => {
 			window.removeEventListener( 'resize', onWindowResize );
 		} );
-
-		const harassmentOptions = [
-			{
-				label: mw.msg( 'reportincident-dialog-harassment-type-hate-speech-or-discrimination' ),
-				value: Constants.harassmentTypes.HATE_SPEECH
-			},
-			{
-				label: mw.msg( 'reportincident-dialog-harassment-type-sexual-harassment' ),
-				value: Constants.harassmentTypes.SEXUAL_HARASSMENT
-			},
-			{
-				label: mw.msg( 'reportincident-dialog-harassment-type-threats-of-violence' ),
-				value: Constants.harassmentTypes.THREATS_OR_VIOLENCE
-			},
-			{
-				label: mw.msg( 'reportincident-dialog-harassment-type-intimidation' ),
-				value: Constants.harassmentTypes.INTIMIDATION_AGGRESSION
-			},
-			{
-				label: mw.msg( 'reportincident-dialog-harassment-type-something-else' ),
-				value: Constants.harassmentTypes.OTHER
-			}
-		];
 
 		const harassmentStatus = computed( () => store.formErrorMessages.inputBehaviors ? 'error' : 'default' );
 
