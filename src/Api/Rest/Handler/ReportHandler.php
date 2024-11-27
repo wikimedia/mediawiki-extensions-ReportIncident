@@ -43,15 +43,6 @@ class ReportHandler extends SimpleHandler {
 	public const HTTP_STATUS_FORBIDDEN = 403;
 	public const HTTP_STATUS_NOT_FOUND = 404;
 
-	/**
-	 * @param Config $config
-	 * @param RevisionStore $revisionStore
-	 * @param UserNameUtils $userNameUtils
-	 * @param UserIdentityLookup $userIdentityLookup
-	 * @param ReportIncidentManager $reportIncidentManager
-	 * @param UserFactory $userFactory
-	 * @param Language $contentLanguage
-	 */
 	public function __construct(
 		Config $config,
 		RevisionStore $revisionStore,
@@ -319,22 +310,13 @@ class ReportHandler extends SimpleHandler {
 		// method
 		$status = $this->reportIncidentManager->notify( $incidentReport );
 		if ( !$status->isGood() ) {
-			$extraData = [];
-			if ( $this->config->get( 'ReportIncidentDeveloperMode' ) ) {
-				$extraData = [ 'sentEmail' => $status->getEmailContents() ];
-			}
 			throw new LocalizedHttpException(
 				new MessageValue( 'reportincident-unable-to-send' ),
-				500,
-				$extraData
+				500
 			);
 		}
 
-		if ( $this->config->get( 'ReportIncidentDeveloperMode' ) ) {
-			return $this->getResponseFactory()->createJson( [ 'sentEmail' => $status->getEmailContents() ] );
-		} else {
-			return $this->getResponseFactory()->createNoContent();
-		}
+		return $this->getResponseFactory()->createNoContent();
 	}
 
 	public function getBodyParamSettings(): array {

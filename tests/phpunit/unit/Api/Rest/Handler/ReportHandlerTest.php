@@ -10,7 +10,6 @@ use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\IncidentReportEmailStatus;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
-use MediaWiki\Json\FormatJson;
 use MediaWiki\Language\Language;
 use MediaWiki\Permissions\RateLimiter;
 use MediaWiki\Rest\LocalizedHttpException;
@@ -581,7 +580,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			],
 			$this->mockRegisteredUltimateAuthority()
 		);
-		$this->assertSame( 200, $response->getStatusCode() );
+		$this->assertSame( 204, $response->getStatusCode() );
 	}
 
 	/**
@@ -666,7 +665,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			$data,
 			$this->mockRegisteredAuthorityWithPermissions( [ 'reportincident' ] )
 		);
-		$this->assertSame( 200, $response->getStatusCode() );
+		$this->assertSame( 204, $response->getStatusCode() );
 	}
 
 	/**
@@ -736,50 +735,6 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				true,
 			]
 		];
-	}
-
-	public function testSubmitIncidentReportWithDeveloperMode() {
-		$config = new HashConfig( [
-			'ReportIncidentDeveloperMode' => true,
-		] );
-		$reportManager = $this->createMock( ReportIncidentManager::class );
-		$incidentReport = $this->createMock( IncidentReport::class );
-		// Mock that the ::notify and ::record methods both return good statuses.
-		$incidentReportEmailStatus = IncidentReportEmailStatus::newGood();
-		$incidentReportEmailStatus->emailContents = [
-			'to' => 'test@test.com',
-			'from' => [ 'test@testing.com' ],
-			'subject' => 'testing',
-			'body' => "testing.\ntest"
-		];
-		$reportManager->method( 'notify' )->with( $incidentReport )
-			->willReturn( $incidentReportEmailStatus );
-		$reportManager->method( 'record' )->with( $incidentReport )
-			->willReturn( StatusValue::newGood() );
-		/** @var ReportHandler $handler */
-		$handler = $this->newServiceInstance( ReportHandler::class,
-			[
-				'config' => $config,
-				'reportIncidentManager' => $reportManager,
-			]
-		);
-		$handler = TestingAccessWrapper::newFromObject( $handler );
-		$handler->responseFactory = new ResponseFactory( [] );
-		/** @var Response $response */
-		$response = $handler->submitIncidentReport( $incidentReport );
-		$this->assertSame( 200, $response->getStatusCode() );
-		$this->assertArrayEquals(
-			[ 'sentEmail' => (object)[
-				'to' => 'test@test.com',
-				'from' => [ 'test@testing.com' ],
-				'subject' => 'testing',
-				'body' => "testing.\ntest"
-			] ],
-			(array)FormatJson::decode( $response->getBody() ),
-			true,
-			true,
-			'Response body did not contain email details on successful response.'
-		);
 	}
 
 	public function testSubmitIncidentReportWithoutDeveloperMode() {
