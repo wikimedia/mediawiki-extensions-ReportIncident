@@ -79,10 +79,15 @@ class ReportIncidentController {
 		$user = $output->getUser();
 		$isDeveloperMode = $this->config->get( 'ReportIncidentDeveloperMode' );
 		$pretendUserHasConfirmedEmail = $isDeveloperMode && $output->getRequest()->getBool( 'withconfirmedemail' );
+		$pretendUserHasEmail = $isDeveloperMode && $output->getRequest()->getBool( 'withemail' );
+
 		$output->addJsConfigVars( [
 			// If in developer mode, pretend the user has a confirmed email if the query parameter is set to
 			// 'withconfirmedemail=1', otherwise use DB value.
 			'wgReportIncidentUserHasConfirmedEmail' => $pretendUserHasConfirmedEmail ?: $user->isEmailConfirmed(),
+			// If in developer mode, pretend the user has an email set if the query parameter is set to
+			// 'withemail=1', otherwise use DB value.
+			'wgReportIncidentUserHasEmail' => $pretendUserHasEmail ?: $user->getEmail() !== '',
 			// Add wiki-specific links used by the submit success step (T379242).
 			// These will be replaced by community configuration in T374113.
 			'wgReportIncidentLocalLinks' => $this->config->get( 'ReportIncidentLocalLinks' ),

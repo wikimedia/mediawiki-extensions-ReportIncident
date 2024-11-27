@@ -36,7 +36,19 @@ module.exports = exports = {
 
 		function onPrimaryAction() {
 			wrappedOpen.value = false;
-			window.location.assign( mw.Title.newFromText( 'Special:ChangeEmail' ).getUrl() );
+
+			if ( mw.config.get( 'wgReportIncidentUserHasEmail' ) ) {
+				window.location.assign(
+					mw.Title.newFromText( 'Special:ConfirmEmail' ).getUrl()
+				);
+
+				return;
+			}
+
+			window.location.assign(
+				mw.Title.newFromText( 'Special:Preferences' ).getUrl() +
+					'#mw-prefsection-personal-email'
+			);
 		}
 
 		function onDefaultAction() {
