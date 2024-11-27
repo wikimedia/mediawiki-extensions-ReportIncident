@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\ReportIncident\Tests\Unit\Services;
 
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\Services\IReportIncidentNotifier;
+use MediaWiki\Extension\ReportIncident\Services\IReportIncidentRecorder;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\User\UserIdentityValue;
@@ -17,6 +18,23 @@ use StatusValue;
  */
 class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 
+	private IReportIncidentNotifier $notifier;
+	private IReportIncidentRecorder $recorder;
+
+	private ReportIncidentManager $reportIncidentManager;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->notifier = $this->createMock( IReportIncidentNotifier::class );
+		$this->recorder = $this->createMock( IReportIncidentRecorder::class );
+
+		$this->reportIncidentManager = new ReportIncidentManager(
+			$this->notifier,
+			$this->recorder
+		);
+	}
+
 	public function testRecord() {
 		$incidentReport = new IncidentReport(
 			new UserIdentityValue( 1, 'Reporter' ),
@@ -28,10 +46,13 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 			null,
 			'Details'
 		);
-		$reportIncidentManager = new ReportIncidentManager(
-			$this->createMock( IReportIncidentNotifier::class ),
-		);
-		$this->assertStatusGood( $reportIncidentManager->record( $incidentReport ) );
+
+		$this->recorder->expects( $this->once() )
+			->method( 'record' )
+			->with( $incidentReport )
+			->willReturn( StatusValue::newGood() );
+
+		$this->assertStatusGood( $this->reportIncidentManager->record( $incidentReport ) );
 	}
 
 	public function testNotify() {
@@ -45,16 +66,13 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 			null,
 			'Details'
 		);
-		$notifier = $this->createMock( IReportIncidentNotifier::class );
-		$notifier->expects( $this->once() )
+
+		$this->notifier->expects( $this->once() )
 			->method( 'notify' )
 			->with( $incidentReport )
 			->willReturn( StatusValue::newGood() );
 
-		$reportIncidentManager = new ReportIncidentManager(
-			$notifier
-		);
-		$this->assertStatusGood( $reportIncidentManager->notify( $incidentReport ) );
+		$this->assertStatusGood( $this->reportIncidentManager->notify( $incidentReport ) );
 	}
 
 }

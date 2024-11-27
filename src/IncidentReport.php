@@ -44,6 +44,24 @@ class IncidentReport {
 		$this->physicalHarmType = $physicalHarmType;
 	}
 
+	/**
+	 * Known values for the 'behaviorType' field.
+	 * This should match the list of allowed values for "unacceptable behavior" reports on the frontend.
+	 *
+	 * @return string[]
+	 */
+	public static function behaviorTypes(): array {
+		return [
+			'doxing',
+			'hate-speech-or-discrimination',
+			'intimidation',
+			'sexual-harassment',
+			'spam',
+			'trolling',
+			'something-else'
+		];
+	}
+
 	public static function newFromRestPayload(
 		UserIdentity $reportingUser,
 		array $data
