@@ -389,7 +389,7 @@ describe( 'Report Incident Dialog', () => {
 					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
 					const store = useFormStore();
-					const consoleSpy = jest.spyOn( console, 'log' );
+					const consoleSpy = jest.spyOn( console, 'log' ).mockImplementation( () => {} );
 
 					const response = developerMode ? { sentEmail: {
 						to: [ { address: 'test@test.com' }, { address: 'testing@example.com' } ],
@@ -464,7 +464,7 @@ describe( 'Report Incident Dialog', () => {
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
 			const store = useFormStore();
-			const consoleSpy = jest.spyOn( console, 'log' );
+			const consoleSpy = jest.spyOn( console, 'log' ).mockImplementation( () => {} );
 			const userTokensSpy = jest.spyOn( mw.user.tokens, 'get' ).mockImplementation( ( tokenType ) => {
 				switch ( tokenType ) {
 					case 'csrfToken':
@@ -527,7 +527,7 @@ describe( 'Report Incident Dialog', () => {
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
 
 			const store = useFormStore();
-			const consoleSpy = jest.spyOn( console, 'log' );
+			const consoleSpy = jest.spyOn( console, 'log' ).mockImplementation( () => {} );
 			const userTokensSpy = jest.spyOn( mw.user.tokens, 'get' ).mockImplementation( ( tokenType ) => {
 				switch ( tokenType ) {
 					case 'csrfToken':
