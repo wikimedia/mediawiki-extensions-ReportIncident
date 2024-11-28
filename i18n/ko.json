@@ -19,5 +19,6 @@
 	"reportincident-submit-emergency-success": "검토를 위해 제출된 보고서",
 	"reportincident-submit-emergency-section-important-title": "중요",
 	"reportincident-submit-behavior-section-support-title": "지원을 받는 방법",
+	"reportincident-submit-behavior-section-support-item-info-is-public": "위키에서의 모든 대화는 공개되므로 개인 정보를 공유하지 마십시오.",
 	"reportincident-submit-back-to-page": "$1 문서로 돌아가기"
 }

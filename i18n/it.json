@@ -8,10 +8,10 @@
 	"reportincident-dialog-close-btn": "Chiudi",
 	"reportincident-dialog-additional-details-input-label": "Ulteriori informazioni",
 	"reportincident-dialog-optional-label": "(facoltativo)",
-	"reportincident-email-link-to-page-prefix": "Collegamento alla pagina",
-	"reportincident-email-something-else": "Qualcos'altro: \"$1\"",
+	"reportincident-notification-link-to-page-prefix": "Collegamento alla pagina",
 	"reportincident-emaildialog-close-button": "Annulla",
 	"reportincident-emaildialog-primary": "Vai alle impostazioni",
 	"reportincident-dialog-report-immediate-harm-title": "Segnala una minaccia immediata di danno al team di emergenza",
-	"reportincident-choose-option": "Scegli un'opzione"
+	"reportincident-choose-option": "Scegli un'opzione",
+	"reportincident-submit-behavior-section-support-item-info-is-public": "Tutte le conversazioni sui wiki sono pubbliche, non condividere informazioni personali."
 }
