@@ -417,10 +417,14 @@ module.exports = exports = {
 		float: right;
 	}
 
-	// Necessary because it isn't currently possible to have an inline CodexMessage
-	// that uses a normal font weight. That will become possible with T331623.
 	.ext-reportincident-dialog__footer_help span {
+		color: @color-subtle;
+		// Necessary because it isn't currently possible to have an inline CodexMessage
+		// that uses a normal font weight. That will become possible with T331623.
 		font-weight: normal;
+		hyphens: manual;
+		-ms-hyphens: manual;
+		-webkit-hyphens: manual;
 	}
 
 	@media screen and ( max-width: @max-width-breakpoint-mobile ) {
