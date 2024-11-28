@@ -66,7 +66,7 @@
 	"reportincident-behavior-required": "Please select the type of unacceptable behavior",
 	"reportincident-threat-harm-required": "\"Threat of harm\" option must be provided",
 	"reportincident-submit-emergency-dialog-title": "Thank {{GENDER:|you}} for taking steps to make {{SITENAME}} more safe and inclusive",
-	"reportincident-submit-emergency-success": "Report submitted for review. {{GENDER:|your}} request will be looked into within 3 hours.",
+	"reportincident-submit-emergency-success": "Report submitted for review. {{GENDER:|Your}} request will be looked into within 3 hours.",
 	"reportincident-submit-emergency-section-important-title": "Important",
 	"reportincident-submit-emergency-section-important-item-services": "If {{GENDER:|you}} are injured or in immediate danger, call {{GENDER:|your}} [[wikipedia:List_of_emergency_telephone_numbers|local emergency services]].",
 	"reportincident-submit-emergency-section-important-item-resources": "If {{GENDER:|you}} feel {{GENDER:|you}} may physically harm {{GENDER:|yourself}} or others, {{GENDER:|you}} can find a [[meta:Special:MyLanguage/Mental_health_resources|list of support resources]].",
