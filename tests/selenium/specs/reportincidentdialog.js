@@ -4,7 +4,6 @@ const ReportIncidentPage = require( '../pageobjects/reportincident.page' );
 const Api = require( 'wdio-mediawiki/Api' );
 const UserLoginPage = require( 'wdio-mediawiki/LoginPage' );
 const Util = require( 'wdio-mediawiki/Util' );
-const assert = require( 'assert' );
 
 describe( 'ReportIncident dialog', () => {
 	const waitOpts = { timeout: 10000 };
@@ -34,19 +33,19 @@ describe( 'ReportIncident dialog', () => {
 		await ReportIncidentPage.actionsMenu.click();
 		await ReportIncidentPage.reportLinkInToolsMenu.waitForDisplayed( waitOpts );
 		// The tools link should exist, otherwise fail.
-		assert( await ReportIncidentPage.reportLinkInToolsMenu.isExisting() );
+		await expect( ReportIncidentPage.reportLinkInToolsMenu ).toExist();
 		// Initially the dialog should not be open
-		assert.strictEqual( await ReportIncidentPage.reportIncidentDialog.isExisting(), false );
+		await expect( ReportIncidentPage.reportIncidentDialog ).not.toExist();
 
 		// Click the report link in the tools menu
 		await ReportIncidentPage.reportLinkInToolsMenu.click();
 		await ReportIncidentPage.reportIncidentDialog.waitForDisplayed( waitOpts );
-		assert( await ReportIncidentPage.reportIncidentDialog.isExisting() );
+		await expect( ReportIncidentPage.reportIncidentDialog ).toExist();
 
 		// The dialog should initially be on step 1.
-		assert( await ReportIncidentPage.stepOneContent.isExisting() );
-		assert( await ReportIncidentPage.dialogFooterNextButton.isExisting() );
-		assert( await ReportIncidentPage.dialogFooterBackButton.isExisting() );
+		await expect( ReportIncidentPage.stepOneContent ).toExist();
+		await expect( ReportIncidentPage.dialogFooterNextButton ).toExist();
+		await expect( ReportIncidentPage.dialogFooterBackButton ).toExist();
 	} );
 	it( 'Should be able to advance to step 2 and see a form with the expected fields', async () => {
 		// Click the "More" menu containing the "Report incident" link
@@ -56,7 +55,7 @@ describe( 'ReportIncident dialog', () => {
 		// Click the report link in the tools menu
 		await ReportIncidentPage.reportLinkInToolsMenu.click();
 		await ReportIncidentPage.reportIncidentDialog.waitForDisplayed( waitOpts );
-		assert( await ReportIncidentPage.reportIncidentDialog.isExisting() );
+		await expect( ReportIncidentPage.reportIncidentDialog ).toExist();
 
 		// Select "Unacceptable user behavior"
 		await ReportIncidentPage.dialogUnacceptableBehaviorsButton.click();
@@ -64,22 +63,22 @@ describe( 'ReportIncident dialog', () => {
 		await ReportIncidentPage.dialogFooterNextButton.click();
 		// Step two content for types of behavior should exist, along with
 		// all the form items.
-		assert( await ReportIncidentPage.typesOfBehviorScreenContent.isExisting() );
-		assert( await ReportIncidentPage.harassmentOptionsFormFieldset.isExisting() );
-		assert( await ReportIncidentPage.hateSpeechOrDiscriminationOption.isExisting() );
-		assert( await ReportIncidentPage.sexualHarassmentOption.isExisting() );
-		assert( await ReportIncidentPage.trollingOption.isExisting() );
-		assert( await ReportIncidentPage.intimidationOption.isExisting() );
-		assert( await ReportIncidentPage.somethingElseOption.isExisting() );
+		await expect( ReportIncidentPage.typesOfBehviorScreenContent ).toExist();
+		await expect( ReportIncidentPage.harassmentOptionsFormFieldset ).toExist();
+		await expect( ReportIncidentPage.hateSpeechOrDiscriminationOption ).toExist();
+		await expect( ReportIncidentPage.sexualHarassmentOption ).toExist();
+		await expect( ReportIncidentPage.trollingOption ).toExist();
+		await expect( ReportIncidentPage.intimidationOption ).toExist();
+		await expect( ReportIncidentPage.somethingElseOption ).toExist();
 
 		// A textarea for additional details should not be shown, since the
 		// "Something else" radio button is not selected
-		assert( !await ReportIncidentPage.somethingElseTextbox.isExisting() );
+		await expect( ReportIncidentPage.somethingElseTextbox ).not.toExist();
 
 		// Selecting an option other than "Something else" should not show the
 		// "Something else" textbox
 		await ReportIncidentPage.intimidationOption.click();
-		assert( !await ReportIncidentPage.somethingElseTextbox.isExisting() );
+		await expect( ReportIncidentPage.somethingElseTextbox ).not.toExist();
 	} );
 	it( 'Should ask for additional details only when selecting "Something else"', async () => {
 		// Click the "More" menu containing the "Report incident" link
@@ -89,7 +88,7 @@ describe( 'ReportIncident dialog', () => {
 		// Click the report link in the tools menu
 		await ReportIncidentPage.reportLinkInToolsMenu.click();
 		await ReportIncidentPage.reportIncidentDialog.waitForDisplayed( waitOpts );
-		assert( await ReportIncidentPage.reportIncidentDialog.isExisting() );
+		await expect( ReportIncidentPage.reportIncidentDialog ).toExist();
 
 		// Select "Unacceptable user behavior"
 		await ReportIncidentPage.dialogUnacceptableBehaviorsButton.click();
@@ -97,24 +96,24 @@ describe( 'ReportIncident dialog', () => {
 		await ReportIncidentPage.dialogFooterNextButton.click();
 		// Step two content for types of behavior should exist, along with
 		// all the form items.
-		assert( await ReportIncidentPage.typesOfBehviorScreenContent.isExisting() );
-		assert( await ReportIncidentPage.harassmentOptionsFormFieldset.isExisting() );
-		assert( await ReportIncidentPage.hateSpeechOrDiscriminationOption.isExisting() );
-		assert( await ReportIncidentPage.sexualHarassmentOption.isExisting() );
-		assert( await ReportIncidentPage.trollingOption.isExisting() );
-		assert( await ReportIncidentPage.intimidationOption.isExisting() );
-		assert( await ReportIncidentPage.somethingElseOption.isExisting() );
+		await expect( ReportIncidentPage.typesOfBehviorScreenContent ).toExist();
+		await expect( ReportIncidentPage.harassmentOptionsFormFieldset ).toExist();
+		await expect( ReportIncidentPage.hateSpeechOrDiscriminationOption ).toExist();
+		await expect( ReportIncidentPage.sexualHarassmentOption ).toExist();
+		await expect( ReportIncidentPage.trollingOption ).toExist();
+		await expect( ReportIncidentPage.intimidationOption ).toExist();
+		await expect( ReportIncidentPage.somethingElseOption ).toExist();
 
 		// A textarea for additional details should not be shown, since the
 		// "Something else" radio button is not selected
-		assert( !await ReportIncidentPage.somethingElseTextbox.isExisting() );
+		await expect( ReportIncidentPage.somethingElseTextbox ).not.toExist();
 
 		// Selecting the "Something else" option should show the associated textbox
 		await ReportIncidentPage.somethingElseOption.click();
-		assert( await ReportIncidentPage.somethingElseTextbox.isExisting() );
+		await expect( ReportIncidentPage.somethingElseTextbox ).toExist();
 
 		// The non-emergency flow does not collect the 'user reported' anymore
-		assert( !await ReportIncidentPage.violatorFormInput.isExisting() );
+		await expect( ReportIncidentPage.violatorFormInput ).not.toExist();
 	} );
 	it( 'Should display form errors when submit attempted with no form data', async () => {
 		// Click the "More" menu containing the "Report incident" link
@@ -124,7 +123,7 @@ describe( 'ReportIncident dialog', () => {
 		// Click the report link in the tools menu
 		await ReportIncidentPage.reportLinkInToolsMenu.click();
 		await ReportIncidentPage.reportIncidentDialog.waitForDisplayed( waitOpts );
-		assert( await ReportIncidentPage.reportIncidentDialog.isExisting() );
+		await expect( ReportIncidentPage.reportIncidentDialog ).toExist();
 
 		// Select "Unacceptable user behavior" & advance to step 2
 		await ReportIncidentPage.dialogUnacceptableBehaviorsButton.click();
@@ -134,17 +133,17 @@ describe( 'ReportIncident dialog', () => {
 		// Advance to step 2.
 		await ReportIncidentPage.dialogFooterNextButton.click();
 		// Assert the dialog is on the list of unacceptable behaviors
-		assert( await ReportIncidentPage.typesOfBehviorScreenContent.isExisting() );
+		await expect( ReportIncidentPage.typesOfBehviorScreenContent ).toExist();
 
 		// Attempt to submit the form with no data specified.
 		await ReportIncidentPage.dialogFooterNextButton.click();
 		// Check that the form displays errors on the required fields.
-		assert( await ReportIncidentPage.harassmentOptionsFieldsetFormErrors.isExisting() );
+		await expect( ReportIncidentPage.harassmentOptionsFieldsetFormErrors ).toExist();
 
 		// The non-emergency flow does not collect the 'user reported' anymore
-		assert( !await ReportIncidentPage.violatorFormInputErrors.isExisting() );
+		await expect( ReportIncidentPage.violatorFormInputErrors ).not.toExist();
 		// Assert that the dialog still exists.
-		assert( await ReportIncidentPage.reportIncidentDialog.isExisting() );
+		await expect( ReportIncidentPage.reportIncidentDialog ).toExist();
 	} );
 	it( 'Should be able to submit a form with valid data', async () => {
 		// Click the "More" menu containing the "Report incident" link
@@ -159,7 +158,7 @@ describe( 'ReportIncident dialog', () => {
 		await ReportIncidentPage.dialogUnacceptableBehaviorsButton.click();
 		await ReportIncidentPage.dialogFooterNextButton.click();
 		// Assert the dialog is on the list of unacceptable behaviors
-		assert( await ReportIncidentPage.typesOfBehviorScreenContent.isExisting() );
+		await expect( ReportIncidentPage.typesOfBehviorScreenContent ).toExist();
 
 		// Fill out the form
 		// Check hate speech from the harassment options, then switch to something else
@@ -167,13 +166,13 @@ describe( 'ReportIncident dialog', () => {
 		await ReportIncidentPage.somethingElseOption.click();
 
 		// Something else textbox should appear once something else is checked.
-		assert( await ReportIncidentPage.somethingElseTextbox.isExisting() );
+		await expect( ReportIncidentPage.somethingElseTextbox ).toExist();
 		// Add something to the something else textbox
 		await ReportIncidentPage.somethingElseTextbox.setValue( 'Testing1234' );
 
 		// We don't collect the 'user reported' as the non-emergency flow
 		// is not for actionable reports
-		assert( !await ReportIncidentPage.violatorFormInput.isExisting() );
+		await expect( ReportIncidentPage.violatorFormInput ).not.toExist();
 
 		// Listen for the API request
 		await browser.setupInterceptor();
@@ -198,23 +197,20 @@ describe( 'ReportIncident dialog', () => {
 		// Assert that the URL in the request goes to the REST API for submitting report data
 		const MW_SCRIPT_PATH = ( 'MW_SCRIPT_PATH' in process.env ? process.env.MW_SCRIPT_PATH : '' );
 		const baseUri = ( MW_SCRIPT_PATH.endsWith( '/' ) ? MW_SCRIPT_PATH : `${ MW_SCRIPT_PATH }/` );
-		assert.strictEqual( request.url, `${ baseUri }rest.php/reportincident/v0/report` );
+		await expect( request.url ).toBe( `${ baseUri }rest.php/reportincident/v0/report` );
 
 		// Assert that the request method is POST.
-		assert.strictEqual( request.method, 'POST' );
+		await expect( request.method ).toBe( 'POST' );
 		const requestBody = request.body;
 		// Remove the token from our verification as it will be different each time.
 		delete requestBody.token;
 		// Assert that the request body matches the data entered in the form
-		assert.deepStrictEqual(
-			request.body,
-			{
-				reportedUser: '',
-				incidentType: 'unacceptable-user-behavior',
-				behaviorType: 'something-else',
-				somethingElseDetails: 'Testing1234',
-				revisionId: 0
-			}
-		);
+		await expect( request.body ).toStrictEqual( {
+			reportedUser: '',
+			incidentType: 'unacceptable-user-behavior',
+			behaviorType: 'something-else',
+			somethingElseDetails: 'Testing1234',
+			revisionId: 0
+		} );
 	} );
 } );
