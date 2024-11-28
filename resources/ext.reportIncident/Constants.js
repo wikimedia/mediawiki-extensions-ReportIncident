@@ -16,7 +16,7 @@ const Constants = {
 	},
 	harassmentTypes: {
 		DOXING: 'doxing',
-		HATE_SPEECH: 'hate-speech-or-discrimination',
+		HATE_SPEECH: 'hate-or-discrimination',
 		INTIMIDATION: 'intimidation',
 		SEXUAL_HARASSMENT: 'sexual-harassment',
 		SPAM: 'spam',

@@ -60,7 +60,7 @@ class ReportIncidentPage extends Page {
 	}
 
 	get hateSpeechOrDiscriminationOption() {
-		return $( 'input[value="hate-speech-or-discrimination"]', this.harassmentOptionsFormFieldset );
+		return $( 'input[value="hate-or-discrimination"]', this.harassmentOptionsFormFieldset );
 	}
 
 	get sexualHarassmentOption() {

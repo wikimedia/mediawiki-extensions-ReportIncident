@@ -110,7 +110,7 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 				[
 					'action_source' => 'api',
 					'action_context' => json_encode( [
-						'type' => $incidentReport->getBehaviorType(),
+						'type' => $behaviorType,
 						'reportedUserId' => $reportedUser ? $reportedUser->getId() : null,
 					] ),
 				]
@@ -142,10 +142,7 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 		// alongside a large user ID for the reported user.
 		$reportedUser = new UserIdentityValue( 17_000_000_000, 'Reported' );
 		foreach ( IncidentReport::behaviorTypes() as $behaviorType ) {
-			// TODO: Data is too long, fix in follow-up patchset.
-			if ( $behaviorType !== 'hate-speech-or-discrimination' ) {
-				yield "behavior type \"$behaviorType\"" => [ $reportedUser, $behaviorType ];
-			}
+			yield "behavior type \"$behaviorType\"" => [ $reportedUser, $behaviorType ];
 		}
 
 		yield 'null reported user' => [ null, 'spam' ];

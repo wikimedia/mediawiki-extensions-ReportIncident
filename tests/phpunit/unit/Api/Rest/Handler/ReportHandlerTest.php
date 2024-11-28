@@ -410,7 +410,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				'reportedUser' => 'user',
 				'revisionId' => 123,
 				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
-				'behaviorType' => 'hate-speech-or-discrimination',
+				'behaviorType' => 'hate-or-discrimination',
 				'physicalHarmType' => 'threats-self-harm',
 			],
 			new LocalizedHttpException(
@@ -437,7 +437,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				'reportedUser' => 'user',
 				'revisionId' => 123,
 				'incidentType' => IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR,
-				'behaviorType' => 'hate-speech-or-discrimination',
+				'behaviorType' => 'hate-or-discrimination',
 				'physicalHarmType' => 'threats-self-harm',
 			],
 			new LocalizedHttpException(

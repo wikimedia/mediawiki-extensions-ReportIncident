@@ -53,7 +53,7 @@ class IncidentReport {
 	public static function behaviorTypes(): array {
 		return [
 			'doxing',
-			'hate-speech-or-discrimination',
+			'hate-or-discrimination',
 			'intimidation',
 			'sexual-harassment',
 			'spam',
