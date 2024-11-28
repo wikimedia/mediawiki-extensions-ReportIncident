@@ -11,9 +11,14 @@ use StatusValue;
  */
 class ReportIncidentManager {
 	private IReportIncidentNotifier $notifier;
+	private IReportIncidentRecorder $recorder;
 
-	public function __construct( IReportIncidentNotifier $notifier ) {
+	public function __construct(
+		IReportIncidentNotifier $notifier,
+		IReportIncidentRecorder $recorder
+	) {
 		$this->notifier = $notifier;
+		$this->recorder = $recorder;
 	}
 
 	/**
@@ -21,9 +26,7 @@ class ReportIncidentManager {
 	 * @return StatusValue
 	 */
 	public function record( IncidentReport $incidentReport ): StatusValue {
-		// For now, this is a no-op.
-		// Eventually we would store the reports in DB (T345246)
-		return StatusValue::newGood();
+		return $this->recorder->record( $incidentReport );
 	}
 
 	public function notify( IncidentReport $incidentReport ): StatusValue {

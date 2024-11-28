@@ -350,15 +350,7 @@ class ReportHandler extends SimpleHandler {
 			],
 			'behaviorType' => [
 				static::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => [
-					'doxing',
-					'hate-speech-or-discrimination',
-					'intimidation',
-					'sexual-harassment',
-					'spam',
-					'trolling',
-					'something-else'
-				],
+				ParamValidator::PARAM_TYPE => IncidentReport::behaviorTypes(),
 				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'details' => [

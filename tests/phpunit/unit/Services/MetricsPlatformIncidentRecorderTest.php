@@ -1,0 +1,146 @@
+<?php
+namespace MediaWiki\Extension\ReportIncident\Tests\Unit;
+
+use MediaWiki\Context\IContextSource;
+use MediaWiki\Extension\EventLogging\MetricsPlatform\MetricsClientFactory;
+use MediaWiki\Extension\ReportIncident\IncidentReport;
+use MediaWiki\Extension\ReportIncident\Services\MetricsPlatformIncidentRecorder;
+use MediaWiki\Page\PageIdentityValue;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Title\Title;
+use MediaWiki\Title\TitleFactory;
+use MediaWiki\User\User;
+use MediaWiki\User\UserFactory;
+use MediaWiki\User\UserIdentityValue;
+use MediaWikiUnitTestCase;
+use Wikimedia\MetricsPlatform\MetricsClient;
+
+/**
+ * @covers \MediaWiki\Extension\ReportIncident\Services\MetricsPlatformIncidentRecorder
+ */
+class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
+	private MetricsClientFactory $metricsClientFactory;
+	private UserFactory $userFactory;
+	private TitleFactory $titleFactory;
+
+	private MetricsPlatformIncidentRecorder $recorder;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->metricsClientFactory = $this->createMock( MetricsClientFactory::class );
+		$this->userFactory = $this->createMock( UserFactory::class );
+		$this->titleFactory = $this->createMock( TitleFactory::class );
+
+		$this->recorder = $this->getMockBuilder( MetricsPlatformIncidentRecorder::class )
+			->setConstructorArgs( [
+				$this->metricsClientFactory,
+				$this->titleFactory,
+				$this->userFactory
+			] )
+			->onlyMethods( [ 'getContext' ] )
+			->getMock();
+
+		$this->recorder->method( 'getContext' )
+			->willReturn( $this->createMock( IContextSource::class ) );
+	}
+
+	public function testShouldDoNothingForEmergencyReports(): void {
+		$incidentReport = new IncidentReport(
+			new UserIdentityValue( 1, 'Reporter' ),
+			new UserIdentityValue( 2, 'Reported' ),
+			$this->createMock( RevisionRecord::class ),
+			IncidentReport::THREAT_TYPE_IMMEDIATE,
+			null,
+			'threats-physical-harm',
+			null,
+			'Details'
+		);
+
+		$this->metricsClientFactory->expects( $this->never() )
+			->method( 'newMetricsClient' );
+
+		$status = $this->recorder->record( $incidentReport );
+
+		$this->assertStatusGood( $status );
+	}
+
+	/**
+	 * @dataProvider provideBehaviorTypes
+	 */
+	public function testShouldRecordNonEmergencyReport(
+		string $behaviorType
+	): void {
+		$page = new PageIdentityValue( 1, NS_TALK, 'Test', PageIdentityValue::LOCAL );
+
+		$revRecord = $this->createMock( RevisionRecord::class );
+		$revRecord->method( 'getPage' )
+			->willReturn( $page );
+
+		$incidentReport = new IncidentReport(
+			// Use a large user ID for the reporting user to verify it can fit into the limited space
+			// in action_context.
+			new UserIdentityValue( 17_000_000_000, 'Reporter' ),
+			new UserIdentityValue( 2, 'Reported' ),
+			$revRecord,
+			IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR,
+			$behaviorType,
+			null,
+			null,
+			'Details'
+		);
+
+		$title = $this->createMock( Title::class );
+		$this->titleFactory->method( 'newFromPageIdentity' )
+			->with( $page )
+			->willReturn( $title );
+
+		$performer = $this->createMock( User::class );
+		$this->userFactory->method( 'newFromUserIdentity' )
+			->with( $incidentReport->getReportingUser() )
+			->willReturn( $performer );
+
+		$metricsClient = $this->createMock( MetricsClient::class );
+		$metricsClient->expects( $this->once() )
+			->method( 'submitInteraction' )
+			->with(
+				'mediawiki.product_metrics.incident_reporting_system_interaction',
+				'/analytics/product_metrics/web/base/1.3.0',
+				'submit',
+				[
+					'action_source' => 'api',
+					'action_context' => json_encode( [
+						'type' => $incidentReport->getBehaviorType(),
+						'reportedUserId' => $incidentReport->getReportedUser()->getId(),
+					] ),
+				]
+			)
+			->willReturnCallback( function ( string $streamName, string $schema, string $action, array $event ) {
+				$this->assertLessThanOrEqual(
+					64,
+					mb_strlen( $event['action_context'] ),
+					'Metrics Platform instruments only allow max. 64 characters in action_context'
+				);
+			} );
+
+		$this->metricsClientFactory->method( 'newMetricsClient' )
+			->willReturnCallback(
+				function ( IContextSource $context ) use ( $title, $performer, $metricsClient ): MetricsClient {
+					$this->assertSame( $performer, $context->getUser() );
+					$this->assertSame( $title, $context->getTitle() );
+					return $metricsClient;
+				}
+			);
+
+		$status = $this->recorder->record( $incidentReport );
+
+		$this->assertStatusGood( $status );
+	}
+
+	public static function provideBehaviorTypes(): iterable {
+		// Test each behavior type to ensure it fits into action_context.
+		foreach ( IncidentReport::behaviorTypes() as $behaviorType ) {
+			yield "behavior type \"$behaviorType\"" => [ $behaviorType ];
+		}
+	}
+}
