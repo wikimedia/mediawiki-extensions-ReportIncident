@@ -410,6 +410,10 @@ describe( 'Report Incident Dialog', () => {
 					);
 					expect( logEvent ).toHaveBeenCalledTimes( 1 );
 
+					expect(
+						wrapper.find( '.ext-reportincident-dialog__form-error-text' ).exists()
+					).toBe( false );
+
 					if ( store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm ) {
 						expect( logEvent ).toHaveBeenCalledWith( 'click', {
 							subType: 'continue',
@@ -449,66 +453,96 @@ describe( 'Report Incident Dialog', () => {
 			expect( store.inputReportedUser ).toBe( '' );
 		} );
 
-		it( 'attempts to submit form when next is clicked on STEP 2 and has valid form data but API rejects', async () => {
-			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+		const submitErrorTestCases = {
+			'API error when submitting from non-emergency flow': [
+				Constants.DIALOG_STEP_2,
+				Constants.typeOfIncident.unacceptableUserBehavior,
+				'',
+				Constants.harassmentTypes.INTIMIDATION
+			],
+			'API error when submitting from emergency flow': [
+				Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM,
+				Constants.typeOfIncident.immediateThreatPhysicalHarm,
+				Constants.physicalHarmTypes.publicHarm,
+				''
+			]
+		};
 
-			const store = useFormStore();
+		for ( const testName of Object.keys( submitErrorTestCases ) ) {
+			const [
+				initialStep, incidentType, physicalHarmType, behaviorType
+			] = submitErrorTestCases[ testName ];
 
-			const userTokensSpy = jest.spyOn( mw.user.tokens, 'get' ).mockImplementation( ( tokenType ) => {
-				switch ( tokenType ) {
-					case 'csrfToken':
-						return 'csrf-token';
-					default:
-						throw new Error( 'Unknown token type: ' + tokenType );
-				}
-			} );
-			const restPost = mockRestPost( () => {
-				// Form should be in submission when the REST API is called.
-				expect( wrapper.vm.formSubmissionInProgress ).toBe( true );
-				return {
-					then: ( _resolveHandler, rejectHandler ) => {
-						rejectHandler(
-							'http',
-							{ xhr: { responseJSON: {} } }
-						);
+			it( testName, async () => {
+				const wrapper = renderComponent( { open: true, initialStep } );
+				expect( wrapper.vm.currentSlotName ).toBe( initialStep );
+
+				const store = useFormStore();
+
+				const userTokensSpy = jest.spyOn( mw.user.tokens, 'get' ).mockImplementation( ( tokenType ) => {
+					switch ( tokenType ) {
+						case 'csrfToken':
+							return 'csrf-token';
+						default:
+							throw new Error( 'Unknown token type: ' + tokenType );
 					}
-				};
-			} );
+				} );
+				const restPost = mockRestPost( () => {
+					// Form should be in submission when the REST API is called.
+					expect( wrapper.vm.formSubmissionInProgress ).toBe( true );
+					return {
+						then: ( _resolveHandler, rejectHandler ) => {
+							rejectHandler(
+								'http',
+								{ xhr: { responseJSON: {} } }
+							);
+						}
+					};
+				} );
 
-			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
-			store.inputBehavior = Constants.harassmentTypes.INTIMIDATION;
-			store.inputReportedUser = 'test user';
-			expect( store.isFormValidForSubmission() ).toBe( true );
+				store.incidentType = incidentType;
+				store.inputBehavior = behaviorType;
+				store.physicalHarmType = physicalHarmType;
+				store.inputReportedUser = 'test user';
+				expect( store.isFormValidForSubmission() ).toBe( true );
 
-			expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
+				expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
 
-			await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
+				await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
 
-			// Should be dialog step one if the form submitted correctly.
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+				expect( wrapper.vm.currentSlotName ).toBe( initialStep );
 
-			expect( restPost ).toHaveBeenCalledWith(
-				'/reportincident/v0/report',
-				{
-					incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-					behaviorType: Constants.harassmentTypes.INTIMIDATION,
-					reportedUser: 'test user',
-					revisionId: 1,
-					token: 'csrf-token'
+				expect( restPost ).toHaveBeenCalledTimes( 1 );
+				expect( userTokensSpy ).toHaveBeenCalledWith( 'csrfToken' );
+				// Form should not be in submission if the form has finished submitting.
+				expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
+
+				expect(
+					wrapper.find( '.ext-reportincident-dialog__form-error-text' ).text()
+				).toBe( 'reportincident-dialog-generic-error' );
+
+				expect( logEvent ).toHaveBeenCalledTimes( 1 );
+
+				if ( store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm ) {
+					expect( logEvent ).toHaveBeenCalledWith( 'click', {
+						subType: 'continue',
+						source: 'submit_report',
+						context: JSON.stringify( {
+							// eslint-disable-next-line camelcase
+							addl_info: !!( store.inputSomethingElseDetails || store.inputDetails ),
+							// eslint-disable-next-line camelcase
+							reported_user: store.inputReportedUser
+						} )
+					} );
+				} else {
+					expect( logEvent ).toHaveBeenCalledWith( 'click', {
+						context: store.inputBehavior,
+						source: 'describe_unacceptable_behavior',
+						subType: 'continue'
+					} );
 				}
-			);
-			expect( userTokensSpy ).toHaveBeenCalledWith( 'csrfToken' );
-			// Form should not be in submission if the form has finished submitting.
-			expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
-
-			expect( logEvent ).toHaveBeenCalledTimes( 1 );
-			expect( logEvent ).toHaveBeenCalledWith( 'click', {
-				context: Constants.harassmentTypes.INTIMIDATION,
-				source: 'describe_unacceptable_behavior',
-				subType: 'continue'
 			} );
-		} );
+		}
 	} );
 
 	const closeTestCases = [

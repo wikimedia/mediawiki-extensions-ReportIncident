@@ -35,7 +35,7 @@
 	"reportincident-dialog-internet-disconnected-error": "Looks like {{GENDER:|you}} don't have internet connection. Please try re-submitting when {{GENDER:|your}} connection is back.",
 	"reportincident-dialog-server-error": "Sorry, looks like our server is not responding. Please try re-submitting.",
 	"reportincident-dialog-generic-error": "{{GENDER:|Your}} request could not be submitted due to an error. Please try re-submitting.",
-	"reportincident-unable-to-send": "Unable to create incident report. If the issue persists, please email [mailto:emergency@wikimedia.org emergency@wikimedia.org] with {{GENDER:|your}} incident report.",
+	"reportincident-unable-to-send": "Unable to create incident report. If the issue persists, please email emergency@wikimedia.org with {{GENDER:|your}} incident report.",
 	"reportincident-notification-link-to-page-prefix": "Link to page",
 	"reportincident-notification-link-to-comment-prefix": "Link to reported comment",
 	"reportincident-notification-link-to-topic-prefix": "Link to reported topic",

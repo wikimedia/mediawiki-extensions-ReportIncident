@@ -108,7 +108,13 @@ module.exports = exports = {
 		} );
 
 		const currentSlotName = computed( () => `${ currentStep.value }` );
-		const showFooterErrorText = computed( () => currentStep.value === Constants.DIALOG_STEP_2 && footerErrorMessage.value !== '' );
+		const showFooterErrorText = computed(
+			() => [
+				Constants.DIALOG_STEP_2,
+				Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM
+			].indexOf( currentStep.value ) !== -1 && footerErrorMessage.value !== ''
+		);
+
 		const showCancelOrBackButton = computed(
 			() => currentStep.value !== Constants.DIALOG_STEP_SUBMIT_SUCCESS
 		);
