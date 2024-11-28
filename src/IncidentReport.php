@@ -13,7 +13,7 @@ class IncidentReport {
 	public const THREAT_TYPE_UNACCEPTABLE_BEHAVIOR = 'unacceptable-user-behavior';
 
 	private UserIdentity $reportingUser;
-	private UserIdentity $reportedUser;
+	private ?UserIdentity $reportedUser;
 	private RevisionRecord $revisionRecord;
 	private ?string $behaviorType;
 	private ?string $physicalHarmType;
@@ -24,7 +24,7 @@ class IncidentReport {
 
 	public function __construct(
 		UserIdentity $reportingUser,
-		UserIdentity $reportedUser,
+		?UserIdentity $reportedUser,
 		RevisionRecord $revisionRecord,
 		string $incidentType,
 		?string $behaviorType,
@@ -103,7 +103,7 @@ class IncidentReport {
 		return $this->revisionRecord;
 	}
 
-	public function getReportedUser(): UserIdentity {
+	public function getReportedUser(): ?UserIdentity {
 		return $this->reportedUser;
 	}
 

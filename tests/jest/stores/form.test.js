@@ -7,16 +7,6 @@ describe( 'Form Store', () => {
 		setActivePinia( createPinia() );
 	} );
 
-	it( 'validates a form correctly', () => {
-		const form = useFormStore();
-		expect( form.isFormValidForSubmission() ).toBe( false );
-
-		form.inputBehavior = Constants.harassmentTypes.HATE_SPEECH;
-		form.inputReportedUser = 'test value';
-
-		expect( form.isFormValidForSubmission() ).toBe( true );
-	} );
-
 	it( 'resets the form properly on call to $reset', () => {
 		const form = useFormStore();
 		form.inputBehavior = Constants.harassmentTypes.HATE_SPEECH;
@@ -25,10 +15,8 @@ describe( 'Form Store', () => {
 		form.inputSomethingElseDetails = 'test something else details';
 		form.overflowMenuData = { test: 'testing' };
 		form.inputReportedUserDisabled = true;
-		form.displayReportedUserRequiredError = true;
 		form.displaySomethingElseTextboxRequiredError = true;
 		form.displayBehaviorsRequiredError = true;
-		form.reportedUserDoesNotExist = true;
 		form.funnelEntryToken = 'foo';
 		form.funnelName = 'bar';
 
@@ -44,13 +32,10 @@ describe( 'Form Store', () => {
 		expect( form.overflowMenuData ).toStrictEqual( {} );
 		// Required field checks should be disabled again (they are enabled on
 		// pressing submit or un-focusing that required field).
-		expect( form.displayReportedUserRequiredError ).toBe( false );
 		expect( form.displaySomethingElseTextboxRequiredError ).toBe( false );
 		expect( form.displayBehaviorsRequiredError ).toBe( false );
 		// Username field should be un-disabled
 		expect( form.inputReportedUserDisabled ).toBe( false );
-		// Reported user field shouldn't have the username doesn't exist error
-		expect( form.reportedUserDoesNotExist ).toBe( false );
 
 		expect( form.funnelEntryToken ).toBe( '' );
 		expect( form.funnelName ).toBe( '' );
@@ -151,18 +136,6 @@ describe( 'Form Store', () => {
 		form.isFormValidForSubmission(); // Triggers validations
 
 		expect( form.formErrorMessages ).toStrictEqual( {} );
-
-		// Test that emptying all the required fields generates error messages
-		//
-		form.inputReportedUser = '';
-
-		form.isFormValidForSubmission(); // Triggers validations
-
-		expect( form.formErrorMessages ).toStrictEqual( {
-			inputReportedUser: {
-				error: mw.msg( 'reportincident-dialog-violator-empty' )
-			}
-		} );
 	} );
 
 	it( 'Generates something-else error for empty something else textbox', () => {
@@ -179,18 +152,6 @@ describe( 'Form Store', () => {
 		form.inputSomethingElseDetails = '';
 		expect( form.formErrorMessages ).toStrictEqual( {
 			inputBehaviors: { error: mw.msg( 'reportincident-dialog-something-else-empty' ) }
-		} );
-	} );
-
-	it( 'Generates correct error message for non-existent user', () => {
-		const form = useFormStore();
-
-		// Test that when reportedUserDoesNotExist is true and inputReportedUser is
-		// not an empty string, the error message is displayed.
-		form.inputReportedUser = 'test';
-		form.reportedUserDoesNotExist = true;
-		expect( form.formErrorMessages ).toStrictEqual( {
-			inputReportedUser: { error: mw.msg( 'reportincident-dialog-violator-nonexistent' ) }
 		} );
 	} );
 

@@ -174,17 +174,12 @@ class ReportHandler extends SimpleHandler {
 		}
 		$body['revision'] = $revision;
 		// Validate that the user is either an IP or an existing user
-		$reportedUser = $body['reportedUser'];
+		$reportedUser = $body['reportedUser'] ?? '';
 		'@phan-var string $reportedUser';
 		if ( $this->userNameUtils->isIP( $reportedUser ) ) {
 			$reportedUserIdentity = UserIdentityValue::newAnonymous( $reportedUser );
 		} else {
 			$reportedUserIdentity = $this->userIdentityLookup->getUserIdentityByName( $reportedUser );
-			if ( !$reportedUserIdentity || !$reportedUserIdentity->isRegistered() ) {
-				throw new LocalizedHttpException(
-					new MessageValue( 'reportincident-dialog-violator-nonexistent', [ $reportedUser ] ), 404
-				);
-			}
 		}
 		$body['reportedUser'] = $reportedUserIdentity;
 		// Truncate the Something else details and Additional details fields.
@@ -323,7 +318,7 @@ class ReportHandler extends SimpleHandler {
 			'reportedUser' => [
 				static::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'revisionId' => [
 				static::PARAM_SOURCE => 'body',

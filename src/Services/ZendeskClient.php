@@ -59,13 +59,14 @@ class ZendeskClient implements IReportIncidentNotifier {
 		[ $linkPrefixText, $linkToPageAtRevision ] = $this->getLinkToReportedContent( $incidentReport );
 
 		$physicalHarmType = $incidentReport->getPhysicalHarmType() ?? '';
+		$reportedUser = $incidentReport->getReportedUser();
 
 		$body = $this->textFormatter->format(
 			new MessageValue(
 				'reportincident-notification-message-body',
 				[
 					$reportingUserName,
-					$incidentReport->getReportedUser()->getName(),
+					$reportedUser ? $reportedUser->getName() : '',
 					$linkPrefixText,
 					$linkToPageAtRevision,
 					// Possible message keys used here:

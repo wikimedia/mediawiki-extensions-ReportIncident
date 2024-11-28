@@ -100,7 +100,7 @@ describe( 'Main Component Test Suite', () => {
 		store.overflowMenuData = { test: 'test' };
 		store.inputReportedUserDisabled = true;
 		store.inputReportedUser = 'test';
-		store.displayReportedUserRequiredError = true;
+
 		// Fire the handler.
 		wrapper.vm.reportLinkInToolsMenuHandler( { preventDefault: jest.fn() } );
 		await nextTick();
@@ -110,7 +110,6 @@ describe( 'Main Component Test Suite', () => {
 		expect( store.overflowMenuData ).toStrictEqual( {} );
 		expect( store.inputReportedUserDisabled ).toBe( false );
 		expect( store.inputReportedUser ).toBe( '' );
-		expect( store.displayReportedUserRequiredError ).toBe( false );
 
 		expect( logEvent ).toHaveBeenCalledTimes( 1 );
 		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );

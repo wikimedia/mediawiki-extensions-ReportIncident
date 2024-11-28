@@ -200,16 +200,7 @@ module.exports = exports = {
 				}
 			}
 
-			if ( errorKey === 'reportincident-dialog-violator-nonexistent' ) {
-				// Show the server error next to the correct field.
-				store.reportedUserDoesNotExist = true;
-				// Remove any existing footer error message as a field
-				// specific one exists.
-				footerErrorMessage.value = '';
-				// Re-enable the field if is disabled as the server has said
-				// the user does not exist, so it will need to be fixed.
-				store.inputReportedUserDisabled = false;
-			} else if ( errorKey && errorText ) {
+			if ( errorKey && errorText ) {
 				// If a localized error message is available in the response, use that.
 				footerErrorMessage.value = errorText;
 				store.formSubmissionInProgress = false;

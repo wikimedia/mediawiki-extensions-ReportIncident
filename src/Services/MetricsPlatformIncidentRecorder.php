@@ -38,6 +38,8 @@ class MetricsPlatformIncidentRecorder implements IReportIncidentRecorder {
 			return StatusValue::newGood();
 		}
 
+		$reportedUser = $incidentReport->getReportedUser();
+
 		$page = $incidentReport->getRevisionRecord()->getPage();
 
 		$context = new DerivativeContext( $this->getContext() );
@@ -54,7 +56,7 @@ class MetricsPlatformIncidentRecorder implements IReportIncidentRecorder {
 				'action_source' => 'api',
 				'action_context' => json_encode( [
 					'type' => $incidentReport->getBehaviorType(),
-					'reportedUserId' => $incidentReport->getReportedUser()->getId(),
+					'reportedUserId' => $reportedUser ? $reportedUser->getId() : null,
 				] ),
 			]
 		);

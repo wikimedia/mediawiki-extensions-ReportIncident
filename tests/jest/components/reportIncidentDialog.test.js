@@ -167,25 +167,6 @@ describe( 'Report Incident Dialog', () => {
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-server-error' );
 			} );
 
-			it( 'Should add form specific error message on call to onReportSubmitFailure with errorKey indicating reported user does not exist', () => {
-				const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
-				const store = useFormStore();
-				// The error will cause the field to be un-disabled if it was
-				// disabled, so set it to be disabled so that the test can
-				// observe a change in value.
-				store.inputReportedUserDisabled = true;
-				wrapper.vm.onReportSubmitFailure( 'http', {
-					xhr: { status: 404, responseJSON: { errorKey: 'reportincident-dialog-violator-nonexistent' } }
-				} );
-				// This error is shown for the reported user field, so the footer error
-				// message should be empty.
-				expect( wrapper.vm.showFooterErrorText ).toBe( false );
-				expect( wrapper.vm.footerErrorMessage ).toBe( '' );
-				// Expect that the error is shown for the reported user field.
-				expect( store.reportedUserDoesNotExist ).toBe( true );
-				expect( store.inputReportedUserDisabled ).toBe( false );
-			} );
-
 			it( 'Should use server-side error message on call to onReportSubmitFailure when available', () => {
 				const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
 				const errMsg = 'This is some server error';
