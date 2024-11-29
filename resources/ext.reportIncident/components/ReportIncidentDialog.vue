@@ -437,6 +437,11 @@ module.exports = exports = {
 				margin-top: @spacing-35;
 			}
 		}
+
+		// NOTE: Add extra cascade due to conflicting MobileFrontend styling.
+		p.ext-reportincident-dialog-footer-help {
+			font-size: @font-size-small;
+		}
 	}
 }
 </style>
