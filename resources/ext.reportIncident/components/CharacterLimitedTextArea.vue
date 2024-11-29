@@ -1,9 +1,15 @@
 <template>
 	<cdx-text-area
 		ref="textAreaRef"
+		v-bind="$attrs"
 		v-model="computedTextContent"
 		@input="updateCharacterCount"
 	></cdx-text-area>
+	<span
+		v-if="remainingCharacters !== ''"
+		class="ext-reportincident-dialog__textarea-character-count">
+		{{ remainingCharacters }}
+	</span>
 </template>
 
 <script>
@@ -18,6 +24,7 @@ module.exports = exports = {
 	components: {
 		CdxTextArea
 	},
+	inheritAttrs: false,
 	props: {
 		/**
 		 * The maximum number of Unicode code points accepted by this textarea.
@@ -27,12 +34,7 @@ module.exports = exports = {
 		 * The value of this text field.
 		 * Must be bound with `v-model:text-content`.
 		 */
-		textContent: { type: String, required: true },
-		/**
-		 * The number of characters this text area can still accept, as a localized numeric string.
-		 * Must be bound with `v-model:remaining-characters`.
-		 */
-		remainingCharacters: { type: String, required: true }
+		textContent: { type: String, required: true }
 	},
 	emits: [
 		'update:remaining-characters',
@@ -41,15 +43,11 @@ module.exports = exports = {
 	setup( props, ctx ) {
 		const codePointLimit = props.codePointLimit;
 		const textAreaRef = ref( null );
+		const remainingCharacters = ref( '' );
 
 		const computedTextContent = computed( {
 			get: () => props.textContent,
 			set: ( value ) => ctx.emit( 'update:text-content', value )
-		} );
-
-		const computedRemainingCharacters = computed( {
-			get: () => props.remainingCharacters,
-			set: ( value ) => ctx.emit( 'update:remaining-characters', value )
 		} );
 
 		/**
@@ -60,14 +58,17 @@ module.exports = exports = {
 		function updateCharacterCount( event ) {
 			const value = event.target.value;
 
-			let remaining = codePointLimit - codePointLength( value );
-			if ( remaining > 99 ) {
-				remaining = '';
-			} else {
-				remaining = mw.language.convertNumber( remaining );
-			}
+			const remaining = codePointLimit - codePointLength( value );
 
-			computedRemainingCharacters.value = remaining;
+			// Only show the character counter as the user is approaching the limit,
+			// to avoid confusion stemming from our definition of a character not matching
+			// the user's own expectations of what counts as a character.
+			// This is consistent with other features such as VisualEditor.
+			if ( remaining > 99 ) {
+				remainingCharacters.value = '';
+			} else {
+				remainingCharacters.value = mw.language.convertNumber( remaining );
+			}
 		}
 
 		onMounted( () => {
@@ -83,8 +84,18 @@ module.exports = exports = {
 		return {
 			textAreaRef,
 			computedTextContent,
+			remainingCharacters,
 			updateCharacterCount
 		};
 	}
 };
 </script>
+
+<style lang="less">
+@import ( reference ) 'mediawiki.skin.variables.less';
+
+.ext-reportincident-dialog__textarea-character-count {
+	color: @color-subtle;
+	float: right;
+}
+</style>
