@@ -422,22 +422,6 @@ module.exports = exports = {
 	}
 
 	@media screen and ( max-width: @max-width-breakpoint-mobile ) {
-		.ext-reportincident-dialog-footer {
-			display: flex;
-			flex-direction: column-reverse;
-			width: 100%;
-
-			&__back-btn {
-				width: 100%;
-				margin-top: @spacing-35;
-			}
-
-			&__next-btn {
-				width: 100%;
-				margin-top: @spacing-35;
-			}
-		}
-
 		// NOTE: Add extra cascade due to conflicting MobileFrontend styling.
 		p.ext-reportincident-dialog-footer-help {
 			font-size: @font-size-small;
