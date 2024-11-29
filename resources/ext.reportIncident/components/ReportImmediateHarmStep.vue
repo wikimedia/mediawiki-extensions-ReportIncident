@@ -1,8 +1,11 @@
 <template>
 	<form id="reportincident-form" class="ext-reportincident-dialog-step2">
 		<cdx-message>
-			<!-- eslint-disable-next-line vue/no-v-html -->
-			<p v-html="$i18n( 'reportincident-physical-harm-infotext' ).parse()"></p>
+			<!-- eslint-disable vue/no-v-html -->
+			<p
+				class="ext-reportincident-dialog__message"
+				v-html="$i18n( 'reportincident-physical-harm-infotext' ).parse()"></p>
+			<!-- eslint-enable -->
 		</cdx-message>
 		<!-- who is violating behavior guidelines -->
 		<cdx-field

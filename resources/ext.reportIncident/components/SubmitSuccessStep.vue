@@ -1,8 +1,8 @@
 <template>
 	<form id="reportincident-form" ref="form">
 		<cdx-message :type="messageType">
-			<!-- eslint-disable vue/no-v-html -->
-			<p v-html="banner.parse()"></p>
+			<!-- eslint-disable-next-line vue/no-v-html -->
+			<p class="ext-reportincident-dialog__message" v-html="banner.parse()"></p>
 		</cdx-message>
 		<template v-for="section in sections" :key="section.title.key">
 			<h3 class="ext-reportincident-dialog__submit-success-section-header">

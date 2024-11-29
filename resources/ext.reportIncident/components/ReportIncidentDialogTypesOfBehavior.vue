@@ -3,6 +3,7 @@
 		<cdx-message>
 			<!-- eslint-disable vue/no-v-html -->
 			<span
+				class="ext-reportincident-dialog__message"
 				v-html="$i18n(
 					'reportincident-dialog-unacceptable-behavior-community-managed'
 				).parse()"
