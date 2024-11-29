@@ -31,16 +31,8 @@ class ReportIncidentPage extends Page {
 		return $( '.ext-reportincident-dialog-step1', this.reportIncidentDialog );
 	}
 
-	get stepTwoContent() {
-		return $( '.ext-reportincident-dialog-step2', this.reportIncidentDialog );
-	}
-
 	get typesOfBehviorScreenContent() {
 		return $( '.ext-reportincident-dialog-types-of-behavior', this.reportIncidentDialog );
-	}
-
-	get additionalContentFormInput() {
-		return $( '.ext-reportincident-dialog-step2__additional-details textarea', this.reportIncidentDialog );
 	}
 
 	get violatorFormInput() {
@@ -83,8 +75,32 @@ class ReportIncidentPage extends Page {
 		return $( '.ext-reportincident-dialog-types-of-behavior__something-else-textarea textarea', this.harassmentOptionsFormFieldset );
 	}
 
-	async open( userName, query ) {
-		await super.openTitle( `User talk:${ userName }`, query );
+	get submitButton() {
+		return $( 'input[name="wpSave"]' );
+	}
+
+	get messageDialog() {
+		return $( '.oo-ui-messageDialog-content' );
+	}
+
+	get threadOptions() {
+		return $( '.ext-discussiontools-init-section-overflowMenuButton > a' );
+	}
+
+	get reportLink() {
+		return $( '#reportincident .oo-ui-labelElement-label', this.threadOptions );
+	}
+
+	get successfulSubmissionSectionHeader() {
+		return $( '.ext-reportincident-dialog__submit-success-section-header', this.messageDialog );
+	}
+
+	async open( userName, query, fragment ) {
+		await super.openTitle(
+			`User talk:${ userName }`,
+			query,
+			fragment
+		);
 	}
 }
 
