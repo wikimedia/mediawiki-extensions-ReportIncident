@@ -40,16 +40,12 @@
 			</template>
 			<character-limited-text-area
 				v-model:text-content="inputDetails"
-				v-model:remaining-characters="additionalDetailsCharacterCountLeft"
 				:code-point-limit="additionalDetailsCodepointLimit"
 				:placeholder="$i18n(
 					'reportincident-dialog-additional-details-input-placeholder'
 				).text()"
 			>
 			</character-limited-text-area>
-			<template v-if="additionalDetailsCharacterCountLeft !== ''" #help-text>
-				{{ additionalDetailsCharacterCountLeft }}
-			</template>
 		</cdx-field>
 	</form>
 </template>
@@ -91,7 +87,6 @@ module.exports = exports = {
 		const suggestedUsernames = ref( [] );
 
 		const additionalDetailsCodepointLimit = Constants.detailsCodepointLimit;
-		const additionalDetailsCharacterCountLeft = ref( '' );
 
 		let debounce = null;
 
@@ -222,7 +217,6 @@ module.exports = exports = {
 			inputReportedUserMenuItems,
 			reportedUserLookupMenuConfig,
 			additionalDetailsCodepointLimit,
-			additionalDetailsCharacterCountLeft,
 			windowHeight,
 			suggestedUsernames,
 			onReportedUserInput

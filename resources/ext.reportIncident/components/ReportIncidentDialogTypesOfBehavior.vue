@@ -30,7 +30,6 @@
 			<character-limited-text-area
 				v-if="collectSomethingElseDetails"
 				v-model:text-content="inputSomethingElseDetails"
-				v-model:remaining-characters="somethingElseDetailsCharacterCountLeft"
 				:code-point-limit="somethingElseDetailsCodepointLimit"
 				class="ext-reportincident-dialog-types-of-behavior__something-else-textarea"
 				:placeholder="$i18n(
@@ -38,9 +37,6 @@
 				).text()"
 			>
 			</character-limited-text-area>
-			<template v-if="showSomethingElseDetailsCharacterCountLeft">
-				{{ somethingElseDetailsCharacterCountLeft }} characters left.
-			</template>
 			<parsed-message
 				class="ext-reportincident-dialog-types-of-behavior-footer"
 				:message="footerMsg"
@@ -54,7 +50,7 @@
 const useFormStore = require( '../stores/Form.js' );
 const useInstrument = require( '../composables/useInstrument.js' );
 const { storeToRefs } = require( 'pinia' );
-const { computed, onMounted, ref } = require( 'vue' );
+const { computed, onMounted } = require( 'vue' );
 const { CdxField, CdxMessage, CdxRadio } = require( '@wikimedia/codex' );
 const CharacterLimitedTextArea = require( './CharacterLimitedTextArea.vue' );
 const ParsedMessage = require( './ParsedMessage.vue' );
@@ -76,7 +72,6 @@ module.exports = exports = {
 		const logEvent = useInstrument();
 
 		const somethingElseDetailsCodepointLimit = Constants.detailsCodepointLimit;
-		const somethingElseDetailsCharacterCountLeft = ref( '' );
 
 		onMounted( () => logEvent( 'view', { source: 'describe_unacceptable_behavior' } ) );
 
@@ -96,9 +91,6 @@ module.exports = exports = {
 				computed( () => inputBehavior.value === Constants.harassmentTypes.OTHER );
 
 		const formErrorMessages = computed( () => store.formErrorMessages );
-
-		const showSomethingElseDetailsCharacterCountLeft =
-				computed( () => somethingElseDetailsCharacterCountLeft.value !== '' && collectSomethingElseDetails.value );
 
 		const harassmentStatus = computed( () => store.formErrorMessages.inputBehaviors ? 'error' : 'default' );
 
@@ -123,8 +115,6 @@ module.exports = exports = {
 			inputSomethingElseDetails,
 			formErrorMessages,
 			somethingElseDetailsCodepointLimit,
-			somethingElseDetailsCharacterCountLeft,
-			showSomethingElseDetailsCharacterCountLeft,
 			harassmentStatus,
 			collectSomethingElseDetails,
 			onRadioButtonOptionChanged,
