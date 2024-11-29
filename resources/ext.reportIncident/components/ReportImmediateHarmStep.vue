@@ -8,9 +8,6 @@
 		<cdx-field
 			class="ext-reportincident-dialog-step2__form-item
 				ext-reportincident-dialog-step2__violator-name"
-			:status="reportedUserStatus"
-			:messages="formErrorMessages.inputReportedUser"
-			@focusout="displayReportedUserRequiredError = true"
 		>
 			<template #label>
 				{{ $i18n( 'reportincident-dialog-violator-label' ).text() }}
@@ -26,7 +23,6 @@
 				:menu-items="inputReportedUserMenuItems"
 				:menu-config="reportedUserLookupMenuConfig"
 				@input="onReportedUserInput"
-				@update:selected="displayReportedUserRequiredError = false"
 			>
 			</cdx-lookup>
 		</cdx-field>
@@ -81,8 +77,6 @@ module.exports = exports = {
 		const {
 			inputReportedUser,
 			inputReportedUserDisabled,
-			displayReportedUserRequiredError,
-			reportedUserDoesNotExist,
 			inputDetails
 		} = storeToRefs( store );
 
@@ -120,10 +114,6 @@ module.exports = exports = {
 		onUnmounted( () => {
 			window.removeEventListener( 'resize', onWindowResize );
 		} );
-
-		const reportedUserStatus = computed( () => store.formErrorMessages.inputReportedUser ? 'error' : 'default' );
-
-		const formErrorMessages = computed( () => store.formErrorMessages );
 
 		/**
 		 * The menu items for the reported user Codex Lookup component.
@@ -212,10 +202,7 @@ module.exports = exports = {
 		function onReportedUserInput( value ) {
 			// Keep a track of the actual text in the input for the form store.
 			inputReportedUser.value = value;
-			// A change to the reported user input means that if the
-			// server said the reported user doesn't exist it no
-			// longer applies.
-			reportedUserDoesNotExist.value = false;
+
 			// Load suggestions based on the input already entered.
 			loadSuggestedUsernames();
 		}
@@ -227,9 +214,6 @@ module.exports = exports = {
 			inputReportedUserSelection,
 			inputReportedUserMenuItems,
 			reportedUserLookupMenuConfig,
-			displayReportedUserRequiredError,
-			formErrorMessages,
-			reportedUserStatus,
 			additionalDetailsCodepointLimit,
 			additionalDetailsCharacterCountLeft,
 			windowHeight,

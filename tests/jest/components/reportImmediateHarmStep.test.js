@@ -79,31 +79,6 @@ describe( 'ReportImmediateHarmStep', () => {
 		expect( wrapper.find( '.ext-reportincident-dialog-step2__additional-details' ).exists() ).toBe( true );
 	} );
 
-	it( 'Gets correct error messages for display', () => {
-		const wrapper = renderComponent();
-		const store = useFormStore();
-
-		store.isFormValidForSubmission();
-
-		expect( wrapper.vm.formErrorMessages ).toStrictEqual( store.formErrorMessages );
-	} );
-
-	it( 'Sets correct status values', async () => {
-		const wrapper = renderComponent();
-		const store = useFormStore();
-
-		// No errors should be displayed until a user tries to submit the form
-		// or focuses out of the required field.
-		expect( wrapper.vm.reportedUserStatus ).toBe( 'default' );
-
-		// Call method used to indicate that form is about to be submitted.
-		store.isFormValidForSubmission();
-
-		// Errors should be displayed when a user tries to submit the form without
-		// specifying required fields.
-		expect( wrapper.vm.reportedUserStatus ).toBe( 'error' );
-	} );
-
 	it( 'Should update menu config on change in window height', () => {
 		const wrapper = renderComponent();
 
@@ -132,16 +107,11 @@ describe( 'ReportImmediateHarmStep', () => {
 			)
 		);
 		const wrapper = renderComponent();
-		const store = useFormStore();
-		// Fake that a previous submit has caused the user non-existent
-		// error to display.
-		store.reportedUserDoesNotExist = true;
+
 		// Call the method under test
 		wrapper.vm.onReportedUserInput( 'testing' );
 		expect( wrapper.vm.inputReportedUser ).toBe( 'testing' );
-		// Change to the inputReportedUser value should invalidate previous
-		// non-existent user error returned by the server.
-		expect( store.reportedUserDoesNotExist ).toBe( false );
+
 		// Wait until the debounce time has expired and add around 20ms to be sure it has run.
 		await waitUntilDebounceComplete();
 		// The suggestions should now be set.

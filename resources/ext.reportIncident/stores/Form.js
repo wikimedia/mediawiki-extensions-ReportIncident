@@ -16,8 +16,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const displayBehaviorsRequiredError = ref( false );
 	const inputReportedUser = ref( '' );
 	const inputReportedUserDisabled = ref( false );
-	const displayReportedUserRequiredError = ref( false );
-	const reportedUserDoesNotExist = ref( false );
 	const inputDetails = ref( '' );
 	const inputSomethingElseDetails = ref( '' );
 	const displaySomethingElseDetailsEmptyError = ref( false );
@@ -51,21 +49,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 			inputSomethingElseDetails.value !== ''
 		) {
 			displaySomethingElseTextboxRequiredError.value = true;
-		}
-
-		// For emergencies, validate the reported user field has some content
-		if ( isEmergency() ) {
-			if ( inputReportedUser.value === '' ) {
-				if ( displayReportedUserRequiredError.value ) {
-					formErrors.inputReportedUser = {
-						error: mw.msg( 'reportincident-dialog-violator-empty' )
-					};
-				}
-			} else if ( reportedUserDoesNotExist.value ) {
-				formErrors.inputReportedUser = {
-					error: mw.msg( 'reportincident-dialog-violator-nonexistent' )
-				};
-			}
 		}
 
 		if ( displaySomethingElseDetailsEmptyError.value &&
@@ -132,14 +115,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		return 'na';
 	} );
 
-	watch( inputReportedUser, ( newReportedUser ) => {
-		// Once the reported user has been filled for the first time,
-		// show an error if the value becomes empty again.
-		if ( newReportedUser.length > 0 ) {
-			displayReportedUserRequiredError.value = true;
-		}
-	} );
-
 	watch( inputSomethingElseDetails, ( newSomethingElseDetails ) => {
 		displaySomethingElseDetailsEmptyError.value = false;
 
@@ -183,7 +158,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		}
 
 		displayBehaviorsRequiredError.value = true;
-		displayReportedUserRequiredError.value = true;
 
 		// The form is valid if the formErrorMessages has no items.
 		return Object.keys( formErrorMessages.value ).length === 0;
@@ -319,15 +293,11 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		// Disable the required fields error again until
 		// that required field is un-focused or a submit
 		// is attempted.
-		displayReportedUserRequiredError.value = false;
 		displayBehaviorsRequiredError.value = false;
 		displaySomethingElseTextboxRequiredError.value = false;
 		displaySomethingElseDetailsEmptyError.value = false;
 		// Re-enable the username field if it was disabled
 		inputReportedUserDisabled.value = false;
-		// The username is now empty, so the username not
-		// existing error is no longer applicable.
-		reportedUserDoesNotExist.value = false;
 
 		funnelEntryToken.value = '';
 		funnelName.value = '';
@@ -345,8 +315,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		displayBehaviorsRequiredError,
 		inputReportedUser,
 		inputReportedUserDisabled,
-		displayReportedUserRequiredError,
-		reportedUserDoesNotExist,
 		inputDetails,
 		inputSomethingElseDetails,
 		displaySomethingElseTextboxRequiredError,

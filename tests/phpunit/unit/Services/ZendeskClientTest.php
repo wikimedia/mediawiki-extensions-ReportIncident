@@ -8,6 +8,7 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\User\User;
 use MediaWiki\User\UserFactory;
+use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserIdentityValue;
 use MediaWiki\Utils\UrlUtils;
 use MediaWikiUnitTestCase;
@@ -66,14 +67,18 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 	/**
 	 * @dataProvider provideReportData
 	 */
-	public function testShouldCreateRequest( ?string $threadId, string $expectedPageLink ): void {
+	public function testShouldCreateRequest(
+		?UserIdentity $reportedUser,
+		?string $threadId,
+		string $expectedPageLink
+	): void {
 		$mockRevisionRecord = $this->createMock( RevisionRecord::class );
 		$mockRevisionRecord->method( 'getId' )
 			->willReturn( 1 );
 
 		$incidentReport = new IncidentReport(
 			new UserIdentityValue( 1, 'Reporter' ),
-			new UserIdentityValue( 2, 'Reported' ),
+			$reportedUser,
 			$mockRevisionRecord,
 			IncidentReport::THREAT_TYPE_IMMEDIATE,
 			null,
@@ -95,6 +100,8 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 			->with( '/index.php' )
 			->willReturn( 'page-link' );
 
+		$reportedUserName = $reportedUser ? $reportedUser->getName() : '';
+
 		$expectedPayload = json_encode( [
 			'request' => [
 				'requester' => [
@@ -105,7 +112,7 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 				'subject' => 'Test subject line',
 				'comment' => [
 					'body' => '<message key="reportincident-notification-message-body"><text>Reporter</text>' .
-						'<text>Reported</text>' . $expectedPageLink .
+						"<text>$reportedUserName</text>" . $expectedPageLink .
 						'<text><message key="reportincident-threats-physical-harm"></message></text>' .
 						'<text>Details</text></message>',
 				],
@@ -132,22 +139,34 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 	}
 
 	public static function provideReportData(): iterable {
+		$reportedUser = new UserIdentityValue( 2, 'Reported' );
+
 		yield 'no thread ID' => [
+			$reportedUser,
 			null,
 			'<text><message key="reportincident-notification-link-to-page-prefix"></message></text>' .
 			'<text>page-link?oldid=1</text>'
 		];
 
 		yield 'thread ID for comment' => [
+			$reportedUser,
 			'c-testuser-20230504030201',
 			'<text><message key="reportincident-notification-link-to-comment-prefix"></message></text>' .
 			'<text>page-link?oldid=1#c-testuser-20230504030201</text>'
 		];
 
 		yield 'thread ID for topic' => [
+			$reportedUser,
 			'h-testuser-20230504030201',
 			'<text><message key="reportincident-notification-link-to-topic-prefix"></message></text>' .
 			'<text>page-link?oldid=1#h-testuser-20230504030201</text>'
+		];
+
+		yield 'no reported user' => [
+			null,
+			null,
+			'<text><message key="reportincident-notification-link-to-page-prefix"></message></text>' .
+			'<text>page-link?oldid=1</text>'
 		];
 	}
 

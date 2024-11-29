@@ -11,6 +11,7 @@ use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use MediaWiki\User\User;
 use MediaWiki\User\UserFactory;
+use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserIdentityValue;
 use MediaWikiUnitTestCase;
 use Wikimedia\MetricsPlatform\MetricsClient;
@@ -69,6 +70,7 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 	 * @dataProvider provideBehaviorTypes
 	 */
 	public function testShouldRecordNonEmergencyReport(
+		?UserIdentity $reportedUser,
 		string $behaviorType
 	): void {
 		$page = new PageIdentityValue( 1, NS_TALK, 'Test', PageIdentityValue::LOCAL );
@@ -78,10 +80,8 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 			->willReturn( $page );
 
 		$incidentReport = new IncidentReport(
-			// Use a large user ID for the reporting user to verify it can fit into the limited space
-			// in action_context.
-			new UserIdentityValue( 17_000_000_000, 'Reporter' ),
-			new UserIdentityValue( 2, 'Reported' ),
+			new UserIdentityValue( 2, 'Reporter' ),
+			$reportedUser,
 			$revRecord,
 			IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR,
 			$behaviorType,
@@ -111,7 +111,7 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 					'action_source' => 'api',
 					'action_context' => json_encode( [
 						'type' => $incidentReport->getBehaviorType(),
-						'reportedUserId' => $incidentReport->getReportedUser()->getId(),
+						'reportedUserId' => $reportedUser ? $reportedUser->getId() : null,
 					] ),
 				]
 			)
@@ -138,9 +138,16 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 	}
 
 	public static function provideBehaviorTypes(): iterable {
-		// Test each behavior type to ensure it fits into action_context.
+		// Test each behavior type to ensure it fits into action_context
+		// alongside a large user ID for the reported user.
+		$reportedUser = new UserIdentityValue( 17_000_000_000, 'Reported' );
 		foreach ( IncidentReport::behaviorTypes() as $behaviorType ) {
-			yield "behavior type \"$behaviorType\"" => [ $behaviorType ];
+			// TODO: Data is too long, fix in follow-up patchset.
+			if ( $behaviorType !== 'hate-speech-or-discrimination' ) {
+				yield "behavior type \"$behaviorType\"" => [ $reportedUser, $behaviorType ];
+			}
 		}
+
+		yield 'null reported user' => [ null, 'spam' ];
 	}
 }

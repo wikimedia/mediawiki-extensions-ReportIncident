@@ -152,7 +152,6 @@ module.exports = exports = {
 					store.inputReportedUser = threadItem.author;
 				} else {
 					store.inputReportedUser = '';
-					store.displayReportedUserRequiredError = false;
 				}
 				store.overflowMenuData = menuItem.getData();
 				showDialogDependingOnEmailConfirmationStatus();
