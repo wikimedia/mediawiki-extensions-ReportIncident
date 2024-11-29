@@ -38,13 +38,11 @@ describe( 'Report Incident Dialog Types of Behavior', () => {
 		// Mock the codePointLimit which is added by a plugin.
 		jQueryCodePointLimitMock = jest.fn();
 		global.$.prototype.codePointLimit = jQueryCodePointLimitMock;
-		// Mock wgCommentCodePointLimit to the default value of 500.
-		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
-			switch ( key ) {
-				case 'wgCommentCodePointLimit':
-					return 500;
-			}
-		} );
+
+		const mwConfig = {
+			wgReportIncidentDetailsCodePointLength: 1000
+		};
+		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => mwConfig[ key ] );
 	} );
 
 	it( 'renders correctly', () => {

@@ -52,7 +52,6 @@
 
 <script>
 
-const Constants = require( '../Constants.js' );
 const useFormStore = require( '../stores/Form.js' );
 const useInstrument = require( '../composables/useInstrument.js' );
 const { CdxField, CdxLookup, CdxMessage } = require( '@wikimedia/codex' );
@@ -86,7 +85,7 @@ module.exports = exports = {
 		const windowHeight = ref( window.innerHeight );
 		const suggestedUsernames = ref( [] );
 
-		const additionalDetailsCodepointLimit = Constants.detailsCodepointLimit;
+		const additionalDetailsCodepointLimit = mw.config.get( 'wgReportIncidentDetailsCodePointLength' );
 
 		let debounce = null;
 

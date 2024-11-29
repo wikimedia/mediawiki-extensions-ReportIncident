@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\ReportIncident\Services;
 
 use MediaWiki\Config\Config;
 use MediaWiki\Context\IContextSource;
+use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\User\User;
 
@@ -88,7 +89,8 @@ class ReportIncidentController {
 			// These will be replaced by community configuration in T374113.
 			'wgReportIncidentLocalLinks' => $this->config->get( 'ReportIncidentLocalLinks' ),
 			// Control whether instrumentation is enabled pending approval (T372823).
-			'wgReportIncidentEnableInstrumentation' => $this->config->get( 'ReportIncidentEnableInstrumentation' )
+			'wgReportIncidentEnableInstrumentation' => $this->config->get( 'ReportIncidentEnableInstrumentation' ),
+			'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 		] );
 		// Add the ReportIncident module, including the JS and Vue code for the dialog.
 		$output->addModules( 'ext.reportIncident' );

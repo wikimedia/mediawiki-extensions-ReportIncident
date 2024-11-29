@@ -1,10 +1,11 @@
 <template>
-	<cdx-text-area
-		ref="textAreaRef"
-		v-bind="$attrs"
-		v-model="computedTextContent"
-		@input="updateCharacterCount"
-	></cdx-text-area>
+	<div ref="textAreaWrapperRef">
+		<cdx-text-area
+			v-bind="$attrs"
+			v-model="computedTextContent"
+			@input="updateCharacterCount"
+		></cdx-text-area>
+	</div>
 	<span
 		v-if="remainingCharacters !== ''"
 		class="ext-reportincident-dialog__textarea-character-count">
@@ -42,7 +43,7 @@ module.exports = exports = {
 	],
 	setup( props, ctx ) {
 		const codePointLimit = props.codePointLimit;
-		const textAreaRef = ref( null );
+		const textAreaWrapperRef = ref( null );
 		const remainingCharacters = ref( '' );
 
 		const computedTextContent = computed( {
@@ -72,7 +73,8 @@ module.exports = exports = {
 		}
 
 		onMounted( () => {
-			const $textarea = $( textAreaRef.value.textarea );
+			const $textarea = $( textAreaWrapperRef.value ).find( 'textarea' );
+
 			$textarea.codePointLimit( codePointLimit );
 			$textarea.on( 'change', () => {
 				// Needed because Vue cannot listen to JQuery events, so
@@ -82,7 +84,7 @@ module.exports = exports = {
 		} );
 
 		return {
-			textAreaRef,
+			textAreaWrapperRef,
 			computedTextContent,
 			remainingCharacters,
 			updateCharacterCount

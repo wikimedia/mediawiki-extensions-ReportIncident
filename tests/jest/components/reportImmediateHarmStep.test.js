@@ -59,6 +59,11 @@ describe( 'ReportImmediateHarmStep', () => {
 		logEvent = jest.fn();
 
 		useInstrument.mockImplementation( () => logEvent );
+
+		const mwConfig = {
+			wgReportIncidentDetailsCodePointLength: 1000
+		};
+		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => mwConfig[ key ] );
 	} );
 
 	it( 'renders correctly', () => {
