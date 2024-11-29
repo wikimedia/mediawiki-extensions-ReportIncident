@@ -54,7 +54,7 @@
 	"reportincident-choose-option": "Choose an option",
 	"reportincident-dialog-cancel": "Cancel",
 	"reportincident-dialog-continue": "Continue",
-	"reportincident-unacceptable-behavior-footer": "Inappropriate behavior is [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|not tolerated]] on {{SITENAME}}, and is managed by the community.",
+	"reportincident-unacceptable-behavior-footer": "Inappropriate behavior is [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|not tolerated]] on {{SITENAME}}, and is managed by the community of experienced users.",
 	"reportincident-physical-harm-infotext": "A link to the incident {{GENDER:|you}} are reporting (including the reported user) and {{GENDER:|your}} own username and email address will be <b>shared privately with the [[meta:Special:MyLanguage/Threats_of_harm|Wikimedia Foundation emergency team]]</b>.",
 	"reportincident-physical-harm-footer": "{{GENDER:|Your}} report is [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|private]] and will be sent to the [[meta:Special:MyLanguage/Threats_of_harm|Wikimedia Foundation emergency team]] for review.",
 	"reportincident-threats-physical-harm": "Threats of physical harm",
