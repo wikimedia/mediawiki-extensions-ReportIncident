@@ -213,8 +213,6 @@ describe( 'Report Incident Dialog', () => {
 		beforeEach( () => {
 			jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
 				switch ( key ) {
-					case 'wgReportIncidentAdministratorsPage':
-						return 'Wikipedia:Administrators';
 					case 'wgReportIncidentUserHasConfirmedEmail':
 						return true;
 					case 'wgCurRevisionId':
