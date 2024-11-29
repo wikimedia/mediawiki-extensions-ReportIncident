@@ -11,6 +11,7 @@
 	"reportincident-dialog-violator-label": "Benotzer, deen {{GENDER:Dir}} melle wëllt",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Sexuell Belästegung",
 	"reportincident-dialog-harassment-type-something-else": "Eppes anescht",
+	"reportincident-dialog-harassment-type-spam": "Spam",
 	"reportincident-notification-link-to-page-prefix": "Link op d'Säit",
 	"reportincident-emaildialog-title": "Verifizéiert E-Mail-Adress néideg",
 	"reportincident-emaildialog-close-button": "Ofbriechen",
