@@ -291,6 +291,16 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			]
 		];
 
+		yield 'too long "details" field' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+				'physicalHarmType' => '',
+				'details' => str_repeat( 'a', 2000 ),
+			]
+		];
+
 		yield 'invalid "somethingElseDetails" field' => [
 			[
 				'reportedUser' => 'user',
@@ -298,6 +308,16 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
 				'physicalHarmType' => '',
 				'somethingElseDetails' => [ 'test' => 'testing' ]
+			]
+		];
+
+		yield 'too long "somethingElseDetails" field' => [
+			[
+				'reportedUser' => 'user',
+				'revisionId' => 123,
+				'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+				'physicalHarmType' => '',
+				'somethingElseDetails' => str_repeat( 'a', 2000 ),
 			]
 		];
 

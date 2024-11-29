@@ -71,7 +71,7 @@ module.exports = exports = {
 		const store = useFormStore();
 		const logEvent = useInstrument();
 
-		const somethingElseDetailsCodepointLimit = Constants.detailsCodepointLimit;
+		const somethingElseDetailsCodepointLimit = mw.config.get( 'wgReportIncidentDetailsCodePointLength' );
 
 		onMounted( () => logEvent( 'view', { source: 'describe_unacceptable_behavior' } ) );
 

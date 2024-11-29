@@ -5,6 +5,7 @@ namespace MediaWiki\Extension\ReportIncident\Tests\Unit;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\Context\IContextSource;
+use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Tests\Unit\MockServiceDependenciesTrait;
@@ -187,6 +188,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentUserHasConfirmedEmail' => true,
 				'wgReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 				'wgReportIncidentEnableInstrumentation' => true,
+				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -222,6 +224,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentUserHasConfirmedEmail' => true,
 				'wgReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 				'wgReportIncidentEnableInstrumentation' => true,
+				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -257,6 +260,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentUserHasConfirmedEmail' => false,
 				'wgReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 				'wgReportIncidentEnableInstrumentation' => true,
+				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );

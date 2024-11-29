@@ -22,6 +22,7 @@ use MediaWiki\User\UserNameUtils;
 use Psr\Log\LoggerInterface;
 use Wikimedia\Message\MessageValue;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\ParamValidator\TypeDef\StringDef;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
@@ -42,6 +43,11 @@ class ReportHandler extends SimpleHandler {
 
 	public const HTTP_STATUS_FORBIDDEN = 403;
 	public const HTTP_STATUS_NOT_FOUND = 404;
+
+	/**
+	 * The maximum length of the "details" and "somethingElseDetails" fields, in Unicode codepoints.
+	 */
+	public const MAX_DETAILS_LENGTH = 1000;
 
 	public function __construct(
 		Config $config,
@@ -352,11 +358,13 @@ class ReportHandler extends SimpleHandler {
 				static::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
+				StringDef::PARAM_MAX_CHARS => self::MAX_DETAILS_LENGTH,
 			],
 			'somethingElseDetails' => [
 				static::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
+				StringDef::PARAM_MAX_CHARS => self::MAX_DETAILS_LENGTH,
 			],
 			'threadId' => [
 				static::PARAM_SOURCE => 'body',
