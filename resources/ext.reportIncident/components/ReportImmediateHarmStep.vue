@@ -1,10 +1,10 @@
 <template>
 	<form id="reportincident-form" class="ext-reportincident-dialog-step2">
 		<cdx-message>
-			<!-- eslint-disable vue/no-v-html -->
-			<p
+			<parsed-message
 				class="ext-reportincident-dialog__message"
-				v-html="$i18n( 'reportincident-physical-harm-infotext' ).parse()"></p>
+				:message="infoTextMsg">
+			</parsed-message>
 			<!-- eslint-enable -->
 		</cdx-message>
 		<!-- who is violating behavior guidelines -->
@@ -61,6 +61,7 @@ const useFormStore = require( '../stores/Form.js' );
 const useInstrument = require( '../composables/useInstrument.js' );
 const { CdxField, CdxLookup, CdxMessage } = require( '@wikimedia/codex' );
 const CharacterLimitedTextArea = require( './CharacterLimitedTextArea.vue' );
+const ParsedMessage = require( './ParsedMessage.vue' );
 const { storeToRefs } = require( 'pinia' );
 const { computed, ref, onMounted, onUnmounted } = require( 'vue' );
 
@@ -71,7 +72,8 @@ module.exports = exports = {
 		CdxField,
 		CdxLookup,
 		CdxMessage,
-		CharacterLimitedTextArea
+		CharacterLimitedTextArea,
+		ParsedMessage
 	},
 	setup() {
 		const store = useFormStore();
@@ -83,6 +85,7 @@ module.exports = exports = {
 			inputDetails
 		} = storeToRefs( store );
 
+		const infoTextMsg = mw.message( 'reportincident-physical-harm-infotext' );
 		const inputReportedUserSelection = ref( '' );
 		const windowHeight = ref( window.innerHeight );
 		const suggestedUsernames = ref( [] );
@@ -211,6 +214,7 @@ module.exports = exports = {
 		}
 
 		return {
+			infoTextMsg,
 			inputDetails,
 			inputReportedUser,
 			inputReportedUserDisabled,

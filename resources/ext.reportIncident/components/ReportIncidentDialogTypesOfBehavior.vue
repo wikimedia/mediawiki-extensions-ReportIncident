@@ -1,13 +1,10 @@
 <template>
 	<form id="reportincident-form" class="ext-reportincident-dialog-types-of-behavior">
 		<cdx-message>
-			<!-- eslint-disable vue/no-v-html -->
-			<span
+			<parsed-message
 				class="ext-reportincident-dialog__message"
-				v-html="$i18n(
-					'reportincident-dialog-unacceptable-behavior-community-managed'
-				).parse()"
-			></span>
+				:message="noticeMsg"
+			></parsed-message>
 		</cdx-message>
 
 		<!-- type of unacceptable behavior -->
@@ -44,13 +41,10 @@
 			<template v-if="showSomethingElseDetailsCharacterCountLeft">
 				{{ somethingElseDetailsCharacterCountLeft }} characters left.
 			</template>
-			<!-- eslint-disable vue/no-v-html -->
-			<span
+			<parsed-message
 				class="ext-reportincident-dialog-types-of-behavior-footer"
-				v-html="$i18n(
-					'reportincident-dialog-record-for-statistical-purposes'
-				).parse()"
-			></span>
+				:message="footerMsg"
+			></parsed-message>
 		</cdx-field>
 	</form>
 </template>
@@ -63,6 +57,7 @@ const { storeToRefs } = require( 'pinia' );
 const { computed, onMounted, ref } = require( 'vue' );
 const { CdxField, CdxMessage, CdxRadio } = require( '@wikimedia/codex' );
 const CharacterLimitedTextArea = require( './CharacterLimitedTextArea.vue' );
+const ParsedMessage = require( './ParsedMessage.vue' );
 const Constants = require( '../Constants.js' );
 
 // @vue/component
@@ -72,7 +67,8 @@ module.exports = exports = {
 		CdxField,
 		CdxMessage,
 		CdxRadio,
-		CharacterLimitedTextArea
+		CharacterLimitedTextArea,
+		ParsedMessage
 	},
 
 	setup() {
@@ -106,6 +102,9 @@ module.exports = exports = {
 
 		const harassmentStatus = computed( () => store.formErrorMessages.inputBehaviors ? 'error' : 'default' );
 
+		const noticeMsg = mw.message( 'reportincident-dialog-unacceptable-behavior-community-managed' );
+		const footerMsg = mw.message( 'reportincident-dialog-record-for-statistical-purposes' );
+
 		/**
 		 * Callback when the radio button selection changes for the behavior type.
 		 */
@@ -128,7 +127,9 @@ module.exports = exports = {
 			showSomethingElseDetailsCharacterCountLeft,
 			harassmentStatus,
 			collectSomethingElseDetails,
-			onRadioButtonOptionChanged
+			onRadioButtonOptionChanged,
+			noticeMsg,
+			footerMsg
 		};
 	}
 };

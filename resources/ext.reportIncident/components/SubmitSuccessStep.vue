@@ -1,24 +1,21 @@
 <template>
 	<form id="reportincident-form" ref="form">
 		<cdx-message :type="messageType">
-			<!-- eslint-disable-next-line vue/no-v-html -->
-			<p class="ext-reportincident-dialog__message" v-html="banner.parse()"></p>
+			<parsed-message class="ext-reportincident-dialog__message" :message="banner">
+			</parsed-message>
 		</cdx-message>
 		<template v-for="section in sections" :key="section.title.key">
 			<h3 class="ext-reportincident-dialog__submit-success-section-header">
 				{{ section.title.text() }}
 			</h3>
-			<!-- eslint-disable vue/no-v-html -->
-			<p
+			<parsed-message
 				v-for="item in section.paragraphs"
 				:key="item.key"
-				v-html="item.parse()">
-			</p>
+				:message="item">
+			</parsed-message>
 			<ul v-if="section.listItems">
-				<li
-					v-for="item in section.listItems"
-					:key="item.key"
-					v-html="item.parse()">
+				<li v-for="item in section.listItems" :key="item.key">
+					<parsed-message :message="item"></parsed-message>
 				</li>
 			</ul>
 		</template>
@@ -28,6 +25,7 @@
 <script>
 const { computed, defineComponent, onMounted, ref } = require( 'vue' );
 const { CdxMessage } = require( '@wikimedia/codex' );
+const ParsedMessage = require( './ParsedMessage.vue' );
 const Constants = require( '../Constants.js' );
 const useFormStore = require( '../stores/Form.js' );
 const useInstrument = require( '../composables/useInstrument.js' );
@@ -35,7 +33,8 @@ const useInstrument = require( '../composables/useInstrument.js' );
 module.exports = exports = defineComponent( {
 	name: 'SubmitSuccessStep',
 	components: {
-		CdxMessage
+		CdxMessage,
+		ParsedMessage
 	},
 	props: {
 		links: { type: Object, required: true }

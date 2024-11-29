@@ -16,10 +16,11 @@
 			<cdx-message
 				v-if="showFooterHelpText"
 				:icon="footerIconName"
-				:inline="true"
-				class="ext-reportincident-dialog__footer_help">
-				<!-- eslint-disable-next-line vue/no-v-html -->
-				<span v-html="footerHelpTextMessageHtml"></span>
+				:inline="true">
+				<parsed-message
+					class="ext-reportincident-dialog-footer-help"
+					:message="footerHelpTextMessage">
+				</parsed-message>
 			</cdx-message>
 			<cdx-message
 				v-if="showFooterErrorText"
@@ -58,6 +59,7 @@ const useInstrument = require( '../composables/useInstrument.js' );
 const { storeToRefs } = require( 'pinia' );
 const { toRef, ref, computed } = require( 'vue' );
 const { CdxButton, CdxDialog, CdxMessage, useModelWrapper } = require( '@wikimedia/codex' );
+const ParsedMessage = require( './ParsedMessage.vue' );
 const icons = require( '../components/icons.json' );
 const Constants = require( '../Constants.js' );
 
@@ -68,7 +70,8 @@ module.exports = exports = {
 	components: {
 		CdxButton,
 		CdxDialog,
-		CdxMessage
+		CdxMessage,
+		ParsedMessage
 	},
 
 	props: {
@@ -157,10 +160,10 @@ module.exports = exports = {
 				mw.msg( 'reportincident-dialog-cancel' ) :
 				mw.msg( 'reportincident-dialog-back-btn' ) );
 
-		const footerHelpTextMessageHtml = computed(
+		const footerHelpTextMessage = computed(
 			() => store.incidentType === 'immediate-threat-physical-harm' ?
-				mw.message( 'reportincident-physical-harm-footer' ).parse() :
-				mw.message( 'reportincident-unacceptable-behavior-footer' ).parse() );
+				mw.message( 'reportincident-physical-harm-footer' ) :
+				mw.message( 'reportincident-unacceptable-behavior-footer' ) );
 
 		const footerIconName = computed( () => {
 			if ( !store.incidentType ) {
@@ -380,7 +383,7 @@ module.exports = exports = {
 			currentSlotName,
 			navigateNext,
 			navigatePrevious,
-			footerHelpTextMessageHtml,
+			footerHelpTextMessage,
 			footerErrorMessage,
 			showCancelOrBackButton,
 			showFooterHelpText,
@@ -408,7 +411,7 @@ module.exports = exports = {
 		float: right;
 	}
 
-	.ext-reportincident-dialog__footer_help span {
+	.ext-reportincident-dialog-footer-help {
 		color: @color-subtle;
 		// Necessary because it isn't currently possible to have an inline CodexMessage
 		// that uses a normal font weight. That will become possible with T331623.
