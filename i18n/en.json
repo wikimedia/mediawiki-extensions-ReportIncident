@@ -74,15 +74,15 @@
 	"reportincident-submit-emergency-section-next-item-email": "If {{GENDER:|you}} need to submit additional details, please email [mailto:emergency@wikimedia.org emergency@wikimedia.org].",
 	"reportincident-submit-behavior-dialog-title": "Get support for an incident",
 	"reportincident-submit-behavior-notice": "Admins can help with [[$1|urgent incidents and ongoing problems]] with user behavior.",
-	"reportincident-submit-behavior-section-support-title": "How to get support",
-	"reportincident-submit-behavior-section-support-item-behavior": "{{SITENAME}} is a community where inappropriate behavior is [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|not tolerated]] and unacceptable behavior is managed by the community of experienced {{SITENAME}} users:",
+	"reportincident-submit-behavior-section-support-title": "What to do next",
+	"reportincident-submit-behavior-section-support-item-behavior": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|Unacceptable behavior]] is managed by the community of experienced {{SITENAME}} users",
 	"reportincident-submit-behavior-section-support-item-guidelines": "The [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct|Universal Code of Conduct]] has [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct/Enforcement_guidelines|enforcement guidelines]] that explain how inappropriate behavior should be resolved.",
 	"reportincident-submit-behavior-section-support-item-dispute-resolution": "[[$1|Dispute resolution]] is often the first step for simple on-wiki issues. If {{GENDER:|you}} feel safe doing so, {{GENDER:|you}} can try talking to the person {{GENDER:|you}} are reporting, on their user talk page.",
 	"reportincident-submit-behavior-section-support-item-admins": "Admins can help with [[$1|urgent and ongoing incidents]].",
 	"reportincident-submit-behavior-section-support-item-mentors": "If {{GENDER:|you}} are new, [[Special:Homepage|ask {{GENDER:|your}} mentor]] to guide {{GENDER:|you}} through the process.",
 	"reportincident-submit-behavior-section-support-item-info-is-public": "All conversations on the wikis are public, please do not share personal information.",
 	"reportincident-submit-behavior-section-other-options-title": "Can't find what {{GENDER:|you're}} looking for?",
-	"reportincident-submit-behavior-section-other-options-item-ask": "If {{GENDER:|your}} issue isn't covered, [[$1|please ask the community]] for help.",
+	"reportincident-submit-behavior-section-other-options-item-ask": "If {{GENDER:|you're}} unsure what to do, [[$1|please ask the community]] for help.",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "If the steps above did not help {{GENDER:|you}}, {{GENDER:|you}} can contact the [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|non-profit organization]] that hosts this website.",
 	"reportincident-submit-back-to-page": "Back to $1"
 }
