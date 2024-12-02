@@ -549,4 +549,68 @@ describe( 'Report Incident Dialog', () => {
 		} );
 	}
 
+	describe( 'primary button label', () => {
+		const primaryButtonLabelTestCases = {
+			'on initial screen': [
+				Constants.DIALOG_STEP_1,
+				'',
+				'reportincident-dialog-continue',
+				[]
+			],
+			'when reporting unacceptable behavior': [
+				Constants.DIALOG_STEP_2,
+				Constants.typeOfIncident.unacceptableUserBehavior,
+				'reportincident-dialog-continue',
+				[]
+			],
+			'when reporting immediate threat': [
+				Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM,
+				Constants.typeOfIncident.immediateThreatPhysicalHarm,
+				'reportincident-dialog-submit-btn',
+				[]
+			],
+			'on success screen after reporting immediate threat': [
+				Constants.DIALOG_STEP_SUBMIT_SUCCESS,
+				Constants.typeOfIncident.immediateThreatPhysicalHarm,
+				'reportincident-submit-back-to-page',
+				[ 'Test multiple underscores' ]
+			],
+			'on success screen after reporting unacceptable behavior': [
+				Constants.DIALOG_STEP_SUBMIT_SUCCESS,
+				Constants.typeOfIncident.unacceptableUserBehavior,
+				'reportincident-submit-back-to-page',
+				[ 'Test multiple underscores' ]
+			]
+		};
+
+		for ( const testName of Object.keys( primaryButtonLabelTestCases ) ) {
+			const [
+				initialStep, incidentType, expectedMsg, expectedArgs
+			] = primaryButtonLabelTestCases[ testName ];
+
+			it( testName, () => {
+				jest.spyOn( mw, 'msg' ).mockImplementation( ( key ) => key );
+				const mockConfig = {
+					// T381184
+					wgPageName: 'Test_multiple_underscores'
+				};
+				jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => mockConfig[ key ] );
+
+				const wrapper = renderComponent(
+					{ open: true, initialStep },
+					{},
+					{ incidentType }
+				);
+				const primaryButton = wrapper.find(
+					'.ext-reportincident-dialog-footer__next-btn'
+				);
+
+				const mwMsgArgs = mw.msg.mock.calls.find( ( args ) => args[ 0 ] === expectedMsg );
+
+				expect( primaryButton.text() ).toBe( expectedMsg );
+				expect( mwMsgArgs ).toEqual( [ expectedMsg, ...expectedArgs ] );
+			} );
+		}
+	} );
+
 } );
