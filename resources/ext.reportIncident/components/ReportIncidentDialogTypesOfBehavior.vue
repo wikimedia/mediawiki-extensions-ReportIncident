@@ -37,10 +37,6 @@
 				).text()"
 			>
 			</character-limited-text-area>
-			<parsed-message
-				class="ext-reportincident-dialog-types-of-behavior-footer"
-				:message="footerMsg"
-			></parsed-message>
 		</cdx-field>
 	</form>
 </template>
@@ -95,7 +91,6 @@ module.exports = exports = {
 		const harassmentStatus = computed( () => store.formErrorMessages.inputBehaviors ? 'error' : 'default' );
 
 		const noticeMsg = mw.message( 'reportincident-dialog-unacceptable-behavior-community-managed' );
-		const footerMsg = mw.message( 'reportincident-dialog-record-for-statistical-purposes' );
 
 		/**
 		 * Callback when the radio button selection changes for the behavior type.
@@ -118,8 +113,7 @@ module.exports = exports = {
 			harassmentStatus,
 			collectSomethingElseDetails,
 			onRadioButtonOptionChanged,
-			noticeMsg,
-			footerMsg
+			noticeMsg
 		};
 	}
 };
@@ -136,10 +130,4 @@ module.exports = exports = {
 	}
 }
 
-.ext-reportincident-dialog-types-of-behavior-footer {
-	font-size: @font-size-small;
-	line-height: @color-base--subtle;
-	margin-top: @spacing-125;
-	display: block;
-}
 </style>
