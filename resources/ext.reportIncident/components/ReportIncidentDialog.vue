@@ -147,7 +147,7 @@ module.exports = exports = {
 				case Constants.DIALOG_STEP_SUBMIT_SUCCESS:
 					return mw.msg(
 						'reportincident-submit-back-to-page',
-						mw.config.get( 'wgPageName' ).replace( '_', ' ' )
+						mw.config.get( 'wgPageName' ).replace( /_/g, ' ' )
 					);
 
 				default:
