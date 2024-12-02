@@ -45,18 +45,6 @@
 			],
 			"description": "Determines what namespaces the Incident Reporting tool will render within. The default is 3 which defaults to the NS_USER_TALK namespace"
 		},
-		"ReportIncidentAdministratorsPage": {
-			"value": "Main_Page",
-			"description": "The page the report incident form links to when specifying who will review an incident report. This value will be passed to mw.util.getUrl(); a DB prefix is allowed, e.g. Wikipedia:Administrators"
-		},
-		"ReportIncidentRecipientEmails": {
-			"value": [],
-			"description": "An array of email addresses that should receive reports sent via the incident report system. An empty array means that ReportIncident will not attempt to send any emails when a user files an incident report."
-		},
-		"ReportIncidentEmailFromAddress": {
-			"value": "",
-			"description": "Email to use as the 'from' address for emails that ReportIncident sends. If not set, ReportIncident cannot send emails when users file an incident report."
-		},
 		"ReportIncidentMinimumAccountAgeInSeconds": {
 			"value": 10800,
 			"description": "User accounts must be older than this value in order to submit a report. The default is 3 hours."

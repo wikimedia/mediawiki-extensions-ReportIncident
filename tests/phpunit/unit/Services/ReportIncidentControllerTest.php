@@ -173,7 +173,6 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 
 	public function testAddModulesAndConfigVarsForMinerva() {
 		$config = new HashConfig( [
-			'ReportIncidentAdministratorsPage' => 'Main_Page',
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 			'ReportIncidentEnableInstrumentation' => true,
@@ -184,7 +183,6 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$outputPageMock->method( 'getUser' )->willReturn( $userMock );
 		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
 			->with( [
-				'wgReportIncidentAdministratorsPage' => 'Main_Page',
 				'wgReportIncidentUserHasConfirmedEmail' => true,
 				'wgReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 				'wgReportIncidentEnableInstrumentation' => true,
@@ -209,7 +207,6 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 
 	public function testAddModulesAndConfigVars() {
 		$config = new HashConfig( [
-			'ReportIncidentAdministratorsPage' => 'Main_Page',
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 			'ReportIncidentEnableInstrumentation' => true,
@@ -220,7 +217,6 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$outputPageMock->method( 'getUser' )->willReturn( $userMock );
 		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
 			->with( [
-				'wgReportIncidentAdministratorsPage' => 'Main_Page',
 				'wgReportIncidentUserHasConfirmedEmail' => true,
 				'wgReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 				'wgReportIncidentEnableInstrumentation' => true,
@@ -245,7 +241,6 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 
 	public function testAddModulesAndConfigVarsNoConfirmedEmail() {
 		$config = new HashConfig( [
-			'ReportIncidentAdministratorsPage' => 'Main_Page',
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 			'ReportIncidentEnableInstrumentation' => true,
@@ -256,7 +251,6 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$outputPageMock->method( 'getUser' )->willReturn( $userMock );
 		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
 			->with( [
-				'wgReportIncidentAdministratorsPage' => 'Main_Page',
 				'wgReportIncidentUserHasConfirmedEmail' => false,
 				'wgReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 				'wgReportIncidentEnableInstrumentation' => true,

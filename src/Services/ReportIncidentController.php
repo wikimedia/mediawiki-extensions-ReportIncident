@@ -80,8 +80,6 @@ class ReportIncidentController {
 		$isDeveloperMode = $this->config->get( 'ReportIncidentDeveloperMode' );
 		$pretendUserHasConfirmedEmail = $isDeveloperMode && $output->getRequest()->getBool( 'withconfirmedemail' );
 		$output->addJsConfigVars( [
-			// Add the link to the administrators page for use by the dialog.
-			'wgReportIncidentAdministratorsPage' => $this->config->get( 'ReportIncidentAdministratorsPage' ),
 			// If in developer mode, pretend the user has a confirmed email if the query parameter is set to
 			// 'withconfirmedemail=1', otherwise use DB value.
 			'wgReportIncidentUserHasConfirmedEmail' => $pretendUserHasConfirmedEmail ?: $user->isEmailConfirmed(),

@@ -70,8 +70,6 @@ describe( 'Main Component Test Suite', () => {
 	beforeEach( () => {
 		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
 			switch ( key ) {
-				case 'wgReportIncidentAdministratorsPage':
-					return 'Wikipedia:Administrators';
 				case 'wgReportIncidentUserHasConfirmedEmail':
 					return true;
 				default:
@@ -119,8 +117,6 @@ describe( 'Main Component Test Suite', () => {
 		global.mw.config.get = jest.fn();
 		global.mw.config.get.mockImplementation( ( key ) => {
 			switch ( key ) {
-				case 'wgReportIncidentAdministratorsPage':
-					return 'Wikipedia:Administrators';
 				case 'wgReportIncidentUserHasConfirmedEmail':
 					return false;
 				default:
