@@ -8,7 +8,6 @@
 	"reportincident-dialog-additional-details-input-placeholder": "Содтӧ доналісьлӧ колана контекст. Ті вермат пыртны зык йылісь юӧртан ыстісьӧммез.",
 	"reportincident-dialog-violator-label": "Вӧдитчись {{РӦД:|тійӧ}} кӧсйис бы юӧртны",
 	"reportincident-dialog-something-else-input-placeholder": "Мыччалӧ иньдӧт,кӧда абу гижӧм вылын",
-	"reportincident-dialog-violator-nonexistent": "{{GENDER:|Ті}} Колӧ иньдыны вӧдитчисьлісь быльнӧй ним, медбы юӧртны",
 	"reportincident-dialog-internet-disconnected-error": "Вермас лоны, тіян абу ӧтуввезкӧт йитӧм.Пожалуйста, ыстӧ мӧдпырся, кор лоас дзоньтӧм йитӧмыс.",
 	"reportincident-dialog-server-error": "Извинитӧ, миян сервер оз видз очакыв.Пожалуйста, пондылӧ ыстыны мӧдпырся.",
 	"reportincident-dialog-generic-error": "{{GENDER:|Тіян}} шыӧтчӧм эз артмы ыстыны сорсьӧм понда.Пожалуйста, пондылӧ ыстыны шыӧтчӧм мӧдпырся.",

@@ -21,7 +21,6 @@
 	"reportincident-dialog-harassment-type-something-else": "Jokin muu",
 	"reportincident-dialog-harassment-type-spam": "Roskapostitus",
 	"reportincident-dialog-harassment-type-trolling": "Trollaus",
-	"reportincident-dialog-violator-empty": "{{GENDER:|Sinun}} tulee annettava käyttäjänimi, josta haluat tehdä ilmoituksen.",
 	"reportincident-emaildialog-close-button": "Peruuta",
 	"reportincident-emaildialog-primary": "Mene asetuksiin",
 	"reportincident-choose-option": "Valitse vaihtoehto",

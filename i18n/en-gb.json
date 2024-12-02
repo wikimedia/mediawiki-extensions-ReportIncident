@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Dreamy Jazz"
+			"Dreamy Jazz",
+			"Jon Harald Søby"
 		]
 	},
-	"reportincident-dialog-harassment-type-label": "What type of behaviour?",
+	"reportincident-dialog-harassment-type-label": "Type of unacceptable behaviour",
 	"reportincident-dialog-something-else-input-placeholder": "Specify the behaviours not listed above.",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|You}} must select at least one behaviour.",
-	"reportincident-dialog-something-else-empty": "Please provide a short description of the behaviour."
+	"reportincident-dialog-something-else-empty": "Please provide a short description of the behaviour.",
+	"reportincident-behavior-required": "Please select the type of unacceptable behaviour",
+	"reportincident-submit-behavior-notice": "Admins can help with [[$1|urgent incidents and ongoing problems]] with user behaviour."
 }

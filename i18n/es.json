@@ -22,7 +22,6 @@
 	"reportincident-dialog-harassment-type-something-else": "Algo más",
 	"reportincident-dialog-something-else-input-placeholder": "Especifique los comportamientos que no figuran en la lista anterior.",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|Debes}} seleccionar al menos un comportamiento.",
-	"reportincident-dialog-violator-empty": "{{GENDER:|Debes}} indicar un nombre de usuario sobre el que informar.",
 	"reportincident-dialog-something-else-empty": "Describe brevemente el comportamiento.",
 	"reportincident-unable-to-send": "No se ha podido enviar por correo electrónico el informe del incidente.",
 	"right-reportincident": "Reportar un incidente",
