@@ -409,6 +409,7 @@ module.exports = exports = {
 .ext-reportincident-dialog {
 	.ext-reportincident-dialog-footer {
 		float: right;
+		margin-top: @spacing-50;
 	}
 
 	.ext-reportincident-dialog-footer-help {
@@ -425,6 +426,10 @@ module.exports = exports = {
 		// NOTE: Add extra cascade due to conflicting MobileFrontend styling.
 		p.ext-reportincident-dialog-footer-help {
 			font-size: @font-size-small;
+		}
+
+		.ext-reportincident-dialog-footer {
+			margin-top: @spacing-75;
 		}
 	}
 }
