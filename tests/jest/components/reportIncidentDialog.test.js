@@ -18,7 +18,7 @@ const { nextTick } = require( 'vue' );
 
 const steps = {
 	[ Constants.DIALOG_STEP_1 ]: '<p>Step 1</p>',
-	[ Constants.DIALOG_STEP_2 ]: '<p>Step 2</p>'
+	[ Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ]: '<p>Type of Behavior</p>'
 };
 
 /**
@@ -93,82 +93,167 @@ describe( 'Report Incident Dialog', () => {
 		expect( wrapper.text() ).not.toContain( 'Step 2' );
 	} );
 
-	describe( 'footer messages', () => {
-		it( 'Should not display a footer explanation when first rendered and no radio button is selected', () => {
-			const wrapper = renderComponent( { open: true } );
-			expect( wrapper.vm.showFooterHelpText ).toBe( false );
+	describe( 'Footer', () => {
+		describe( 'on Step 1', () => {
+			it( 'should not display help text when first rendered and no radio button is selected', () => {
+				const wrapper = renderComponent( { open: true } );
+
+				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
+				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
+			} );
+			it( 'should not initially display form error messages', () => {
+				const wrapper = renderComponent( { open: true } );
+				wrapper.vm.footerErrorMessage = 'test';
+
+				expect( wrapper.vm.showFooterErrorText ).toBe( false );
+				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
+				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
+			} );
+			it( 'should show validation errors if no incident type is selected', async () => {
+				const wrapper = renderComponent( { open: true } );
+				const store = useFormStore();
+				const { showValidationError } = storeToRefs( store );
+
+				await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
+				await wrapper.vm.$nextTick();
+
+				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+				expect( store.isIncidentTypeSelected() ).toBe( false );
+				expect( showValidationError.value ).toBe( true );
+			} );
+			it( 'should not display help text if no behavior is selected', () => {
+				const wrapper = renderComponent( { open: true } );
+				const store = useFormStore();
+				store.incidentType = '';
+
+				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
+				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
+			} );
+			it( 'should display help text with a help icon if a behavior is selected', () => {
+				const wrapper = renderComponent( { open: true } );
+				const store = useFormStore();
+				store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
+
+				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( true );
+				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
+			} );
+			it( 'should display form error messages once a behavior is selected', () => {
+				const wrapper = renderComponent( { open: true } );
+				const store = useFormStore();
+				store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
+				wrapper.vm.footerErrorMessage = 'test';
+
+				expect( wrapper.vm.showFooterErrorText ).toBe( false );
+				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( true );
+				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
+			} );
 		} );
 
-		it( 'Should show validation errors if no incident type is selected', async () => {
-			const wrapper = renderComponent( { open: true } );
-			const store = useFormStore();
-			const { showValidationError } = storeToRefs( store );
+		describe( 'on Step 2', () => {
+			describe( 'when showing the list of Behavior types', () => {
+				it( 'should display help text messages without an icon', () => {
+					const wrapper = renderComponent( {
+						open: true,
+						initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
+					} );
 
-			await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
-			await wrapper.vm.$nextTick();
+					const store = useFormStore();
+					store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
 
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
-			expect( store.isIncidentTypeSelected() ).toBe( false );
-			expect( showValidationError.value ).toBe( true );
-		} );
+					expect( wrapper.vm.showFooterErrorText ).toBe( false );
+					expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
+					expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( true );
+				} );
+				it( 'should display form error messages', async () => {
+					const wrapper = renderComponent( {
+						open: true,
+						initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
+					} );
 
-		it( 'Should display help text only on step 1', () => {
-			const wrapper = renderComponent( { open: true } );
-			const store = useFormStore();
-			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
-			expect( wrapper.vm.showFooterHelpText ).toBe( true );
-		} );
+					wrapper.vm.footerErrorMessage = 'test';
 
-		it( 'Should not display form error messages on step 1', () => {
-			const wrapper = renderComponent( { open: true } );
-			wrapper.vm.footerErrorMessage = 'test';
-			expect( wrapper.vm.showFooterErrorText ).toBe( false );
-		} );
+					const store = useFormStore();
+					store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
 
-		it( 'Should display form error messages on step 2', () => {
-			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
-			wrapper.vm.footerErrorMessage = 'test';
-			expect( wrapper.vm.showFooterErrorText ).toBe( true );
+					expect( wrapper.vm.showFooterErrorText ).toBe( true );
+					expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
+					expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( true );
+				} );
+			} );
+			describe( 'when reporting an Immediate Harm', () => {
+				it( 'should display form error messages', () => {
+					const wrapper = renderComponent( {
+						open: true,
+						initialStep: Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM
+					} );
+
+					wrapper.vm.footerErrorMessage = 'test';
+
+					const store = useFormStore();
+					store.incidentType = Constants.typeOfIncident.immediateThreatPhysicalHarm;
+
+					expect( wrapper.vm.showFooterErrorText ).toBe( true );
+					expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( true );
+					expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
+				} );
+			} );
 		} );
 
 		describe( 'footer server error messages', () => {
 			it( 'Should add footer error message on call to onReportSubmitFailure with no data', () => {
-				const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+				const wrapper = renderComponent( {
+					open: true,
+					initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
+				} );
 				jest.spyOn( navigator, 'onLine', 'get' ).mockReturnValue( true );
 				// No JSON in the error object should lead the generic error to display.
 				wrapper.vm.onReportSubmitFailure( 'http', {
 					xhr: { status: 0 }
 				} );
 				expect( wrapper.vm.showFooterErrorText ).toBe( true );
+				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
+				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-generic-error' );
 			} );
 
 			it( 'Should add footer error message on call to onReportSubmitFailure with no data when offline', () => {
-				const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+				const wrapper = renderComponent( {
+					open: true,
+					initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
+				} );
 				// Mock that navigator.onLine is false.
 				jest.spyOn( navigator, 'onLine', 'get' ).mockReturnValue( false );
 				wrapper.vm.onReportSubmitFailure( 'http', {
 					xhr: { status: 0 }
 				} );
 				expect( wrapper.vm.showFooterErrorText ).toBe( true );
+				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
+				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
 				// As navigator.onLine is false, the internet disconnected error should be shown
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-internet-disconnected-error' );
 			} );
 
 			it( 'Should add footer error message on call to onReportSubmitFailure with xhr indicating server error', () => {
-				const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+				const wrapper = renderComponent( {
+					open: true, initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
+				} );
 				jest.spyOn( navigator, 'onLine', 'get' ).mockReturnValue( true );
 				// Set the HTTP status code to 501, which is a 5XX code.
 				wrapper.vm.onReportSubmitFailure( 'http', {
 					xhr: { status: 501 }
 				} );
+
 				expect( wrapper.vm.showFooterErrorText ).toBe( true );
+				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
+				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
 				// As the HTTP status code is 5XX, the server error message should be shown
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-server-error' );
 			} );
 
 			it( 'Should use server-side error message on call to onReportSubmitFailure when available', () => {
-				const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+				const wrapper = renderComponent( {
+					open: true, initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
+				} );
 				const errMsg = 'This is some server error';
 
 				jest.spyOn( mw.config, 'get' ).mockReturnValue( 'en' );
@@ -179,11 +264,15 @@ describe( 'Report Incident Dialog', () => {
 
 				expect( mw.config.get.mock.calls ).toEqual( [ [ 'wgUserLanguage' ] ] );
 				expect( wrapper.vm.showFooterErrorText ).toBe( true );
+				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
+				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
 				expect( wrapper.vm.footerErrorMessage ).toBe( errMsg );
 			} );
 
 			it( 'Should use generic error message on call to onReportSubmitFailure when server-side error message is unlocalized', () => {
-				const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+				const wrapper = renderComponent( {
+					open: true, initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
+				} );
 				const errMsg = 'This is some server error';
 
 				jest.spyOn( mw.config, 'get' ).mockReturnValue( 'de' );
@@ -194,16 +283,23 @@ describe( 'Report Incident Dialog', () => {
 
 				expect( mw.config.get.mock.calls ).toEqual( [ [ 'wgUserLanguage' ] ] );
 				expect( wrapper.vm.showFooterErrorText ).toBe( true );
+				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
+				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-generic-error' );
 			} );
 
 			it( 'Should add footer error message on call to onReportSubmitFailure with errorKey that is not otherwise handled', () => {
-				const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
+				const wrapper = renderComponent( {
+					open: true,
+					initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
+				} );
 				wrapper.vm.onReportSubmitFailure( 'http', {
 					xhr: { status: 403, responseJSON: { errorKey: 'apierror-permissiondenied' } }
 				} );
 				// This error is not handled separately, so the generic error should be shown.
 				expect( wrapper.vm.showFooterErrorText ).toBe( true );
+				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
+				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-generic-error' );
 			} );
 		} );
@@ -228,17 +324,22 @@ describe( 'Report Incident Dialog', () => {
 		it( 'navigates from STEP 1 to STEP 2 when the next button is clicked', async () => {
 			const wrapper = renderComponent( { open: true } );
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
+
 			const store = useFormStore();
 			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
+
 			await wrapper.vm.$nextTick();
 			return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
-				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES );
 			} );
 		} );
 
 		it( 'navigates from STEP 2 to STEP 1 when the back button is clicked', () => {
-			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+			const wrapper = renderComponent( {
+				open: true,
+				initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
+			} );
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES );
 
 			return wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' ).then( () => {
 				expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
@@ -246,8 +347,11 @@ describe( 'Report Incident Dialog', () => {
 		} );
 
 		it( 'Clears any form data if navigating back twice from STEP 2', async () => {
-			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+			const wrapper = renderComponent( {
+				open: true,
+				initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
+			} );
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES );
 
 			const store = useFormStore();
 
@@ -276,8 +380,11 @@ describe( 'Report Incident Dialog', () => {
 		} );
 
 		it( 'attempts to submit form when next is clicked on STEP 2 and has invalid form data', async () => {
-			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_2 } );
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+			const wrapper = renderComponent( {
+				open: true,
+				initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
+			} );
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES );
 
 			const store = useFormStore();
 			const restPost = mockRestPost( Promise.resolve() );
@@ -317,64 +424,66 @@ describe( 'Report Incident Dialog', () => {
 
 		describe( 'attempts to submit form when next is clicked on STEP 2', () => {
 			const validSubmitTestCases = {
-				'valid form data': [
-					{
+				'valid form data': {
+					initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
+					initialState: {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
 						inputReportedUser: 'test user'
 					},
-					{
+					expectedRestPayload: {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						behaviorType: Constants.harassmentTypes.HATE_SPEECH,
 						reportedUser: 'test user',
 						revisionId: 1
 					}
-				],
-				'valid form data in emergency flow': [
-					{
+				},
+				'valid form data in emergency flow': {
+					initialStep: Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM,
+					initialState: {
 						incidentType: Constants.typeOfIncident.immediateThreatPhysicalHarm,
 						physicalHarmType: Constants.physicalHarmTypes.physicalHarm,
 						inputDetails: 'some details',
 						inputReportedUser: 'test user'
 					},
-					{
+					expectedRestPayload: {
 						incidentType: Constants.typeOfIncident.immediateThreatPhysicalHarm,
 						physicalHarmType: Constants.physicalHarmTypes.physicalHarm,
 						details: 'some details',
 						reportedUser: 'test user',
 						revisionId: 1
 					}
-				],
-				'valid form data with "something else"': [
-					{
+				},
+				'valid form data with "something else"': {
+					initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
+					initialState: {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						inputBehavior: Constants.harassmentTypes.OTHER,
 						inputSomethingElseDetails: 'details',
 						inputReportedUser: 'test user'
 					},
-					{
+					expectedRestPayload: {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						behaviorType: Constants.harassmentTypes.OTHER,
 						somethingElseDetails: 'details',
 						reportedUser: 'test user',
 						revisionId: 1
 					}
-				]
+				}
 			};
 
 			for ( const testName of Object.keys( validSubmitTestCases ) ) {
-				const [ initialState, expectedRestPayload ] = validSubmitTestCases[ testName ];
+				const { initialStep, initialState, expectedRestPayload } = validSubmitTestCases[ testName ];
 
 				it( testName, async () => {
 					const wrapper = renderComponent(
-						{ open: true, initialStep: Constants.DIALOG_STEP_2 },
+						{ open: true, initialStep: initialStep },
 						undefined,
 						initialState
 					);
-					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_2 );
+					expect( wrapper.vm.currentSlotName ).toBe( initialStep );
 
 					const store = useFormStore();
-
 					const restPost = mockRestPost( Promise.resolve() );
 
 					expect( store.isFormValidForSubmission() ).toBe( true );
@@ -433,27 +542,33 @@ describe( 'Report Incident Dialog', () => {
 		} );
 
 		const submitErrorTestCases = {
-			'API error when submitting from non-emergency flow': [
-				Constants.DIALOG_STEP_2,
-				Constants.typeOfIncident.unacceptableUserBehavior,
-				'',
-				Constants.harassmentTypes.INTIMIDATION
-			],
-			'API error when submitting from emergency flow': [
-				Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM,
-				Constants.typeOfIncident.immediateThreatPhysicalHarm,
-				Constants.physicalHarmTypes.publicHarm,
-				''
-			]
+			'API error when submitting from non-emergency flow': {
+				initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+				physicalHarmType: '',
+				behaviorType: Constants.harassmentTypes.INTIMIDATION
+			},
+			'API error when submitting from emergency flow': {
+				initialStep: Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM,
+				incidentType: Constants.typeOfIncident.immediateThreatPhysicalHarm,
+				physicalHarmType: Constants.physicalHarmTypes.publicHarm,
+				behaviorType: ''
+			}
 		};
 
 		for ( const testName of Object.keys( submitErrorTestCases ) ) {
-			const [
-				initialStep, incidentType, physicalHarmType, behaviorType
-			] = submitErrorTestCases[ testName ];
+			const {
+				initialStep,
+				incidentType,
+				physicalHarmType,
+				behaviorType
+			} = submitErrorTestCases[ testName ];
 
 			it( testName, async () => {
-				const wrapper = renderComponent( { open: true, initialStep } );
+				const wrapper = renderComponent( {
+					open: true,
+					initialStep
+				} );
 				expect( wrapper.vm.currentSlotName ).toBe( initialStep );
 
 				const store = useFormStore();
