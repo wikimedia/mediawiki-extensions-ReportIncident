@@ -75,7 +75,7 @@
 	"reportincident-submit-behavior-dialog-title": "Get support for an incident",
 	"reportincident-submit-behavior-notice": "Admins can help with [[$1|urgent incidents and ongoing problems]] with user behavior.",
 	"reportincident-submit-behavior-section-support-title": "What to do next",
-	"reportincident-submit-behavior-section-support-item-behavior": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|Unacceptable behavior]] is managed by the community of experienced {{SITENAME}} users",
+	"reportincident-submit-behavior-section-support-item-behavior": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|Unacceptable behavior]] is managed by the community of experienced {{SITENAME}} users:",
 	"reportincident-submit-behavior-section-support-item-guidelines": "The [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct|Universal Code of Conduct]] has [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct/Enforcement_guidelines|enforcement guidelines]] that explain how inappropriate behavior should be resolved.",
 	"reportincident-submit-behavior-section-support-item-dispute-resolution": "[[$1|Dispute resolution]] is often the first step for simple on-wiki issues. If {{GENDER:|you}} feel safe doing so, {{GENDER:|you}} can try talking to the person {{GENDER:|you}} are reporting, on their user talk page.",
 	"reportincident-submit-behavior-section-support-item-admins": "Admins can help with [[$1|urgent and ongoing incidents]].",
