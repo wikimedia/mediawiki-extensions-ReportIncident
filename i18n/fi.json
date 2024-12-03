@@ -15,9 +15,12 @@
 	"reportincident-dialog-additional-details-input-label": "Lisätietoja",
 	"reportincident-dialog-optional-label": "(valinnainen)",
 	"reportincident-dialog-violator-label": "Käyttäjä, josta {{GENDER:|haluat}} tehdä ilmoituksen",
+	"reportincident-dialog-violator-placeholder-text": "Kenestä {{GENDER:|teet}} ilmoituksen?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Vihapuhe tai syrjintä",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Seksuaalinen häirintä",
 	"reportincident-dialog-harassment-type-threats-of-violence": "Väkivallalla uhkailu",
 	"reportincident-dialog-harassment-type-intimidation": "Uhkailu, hyökkäys, nimittely",
-	"reportincident-dialog-harassment-type-something-else": "Jokin muu"
+	"reportincident-dialog-harassment-type-something-else": "Jokin muu",
+	"reportincident-emaildialog-close-button": "Peruuta",
+	"reportincident-emaildialog-primary": "Mene asetuksiin"
 }
