@@ -1,11 +1,8 @@
 <template>
-	<div ref="textAreaWrapperRef">
-		<cdx-text-area
-			v-bind="$attrs"
-			v-model="computedTextContent"
-			@input="updateCharacterCount"
-		></cdx-text-area>
-	</div>
+	<cdx-text-area
+		v-bind="$attrs"
+		v-model="computedTextContent"
+	></cdx-text-area>
 	<span
 		v-if="remainingCharacters !== ''"
 		class="ext-reportincident-dialog__textarea-character-count">
@@ -15,8 +12,8 @@
 
 <script>
 const { CdxTextArea } = require( '@wikimedia/codex' );
-const { computed, onMounted, ref } = require( 'vue' );
-const { codePointLength } = require( 'mediawiki.String' );
+const { computed, watch } = require( 'vue' );
+const { codePointLength, trimCodePointLength } = require( 'mediawiki.String' );
 
 // A Codex textarea with a character limit.
 // @vue/component
@@ -38,56 +35,44 @@ module.exports = exports = {
 		textContent: { type: String, required: true }
 	},
 	emits: [
-		'update:remaining-characters',
 		'update:text-content'
 	],
 	setup( props, ctx ) {
 		const codePointLimit = props.codePointLimit;
-		const textAreaWrapperRef = ref( null );
-		const remainingCharacters = ref( '' );
 
 		const computedTextContent = computed( {
 			get: () => props.textContent,
 			set: ( value ) => ctx.emit( 'update:text-content', value )
 		} );
 
-		/**
-		 * Updates the count of remaining characters when the content changes.
-		 *
-		 * @param {Event} event The input event that changed the content.
-		 */
-		function updateCharacterCount( event ) {
-			const value = event.target.value;
+		const remainingCharacters = computed( () => {
+			if ( computedTextContent.value === '' ) {
+				return '';
+			}
 
-			const remaining = codePointLimit - codePointLength( value );
+			const remaining = codePointLimit - codePointLength( computedTextContent.value );
 
 			// Only show the character counter as the user is approaching the limit,
 			// to avoid confusion stemming from our definition of a character not matching
 			// the user's own expectations of what counts as a character.
 			// This is consistent with other features such as VisualEditor.
 			if ( remaining > 99 ) {
-				remainingCharacters.value = '';
-			} else {
-				remainingCharacters.value = mw.language.convertNumber( remaining );
+				return '';
 			}
-		}
 
-		onMounted( () => {
-			const $textarea = $( textAreaWrapperRef.value ).find( 'textarea' );
+			return mw.language.convertNumber( remaining );
+		} );
 
-			$textarea.codePointLimit( codePointLimit );
-			$textarea.on( 'change', () => {
-				// Needed because Vue cannot listen to JQuery events, so
-				// a native JS input event is needed to cause an update.
-				$textarea[ 0 ].dispatchEvent( new CustomEvent( 'input' ) );
-			} );
+		watch( computedTextContent, () => {
+			if ( codePointLength( computedTextContent.value ) > codePointLimit ) {
+				const { newVal } = trimCodePointLength( '', computedTextContent.value, codePointLimit );
+				computedTextContent.value = newVal;
+			}
 		} );
 
 		return {
-			textAreaWrapperRef,
 			computedTextContent,
-			remainingCharacters,
-			updateCharacterCount
+			remainingCharacters
 		};
 	}
 };
