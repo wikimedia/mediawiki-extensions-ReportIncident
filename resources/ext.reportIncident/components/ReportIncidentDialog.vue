@@ -13,8 +13,13 @@
 
 		<!-- dialog footer -->
 		<template #footer>
+			<parsed-message
+				v-if="showFooterHelpTextWithoutIcon"
+				class="ext-reportincident-dialog-footer-help"
+				:message="footerHelpTextMessage">
+			</parsed-message>
 			<cdx-message
-				v-if="showFooterHelpText"
+				v-if="showFooterHelpTextWithIcon"
 				:icon="footerIconName"
 				:inline="true">
 				<parsed-message
@@ -66,21 +71,18 @@ const Constants = require( '../Constants.js' );
 // @vue/component
 module.exports = exports = {
 	name: 'ReportIncidentDialog',
-
 	components: {
 		CdxButton,
 		CdxDialog,
 		CdxMessage,
 		ParsedMessage
 	},
-
 	props: {
 		initialStep: {
 			type: String,
 			default: Constants.DIALOG_STEP_1
 		}
 	},
-
 	emits: [ 'update:open' ],
 
 	setup( props, { emit } ) {
@@ -97,8 +99,6 @@ module.exports = exports = {
 				store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm;
 			const titlesByStep = {
 				[ Constants.DIALOG_STEP_1 ]: 'reportincident-dialog-describe-the-incident-title',
-				[ Constants.DIALOG_STEP_2 ]: 'reportincident-dialog-describe-the-incident-title',
-
 				[ Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ]: 'reportincident-type-unacceptable-user-behavior',
 				[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'reportincident-dialog-report-immediate-harm-title',
 				[ Constants.DIALOG_STEP_SUBMIT_SUCCESS ]: isEmergency ? 'reportincident-submit-emergency-dialog-title' :
@@ -113,7 +113,7 @@ module.exports = exports = {
 		const currentSlotName = computed( () => `${ currentStep.value }` );
 		const showFooterErrorText = computed(
 			() => [
-				Constants.DIALOG_STEP_2,
+				Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
 				Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM
 			].indexOf( currentStep.value ) !== -1 && footerErrorMessage.value !== ''
 		);
@@ -124,25 +124,17 @@ module.exports = exports = {
 
 		const stepsWithHelpText = [
 			Constants.DIALOG_STEP_1,
-			Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM
+			Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM,
+			Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
 		];
-
-		const showFooterHelpText = computed(
-			() => stepsWithHelpText.indexOf( currentStep.value ) !== -1 && store.incidentType !== ''
-		);
 
 		const primaryButtonLabel = computed( () => {
 			switch ( currentStep.value ) {
 				case Constants.DIALOG_STEP_1:
 					return mw.msg( 'reportincident-dialog-continue' );
 
-				case Constants.DIALOG_STEP_2:
-					if ( store.incidentType ===
-							Constants.typeOfIncident.unacceptableUserBehavior ) {
-						return mw.msg( 'reportincident-dialog-continue' );
-					}
-
-					return mw.msg( 'reportincident-dialog-submit-btn' );
+				case Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES:
+					return mw.msg( 'reportincident-dialog-continue' );
 
 				case Constants.DIALOG_STEP_SUBMIT_SUCCESS:
 					return mw.msg(
@@ -160,19 +152,50 @@ module.exports = exports = {
 				mw.msg( 'reportincident-dialog-cancel' ) :
 				mw.msg( 'reportincident-dialog-back-btn' ) );
 
-		const footerHelpTextMessage = computed(
-			() => store.incidentType === 'immediate-threat-physical-harm' ?
-				mw.message( 'reportincident-physical-harm-footer' ) :
-				mw.message( 'reportincident-unacceptable-behavior-footer' ) );
+		const footerHelpTextMessage = computed( () => {
+			switch ( store.incidentType ) {
+				case Constants.typeOfIncident.unacceptableUserBehavior:
+					if ( currentStep.value === Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ) {
+						return mw.message( 'reportincident-dialog-record-for-statistical-purposes' );
+					}
+
+					return mw.message( 'reportincident-unacceptable-behavior-footer' );
+
+				case Constants.typeOfIncident.immediateThreatPhysicalHarm:
+					return mw.message( 'reportincident-physical-harm-footer' );
+			}
+		} );
 
 		const footerIconName = computed( () => {
 			if ( !store.incidentType ) {
 				return null;
 			}
-			return store.incidentType === 'immediate-threat-physical-harm' ?
-				icons.cdxIconLock :
-				icons.cdxIconUserGroup;
+
+			switch ( store.incidentType ) {
+				case Constants.typeOfIncident.immediateThreatPhysicalHarm:
+					return icons.cdxIconLock;
+
+				case Constants.typeOfIncident.unacceptableUserBehavior:
+					if ( currentStep.value === Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ) {
+						return null;
+					}
+
+					return icons.cdxIconUserGroup;
+
+				default:
+					return icons.cdxIconUserGroup;
+			}
 		} );
+
+		const shouldShowHelpText = computed(
+			() => store.isIncidentTypeSelected() &&
+					stepsWithHelpText.indexOf( currentStep.value ) !== -1 );
+
+		const showFooterHelpTextWithIcon = computed(
+			() => shouldShowHelpText.value && footerIconName.value !== null );
+
+		const showFooterHelpTextWithoutIcon = computed(
+			() => shouldShowHelpText.value && footerIconName.value === null );
 
 		/**
 		 * Function called when the POST request to the
@@ -265,7 +288,7 @@ module.exports = exports = {
 				if ( store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm ) {
 					currentStep.value = Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM;
 				} else {
-					currentStep.value = Constants.DIALOG_STEP_2;
+					currentStep.value = Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES;
 				}
 
 				logEvent( 'click', {
@@ -278,7 +301,7 @@ module.exports = exports = {
 				wrappedOpen.value = false;
 				store.$reset();
 				currentStep.value = Constants.DIALOG_STEP_1;
-			} else if ( ( currentStep.value === Constants.DIALOG_STEP_2 ) &&
+			} else if ( ( currentStep.value === Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ) &&
 					store.isUnacceptableBehavior() ) {
 				unacceptableBehaviorNavigateNextFromStep2();
 			} else {
@@ -386,7 +409,8 @@ module.exports = exports = {
 			footerHelpTextMessage,
 			footerErrorMessage,
 			showCancelOrBackButton,
-			showFooterHelpText,
+			showFooterHelpTextWithIcon,
+			showFooterHelpTextWithoutIcon,
 			showFooterErrorText,
 			formSubmissionInProgress,
 			onReportSubmitFailure,

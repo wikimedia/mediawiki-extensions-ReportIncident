@@ -1,6 +1,5 @@
 const Constants = {
 	DIALOG_STEP_1: 'dialog_step_1',
-	DIALOG_STEP_2: 'dialog_step_2',
 	DIALOG_STEP_REPORT_BEHAVIOR_TYPES: 'dialog_step_report_unacceptable_behavior',
 	DIALOG_STEP_REPORT_IMMEDIATE_HARM: 'dialog_step_report_immediate_harm',
 	DIALOG_STEP_SUBMIT_SUCCESS: 'dialog_step_submit_success',
