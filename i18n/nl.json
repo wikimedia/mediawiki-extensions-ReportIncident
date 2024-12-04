@@ -74,7 +74,7 @@
 	"reportincident-submit-behavior-dialog-title": "Ondersteuning bij een incident",
 	"reportincident-submit-behavior-notice": "Moderatoren kunnen helpen bij [[$1|dringende incidenten en aanhoudende problemen]] met gebruikersgedrag.",
 	"reportincident-submit-behavior-section-support-title": "Wat nu",
-	"reportincident-submit-behavior-section-support-item-behavior": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|Onaanvaardbaar gedrag]] wordt afgehandeld door de gemeenschap van ervaren {{SITENAME}}-gebruikers",
+	"reportincident-submit-behavior-section-support-item-behavior": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|Onaanvaardbaar gedrag]] wordt afgehandeld door de gemeenschap van ervaren {{SITENAME}}-gebruikers:",
 	"reportincident-submit-behavior-section-support-item-guidelines": "De [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct|Universele Gedragscode]] bevat [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct/Enforcement_guidelines|handhavingsrichtlijnen]] waarin wordt uitgelegd hoe met ongepast gedrag moet worden omgegaan.",
 	"reportincident-submit-behavior-section-support-item-dispute-resolution": "[[$1|Geschillenbeslechting]] is vaak de eerste stap voor eenvoudige problemen op de wiki. Als u zich daar veilig bij voelt, kunt u proberen om te praten met degene die u aan het melden bent, op diens gebruikersoverlegpagina.",
 	"reportincident-submit-behavior-section-support-item-admins": "Moderatoren kunnen helpen bij [[$1|dringende en aanhoudende incidenten]].",
