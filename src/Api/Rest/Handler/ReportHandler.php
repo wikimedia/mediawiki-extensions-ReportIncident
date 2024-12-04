@@ -215,28 +215,28 @@ class ReportHandler extends SimpleHandler {
 			if ( !isset( $body['physicalHarmType'] ) ) {
 				throw new LocalizedHttpException(
 					new MessageValue( 'rest-missing-body-field', [ 'physicalHarmType' ] ),
-					429
+					422
 				);
 			}
 
 			if ( isset( $body['behaviorType'] ) ) {
 				throw new LocalizedHttpException(
 					new MessageValue( 'rest-extraneous-body-fields', [ 'behaviorType' ] ),
-					429
+					422
 				);
 			}
 		} else {
 			if ( !isset( $body['behaviorType'] ) ) {
 				throw new LocalizedHttpException(
 					new MessageValue( 'rest-missing-body-field', [ 'physicalHarmType' ] ),
-					429
+					422
 				);
 			}
 
 			if ( isset( $body['physicalHarmType'] ) ) {
 				throw new LocalizedHttpException(
 					new MessageValue( 'rest-extraneous-body-fields', [ 'physicalHarmType' ] ),
-					429
+					422
 				);
 			}
 		}

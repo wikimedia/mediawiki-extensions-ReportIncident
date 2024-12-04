@@ -426,7 +426,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			],
 			new LocalizedHttpException(
 				new MessageValue( 'rest-missing-body-field', [ 'physicalHarmType' ] ),
-				429
+				422
 			)
 		];
 
@@ -440,7 +440,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			],
 			new LocalizedHttpException(
 				new MessageValue( 'rest-extraneous-body-fields', [ 'behaviorType' ] ),
-				429
+				422
 			)
 		];
 
@@ -453,7 +453,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			],
 			new LocalizedHttpException(
 				new MessageValue( 'rest-missing-body-field', [ 'behaviorType' ] ),
-				429
+				422
 			)
 		];
 
@@ -467,7 +467,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			],
 			new LocalizedHttpException(
 				new MessageValue( 'rest-extraneous-body-fields', [ 'physicalHarmType' ] ),
-				429
+				422
 			)
 		];
 	}
