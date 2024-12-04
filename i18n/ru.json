@@ -1,7 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kareyac"
+			"Kareyac",
+			"Stjn"
 		]
-	}
+	},
+	"reportincident-desc": "Расширение системы жалоб об инцидентах (Incident Reporting System).",
+	"reportincident-report-btn-label": "Пожаловаться",
+	"reportincident-dialog-close-btn": "Закрыть",
+	"reportincident-dialog-back-btn": "Назад",
+	"reportincident-dialog-optional-label": "(необязательно)",
+	"reportincident-dialog-violator-placeholder-text": "О ком {{GENDER:|вы}} жалуетесь?",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Язык вражды или дискриминация",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Сексуальные домогательства",
+	"reportincident-dialog-harassment-type-something-else": "Другое",
+	"reportincident-dialog-harassment-empty": "{{GENDER:|Вы}} должны выбрать хотя бы одно поведение.",
+	"reportincident-dialog-something-else-empty": "Пожалуйста, предоставьте краткое описание поведения."
 }
