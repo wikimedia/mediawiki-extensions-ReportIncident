@@ -8,12 +8,15 @@ use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Language\Language;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\Page\PageReferenceValue;
 use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\TokenAwareHandlerTrait;
 use MediaWiki\Revision\RevisionStore;
+use MediaWiki\Title\MalformedTitleException;
+use MediaWiki\Title\TitleParser;
 use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserIdentityLookup;
@@ -40,6 +43,7 @@ class ReportHandler extends SimpleHandler {
 	private LoggerInterface $logger;
 	private UserFactory $userFactory;
 	private Language $contentLanguage;
+	private TitleParser $titleParser;
 
 	public const HTTP_STATUS_FORBIDDEN = 403;
 	public const HTTP_STATUS_NOT_FOUND = 404;
@@ -56,7 +60,8 @@ class ReportHandler extends SimpleHandler {
 		UserIdentityLookup $userIdentityLookup,
 		ReportIncidentManager $reportIncidentManager,
 		UserFactory $userFactory,
-		Language $contentLanguage
+		Language $contentLanguage,
+		TitleParser $titleParser
 	) {
 		$this->config = $config;
 		$this->reportIncidentManager = $reportIncidentManager;
@@ -66,6 +71,7 @@ class ReportHandler extends SimpleHandler {
 		$this->logger = LoggerFactory::getInstance( 'ReportIncident' );
 		$this->userFactory = $userFactory;
 		$this->contentLanguage = $contentLanguage;
+		$this->titleParser = $titleParser;
 	}
 
 	/**
@@ -171,14 +177,35 @@ class ReportHandler extends SimpleHandler {
 	private function getIncidentReportObjectFromValidatedBody( $body ): IncidentReport {
 		// Validate the CSRF token in the request body.
 		$this->validateToken();
-		// Validate that the revision with the given ID exists.
+
 		$revisionId = $body['revisionId'];
-		$revision = $this->revisionStore->getRevisionById( $revisionId );
-		if ( !$revision ) {
-			throw new LocalizedHttpException(
-				new MessageValue( 'rest-nonexistent-revision', [ $revisionId ] ), 404 );
+
+		// Validate that the revision with the given ID exists.
+		if ( $revisionId !== 0 ) {
+			$revision = $this->revisionStore->getRevisionById( $revisionId );
+			if ( !$revision ) {
+				throw new LocalizedHttpException(
+					new MessageValue( 'rest-nonexistent-revision', [ $revisionId ] ),
+					404
+				);
+			}
+
+			$body['revision'] = $revision;
+			$body['page'] = $revision->getPage();
+		} else {
+			// Treat a revision ID of zero as a nonexistent page
+			// to allow reporting nonexistent talk pages (T381363)
+			try {
+				$title = $this->titleParser->parseTitle( $body['page'] );
+				$body['page'] = PageReferenceValue::localReference( $title->getNamespace(), $title->getDBkey() );
+			} catch ( MalformedTitleException $e ) {
+				throw new LocalizedHttpException(
+					new MessageValue( 'rest-invalid-title', [ $body['page'] ] ),
+					422
+				);
+			}
 		}
-		$body['revision'] = $revision;
+
 		// Validate that the user is either an IP or an existing user
 		$reportedUser = $body['reportedUser'] ?? '';
 		'@phan-var string $reportedUser';
@@ -321,6 +348,11 @@ class ReportHandler extends SimpleHandler {
 
 	public function getBodyParamSettings(): array {
 		return [
+			'page' => [
+				static::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
+			],
 			'reportedUser' => [
 				static::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',

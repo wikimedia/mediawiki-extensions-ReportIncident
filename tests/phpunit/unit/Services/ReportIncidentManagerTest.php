@@ -6,6 +6,7 @@ use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\Services\IReportIncidentNotifier;
 use MediaWiki\Extension\ReportIncident\Services\IReportIncidentRecorder;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
+use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\User\UserIdentityValue;
 use MediaWikiUnitTestCase;
@@ -36,16 +37,7 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testRecord() {
-		$incidentReport = new IncidentReport(
-			new UserIdentityValue( 1, 'Reporter' ),
-			new UserIdentityValue( 2, 'Reported' ),
-			$this->createMock( RevisionRecord::class ),
-			IncidentReport::THREAT_TYPE_IMMEDIATE,
-			null,
-			'threats-physical-harm',
-			null,
-			'Details'
-		);
+		$incidentReport = $this->newIncidentReport();
 
 		$this->recorder->expects( $this->once() )
 			->method( 'record' )
@@ -56,16 +48,7 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testNotify() {
-		$incidentReport = new IncidentReport(
-			new UserIdentityValue( 1, 'Reporter' ),
-			new UserIdentityValue( 2, 'Reported' ),
-			$this->createMock( RevisionRecord::class ),
-			IncidentReport::THREAT_TYPE_IMMEDIATE,
-			null,
-			'threats-physical-harm',
-			null,
-			'Details'
-		);
+		$incidentReport = $this->newIncidentReport();
 
 		$this->notifier->expects( $this->once() )
 			->method( 'notify' )
@@ -73,6 +56,26 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 			->willReturn( StatusValue::newGood() );
 
 		$this->assertStatusGood( $this->reportIncidentManager->notify( $incidentReport ) );
+	}
+
+	private function newIncidentReport(): IncidentReport {
+		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
+
+		$revRecord = $this->createMock( RevisionRecord::class );
+		$revRecord->method( 'getPage' )
+			->willReturn( $page );
+
+		return new IncidentReport(
+			new UserIdentityValue( 1, 'Reporter' ),
+			new UserIdentityValue( 2, 'Reported' ),
+			$revRecord,
+			$page,
+			IncidentReport::THREAT_TYPE_IMMEDIATE,
+			null,
+			'threats-physical-harm',
+			null,
+			'Details'
+		);
 	}
 
 }

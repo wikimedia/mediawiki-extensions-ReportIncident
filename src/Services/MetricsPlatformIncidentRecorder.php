@@ -40,10 +40,10 @@ class MetricsPlatformIncidentRecorder implements IReportIncidentRecorder {
 
 		$reportedUser = $incidentReport->getReportedUser();
 
-		$page = $incidentReport->getRevisionRecord()->getPage();
+		$page = $incidentReport->getPage();
 
 		$context = new DerivativeContext( $this->getContext() );
-		$context->setTitle( $this->titleFactory->newFromPageIdentity( $page ) );
+		$context->setTitle( $this->titleFactory->newFromPageReference( $page ) );
 		$context->setUser( $this->userFactory->newFromUserIdentity( $incidentReport->getReportingUser() ) );
 
 		$client = $this->metricsClientFactory->newMetricsClient( $context );

@@ -210,6 +210,7 @@ describe( 'ReportIncident dialog', () => {
 			incidentType: 'unacceptable-user-behavior',
 			behaviorType: 'something-else',
 			somethingElseDetails: 'Testing1234',
+			page: `User_talk:${ userName }`,
 			revisionId: 0
 		} );
 	} );

@@ -2,8 +2,10 @@
 
 namespace MediaWiki\Extension\ReportIncident;
 
+use MediaWiki\Page\PageReference;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\User\UserIdentity;
+use Wikimedia\Assert\Assert;
 
 /**
  * Plain value object containing incident report data.
@@ -14,7 +16,8 @@ class IncidentReport {
 
 	private UserIdentity $reportingUser;
 	private ?UserIdentity $reportedUser;
-	private RevisionRecord $revisionRecord;
+	private ?RevisionRecord $revisionRecord;
+	private PageReference $page;
 	private ?string $behaviorType;
 	private ?string $physicalHarmType;
 	private ?string $somethingElseDetails;
@@ -25,7 +28,8 @@ class IncidentReport {
 	public function __construct(
 		UserIdentity $reportingUser,
 		?UserIdentity $reportedUser,
-		RevisionRecord $revisionRecord,
+		?RevisionRecord $revisionRecord,
+		PageReference $page,
 		string $incidentType,
 		?string $behaviorType,
 		?string $physicalHarmType,
@@ -33,9 +37,18 @@ class IncidentReport {
 		?string $details = null,
 		?string $threadId = null
 	) {
+		$page->assertWiki( PageReference::LOCAL );
+
+		Assert::parameter(
+			$revisionRecord === null || $revisionRecord->getPage()->isSamePageAs( $page ),
+			'$revision',
+			'The given revision must match the given page',
+		);
+
 		$this->reportingUser = $reportingUser;
 		$this->reportedUser = $reportedUser;
 		$this->revisionRecord = $revisionRecord;
+		$this->page = $page;
 		$this->incidentType = $incidentType;
 		$this->behaviorType = $behaviorType;
 		$this->somethingElseDetails = $somethingElseDetails;
@@ -69,7 +82,8 @@ class IncidentReport {
 		return new self(
 			$reportingUser,
 			$data['reportedUser'],
-			$data['revision'],
+			$data['revision'] ?? null,
+			$data['page'],
 			$data['incidentType'],
 			$data['behaviorType'] ?? null,
 			$data['physicalHarmType'] ?? null,
@@ -99,8 +113,12 @@ class IncidentReport {
 		return $this->details;
 	}
 
-	public function getRevisionRecord(): RevisionRecord {
+	public function getRevisionRecord(): ?RevisionRecord {
 		return $this->revisionRecord;
+	}
+
+	public function getPage(): PageReference {
+		return $this->page;
 	}
 
 	public function getReportedUser(): ?UserIdentity {

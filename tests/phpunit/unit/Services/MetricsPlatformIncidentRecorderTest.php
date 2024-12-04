@@ -6,6 +6,7 @@ use MediaWiki\Extension\EventLogging\MetricsPlatform\MetricsClientFactory;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\Services\MetricsPlatformIncidentRecorder;
 use MediaWiki\Page\PageIdentityValue;
+use MediaWiki\Page\PageReferenceValue;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
@@ -47,10 +48,17 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testShouldDoNothingForEmergencyReports(): void {
+		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageReferenceValue::LOCAL );
+
+		$revRecord = $this->createMock( RevisionRecord::class );
+		$revRecord->method( 'getPage' )
+			->willReturn( $page );
+
 		$incidentReport = new IncidentReport(
 			new UserIdentityValue( 1, 'Reporter' ),
 			new UserIdentityValue( 2, 'Reported' ),
-			$this->createMock( RevisionRecord::class ),
+			$revRecord,
+			$page,
 			IncidentReport::THREAT_TYPE_IMMEDIATE,
 			null,
 			'threats-physical-harm',
@@ -73,7 +81,7 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 		?UserIdentity $reportedUser,
 		string $behaviorType
 	): void {
-		$page = new PageIdentityValue( 1, NS_TALK, 'Test', PageIdentityValue::LOCAL );
+		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageReferenceValue::LOCAL );
 
 		$revRecord = $this->createMock( RevisionRecord::class );
 		$revRecord->method( 'getPage' )
@@ -83,6 +91,7 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 			new UserIdentityValue( 2, 'Reporter' ),
 			$reportedUser,
 			$revRecord,
+			$page,
 			IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR,
 			$behaviorType,
 			null,
@@ -91,7 +100,7 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 		);
 
 		$title = $this->createMock( Title::class );
-		$this->titleFactory->method( 'newFromPageIdentity' )
+		$this->titleFactory->method( 'newFromPageReference' )
 			->with( $page )
 			->willReturn( $title );
 
