@@ -264,7 +264,6 @@
 				"UserIdentityLookup",
 				"ReportIncidentManager",
 				"UserFactory",
-				"ContentLanguage",
 				"TitleParser"
 			]
 		}

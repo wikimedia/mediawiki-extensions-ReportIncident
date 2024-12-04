@@ -4,12 +4,10 @@ namespace MediaWiki\Extension\ReportIncident\Tests\Unit\Api\Rest\Handler;
 
 use Exception;
 use MediaWiki\Block\AbstractBlock;
-use MediaWiki\Config\Config;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
-use MediaWiki\Language\Language;
 use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Permissions\RateLimiter;
 use MediaWiki\Rest\LocalizedHttpException;
@@ -472,65 +470,6 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				429
 			)
 		];
-	}
-
-	public function testTruncationOfTextareaFields() {
-		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
-		$revision = $this->createMock( RevisionRecord::class );
-		$revision->method( 'getPage' )
-			->willReturn( $page );
-
-		$revisionStore = $this->createMock( RevisionStore::class );
-		$revisionStore->method( 'getRevisionById' )
-			->with( 1 )
-			->willReturn( $revision );
-		$userNameUtils = $this->createMock( UserNameUtils::class );
-		$userNameUtils->method( 'isIP' )
-			->willReturn( true );
-		// Return the text from Language::truncateForVisual with "-truncated" added
-		// to the end.
-		$contentLanguage = $this->createMock( Language::class );
-		$contentLanguage
-			->expects( $this->exactly( 2 ) )
-			->method( 'truncateForVisual' )
-			->willReturnCallback( static fn ( $str ) => "$str-truncated" );
-		$handler = $this->getMockBuilder( ReportHandler::class )
-			->setConstructorArgs( [
-				$this->createMock( Config::class ),
-				$revisionStore,
-				$userNameUtils,
-				$this->createMock( UserIdentityLookup::class ),
-				$this->createMock( ReportIncidentManager::class ),
-				$this->createMock( UserFactory::class ),
-				$contentLanguage,
-				$this->createMock( TitleParser::class )
-			] )
-			->onlyMethods( [ 'getAuthority', 'validateToken' ] )
-			->getMock();
-		$handler->method( 'getAuthority' )
-			->willReturn( $this->mockRegisteredUltimateAuthority() );
-		$handler->expects( $this->once() )
-			->method( 'validateToken' );
-		$handler = TestingAccessWrapper::newFromObject( $handler );
-		/** @var IncidentReport $incidentReportObject */
-		$incidentReportObject = $handler->getIncidentReportObjectFromValidatedBody( [
-			'revisionId' => 1,
-			'reportedUser' => '1.2.3.4',
-			'somethingElseDetails' => 'testing-something-else',
-			'details' => 'testing-details',
-			'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
-			'physicalHarmType' => 'threats-physical-harm',
-		] );
-		$this->assertSame(
-			'testing-something-else-truncated',
-			$incidentReportObject->getSomethingElseDetails(),
-			'Something else textarea data was not truncated.'
-		);
-		$this->assertSame(
-			'testing-details-truncated',
-			$incidentReportObject->getDetails(),
-			'Additional details textarea data was not truncated.'
-		);
 	}
 
 	public function testDenyWithoutConfirmedEmail() {

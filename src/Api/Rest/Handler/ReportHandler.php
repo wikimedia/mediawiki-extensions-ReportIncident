@@ -2,11 +2,9 @@
 
 namespace MediaWiki\Extension\ReportIncident\Api\Rest\Handler;
 
-use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\Config;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
-use MediaWiki\Language\Language;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Page\PageReferenceValue;
 use MediaWiki\Permissions\PermissionStatus;
@@ -42,7 +40,6 @@ class ReportHandler extends SimpleHandler {
 	private UserIdentityLookup $userIdentityLookup;
 	private LoggerInterface $logger;
 	private UserFactory $userFactory;
-	private Language $contentLanguage;
 	private TitleParser $titleParser;
 
 	public const HTTP_STATUS_FORBIDDEN = 403;
@@ -60,7 +57,6 @@ class ReportHandler extends SimpleHandler {
 		UserIdentityLookup $userIdentityLookup,
 		ReportIncidentManager $reportIncidentManager,
 		UserFactory $userFactory,
-		Language $contentLanguage,
 		TitleParser $titleParser
 	) {
 		$this->config = $config;
@@ -70,7 +66,6 @@ class ReportHandler extends SimpleHandler {
 		$this->userIdentityLookup = $userIdentityLookup;
 		$this->logger = LoggerFactory::getInstance( 'ReportIncident' );
 		$this->userFactory = $userFactory;
-		$this->contentLanguage = $contentLanguage;
 		$this->titleParser = $titleParser;
 	}
 
@@ -215,17 +210,6 @@ class ReportHandler extends SimpleHandler {
 			$reportedUserIdentity = $this->userIdentityLookup->getUserIdentityByName( $reportedUser );
 		}
 		$body['reportedUser'] = $reportedUserIdentity;
-		// Truncate the Something else details and Additional details fields.
-		if ( array_key_exists( 'details', $body ) && $body['details'] !== null ) {
-			$body['details'] = $this->contentLanguage->truncateForVisual(
-				$body['details'], CommentStore::COMMENT_CHARACTER_LIMIT
-			);
-		}
-		if ( array_key_exists( 'somethingElseDetails', $body ) && $body['somethingElseDetails'] !== null ) {
-			$body['somethingElseDetails'] = $this->contentLanguage->truncateForVisual(
-				$body['somethingElseDetails'], CommentStore::COMMENT_CHARACTER_LIMIT
-			);
-		}
 
 		if ( $body['incidentType'] === IncidentReport::THREAT_TYPE_IMMEDIATE ) {
 			if ( !isset( $body['physicalHarmType'] ) ) {
