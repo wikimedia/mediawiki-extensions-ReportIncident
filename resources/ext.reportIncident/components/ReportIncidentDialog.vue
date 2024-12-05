@@ -434,6 +434,10 @@ module.exports = exports = {
 	.ext-reportincident-dialog-footer {
 		float: right;
 		margin-top: @spacing-50;
+
+		.ext-reportincident-dialog-footer__back-btn {
+			margin-right: @spacing-50;
+		}
 	}
 
 	.ext-reportincident-dialog-footer-help {
