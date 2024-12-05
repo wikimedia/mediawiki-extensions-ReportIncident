@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\ReportIncident\Services;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Title\TitleFactory;
 use MediaWiki\User\UserFactory;
 use MediaWiki\Utils\UrlUtils;
 use Psr\Log\LoggerInterface;
@@ -26,6 +27,7 @@ class ZendeskClient implements IReportIncidentNotifier {
 	private ITextFormatter $textFormatter;
 	private UrlUtils $urlUtils;
 	private UserFactory $userFactory;
+	private TitleFactory $titleFactory;
 	private LoggerInterface $logger;
 	private ServiceOptions $serviceOptions;
 
@@ -34,6 +36,7 @@ class ZendeskClient implements IReportIncidentNotifier {
 		ITextFormatter $textFormatter,
 		UrlUtils $urlUtils,
 		UserFactory $userFactory,
+		TitleFactory $titleFactory,
 		LoggerInterface $logger,
 		ServiceOptions $serviceOptions
 	) {
@@ -43,6 +46,7 @@ class ZendeskClient implements IReportIncidentNotifier {
 		$this->textFormatter = $textFormatter;
 		$this->urlUtils = $urlUtils;
 		$this->userFactory = $userFactory;
+		$this->titleFactory = $titleFactory;
 		$this->serviceOptions = $serviceOptions;
 		$this->logger = $logger;
 	}
@@ -151,7 +155,14 @@ class ZendeskClient implements IReportIncidentNotifier {
 	 *   and the second item being the URL to the reported content.
 	 */
 	private function getLinkToReportedContent( IncidentReport $incidentReport ): array {
+		$linkPrefixText = new MessageValue( 'reportincident-notification-link-to-page-prefix' );
 		$revision = $incidentReport->getRevisionRecord();
+
+		if ( $revision === null ) {
+			$title = $this->titleFactory->newFromPageReference( $incidentReport->getPage() );
+			return [ $linkPrefixText, $title->getFullURL() ];
+		}
+
 		// In theory UrlUtils::expand() could return null, this seems pretty unlikely in practice;
 		// cast to string to make Phan happy.
 		$entrypointUrl = (string)$this->urlUtils->expand( $this->serviceOptions->get( 'Script' ) );
@@ -171,9 +182,8 @@ class ZendeskClient implements IReportIncidentNotifier {
 			} else {
 				$linkPrefixText = new MessageValue( 'reportincident-notification-link-to-comment-prefix' );
 			}
-		} else {
-			$linkPrefixText = new MessageValue( 'reportincident-notification-link-to-page-prefix' );
 		}
+
 		return [ $linkPrefixText, $linkToPageAtRevision ];
 	}
 }

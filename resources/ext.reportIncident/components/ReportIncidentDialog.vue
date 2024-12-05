@@ -263,6 +263,8 @@ module.exports = exports = {
 
 			restPayload.token = mw.user.tokens.get( 'csrfToken' );
 
+			restPayload.page = mw.config.get( 'wgPageName' );
+
 			formSubmissionInProgress.value = true;
 			new mw.Rest().post(
 				'/reportincident/v0/report',

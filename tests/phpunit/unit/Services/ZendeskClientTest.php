@@ -5,7 +5,10 @@ use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\Services\ZendeskClient;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Title\Title;
+use MediaWiki\Title\TitleFactory;
 use MediaWiki\User\User;
 use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserIdentity;
@@ -28,6 +31,7 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 	private ITextFormatter $textFormatter;
 	private UrlUtils $urlUtils;
 	private UserFactory $userFactory;
+	private TitleFactory $titleFactory;
 	private LoggerInterface $logger;
 
 	private ZendeskClient $zendeskClient;
@@ -37,6 +41,7 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 		$this->textFormatter = $this->createMock( ITextFormatter::class );
 		$this->urlUtils = $this->createMock( UrlUtils::class );
 		$this->userFactory = $this->createMock( UserFactory::class );
+		$this->titleFactory = $this->createMock( TitleFactory::class );
 		$this->logger = $this->createMock( LoggerInterface::class );
 
 		$formatter = new class implements ITextFormatter {
@@ -54,6 +59,7 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 			$formatter,
 			$this->urlUtils,
 			$this->userFactory,
+			$this->titleFactory,
 			$this->logger,
 			new ServiceOptions( ZendeskClient::CONSTRUCTOR_OPTIONS, [
 				'ReportIncidentZendeskHTTPProxy' => 'foo',
@@ -70,16 +76,26 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 	public function testShouldCreateRequest(
 		?UserIdentity $reportedUser,
 		?string $threadId,
+		bool $hasRevision,
 		string $expectedPageLink
 	): void {
-		$mockRevisionRecord = $this->createMock( RevisionRecord::class );
-		$mockRevisionRecord->method( 'getId' )
-			->willReturn( 1 );
+		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
+
+		if ( $hasRevision ) {
+			$revRecord = $this->createMock( RevisionRecord::class );
+			$revRecord->method( 'getId' )
+				->willReturn( 1 );
+			$revRecord->method( 'getPage' )
+				->willReturn( $page );
+		} else {
+			$revRecord = null;
+		}
 
 		$incidentReport = new IncidentReport(
 			new UserIdentityValue( 1, 'Reporter' ),
 			$reportedUser,
-			$mockRevisionRecord,
+			$revRecord,
+			$page,
 			IncidentReport::THREAT_TYPE_IMMEDIATE,
 			null,
 			'threats-physical-harm',
@@ -99,6 +115,16 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 		$this->urlUtils->method( 'expand' )
 			->with( '/index.php' )
 			->willReturn( 'page-link' );
+
+		if ( !$hasRevision ) {
+			$title = $this->createMock( Title::class );
+			$title->method( 'getFullURL' )
+				->willReturn( 'page-link-without-rev' );
+
+			$this->titleFactory->method( 'newFromPageReference' )
+				->with( $page )
+				->willReturn( $title );
+		}
 
 		$reportedUserName = $reportedUser ? $reportedUser->getName() : '';
 
@@ -144,6 +170,7 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 		yield 'no thread ID' => [
 			$reportedUser,
 			null,
+			true,
 			'<text><message key="reportincident-notification-link-to-page-prefix"></message></text>' .
 			'<text>page-link?oldid=1</text>'
 		];
@@ -151,6 +178,7 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 		yield 'thread ID for comment' => [
 			$reportedUser,
 			'c-testuser-20230504030201',
+			true,
 			'<text><message key="reportincident-notification-link-to-comment-prefix"></message></text>' .
 			'<text>page-link?oldid=1#c-testuser-20230504030201</text>'
 		];
@@ -158,6 +186,7 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 		yield 'thread ID for topic' => [
 			$reportedUser,
 			'h-testuser-20230504030201',
+			true,
 			'<text><message key="reportincident-notification-link-to-topic-prefix"></message></text>' .
 			'<text>page-link?oldid=1#h-testuser-20230504030201</text>'
 		];
@@ -165,16 +194,34 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 		yield 'no reported user' => [
 			null,
 			null,
+			true,
 			'<text><message key="reportincident-notification-link-to-page-prefix"></message></text>' .
 			'<text>page-link?oldid=1</text>'
+		];
+
+		yield 'no revision' => [
+			$reportedUser,
+			null,
+			false,
+			'<text><message key="reportincident-notification-link-to-page-prefix"></message></text>' .
+			'<text>page-link-without-rev</text>'
 		];
 	}
 
 	public function testShouldLogUnknownZendeskError(): void {
+		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
+
+		$mockRevisionRecord = $this->createMock( RevisionRecord::class );
+		$mockRevisionRecord->method( 'getId' )
+			->willReturn( 1 );
+		$mockRevisionRecord->method( 'getPage' )
+			->willReturn( $page );
+
 		$incidentReport = new IncidentReport(
 			new UserIdentityValue( 1, 'Reporter' ),
 			new UserIdentityValue( 2, 'Reported' ),
-			$this->createMock( RevisionRecord::class ),
+			$mockRevisionRecord,
+			$page,
 			IncidentReport::THREAT_TYPE_IMMEDIATE,
 			null,
 			'threats-physical-harm',
@@ -207,10 +254,19 @@ class ZendeskClientTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testShouldLogFormattedZendeskError(): void {
+		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
+
+		$mockRevisionRecord = $this->createMock( RevisionRecord::class );
+		$mockRevisionRecord->method( 'getId' )
+			->willReturn( 1 );
+		$mockRevisionRecord->method( 'getPage' )
+			->willReturn( $page );
+
 		$incidentReport = new IncidentReport(
 			new UserIdentityValue( 1, 'Reporter' ),
 			new UserIdentityValue( 2, 'Reported' ),
-			$this->createMock( RevisionRecord::class ),
+			$mockRevisionRecord,
+			$page,
 			IncidentReport::THREAT_TYPE_IMMEDIATE,
 			null,
 			'threats-physical-harm',

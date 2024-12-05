@@ -35,6 +35,7 @@ return [
 			$services->getMessageFormatterFactory()->getTextFormatter( 'en' ),
 			$services->getUrlUtils(),
 			$services->getUserFactory(),
+			$services->getTitleFactory(),
 			LoggerFactory::getInstance( 'ReportIncident' ),
 			new ServiceOptions( ZendeskClient::CONSTRUCTOR_OPTIONS, $services->getMainConfig() )
 		);

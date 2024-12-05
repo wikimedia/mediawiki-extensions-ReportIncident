@@ -415,6 +415,7 @@ describe( 'Report Incident Dialog', () => {
 							behaviorType: Constants.harassmentTypes.OTHER,
 							reportedUser: '',
 							somethingElseDetails: 'test details',
+							page: 'Test_page',
 							revisionId: 1
 						}
 					);
@@ -435,6 +436,7 @@ describe( 'Report Incident Dialog', () => {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						behaviorType: Constants.harassmentTypes.HATE_SPEECH,
 						reportedUser: 'test user',
+						page: 'Test_page',
 						revisionId: 1
 					}
 				},
@@ -451,6 +453,7 @@ describe( 'Report Incident Dialog', () => {
 						physicalHarmType: Constants.physicalHarmTypes.physicalHarm,
 						details: 'some details',
 						reportedUser: 'test user',
+						page: 'Test_page',
 						revisionId: 1
 					}
 				},
@@ -467,6 +470,7 @@ describe( 'Report Incident Dialog', () => {
 						behaviorType: Constants.harassmentTypes.OTHER,
 						somethingElseDetails: 'details',
 						reportedUser: 'test user',
+						page: 'Test_page',
 						revisionId: 1
 					}
 				}

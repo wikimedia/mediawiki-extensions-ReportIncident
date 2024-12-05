@@ -10,6 +10,7 @@ use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Extension\ReportIncident\IncidentReport;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentManager;
 use MediaWiki\Language\Language;
+use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Permissions\RateLimiter;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Rest\RequestData;
@@ -20,6 +21,8 @@ use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWiki\Tests\Unit\MockServiceDependenciesTrait;
 use MediaWiki\Tests\Unit\Permissions\MockAuthorityTrait;
+use MediaWiki\Title\TitleParser;
+use MediaWiki\Title\TitleValue;
 use MediaWiki\User\User;
 use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserIdentity;
@@ -204,7 +207,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		);
 	}
 
-	public function testRevisionDoesntExist() {
+	public function testRevisionDoesntExistAndNoPageProvided() {
 		$config = new HashConfig( [
 			'ReportIncidentApiEnabled' => true,
 			'ReportIncidentDeveloperMode' => true,
@@ -378,10 +381,14 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentDeveloperMode' => true,
 			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
+		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
+		$revision = $this->createMock( RevisionRecord::class );
+		$revision->method( 'getPage' )
+			->willReturn( $page );
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionStore->method( 'getRevisionById' )
 			->with( 123 )
-			->willReturn( $this->createMock( RevisionRecord::class ) );
+			->willReturn( $revision );
 		$userNameUtils = $this->createMock( UserNameUtils::class );
 		$userNameUtils->method( 'isIP' )
 			->willReturn( true );
@@ -468,10 +475,15 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testTruncationOfTextareaFields() {
+		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
+		$revision = $this->createMock( RevisionRecord::class );
+		$revision->method( 'getPage' )
+			->willReturn( $page );
+
 		$revisionStore = $this->createMock( RevisionStore::class );
 		$revisionStore->method( 'getRevisionById' )
 			->with( 1 )
-			->willReturn( $this->createMock( RevisionRecord::class ) );
+			->willReturn( $revision );
 		$userNameUtils = $this->createMock( UserNameUtils::class );
 		$userNameUtils->method( 'isIP' )
 			->willReturn( true );
@@ -491,6 +503,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				$this->createMock( ReportIncidentManager::class ),
 				$this->createMock( UserFactory::class ),
 				$contentLanguage,
+				$this->createMock( TitleParser::class )
 			] )
 			->onlyMethods( [ 'getAuthority', 'validateToken' ] )
 			->getMock();
@@ -562,7 +575,11 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentMinimumAccountAgeInSeconds' => null,
 		] );
 		$revisionStore = $this->createMock( RevisionStore::class );
-		$revisionStore->method( 'getRevisionById' )->willReturn( $this->createMock( RevisionRecord::class ) );
+		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
+		$revision = $this->createMock( RevisionRecord::class );
+		$revision->method( 'getPage' )
+			->willReturn( $page );
+		$revisionStore->method( 'getRevisionById' )->willReturn( $revision );
 		$reportManager = $this->createMock( ReportIncidentManager::class );
 		$reportManager->method( 'record' )->willReturn( StatusValue::newGood() );
 		$reportManager->method( 'notify' )->willReturn( StatusValue::newGood() );
@@ -626,11 +643,25 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		$reportManager->method( 'notify' )->willReturn( $notifyStatus );
 		// Mock the result of RevisionStore::getRevisionById
 		$revisionStore = $this->createMock( RevisionStore::class );
-		$revisionRecord = $this->createMock( RevisionRecord::class );
-		$revisionRecord->method( 'getId' )->willReturn( $data['revisionId'] );
-		$revisionStore->method( 'getRevisionById' )
-			->with( $data['revisionId'] )
-			->willReturn( $revisionRecord );
+		$titleParser = $this->createMock( TitleParser::class );
+
+		if ( $data['revisionId'] !== 0 ) {
+			$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
+			$revision = $this->createMock( RevisionRecord::class );
+			$revision->method( 'getPage' )
+				->willReturn( $page );
+			$revision->method( 'getId' )->willReturn( $data['revisionId'] );
+			$revisionStore->method( 'getRevisionById' )
+				->with( $data['revisionId'] )
+				->willReturn( $revision );
+		} else {
+			$revisionStore->expects( $this->never() )
+				->method( 'getRevisionById' );
+
+			$titleParser->method( 'parseTitle' )
+				->with( $data['page'] )
+				->willReturn( new TitleValue( NS_TALK, 'Test' ) );
+		}
 
 		$reportingUser = $this->createMock( User::class );
 		$reportingUser->method( 'isNamed' )->willReturn( true );
@@ -662,6 +693,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				'userIdentityLookup' => $userIdentityLookup,
 				'userFactory' => $userFactory,
 				'userNameUtils' => $userNameUtils,
+				'titleParser' => $titleParser,
 			]
 		);
 		if ( $expectRecordException ) {
@@ -696,6 +728,21 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 				[
 					'reportedUser' => 'user',
 					'revisionId' => 123,
+					'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
+					'physicalHarmType' => 'threats-physical-harm',
+					'details' => 'foo',
+				],
+				$reportedUser,
+				StatusValue::newGood(),
+				StatusValue::newGood(),
+				false,
+				false,
+			],
+			'correct values, non-existent page' => [
+				[
+					'reportedUser' => 'user',
+					'revisionId' => 0,
+					'page' => 'Talk:Test',
 					'incidentType' => IncidentReport::THREAT_TYPE_IMMEDIATE,
 					'physicalHarmType' => 'threats-physical-harm',
 					'details' => 'foo',
@@ -829,7 +876,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 
 		// Pass the revision check
 		$revisionStore = $this->createMock( RevisionStore::class );
+		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
 		$revision = $this->createMock( RevisionRecord::class );
+		$revision->method( 'getPage' )
+			->willReturn( $page );
 		$revisionStore->method( 'getRevisionById' )
 			->willReturn( $revision );
 		// Pass the reported user is IP check
@@ -880,7 +930,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		] );
 		// Pass the revision check
 		$revisionStore = $this->createMock( RevisionStore::class );
+		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
 		$revision = $this->createMock( RevisionRecord::class );
+		$revision->method( 'getPage' )
+			->willReturn( $page );
 		$revisionStore->method( 'getRevisionById' )
 			->willReturn( $revision );
 		// Pass the reported user is IP check
@@ -932,7 +985,10 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 		] );
 		// Pass the revision check
 		$revisionStore = $this->createMock( RevisionStore::class );
+		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
 		$revision = $this->createMock( RevisionRecord::class );
+		$revision->method( 'getPage' )
+			->willReturn( $page );
 		$revisionStore->method( 'getRevisionById' )
 			->willReturn( $revision );
 		// Pass the reported user is IP check
