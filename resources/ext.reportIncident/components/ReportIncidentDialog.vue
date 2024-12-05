@@ -99,7 +99,7 @@ module.exports = exports = {
 				store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm;
 			const titlesByStep = {
 				[ Constants.DIALOG_STEP_1 ]: 'reportincident-dialog-describe-the-incident-title',
-				[ Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ]: 'reportincident-type-unacceptable-user-behavior',
+				[ Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ]: 'reportincident-dialog-describe-the-incident-title',
 				[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'reportincident-dialog-report-immediate-harm-title',
 				[ Constants.DIALOG_STEP_SUBMIT_SUCCESS ]: isEmergency ? 'reportincident-submit-emergency-dialog-title' :
 					'reportincident-submit-behavior-dialog-title'
