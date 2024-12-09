@@ -26,6 +26,7 @@
 	"reportincident-dialog-something-else-input-placeholder": "Укажете ги поведенијата ненаведени погоре.",
 	"reportincident-dialog-unacceptable-behavior-community-managed": "{{SITENAME}} е заедница каде [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|неприкладното однесување не се толерира]] и со него се справува заедницата на искусни корисници.",
 	"reportincident-dialog-get-support-title": "Добијте поддршка за инцидент",
+	"reportincident-dialog-record-for-statistical-purposes": "Притискајќи на „Продолжи“ ќе направите [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|лична евиденција]] за овој инцидент за статистички цели, а потоа ќе бидете {{GENDER:|упатени}} што понатаму да правите. Нема да поднесе извештај.",
 	"reportincident-dialog-harassment-empty": "Ќе мора да {{GENDER:|изберете}} барем едно поведение.",
 	"reportincident-dialog-something-else-empty": "Напишете краток опис на поведението.",
 	"reportincident-dialog-internet-disconnected-error": "Се чини дека не {{GENDER:|сте}} поврзани со семрежјето. Поднесете повторно кога ќе {{GENDER:|ви}} се обнови врската.",
@@ -62,5 +63,6 @@
 	"reportincident-submit-emergency-section-important-item-services": "Ако {{GENDER:|сте}} повредени или во непосредна опасност, повикајте ги [[wikipedia:List_of_emergency_telephone_numbers|итни служби]] во {{GENDER:|вашиот}} град.",
 	"reportincident-submit-behavior-dialog-title": "Добијте поддршка за инцидент",
 	"reportincident-submit-behavior-section-support-title": "Како да добиете поддршка",
+	"reportincident-submit-behavior-section-other-options-item-ask": "Ако {{GENDER:|не знаете}} што да правите, [[$1|побарајте помош од заедницата]].",
 	"reportincident-submit-back-to-page": "Назад на $1"
 }
