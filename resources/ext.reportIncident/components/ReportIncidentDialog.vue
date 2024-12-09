@@ -438,7 +438,7 @@ module.exports = exports = {
 		margin-top: @spacing-50;
 
 		.ext-reportincident-dialog-footer__back-btn {
-			margin-right: @spacing-75;
+			margin-right: @spacing-50;
 		}
 	}
 
