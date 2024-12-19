@@ -87,5 +87,17 @@
 	"reportincident-submit-behavior-section-other-options-title": "Section header for informational text shown in the incident report dialog after successfully submitting a report.",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Paragraph with informational text shown in the incident report dialog after successfully submitting a report. Parameters:\n* $1 - title of a local wiki page used for general questions.",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Paragraph with informational text shown in the incident report dialog after successfully submitting a report.",
-	"reportincident-submit-back-to-page": "Label used for the primary button on the incident report dialog. Parameters:\n* $1 - the title of the current page."
+	"reportincident-submit-back-to-page": "Label used for the primary button on the incident report dialog. Parameters:\n* $1 - the title of the current page.",
+	"communityconfiguration-reportincident-title": "Title used for the configuration section related to the Incident Reporting System on Special:CommunityConfiguration.",
+	"communityconfiguration-reportincident-description": "Short description used for the configuration section related to the Incident Reporting System on Special:CommunityConfiguration.",
+	"communityconfiguration-reportincident-info-text": "Help text displayed on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "Form input label used for the community questions page configuration field on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "Form input description used for the community questions page configuration field on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "Form input label used for the local incident reporting page configuration field on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-help-text": "Form input description used for the local incident reporting page configuration field on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-label": "Form input label used for the dispute resolution page configuration field on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Form input description used for the dispute resolution page configuration field on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Form input label used for the enabled namespaces configuration field on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Form input description used for the enabled namespaces configuration field on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",
+	"communityconfiguration-reportincident-invalid-title": "Validation error shown on the Special:CommunityConfiguration editor subpage of the Incident Reporting System when an invalid title is provided."
 }

@@ -16,6 +16,24 @@
 			"EventLogging": "*"
 		}
 	},
+	"attributes": {
+		"CommunityConfiguration": {
+			"Providers": {
+				"ReportIncident": {
+					"store": {
+						"type": "wikipage",
+						"args": [
+							"MediaWiki:IncidentReportingConfig.json"
+						]
+					},
+					"validator": {
+						"type": "reportincident"
+					},
+					"type": "mw-config"
+				}
+			}
+		}
+	},
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\ReportIncident\\": "src/"
 	},
@@ -49,13 +67,17 @@
 			"value": 10800,
 			"description": "User accounts must be older than this value in order to submit a report. The default is 3 hours."
 		},
-		"ReportIncidentLocalLinks": {
-			"value": {
-				"disputeResolution": "Project:Dispute resolution",
-				"askTheCommunity": "Project:Village pump",
-				"localIncidentReport": "Project:Report an incident"
-			},
-			"description": "Local wiki pages used by the Incident Reporting tool for the non-emergency flow."
+		"ReportIncidentDisputeResolutionPage": {
+			"value": "Project:Dispute resolution",
+			"description": "A wiki page used for dispute resolution, referenced in the non-emergency flow.."
+		},
+		"ReportIncidentCommunityQuestionsPage": {
+			"value": "Project:Village pump",
+			"description": "A wiki page used for asking questions to the community, referenced in the non-emergency flow."
+		},
+		"ReportIncidentLocalIncidentReportPage": {
+			"value": "Project:Report an incident",
+			"description": "A wiki page used for reporting incidents to local functionaries, referenced in the non-emergency flow."
 		},
 		"ReportIncidentEnableInstrumentation": {
 			"value": false,
@@ -94,13 +116,17 @@
 			"services": [
 				"ReportIncidentController"
 			]
+		},
+		"SetupAfterCacheHooks": {
+			"class": "MediaWiki\\Extension\\ReportIncident\\Hooks\\Handlers\\SetupAfterCacheHandler"
 		}
 	},
 	"Hooks": {
 		"BeforePageDisplay": "ReportIncidentHooks",
 		"SidebarBeforeOutput": "ReportIncidentHooks",
 		"SkinTemplateNavigation::Universal": "ReportIncidentHooks",
-		"DiscussionToolsAddOverflowMenuItems": "DiscussionToolsHooks"
+		"DiscussionToolsAddOverflowMenuItems": "DiscussionToolsHooks",
+		"SetupAfterCache": "SetupAfterCacheHooks"
 	},
 	"MessagesDirs": {
 		"ReportIncident": [
