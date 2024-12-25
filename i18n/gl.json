@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Toliño"
+		]
+	},
+	"reportincident-desc": "Extensión para o sistema de denuncia de incidentes.",
+	"reportincident-report-btn-label": "Denunciar",
+	"reportincident-dialog-close-btn": "Pechar",
+	"reportincident-dialog-back-btn": "Volver",
+	"reportincident-dialog-optional-label": "(opcional)",
+	"reportincident-dialog-violator-placeholder-text": "A quen {{GENDER:|estás}} denunciando?",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Discurso de odio ou discriminación",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Acoso sexual",
+	"reportincident-dialog-harassment-type-something-else": "Outra cousa",
+	"reportincident-dialog-harassment-empty": "{{GENDER:|Debes}} seleccionar polo menos un comportamento.",
+	"reportincident-dialog-something-else-empty": "Indica unha breve descrición do comportamento."
+}
