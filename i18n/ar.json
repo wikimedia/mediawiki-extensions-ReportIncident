@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cigaryno"
+		]
+	},
+	"reportincident-report-btn-label": "تقرير",
+	"reportincident-dialog-close-btn": "إغلاق",
+	"reportincident-dialog-back-btn": "رجوع",
+	"reportincident-dialog-submit-btn": "إرسال التقرير",
+	"reportincident-dialog-harassment-type-spam": "سخام",
+	"reportincident-emaildialog-close-button": "إلغاء",
+	"reportincident-emaildialog-primary": "إذهب إلى الإعدادات",
+	"reportincident-submit-back-to-page": "رجوع إلى $1"
+}
