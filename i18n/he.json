@@ -32,7 +32,7 @@
 	"reportincident-dialog-internet-disconnected-error": "נראה שאין {{GENDER:|לך}} חיבור לאינטרנט. נא לנסות לשלוח מחדש כשהחיבור שלך יחזור.",
 	"reportincident-dialog-server-error": "מצטערים, נראה שהשרת שלנו לא מגיב. נא לנסות לשלוח מחדש.",
 	"reportincident-dialog-generic-error": "לא היה אפשר להגיש את הבקשה {{GENDER:|שלך}} עקב שגיאה. נא לנסות לשלוח מחדש.",
-	"reportincident-unable-to-send": "לא ניתן ליצור דו\"ח תקרית. אם הבעיה ממשיכה להתקיים, נא לשלוח דוא\"ל לכתובת emergency@wikimedia.org עם דו\"ח התקרית שלך.",
+	"reportincident-unable-to-send": "לא ניתן ליצור דו\"ח תקרית. אם הבעיה ממשיכה להתקיים, נא לשלוח דוא\"ל לכתובת emergency@wikimedia.org עם דו\"ח התקרית {{GENDER:|שלך}}.",
 	"reportincident-notification-link-to-page-prefix": "קישור לדף",
 	"reportincident-notification-link-to-comment-prefix": "קישור לתגובה המדווחת",
 	"reportincident-notification-link-to-topic-prefix": "קישור לנושא המדווח",
