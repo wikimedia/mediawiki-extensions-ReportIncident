@@ -8,6 +8,7 @@
 	"reportincident-dialog-close-btn": "إغلاق",
 	"reportincident-dialog-back-btn": "رجوع",
 	"reportincident-dialog-submit-btn": "إرسال التقرير",
+	"reportincident-dialog-optional-label": "(اختياري)",
 	"reportincident-dialog-harassment-type-spam": "سخام",
 	"reportincident-emaildialog-close-button": "إلغاء",
 	"reportincident-emaildialog-primary": "إذهب إلى الإعدادات",
