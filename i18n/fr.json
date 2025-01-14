@@ -48,7 +48,7 @@
 	"reportincident-dialog-violator-nonexistent": "{{GENDER:|}}Vous devez fournir un nom d'utilisateur existant à signaler.",
 	"reportincident-dialog-internet-disconnected-error": "Il semblerait que vous n'ayez pas de connexion Internet. Veuillez réessayer lorsque votre connexion sera rétablie.",
 	"reportincident-dialog-server-error": "Désolé, il semblerait que notre serveur ne réponde pas. Veuillez réessayer.",
-	"reportincident-dialog-generic-error": "{{GENDER:|}}Votre demande n'a pas pu être envoyée en raison d'une erreur. Veuillez réessayer.",
+	"reportincident-dialog-generic-error": "{{GENDER:|Votre}} demande n'a pas pu être envoyée en raison d'une erreur. Veuillez réessayer.",
 	"reportincident-success-message": "Signalement enregistré avec succès. Un administrateur examinera et déterminera si l'incident enfreint nos politiques. Merci de nous aider à assurer la sécurité de {{SITENAME}}.",
 	"reportincident-success-message-close": "Fermer",
 	"reportincident-unable-to-send": "Impossible d’envoyer par courriel le rapport d’incident.",
@@ -62,7 +62,7 @@
 	"action-reportincident": "Signaler un incident",
 	"reportincident-emaildialog-title": "Une adresse électronique vérifiée est requise",
 	"reportincident-emaildialog-close-button": "Annuler",
-	"reportincident-emaildialog-content": "Nous avons besoin de {{GENDER:|}}votre adresse courriel vérifiée pour vous envoyer les avancements sur le signalement ou faire le point si nécessaire. Veuillez ajouter ou vérifier votre adresse courriel dans les paramètres de votre compte utilisateur avant de déposer un signalement.",
+	"reportincident-emaildialog-content": "Nous avons besoin de {{GENDER:|votre}} adresse courriel vérifiée pour vous envoyer les avancements sur le signalement ou faire le point si nécessaire. Veuillez ajouter ou vérifier votre adresse courriel dans les paramètres de votre compte utilisateur avant de déposer un signalement.",
 	"reportincident-emaildialog-primary": "Aller aux paramètres",
 	"reportincident-confirmedemail-required": "Une adresse courriel confirmée est requise pour soumettre un signalement d'incident."
 }
