@@ -12,7 +12,6 @@ const ReportImmediateHarmStep = require( '../../../resources/ext.reportIncident/
 	utils = require( '@vue/test-utils' ),
 	{ createTestingPinia } = require( '@pinia/testing' ),
 	{ mockApiGet } = require( '../utils.js' ),
-	Constants = require( '../../../resources/ext.reportIncident/Constants.js' ),
 	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' ),
 	useInstrument = require( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
 
@@ -48,14 +47,9 @@ const waitUntilDebounceComplete = () => new Promise( ( resolve ) => {
 } );
 
 describe( 'ReportImmediateHarmStep', () => {
-	let jQueryCodePointLimitMock;
 	let logEvent;
 
 	beforeEach( () => {
-		// Mock the codePointLimit which is added by a plugin.
-		jQueryCodePointLimitMock = jest.fn();
-		global.$.prototype.codePointLimit = jQueryCodePointLimitMock;
-
 		logEvent = jest.fn();
 
 		useInstrument.mockImplementation( () => logEvent );
@@ -69,9 +63,6 @@ describe( 'ReportImmediateHarmStep', () => {
 	it( 'renders correctly', () => {
 		const wrapper = renderComponent();
 		expect( wrapper.find( '.ext-reportincident-dialog-step2' ).exists() ).toBe( true );
-		// Expect that the value of wgCommentCodePointLimit is passed to the codePointLimit call
-		// for the additional details field.
-		expect( jQueryCodePointLimitMock ).toHaveBeenCalledWith( Constants.detailsCodepointLimit );
 
 		expect( logEvent ).toHaveBeenCalledTimes( 1 );
 		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'submit_report' } );

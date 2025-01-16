@@ -10,8 +10,7 @@ const ReportIncidentDialogTypesOfBehavior = require( '../../../resources/ext.rep
 	Constants = require( '../../../resources/ext.reportIncident/Constants.js' ),
 	useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' ),
 	utils = require( '@vue/test-utils' ),
-	{ createTestingPinia } = require( '@pinia/testing' ),
-	{ nextTick } = require( 'vue' );
+	{ createTestingPinia } = require( '@pinia/testing' );
 
 const suppressMessage = 'Invalid prop: type check failed for prop "remainingCharacters"';
 const renderComponent = ( testingPinia ) => utils.mount( ReportIncidentDialogTypesOfBehavior, {
@@ -32,13 +31,7 @@ const renderComponent = ( testingPinia ) => utils.mount( ReportIncidentDialogTyp
 } );
 
 describe( 'Report Incident Dialog Types of Behavior', () => {
-	let jQueryCodePointLimitMock;
-
 	beforeEach( () => {
-		// Mock the codePointLimit which is added by a plugin.
-		jQueryCodePointLimitMock = jest.fn();
-		global.$.prototype.codePointLimit = jQueryCodePointLimitMock;
-
 		const mwConfig = {
 			wgReportIncidentDetailsCodePointLength: 1000
 		};
@@ -85,35 +78,5 @@ describe( 'Report Incident Dialog Types of Behavior', () => {
 
 		store.inputBehavior = Constants.harassmentTypes.OTHER;
 		expect( wrapper.vm.collectSomethingElseDetails ).toBe( true );
-	} );
-
-	it( 'Should apply codePointLimit on something else textarea on open', async () => {
-		const wrapper = renderComponent();
-		const store = useFormStore();
-
-		store.inputBehavior = Constants.harassmentTypes.OTHER;
-		expect( wrapper.vm.collectSomethingElseDetails ).toBe( true );
-
-		// Wait until the watch on collectSomethingElseDetails has run.
-		await nextTick();
-		// Wait until the next tick so that the callback set for nextTick in the code under-test has run.
-		return nextTick( () => {
-			// codePointLimit should have been called once
-			expect( jQueryCodePointLimitMock ).toHaveBeenCalledTimes( 1 );
-			expect( jQueryCodePointLimitMock ).toHaveBeenNthCalledWith( 1, Constants.detailsCodepointLimit );
-		} );
-	} );
-
-	it( 'Should apply codePointLimit on something else textarea if open on mount', async () => {
-		const testingPinia = createTestingPinia( { stubActions: false } );
-		const store = useFormStore();
-
-		store.inputBehavior = Constants.harassmentTypes.OTHER;
-		const wrapper = renderComponent( testingPinia );
-
-		expect( wrapper.vm.collectSomethingElseDetails ).toBe( true );
-		// codePointLimit should have been called once
-		expect( jQueryCodePointLimitMock ).toHaveBeenCalledTimes( 1 );
-		expect( jQueryCodePointLimitMock ).toHaveBeenNthCalledWith( 1, Constants.detailsCodepointLimit );
 	} );
 } );
