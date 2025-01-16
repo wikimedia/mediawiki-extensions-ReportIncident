@@ -14,9 +14,14 @@ use MediaWiki\User\User;
 class ReportIncidentController {
 
 	private Config $config;
+	private Config $localConfig;
 
-	public function __construct( Config $config ) {
+	public function __construct(
+		Config $config,
+		Config $localConfig
+	) {
 		$this->config = $config;
+		$this->localConfig = $localConfig;
 	}
 
 	/**
@@ -26,7 +31,7 @@ class ReportIncidentController {
 	 * @return bool
 	 */
 	private function shouldShowButtonForNamespace( int $namespace ): bool {
-		return in_array( $namespace, $this->config->get( 'ReportIncidentEnabledNamespaces' ) );
+		return in_array( $namespace, $this->getLocalConfig( 'ReportIncidentEnabledNamespaces' ) );
 	}
 
 	/**
@@ -89,8 +94,11 @@ class ReportIncidentController {
 			// 'withemail=1', otherwise use DB value.
 			'wgReportIncidentUserHasEmail' => $pretendUserHasEmail ?: $user->getEmail() !== '',
 			// Add wiki-specific links used by the submit success step (T379242).
-			// These will be replaced by community configuration in T374113.
-			'wgReportIncidentLocalLinks' => $this->config->get( 'ReportIncidentLocalLinks' ),
+			'wgReportIncidentLocalLinks' => [
+				'disputeResolution' => $this->getLocalConfig( 'ReportIncidentDisputeResolutionPage' ),
+				'localIncidentReport' => $this->getLocalConfig( 'ReportIncidentLocalIncidentReportPage' ),
+				'askTheCommunity' => $this->getLocalConfig( 'ReportIncidentCommunityQuestionsPage' )
+			],
 			// Control whether instrumentation is enabled pending approval (T372823).
 			'wgReportIncidentEnableInstrumentation' => $this->config->get( 'ReportIncidentEnableInstrumentation' ),
 			'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
@@ -102,5 +110,17 @@ class ReportIncidentController {
 			// loaded below.
 			$output->addModuleStyles( 'ext.reportIncident.menuStyles' );
 		}
+	}
+
+	/**
+	 * Get a config option from IRS's community configuration,
+	 * falling back to the global config if no value was set.
+	 *
+	 * @param string $key The key to look up in the configuration.
+	 * @return mixed
+	 */
+	private function getLocalConfig( string $key ) {
+		$localValue = $this->localConfig->get( $key );
+		return $localValue ?: $this->config->get( $key );
 	}
 }

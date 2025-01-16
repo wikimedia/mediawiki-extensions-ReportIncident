@@ -2,7 +2,6 @@
 
 namespace MediaWiki\Extension\ReportIncident\Tests\Unit;
 
-use MediaWiki\Config\Config;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
@@ -23,21 +22,40 @@ use Wikimedia\TestingAccessWrapper;
 class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 	use MockServiceDependenciesTrait;
 
-	private const TEST_LOCAL_LINKS = [
-		'disputeResolution' => 'Project:Dispute resolution',
-		'askTheCommunity' => 'Project:Village pump',
-		'localIncidentReport' => 'Project:Report an incident',
+	private const DEFAULT_LOCAL_LINKS = [
+		'ReportIncidentDisputeResolutionPage' => 'Project:Dispute resolution',
+		'ReportIncidentCommunityQuestionsPage' => 'Project:Village pump',
+		'ReportIncidentLocalIncidentReportPage' => 'Project:Report an incident',
 	];
 
+	private function newReportIncidentController(
+		array $globalConfig,
+		array $communityConfig = []
+	): ReportIncidentController {
+		$globalConfig += self::DEFAULT_LOCAL_LINKS;
+		$communityConfig += [
+			'ReportIncidentLocalIncidentReportPage' => '',
+			'ReportIncidentDisputeResolutionPage' => '',
+			'ReportIncidentCommunityQuestionsPage' => '',
+			'ReportIncidentEnabledNamespaces' => [],
+		];
+		return new ReportIncidentController(
+			new HashConfig( $globalConfig ),
+			new HashConfig( $communityConfig )
+		);
+	}
+
 	/** @dataProvider provideShouldShowButtonForNamespace */
-	public function testShouldShowButtonForNamespace( $namespace, $supportedNamespaces, $expectedReturnValue ) {
-		$config = new HashConfig( [
-			'ReportIncidentEnabledNamespaces' => $supportedNamespaces,
-			'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
-		] );
-		$objectUnderTest = $this->newServiceInstance( ReportIncidentController::class, [
-			'config' => $config
-		] );
+	public function testShouldShowButtonForNamespace(
+		$namespace,
+		$supportedNamespaces,
+		$communityConfigNamespaces,
+		$expectedReturnValue
+	) {
+		$objectUnderTest = $this->newReportIncidentController(
+			[ 'ReportIncidentEnabledNamespaces' => $supportedNamespaces ],
+			[ 'ReportIncidentEnabledNamespaces' => $communityConfigNamespaces ]
+		);
 		$objectUnderTest = TestingAccessWrapper::newFromObject( $objectUnderTest );
 		$this->assertSame(
 			$expectedReturnValue,
@@ -48,8 +66,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 
 	public static function provideShouldShowButtonForNamespace() {
 		return [
-			'Namespace is supported' => [ 3, [ 3 ], true ],
-			'Namespace is not supported' => [ 4, [ 3, 2 ], false ],
+			'Namespace is supported' => [ 3, [ 3 ], [], true ],
+			'Namespace is not supported' => [ 4, [ 3, 2 ], [], false ],
+			'Namespace is set in community configuration' => [ 3, [ 4, 2 ], [ 3 ], true ],
 		];
 	}
 
@@ -58,7 +77,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$mockUser = $this->createMock( User::class );
 		$mockUser->method( 'isNamed' )
 			->willReturn( $isUserNamed );
-		$objectUnderTest = $this->newServiceInstance( ReportIncidentController::class, [] );
+		$objectUnderTest = $this->newReportIncidentController( [] );
 		$objectUnderTest = TestingAccessWrapper::newFromObject( $objectUnderTest );
 		$this->assertSame(
 			$isUserNamed,
@@ -76,7 +95,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 
 	/** @dataProvider provideShouldAddMenuItem */
 	public function testShouldAddMenuItem(
-		Config $config, int $namespace, ?string $skinName, bool $isUserNamed, bool $expectedReturnResult
+		array $config, int $namespace, ?string $skinName, bool $isUserNamed, bool $expectedReturnResult
 	) {
 		// Mock the IContextSource that is passed to the ::shouldAddMenuItem method
 		$mockContext = $this->createMock( IContextSource::class );
@@ -94,10 +113,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$mockContext->method( 'getSkin' )->willReturn( $mockSkin );
 		// Get the object under test
 		/** @var ReportIncidentController $objectUnderTest */
-		$objectUnderTest = $this->newServiceInstance(
-			ReportIncidentController::class,
-			[ 'config' => $config ]
-		);
+		$objectUnderTest = $this->newReportIncidentController( $config );
 		$this->assertSame(
 			$expectedReturnResult,
 			$objectUnderTest->shouldAddMenuItem( $mockContext ),
@@ -108,61 +124,56 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 	public static function provideShouldAddMenuItem() {
 		return [
 			'All checks should fail' => [
-				new HashConfig( [
+				[
 					'ReportIncidentReportButtonEnabled' => false,
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
-					'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 					'ReportIncidentEnableInstrumentation' => true,
-				] ),
+				],
 				NS_TEMPLATE,
 				'minerva',
 				false,
 				false,
 			],
 			'Feature flag disabled' => [
-				new HashConfig( [
+				[
 					'ReportIncidentReportButtonEnabled' => false,
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
-					'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 					'ReportIncidentEnableInstrumentation' => true,
-				] ),
+				],
 				NS_USER_TALK,
 				'vector',
 				true,
 				false,
 			],
 			'Unsupported namespace' => [
-				new HashConfig( [
+				[
 					'ReportIncidentReportButtonEnabled' => true,
 					'ReportIncident' => [ 'vector' ],
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
-					'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 					'ReportIncidentEnableInstrumentation' => true,
-				] ),
+				],
 				NS_TEMPLATE,
 				'vector',
 				true,
 				false,
 			],
 			'User is not named' => [
-				new HashConfig( [
+				[
 					'ReportIncidentReportButtonEnabled' => true,
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
-					'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 					'ReportIncidentEnableInstrumentation' => true,
-				] ),
+				],
 				NS_USER_TALK,
 				'vector',
 				false,
 				false,
 			],
 			'All checks should pass' => [
-				new HashConfig( [
+				[
 					'ReportIncidentReportButtonEnabled' => true,
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
-					'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
 					'ReportIncidentEnableInstrumentation' => true,
-				] ),
+				],
 				NS_USER_TALK,
 				'vector',
 				true,
@@ -172,11 +183,6 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testAddModulesAndConfigVarsForMinerva() {
-		$config = new HashConfig( [
-			'ReportIncidentDeveloperMode' => false,
-			'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
-			'ReportIncidentEnableInstrumentation' => true,
-		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$userMock = $this->createMock( User::class );
 		$userMock->method( 'isEmailConfirmed' )->willReturn( true );
@@ -184,7 +190,11 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
 			->with( [
 				'wgReportIncidentUserHasConfirmedEmail' => true,
-				'wgReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+				'wgReportIncidentLocalLinks' => [
+					'disputeResolution' => 'Project:Dispute resolution',
+					'localIncidentReport' => 'Project:Report an incident',
+					'askTheCommunity' => 'Project:Village pump',
+				],
 				'wgReportIncidentEnableInstrumentation' => true,
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
@@ -200,18 +210,21 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$outputPageMock->expects( $this->once() )->method( 'getSkin' )
 			->willReturn( $mockSkin );
 		/** @var ReportIncidentController $objectUnderTest */
-		$objectUnderTest = $this->newServiceInstance( ReportIncidentController::class, [
-			'config' => $config
+		$objectUnderTest = $this->newReportIncidentController( [
+			'ReportIncidentDeveloperMode' => false,
+			'ReportIncidentEnableInstrumentation' => true,
 		] );
 		$objectUnderTest->addModulesAndConfigVars( $outputPageMock );
 	}
 
-	public function testAddModulesAndConfigVars() {
-		$config = new HashConfig( [
-			'ReportIncidentDeveloperMode' => false,
-			'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
-			'ReportIncidentEnableInstrumentation' => true,
-		] );
+	/**
+	 * @dataProvider provideConfigVarsData
+	 */
+	public function testAddModulesAndConfigVars(
+		array $globalConfig,
+		array $communityConfig,
+		array $expectedLocalLinks
+	): void {
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$userMock = $this->createMock( User::class );
 		$userMock->method( 'isEmailConfirmed' )->willReturn( true );
@@ -219,7 +232,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
 			->with( [
 				'wgReportIncidentUserHasConfirmedEmail' => true,
-				'wgReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+				'wgReportIncidentLocalLinks' => $expectedLocalLinks,
 				'wgReportIncidentEnableInstrumentation' => true,
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
@@ -234,19 +247,55 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			->willReturn( 'vector' );
 		$outputPageMock->expects( $this->once() )->method( 'getSkin' )
 			->willReturn( $mockSkin );
+		$globalConfig += [
+			'ReportIncidentDeveloperMode' => false,
+			'ReportIncidentEnableInstrumentation' => true,
+		];
 		/** @var ReportIncidentController $objectUnderTest */
-		$objectUnderTest = $this->newServiceInstance( ReportIncidentController::class, [
-			'config' => $config
-		] );
+		$objectUnderTest = $this->newReportIncidentController( $globalConfig, $communityConfig );
 		$objectUnderTest->addModulesAndConfigVars( $outputPageMock );
 	}
 
+	public static function provideConfigVarsData(): iterable {
+		yield 'no customized local links in LocalSettings nor community configuration' => [
+			[],
+			[],
+			[
+				'disputeResolution' => 'Project:Dispute resolution',
+				'localIncidentReport' => 'Project:Report an incident',
+				'askTheCommunity' => 'Project:Village pump',
+			],
+		];
+
+		yield 'customized local links in LocalSettings, nothing in community configuration' => [
+			[
+				'ReportIncidentLocalIncidentReportPage' => 'Project:Local incident report',
+			],
+			[],
+			[
+				'disputeResolution' => 'Project:Dispute resolution',
+				'localIncidentReport' => 'Project:Local incident report',
+				'askTheCommunity' => 'Project:Village pump',
+			],
+		];
+
+		yield 'customized local links in LocalSettings and in community configuration' => [
+			[
+				'ReportIncidentLocalIncidentReportPage' => 'Project:Local incident report',
+				'ReportIncidentCommunityQuestionsPage' => 'Project:Community questions',
+			],
+			[
+				'ReportIncidentLocalIncidentReportPage' => 'Project:CommunityConfig Local incident report',
+			],
+			[
+				'disputeResolution' => 'Project:Dispute resolution',
+				'localIncidentReport' => 'Project:CommunityConfig Local incident report',
+				'askTheCommunity' => 'Project:Community questions',
+			],
+		];
+	}
+
 	public function testAddModulesAndConfigVarsNoConfirmedEmail() {
-		$config = new HashConfig( [
-			'ReportIncidentDeveloperMode' => false,
-			'ReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
-			'ReportIncidentEnableInstrumentation' => true,
-		] );
 		$outputPageMock = $this->createMock( OutputPage::class );
 		$userMock = $this->createMock( User::class );
 		$userMock->method( 'isEmailConfirmed' )->willReturn( false );
@@ -254,7 +303,11 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
 			->with( [
 				'wgReportIncidentUserHasConfirmedEmail' => false,
-				'wgReportIncidentLocalLinks' => self::TEST_LOCAL_LINKS,
+				'wgReportIncidentLocalLinks' => [
+					'disputeResolution' => 'Project:Dispute resolution',
+					'localIncidentReport' => 'Project:Report an incident',
+					'askTheCommunity' => 'Project:Village pump',
+				],
 				'wgReportIncidentEnableInstrumentation' => true,
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
@@ -270,8 +323,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$outputPageMock->expects( $this->once() )->method( 'getSkin' )
 			->willReturn( $mockSkin );
 		/** @var ReportIncidentController $objectUnderTest */
-		$objectUnderTest = $this->newServiceInstance( ReportIncidentController::class, [
-			'config' => $config
+		$objectUnderTest = $this->newReportIncidentController( [
+			'ReportIncidentDeveloperMode' => false,
+			'ReportIncidentEnableInstrumentation' => true,
 		] );
 		$objectUnderTest->addModulesAndConfigVars( $outputPageMock );
 	}

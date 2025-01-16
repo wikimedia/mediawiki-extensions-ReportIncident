@@ -50,7 +50,12 @@ return [
 	'ReportIncidentController' => static function (
 		MediaWikiServices $services
 	): ReportIncidentController {
-		return new ReportIncidentController( $services->getMainConfig() );
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'CommunityConfiguration' ) ) {
+			$localLinksConfig = $services->getService( 'CommunityConfiguration.MediaWikiConfigReader' );
+		} else {
+			$localLinksConfig = $services->getMainConfig();
+		}
+		return new ReportIncidentController( $services->getMainConfig(), $localLinksConfig );
 	}
 ];
 // @codeCoverageIgnoreEnd
