@@ -7,6 +7,7 @@
 	"reportincident-report-btn-label": "تقرير",
 	"reportincident-dialog-close-btn": "إغلاق",
 	"reportincident-dialog-back-btn": "رجوع",
+	"reportincident-dialog-optional-label": "(اختياري)",
 	"reportincident-emaildialog-close-button": "إلغاء",
 	"reportincident-emaildialog-primary": "إذهب إلى الإعدادات"
 }
