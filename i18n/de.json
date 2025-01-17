@@ -66,7 +66,7 @@
 	"reportincident-submit-emergency-dialog-title": "Vielen Dank, dass {{GENDER:|du}} Schritte unternimmst, um {{SITENAME}} sicherer und integrativer zu machen",
 	"reportincident-submit-emergency-success": "Bericht zur Überprüfung eingereicht. Deine Anfrage wird innerhalb von 3 Stunden bearbeitet.",
 	"reportincident-submit-emergency-section-important-title": "Wichtig",
-	"reportincident-submit-emergency-section-important-item-services": "Wenn {{GENDER:|du}} verletzt bist oder dich in unmittelbarer Gefahr befindest, rufe {{GENDER:|deinen}} [[:de:Wikipedia:Verhalten im Notfall|örtlichen Notdienst]] an.",
+	"reportincident-submit-emergency-section-important-item-services": "Wenn {{GENDER:|du}} verletzt bist oder dich in unmittelbarer Gefahr befindest, rufe {{GENDER:|deinen}} örtlichen Notdienst an.",
 	"reportincident-submit-emergency-section-important-item-resources": "Wenn {{GENDER:|du}} das Gefühl hast, dass du {{GENDER:|dich selbst}} oder anderen körperlichen Schaden zufügen könntest, findest {{GENDER:|du}} hier eine [[meta:Special:MyLanguage/Mental_health_resources|Liste mit Möglichkeiten zur Hilfe]].",
 	"reportincident-submit-emergency-section-next-title": "Wie geht es weiter?",
 	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|Dein}} Bericht wurde an das [[meta:Special:MyLanguage/Threats_of_harm|Notfallteam der Wikimedia Foundation]] übermittelt. Das Team überwacht Notfallberichte rund um die Uhr und {{GENDER:|deine}} Anfrage wird innerhalb von 3 Stunden geprüft.",
@@ -84,5 +84,16 @@
 	"reportincident-submit-behavior-section-other-options-title": "Du kannst nicht finden, wonach {{GENDER:|du}} suchst?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Wenn {{GENDER:|du}} nicht sicher bist, was du tun sollst, [[$1|bitte die Community]] um Hilfe.",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Wenn die oben genannten Schritte {{GENDER:|dir}} nicht geholfen haben, kannst {{GENDER:|du}} die [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|gemeinnützige Organisation]] kontaktieren, die diese Website hostet.",
-	"reportincident-submit-back-to-page": "Zurück zu $1"
+	"reportincident-submit-back-to-page": "Zurück zu $1",
+	"communityconfiguration-reportincident-title": "Vorfallmeldesystem",
+	"communityconfiguration-reportincident-info-text": "Das Vorfallmeldesystem leitet Benutzer, die ihre Berichte einreichen, die kein Notfall sind, an entsprechende lokale Wiki-Seiten weiter. Diese können hier angepasst werden. Wenn du ein Feld leer lässt, werden Standardwerte aus der bereitgestellten Konfiguration verwendet.",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "Community-Fragenseite",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "Eine Wiki-Seite, auf der Benutzer der Community Fragen stellen können.",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "Lokale Vorfallsberichtsseite",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-help-text": "Eine Wiki-Seite, auf der Benutzer den lokalen Administratoren Vorfälle melden können.",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-label": "Seite zur Streitbeilegung",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Eine Wiki-Seite, auf der Benutzer Informationen zur Lösung von On-Wiki-Konflikten finden können.",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Aktivierte Namensräume",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Namensräume, in denen das Vorfallmeldesystem aktiviert ist.",
+	"communityconfiguration-reportincident-invalid-title": "Die Seite muss eine vorhandene lokale Wiki-Seite sein."
 }

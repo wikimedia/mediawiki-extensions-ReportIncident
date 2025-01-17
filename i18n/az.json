@@ -64,7 +64,7 @@
 	"reportincident-submit-emergency-dialog-title": "{{SITENAME}} saytını daha təhlükəsiz etmək üçün addımlar atdığınız üçün təşəkkür edirik",
 	"reportincident-submit-emergency-success": "Şikayət baxılmaq üçün təqdim edilib. Müraciətinizə 3 saat ərzində baxılacaq.",
 	"reportincident-submit-emergency-section-important-title": "Əhəmiyyətli",
-	"reportincident-submit-emergency-section-important-item-services": "Əgər yaralanmısınızsa və ya təhlükə altındasınızsa, [[wikipedia:List_of_emergency_telephone_numbers|yerli təcili yardım xidmətlərinə]] zəng edin.",
+	"reportincident-submit-emergency-section-important-item-services": "Əgər yaralanmısınızsa və ya təhlükə altındasınızsa, yerli təcili yardım xidmətlərinə zəng edin.",
 	"reportincident-submit-emergency-section-important-item-resources": "Əgər {{GENDER:|siz}} özünüzə və ya başqalarına fiziki zərər verə biləcəyinizi düşünürsünüzsə, [[meta:Special:MyLanguage/Mental_health_resources|dəstək resurslarının siyahısına baxa bilərsiniz.]]",
 	"reportincident-submit-emergency-section-next-title": "Sonra nə olacaq?",
 	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|Sizin}} bildirişiniz [[meta:Special:MyLanguage/Threats_of_harm|Vikimedia Fondunun təcili yardım komandasına]] təqdim ediləcək. Komanda fövqəladə hallar bildirişlərinə 24/7 nəzarət edir və {{GENDER:|sizin}} müraciətinizə 3 saat ərzində baxılacaq.",
