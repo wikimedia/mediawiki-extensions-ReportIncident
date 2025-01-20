@@ -86,6 +86,7 @@
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Wenn die oben genannten Schritte {{GENDER:|dir}} nicht geholfen haben, kannst {{GENDER:|du}} die [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|gemeinnützige Organisation]] kontaktieren, die diese Website hostet.",
 	"reportincident-submit-back-to-page": "Zurück zu $1",
 	"communityconfiguration-reportincident-title": "Vorfallmeldesystem",
+	"communityconfiguration-reportincident-description": "Konfiguriere lokale Links, die vom Vorfallmeldesystem verwendet werden, die keine Notfälle sind, und verwalte die Namensräume, für die das System aktiviert ist.",
 	"communityconfiguration-reportincident-info-text": "Das Vorfallmeldesystem leitet Benutzer, die ihre Berichte einreichen, die kein Notfall sind, an entsprechende lokale Wiki-Seiten weiter. Diese können hier angepasst werden. Wenn du ein Feld leer lässt, werden Standardwerte aus der bereitgestellten Konfiguration verwendet.",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "Community-Fragenseite",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "Eine Wiki-Seite, auf der Benutzer der Community Fragen stellen können.",

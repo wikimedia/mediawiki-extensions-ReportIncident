@@ -82,5 +82,17 @@
 	"reportincident-submit-behavior-section-other-options-title": "Axtardığınızı tapa bilmirsiniz?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Nə edəcəyinizi bilmirsinizsə, kömək üçün [[$1|icmadan]] xahiş edin.",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Yuxarıdakı addımlar sizə kömək etmədisə, bu veb-saytın sahibi olan [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|qeyri-kommersiya təşkilatı]] ilə əlaqə saxlaya bilərsiniz.",
-	"reportincident-submit-back-to-page": "$1 səhifəsinə qayıt"
+	"reportincident-submit-back-to-page": "$1 səhifəsinə qayıt",
+	"communityconfiguration-reportincident-title": "Hadisə Bildiriş Sistemi",
+	"communityconfiguration-reportincident-description": "Hadisə Bildiriş Sisteminin fövqəladə olmayan axını tərəfindən istifadə edilən yerli bağlantıları konfiqurasiya edin və sistemin aktiv olduğu ad fəzalarını təyin edin.",
+	"communityconfiguration-reportincident-info-text": "Hadisə Bildiriş Sistemi öz qeyri-fövqəladə axını vasitəsilə hesabat təqdim edən istifadəçiləri müvafiq lokal viki səhifələrinə yönləndirir. Bunlar burada fərdiləşdirilə bilər. Sahənin boş qalması onun yerləşdirilmiş konfiqurasiyadan defolt dəyərlərdən istifadə etməsinə səbəb olacaq.",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "İcma sualları səhifəsi",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "İstifadəçilərin cəmiyyətə sual verə biləcəyi viki səhifəsi.",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "Lokal hadisə bildirişi səhifəsi",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-help-text": "İstifadəçilərin hadisələr barədə lokal inzibatçılara məlumat verə biləcəyi viki səhifəsi.",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-label": "Mübahisələrin həlli səhifəsi",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "İstifadəçilərin vikidaxili mübahisələrin həlli ilə bağlı məlumat tapa biləcəyi viki səhifəsi.",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Aktivləşdirilmiş ad fəzaları",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Hadisə Bildiriş Sisteminin aktiv olduğu ad fəzaları.",
+	"communityconfiguration-reportincident-invalid-title": "Səhifə mövcud lokal viki səhifəsi olmalıdır."
 }

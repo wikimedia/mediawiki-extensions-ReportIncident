@@ -64,7 +64,7 @@
 	"reportincident-submit-emergency-dialog-title": "Grazas {{GENDER:|tomares}} as medidas para facer que {{SITENAME}} sexa un lugar máis seguro e inclusivo",
 	"reportincident-submit-emergency-success": "A denuncia enviouse para a súa revisión. A túa {{GENDER:|denuncia }} analizarase nun prazo de 3 horas.",
 	"reportincident-submit-emergency-section-important-title": "Importante",
-	"reportincident-submit-emergency-section-important-item-services": "Se estás {{GENDER:|ferido|ferida}} ou en perigo inminente, chama ao {{GENDER:|teu}} [[wikipedia:List_of_emergency_telephone_numbers|servizo de emerxencias local]].",
+	"reportincident-submit-emergency-section-important-item-services": "Se estás {{GENDER:|ferido|ferida}} ou en perigo inminente, chama ao {{GENDER:|teu}} servizo de emerxencias local.",
 	"reportincident-submit-emergency-section-important-item-resources": "Se {{GENDER:|consideras}} que {{GENDER:|podes}} lesionarte ou lesionar a outras persoas, {{GENDER:|consulta}} a [[meta:Special:MyLanguage/Mental_health_resources|lista de recursos de asistencia]].",
 	"reportincident-submit-emergency-section-next-title": "Que pasa agora?",
 	"reportincident-submit-emergency-section-next-item-team": "A {{GENDER:|túa}} denuncia enviouse ao [[meta:Special:MyLanguage/Threats_of_harm|equipo de emerxencias da Fundación Wikimedia]]. O equipo supervisa as denuncias as 24 horas do día e os 7 días da semana; a {{GENDER:|túa}} solicitude analizarase nun prazo de 3 horas.",
@@ -82,5 +82,17 @@
 	"reportincident-submit-behavior-section-other-options-title": "Non atopas o que {{GENDER:|estás}} a buscar?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Se non {{GENDER:|sabes}} que facer, [[$1|pídelle axuda á comunidade]].",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Se os pasos anteriores non foron de axuda, {{GENDER:|podes}} contactar coa [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|organización sen ánimo de lucro]] que aloxa este sitio web.",
-	"reportincident-submit-back-to-page": "Volver a «$1»"
+	"reportincident-submit-back-to-page": "Volver a «$1»",
+	"communityconfiguration-reportincident-title": "Sistema de notificación de incidentes",
+	"communityconfiguration-reportincident-description": "Configura as ligazóns locais utilizadas polo fluxo que non é de emerxencia do sistema de notificación de incidentes e xestiona os espazos de nomes nos que está activado o sistema.",
+	"communityconfiguration-reportincident-info-text": "O sistema de notificación de incidentes dirixe os usuarios que envían informes a través do seu fluxo que non é de emerxencia ás páxinas wiki locais axeitadas. Estas poden personalizarse aquí. Se deixas o campo baleiro provocarás que se usen os valores predeterminados da configuración despregada.",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "Páxina de preguntas da comunidade",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "Unha páxina wiki onde os usuarios poden facer preguntas á comunidade.",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "Páxina de notificación de incidentes locais",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-help-text": "Unha páxina wiki onde os usuarios poden informar de incidencias á administración local.",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-label": "Páxina de resolución de liortas",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Unha páxina wiki onde os usuarios poden atopar información sobre a resolución de liortas no wiki.",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Espazos de nomes activados",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Espazos de nomes onde o sistema de notificación de incidentes está activado.",
+	"communityconfiguration-reportincident-invalid-title": "A páxina debe ser unha páxina wiki local que exista."
 }

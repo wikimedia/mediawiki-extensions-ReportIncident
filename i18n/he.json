@@ -64,7 +64,7 @@
 	"reportincident-submit-emergency-dialog-title": "תודה {{GENDER:|שעשית}} הצעדים כדי להפוך את {{SITENAME}} לאתר בטוח ומכיל יותר",
 	"reportincident-submit-emergency-success": "הדו\"ח הוגש לבדיקה. {{GENDER:|בקשתך}} תיבדק תוך 3 שעות.",
 	"reportincident-submit-emergency-section-important-title": "חשוב",
-	"reportincident-submit-emergency-section-important-item-services": "אם נפצעת או {{GENDER:|שאתה|שאת}} בסכנה מיידית, אנא {{GENDER:|התקשר|התקשרי}} ל[[wikipedia:List_of_emergency_telephone_numbers|שירותי החירום המקומיים]].",
+	"reportincident-submit-emergency-section-important-item-services": "אם נפצעת או {{GENDER:|שאתה|שאת}} בסכנה מיידית, אנא {{GENDER:|התקשר|התקשרי}} לשירותי החירום המקומיים.",
 	"reportincident-submit-emergency-section-important-item-resources": "אם {{GENDER:|אתה מרגיש שאתה עלול|את מרגישה שאת עלול}} לפגוע פיזית בעצמך או באחרים, {{GENDER:|אתה יכול|את יכולה}} למצוא [[meta:Special:MyLanguage/Mental_health_resources|רשימה של משאבי תמיכה]].",
 	"reportincident-submit-emergency-section-next-title": "מה קורה אחר־כך?",
 	"reportincident-submit-emergency-section-next-item-team": "הדו\"ח {{GENDER:|שלך}} הוגש ל[[meta:Special:MyLanguage/Threats_of_harm|צוות החירום של קרן ויקימדיה]]. הצוות עוקב אחר דו\"חות חירום 24/7, וההקשה שלך תיבדק תוך 3 שעות.",
@@ -82,5 +82,17 @@
 	"reportincident-submit-behavior-section-other-options-title": "לא מצאת את מה {{GENDER:|שאתה מחפש|שאת מחפשת}}?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "אם {{GENDER:|אתה לא בטוח|את לא בטוחה}} מה לעשות, [[$1|{{GENDER:|בקש|בקשי}} עזרה מהקהילה]].",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "אם השלבים לעיל לא עזרו לך, {{GENDER:|אתה יכול|את יכולה}} ליצור קשר עם [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|המוסד ללא כוונת רווח]] שמארח את האתר הזה.",
-	"reportincident-submit-back-to-page": "חזרה אל $1"
+	"reportincident-submit-back-to-page": "חזרה אל $1",
+	"communityconfiguration-reportincident-title": "מערכת דיווח תקריות",
+	"communityconfiguration-reportincident-description": "הגדרת קישורים מקומיים שמשמשים את זרימת העבודה למצבים שאינם מצבי חירום של מערכת דיווח התקריות וניהול מרחבי השמות שהמערכת מופעלת בהם.",
+	"communityconfiguration-reportincident-info-text": "מערכת דיווח התקריות מפנה משתמשים שמגישים דו\"חות דרך זרימת העבודה שלה למצבים שאינם מצבי חירום לדפי ויקי מקומיים מתאימים. אפשר להגדיר אותם כאן. אם השדה יושאר ריק, זה יגרום לשימוש בערכי ברירת מחדל מהתצורה המותקנת.",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "דף שאלות קהילה",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "דף ויקי שמשתמשים יכולים להפנות בו שאלות אל הקהילה.",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "דף דיווח תקריות מקומי",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-help-text": "דף ויקי שבו משתמשים יכולים לדווח על תקריות למפעילים מקומיים.",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-label": "דף יישוב מחלוקות",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "דף ויקי שמשתמשים יכולים למצוא בו מידע על פתרון מחלוקות בוויקי.",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "מרחבי שם מופעלים",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "מרחבי שמות שמערכת דיווח האירועים מופעלת בהם.",
+	"communityconfiguration-reportincident-invalid-title": "הדף חייב להיות דף ויקי מקומי קיים."
 }
