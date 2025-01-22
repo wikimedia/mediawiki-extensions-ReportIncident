@@ -7,7 +7,8 @@
 			"Mahabarata",
 			"Obscaeris",
 			"SleaY",
-			"Urhixidur"
+			"Urhixidur",
+			"Wladek92"
 		]
 	},
 	"reportincident-desc": "Extension du système de signalement d’incident",
@@ -70,7 +71,7 @@
 	"reportincident-submit-emergency-dialog-title": "{{GENDER:|Merci}} d'avoir pris des mesures pour rendre {{SITENAME}} plus sûr et plus inclusif",
 	"reportincident-submit-emergency-success": "Rapport soumis pour examen. {{GENDER:|Votre}} demande sera étudiée dans les 3 heures.",
 	"reportincident-submit-emergency-section-important-title": "Important",
-	"reportincident-submit-emergency-section-important-item-services": "Si vous êtes {{GENDER:|blessé|blessée}} ou en danger immédiat, appelez les [[wikipedia:List_of_emergency_telephone_numbers|services d'urgence locaux]].",
+	"reportincident-submit-emergency-section-important-item-services": "Si vous êtes {{GENDER:|blessé|blessée}} ou en danger immédiat, appelez {{GENDER:|les}} services d'urgence locaux.",
 	"reportincident-submit-emergency-section-important-item-resources": "Si {{GENDER:|vous}} pensez que {{GENDER:|vous}} pourriez {{GENDER:|vous}} faire du mal physiquement ou faire du mal à d'autres personnes, {{GENDER:|vous}} pouvez trouver [[meta:Special:MyLanguage/Mental_health_resources|dans ce lien]] une liste de ressources pour de l'assistance.",
 	"reportincident-submit-emergency-section-next-title": "Que se passe-t-il ensuite ?",
 	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|Votre}} signalement a été soumis à l'[[meta:Special:MyLanguage/Threats_of_harm|équipe d'urgence de la Fondation Wikimédia]]. L'équipe surveille les signalements d'urgence 24h/24 et 7j/7 et {{GENDER:|votre}} signalement sera examiné dans les 3 heures.",
@@ -88,5 +89,8 @@
 	"reportincident-submit-behavior-section-other-options-title": "Vous ne trouvez pas ce que {{GENDER:|vous}} cherchez ?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Si {{GENDER:|vous}} n'êtes pas sûr de ce qu'il faut faire, veuillez demander de l'[[$1|aide à la communauté]].",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Si les étapes ci-dessus ne {{GENDER:|vous}} ont pas aidé, vous pouvez contacter l'[[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|organisation à but non lucratif]] qui héberge ce site Internet.",
-	"reportincident-submit-back-to-page": "Retour à $1"
+	"reportincident-submit-back-to-page": "Retour à $1",
+	"communityconfiguration-reportincident-title": "Système des raports d'incident",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "Page des questions de la communauté",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "Page des rapports d'incidents locaux"
 }
