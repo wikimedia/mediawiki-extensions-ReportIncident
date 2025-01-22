@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"沈澄心"
+			"沈澄心",
+			"Diskdance"
 		]
 	},
 	"reportincident-desc": "事件报告系统扩展。",
-	"reportincident-report-btn-label": "报告",
+	"reportincident-report-btn-label": "举报",
 	"reportincident-dialog-close-btn": "关闭",
 	"reportincident-dialog-proceed-btn": "继续提交报告",
 	"reportincident-dialog-back-btn": "返回",
@@ -15,7 +16,7 @@
 	"reportincident-dialog-harassment-type-label": "什么类型的行为？",
 	"reportincident-dialog-additional-details-input-label": "额外细节",
 	"reportincident-dialog-optional-label": "（可选）",
-	"reportincident-dialog-violator-placeholder-text": "{{GENDER:|您}}要报告谁？",
+	"reportincident-dialog-violator-placeholder-text": "{{GENDER:|您}}想要举报谁？",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "仇恨言论或歧视",
 	"reportincident-dialog-harassment-type-sexual-harassment": "性骚扰",
 	"reportincident-dialog-harassment-type-threats-of-violence": "暴力威胁",
@@ -30,5 +31,6 @@
 	"reportincident-dialog-harassment-example-doxing": "个人信息泄露（人肉搜索、起底）",
 	"reportincident-dialog-harassment-example-hounding": "追逼烦扰",
 	"reportincident-dialog-harassment-example-trolling": "引战",
+	"reportincident-dialog-harassment-empty": "{{GENDER:|您}}必须选择至少一种行为。",
 	"reportincident-dialog-something-else-empty": "请简要描述该行为。"
 }
