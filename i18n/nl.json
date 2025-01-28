@@ -83,5 +83,6 @@
 	"reportincident-submit-behavior-section-other-options-title": "Kunt u niet vinden wat u zoekt?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Als u niet weet wat u moet doen, [[$1|vraag dan de gemeenschap]] om hulp.",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Als de bovenstaande stappen u niet hebben geholpen, kunt u contact opnemen met de [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|non-profitorganisatie]] waarbij deze website is ondergebracht.",
-	"reportincident-submit-back-to-page": "Terug naar $1"
+	"reportincident-submit-back-to-page": "Terug naar $1",
+	"communityconfiguration-reportincident-title": "Incidentenrapportagesysteem"
 }
