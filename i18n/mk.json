@@ -64,7 +64,7 @@
 	"reportincident-submit-emergency-dialog-title": "{{GENDER:|Ви}} благодариме што преземате чекори за безбедноста и вклучителноста на {{SITENAME}}",
 	"reportincident-submit-emergency-success": "Пријавата е поднесена на разгледување. {{GENDER:|Вашето}} барање ќе биде разгледано во рок од 3 часа.",
 	"reportincident-submit-emergency-section-important-title": "Важно",
-	"reportincident-submit-emergency-section-important-item-services": "Ако {{GENDER:|сте}} повредени или во непосредна опасност, повикајте ги [[wikipedia:List_of_emergency_telephone_numbers|итни служби]] во {{GENDER:|вашиот}} град.",
+	"reportincident-submit-emergency-section-important-item-services": "Ако {{GENDER:|сте}} повредени или во непосредна опасност, повикајте ги итните служби во {{GENDER:|вашиот}} град.",
 	"reportincident-submit-emergency-section-important-item-resources": "Ако {{GENDER:|сметате}} дека {{GENDER:|може}} да нанесете физичка повреда врз {{GENDER:|себе}} или други, {{GENDER:|можете}} да најдете [[meta:Special:MyLanguage/Mental_health_resources|список на ресурси за поддршка]].",
 	"reportincident-submit-emergency-section-next-title": "Што понатаму?",
 	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|Вашата}} пријава е поднесена кај [[meta:Special:MyLanguage/Threats_of_harm|Екипата за итни случаи на Фондацијата Викимедија]]. Екипата врши надзор врз пријавите на итни случаи 24/7, и {{GENDER:|вашето}} барање ќе биде разгледано во рок од 3 часа.",
