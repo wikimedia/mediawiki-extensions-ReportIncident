@@ -82,5 +82,17 @@
 	"reportincident-submit-behavior-section-other-options-title": "Не го најдовте тоа што го {{GENDER:|барате}}?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Ако {{GENDER:|не знаете}} што да правите, [[$1|побарајте помош од заедницата]].",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Доколку горенаведените чекори не {{GENDER:|ви}} помогнаа, {{GENDER:|можете}} да се обратите на [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|непрофитната организација]] која го вдомува ова мрежно место.",
-	"reportincident-submit-back-to-page": "Назад на $1"
+	"reportincident-submit-back-to-page": "Назад на $1",
+	"communityconfiguration-reportincident-title": "Систем за пријавување на инциденти",
+	"communityconfiguration-reportincident-description": "Поставете ги месните врски за употреба во текот за неитни случаи на Системот за пријавување на инциденти и одредете во кои именски простори да е овозможен системот.",
+	"communityconfiguration-reportincident-info-text": "Системот за пријавување на инциденти упатува корисници кои поднесуваат пријави преку неитен тек кон соодветните месни викистраници. Тие можат да се прилагодат тука. Ако полето остане празно, ќе се користат подразбраните вредности од спроведената поставеност.",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "Страница за прашања за заедницата",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "Викистраница каде корисниците можат да ѝ поставаат прашања на заедницата.",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "Месна страница за пријавување на инциденти",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-help-text": "Викистраница каде корисниците можат да им пријавуваат инциденти на месните администратори.",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-label": "Страница за решавање спорови",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "ВИкистраница каде корисниците можат да најдат информации за решавање на спорови на викито.",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Овозможени именски простори",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Именски простори во кои е овозможен Системот за пријавување на инциденти.",
+	"communityconfiguration-reportincident-invalid-title": "Страницата мора да биде постоечка месна викистраница."
 }
