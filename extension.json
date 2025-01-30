@@ -18,6 +18,18 @@
 	},
 	"attributes": {
 		"CommunityConfiguration": {
+			"Validators": {
+				"reportincident": {
+					"class": "MediaWiki\\Extension\\ReportIncident\\Config\\ReportIncidentConfigValidator",
+					"factory": "MediaWiki\\Extension\\ReportIncident\\Config\\ReportIncidentConfigValidator::factory",
+					"services": [
+						"TitleParser",
+						"PageStore",
+						"StatsdDataFactory"
+					],
+					"args": [ "MediaWiki\\Extension\\ReportIncident\\Config\\ReportIncidentSchema" ]
+				}
+			},
 			"Providers": {
 				"ReportIncident": {
 					"store": {
@@ -116,17 +128,13 @@
 			"services": [
 				"ReportIncidentController"
 			]
-		},
-		"SetupAfterCacheHooks": {
-			"class": "MediaWiki\\Extension\\ReportIncident\\Hooks\\Handlers\\SetupAfterCacheHandler"
 		}
 	},
 	"Hooks": {
 		"BeforePageDisplay": "ReportIncidentHooks",
 		"SidebarBeforeOutput": "ReportIncidentHooks",
 		"SkinTemplateNavigation::Universal": "ReportIncidentHooks",
-		"DiscussionToolsAddOverflowMenuItems": "DiscussionToolsHooks",
-		"SetupAfterCache": "SetupAfterCacheHooks"
+		"DiscussionToolsAddOverflowMenuItems": "DiscussionToolsHooks"
 	},
 	"MessagesDirs": {
 		"ReportIncident": [

@@ -5,7 +5,7 @@ use MediaWiki\Extension\ReportIncident\Config\ReportIncidentConfigValidator;
 use MediaWikiIntegrationTestCase;
 
 /**
- * @covers \MediaWiki\Extension\ReportIncident\Hooks\Handlers\SetupAfterCacheHandler
+ * @coversNothing
  */
 class ReportIncidentConfigValidatorRegistrationTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
