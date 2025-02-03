@@ -18,6 +18,7 @@
 	"communityconfiguration-reportincident-description": "پیکربندی پیوندهای محلی مورد استفادهٔ جریان غیر اضطراری سامانهٔ گزارش رویداد و مدیریت فضاهای نامی که سامانه در آن‌ها فعال است.",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "صفحهٔ پرسش و پاسخ اجتماع",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "یک صفحهٔ ویکی که در آن کاربران می‌توانند پرسش‌های خود را با اجتماع در میان بگذارند.",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "صفحهٔ گزارش رویداد محلی",
 	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-help-text": "یک صفحهٔ ویکی که در آن کاربران می‌توانند وقایع را به مدیران محلی گزارش کنند.",
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-label": "صفحهٔ حل اختلاف",
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "یک صفحهٔ ویکی که در آن کاربران می‌توانند اطلاعاتی پیرامون نحوهٔ رفع اختلافات درون‌ویکی بیابند.",

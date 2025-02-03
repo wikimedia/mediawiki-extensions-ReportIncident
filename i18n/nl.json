@@ -84,5 +84,16 @@
 	"reportincident-submit-behavior-section-other-options-item-ask": "Als u niet weet wat u moet doen, [[$1|vraag dan de gemeenschap]] om hulp.",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Als de bovenstaande stappen u niet hebben geholpen, kunt u contact opnemen met de [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|non-profitorganisatie]] waarbij deze website is ondergebracht.",
 	"reportincident-submit-back-to-page": "Terug naar $1",
-	"communityconfiguration-reportincident-title": "Incidentenrapportagesysteem"
+	"communityconfiguration-reportincident-title": "Incidentenrapportagesysteem",
+	"communityconfiguration-reportincident-description": "Configureer lokale koppelingen die worden gebruikt door de niet-spoedeisende stroom van het Incidentmeldingssysteem en beheer de naamruimten waarvoor het systeem is ingeschakeld.",
+	"communityconfiguration-reportincident-info-text": "Het Incidentmeldingssysteem stuurt gebruikers die meldingen indienen via de niet-noodstroom naar de juiste lokale wikipagina’s. Deze kunnen hier worden aangepast. Bij het leeg laten van een veld worden de standaardwaarden van de doorgevoerde configuratie gebruikt.",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "Pagina voor vragen aan de gemeenschap",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "Een wikipagina waar gebruikers vragen kunnen stellen aan de gemeenschap.",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "Lokale incidentmeldingspagina",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-help-text": "Een wikipagina waar gebruikers incidenten kunnen melden aan lokale moderatoren.",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-label": "Geschillenbeslechtingspagina",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Een wikipagina waar gebruikers informatie kunnen vinden over het oplossen van geschillen op de wiki.",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Ingeschakelde naamruimten",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Naamruimten waarin het Incidentmeldingssysteem is ingeschakeld.",
+	"communityconfiguration-reportincident-invalid-title": "De pagina moet een bestaande lokale wikipagina zijn."
 }

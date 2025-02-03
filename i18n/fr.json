@@ -92,5 +92,8 @@
 	"reportincident-submit-back-to-page": "Retour à $1",
 	"communityconfiguration-reportincident-title": "Système des raports d'incident",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "Page des questions de la communauté",
-	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "Page des rapports d'incidents locaux"
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "Page des rapports d'incidents locaux",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-label": "Page de résolution des litiges",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Espaces de nom autorisés",
+	"communityconfiguration-reportincident-invalid-title": "La page doit exister sur le wiki local."
 }
