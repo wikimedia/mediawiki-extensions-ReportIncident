@@ -3,6 +3,7 @@
 		"authors": [
 			"Hamilton Abreu",
 			"Mbs262",
+			"McDutchie",
 			"Sandiooses"
 		]
 	},
@@ -64,7 +65,7 @@
 	"reportincident-behavior-required": "Selecione o tipo de comportamento inaceitável",
 	"reportincident-threat-harm-required": "É preciso fornecer uma “opção de ameaças de ferimento”",
 	"reportincident-submit-emergency-dialog-title": "Obrigado {{GENDER:|você}} por tomar medidas que tornam a {{SITENAME}} mais segura e inclusiva",
-	"reportincident-submit-emergency-success": "Importante",
+	"reportincident-submit-emergency-success": "Relatório enviado para revisão. {{GENDER:|Sua}} solicitação será analisada dentro de 3 horas.",
 	"reportincident-submit-emergency-section-important-title": "Importante",
 	"reportincident-submit-emergency-section-important-item-services": "Se {{GENDER:|você}} está ferido(a) ou em perigo imediato, ligue para os {{GENDER:|seus}} [[wikipedia:List_of_emergency_telephone_numbers|serviços de emergência locais]].",
 	"reportincident-submit-emergency-section-important-item-resources": "Se {{GENDER:|você}} sente que {{GENDER:|você}} pode causar danos físicos a {{GENDER:|você mesmo}} ou a outras pessoas, {{GENDER:|você}} pode encontrar uma [[meta:Special:MyLanguage/Mental_health_resources|lista de recursos de suporte]].",
