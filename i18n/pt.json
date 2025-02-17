@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Hamilton Abreu",
+			"Martin Urbanec",
 			"Mbs262",
 			"McDutchie",
 			"Sandiooses"
@@ -83,7 +84,7 @@
 	"reportincident-submit-behavior-section-support-item-mentors": "Se {{GENDER:|você}} for novo, [[Special:Homepage|peça ao {{GENDER:|seu}} mentor]] para orientar {{GENDER:|você}} durante o processo.",
 	"reportincident-submit-behavior-section-support-item-info-is-public": "Todas as conversas nos wikis são públicas. Por favor, não compartilhe informações pessoais.",
 	"reportincident-submit-behavior-section-other-options-title": "Não consegue encontrar o que {{GENDER:|você está}} procurando?",
-	"reportincident-submit-behavior-section-other-options-item-ask": "Se {{GENDER:|você não tiver certeza do que fazer, [[$1|peça ajuda à comunidade]].",
+	"reportincident-submit-behavior-section-other-options-item-ask": "Se você não tiver certeza do que fazer, [[$1|peça ajuda à comunidade]].",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Se as etapas acima não ajudaram {{GENDER:|você}}, {{GENDER:|você}} pode entrar em contato com a [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|organização sem fins lucrativos]] que hospeda este site.",
 	"reportincident-submit-back-to-page": "Retornar à $1"
 }
