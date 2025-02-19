@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ата"
+		]
+	},
+	"reportincident-desc": "Розширення Системи повідомлень про інциденти.",
+	"reportincident-report-btn-label": "Поскаржитися",
+	"reportincident-dialog-close-btn": "Закрити",
+	"reportincident-dialog-back-btn": "Назад",
+	"reportincident-dialog-optional-label": "(необов'язково)",
+	"reportincident-dialog-violator-placeholder-text": "На кого {{GENDER:|ви}} скаржитеся?",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Мова ненависті чи дискримінація",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Сексуальні домагання",
+	"reportincident-dialog-harassment-type-something-else": "Щось інше",
+	"reportincident-dialog-harassment-empty": "{{GENDER:|Ви}} маєте вибрати принаймні один тип поведінки.",
+	"reportincident-dialog-something-else-empty": "Будь ласка, дайте короткий опис поведінки."
+}
