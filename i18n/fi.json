@@ -5,7 +5,7 @@
 			"Yupik"
 		]
 	},
-	"reportincident-report-btn-label": "Ilmoita",
+	"reportincident-report-btn-label": "Ilminna",
 	"reportincident-dialog-close-btn": "Sulje",
 	"reportincident-dialog-proceed-btn": "Jatka ilmoituksen tekemiseen",
 	"reportincident-dialog-back-btn": "Takaisin",
@@ -15,12 +15,16 @@
 	"reportincident-dialog-additional-details-input-label": "Lisätietoja",
 	"reportincident-dialog-optional-label": "(valinnainen)",
 	"reportincident-dialog-violator-label": "Käyttäjä, josta {{GENDER:|haluat}} tehdä ilmoituksen",
-	"reportincident-dialog-violator-placeholder-text": "Kenestä {{GENDER:|teet}} ilmoituksen?",
+	"reportincident-dialog-violator-placeholder-text": "Kenestä {{GENDER:|teet}} ilmiannon?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Vihapuhe tai syrjintä",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Seksuaalinen häirintä",
 	"reportincident-dialog-harassment-type-threats-of-violence": "Väkivallalla uhkailu",
 	"reportincident-dialog-harassment-type-intimidation": "Uhkailu, hyökkäys, nimittely",
 	"reportincident-dialog-harassment-type-something-else": "Jokin muu",
+	"reportincident-dialog-server-error": "Pahoittelut, näyttää siltä, ettei palvelimemme vastaa. Kokeile lähettää uudelleen.",
+	"reportincident-dialog-generic-error": "Pyyntöäsi ei voitu lähettää virheen vuoksi. Kokeile lähettää uudelleen.",
+	"reportincident-emaildialog-title": "Vaaditaan varmennettu sähköpostiosoite",
 	"reportincident-emaildialog-close-button": "Peruuta",
+	"reportincident-emaildialog-content": "Tarvitsemme varmennetun sähköpostiosoitteesi, jotta voimme lähettää sinulle päivityksiä ilmiannostasi tai ottaa sinuun yhteyttä tarvittaessa. Lisää ja varmenna sähköpostiosoitteesi käyttäjätunnuksesi asetuksissa ennen kuin lähetät ilmiannon.",
 	"reportincident-emaildialog-primary": "Mene asetuksiin"
 }
