@@ -3,6 +3,7 @@
 		"authors": [
 			"BlueCamille",
 			"Gomoko",
+			"JLTRY",
 			"MacOS Weed",
 			"Mahabarata",
 			"Obscaeris",
@@ -91,9 +92,15 @@
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Si les étapes ci-dessus ne {{GENDER:|vous}} ont pas aidé, vous pouvez contacter l'[[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|organisation à but non lucratif]] qui héberge ce site Internet.",
 	"reportincident-submit-back-to-page": "Retour à $1",
 	"communityconfiguration-reportincident-title": "Système des raports d'incident",
+	"communityconfiguration-reportincident-description": "Configurez les liens locaux utilisés par le flux non urgent du système de signalement d'incidents et gérez les espaces de noms pour lesquels le système est activé.",
+	"communityconfiguration-reportincident-info-text": "Le système de signalement des incidents dirige les utilisateurs qui soumettent des rapports via son flux non urgent vers les pages wiki locales appropriées. Celles-ci peuvent être personnalisées ici. Si vous laissez un champ vide, il utilisera les valeurs par défaut de la configuration déployée.",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "Page des questions de la communauté",
+	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "Une page wiki où les utilisateurs peuvent poser des questions à la communauté.",
 	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "Page des rapports d'incidents locaux",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-help-text": "Une page wiki où les utilisateurs peuvent signaler des incidents aux administrateurs locaux.",
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-label": "Page de résolution des litiges",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Une page wiki où les utilisateurs peuvent trouver des informations sur la résolution des conflits sur le wiki.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Espaces de nom autorisés",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Espaces de noms où le système de signalement d’incidents est activé.",
 	"communityconfiguration-reportincident-invalid-title": "La page doit exister sur le wiki local."
 }
