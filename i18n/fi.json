@@ -5,7 +5,7 @@
 			"Yupik"
 		]
 	},
-	"reportincident-report-btn-label": "Ilminna",
+	"reportincident-report-btn-label": "Ilmianna",
 	"reportincident-dialog-close-btn": "Sulje",
 	"reportincident-dialog-proceed-btn": "Jatka ilmoituksen tekemiseen",
 	"reportincident-dialog-back-btn": "Takaisin",
@@ -19,5 +19,7 @@
 	"reportincident-dialog-harassment-type-sexual-harassment": "Seksuaalinen häirintä",
 	"reportincident-dialog-harassment-type-threats-of-violence": "Väkivallalla uhkailu",
 	"reportincident-dialog-harassment-type-intimidation": "Uhkailu, hyökkäys, nimittely",
-	"reportincident-dialog-harassment-type-something-else": "Jokin muu"
+	"reportincident-dialog-harassment-type-something-else": "Jokin muu",
+	"reportincident-dialog-harassment-empty": "{{GENDER:|Sinun}} on valittava vähintään yksi käytöstyyppi.",
+	"reportincident-dialog-something-else-empty": "Anna lyhyt kuvaus tapahtuneesta."
 }
