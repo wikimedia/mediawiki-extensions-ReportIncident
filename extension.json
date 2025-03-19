@@ -11,7 +11,7 @@
 	"license-name": "GPL-2.0-or-later",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.43",
+		"MediaWiki": ">= 1.44",
 		"extensions": {
 			"EventLogging": "*"
 		}
@@ -27,7 +27,9 @@
 						"PageStore",
 						"StatsdDataFactory"
 					],
-					"args": [ "MediaWiki\\Extension\\ReportIncident\\Config\\ReportIncidentSchema" ]
+					"args": [
+						"MediaWiki\\Extension\\ReportIncident\\Config\\ReportIncidentSchema"
+					]
 				}
 			},
 			"Providers": {
@@ -190,7 +192,6 @@
 						"cdxIconUserGroup"
 					]
 				}
-
 			],
 			"messages": [
 				"reportincident-desc",
