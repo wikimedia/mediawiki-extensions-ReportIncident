@@ -6,12 +6,11 @@ use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Extension\CommunityConfiguration\Schema\SchemaBuilder;
 use MediaWiki\Extension\CommunityConfiguration\Validation\IValidator;
-use MediaWiki\Extension\CommunityConfiguration\Validation\JsonSchemaValidator;
 use MediaWiki\Extension\CommunityConfiguration\Validation\ValidationStatus;
+use MediaWiki\Extension\CommunityConfiguration\Validation\ValidatorFactory;
 use MediaWiki\Page\PageLookup;
 use MediaWiki\Title\MalformedTitleException;
 use MediaWiki\Title\TitleParser;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
 
 /**
  * Validator class used by CommunityConfiguration for IRS local links.
@@ -37,13 +36,14 @@ class ReportIncidentConfigValidator implements IValidator {
 	public static function factory(
 		TitleParser $titleParser,
 		PageLookup $pageLookup,
-		IBufferingStatsdDataFactory $statsdDataFactory,
+		ValidatorFactory $validatorFactory,
 		string $jsonSchema,
 		?IContextSource $context = null
 	): self {
-		$jsonSchemaValidator = new JsonSchemaValidator(
-			$jsonSchema,
-			$statsdDataFactory
+		$jsonSchemaValidator = $validatorFactory->newValidator(
+			'ReportIncident',
+			'jsonschema',
+			[ $jsonSchema ],
 		);
 
 		$context ??= RequestContext::getMain();

@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\ReportIncident\Tests\Integration\Config;
 
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Extension\CommunityConfiguration\CommunityConfigurationServices;
 use MediaWiki\Extension\ReportIncident\Config\ReportIncidentConfigValidator;
 use MediaWiki\Extension\ReportIncident\Config\ReportIncidentSchema;
 use MediaWikiIntegrationTestCase;
@@ -27,7 +28,7 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 		$this->validator = ReportIncidentConfigValidator::factory(
 			$this->getServiceContainer()->getTitleParser(),
 			$this->getServiceContainer()->getPageStore(),
-			$this->getServiceContainer()->getStatsdDataFactory(),
+			CommunityConfigurationServices::wrap( $this->getServiceContainer() )->getValidatorFactory(),
 			ReportIncidentSchema::class,
 			$context
 		);
