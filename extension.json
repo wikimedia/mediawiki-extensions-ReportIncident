@@ -25,7 +25,7 @@
 					"services": [
 						"TitleParser",
 						"PageStore",
-						"StatsdDataFactory"
+						"CommunityConfiguration.ValidatorFactory"
 					],
 					"args": [
 						"MediaWiki\\Extension\\ReportIncident\\Config\\ReportIncidentSchema"
