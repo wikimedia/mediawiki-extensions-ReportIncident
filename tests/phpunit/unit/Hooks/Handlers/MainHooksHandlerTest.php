@@ -7,8 +7,8 @@ use MediaWiki\Extension\ReportIncident\Hooks\Handlers\MainHooksHandler;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
 use MediaWiki\Message\Message;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\Skin\Skin;
 use MediaWikiUnitTestCase;
-use Skin;
 
 /**
  * @group ReportIncident

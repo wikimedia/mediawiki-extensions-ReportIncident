@@ -7,11 +7,11 @@ use MediaWiki\Context\IContextSource;
 use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\Skin\Skin;
 use MediaWiki\Tests\Unit\MockServiceDependenciesTrait;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiUnitTestCase;
-use Skin;
 use Wikimedia\TestingAccessWrapper;
 
 /**
