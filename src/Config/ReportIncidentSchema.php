@@ -10,6 +10,9 @@ use MediaWiki\Extension\CommunityConfiguration\Schemas\MediaWiki\MediaWikiDefini
  * JSON schema for community configuration used by the Incident Reporting System.
  */
 class ReportIncidentSchema extends JsonSchema {
+
+	public const VERSION = '1.0.0';
+
 	public const ReportIncidentDisputeResolutionPage = [
 		self::TYPE => self::TYPE_STRING,
 		self::DEFAULT => ''
