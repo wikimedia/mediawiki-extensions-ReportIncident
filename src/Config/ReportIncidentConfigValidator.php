@@ -49,7 +49,7 @@ class ReportIncidentConfigValidator implements IValidator {
 
 	/** @inheritDoc */
 	public function validateStrictly( $config, ?string $version = null ): ValidationStatus {
-		$status = $this->jsonSchemaValidator->validateStrictly( $config );
+		$status = $this->jsonSchemaValidator->validateStrictly( $config, $version );
 		if ( !$status->isOK() ) {
 			return $status;
 		}
@@ -59,7 +59,7 @@ class ReportIncidentConfigValidator implements IValidator {
 
 	/** @inheritDoc */
 	public function validatePermissively( $config, ?string $version = null ): ValidationStatus {
-		$status = $this->jsonSchemaValidator->validatePermissively( $config );
+		$status = $this->jsonSchemaValidator->validatePermissively( $config, $version );
 		if ( !$status->isOK() ) {
 			return $status;
 		}
