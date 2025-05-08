@@ -268,7 +268,6 @@
 				"reportincident-submit-back-to-page"
 			],
 			"dependencies": [
-				"mediawiki.Uri",
 				"mediawiki.jqueryMsg",
 				"mediawiki.api",
 				"mediawiki.language",
