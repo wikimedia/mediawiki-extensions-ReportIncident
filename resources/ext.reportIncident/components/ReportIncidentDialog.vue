@@ -115,7 +115,7 @@ module.exports = exports = {
 			() => [
 				Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
 				Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM
-			].indexOf( currentStep.value ) !== -1 && footerErrorMessage.value !== ''
+			].includes( currentStep.value ) && footerErrorMessage.value !== ''
 		);
 
 		const showCancelOrBackButton = computed(
@@ -189,7 +189,7 @@ module.exports = exports = {
 
 		const shouldShowHelpText = computed(
 			() => store.isIncidentTypeSelected() &&
-					stepsWithHelpText.indexOf( currentStep.value ) !== -1 );
+					stepsWithHelpText.includes( currentStep.value ) );
 
 		const showFooterHelpTextWithIcon = computed(
 			() => shouldShowHelpText.value && footerIconName.value !== null );

@@ -20,7 +20,7 @@ const renderComponent = ( testingPinia ) => utils.mount( ReportIncidentDialogTyp
 		config: {
 			// Suppress message about mismatching property types
 			warnHandler( msg, instance, trace ) {
-				// eslint-disable-next-line
+
 				if ( !msg.includes( suppressMessage ) ) {
 					// eslint-disable-next-line no-console
 					console.warn( msg, instance, trace );

@@ -248,7 +248,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 			incidentType: incidentType.value
 		};
 
-		if ( Object.keys( overflowMenuData.value ).indexOf( 'thread-id' ) !== -1 ) {
+		if ( Object.keys( overflowMenuData.value ).includes( 'thread-id' ) ) {
 			restData.threadId = overflowMenuData.value[ 'thread-id' ];
 		}
 
