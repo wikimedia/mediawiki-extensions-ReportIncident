@@ -77,7 +77,7 @@
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "Yhteisön neuvontasivu",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "Wikisivu, jossa käyttäjät voivat kysyä kysymyksiä yhteisöltä.",
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-label": "Riitojenratkaisusivu",
-	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Wikisivu, josta käyttäjät löytävät tietoja wikissä tapahtuvien kiistojen ratkaisemiseksi.",
+	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Wikisivu, josta käyttäjät löytävät tietoja wikissä tapahtuvien riitojen ratkaisemiseksi.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Käytössä olevat nimiavaruudet",
 	"communityconfiguration-reportincident-invalid-title": "Sivun on oltava olemassa oleva paikallinen wikisivu."
 }
