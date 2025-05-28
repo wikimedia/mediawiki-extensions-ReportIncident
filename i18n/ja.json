@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"MathXplore",
-			"Waki285"
+			"Waki285",
+			"Shirayuki"
 		]
 	},
 	"reportincident-desc": "インシデント報告システム拡張機能。",
@@ -26,7 +27,7 @@
 	"reportincident-dialog-internet-disconnected-error": "インターネットに接続されていないようです。接続が回復したら、再度送信してください。",
 	"reportincident-dialog-server-error": "申し訳ございませんが、サーバーが応答していないようです。再度送信してください。",
 	"reportincident-dialog-generic-error": "リクエストはエラーのため送信できませんでした。再度送信してください。",
-	"reportincident-unable-to-send": "インシデント報告を電子メールで送信できません。",
+	"reportincident-unable-to-send": "インシデント報告を作成できませんでした。問題が解決しない場合は、{{GENDER:|あなたの}}インシデント報告を添えて emergency@wikimedia.org にメールでご連絡ください。",
 	"reportincident-notification-link-to-page-prefix": "ページへのリンク",
 	"reportincident-notification-link-to-comment-prefix": "報告されたコメントへのリンク",
 	"reportincident-notification-link-to-topic-prefix": "報告されたトピックへのリンク",
