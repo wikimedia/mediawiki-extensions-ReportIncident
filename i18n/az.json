@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Nemoralis"
+			"Nemoralis",
+			"Əkrəm"
 		]
 	},
 	"reportincident-desc": "Hadisə Bildiriş Sistemi uzantısı.",
@@ -29,8 +30,8 @@
 	"reportincident-dialog-record-for-statistical-purposes": "Davam etmək düyməsinə basmaq statistik məqsədlər üçün bu problemin [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|gizli qeydini]] yaradacaq və bundan sonra nə etməli olduğunuzu sizə göstərəcək. Bu, hesabat təqdim etməyəcək.",
 	"reportincident-dialog-harassment-empty": "Ən azı bir davranış {{GENDER:|seçməlisiniz}}.",
 	"reportincident-dialog-something-else-empty": "Zəhmət olmasa davranışın qısa təsvirini yazın.",
-	"reportincident-dialog-internet-disconnected-error": "Deyəsən internet bağlantınız yoxdur. Zəhmət olmasa, bağlantınız bərpa edildikdə yenidən göndərməyə cəhd edin.",
-	"reportincident-dialog-server-error": "Üzr istəyirik, deyəsən serverimiz cavab vermir. Zəhmət olmasa, yenidən cəhd edin.",
+	"reportincident-dialog-internet-disconnected-error": "Görünür, internetə qoşulu deyilsiniz. Zəhmət olmasa, qoşulduqdan sonra yenidən göndərməyə cəhd edin.",
+	"reportincident-dialog-server-error": "Üzr istəyirik, görünür, serverimiz cavab vermir. Zəhmət olmasa, yenidən cəhd edin.",
 	"reportincident-dialog-generic-error": "{{GENDER:|Sizin}} sorğunuz xəta səbəbindən göndərilə bilmədi. Zəhmət olmasa, yenidən cəhd edin.",
 	"reportincident-unable-to-send": "Problem bildirişi yaratmaq mümkün deyil. Problem davam edərsə, zəhmət olmasa, emergency@wikimedia.org ünvanına {{GENDER:|özünüz}} e-poçt göndərin.",
 	"reportincident-notification-link-to-page-prefix": "Səhifəyə keçid",
