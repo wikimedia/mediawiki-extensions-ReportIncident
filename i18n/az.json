@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Nemoralis"
+			"Nemoralis",
+			"Əkrəm"
 		]
 	},
 	"reportincident-desc": "Hadisə Bildiriş Sistemi uzantısı.",
@@ -22,7 +23,7 @@
 	"reportincident-dialog-something-else-empty": "Zəhmət olmasa davranışın qısa təsvirini yazın.",
 	"reportincident-dialog-violator-nonexistent": "{{GENDER:|Siz}} şikayət etmək üçün mövcud istifadəçi adını təqdim etməlisiniz.",
 	"reportincident-dialog-internet-disconnected-error": "Deyəsən internet bağlantınız yoxdur. Zəhmət olmasa, bağlantınız bərpa edildikdə yenidən göndərməyə cəhd edin.",
-	"reportincident-dialog-server-error": "Üzr istəyirik, deyəsən serverimiz cavab vermir. Zəhmət olmasa, yenidən cəhd edin.",
+	"reportincident-dialog-server-error": "Üzr istəyirik, görünür, serverimiz cavab vermir. Zəhmət olmasa, yenidən cəhd edin.",
 	"reportincident-dialog-generic-error": "{{GENDER:|Sizin}} sorğunuz xəta səbəbindən göndərilə bilmədi. Zəhmət olmasa, yenidən cəhd edin.",
 	"reportincident-success-message": "Şikayət uğurla göndərildi. İnzibatçılar bunun siyasətlərimizi pozub-pozmadığını yoxlayacaq və müəyyən edəcək. {{SITENAME}} saytını təhlükəsiz saxlamaqda bizə kömək etdiyiniz üçün təşəkkür edirik.",
 	"reportincident-success-message-close": "Bağla",
