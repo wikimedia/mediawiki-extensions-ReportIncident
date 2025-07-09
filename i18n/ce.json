@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Умар"
+		]
+	},
+	"reportincident-report-btn-label": "Латкъа",
+	"reportincident-dialog-close-btn": "ДӀачӀагӀа",
+	"reportincident-dialog-back-btn": "Йуха",
+	"reportincident-dialog-submit-btn": "Латкъам дӀакхачо",
+	"reportincident-dialog-harassment-type-label": "ТӀе ца оьцучу леларан тайпа",
+	"reportincident-dialog-additional-details-input-label": "Кхин а информаци",
+	"reportincident-dialog-optional-label": "(тӀехь дац)",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Сексуалан хьийзамаш бар",
+	"reportincident-dialog-harassment-type-something-else": "Кхин",
+	"reportincident-dialog-harassment-type-spam": "Спам",
+	"reportincident-dialog-harassment-type-trolling": "Троллинг",
+	"reportincident-notification-link-to-page-prefix": "АгӀонан тӀе хьажорг",
+	"reportincident-emaildialog-close-button": "Йухайаккха",
+	"reportincident-emaildialog-primary": "Нисдаран гӀирсан чугӀо",
+	"reportincident-dialog-describe-the-incident-title": "Йийца инцидент",
+	"reportincident-type-of-incident": "Инцидентан тайпа",
+	"reportincident-choose-option": "Вариант харжа",
+	"reportincident-dialog-cancel": "Йухайаккха",
+	"reportincident-dialog-continue": "Кхин дӀа",
+	"reportincident-threats-physical-harm": "ДегӀана зе дарна кхерамаш тийсар",
+	"reportincident-threats-self-harm": "Ша-шена зе дарна кхерамаш тийсар",
+	"reportincident-submit-emergency-section-important-title": "Ладаме",
+	"reportincident-submit-back-to-page": "Йуха «$1» тӀе"
+}
