@@ -193,7 +193,7 @@ class ReportHandler extends SimpleHandler {
 			try {
 				$title = $this->titleParser->parseTitle( $body['page'] );
 				$body['page'] = PageReferenceValue::localReference( $title->getNamespace(), $title->getDBkey() );
-			} catch ( MalformedTitleException $e ) {
+			} catch ( MalformedTitleException ) {
 				throw new LocalizedHttpException(
 					new MessageValue( 'rest-invalid-title', [ $body['page'] ] ),
 					422
