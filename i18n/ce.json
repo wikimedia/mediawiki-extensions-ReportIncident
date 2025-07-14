@@ -29,5 +29,8 @@
 	"reportincident-threats-physical-harm": "ДегӀана зе дарна кхерамаш тийсар",
 	"reportincident-threats-self-harm": "Ша-шена зе дарна кхерамаш тийсар",
 	"reportincident-submit-emergency-section-important-title": "Ладаме",
-	"reportincident-submit-back-to-page": "Йуха «$1» тӀе"
+	"reportincident-submit-behavior-section-support-title": "Кхин дӀа хӀун дан деза",
+	"reportincident-submit-back-to-page": "Йуха «$1» тӀе",
+	"communityconfiguration-reportincident-title": "Инцидентех лаьцна хаам баран система",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "ДӀахӀиттийна цӀерийн меттигаш"
 }
