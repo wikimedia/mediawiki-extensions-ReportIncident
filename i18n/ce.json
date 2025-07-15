@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Умар"
+		]
+	},
+	"reportincident-report-btn-label": "Латкъа",
+	"reportincident-dialog-close-btn": "ДӀачӀагӀа",
+	"reportincident-dialog-back-btn": "Йуха",
+	"reportincident-dialog-optional-label": "(тӀехь дац)",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Сексуалан хьийзамаш бар",
+	"reportincident-dialog-harassment-type-something-else": "Кхин",
+	"right-reportincident": "Цхьана инцидентах лаьцна хаам бар",
+	"action-reportincident": "цхьана инцидентах лаьцна хаам бар",
+	"reportincident-emaildialog-close-button": "Йухайаккха",
+	"reportincident-emaildialog-primary": "Нисдаран гӀирсан чугӀо"
+}
