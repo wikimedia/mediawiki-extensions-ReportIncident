@@ -35,5 +35,6 @@
 	"reportincident-emaildialog-close-button": "Prekliči",
 	"reportincident-emaildialog-content": "Za pošiljanje posodobitev o poročilu ali nadaljnje ukrepanje, če je potrebno, potrebujemo {{GENDER:|vaš}} preverjen e-poštni naslov. Preden oddate poročilo, v nastavitvah uporabniškega računa dodajte ali preverite {{GENDER:|svoj}} e-poštni naslov.",
 	"reportincident-emaildialog-primary": "Pojdi v nastavitve",
-	"reportincident-confirmedemail-required": "Za oddajo poročila o incidentu je potreben potrjen e-poštni naslov."
+	"reportincident-confirmedemail-required": "Za oddajo poročila o incidentu je potreben potrjen e-poštni naslov.",
+	"reportincident-submit-behavior-section-support-item-info-is-public": "Vsi pogovori v vikijih so javni. Ne delite osebnih informacij."
 }

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Abijeet Patro"
+			"Abijeet Patro",
+			"Saurmandal"
 		]
 	},
 	"reportincident-report-btn-label": "रिपोर्ट करें",
@@ -9,6 +10,8 @@
 	"reportincident-dialog-back-btn": "पीछे",
 	"reportincident-dialog-submit-btn": "जमा करें",
 	"reportincident-dialog-optional-label": "(वैकल्पिक)",
+	"right-reportincident": "घटना रिपोर्ट करना",
+	"action-reportincident": "घटना रिपोर्ट करने",
 	"reportincident-emaildialog-close-button": "रद्द करें",
 	"reportincident-dialog-cancel": "रद्द करें",
 	"reportincident-dialog-continue": "आगे बढ़ें",
