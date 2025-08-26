@@ -4,14 +4,25 @@
 			"Умар"
 		]
 	},
+	"reportincident-desc": "Инциденташна латкъамаш баран система шорйар (Incident Reporting System).",
 	"reportincident-report-btn-label": "Латкъа",
 	"reportincident-dialog-close-btn": "ДӀачӀагӀа",
 	"reportincident-dialog-back-btn": "Йуха",
 	"reportincident-dialog-optional-label": "(тӀехь дац)",
+	"reportincident-dialog-violator-placeholder-text": "Хьанна латкъам бо {{GENDER:|ахь}}?",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "МостагӀаллин йа дискриминацин мотт",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Сексуалан хьийзамаш бар",
 	"reportincident-dialog-harassment-type-something-else": "Кхин",
+	"reportincident-dialog-something-else-input-placeholder": "Лакхахь хьахийна доцу лелар билгалдаккха.",
+	"reportincident-dialog-harassment-empty": "{{GENDER:|Ахь}} цхьаъ мукъане а лелар къасто деза.",
+	"reportincident-dialog-something-else-empty": "Дехар до, леларах лаьцна доцца дийца.",
+	"reportincident-dialog-server-error": "Бехк ма билла, серверо жоп ца луш санна хетало. Дехар до, йуха а форма дӀахьажо хьажа.",
+	"reportincident-dialog-generic-error": "{{GENDER:|Хьан}} дехар дӀакхачо аьтто ца баьлла гӀалат бахьана долуш. Дехар до, йуха а форма дӀахьажо хьажа.",
 	"right-reportincident": "Цхьана инцидентах лаьцна хаам бар",
 	"action-reportincident": "цхьана инцидентах лаьцна хаам бар",
+	"reportincident-emaildialog-title": "ТӀечӀагӀдина электронан поштан адрес оьшу",
 	"reportincident-emaildialog-close-button": "Йухайаккха",
-	"reportincident-emaildialog-primary": "Нисдаран гӀирсан чугӀо"
+	"reportincident-emaildialog-content": "Тхуна оьшу {{GENDER:|хьан}} тӀечӀагӀдина электронан поштан адрес, отчетах лаьцна керланаш дӀахаийта йа оьшуш хилча хьоьца зӀене довла. Дехар до, хаам чубалале {{GENDER:|хьайн}} электронан поштан адрес тӀетоха йа тӀечӀагӀде {{GENDER:|хьайн}} декъашхочун аккаунтан нисдаран гӀирсан чуьра.",
+	"reportincident-emaildialog-primary": "Нисдаран гӀирсан чугӀо",
+	"reportincident-confirmedemail-required": "Латкъам дӀакхачо оьшу тӀечӀагӀдина электронан поштан адрес."
 }
