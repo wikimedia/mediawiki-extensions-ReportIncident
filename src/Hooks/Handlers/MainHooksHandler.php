@@ -30,10 +30,9 @@ class MainHooksHandler implements
 	SkinTemplateNavigation__UniversalHook
 {
 
-	private ReportIncidentController $controller;
-
-	public function __construct( ReportIncidentController $controller ) {
-		$this->controller = $controller;
+	public function __construct(
+		private readonly ReportIncidentController $controller,
+	) {
 	}
 
 	/** @inheritDoc */

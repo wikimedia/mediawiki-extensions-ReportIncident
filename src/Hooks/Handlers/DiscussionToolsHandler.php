@@ -26,10 +26,9 @@ use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
 
 class DiscussionToolsHandler implements DiscussionToolsAddOverflowMenuItemsHook {
 
-	private ReportIncidentController $controller;
-
-	public function __construct( ReportIncidentController $controller ) {
-		$this->controller = $controller;
+	public function __construct(
+		private readonly ReportIncidentController $controller,
+	) {
 	}
 
 	/** @inheritDoc */

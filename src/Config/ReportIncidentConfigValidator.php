@@ -16,21 +16,12 @@ use MediaWiki\Title\TitleParser;
  * Validator class used by CommunityConfiguration for IRS local links.
  */
 class ReportIncidentConfigValidator implements IValidator {
-	private IValidator $jsonSchemaValidator;
-	private TitleParser $titleParser;
-	private PageLookup $pageLookup;
-	private IContextSource $context;
-
 	public function __construct(
-		IValidator $jsonSchemaValidator,
-		TitleParser $titleParser,
-		PageLookup $pageLookup,
-		IContextSource $context
+		private readonly IValidator $jsonSchemaValidator,
+		private readonly TitleParser $titleParser,
+		private readonly PageLookup $pageLookup,
+		private readonly IContextSource $context,
 	) {
-		$this->jsonSchemaValidator = $jsonSchemaValidator;
-		$this->titleParser = $titleParser;
-		$this->pageLookup = $pageLookup;
-		$this->context = $context;
 	}
 
 	public static function factory(

@@ -23,32 +23,16 @@ class ZendeskClient implements IReportIncidentNotifier {
 		'Script'
 	];
 
-	private HttpRequestFactory $httpRequestFactory;
-	private ITextFormatter $textFormatter;
-	private UrlUtils $urlUtils;
-	private UserFactory $userFactory;
-	private TitleFactory $titleFactory;
-	private LoggerInterface $logger;
-	private ServiceOptions $serviceOptions;
-
 	public function __construct(
-		HttpRequestFactory $httpRequestFactory,
-		ITextFormatter $textFormatter,
-		UrlUtils $urlUtils,
-		UserFactory $userFactory,
-		TitleFactory $titleFactory,
-		LoggerInterface $logger,
-		ServiceOptions $serviceOptions
+		private readonly HttpRequestFactory $httpRequestFactory,
+		private readonly ITextFormatter $textFormatter,
+		private readonly UrlUtils $urlUtils,
+		private readonly UserFactory $userFactory,
+		private readonly TitleFactory $titleFactory,
+		private readonly LoggerInterface $logger,
+		private readonly ServiceOptions $serviceOptions,
 	) {
 		$serviceOptions->assertRequiredOptions( self::CONSTRUCTOR_OPTIONS );
-
-		$this->httpRequestFactory = $httpRequestFactory;
-		$this->textFormatter = $textFormatter;
-		$this->urlUtils = $urlUtils;
-		$this->userFactory = $userFactory;
-		$this->titleFactory = $titleFactory;
-		$this->serviceOptions = $serviceOptions;
-		$this->logger = $logger;
 	}
 
 	/**

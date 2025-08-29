@@ -16,18 +16,11 @@ use StatusValue;
  */
 class MetricsPlatformIncidentRecorder implements IReportIncidentRecorder {
 
-	private MetricsClientFactory $metricsClientFactory;
-	private TitleFactory $titleFactory;
-	private UserFactory $userFactory;
-
 	public function __construct(
-		MetricsClientFactory $metricsClientFactory,
-		TitleFactory $titleFactory,
-		UserFactory $userFactory
+		private readonly MetricsClientFactory $metricsClientFactory,
+		private readonly TitleFactory $titleFactory,
+		private readonly UserFactory $userFactory,
 	) {
-		$this->metricsClientFactory = $metricsClientFactory;
-		$this->titleFactory = $titleFactory;
-		$this->userFactory = $userFactory;
 	}
 
 	public function record( IncidentReport $incidentReport ): StatusValue {

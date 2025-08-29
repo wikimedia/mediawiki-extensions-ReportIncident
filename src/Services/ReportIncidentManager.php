@@ -10,15 +10,10 @@ use StatusValue;
  * - Create notifications for emergency reports
  */
 class ReportIncidentManager {
-	private IReportIncidentNotifier $notifier;
-	private IReportIncidentRecorder $recorder;
-
 	public function __construct(
-		IReportIncidentNotifier $notifier,
-		IReportIncidentRecorder $recorder
+		private readonly IReportIncidentNotifier $notifier,
+		private readonly IReportIncidentRecorder $recorder,
 	) {
-		$this->notifier = $notifier;
-		$this->recorder = $recorder;
 	}
 
 	/**

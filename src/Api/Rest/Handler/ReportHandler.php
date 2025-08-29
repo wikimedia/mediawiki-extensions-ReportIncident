@@ -33,14 +33,7 @@ class ReportHandler extends SimpleHandler {
 
 	use TokenAwareHandlerTrait;
 
-	private Config $config;
-	private ReportIncidentManager $reportIncidentManager;
-	private RevisionStore $revisionStore;
-	private UserNameUtils $userNameUtils;
-	private UserIdentityLookup $userIdentityLookup;
 	private LoggerInterface $logger;
-	private UserFactory $userFactory;
-	private TitleParser $titleParser;
 
 	public const HTTP_STATUS_FORBIDDEN = 403;
 	public const HTTP_STATUS_NOT_FOUND = 404;
@@ -51,22 +44,15 @@ class ReportHandler extends SimpleHandler {
 	public const MAX_DETAILS_LENGTH = 1000;
 
 	public function __construct(
-		Config $config,
-		RevisionStore $revisionStore,
-		UserNameUtils $userNameUtils,
-		UserIdentityLookup $userIdentityLookup,
-		ReportIncidentManager $reportIncidentManager,
-		UserFactory $userFactory,
-		TitleParser $titleParser
+		private readonly Config $config,
+		private readonly RevisionStore $revisionStore,
+		private readonly UserNameUtils $userNameUtils,
+		private readonly UserIdentityLookup $userIdentityLookup,
+		private readonly ReportIncidentManager $reportIncidentManager,
+		private readonly UserFactory $userFactory,
+		private readonly TitleParser $titleParser,
 	) {
-		$this->config = $config;
-		$this->reportIncidentManager = $reportIncidentManager;
-		$this->revisionStore = $revisionStore;
-		$this->userNameUtils = $userNameUtils;
-		$this->userIdentityLookup = $userIdentityLookup;
 		$this->logger = LoggerFactory::getInstance( 'ReportIncident' );
-		$this->userFactory = $userFactory;
-		$this->titleParser = $titleParser;
 	}
 
 	/**

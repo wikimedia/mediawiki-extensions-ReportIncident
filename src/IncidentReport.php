@@ -14,28 +14,17 @@ class IncidentReport {
 	public const THREAT_TYPE_IMMEDIATE = 'immediate-threat-physical-harm';
 	public const THREAT_TYPE_UNACCEPTABLE_BEHAVIOR = 'unacceptable-user-behavior';
 
-	private UserIdentity $reportingUser;
-	private ?UserIdentity $reportedUser;
-	private ?RevisionRecord $revisionRecord;
-	private PageReference $page;
-	private ?string $behaviorType;
-	private ?string $physicalHarmType;
-	private ?string $somethingElseDetails;
-	private ?string $details;
-	private ?string $threadId;
-	private string $incidentType;
-
 	public function __construct(
-		UserIdentity $reportingUser,
-		?UserIdentity $reportedUser,
-		?RevisionRecord $revisionRecord,
-		PageReference $page,
-		string $incidentType,
-		?string $behaviorType,
-		?string $physicalHarmType,
-		?string $somethingElseDetails = null,
-		?string $details = null,
-		?string $threadId = null
+		private readonly UserIdentity $reportingUser,
+		private readonly ?UserIdentity $reportedUser,
+		private readonly ?RevisionRecord $revisionRecord,
+		private readonly PageReference $page,
+		private readonly string $incidentType,
+		private readonly ?string $behaviorType,
+		private readonly ?string $physicalHarmType,
+		private readonly ?string $somethingElseDetails = null,
+		private readonly ?string $details = null,
+		private readonly ?string $threadId = null,
 	) {
 		$page->assertWiki( PageReference::LOCAL );
 
@@ -44,17 +33,6 @@ class IncidentReport {
 			'$revision',
 			'The given revision must match the given page',
 		);
-
-		$this->reportingUser = $reportingUser;
-		$this->reportedUser = $reportedUser;
-		$this->revisionRecord = $revisionRecord;
-		$this->page = $page;
-		$this->incidentType = $incidentType;
-		$this->behaviorType = $behaviorType;
-		$this->somethingElseDetails = $somethingElseDetails;
-		$this->details = $details;
-		$this->threadId = $threadId;
-		$this->physicalHarmType = $physicalHarmType;
 	}
 
 	/**

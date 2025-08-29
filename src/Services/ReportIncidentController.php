@@ -13,15 +13,10 @@ use MediaWiki\User\User;
  */
 class ReportIncidentController {
 
-	private Config $config;
-	private Config $localConfig;
-
 	public function __construct(
-		Config $config,
-		Config $localConfig
+		private readonly Config $config,
+		private readonly Config $localConfig,
 	) {
-		$this->config = $config;
-		$this->localConfig = $localConfig;
 	}
 
 	/**
