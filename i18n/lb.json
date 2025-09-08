@@ -5,7 +5,7 @@
 		]
 	},
 	"reportincident-dialog-close-btn": "Zoumaachen",
-	"reportincident-dialog-back-btn": "Zréck",
+	"reportincident-dialog-back-btn": "Zeréck",
 	"reportincident-dialog-additional-details-input-label": "Zousätzlech Informatiounen",
 	"reportincident-dialog-optional-label": "(fakultativ)",
 	"reportincident-dialog-violator-label": "Benotzer, deen {{GENDER:Dir}} melle wëllt",
@@ -20,6 +20,6 @@
 	"reportincident-dialog-continue": "Virufueren",
 	"reportincident-submit-emergency-section-important-title": "Wichteg",
 	"reportincident-submit-behavior-section-support-item-info-is-public": "All Ënnerhalungen op de Wikie sinn ëffentlech, deelt also wgl. keng perséinlech Informatioune mat.",
-	"reportincident-submit-back-to-page": "Zréck op $1",
+	"reportincident-submit-back-to-page": "Zeréck op $1",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Aktivéiert Nummraim"
 }
