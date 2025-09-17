@@ -68,10 +68,7 @@ class MainHooksHandler implements
 		}
 	}
 
-	/**
-	 * @inheritDoc
-	 * @phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
-	 */
+	/** @inheritDoc */
 	public function onSkinTemplateNavigation__Universal( $sktemplate, &$links ): void {
 		// Show the reporting link in the "Tools" menu if the:
 		// * page is in a supported namespace,
