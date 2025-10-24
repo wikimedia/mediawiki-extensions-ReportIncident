@@ -4,37 +4,39 @@
 			:is-fieldset="true"
 			:status="incidentTypeStatus"
 			:messages="incidentTypeMessages">
-			<cdx-radio
+			<div
 				v-for="radio in incidentTypes"
-				:key="'radio-' + radio.value"
-				v-model="incidentType"
-				name="reportincident-type-radio-group-field"
-				:input-value="radio.value"
-				@change="onChange( $event )"
+				:key="radio.value"
 			>
-				{{ radio.label }}
-				<template v-if="radio.value === 'immediate-threat-physical-harm'" #description>
-					{{ $i18n( 'reportincident-type-immediate-threat-physical-harm-help' ).text() }}
-				</template>
-				<template v-if="radio.value === 'immediate-threat-physical-harm'" #custom-input>
-					<cdx-field
-						:is-fieldset="true"
-						:messages="physicalHarmTypeMessages"
-						:status="physicalHarmTypeStatus"
-					>
-						<cdx-select
-							v-model:selected="physicalHarmType"
-							:menu-items="physicalHarmTypes"
-							:disabled="incidentType !== 'immediate-threat-physical-harm'"
-							:default-label="$i18n( 'reportincident-choose-option' ).text()"
-							@update:selected="onPhysicalHarmTypeChanged"
-						></cdx-select>
-					</cdx-field>
-				</template>
-			</cdx-radio>
-			<template #label>
-				{{ $i18n( 'reportincident-type-of-incident' ).text() }}
-			</template>
+				<h3>{{ radio.header }}</h3>
+				<cdx-radio
+					:key="'radio-' + radio.value"
+					v-model="incidentType"
+					name="reportincident-type-radio-group-field"
+					:input-value="radio.value"
+					@change="onChange( $event )"
+				>
+					{{ radio.label }}
+					<template v-if="radio.helpText" #description>
+						{{ radio.helpText }}
+					</template>
+					<template v-if="radio.value === 'immediate-threat-physical-harm'" #custom-input>
+						<cdx-field
+							:is-fieldset="true"
+							:messages="physicalHarmTypeMessages"
+							:status="physicalHarmTypeStatus"
+						>
+							<cdx-select
+								v-model:selected="physicalHarmType"
+								:menu-items="physicalHarmTypes"
+								:disabled="incidentType !== 'immediate-threat-physical-harm'"
+								:default-label="$i18n( 'reportincident-choose-option' ).text()"
+								@update:selected="onPhysicalHarmTypeChanged"
+							></cdx-select>
+						</cdx-field>
+					</template>
+				</cdx-radio>
+			</div>
 		</cdx-field>
 	</div>
 </template>
@@ -104,12 +106,16 @@ module.exports = exports = {
 
 		const incidentTypes = [
 			{
-				label: mw.msg( 'reportincident-type-unacceptable-user-behavior' ),
-				value: Constants.typeOfIncident.unacceptableUserBehavior
+				header: mw.msg( 'reportincident-radio-header-nonemergency' ),
+				label: mw.msg( 'reportincident-type-nonemergency' ),
+				value: Constants.typeOfIncident.unacceptableUserBehavior,
+				helpText: mw.msg( 'reportincident-nonemergency-help' )
 			},
 			{
-				label: mw.msg( 'reportincident-type-immediate-threat-physical-harm' ),
-				value: Constants.typeOfIncident.immediateThreatPhysicalHarm
+				header: mw.msg( 'reportincident-radio-header-emergency' ),
+				label: mw.msg( 'reportincident-type-emergency' ),
+				value: Constants.typeOfIncident.immediateThreatPhysicalHarm,
+				helpText: mw.msg( 'reportincident-type-emergency-help' )
 			}
 		];
 		const physicalHarmTypes = [

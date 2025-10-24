@@ -77,20 +77,20 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 			value: Constants.harassmentTypes.SEXUAL_HARASSMENT
 		},
 		{
-			label: mw.msg( 'reportincident-dialog-harassment-type-hate-speech-or-discrimination' ),
-			value: Constants.harassmentTypes.HATE_SPEECH
-		},
-		{
 			label: mw.msg( 'reportincident-dialog-harassment-type-doxing' ),
 			value: Constants.harassmentTypes.DOXING
 		},
 		{
-			label: mw.msg( 'reportincident-dialog-harassment-type-spam' ),
-			value: Constants.harassmentTypes.SPAM
-		},
-		{
 			label: mw.msg( 'reportincident-dialog-harassment-type-trolling' ),
 			value: Constants.harassmentTypes.TROLLING
+		},
+		{
+			label: mw.msg( 'reportincident-dialog-harassment-type-hate-speech-or-discrimination' ),
+			value: Constants.harassmentTypes.HATE_SPEECH
+		},
+		{
+			label: mw.msg( 'reportincident-dialog-harassment-type-spam' ),
+			value: Constants.harassmentTypes.SPAM
 		},
 		{
 			label: mw.msg( 'reportincident-dialog-harassment-type-something-else' ),
