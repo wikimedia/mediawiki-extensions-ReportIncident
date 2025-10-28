@@ -42,7 +42,6 @@
 	"reportincident-confirmedemail-required": "Щоб надіслати скаргу про інцидент, потрібна підтверджена електронна адреса.",
 	"reportincident-dialog-describe-the-incident-title": "Опишіть інцидент",
 	"reportincident-dialog-report-immediate-harm-title": "Повідомити про безпосередню загрозу заподіяння шкоди команді невідкладних ситуацій",
-	"reportincident-type-of-incident": "Тип інциденту",
-	"reportincident-type-unacceptable-user-behavior": "Неприйнятна поведінка користувача",
-	"reportincident-type-immediate-threat-physical-harm": "Безпосередня загроза фізичної шкоди"
+	"reportincident-type-nonemergency": "Неприйнятна поведінка користувача",
+	"reportincident-type-emergency": "Безпосередня загроза фізичної шкоди"
 }
