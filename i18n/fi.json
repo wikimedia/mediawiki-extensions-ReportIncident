@@ -46,6 +46,8 @@
 	"reportincident-nonemergency-help": "Kiusaaminen, häirintä, yksityisten tietojen paljastaminen, trollaus, syrjivä sisältö tai roskapostitus",
 	"reportincident-type-emergency": "Välitön fyysisen vaaran uhka",
 	"reportincident-type-emergency-help": "Aikomus tehdä väkivaltaa itseään, toista ihmistä tai monia ihmisiä kohtaan",
+	"reportincident-radio-header-nonemergency": "Saa tukea:",
+	"reportincident-radio-header-emergency": "Ilmoitus:",
 	"reportincident-choose-option": "Valitse vaihtoehto",
 	"reportincident-dialog-cancel": "Peruuta",
 	"reportincident-dialog-continue": "Jatka",

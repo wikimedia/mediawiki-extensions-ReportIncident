@@ -8,11 +8,16 @@
 	"reportincident-dialog-close-btn": "Chiudi",
 	"reportincident-dialog-additional-details-input-label": "Ulteriori informazioni",
 	"reportincident-dialog-optional-label": "(facoltativo)",
-	"reportincident-dialog-harassment-type-intimidation": "Bullismo, intimidazione o ripetuti insulti",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Contenuti odiosi e discriminatori",
+	"reportincident-dialog-harassment-type-intimidation": "Bullismo, intimidazione, minacce o insulti ripetuti",
+	"reportincident-dialog-harassment-type-spam": "Spam o contenuti promozionali",
 	"reportincident-notification-link-to-page-prefix": "Collegamento alla pagina",
 	"reportincident-emaildialog-close-button": "Annulla",
 	"reportincident-emaildialog-primary": "Vai alle impostazioni",
+	"reportincident-dialog-main-title": "Cosa ti piacerebbe fare",
 	"reportincident-dialog-report-immediate-harm-title": "Segnala una minaccia immediata di danno al team di emergenza",
+	"reportincident-nonemergency-help": "Bullismo, molestie, divulgazione di informazioni private, trolling, contenuti discriminatori o spam",
+	"reportincident-radio-header-nonemergency": "Ottieni aiuto con:",
 	"reportincident-choose-option": "Scegli un'opzione",
 	"reportincident-submit-behavior-section-support-item-info-is-public": "Tutte le conversazioni sui wiki sono pubbliche, non condividere informazioni personali."
 }
