@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Cigaryno"
+			"Cigaryno",
+			"Meno25"
 		]
 	},
+	"reportincident-desc": "تمديد نظام الإبلاغ عن الحوادث.",
 	"reportincident-report-btn-label": "تقرير",
 	"reportincident-dialog-close-btn": "إغلاق",
 	"reportincident-dialog-back-btn": "رجوع",
