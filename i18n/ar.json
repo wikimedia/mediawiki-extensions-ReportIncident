@@ -1,14 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Cigaryno"
+			"Cigaryno",
+			"Meno25"
 		]
 	},
+	"reportincident-desc": "تمديد نظام الإبلاغ عن الحوادث.",
 	"reportincident-report-btn-label": "تقرير",
 	"reportincident-dialog-close-btn": "إغلاق",
 	"reportincident-dialog-back-btn": "رجوع",
 	"reportincident-dialog-submit-btn": "إرسال التقرير",
+	"reportincident-dialog-harassment-type-label": "نوع السلوك غير المقبول",
+	"reportincident-dialog-additional-details-input-label": "معلومات إضافية",
+	"reportincident-dialog-additional-details-input-placeholder": "أضف السياق الذي قد يكون مفيدًا للمراجع (على سبيل المثال، روابط إضافية).",
 	"reportincident-dialog-optional-label": "(اختياري)",
+	"reportincident-dialog-violator-label": "المستخدم {{GENDER:|الذي}} يريد الإبلاغ عنه",
 	"reportincident-dialog-harassment-type-spam": "سخام",
 	"reportincident-emaildialog-close-button": "إلغاء",
 	"reportincident-emaildialog-primary": "إذهب إلى الإعدادات",
