@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Hedda",
-			"Joseph"
+			"Joseph",
+			"Sakblue"
 		]
 	},
 	"reportincident-desc": "Olay Bildirim Sistemi uzantısı.",
@@ -16,9 +17,14 @@
 	"reportincident-dialog-optional-label": "(isteğe bağlı)",
 	"reportincident-dialog-violator-label": "Bildirmek {{GENDER:|istediğiniz}} kullanıcı",
 	"reportincident-dialog-violator-placeholder-text": "Kimi bildiriyorsunuz?",
-	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Nefret söylemi veya ayrımcılık",
-	"reportincident-dialog-harassment-type-intimidation": "Gözdağı, saldırganlık, isim takma",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Nefret söylemi ve ayrımcılık içeren içerik",
+	"reportincident-dialog-harassment-type-intimidation": "Zorbalık, sindirme, tehdit veya tekrar eden hakaretler",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Cinsel taciz",
 	"reportincident-dialog-harassment-type-something-else": "Başka bir şey",
-	"reportincident-dialog-something-else-input-placeholder": "Yukarıda listelenmeyen davranışları belirtin."
+	"reportincident-dialog-harassment-type-spam": "Spam veya reklam içeriği",
+	"reportincident-dialog-something-else-input-placeholder": "Yukarıda listelenmeyen davranışları belirtin.",
+	"reportincident-dialog-main-title": "Ne yapmak istersin?",
+	"reportincident-nonemergency-help": "Zorbalık, taciz, özel bilgilerin ifşa edilmesi, trolleme, ayrımcı içerik veya spam",
+	"reportincident-radio-header-nonemergency": "Yardım alın:",
+	"reportincident-radio-header-emergency": "Bildir"
 }
