@@ -178,7 +178,6 @@
 				"components/ParsedMessage.vue",
 				"components/ReportIncidentDialog.vue",
 				"components/ReportIncidentDialogStep1.vue",
-				"components/ReportIncidentDialogStep2.vue",
 				"components/ReportIncidentDialogTypesOfBehavior.vue",
 				"components/ReportImmediateHarmStep.vue",
 				"components/SubmitSuccessStep.vue",

@@ -8,10 +8,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const overflowMenuData = ref( {} );
 	const incidentType = ref( '' );
 	const physicalHarmType = ref( '' );
-
-	// @todo To be deleted once ReportIncidentDialogStep2 is deleted
-	const inputBehaviors = ref( [ ] );
-
 	const inputBehavior = ref( '' );
 	const displayBehaviorsRequiredError = ref( false );
 	const inputReportedUser = ref( '' );
@@ -283,7 +279,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		// Reset the form data
 		incidentType.value = '';
 		physicalHarmType.value = '';
-		inputBehaviors.value = [ ];
 		inputBehavior.value = '';
 		inputReportedUser.value = '';
 		inputDetails.value = '';
@@ -308,9 +303,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		overflowMenuData,
 		incidentType,
 		physicalHarmType,
-
-		/** @deprecated To be removed together with ReportIncidentDialogStep2 */
-		inputBehaviors,
 		inputBehavior,
 		displayBehaviorsRequiredError,
 		inputReportedUser,

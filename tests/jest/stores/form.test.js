@@ -23,7 +23,6 @@ describe( 'Form Store', () => {
 		form.$reset();
 
 		// Form fields should be empty
-		expect( form.inputBehaviors ).toStrictEqual( [] );
 		expect( form.inputBehavior ).toStrictEqual( '' );
 		expect( form.inputReportedUser ).toBe( '' );
 		expect( form.inputDetails ).toBe( '' );

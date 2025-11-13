@@ -2,7 +2,7 @@
 
 const { mockCodePointLength } = require( '../utils.js' );
 
-// Need to run this here as the import of ReportIncidentDialogStep2.vue
+// Need to run this here as the import of ReportImmediateHarmStep.vue
 // without mediawiki.String defined causes errors in running these tests.
 mockCodePointLength();
 
