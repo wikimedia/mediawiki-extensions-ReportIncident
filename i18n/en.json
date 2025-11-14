@@ -27,7 +27,6 @@
 	"reportincident-dialog-something-else-input-placeholder": "Specify the behaviors not listed above.",
 	"reportincident-dialog-unacceptable-behavior-community-managed": "{{SITENAME}} is a community where [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|inappropriate behavior is not tolerated]] and is managed by the community of experienced users.",
 	"reportincident-dialog-get-support-title": "Get support for an incident",
-	"reportincident-dialog-record-for-statistical-purposes": "Pressing continue will make a [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|private record]] of this incident for statistical purposes, and then guide {{GENDER:|you}} on what to do next. It will not submit a report.",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|You}} must select at least one behavior.",
 	"reportincident-dialog-something-else-empty": "Please provide a short description of the behavior.",
 	"reportincident-dialog-internet-disconnected-error": "Looks like {{GENDER:|you}} don't have internet connection. Please try re-submitting when {{GENDER:|your}} connection is back.",

@@ -98,16 +98,13 @@ describe( 'Report Incident Dialog', () => {
 			it( 'should not display help text when first rendered and no radio button is selected', () => {
 				const wrapper = renderComponent( { open: true } );
 
-				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
-				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
+				expect( wrapper.vm.footerHelpText.msg ).toBe( null );
 			} );
 			it( 'should not initially display form error messages', () => {
 				const wrapper = renderComponent( { open: true } );
-				wrapper.vm.footerErrorMessage = 'test';
 
-				expect( wrapper.vm.showFooterErrorText ).toBe( false );
-				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
-				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
+				expect( wrapper.vm.footerErrorMessage ).toBe( '' );
+				expect( wrapper.vm.footerHelpText.msg ).toBe( null );
 			} );
 			it( 'should show validation errors if no incident type is selected', async () => {
 				const wrapper = renderComponent( { open: true } );
@@ -126,44 +123,19 @@ describe( 'Report Incident Dialog', () => {
 				const store = useFormStore();
 				store.incidentType = '';
 
-				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
-				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
+				expect( wrapper.vm.footerErrorMessage ).toBe( '' );
 			} );
 			it( 'should display help text with a help icon if a behavior is selected', () => {
 				const wrapper = renderComponent( { open: true } );
 				const store = useFormStore();
 				store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
 
-				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( true );
-				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
-			} );
-			it( 'should display form error messages once a behavior is selected', () => {
-				const wrapper = renderComponent( { open: true } );
-				const store = useFormStore();
-				store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
-				wrapper.vm.footerErrorMessage = 'test';
-
-				expect( wrapper.vm.showFooterErrorText ).toBe( false );
-				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( true );
-				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
+				expect( wrapper.vm.footerHelpText.msg ).not.toBeNull();
 			} );
 		} );
 
 		describe( 'on Step 2', () => {
 			describe( 'when showing the list of Behavior types', () => {
-				it( 'should display help text messages without an icon', () => {
-					const wrapper = renderComponent( {
-						open: true,
-						initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
-					} );
-
-					const store = useFormStore();
-					store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
-
-					expect( wrapper.vm.showFooterErrorText ).toBe( false );
-					expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
-					expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( true );
-				} );
 				it( 'should display form error messages', async () => {
 					const wrapper = renderComponent( {
 						open: true,
@@ -175,13 +147,13 @@ describe( 'Report Incident Dialog', () => {
 					const store = useFormStore();
 					store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
 
-					expect( wrapper.vm.showFooterErrorText ).toBe( true );
-					expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
-					expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( true );
+					await wrapper.vm.$nextTick();
+
+					expect( wrapper.find( '.ext-reportincident-dialog__form-error-text' ).exists() ).toBe( true );
 				} );
 			} );
 			describe( 'when reporting an Immediate Harm', () => {
-				it( 'should display form error messages', () => {
+				it( 'should display form error messages', async () => {
 					const wrapper = renderComponent( {
 						open: true,
 						initialStep: Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM
@@ -192,9 +164,9 @@ describe( 'Report Incident Dialog', () => {
 					const store = useFormStore();
 					store.incidentType = Constants.typeOfIncident.immediateThreatPhysicalHarm;
 
-					expect( wrapper.vm.showFooterErrorText ).toBe( true );
-					expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( true );
-					expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
+					await wrapper.vm.$nextTick();
+
+					expect( wrapper.find( '.ext-reportincident-dialog__form-error-text' ).exists() ).toBe( true );
 				} );
 			} );
 		} );
@@ -210,9 +182,6 @@ describe( 'Report Incident Dialog', () => {
 				wrapper.vm.onReportSubmitFailure( 'http', {
 					xhr: { status: 0 }
 				} );
-				expect( wrapper.vm.showFooterErrorText ).toBe( true );
-				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
-				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-generic-error' );
 			} );
 
@@ -226,9 +195,6 @@ describe( 'Report Incident Dialog', () => {
 				wrapper.vm.onReportSubmitFailure( 'http', {
 					xhr: { status: 0 }
 				} );
-				expect( wrapper.vm.showFooterErrorText ).toBe( true );
-				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
-				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
 				// As navigator.onLine is false, the internet disconnected error should be shown
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-internet-disconnected-error' );
 			} );
@@ -243,9 +209,6 @@ describe( 'Report Incident Dialog', () => {
 					xhr: { status: 501 }
 				} );
 
-				expect( wrapper.vm.showFooterErrorText ).toBe( true );
-				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
-				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
 				// As the HTTP status code is 5XX, the server error message should be shown
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-server-error' );
 			} );
@@ -263,9 +226,6 @@ describe( 'Report Incident Dialog', () => {
 				} );
 
 				expect( mw.config.get.mock.calls ).toEqual( [ [ 'wgUserLanguage' ] ] );
-				expect( wrapper.vm.showFooterErrorText ).toBe( true );
-				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
-				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
 				expect( wrapper.vm.footerErrorMessage ).toBe( errMsg );
 			} );
 
@@ -282,9 +242,6 @@ describe( 'Report Incident Dialog', () => {
 				} );
 
 				expect( mw.config.get.mock.calls ).toEqual( [ [ 'wgUserLanguage' ] ] );
-				expect( wrapper.vm.showFooterErrorText ).toBe( true );
-				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
-				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-generic-error' );
 			} );
 
@@ -297,9 +254,6 @@ describe( 'Report Incident Dialog', () => {
 					xhr: { status: 403, responseJSON: { errorKey: 'apierror-permissiondenied' } }
 				} );
 				// This error is not handled separately, so the generic error should be shown.
-				expect( wrapper.vm.showFooterErrorText ).toBe( true );
-				expect( wrapper.vm.showFooterHelpTextWithIcon ).toBe( false );
-				expect( wrapper.vm.showFooterHelpTextWithoutIcon ).toBe( false );
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-generic-error' );
 			} );
 		} );

@@ -30,7 +30,6 @@
 	"reportincident-dialog-something-else-input-placeholder": "Placeholder text for the 'Something else' text input that is shown when a user has selected the 'Something else' harassment type.",
 	"reportincident-dialog-unacceptable-behavior-community-managed": "Banner shown in the dialog used for reporting a user due to unacceptable behaviour.",
 	"reportincident-dialog-get-support-title": "Title shown in the last step of the non-emergency flow, which shows info about how to get support from the community.",
-	"reportincident-dialog-record-for-statistical-purposes": "Footer message shown in the dialog used for reporting a user due to unacceptable behaviour.",
 	"reportincident-dialog-harassment-empty": "Error message shown to the user when they have not selected one of the items in the behavior list.",
 	"reportincident-dialog-something-else-empty": "Error message shown to the user when they have not specified anything in the 'Something else' textbox.",
 	"reportincident-dialog-internet-disconnected-error": "Error message shown to the user when they attempt to submit the form but their internet is disconnected.",

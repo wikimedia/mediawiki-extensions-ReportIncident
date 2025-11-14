@@ -14,22 +14,17 @@
 
 		<!-- dialog footer -->
 		<template #footer>
-			<parsed-message
-				v-if="showFooterHelpTextWithoutIcon"
-				class="ext-reportincident-dialog-footer-help"
-				:message="footerHelpTextMessage">
-			</parsed-message>
 			<cdx-message
-				v-if="showFooterHelpTextWithIcon"
-				:icon="footerIconName"
+				v-if="footerHelpText.msg"
+				:icon="footerHelpText.icon"
 				:inline="true">
 				<parsed-message
 					class="ext-reportincident-dialog-footer-help"
-					:message="footerHelpTextMessage">
+					:message="footerHelpText.msg">
 				</parsed-message>
 			</cdx-message>
 			<cdx-message
-				v-if="showFooterErrorText"
+				v-if="footerErrorMessage"
 				type="error"
 				inline
 				class="ext-reportincident-dialog__form-error-text">
@@ -112,22 +107,10 @@ module.exports = exports = {
 		} );
 
 		const currentSlotName = computed( () => `${ currentStep.value }` );
-		const showFooterErrorText = computed(
-			() => [
-				Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
-				Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM
-			].includes( currentStep.value ) && footerErrorMessage.value !== ''
-		);
 
 		const showCancelOrBackButton = computed(
 			() => currentStep.value !== Constants.DIALOG_STEP_SUBMIT_SUCCESS
 		);
-
-		const stepsWithHelpText = [
-			Constants.DIALOG_STEP_1,
-			Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM,
-			Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
-		];
 
 		const primaryButtonLabel = computed( () => {
 			switch ( currentStep.value ) {
@@ -153,50 +136,34 @@ module.exports = exports = {
 				mw.msg( 'reportincident-dialog-cancel' ) :
 				mw.msg( 'reportincident-dialog-back-btn' ) );
 
-		const footerHelpTextMessage = computed( () => {
-			switch ( store.incidentType ) {
-				case Constants.typeOfIncident.unacceptableUserBehavior:
-					if ( currentStep.value === Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ) {
-						return mw.message( 'reportincident-dialog-record-for-statistical-purposes' );
-					}
-
-					return mw.message( 'reportincident-unacceptable-behavior-footer' );
-
-				case Constants.typeOfIncident.immediateThreatPhysicalHarm:
-					return mw.message( 'reportincident-physical-harm-footer' );
-			}
-		} );
-
-		const footerIconName = computed( () => {
-			if ( !store.incidentType ) {
-				return null;
+		const footerHelpText = computed( () => {
+			if ( currentStep.value === Constants.DIALOG_STEP_SUBMIT_SUCCESS ) {
+				return {
+					icon: null,
+					msg: null
+				};
 			}
 
 			switch ( store.incidentType ) {
-				case Constants.typeOfIncident.immediateThreatPhysicalHarm:
-					return icons.cdxIconLock;
-
 				case Constants.typeOfIncident.unacceptableUserBehavior:
-					if ( currentStep.value === Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ) {
-						return null;
-					}
+					return {
+						icon: icons.cdxIconUserGroup,
+						msg: mw.message( 'reportincident-unacceptable-behavior-footer' )
+					};
 
-					return icons.cdxIconUserGroup;
+				case Constants.typeOfIncident.immediateThreatPhysicalHarm:
+					return {
+						icon: icons.cdxIconLock,
+						msg: mw.message( 'reportincident-physical-harm-footer' )
+					};
 
 				default:
-					return icons.cdxIconUserGroup;
+					return {
+						icon: null,
+						msg: null
+					};
 			}
 		} );
-
-		const shouldShowHelpText = computed(
-			() => store.isIncidentTypeSelected() &&
-					stepsWithHelpText.includes( currentStep.value ) );
-
-		const showFooterHelpTextWithIcon = computed(
-			() => shouldShowHelpText.value && footerIconName.value !== null );
-
-		const showFooterHelpTextWithoutIcon = computed(
-			() => shouldShowHelpText.value && footerIconName.value === null );
 
 		/**
 		 * Function called when the POST request to the
@@ -275,6 +242,7 @@ module.exports = exports = {
 
 		function navigateNext() {
 			const { showValidationError } = storeToRefs( store );
+			footerErrorMessage.value = '';
 
 			// if on the first page, navigate to the second page, if the user has
 			// made the necessary selections
@@ -362,6 +330,8 @@ module.exports = exports = {
 		}
 
 		function navigatePrevious() {
+			footerErrorMessage.value = '';
+
 			if ( currentStep.value === Constants.DIALOG_STEP_1 ) {
 				// if on the first page, close the dialog
 				wrappedOpen.value = false;
@@ -409,15 +379,11 @@ module.exports = exports = {
 			currentSlotName,
 			navigateNext,
 			navigatePrevious,
-			footerHelpTextMessage,
+			footerHelpText,
 			footerErrorMessage,
 			showCancelOrBackButton,
-			showFooterHelpTextWithIcon,
-			showFooterHelpTextWithoutIcon,
-			showFooterErrorText,
 			formSubmissionInProgress,
 			onReportSubmitFailure,
-			footerIconName,
 			title,
 			onDialogOpenStateChanged
 		};
