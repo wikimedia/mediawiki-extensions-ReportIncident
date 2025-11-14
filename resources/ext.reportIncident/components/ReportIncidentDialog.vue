@@ -2,6 +2,7 @@
 	<cdx-dialog
 		v-model:open="wrappedOpen"
 		:title="title"
+		:use-close-button="true"
 		:close-button-label="$i18n( 'reportincident-dialog-close-btn' ).text()"
 		class="ext-reportincident-dialog"
 		@update:open="onDialogOpenStateChanged"

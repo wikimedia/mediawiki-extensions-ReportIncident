@@ -3,11 +3,13 @@
 		v-model:open="wrappedOpen"
 		class="ext-reportincident-emaildialog"
 		:title="$i18n( 'reportincident-emaildialog-title' ).text()"
+		:use-close-button="true"
 		:close-button-label="$i18n( 'reportincident-emaildialog-close-button' ).text()"
 		:primary-action="primaryAction"
 		:default-action="defaultAction"
 		@primary="onPrimaryAction"
-		@default="onDefaultAction">
+		@default="onDefaultAction"
+	>
 		<p>{{ $i18n( 'reportincident-emaildialog-content' ).text() }}</p>
 	</cdx-dialog>
 </template>

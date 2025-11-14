@@ -32,6 +32,7 @@
 
 		<!-- Additional details -->
 		<cdx-field
+			:optional="true"
 			:optional-flag="$i18n( 'reportincident-dialog-optional-label' ).text()"
 			class="ext-reportincident-dialog-step2__form-item
 							ext-reportincident-dialog-step2__additional-details">
