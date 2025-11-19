@@ -180,7 +180,8 @@
 				"components/ReportIncidentDialogStep1.vue",
 				"components/ReportIncidentDialogTypesOfBehavior.vue",
 				"components/ReportImmediateHarmStep.vue",
-				"components/SubmitSuccessStep.vue",
+				"components/EmergencySubmitSuccessStep.vue",
+				"components/NonEmergencySubmitSuccessStep.vue",
 				"composables/useInstrument.js",
 				"stores/Form.js",
 				{

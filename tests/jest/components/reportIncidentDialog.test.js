@@ -360,7 +360,7 @@ describe( 'Report Incident Dialog', () => {
 				expect( store.isFormValidForSubmission() ).toBe( true );
 
 				return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
-					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
+					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS );
 					expect( wrapper.vm.footerErrorMessage ).toBe( '' );
 					expect( restPost ).toHaveBeenCalledWith(
 						'/reportincident/v0/report',
@@ -381,6 +381,7 @@ describe( 'Report Incident Dialog', () => {
 			const validSubmitTestCases = {
 				'valid form data': {
 					initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
+					finalStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
 					initialState: {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
@@ -396,6 +397,7 @@ describe( 'Report Incident Dialog', () => {
 				},
 				'valid form data in emergency flow': {
 					initialStep: Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM,
+					finalStep: Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS,
 					initialState: {
 						incidentType: Constants.typeOfIncident.immediateThreatPhysicalHarm,
 						physicalHarmType: Constants.physicalHarmTypes.physicalHarm,
@@ -413,6 +415,7 @@ describe( 'Report Incident Dialog', () => {
 				},
 				'valid form data with "something else"': {
 					initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
+					finalStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
 					initialState: {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						inputBehavior: Constants.harassmentTypes.OTHER,
@@ -431,7 +434,7 @@ describe( 'Report Incident Dialog', () => {
 			};
 
 			for ( const testName of Object.keys( validSubmitTestCases ) ) {
-				const { initialStep, initialState, expectedRestPayload } = validSubmitTestCases[ testName ];
+				const { initialStep, initialState, expectedRestPayload, finalStep } = validSubmitTestCases[ testName ];
 
 				it( testName, async () => {
 					const wrapper = renderComponent(
@@ -448,7 +451,7 @@ describe( 'Report Incident Dialog', () => {
 
 					await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
 
-					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
+					expect( wrapper.vm.currentSlotName ).toBe( finalStep );
 
 					expect( restPost ).toHaveBeenCalledWith(
 						'/reportincident/v0/report',
@@ -483,8 +486,11 @@ describe( 'Report Incident Dialog', () => {
 		} );
 
 		it( 'should clear and close dialog when exiting from submit success screen', async () => {
-			const wrapper = renderComponent( { open: true, initialStep: Constants.DIALOG_STEP_SUBMIT_SUCCESS } );
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_SUBMIT_SUCCESS );
+			const wrapper = renderComponent( {
+				open: true,
+				initialStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS
+			} );
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS );
 
 			const store = useFormStore();
 
@@ -600,7 +606,8 @@ describe( 'Report Incident Dialog', () => {
 	const closeTestCases = [
 		[ 'STEP_1', Constants.DIALOG_STEP_1, 'form' ],
 		[ 'REPORT_IMMEDIATE_HARM', Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM, 'submit_report' ],
-		[ 'SUCCESS', Constants.DIALOG_STEP_SUBMIT_SUCCESS, 'success' ]
+		[ 'SUCCESS', Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS, 'success' ],
+		[ 'SUCCESS', Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS, 'success' ]
 	];
 
 	for ( const [ stepName, initialStep, source ] of closeTestCases ) {
@@ -643,13 +650,13 @@ describe( 'Report Incident Dialog', () => {
 				[]
 			],
 			'on success screen after reporting immediate threat': [
-				Constants.DIALOG_STEP_SUBMIT_SUCCESS,
+				Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS,
 				Constants.typeOfIncident.immediateThreatPhysicalHarm,
 				'reportincident-submit-back-to-page',
 				[ 'Test multiple underscores' ]
 			],
 			'on success screen after reporting unacceptable behavior': [
-				Constants.DIALOG_STEP_SUBMIT_SUCCESS,
+				Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
 				Constants.typeOfIncident.unacceptableUserBehavior,
 				'reportincident-submit-back-to-page',
 				[ 'Test multiple underscores' ]

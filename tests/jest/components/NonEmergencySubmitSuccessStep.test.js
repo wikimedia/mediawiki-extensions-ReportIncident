@@ -2,15 +2,15 @@
 
 jest.mock( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
 
-const SubmitSuccessStep = require( '../../../resources/ext.reportIncident/components/SubmitSuccessStep.vue' ),
+const NonEmergencySubmitSuccessStep = require( '../../../resources/ext.reportIncident/components/NonEmergencySubmitSuccessStep.vue' ),
 	{ createTestingPinia } = require( '@pinia/testing' ),
 	utils = require( '@vue/test-utils' ),
 	Constants = require( '../../../resources/ext.reportIncident/Constants.js' ),
 	useInstrument = require( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
 
-describe( 'SubmitSuccessStep', () => {
+describe( 'NonEmergencySubmitSuccessStep', () => {
 	function mount( formStoreState ) {
-		return utils.mount( SubmitSuccessStep, {
+		return utils.mount( NonEmergencySubmitSuccessStep, {
 			global: {
 				plugins: [
 					createTestingPinia( {
@@ -49,25 +49,6 @@ describe( 'SubmitSuccessStep', () => {
 
 	afterEach( () => {
 		jest.restoreAllMocks();
-	} );
-
-	it( 'renders for emergency flow', () => {
-		const wrapper = mount( {
-			incidentType: Constants.typeOfIncident.immediateThreatPhysicalHarm
-		} );
-
-		const message = wrapper.find( '#reportincident-form > .cdx-message' );
-		const headers = wrapper.findAll( 'h3' ).map( ( h ) => h.text() );
-
-		expect( message.classes( 'cdx-message--success' ) ).toBe( true );
-		expect( message.text() ).toBe( 'reportincident-submit-emergency-success' );
-		expect( headers ).toEqual( [
-			'reportincident-submit-emergency-section-important-title',
-			'reportincident-submit-emergency-section-next-title'
-		] );
-
-		expect( logEvent ).toHaveBeenCalledTimes( 1 );
-		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'submitted' } );
 	} );
 
 	it( 'renders for non-emergency flow', () => {

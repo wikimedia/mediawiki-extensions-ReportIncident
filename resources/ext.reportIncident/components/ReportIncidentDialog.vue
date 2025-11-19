@@ -90,15 +90,23 @@ module.exports = exports = {
 		const store = useFormStore();
 		const logEvent = useInstrument();
 
+		const isEmergency = computed(
+			() => store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm
+		);
+		const isSuccessStep = computed(
+			() => currentStep.value === Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ||
+				currentStep.value === Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS
+		);
+		const currentSlotName = computed( () => `${ currentStep.value }` );
+		const showCancelOrBackButton = !isSuccessStep.value;
+
 		const title = computed( () => {
-			const isEmergency =
-				store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm;
 			const titlesByStep = {
 				[ Constants.DIALOG_STEP_1 ]: 'reportincident-dialog-main-title',
 				[ Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ]: 'reportincident-dialog-describe-the-incident-title',
 				[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'reportincident-dialog-report-immediate-harm-title',
-				[ Constants.DIALOG_STEP_SUBMIT_SUCCESS ]: isEmergency ? 'reportincident-submit-emergency-dialog-title' :
-					'reportincident-submit-behavior-dialog-title'
+				[ Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ]: 'reportincident-submit-emergency-dialog-title',
+				[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]: 'reportincident-submit-behavior-dialog-title'
 			};
 
 			// Possible message keys used here are listed above.
@@ -106,25 +114,20 @@ module.exports = exports = {
 			return mw.msg( titlesByStep[ currentStep.value ] );
 		} );
 
-		const currentSlotName = computed( () => `${ currentStep.value }` );
-
-		const showCancelOrBackButton = computed(
-			() => currentStep.value !== Constants.DIALOG_STEP_SUBMIT_SUCCESS
-		);
-
 		const primaryButtonLabel = computed( () => {
+			if ( isSuccessStep.value ) {
+				return mw.msg(
+					'reportincident-submit-back-to-page',
+					mw.config.get( 'wgPageName' ).replace( /_/g, ' ' )
+				);
+			}
+
 			switch ( currentStep.value ) {
 				case Constants.DIALOG_STEP_1:
 					return mw.msg( 'reportincident-dialog-continue' );
 
 				case Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES:
 					return mw.msg( 'reportincident-dialog-continue' );
-
-				case Constants.DIALOG_STEP_SUBMIT_SUCCESS:
-					return mw.msg(
-						'reportincident-submit-back-to-page',
-						mw.config.get( 'wgPageName' ).replace( /_/g, ' ' )
-					);
 
 				default:
 					return mw.msg( 'reportincident-dialog-submit-btn' );
@@ -137,7 +140,7 @@ module.exports = exports = {
 				mw.msg( 'reportincident-dialog-back-btn' ) );
 
 		const footerHelpText = computed( () => {
-			if ( currentStep.value === Constants.DIALOG_STEP_SUBMIT_SUCCESS ) {
+			if ( isSuccessStep.value ) {
 				return {
 					icon: null,
 					msg: null
@@ -170,7 +173,11 @@ module.exports = exports = {
 		 * ReportIncident reporting REST API succeeds.
 		 */
 		function onReportSubmitSuccess() {
-			currentStep.value = Constants.DIALOG_STEP_SUBMIT_SUCCESS;
+			if ( isEmergency.value ) {
+				currentStep.value = Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS;
+			} else {
+				currentStep.value = Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS;
+			}
 			formSubmissionInProgress.value = false;
 			footerErrorMessage.value = '';
 		}
@@ -268,7 +275,7 @@ module.exports = exports = {
 					source: 'form',
 					subType: 'continue'
 				} );
-			} else if ( currentStep.value === Constants.DIALOG_STEP_SUBMIT_SUCCESS ) {
+			} else if ( isSuccessStep.value ) {
 				wrappedOpen.value = false;
 				store.$reset();
 				currentStep.value = Constants.DIALOG_STEP_1;
@@ -362,7 +369,8 @@ module.exports = exports = {
 				const sourcesByStep = {
 					[ Constants.DIALOG_STEP_1 ]: 'form',
 					[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'submit_report',
-					[ Constants.DIALOG_STEP_SUBMIT_SUCCESS ]: 'success'
+					[ Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ]: 'success',
+					[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]: 'success'
 				};
 
 				logEvent( 'click', {
