@@ -25,7 +25,6 @@
 	"reportincident-dialog-harassment-type-trolling": "Trollaus tai vainoaminen (stalkkaus)",
 	"reportincident-dialog-something-else-input-placeholder": "Kerro, millaisesta käytöksestä on kyse.",
 	"reportincident-dialog-unacceptable-behavior-community-managed": "{{SITENAME}} on yhteisö, jossa [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|ei suvaita sopimatonta käytöstä]]. Sivustoa hallinnoi kokeneiden käyttäjien yhteisö.",
-	"reportincident-dialog-record-for-statistical-purposes": "Painamalla ”Jatka” kirjaamme tästä [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|yksityisen lokimerkinnän]] tilastointia varten, minkä jälkeen opastamme, mitä sinun tulisi tehdä seuraavaksi. Tämä ei lähetä ilmiantoa.",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|Sinun}} on valittava vähintään yksi käytöstyyppi.",
 	"reportincident-dialog-something-else-empty": "Anna lyhyt kuvaus tapahtuneesta.",
 	"reportincident-dialog-internet-disconnected-error": "Näyttää siltä, ettei sinulla ole internet-yhteyttä. Kokeile lähettää uudelleen, kun yhteytesi on palannut.",

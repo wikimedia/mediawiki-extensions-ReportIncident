@@ -27,7 +27,6 @@
 	"reportincident-dialog-something-else-input-placeholder": "具体说明上方未列出的行为。",
 	"reportincident-dialog-unacceptable-behavior-community-managed": "{{SITENAME}}社群[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|绝不会容忍不当行为]]，这些行为将由经验丰富的用户处理。",
 	"reportincident-dialog-get-support-title": "获取有关此事件的帮助",
-	"reportincident-dialog-record-for-statistical-purposes": "点击继续将会创建此事件的[[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|私有记录]]，用于统计目的，然后将会指导{{GENDER:|您}}下一步采取何种措施。此操作不会提交举报。",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|您}}必须选择至少一种行为。",
 	"reportincident-dialog-something-else-empty": "请简要描述该行为。",
 	"reportincident-dialog-internet-disconnected-error": "{{GENDER:|您}}似乎没有互联网连接。请在连接恢复正常后尝试重新提交。",

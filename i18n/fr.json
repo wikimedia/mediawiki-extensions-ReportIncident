@@ -34,7 +34,6 @@
 	"reportincident-dialog-something-else-input-placeholder": "Précisez les comportements non listés ci-dessus.",
 	"reportincident-dialog-unacceptable-behavior-community-managed": "{{SITENAME}} est une communauté où [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|les comportements inappropriés ne sont pas tolérés]] et sont gérés par la communauté d'utilisateurs expérimentés.",
 	"reportincident-dialog-get-support-title": "Obtenir de l'aide en cas d'incident",
-	"reportincident-dialog-record-for-statistical-purposes": "En appuyant sur Continuer, vous créerez un [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|enregistrement privé]] de cet incident à des fins statistiques, puis {{GENDER:|vous}} serez guidé sur la marche à suivre. Cela ne soumettra pas de rapport.",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|Vous}} devez sélectionner au moins un comportement.",
 	"reportincident-dialog-something-else-empty": "Veuillez fournir une courte description du comportement.",
 	"reportincident-dialog-internet-disconnected-error": "Il semblerait que {{GENDER:|vous}} n'ayez pas de connexion Internet. Veuillez réessayer lorsque {{GENDER:|votre}} connexion sera rétablie.",

@@ -26,7 +26,6 @@
 	"reportincident-dialog-something-else-input-placeholder": "Specifica le comportamentos que non figura in le lista anterior.",
 	"reportincident-dialog-unacceptable-behavior-community-managed": "{{SITENAME}} es un communitate ubi [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|le comportamento inappropriate non es tolerate]] e es gerite per le communitate de usatores experte.",
 	"reportincident-dialog-get-support-title": "Obtener adjuta in caso de un incidente",
-	"reportincident-dialog-record-for-statistical-purposes": "Si tu preme Continuar, un [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|registro private]] de iste incidente essera generate pro objectivos de statisticas, e tu recipera instructiones sur le proxime passos. Necun reporto essera inviate.",
 	"reportincident-dialog-harassment-empty": "Tu debe seliger al minus un comportamento.",
 	"reportincident-dialog-something-else-empty": "Per favor forni un curte description del comportamento.",
 	"reportincident-dialog-internet-disconnected-error": "Pare que tu non ha connexion a internet. Per favor tenta resubmitter quando tu connexion es restaurate.",
