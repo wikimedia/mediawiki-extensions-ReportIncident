@@ -186,6 +186,7 @@
 				"components/ReportImmediateHarmStep.vue",
 				"components/EmergencySubmitSuccessStep.vue",
 				"components/NonEmergencySubmitSuccessStep.vue",
+				"components/NonEmergencySubmitSuccessStepV2.vue",
 				"composables/useInstrument.js",
 				"stores/Form.js",
 				{
@@ -271,7 +272,11 @@
 				"reportincident-submit-behavior-section-other-options-title",
 				"reportincident-submit-behavior-section-other-options-item-ask",
 				"reportincident-submit-behavior-section-other-options-item-contact-host",
-				"reportincident-submit-back-to-page"
+				"reportincident-submit-back-to-page",
+				"reportincident-nonemergency-submitsuccess-title",
+				"reportincident-nonemergency-nextsteps-header",
+				"reportincident-nonemergency-requesthelp-header",
+				"reportincident-nonemergency-other-header"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",

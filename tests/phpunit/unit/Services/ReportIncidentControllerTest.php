@@ -33,6 +33,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		array $communityConfig = []
 	): ReportIncidentController {
 		$globalConfig += self::DEFAULT_LOCAL_LINKS;
+		$globalConfig['ReportIncidentUseV2NonEmergencyFlow'] = true;
 		$communityConfig += [
 			'ReportIncidentLocalIncidentReportPage' => '',
 			'ReportIncidentDisputeResolutionPage' => '',
@@ -198,6 +199,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentEnableInstrumentation' => true,
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
+				'wgReportIncidentUseV2NonEmergencyFlow' => true,
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -236,6 +238,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentEnableInstrumentation' => true,
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
+				'wgReportIncidentUseV2NonEmergencyFlow' => true,
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -311,6 +314,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentEnableInstrumentation' => true,
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
+				'wgReportIncidentUseV2NonEmergencyFlow' => true,
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );

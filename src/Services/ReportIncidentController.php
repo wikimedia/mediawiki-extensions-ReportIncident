@@ -97,6 +97,7 @@ class ReportIncidentController {
 			// Control whether instrumentation is enabled pending approval (T372823).
 			'wgReportIncidentEnableInstrumentation' => $this->config->get( 'ReportIncidentEnableInstrumentation' ),
 			'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
+			'wgReportIncidentUseV2NonEmergencyFlow' => $this->config->get( 'ReportIncidentUseV2NonEmergencyFlow' ),
 		] );
 		// Add the ReportIncident module, including the JS and Vue code for the dialog.
 		$output->addModules( 'ext.reportIncident' );

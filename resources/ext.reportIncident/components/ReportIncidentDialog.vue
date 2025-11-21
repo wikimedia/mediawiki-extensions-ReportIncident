@@ -95,10 +95,13 @@ module.exports = exports = {
 		);
 		const isSuccessStep = computed(
 			() => currentStep.value === Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ||
-				currentStep.value === Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS
+				currentStep.value === Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ||
+				currentStep.value === Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2
 		);
 		const currentSlotName = computed( () => `${ currentStep.value }` );
-		const showCancelOrBackButton = !isSuccessStep.value;
+		const showCancelOrBackButton = computed(
+			() => !isSuccessStep.value
+		);
 
 		const title = computed( () => {
 			const titlesByStep = {
@@ -106,7 +109,8 @@ module.exports = exports = {
 				[ Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ]: 'reportincident-dialog-describe-the-incident-title',
 				[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'reportincident-dialog-report-immediate-harm-title',
 				[ Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ]: 'reportincident-submit-emergency-dialog-title',
-				[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]: 'reportincident-submit-behavior-dialog-title'
+				[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]: 'reportincident-submit-behavior-dialog-title',
+				[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2 ]: 'reportincident-nonemergency-submitsuccess-title'
 			};
 
 			// Possible message keys used here are listed above.
@@ -176,7 +180,14 @@ module.exports = exports = {
 			if ( isEmergency.value ) {
 				currentStep.value = Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS;
 			} else {
-				currentStep.value = Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS;
+				if (
+					mw.config.get( 'wgReportIncidentUseV2NonEmergencyFlow' ) &&
+					Constants.v2NonEmergencySubmitSuccessPages.includes( store.inputBehavior )
+				) {
+					currentStep.value = Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2;
+				} else {
+					currentStep.value = Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS;
+				}
 			}
 			formSubmissionInProgress.value = false;
 			footerErrorMessage.value = '';
@@ -370,7 +381,8 @@ module.exports = exports = {
 					[ Constants.DIALOG_STEP_1 ]: 'form',
 					[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'submit_report',
 					[ Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ]: 'success',
-					[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]: 'success'
+					[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]: 'success',
+					[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2 ]: 'success'
 				};
 
 				logEvent( 'click', {

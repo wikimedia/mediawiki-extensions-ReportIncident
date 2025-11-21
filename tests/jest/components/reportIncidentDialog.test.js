@@ -269,6 +269,8 @@ describe( 'Report Incident Dialog', () => {
 						return 1;
 					case 'wgPageName':
 						return 'Test_page';
+					case 'wgReportIncidentUseV2NonEmergencyFlow':
+						return true;
 					default:
 						throw new Error( 'Unknown key: ' + key );
 				}

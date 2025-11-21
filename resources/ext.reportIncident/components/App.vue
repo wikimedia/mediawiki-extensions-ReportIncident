@@ -18,6 +18,10 @@
 			<non-emergency-submit-success-step :links="localLinks">
 			</non-emergency-submit-success-step>
 		</template>
+		<template #dialog_step_nonemergency_submit_success_v2>
+			<non-emergency-submit-success-step-v2>
+			</non-emergency-submit-success-step-v2>
+		</template>
 	</report-incident-dialog>
 </template>
 
@@ -29,6 +33,7 @@ const ReportIncidentDialogTypesOfBehavior = require( './ReportIncidentDialogType
 const ReportImmediateHarmStep = require( './ReportImmediateHarmStep.vue' );
 const EmergencySubmitSuccessStep = require( './EmergencySubmitSuccessStep.vue' );
 const NonEmergencySubmitSuccessStep = require( './NonEmergencySubmitSuccessStep.vue' );
+const NonEmergencySubmitSuccessStepV2 = require( './NonEmergencySubmitSuccessStepV2.vue' );
 const useFormStore = require( '../stores/Form.js' );
 const useInstrument = require( '../composables/useInstrument.js' );
 const { ref } = require( 'vue' );
@@ -46,7 +51,8 @@ module.exports = exports = {
 		ReportImmediateHarmStep,
 		ReportIncidentDialogTypesOfBehavior,
 		EmergencySubmitSuccessStep,
-		NonEmergencySubmitSuccessStep
+		NonEmergencySubmitSuccessStep,
+		NonEmergencySubmitSuccessStepV2
 	},
 	props: {
 		localLinks: { type: Object, required: true }

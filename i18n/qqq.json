@@ -101,5 +101,9 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Form input description used for the dispute resolution page configuration field on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Form input label used for the enabled namespaces configuration field on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Form input description used for the enabled namespaces configuration field on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",
-	"communityconfiguration-reportincident-invalid-title": "Validation error shown on the Special:CommunityConfiguration editor subpage of the Incident Reporting System when an invalid title is provided."
+	"communityconfiguration-reportincident-invalid-title": "Validation error shown on the Special:CommunityConfiguration editor subpage of the Incident Reporting System when an invalid title is provided.",
+	"reportincident-nonemergency-submitsuccess-title": "Title of the dialog set after the user has selected a topic to get help with",
+	"reportincident-nonemergency-nextsteps-header": "Subsection header in the non-emergency workflow page that appears after a user has successfully selected a topic to get more information about",
+	"reportincident-nonemergency-requesthelp-header": "Subsection header in the non-emergency workflow page that appears after a user has successfully selected a topic to get more information about",
+	"reportincident-nonemergency-other-header": "Subsection header in the non-emergency workflow page that appears after a user has successfully selected a topic to get more information about"
 }

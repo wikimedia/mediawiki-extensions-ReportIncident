@@ -98,5 +98,9 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "A wiki page where users can find information about resolving on-wiki disputes.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Enabled namespaces",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Namespaces where the Incident Reporting System is enabled.",
-	"communityconfiguration-reportincident-invalid-title": "Page must be an existing local wiki page."
+	"communityconfiguration-reportincident-invalid-title": "Page must be an existing local wiki page.",
+	"reportincident-nonemergency-submitsuccess-title": "Support information",
+	"reportincident-nonemergency-nextsteps-header": "What to do next",
+	"reportincident-nonemergency-requesthelp-header": "How to request help",
+	"reportincident-nonemergency-other-header": "Can't find what you're looking for?"
 }
