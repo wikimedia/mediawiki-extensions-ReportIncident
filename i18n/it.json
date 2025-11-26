@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Beta16",
-			"Ontsed"
+			"Ontsed",
+			"Slow"
 		]
 	},
 	"reportincident-dialog-close-btn": "Chiudi",
@@ -19,5 +20,9 @@
 	"reportincident-nonemergency-help": "Bullismo, molestie, divulgazione di informazioni private, trolling, contenuti discriminatori o spam",
 	"reportincident-radio-header-nonemergency": "Ottieni aiuto con:",
 	"reportincident-choose-option": "Scegli un'opzione",
-	"reportincident-submit-behavior-section-support-item-info-is-public": "Tutte le conversazioni sui wiki sono pubbliche, non condividere informazioni personali."
+	"reportincident-submit-behavior-section-support-item-info-is-public": "Tutte le conversazioni sui wiki sono pubbliche, non condividere informazioni personali.",
+	"reportincident-nonemergency-submitsuccess-title": "Assistenza",
+	"reportincident-nonemergency-nextsteps-header": "Cosa faccio ora?",
+	"reportincident-nonemergency-requesthelp-header": "Come chiedere aiuto",
+	"reportincident-nonemergency-other-header": "Non riesci a trovare ciò che cerchi?"
 }

@@ -98,5 +98,9 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Eine Wiki-Seite, auf der Benutzer Informationen zur Lösung von On-Wiki-Konflikten finden können.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Aktivierte Namensräume",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Namensräume, in denen das Vorfallmeldesystem aktiviert ist.",
-	"communityconfiguration-reportincident-invalid-title": "Die Seite muss eine vorhandene lokale Wiki-Seite sein."
+	"communityconfiguration-reportincident-invalid-title": "Die Seite muss eine vorhandene lokale Wiki-Seite sein.",
+	"reportincident-nonemergency-submitsuccess-title": "Unterstützungsinformationen",
+	"reportincident-nonemergency-nextsteps-header": "Nächste Schritte",
+	"reportincident-nonemergency-requesthelp-header": "Wie man Hilfe anfordert",
+	"reportincident-nonemergency-other-header": "Konntest du nicht das finden, wonach du suchtest?"
 }

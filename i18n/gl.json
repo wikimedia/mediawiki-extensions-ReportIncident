@@ -96,5 +96,9 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Unha páxina wiki onde os usuarios poden atopar información sobre a resolución de liortas no wiki.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Espazos de nomes activados",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Espazos de nomes onde o sistema de notificación de incidentes está activado.",
-	"communityconfiguration-reportincident-invalid-title": "A páxina debe ser unha páxina wiki local que exista."
+	"communityconfiguration-reportincident-invalid-title": "A páxina debe ser unha páxina wiki local que exista.",
+	"reportincident-nonemergency-submitsuccess-title": "Información de asistencia",
+	"reportincident-nonemergency-nextsteps-header": "Que facer a continuación",
+	"reportincident-nonemergency-requesthelp-header": "Como pedir axuda",
+	"reportincident-nonemergency-other-header": "Non atopas o que buscas?"
 }

@@ -96,5 +96,9 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Un pagina wiki ubi usatores pote trovar information sur le resolution de disputas sur le wiki.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Spatios de nomines activate",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Spatios de nomines ubi le Systema de reportage de incidentes es activate.",
-	"communityconfiguration-reportincident-invalid-title": "Le pagina debe esser un pagina wiki local existente."
+	"communityconfiguration-reportincident-invalid-title": "Le pagina debe esser un pagina wiki local existente.",
+	"reportincident-nonemergency-submitsuccess-title": "Information de assistentia",
+	"reportincident-nonemergency-nextsteps-header": "Que facer ora",
+	"reportincident-nonemergency-requesthelp-header": "Como demandar adjuta",
+	"reportincident-nonemergency-other-header": "Non ha tu trovate lo que tu cerca?"
 }
