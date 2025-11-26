@@ -3,17 +3,18 @@
 		"authors": [
 			"Hedda",
 			"Joseph",
-			"Sakblue"
+			"Sakblue",
+			"SaldırganSincap"
 		]
 	},
 	"reportincident-desc": "Olay Bildirim Sistemi uzantısı.",
 	"reportincident-report-btn-label": "Bildir",
 	"reportincident-dialog-close-btn": "Kapat",
 	"reportincident-dialog-back-btn": "Geri",
-	"reportincident-dialog-submit-btn": "Gönder",
-	"reportincident-dialog-harassment-type-label": "Ne tür bir davranış?",
-	"reportincident-dialog-additional-details-input-label": "Ek detaylar",
-	"reportincident-dialog-additional-details-input-placeholder": "Bir incelemeci için yararlı olabilecek bağlamı ekleyin",
+	"reportincident-dialog-submit-btn": "Raporu gönder",
+	"reportincident-dialog-harassment-type-label": "Kabul edilemez davranış türü",
+	"reportincident-dialog-additional-details-input-label": "Ek bilgi",
+	"reportincident-dialog-additional-details-input-placeholder": "İncelemeci için faydalı olabilecek bağlamı ekleyin (örneğin ek bağlantılar).",
 	"reportincident-dialog-optional-label": "(isteğe bağlı)",
 	"reportincident-dialog-violator-label": "Bildirmek {{GENDER:|istediğiniz}} kullanıcı",
 	"reportincident-dialog-violator-placeholder-text": "Kimi bildiriyorsunuz?",
