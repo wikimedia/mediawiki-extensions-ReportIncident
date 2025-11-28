@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Diskdance",
+			"ExoHyper2026",
 			"沈澄心"
 		]
 	},
@@ -90,5 +91,9 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "用户可找到有关解决wiki上争议的信息的wiki页面。",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "启用的命名空间",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "启用事件报告系统的命名空间。",
-	"communityconfiguration-reportincident-invalid-title": "页面必须是已存在的本地wiki页面。"
+	"communityconfiguration-reportincident-invalid-title": "页面必须是已存在的本地wiki页面。",
+	"reportincident-nonemergency-submitsuccess-title": "支持信息",
+	"reportincident-nonemergency-nextsteps-header": "接下来做什么",
+	"reportincident-nonemergency-requesthelp-header": "如何请求帮助",
+	"reportincident-nonemergency-other-header": "找不到您要找的内容？"
 }
