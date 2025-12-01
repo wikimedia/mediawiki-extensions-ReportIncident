@@ -55,7 +55,7 @@
 	"reportincident-choose-option": "Wybierz opcję",
 	"reportincident-dialog-cancel": "Anuluj",
 	"reportincident-dialog-continue": "Kontynuuj",
-	"reportincident-unacceptable-behavior-footer": "Niewłaściwe zachowanie [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|nie jest tolerowane]] w {{GRAMMAR:MS.lp|{{SITENAME}}}} i jest kontrolowane przez społeczność doświadczonych użytkowników.",
+	"reportincident-unacceptable-behavior-footer": "Zostaną Ci przedstawione materiały pomocnicze na temat rozwiązywania takich problemów. [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|Przypadki niewłaściwego zachowania]] są rozpatrywane przez społeczność {{GRAMMAR:D.lp|{{SITENAME}}}}.",
 	"reportincident-physical-harm-infotext": "Link do incydentu, który {{GENDER:|zgłaszasz}} (w tym zgłaszany użytkownik) oraz Twoja nazwa użytkownika i Twój adres e-mail zostaną <b>udostępnione prywatnie [[meta:Special:MyLanguage/Threats_of_harm|zespołowi reagowania kryzysowego Fundacji Wikimedia]]</b>.",
 	"reportincident-physical-harm-footer": "{{GENDER:|Twoje}} zgłoszenie jest [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|poufne]] i zostanie przesłane do [[meta:Special:MyLanguage/Threats_of_harm|zespołu kryzysowego Fundacji Wikimedia]] celem jego rozpatrzenia.",
 	"reportincident-threats-physical-harm": "Groźby wyrządzenia krzywdy fizycznej",
@@ -97,5 +97,9 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Strona wiki, na której użytkownicy mogą znaleźć informacje o rozwiązywaniu sporów na wiki.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Włączone przestrzenie nazw",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Przestrzenie nazw, w których włączony jest system zgłaszania incydentów.",
-	"communityconfiguration-reportincident-invalid-title": "Strona musi być istniejącą lokalną stroną wiki."
+	"communityconfiguration-reportincident-invalid-title": "Strona musi być istniejącą lokalną stroną wiki.",
+	"reportincident-nonemergency-submitsuccess-title": "Informacje pomocnicze",
+	"reportincident-nonemergency-nextsteps-header": "Co zrobić dalej",
+	"reportincident-nonemergency-requesthelp-header": "Jak poprosić o pomoc",
+	"reportincident-nonemergency-other-header": "Nie udało się znaleźć tego, czego szukasz?"
 }

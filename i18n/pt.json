@@ -3,6 +3,7 @@
 		"authors": [
 			"Hamilton Abreu",
 			"Mansil alfalb",
+			"Maria Manuela Silva",
 			"Martin Urbanec",
 			"Mbs262",
 			"McDutchie",
@@ -85,5 +86,8 @@
 	"reportincident-submit-behavior-section-other-options-title": "Não consegue encontrar o que {{GENDER:|você está}} procurando?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Se você não tiver certeza do que fazer, [[$1|peça ajuda à comunidade]].",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Se as etapas acima não ajudaram {{GENDER:|você}}, {{GENDER:|você}} pode entrar em contato com a [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|organização sem fins lucrativos]] que hospeda este site.",
-	"reportincident-submit-back-to-page": "Retornar à $1"
+	"reportincident-submit-back-to-page": "Retornar à $1",
+	"reportincident-nonemergency-submitsuccess-title": "Informação de apoio",
+	"reportincident-nonemergency-nextsteps-header": "O que fazer a seguir",
+	"reportincident-nonemergency-requesthelp-header": "Como solicitar ajuda"
 }

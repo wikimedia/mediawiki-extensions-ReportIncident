@@ -96,5 +96,9 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "ВИкистраница каде корисниците можат да најдат информации за решавање на спорови на викито.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Овозможени именски простори",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Именски простори во кои е овозможен Системот за пријавување на инциденти.",
-	"communityconfiguration-reportincident-invalid-title": "Страницата мора да биде постоечка месна викистраница."
+	"communityconfiguration-reportincident-invalid-title": "Страницата мора да биде постоечка месна викистраница.",
+	"reportincident-nonemergency-submitsuccess-title": "Информации за поддршка",
+	"reportincident-nonemergency-nextsteps-header": "Следни чекори",
+	"reportincident-nonemergency-requesthelp-header": "Како да побарате помош",
+	"reportincident-nonemergency-other-header": "Не го најдовте она што го баравте?"
 }

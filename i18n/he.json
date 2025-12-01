@@ -96,5 +96,9 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "דף ויקי שמשתמשים יכולים למצוא בו מידע על פתרון מחלוקות בוויקי.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "מרחבי שם מופעלים",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "מרחבי שמות שמערכת דיווח האירועים מופעלת בהם.",
-	"communityconfiguration-reportincident-invalid-title": "הדף חייב להיות דף ויקי מקומי קיים."
+	"communityconfiguration-reportincident-invalid-title": "הדף חייב להיות דף ויקי מקומי קיים.",
+	"reportincident-nonemergency-submitsuccess-title": "מידע על תמיכה",
+	"reportincident-nonemergency-nextsteps-header": "מה לעשות הלאה",
+	"reportincident-nonemergency-requesthelp-header": "איך לבקש עזרה?",
+	"reportincident-nonemergency-other-header": "לא מצאת את מה שחיפשת?"
 }
