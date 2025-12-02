@@ -10,6 +10,15 @@
 	"reportincident-dialog-close-btn": "إغلاق",
 	"reportincident-dialog-back-btn": "رجوع",
 	"reportincident-dialog-optional-label": "(اختياري)",
+	"reportincident-dialog-harassment-type-sexual-harassment": "التحرش الجنسي",
+	"reportincident-dialog-harassment-type-something-else": "شيء آخر",
+	"reportincident-dialog-something-else-input-placeholder": "حدد السلوكيات غير المذكورة أعلاه.",
+	"reportincident-dialog-something-else-empty": "يرجى تقديم وصف موجز للسلوك.",
+	"reportincident-dialog-server-error": "عذرًا، يبدو أن خادمنا لا يستجيب. يُرجى إعادة الإرسال.",
+	"right-reportincident": "الإبلاغ عن حادثة",
+	"action-reportincident": "الإبلاغ عن حادثة",
+	"reportincident-emaildialog-title": "عنوان البريد الإلكتروني المطلوب التحقق منه",
 	"reportincident-emaildialog-close-button": "إلغاء",
-	"reportincident-emaildialog-primary": "إذهب إلى الإعدادات"
+	"reportincident-emaildialog-primary": "إذهب إلى الإعدادات",
+	"reportincident-confirmedemail-required": "يجب أن يكون لديك عنوان بريد إلكتروني مؤكد لإرسال تقرير الحادث."
 }
