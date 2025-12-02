@@ -1,37 +1,178 @@
 <template>
-	<template v-if="page">
+	<div v-if="page" ref="pageContent">
 		<cdx-message>
 			<p><strong>{{ page.description.header }}</strong></p>
 			<p>{{ page.description.text }}</p>
 		</cdx-message>
-		<cdx-message v-if="page.notice.shouldDisplay" type="warning">
+		<cdx-message v-if="page.notice && page.notice.shouldDisplay" type="warning">
 			<p>{{ page.notice.text }}</p>
 		</cdx-message>
 		<h3>{{ $i18n( 'reportincident-nonemergency-nextsteps-header' ).text() }}</h3>
+		<!-- eslint-disable vue/no-v-html-->
+		<p
+			v-for="( paragraph, key ) in nextStepMsg"
+			:key="key"
+			v-html="paragraph"
+		></p>
+		<!-- eslint-enable vue/no-v-html-->
 		<h3>{{ $i18n( 'reportincident-nonemergency-requesthelp-header' ).text() }}</h3>
+		<ul>
+			<!-- eslint-disable vue/no-v-html-->
+			<li
+				v-for="( helpMethod, key ) in helpMethods"
+				:key="key"
+				v-html="helpMethod"
+			></li>
+			<!-- eslint-enable vue/no-v-html-->
+		</ul>
 		<h3>{{ $i18n( 'reportincident-nonemergency-other-header' ).text() }}</h3>
-	</template>
+		<!-- eslint-disable vue/no-v-html-->
+		<p v-html="$i18n( 'reportincident-nonemergency-generic-nextstep-otheraction' ).parse()">
+		</p>
+		<!-- eslint-disable vue/no-v-html-->
+	</div>
 </template>
 
 <script>
 
+const { onMounted, ref } = require( 'vue' );
 const useFormStore = require( '../stores/Form.js' );
+const Constants = require( '../Constants.js' );
 const { CdxMessage } = require( '@wikimedia/codex' );
+const useInstrument = require( '../composables/useInstrument.js' );
 
 // @vue/component
 module.exports = exports = {
 	name: 'ReportIncidentDialogNonEmergencySupport',
 	components: { CdxMessage },
 	setup() {
+		const logEvent = useInstrument();
+		const pageContent = ref( null );
+		onMounted( () => {
+			logEvent( 'view', { source: 'get_support' } );
+
+			$( pageContent.value ).find( 'a' ).on( 'click', function () {
+				logEvent( 'click', {
+					context: $( this ).attr( 'href' ),
+					source: 'get_support'
+				} );
+			} );
+		} );
+
 		const store = useFormStore();
 		const behavior = store.inputBehavior;
 
 		const pages = {};
 
+		// Pages that describe next steps for the non-emergency incident. The type
+		// should match up with what's defined in Constants.harassmentTypes.
+		// A page is described by an object with the following keys:
+		// descrption: an object, pass through the header (parsed message) and text (parsed message)
+		// notice (optional): TODO
+		// nextSteps: an array that describes messages to display in descending priority. When
+		// processed, it'll return the first valid message.
+		// helpMethods: an array that describes the possible contact methods. When processed, it'll
+		// return all valid messages.
+		// helpMethodDefault: If no helpMethods are valid, this message will be returned
+		pages[ Constants.harassmentTypes.INTIMIDATION ] = {
+			description: {
+				header: mw.msg( 'reportincident-nonemergency-intimidation-header' ),
+				text: mw.msg( 'reportincident-nonemergency-generic-description' )
+			},
+			nextSteps: [
+				{
+					msgKey: 'reportincident-nonemergency-intimidation-nextstep-configured',
+					requiredParams: [ 'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-intimidation-nextstep-default'
+				}
+			],
+			helpMethods: [
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-contactadmin',
+					requiredParams: [ 'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-email',
+					requiredParams: [ 'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
+					requiredParams: [ 'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' ]
+				}
+			],
+			helpMethodDefault: {
+				msgKey: 'reportincident-nonemergency-helpmethod-default'
+			}
+		};
+
 		const page = pages[ behavior ];
 
+		// A message is considered valid if the requiredParams are found via mw.config.get()
+		// If no requiredParams are found, the message is considered valid by default.
+		function getValidMsgParams( msg ) {
+			// No required params, message is automatically considered valid
+			if ( !msg.requiredParams ) {
+				return [];
+			}
+
+			// Check if all required parameters exist. No other validation is done here.
+			// If all required parameters exist, message is considered valid.
+			const msgParams = [];
+			for ( const param of msg.requiredParams ) {
+				const paramValue = mw.config.get( param );
+				if ( !paramValue ) {
+					// Found an invalid value, break as the message is considered invalid now
+					break;
+				}
+				msgParams.push( paramValue );
+			}
+
+			// If all required parameters weren't found, message is invalid
+			if ( msgParams.length !== msg.requiredParams.length ) {
+				return false;
+			}
+			return msgParams;
+		}
+
+		// Cycle through all the next step messages, returning the first valid one
+		let nextStepMsg = '';
+		for ( const msg of page.nextSteps ) {
+			const msgParams = getValidMsgParams( msg );
+			if ( msgParams !== false ) {
+				// * reportincident-nonemergency-intimidation-nextstep-configured
+				// * reportincident-nonemergency-intimidation-nextstep-default
+				nextStepMsg = mw.message( msg.msgKey, msgParams ).parse();
+				break;
+			}
+		}
+		nextStepMsg = nextStepMsg.split( '\n\n' );
+
+		// Cycle through all help method messages and return all valid ones
+		const helpMethods = [];
+		for ( const msg of page.helpMethods ) {
+			const msgParams = getValidMsgParams( msg );
+			if ( msgParams !== false ) {
+				// * reportincident-nonemergency-helpmethod-contactadmin
+				// * reportincident-nonemergency-helpmethod-email
+				// * reportincident-nonemergency-helpmethod-contactcommunity
+				helpMethods.push( mw.message( msg.msgKey, msgParams ).parse() );
+			}
+		}
+
+		// If no valid (configured) help methods were found, return the default fallback
+		if ( !helpMethods.length ) {
+			// * reportincident-nonemergency-helpmethod-default
+			// * HACK: linter wants at least 2 messages, remove when second one added
+			helpMethods.push( mw.message( page.helpMethodDefault.msgKey ).parse() );
+		}
+
 		return {
-			page
+			page,
+			pageContent,
+			nextStepMsg,
+			helpMethods
 		};
 	}
 };

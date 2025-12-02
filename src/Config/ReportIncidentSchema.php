@@ -11,7 +11,7 @@ use MediaWiki\Extension\CommunityConfiguration\Schemas\MediaWiki\MediaWikiDefini
  */
 class ReportIncidentSchema extends JsonSchema {
 
-	public const VERSION = '1.0.0';
+	public const VERSION = '1.1.0';
 
 	public const ReportIncidentDisputeResolutionPage = [
 		self::TYPE => self::TYPE_STRING,
@@ -32,6 +32,34 @@ class ReportIncidentSchema extends JsonSchema {
 		self::REF => [
 			'class' => MediaWikiDefinitions::class,
 			'field' => 'Namespaces',
+		],
+	];
+
+	// This is a hack to add a sub-header denoting the section
+	public const ReportIncident_NonEmergency_Intimidation = [
+		self::TYPE => self::TYPE_OBJECT,
+	];
+
+	public const ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL = [
+		self::TYPE => self::TYPE_STRING,
+		self::DEFAULT => ''
+	];
+
+	public const ReportIncident_NonEmergency_Intimidation_HelpMethod = [
+		self::TYPE => self::TYPE_OBJECT,
+		self::PROPERTIES => [
+			'ContactAdmin' => [
+				self::TYPE => self::TYPE_STRING,
+				self::DEFAULT => ''
+			],
+			'Email' => [
+				self::TYPE => self::TYPE_STRING,
+				self::DEFAULT => ''
+			],
+			'ContactCommunity' => [
+				self::TYPE => self::TYPE_STRING,
+				self::DEFAULT => ''
+			],
 		],
 	];
 }

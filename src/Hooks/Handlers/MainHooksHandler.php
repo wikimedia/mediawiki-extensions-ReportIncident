@@ -45,6 +45,12 @@ class MainHooksHandler implements
 		if ( $this->controller->shouldAddMenuItem( $out->getContext() ) ) {
 			$out->addHtml( '<div id="ext-reportincident-app"></div>' );
 		}
+
+		// If page is Special:CommunityConfiguration, add message components
+		// needed to render the final message on-page
+		if ( $out->getTitle()->isSpecial( 'CommunityConfiguration' ) ) {
+			$out->addModules( 'ext.reportIncidentCommunityConfigurationMessages' );
+		}
 	}
 
 	/** @inheritDoc */

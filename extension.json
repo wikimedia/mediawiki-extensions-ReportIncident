@@ -165,6 +165,18 @@
 		"remoteExtPath": "ReportIncident/resources/ext.reportIncident"
 	},
 	"ResourceModules": {
+		"ext.reportIncidentCommunityConfigurationMessages": {
+			"messages": [
+				"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label",
+				"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description",
+				"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-label",
+				"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-description",
+				"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-label",
+				"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-description",
+				"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label",
+				"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description"
+			]
+		},
 		"ext.reportIncident": {
 			"styles": [
 				"ext.reportincident.less"
@@ -276,7 +288,17 @@
 				"reportincident-nonemergency-submitsuccess-title",
 				"reportincident-nonemergency-nextsteps-header",
 				"reportincident-nonemergency-requesthelp-header",
-				"reportincident-nonemergency-other-header"
+				"reportincident-nonemergency-other-header",
+				"reportincident-nonemergency-generic-description",
+				"reportincident-nonemergency-intimidation-header",
+				"reportincident-nonemergency-intimidation-nextstep-default",
+				"reportincident-nonemergency-intimidation-nextstep-configured",
+				"reportincident-nonemergency-intimidation-nextstep-common",
+				"reportincident-nonemergency-helpmethod-default",
+				"reportincident-nonemergency-helpmethod-contactadmin",
+				"reportincident-nonemergency-helpmethod-email",
+				"reportincident-nonemergency-helpmethod-contactcommunity",
+				"reportincident-nonemergency-generic-nextstep-otheraction"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",

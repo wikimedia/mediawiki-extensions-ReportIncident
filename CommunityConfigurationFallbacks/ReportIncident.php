@@ -8,4 +8,14 @@ return (object) array(
    'ReportIncidentEnabledNamespaces' => 
   array (
   ),
+   'ReportIncident_NonEmergency_Intimidation' => 
+  (object) array(
+  ),
+   'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL' => '',
+   'ReportIncident_NonEmergency_Intimidation_HelpMethod' => 
+  (object) array(
+     'ContactAdmin' => '',
+     'Email' => '',
+     'ContactCommunity' => '',
+  ),
 );

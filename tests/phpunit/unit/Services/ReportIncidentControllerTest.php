@@ -39,6 +39,12 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentDisputeResolutionPage' => '',
 			'ReportIncidentCommunityQuestionsPage' => '',
 			'ReportIncidentEnabledNamespaces' => [],
+			'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL' => '',
+			'ReportIncident_NonEmergency_Intimidation_HelpMethod' => (object)[
+				'ContactAdmin' => '',
+				'Email' => '',
+				'ContactCommunity' => '',
+			],
 		];
 		return new ReportIncidentController(
 			new HashConfig( $globalConfig ),
@@ -200,6 +206,10 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
 				'wgReportIncidentUseV2NonEmergencyFlow' => true,
+				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
+				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -239,6 +249,10 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
 				'wgReportIncidentUseV2NonEmergencyFlow' => true,
+				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
+				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -315,6 +329,10 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
 				'wgReportIncidentUseV2NonEmergencyFlow' => true,
+				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
+				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
