@@ -5,7 +5,7 @@
 			"আফতাবুজ্জামান"
 		]
 	},
-	"reportincident-desc": "ব্যক্তিগত ঘটনা অভিযোগ ব্যবস্থা এক্সটেনশন।",
+	"reportincident-desc": "ঘটনার অভিযোগ ব্যবস্থা এক্সটেনশন।",
 	"reportincident-report-btn-label": "অভিযোগ করুন",
 	"reportincident-dialog-close-btn": "বন্ধ করুন",
 	"reportincident-dialog-back-btn": "পিছনে যান",
@@ -21,6 +21,7 @@
 	"reportincident-dialog-harassment-type-spam": "স্প্যাম",
 	"reportincident-dialog-harassment-type-trolling": "ট্রোলিং",
 	"reportincident-dialog-something-else-input-placeholder": "উপরে তালিকাভুক্ত নয় এমন আচরণগুলি উল্লেখ করুন।",
+	"reportincident-dialog-something-else-empty": "অনুগ্রহ করে আচরণের একটি সংক্ষিপ্ত বিবরণ প্রদান করুন।",
 	"reportincident-dialog-internet-disconnected-error": "মনে হচ্ছে আপনার ইন্টারনেট সংযোগ নেই। অনুগ্রহ করে আপনার সংযোগ ফিরে এলে পুনরায় জমা দেওয়ার চেষ্টা করুন।",
 	"reportincident-dialog-server-error": "দুঃখিত, মনে হচ্ছে আমাদের সার্ভার সাড়া দিচ্ছে না। অনুগ্রহ করে পুনরায় জমা দেওয়ার চেষ্টা করুন।",
 	"reportincident-dialog-generic-error": "{{GENDER:|আপনার}} অনুরোধ একটি ত্রুটির কারণে জমা দেওয়া যায়নি। অনুগ্রহ করে পুনরায় জমা দেওয়ার চেষ্টা করুন।",
@@ -37,7 +38,15 @@
 	"reportincident-choose-option": "একটি বিকল্প বেছে নিন",
 	"reportincident-dialog-cancel": "বাতিল",
 	"reportincident-dialog-continue": "অগ্রসর হোন",
+	"reportincident-physical-harm-footer": "{{GENDER:|আপনার}} প্রতিবেদনটি [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|গোপন থাকবে]] এবং পর্যালোচনার জন্য [[meta:Special:MyLanguage/Threats_of_harm|উইকিমিডিয়া ফাউন্ডেশনের ইমার্জেন্সি দলের]] কাছে পাঠানো হবে।",
+	"reportincident-threats-physical-harm": "শারীরিক ক্ষতির হুমকি",
+	"reportincident-threats-self-harm": "স্ব-ক্ষতির হুমকি",
+	"reportincident-threats-public-harm": "জনসাধারণের ক্ষতির হুমকি",
+	"reportincident-type-incident-required": "অনুগ্রহ করে ঘটনার ধরন নির্বাচন করুন",
+	"reportincident-behavior-required": "অনুগ্রহ করে অগ্রহণযোগ্য আচরণের ধরন নির্বাচন করুন",
+	"reportincident-threat-harm-required": "\"ক্ষতির হুমকি\" বিকল্পটি অবশ্যই প্রদান করতে হবে",
 	"reportincident-submit-emergency-section-important-title": "গুরুত্বপূর্ণ",
 	"reportincident-submit-emergency-section-next-title": "এরপর কি ঘটবে?",
+	"reportincident-submit-behavior-section-support-title": "এরপর কী করতে হবে",
 	"reportincident-submit-back-to-page": "$1-এ ফিরুন"
 }
