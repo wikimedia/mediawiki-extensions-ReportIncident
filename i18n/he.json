@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amire80"
+			"Amire80",
+			"YaronSh"
 		]
 	},
 	"reportincident-desc": "הרחבה למערכת דיווח תקריות.",
@@ -99,6 +100,6 @@
 	"communityconfiguration-reportincident-invalid-title": "הדף חייב להיות דף ויקי מקומי קיים.",
 	"reportincident-nonemergency-submitsuccess-title": "מידע על תמיכה",
 	"reportincident-nonemergency-nextsteps-header": "מה לעשות הלאה",
-	"reportincident-nonemergency-requesthelp-header": "איך לבקש עזרה?",
+	"reportincident-nonemergency-requesthelp-header": "איך לבקש עזרה",
 	"reportincident-nonemergency-other-header": "לא מצאת את מה שחיפשת?"
 }
