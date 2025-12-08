@@ -31,9 +31,12 @@
 	"reportincident-emaildialog-title": "যাচাইকৃত ইমেইল ঠিকানা প্রয়োজন",
 	"reportincident-emaildialog-close-button": "বাতিল",
 	"reportincident-emaildialog-primary": "সেটিংসে যান",
+	"reportincident-dialog-main-title": "আপনি কী করতে চান",
 	"reportincident-dialog-describe-the-incident-title": "ঘটনাটির বর্ণনা দিন",
 	"reportincident-type-nonemergency": "ব্যবহারকারীর অগ্রহণযোগ্য আচরণ",
+	"reportincident-nonemergency-help": "উত্যক্ত করা, হয়রানি করা, ব্যক্তিগত তথ্য ফাঁস করা, ট্রোলিং করা, বৈষম্যমূলক বিষয়বস্তু বা স্প্যাম",
 	"reportincident-type-emergency": "তাৎক্ষণিক শারীরিক ক্ষতির হুমকি",
+	"reportincident-type-emergency-help": "কোনও ব্যক্তির বিরুদ্ধে সহিংসতা সংঘটিত করার, নিজের ক্ষতি করার, অথবা ব্যাপক সহিংসতার কোনও কাজ করার ইচ্ছা পোষণ করা",
 	"reportincident-radio-header-nonemergency": "এই বিষয়ে সাহায্য পান:",
 	"reportincident-radio-header-emergency": "অভিযোগ করুন:",
 	"reportincident-choose-option": "একটি বিকল্প বেছে নিন",
@@ -49,5 +52,7 @@
 	"reportincident-submit-emergency-section-important-title": "গুরুত্বপূর্ণ",
 	"reportincident-submit-emergency-section-next-title": "এরপর কি ঘটবে?",
 	"reportincident-submit-behavior-section-support-title": "এরপর কী করতে হবে",
-	"reportincident-submit-back-to-page": "$1-এ ফিরুন"
+	"reportincident-submit-back-to-page": "$1-এ ফিরুন",
+	"reportincident-nonemergency-nextsteps-header": "এরপর কী করতে হবে",
+	"reportincident-nonemergency-other-header": "আপনি যা খুঁজছেন তা পাননি?"
 }
