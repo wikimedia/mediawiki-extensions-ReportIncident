@@ -44,63 +44,174 @@ describe( 'NonEmergencySubmitSuccessStepV2', () => {
 		jest.restoreAllMocks();
 	} );
 
-	it( 'renders the default page for intimidation non-emergency resolution', () => {
-		const wrapper = mount( {
-			incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-			inputBehavior: 'intimidation'
-		} );
-
-		const headers = wrapper.findAll( 'h3' ).map( ( h ) => h.text() );
-		expect( headers ).toEqual( [
-			'reportincident-nonemergency-nextsteps-header',
-			'reportincident-nonemergency-requesthelp-header',
-			'reportincident-nonemergency-other-header'
-		] );
-
-		const copy = wrapper.findAll( 'p, li' ).map( ( c ) => c.text() );
-		expect( copy ).toEqual( [
-			'reportincident-nonemergency-intimidation-header',
-			'reportincident-nonemergency-generic-description',
-			'reportincident-nonemergency-intimidation-nextstep-default',
-			'reportincident-nonemergency-helpmethod-default',
-			'reportincident-nonemergency-generic-nextstep-otheraction'
-		] );
-
-		expect( logEvent ).toHaveBeenCalledTimes( 1 );
-		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'get_support' } );
-	} );
-
-	it( 'renders the configured page for intimidation non-emergency resolution', () => {
-		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
-			switch ( key ) {
-				case 'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL':
-					return 'url';
-				case 'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin':
-					return 'foo';
-				case 'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail':
-					return 'bar';
-				case 'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity':
-					return 'baz';
-				default:
-					throw new Error( 'Unknown key: ' + key );
+	const defaultNonEmergencyPageCases = [
+		{
+			title: 'intimidation resolution',
+			config: {
+				inputBehavior: Constants.harassmentTypes.INTIMIDATION
+			},
+			expected: {
+				headers: [
+					'reportincident-nonemergency-nextsteps-header',
+					'reportincident-nonemergency-requesthelp-header',
+					'reportincident-nonemergency-other-header'
+				],
+				copy: [
+					'reportincident-nonemergency-intimidation-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-intimidation-nextstep-default',
+					'reportincident-nonemergency-helpmethod-default',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
 			}
-		} );
+		},
+		{
+			title: 'doxing resolution',
+			config: {
+				inputBehavior: Constants.harassmentTypes.DOXING
+			},
+			expected: {
+				headers: [
+					'reportincident-nonemergency-nextsteps-header',
+					'reportincident-nonemergency-requesthelp-header',
+					'reportincident-nonemergency-other-header'
+				],
+				copy: [
+					'reportincident-nonemergency-doxing-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-doxing-nextstep-default',
+					'reportincident-nonemergency-helpmethod-default',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		}
+	];
 
-		const wrapper = mount( {
-			incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-			inputBehavior: Constants.harassmentTypes.INTIMIDATION
-		} );
-		const copy = wrapper.findAll( 'p, li' ).map( ( c ) => c.text() );
-		expect( copy ).toEqual( [
-			'reportincident-nonemergency-intimidation-header',
-			'reportincident-nonemergency-generic-description',
-			'reportincident-nonemergency-intimidation-nextstep-configured',
-			'reportincident-nonemergency-helpmethod-contactadmin',
-			'reportincident-nonemergency-helpmethod-email',
-			'reportincident-nonemergency-helpmethod-contactcommunity',
-			'reportincident-nonemergency-generic-nextstep-otheraction'
-		] );
-	} );
+	it.each( defaultNonEmergencyPageCases )(
+		'renders the default page', ( { config, expected } ) => {
+			const wrapper = mount( {
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+				inputBehavior: config.inputBehavior
+			} );
+
+			const headers = wrapper.findAll( 'h3' ).map( ( h ) => h.text() );
+			expect( headers ).toEqual( expected.headers );
+
+			const copy = wrapper.findAll( 'p, li' ).map( ( c ) => c.text() );
+			expect( copy ).toEqual( expected.copy );
+
+			expect( logEvent ).toHaveBeenCalledTimes( 1 );
+			expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'get_support' } );
+		}
+	);
+
+	const configuredNonEmergencyPageCases = [
+		{
+			title: 'intimidation resolution, configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.INTIMIDATION,
+				get: {
+					wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL: 'url',
+					wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyIntimidationHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity: 'baz'
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-intimidation-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-intimidation-nextstep-configured',
+					'reportincident-nonemergency-helpmethod-contactadmin',
+					'reportincident-nonemergency-helpmethod-email',
+					'reportincident-nonemergency-helpmethod-contactcommunity',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'doxing resolution, show notice',
+			config: {
+				inputBehavior: Constants.harassmentTypes.DOXING,
+				get: {
+					wgReportIncidentNonEmergencyDoxingShowWarning: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-doxing-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-doxing-notice',
+					'reportincident-nonemergency-doxing-nextstep-default',
+					'reportincident-nonemergency-helpmethod-default',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'doxing resolution, hide notice',
+			config: {
+				inputBehavior: Constants.harassmentTypes.DOXING,
+				get: {
+					wgReportIncidentNonEmergencyDoxingShowWarning: false
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-doxing-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-doxing-nextstep-default',
+					'reportincident-nonemergency-helpmethod-default',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'doxing resolution, configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.DOXING,
+				get: {
+					wgReportIncidentNonEmergencyDoxingShowWarning: false,
+					wgReportIncidentNonEmergencyDoxingHideEditURL: 'url',
+					wgReportIncidentNonEmergencyDoxingHelpMethodWikiEmailURL: 'foo',
+					wgReportIncidentNonEmergencyDoxingHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL: 'baz',
+					wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-doxing-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-doxing-nextsteps-configured',
+					'reportincident-nonemergency-helpmethod-wikiemailurl',
+					'reportincident-nonemergency-helpmethod-email',
+					'reportincident-nonemergency-helpmethod-otherurl',
+					'reportincident-nonemergency-helpmethod-emailstewards',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		}
+	];
+
+	it.each( configuredNonEmergencyPageCases )(
+		'renders the configured page', ( { config, expected } ) => {
+			jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+				if ( key in config.get ) {
+					return config.get[ key ];
+				} else {
+					return null;
+				}
+			} );
+
+			const wrapper = mount( {
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+				inputBehavior: config.inputBehavior
+			} );
+			const copy = wrapper.findAll( 'p, li' ).map( ( c ) => c.text() );
+			expect( copy ).toEqual( expected.copy );
+		}
+	);
 
 	it( 'records interaction event for links in non-emergency flow', async () => {
 		// Manually mount instead of using mount() in order to overwrite global.$i18n

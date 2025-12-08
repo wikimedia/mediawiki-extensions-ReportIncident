@@ -67,8 +67,11 @@ module.exports = exports = {
 		// Pages that describe next steps for the non-emergency incident. The type
 		// should match up with what's defined in Constants.harassmentTypes.
 		// A page is described by an object with the following keys:
-		// descrption: an object, pass through the header (parsed message) and text (parsed message)
-		// notice (optional): TODO
+		// description: an object that summarizes the page; pass through the header (parsed
+		// message) and text (parsed message)
+		// notice (optional): an object that describes a notice displayed in a warning notice box;
+		// pass through the text (parsed message) and a boolean determining if the box should be
+		// displayed at all
 		// nextSteps: an array that describes messages to display in descending priority. When
 		// processed, it'll return the first valid message.
 		// helpMethods: an array that describes the possible contact methods. When processed, it'll
@@ -100,6 +103,47 @@ module.exports = exports = {
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
 					requiredParams: [ 'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' ]
+				}
+			],
+			helpMethodDefault: {
+				msgKey: 'reportincident-nonemergency-helpmethod-default'
+			}
+		};
+
+		pages[ Constants.harassmentTypes.DOXING ] = {
+			description: {
+				header: mw.msg( 'reportincident-nonemergency-doxing-header' ),
+				text: mw.msg( 'reportincident-nonemergency-generic-description' )
+			},
+			notice: {
+				text: mw.msg( 'reportincident-nonemergency-doxing-notice' ),
+				shouldDisplay: mw.config.get( 'wgReportIncidentNonEmergencyDoxingShowWarning' )
+			},
+			nextSteps: [
+				{
+					msgKey: 'reportincident-nonemergency-doxing-nextsteps-configured',
+					requiredParams: [ 'wgReportIncidentNonEmergencyDoxingHideEditURL' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-doxing-nextstep-default'
+				}
+			],
+			helpMethods: [
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-wikiemailurl',
+					requiredParams: [ 'wgReportIncidentNonEmergencyDoxingHelpMethodWikiEmailURL' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-email',
+					requiredParams: [ 'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-otherurl',
+					requiredParams: [ 'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-emailstewards',
+					requiredParams: [ 'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' ]
 				}
 			],
 			helpMethodDefault: {

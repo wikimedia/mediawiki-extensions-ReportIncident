@@ -45,6 +45,14 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'Email' => '',
 				'ContactCommunity' => '',
 			],
+			'ReportIncident_NonEmergency_Doxing_ShowWarning' => true,
+			'ReportIncident_NonEmergency_Doxing_HideEditURL' => '',
+			'ReportIncident_NonEmergency_Doxing_HelpMethod' => (object)[
+				'WikiEmailURL' => '',
+				'Email' => '',
+				'OtherURL' => '',
+				'EmailStewards' => false,
+			],
 		];
 		return new ReportIncidentController(
 			new HashConfig( $globalConfig ),
@@ -210,6 +218,12 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' => '',
+				'wgReportIncidentNonEmergencyDoxingShowWarning' => true,
+				'wgReportIncidentNonEmergencyDoxingHideEditURL' => '',
+				'wgReportIncidentNonEmergencyDoxingHelpMethodWikiEmailURL' => '',
+				'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' => '',
+				'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' => false,
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -253,6 +267,12 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' => '',
+				'wgReportIncidentNonEmergencyDoxingShowWarning' => true,
+				'wgReportIncidentNonEmergencyDoxingHideEditURL' => '',
+				'wgReportIncidentNonEmergencyDoxingHelpMethodWikiEmailURL' => '',
+				'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' => '',
+				'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' => false,
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -333,6 +353,12 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' => '',
+				'wgReportIncidentNonEmergencyDoxingShowWarning' => true,
+				'wgReportIncidentNonEmergencyDoxingHideEditURL' => '',
+				'wgReportIncidentNonEmergencyDoxingHelpMethodWikiEmailURL' => '',
+				'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' => '',
+				'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' => false,
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );

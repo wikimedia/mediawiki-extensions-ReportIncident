@@ -83,6 +83,8 @@ class ReportIncidentController {
 
 		$communityConfigIntimidationHelpMethods = $this->localConfig
 			->get( 'ReportIncident_NonEmergency_Intimidation_HelpMethod' );
+		$communityConfigDoxingHelpMethods = $this->localConfig
+			->get( 'ReportIncident_NonEmergency_Doxing_HelpMethod' );
 		$output->addJsConfigVars( [
 			// If in developer mode, pretend the user has a confirmed email if the query parameter is set to
 			// 'withconfirmedemail=1', otherwise use DB value.
@@ -110,6 +112,19 @@ class ReportIncidentController {
 				$communityConfigIntimidationHelpMethods->Email,
 			'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' =>
 				$communityConfigIntimidationHelpMethods->ContactCommunity,
+			'wgReportIncidentNonEmergencyDoxingShowWarning' =>
+				$this->localConfig->get( 'ReportIncident_NonEmergency_Doxing_ShowWarning' ),
+			'wgReportIncidentNonEmergencyDoxingHideEditURL' =>
+				$this->localConfig->get( 'ReportIncident_NonEmergency_Doxing_HideEditURL' ),
+			// For doxing help methods, disable all other configured methods if stewards email is enabled
+			'wgReportIncidentNonEmergencyDoxingHelpMethodWikiEmailURL' =>
+				$communityConfigDoxingHelpMethods->EmailStewards ? '' : $communityConfigDoxingHelpMethods->WikiEmailURL,
+			'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' =>
+				$communityConfigDoxingHelpMethods->EmailStewards ? '' : $communityConfigDoxingHelpMethods->Email,
+			'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' =>
+				$communityConfigDoxingHelpMethods->EmailStewards ? '' : $communityConfigDoxingHelpMethods->OtherURL,
+			'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' =>
+				$communityConfigDoxingHelpMethods->EmailStewards,
 		] );
 		// Add the ReportIncident module, including the JS and Vue code for the dialog.
 		$output->addModules( 'ext.reportIncident' );

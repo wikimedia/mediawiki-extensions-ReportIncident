@@ -298,7 +298,15 @@
 				"reportincident-nonemergency-helpmethod-contactadmin",
 				"reportincident-nonemergency-helpmethod-email",
 				"reportincident-nonemergency-helpmethod-contactcommunity",
-				"reportincident-nonemergency-generic-nextstep-otheraction"
+				"reportincident-nonemergency-generic-nextstep-otheraction",
+				"reportincident-nonemergency-doxing-header",
+				"reportincident-nonemergency-doxing-notice",
+				"reportincident-nonemergency-doxing-nextstep-default",
+				"reportincident-nonemergency-doxing-nextsteps-configured",
+				"reportincident-nonemergency-helpmethod-wikiemailurl",
+				"reportincident-nonemergency-helpmethod-email",
+				"reportincident-nonemergency-helpmethod-otherurl",
+				"reportincident-nonemergency-helpmethod-emailstewards"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",

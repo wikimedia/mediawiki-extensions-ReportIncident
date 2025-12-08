@@ -62,4 +62,41 @@ class ReportIncidentSchema extends JsonSchema {
 			],
 		],
 	];
+
+	// sub-header hack
+	public const ReportIncident_NonEmergency_Doxing = [
+		self::TYPE => self::TYPE_OBJECT,
+	];
+
+	public const ReportIncident_NonEmergency_Doxing_ShowWarning = [
+		self::TYPE => self::TYPE_BOOLEAN,
+		self::DEFAULT => true
+	];
+
+	public const ReportIncident_NonEmergency_Doxing_HideEditURL = [
+		self::TYPE => self::TYPE_STRING,
+		self::DEFAULT => ''
+	];
+
+	public const ReportIncident_NonEmergency_Doxing_HelpMethod = [
+		self::TYPE => self::TYPE_OBJECT,
+		self::PROPERTIES => [
+			'WikiEmailURL' => [
+				self::TYPE => self::TYPE_STRING,
+				self::DEFAULT => ''
+			],
+			'Email' => [
+				self::TYPE => self::TYPE_STRING,
+				self::DEFAULT => ''
+			],
+			'OtherURL' => [
+				self::TYPE => self::TYPE_STRING,
+				self::DEFAULT => ''
+			],
+			'EmailStewards' => [
+				self::TYPE => self::TYPE_BOOLEAN,
+				self::DEFAULT => false
+			],
+		],
+	];
 }

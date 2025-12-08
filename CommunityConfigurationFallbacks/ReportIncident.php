@@ -18,4 +18,16 @@ return (object) array(
      'Email' => '',
      'ContactCommunity' => '',
   ),
+   'ReportIncident_NonEmergency_Doxing' => 
+  (object) array(
+  ),
+   'ReportIncident_NonEmergency_Doxing_ShowWarning' => true,
+   'ReportIncident_NonEmergency_Doxing_HideEditURL' => '',
+   'ReportIncident_NonEmergency_Doxing_HelpMethod' => 
+  (object) array(
+     'WikiEmailURL' => '',
+     'Email' => '',
+     'OtherURL' => '',
+     'EmailStewards' => false,
+  ),
 );
