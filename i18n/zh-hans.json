@@ -4,6 +4,7 @@
 			"Diskdance",
 			"ExoHyper2026",
 			"Peterxy12",
+			"TeaSummer",
 			"沈澄心"
 		]
 	},
@@ -21,7 +22,7 @@
 	"reportincident-dialog-violator-placeholder-text": "{{GENDER:|您}}想要举报谁？",
 	"reportincident-dialog-harassment-type-doxing": "泄露私密个人信息（人肉搜索）",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "仇恨与歧视性内容",
-	"reportincident-dialog-harassment-type-intimidation": "欺凌、恐吓、威胁或反复侮辱",
+	"reportincident-dialog-harassment-type-intimidation": "欺凌、恐吓、威胁或侮辱",
 	"reportincident-dialog-harassment-type-sexual-harassment": "性骚扰",
 	"reportincident-dialog-harassment-type-something-else": "其他情況",
 	"reportincident-dialog-harassment-type-spam": "垃圾邮件或促销内容",
