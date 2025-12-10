@@ -180,6 +180,20 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-placeholder": "e.g. incidents@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
-	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "e.g. Project:Village pump"
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "e.g. Project:Village pump",
+	"reportincident-nonemergency-trolling-header": "Trolling or hounding (stalking)",
+	"reportincident-nonemergency-trolling-nextstep": "Trolling or hounding (stalking) occurring on-wiki is considered unacceptable behavior in the [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment official policy].",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling-label": "Trolling or hounding (stalking)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactadmin-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactadmin-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactadmin-placeholder": "e.g. Project:Administrators' noticeboard",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-email-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-email-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-email-placeholder": "e.g. incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-placeholder": "e.g. Project:Village pump"
 
 }

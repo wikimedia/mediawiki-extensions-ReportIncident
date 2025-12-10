@@ -39,4 +39,13 @@ return (object) array(
      'Email' => '',
      'ContactCommunity' => '',
   ),
+   'ReportIncident_NonEmergency_Trolling' => 
+  (object) array(
+  ),
+   'ReportIncident_NonEmergency_Trolling_HelpMethod' => 
+  (object) array(
+     'ContactAdmin' => '',
+     'Email' => '',
+     'ContactCommunity' => '',
+  ),
 );

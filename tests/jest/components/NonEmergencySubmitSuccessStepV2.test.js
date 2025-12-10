@@ -104,6 +104,26 @@ describe( 'NonEmergencySubmitSuccessStepV2', () => {
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
+		},
+		{
+			title: 'trolling resolution',
+			config: {
+				inputBehavior: Constants.harassmentTypes.TROLLING
+			},
+			expected: {
+				headers: [
+					'reportincident-nonemergency-nextsteps-header',
+					'reportincident-nonemergency-requesthelp-header',
+					'reportincident-nonemergency-other-header'
+				],
+				copy: [
+					'reportincident-nonemergency-trolling-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-trolling-nextstep',
+					'reportincident-nonemergency-helpmethod-default',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
 		}
 	];
 
@@ -227,6 +247,28 @@ describe( 'NonEmergencySubmitSuccessStepV2', () => {
 					'reportincident-nonemergency-sexualharassment-header',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-sexualharassment-nextstep',
+					'reportincident-nonemergency-helpmethod-contactadmin',
+					'reportincident-nonemergency-helpmethod-email',
+					'reportincident-nonemergency-helpmethod-contactcommunity',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'trolling resolution, configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.TROLLING,
+				get: {
+					wgReportIncidentNonEmergencyTrollingHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyTrollingHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencyTrollingHelpMethodContactCommunity: 'baz'
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-trolling-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-trolling-nextstep',
 					'reportincident-nonemergency-helpmethod-contactadmin',
 					'reportincident-nonemergency-helpmethod-email',
 					'reportincident-nonemergency-helpmethod-contactcommunity',

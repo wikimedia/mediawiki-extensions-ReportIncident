@@ -28,7 +28,7 @@ const Constants = {
 	// submit success page should use NonEmergencySubmitSuccessStepv2 or fall back to
 	// NonEmergencySubmitSuccessStep and should be deprecated when all wikis have been
 	// off-boarded from the legacy version.
-	v2NonEmergencySubmitSuccessPages: [ 'intimidation', 'doxing', 'sexual-harassment' ],
+	v2NonEmergencySubmitSuccessPages: [ 'intimidation', 'doxing', 'sexual-harassment', 'trolling' ],
 	/**
 	 * The number of Unicode codepoints accepted by textareas holding report details.
 	 */
