@@ -84,6 +84,26 @@ describe( 'NonEmergencySubmitSuccessStepV2', () => {
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
+		},
+		{
+			title: 'sexual harassment resolution',
+			config: {
+				inputBehavior: Constants.harassmentTypes.SEXUAL_HARASSMENT
+			},
+			expected: {
+				headers: [
+					'reportincident-nonemergency-nextsteps-header',
+					'reportincident-nonemergency-requesthelp-header',
+					'reportincident-nonemergency-other-header'
+				],
+				copy: [
+					'reportincident-nonemergency-sexualharassment-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-sexualharassment-nextstep',
+					'reportincident-nonemergency-helpmethod-default',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
 		}
 	];
 
@@ -188,6 +208,28 @@ describe( 'NonEmergencySubmitSuccessStepV2', () => {
 					'reportincident-nonemergency-helpmethod-email',
 					'reportincident-nonemergency-helpmethod-otherurl',
 					'reportincident-nonemergency-helpmethod-emailstewards',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'sexual harassment resolution, configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.SEXUAL_HARASSMENT,
+				get: {
+					wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity: 'baz'
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-sexualharassment-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-sexualharassment-nextstep',
+					'reportincident-nonemergency-helpmethod-contactadmin',
+					'reportincident-nonemergency-helpmethod-email',
+					'reportincident-nonemergency-helpmethod-contactcommunity',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}

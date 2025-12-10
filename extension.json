@@ -306,7 +306,9 @@
 				"reportincident-nonemergency-helpmethod-wikiemailurl",
 				"reportincident-nonemergency-helpmethod-email",
 				"reportincident-nonemergency-helpmethod-otherurl",
-				"reportincident-nonemergency-helpmethod-emailstewards"
+				"reportincident-nonemergency-helpmethod-emailstewards",
+				"reportincident-nonemergency-sexualharassment-header",
+				"reportincident-nonemergency-sexualharassment-nextstep"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",

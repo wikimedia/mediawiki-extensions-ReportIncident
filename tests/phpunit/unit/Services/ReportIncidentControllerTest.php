@@ -53,6 +53,11 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'OtherURL' => '',
 				'EmailStewards' => false,
 			],
+			'ReportIncident_NonEmergency_SexualHarassment_HelpMethod' => (object)[
+				'ContactAdmin' => '',
+				'Email' => '',
+				'ContactCommunity' => '',
+			],
 		];
 		return new ReportIncidentController(
 			new HashConfig( $globalConfig ),
@@ -224,6 +229,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' => '',
 				'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' => false,
+				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -273,6 +281,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' => '',
 				'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' => false,
+				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -359,6 +370,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' => '',
 				'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' => false,
+				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );

@@ -170,5 +170,19 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-label": "Label for a configurable option to toggle a help method",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-description": "Description for a configurable option to toggle a help method",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-control-label": "Checkbox label for a configurable option to toggle a help method",
-	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-help-text": "Additional help text for a configurable option to toggle a help method"
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-help-text": "Additional help text for a configurable option to toggle a help method",
+	"reportincident-nonemergency-sexualharassment-header": "Type of non-emergency incident",
+	"reportincident-nonemergency-sexualharassment-nextstep": "Suggested next step for this kind of non-emergency incident.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Header for a subsection on ReportIncident's CommunityConfiguration page",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-label": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-description": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactadmin-label": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactadmin-description": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactadmin-placeholder": "Placeholder for a configurable link to be used in a help contact method",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-label": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-description": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-placeholder": "Placeholder for a configurable email to be used in a help contact method",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-label": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-description": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "Placeholder for a configurable link to be used in a help contact method"
 }

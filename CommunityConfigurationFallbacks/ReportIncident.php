@@ -30,4 +30,13 @@ return (object) array(
      'OtherURL' => '',
      'EmailStewards' => false,
   ),
+   'ReportIncident_NonEmergency_SexualHarassment' => 
+  (object) array(
+  ),
+   'ReportIncident_NonEmergency_SexualHarassment_HelpMethod' => 
+  (object) array(
+     'ContactAdmin' => '',
+     'Email' => '',
+     'ContactCommunity' => '',
+  ),
 );

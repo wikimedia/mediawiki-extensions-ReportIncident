@@ -166,5 +166,20 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-label": "Email your request to Stewards (Global oversight request)",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-description": "Only use this method if your wiki does not have any users with the “supress” user right",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-control-label": "Show instruction to email stewards-oversight@wikimedia.org",
-	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-help-text": "Selecting this option will hide all other contact methods."
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-help-text": "Selecting this option will hide all other contact methods.",
+	"reportincident-nonemergency-sexualharassment-header": "Sexual harassment",
+	"reportincident-nonemergency-sexualharassment-nextstep": "Sexual harassment occurring on-wiki is considered unacceptable behavior in the [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment official policy].",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Sexual harassment",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactadmin-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactadmin-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactadmin-placeholder": "e.g. Project:Administrators' noticeboard",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-placeholder": "e.g. incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "e.g. Project:Village pump"
+
 }

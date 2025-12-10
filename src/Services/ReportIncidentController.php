@@ -85,6 +85,8 @@ class ReportIncidentController {
 			->get( 'ReportIncident_NonEmergency_Intimidation_HelpMethod' );
 		$communityConfigDoxingHelpMethods = $this->localConfig
 			->get( 'ReportIncident_NonEmergency_Doxing_HelpMethod' );
+		$communityConfigSexualHarassmentHelpMethods = $this->localConfig
+			->get( 'ReportIncident_NonEmergency_SexualHarassment_HelpMethod' );
 		$output->addJsConfigVars( [
 			// If in developer mode, pretend the user has a confirmed email if the query parameter is set to
 			// 'withconfirmedemail=1', otherwise use DB value.
@@ -125,6 +127,12 @@ class ReportIncidentController {
 				$communityConfigDoxingHelpMethods->EmailStewards ? '' : $communityConfigDoxingHelpMethods->OtherURL,
 			'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' =>
 				$communityConfigDoxingHelpMethods->EmailStewards,
+			'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin' =>
+				$communityConfigSexualHarassmentHelpMethods->ContactAdmin,
+			'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' =>
+				$communityConfigSexualHarassmentHelpMethods->Email,
+			'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity' =>
+				$communityConfigSexualHarassmentHelpMethods->ContactCommunity,
 		] );
 		// Add the ReportIncident module, including the JS and Vue code for the dialog.
 		$output->addModules( 'ext.reportIncident' );

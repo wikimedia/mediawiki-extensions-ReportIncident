@@ -151,6 +151,35 @@ module.exports = exports = {
 			}
 		};
 
+		pages[ Constants.harassmentTypes.SEXUAL_HARASSMENT ] = {
+			description: {
+				header: mw.msg( 'reportincident-nonemergency-sexualharassment-header' ),
+				text: mw.msg( 'reportincident-nonemergency-generic-description' )
+			},
+			nextSteps: [
+				{
+					msgKey: 'reportincident-nonemergency-sexualharassment-nextstep'
+				}
+			],
+			helpMethods: [
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-contactadmin',
+					requiredParams: [ 'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-email',
+					requiredParams: [ 'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
+					requiredParams: [ 'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity' ]
+				}
+			],
+			helpMethodDefault: {
+				msgKey: 'reportincident-nonemergency-helpmethod-default'
+			}
+		};
+
 		const page = pages[ behavior ];
 
 		// A message is considered valid if the requiredParams are found via mw.config.get()
