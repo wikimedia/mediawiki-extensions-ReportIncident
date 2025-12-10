@@ -383,7 +383,7 @@ describe( 'Report Incident Dialog', () => {
 			const validSubmitTestCases = {
 				'valid form data': {
 					initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
-					finalStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
+					finalStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2,
 					initialState: {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						inputBehavior: Constants.harassmentTypes.HATE_SPEECH,

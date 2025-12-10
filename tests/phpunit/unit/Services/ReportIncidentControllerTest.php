@@ -63,6 +63,10 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'Email' => '',
 				'ContactCommunity' => '',
 			],
+			'ReportIncident_NonEmergency_HateSpeech_HelpMethod' => (object)[
+				'ContactAdmin' => '',
+				'Email' => '',
+			],
 		];
 		return new ReportIncidentController(
 			new HashConfig( $globalConfig ),
@@ -240,6 +244,8 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyTrollingHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyTrollingHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyTrollingHelpMethodContactCommunity' => '',
+				'wgReportIncidentNonEmergencyHateSpeechHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencyHateSpeechHelpMethodEmail' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -295,6 +301,8 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyTrollingHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyTrollingHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyTrollingHelpMethodContactCommunity' => '',
+				'wgReportIncidentNonEmergencyHateSpeechHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencyHateSpeechHelpMethodEmail' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -387,6 +395,8 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyTrollingHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyTrollingHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyTrollingHelpMethodContactCommunity' => '',
+				'wgReportIncidentNonEmergencyHateSpeechHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencyHateSpeechHelpMethodEmail' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );

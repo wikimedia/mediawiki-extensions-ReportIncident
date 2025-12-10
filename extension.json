@@ -310,7 +310,9 @@
 				"reportincident-nonemergency-sexualharassment-header",
 				"reportincident-nonemergency-sexualharassment-nextstep",
 				"reportincident-nonemergency-trolling-header",
-				"reportincident-nonemergency-trolling-nextstep"
+				"reportincident-nonemergency-trolling-nextstep",
+				"reportincident-nonemergency-hatespeech-header",
+				"reportincident-nonemergency-hatespeech-nextstep"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",

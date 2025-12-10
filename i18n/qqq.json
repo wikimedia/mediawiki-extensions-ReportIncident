@@ -198,5 +198,16 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-email-placeholder": "Placeholder for a configurable email to be used in a help contact method",
 	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-label": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
 	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-description": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
-	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-placeholder": "Placeholder for a configurable link to be used in a help contact method"
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-placeholder": "Placeholder for a configurable link to be used in a help contact method",
+	"reportincident-nonemergency-hatespeech-header": "Type of non-emergency incident",
+	"reportincident-nonemergency-hatespeech-nextstep": "Suggested next step for this kind of non-emergency incident.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Header for a subsection on ReportIncident's CommunityConfiguration page",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-label": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-description": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-contactadmin-label": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-contactadmin-description": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-contactadmin-placeholder": "Placeholder for a configurable link to be used in a help contact method",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-label": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-description": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "Placeholder for a configurable email to be used in a help contact method"
 }

@@ -124,6 +124,26 @@ describe( 'NonEmergencySubmitSuccessStepV2', () => {
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
+		},
+		{
+			title: 'hate speech resolution',
+			config: {
+				inputBehavior: Constants.harassmentTypes.HATE_SPEECH
+			},
+			expected: {
+				headers: [
+					'reportincident-nonemergency-nextsteps-header',
+					'reportincident-nonemergency-requesthelp-header',
+					'reportincident-nonemergency-other-header'
+				],
+				copy: [
+					'reportincident-nonemergency-hatespeech-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-hatespeech-nextstep',
+					'reportincident-nonemergency-helpmethod-default',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
 		}
 	];
 
@@ -272,6 +292,26 @@ describe( 'NonEmergencySubmitSuccessStepV2', () => {
 					'reportincident-nonemergency-helpmethod-contactadmin',
 					'reportincident-nonemergency-helpmethod-email',
 					'reportincident-nonemergency-helpmethod-contactcommunity',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'hate speech resolution, configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
+				get: {
+					wgReportIncidentNonEmergencyHateSpeechHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyHateSpeechHelpMethodEmail: 'bar'
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-hatespeech-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-hatespeech-nextstep',
+					'reportincident-nonemergency-helpmethod-contactadmin',
+					'reportincident-nonemergency-helpmethod-email',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
