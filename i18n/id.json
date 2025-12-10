@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Felianiwiki"
+		]
+	},
+	"reportincident-dialog-harassment-type-intimidation": "Penindasan, intimidasi, ancaman atau penghinaan",
+	"reportincident-nonemergency-intimidation-header": "Penindasan, intimidasi, ancaman atau penghinaan",
+	"reportincident-nonemergency-intimidation-nextstep-common": "Jika Anda merasa aman melakukannya, Anda dapat mencoba berbicara dengan orang yang Anda permasalahkan di halaman pembicaraan pengguna mereka.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-label": "Halaman penyelesaian sengketa (opsional)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-description": "Tambahkan tautan untuk halaman penyelesaian sengketa",
+	"reportincident-nonemergency-helpmethod-default": "Untuk masalah yang terjadi di wiki, disarankan agar Anda menghubungi admin atau menggunakan papan pengumuman komunitas untuk mendapatkan bantuan terkait insiden yang mendesak dan sedang berlangsung.",
+	"reportincident-nonemergency-helpmethod-email": "Kirimkan keluhan Anda melalui surel ke [mailto: $1 $1 ]",
+	"reportincident-nonemergency-helpmethod-contactcommunity": "Jika Anda tidak yakin apa yang harus dilakukan, [[ $1 |minta bantuan komunitas]]",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label": "Cara meminta bantuan",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description": "Tambahkan setidaknya satu metode kontak untuk ditampilkan kepada pengguna",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-label": "Hubungi Admin untuk bantuan terkait insiden yang mendesak dan sedang berlangsung",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-label": "Kirimkan keluhan Anda melalui surel dengan alamat surel umum",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-description": "Tambahkan alamat surel yang harus dikirimi surel oleh pengguna",
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_helpmethod-email-placeholder": "Misalnya, incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label": "Jika Anda tidak yakin apa yang harus dilakukan, mintalah bantuan komunitas",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description": "Tambahkan tautan untuk halaman yang harus dituju pengguna",
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_helpmethod-contactcommunity-placeholder": "Contoh: Proyek: Warung Kopi",
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation-label": "Penindasan, intimidasi, ancaman atau penghinaan"
+}

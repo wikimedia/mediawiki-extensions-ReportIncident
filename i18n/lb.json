@@ -22,5 +22,6 @@
 	"reportincident-submit-emergency-section-important-title": "Wichteg",
 	"reportincident-submit-behavior-section-support-item-info-is-public": "All Ënnerhalungen op de Wikie sinn ëffentlech, deelt also wgl. keng perséinlech Informatioune mat.",
 	"reportincident-submit-back-to-page": "Zeréck op $1",
-	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Aktivéiert Nummraim"
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Aktivéiert Nummraim",
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_helpmethod-email-placeholder": "z.&nbsp;B. incidents@example.com"
 }
