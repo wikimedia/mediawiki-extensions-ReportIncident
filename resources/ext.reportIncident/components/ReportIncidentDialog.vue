@@ -181,8 +181,7 @@ module.exports = exports = {
 				currentStep.value = Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS;
 			} else {
 				if (
-					mw.config.get( 'wgReportIncidentUseV2NonEmergencyFlow' ) &&
-					Constants.v2NonEmergencySubmitSuccessPages.includes( store.inputBehavior )
+					mw.config.get( 'wgReportIncidentUseV2NonEmergencyFlow' )
 				) {
 					currentStep.value = Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2;
 				} else {

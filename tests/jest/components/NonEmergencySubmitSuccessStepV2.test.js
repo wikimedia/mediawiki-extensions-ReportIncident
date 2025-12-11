@@ -1,6 +1,9 @@
 'use strict';
 
 jest.mock( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
+jest.mock( '../../../resources/ext.reportIncident/components/icons.json', () => ( {
+	cdxIconUserGroup: ''
+} ), { virtual: true } );
 
 const NonEmergencySubmitSuccessStepV2 = require( '../../../resources/ext.reportIncident/components/NonEmergencySubmitSuccessStepV2.vue' ),
 	{ createTestingPinia } = require( '@pinia/testing' ),
@@ -160,6 +163,25 @@ describe( 'NonEmergencySubmitSuccessStepV2', () => {
 					'reportincident-nonemergency-spam-header',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-spam-nextstep-default',
+					'reportincident-nonemergency-helpmethod-default',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'other resolution',
+			config: {
+				inputBehavior: Constants.harassmentTypes.OTHER
+			},
+			expected: {
+				headers: [
+					'reportincident-nonemergency-nextsteps-header',
+					'reportincident-nonemergency-requesthelp-header',
+					'reportincident-nonemergency-other-header'
+				],
+				copy: [
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-other-nextstep-default',
 					'reportincident-nonemergency-helpmethod-default',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
@@ -353,6 +375,28 @@ describe( 'NonEmergencySubmitSuccessStepV2', () => {
 					'reportincident-nonemergency-spam-nextsteps-configured',
 					'reportincident-nonemergency-helpmethod-contactadmin',
 					'reportincident-nonemergency-helpmethod-email',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'other resolution, configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.OTHER,
+				get: {
+					wgReportIncidentNonEmergencyOtherDisputeResolutionURL: 'url',
+					wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyOtherHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity: 'baz'
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-other-nextstep-configured',
+					'reportincident-nonemergency-helpmethod-contactadmin',
+					'reportincident-nonemergency-helpmethod-email',
+					'reportincident-nonemergency-helpmethod-contactcommunity',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}

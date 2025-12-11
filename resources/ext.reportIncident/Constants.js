@@ -24,18 +24,6 @@ const Constants = {
 		TROLLING: 'trolling',
 		OTHER: 'something-else'
 	},
-	// Pages implemented by the v2 non-emergency workflow. This is used to check if the
-	// submit success page should use NonEmergencySubmitSuccessStepv2 or fall back to
-	// NonEmergencySubmitSuccessStep and should be deprecated when all wikis have been
-	// off-boarded from the legacy version.
-	v2NonEmergencySubmitSuccessPages: [
-		'intimidation',
-		'doxing',
-		'sexual-harassment',
-		'trolling',
-		'hate-or-discrimination',
-		'spam'
-	],
 	/**
 	 * The number of Unicode codepoints accepted by textareas holding report details.
 	 */

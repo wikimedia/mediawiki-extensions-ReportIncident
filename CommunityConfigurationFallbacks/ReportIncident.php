@@ -65,4 +65,14 @@ return (object) array(
      'ContactAdmin' => '',
      'Email' => '',
   ),
+   'ReportIncident_NonEmergency_Other' => 
+  (object) array(
+  ),
+   'ReportIncident_NonEmergency_Other_DisputeResolutionURL' => '',
+   'ReportIncident_NonEmergency_Other_HelpMethod' => 
+  (object) array(
+     'ContactAdmin' => '',
+     'Email' => '',
+     'ContactCommunity' => '',
+  ),
 );

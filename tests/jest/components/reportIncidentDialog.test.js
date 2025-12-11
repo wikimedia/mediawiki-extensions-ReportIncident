@@ -362,7 +362,7 @@ describe( 'Report Incident Dialog', () => {
 				expect( store.isFormValidForSubmission() ).toBe( true );
 
 				return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
-					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS );
+					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2 );
 					expect( wrapper.vm.footerErrorMessage ).toBe( '' );
 					expect( restPost ).toHaveBeenCalledWith(
 						'/reportincident/v0/report',
@@ -417,7 +417,7 @@ describe( 'Report Incident Dialog', () => {
 				},
 				'valid form data with "something else"': {
 					initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
-					finalStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
+					finalStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2,
 					initialState: {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						inputBehavior: Constants.harassmentTypes.OTHER,

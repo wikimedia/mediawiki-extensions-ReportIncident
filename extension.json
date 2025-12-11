@@ -316,7 +316,10 @@
 				"reportincident-nonemergency-spam-header",
 				"reportincident-nonemergency-spam-nextstep-default",
 				"reportincident-nonemergency-spam-nextsteps-configured",
-				"reportincident-nonemergency-spam-nextstep-common"
+				"reportincident-nonemergency-spam-nextstep-common",
+				"reportincident-nonemergency-other-nextstep-default",
+				"reportincident-nonemergency-other-nextstep-configured",
+				"reportincident-nonemergency-other-nextstep-common"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",

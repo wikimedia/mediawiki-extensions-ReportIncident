@@ -72,6 +72,12 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'ContactAdmin' => '',
 				'Email' => '',
 			],
+			'ReportIncident_NonEmergency_Other_DisputeResolutionURL' => '',
+			'ReportIncident_NonEmergency_Other_HelpMethod' => (object)[
+				'ContactAdmin' => '',
+				'Email' => '',
+				'ContactCommunity' => '',
+			],
 		];
 		return new ReportIncidentController(
 			new HashConfig( $globalConfig ),
@@ -254,6 +260,10 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencySpamSpamContentURL' => '',
 				'wgReportIncidentNonEmergencySpamHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencySpamHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyOtherDisputeResolutionURL' => '',
+				'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencyOtherHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -314,6 +324,10 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencySpamSpamContentURL' => '',
 				'wgReportIncidentNonEmergencySpamHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencySpamHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyOtherDisputeResolutionURL' => '',
+				'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencyOtherHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -411,6 +425,10 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencySpamSpamContentURL' => '',
 				'wgReportIncidentNonEmergencySpamHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencySpamHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyOtherDisputeResolutionURL' => '',
+				'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencyOtherHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );

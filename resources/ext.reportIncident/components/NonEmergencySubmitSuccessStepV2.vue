@@ -1,13 +1,17 @@
 <template>
 	<div v-if="page" ref="pageContent">
-		<cdx-message>
-			<p><strong>{{ page.description.header }}</strong></p>
+		<cdx-message :icon="icons.cdxIconUserGroup">
+			<p v-if="page.description.header">
+				<strong>{{ page.description.header }}</strong>
+			</p>
 			<p>{{ page.description.text }}</p>
 		</cdx-message>
 		<cdx-message v-if="page.notice && page.notice.shouldDisplay" type="warning">
 			<p>{{ page.notice.text }}</p>
 		</cdx-message>
-		<h3>{{ $i18n( 'reportincident-nonemergency-nextsteps-header' ).text() }}</h3>
+		<h3 class="ext-reportincident-dialog__submit-success-section-header">
+			{{ $i18n( 'reportincident-nonemergency-nextsteps-header' ).text() }}
+		</h3>
 		<!-- eslint-disable vue/no-v-html-->
 		<p
 			v-for="( paragraph, key ) in nextStepMsg"
@@ -15,7 +19,9 @@
 			v-html="paragraph"
 		></p>
 		<!-- eslint-enable vue/no-v-html-->
-		<h3>{{ $i18n( 'reportincident-nonemergency-requesthelp-header' ).text() }}</h3>
+		<h3 class="ext-reportincident-dialog__submit-success-section-header">
+			{{ $i18n( 'reportincident-nonemergency-requesthelp-header' ).text() }}
+		</h3>
 		<ul>
 			<!-- eslint-disable vue/no-v-html-->
 			<li
@@ -25,7 +31,9 @@
 			></li>
 			<!-- eslint-enable vue/no-v-html-->
 		</ul>
-		<h3>{{ $i18n( 'reportincident-nonemergency-other-header' ).text() }}</h3>
+		<h3 class="ext-reportincident-dialog__submit-success-section-header">
+			{{ $i18n( 'reportincident-nonemergency-other-header' ).text() }}
+		</h3>
 		<!-- eslint-disable vue/no-v-html-->
 		<p v-html="$i18n( 'reportincident-nonemergency-generic-nextstep-otheraction' ).parse()">
 		</p>
@@ -40,6 +48,7 @@ const useFormStore = require( '../stores/Form.js' );
 const Constants = require( '../Constants.js' );
 const { CdxMessage } = require( '@wikimedia/codex' );
 const useInstrument = require( '../composables/useInstrument.js' );
+const icons = require( '../components/icons.json' );
 
 // @vue/component
 module.exports = exports = {
@@ -263,6 +272,38 @@ module.exports = exports = {
 			}
 		};
 
+		pages[ Constants.harassmentTypes.OTHER ] = {
+			description: {
+				text: mw.msg( 'reportincident-nonemergency-generic-description' )
+			},
+			nextSteps: [
+				{
+					msgKey: 'reportincident-nonemergency-other-nextstep-configured',
+					requiredParams: [ 'wgReportIncidentNonEmergencyOtherDisputeResolutionURL' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-other-nextstep-default'
+				}
+			],
+			helpMethods: [
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-contactadmin',
+					requiredParams: [ 'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-email',
+					requiredParams: [ 'wgReportIncidentNonEmergencyOtherHelpMethodEmail' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
+					requiredParams: [ 'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' ]
+				}
+			],
+			helpMethodDefault: {
+				msgKey: 'reportincident-nonemergency-helpmethod-default'
+			}
+		};
+
 		const page = pages[ behavior ];
 
 		// A message is considered valid if the requiredParams are found via mw.config.get()
@@ -328,8 +369,15 @@ module.exports = exports = {
 			page,
 			pageContent,
 			nextStepMsg,
-			helpMethods
+			helpMethods,
+			icons
 		};
 	}
 };
 </script>
+
+<style lang="less">
+.ext-reportincident-dialog__submit-success-section-header {
+	font-size: 100%;
+}
+</style>

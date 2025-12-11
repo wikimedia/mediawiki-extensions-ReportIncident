@@ -93,6 +93,8 @@ class ReportIncidentController {
 			->get( 'ReportIncident_NonEmergency_HateSpeech_HelpMethod' );
 		$communityConfigSpamHelpMethods = $this->localConfig
 			->get( 'ReportIncident_NonEmergency_Spam_HelpMethod' );
+		$communityConfigOtherHelpMethods = $this->localConfig
+			->get( 'ReportIncident_NonEmergency_Other_HelpMethod' );
 		$output->addJsConfigVars( [
 			// If in developer mode, pretend the user has a confirmed email if the query parameter is set to
 			// 'withconfirmedemail=1', otherwise use DB value.
@@ -155,6 +157,14 @@ class ReportIncidentController {
 				$communityConfigSpamHelpMethods->ContactAdmin,
 			'wgReportIncidentNonEmergencySpamHelpMethodEmail' =>
 				$communityConfigSpamHelpMethods->Email,
+			'wgReportIncidentNonEmergencyOtherDisputeResolutionURL' =>
+				$this->localConfig->get( 'ReportIncident_NonEmergency_Other_DisputeResolutionURL' ),
+			'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' =>
+				$communityConfigOtherHelpMethods->ContactAdmin,
+			'wgReportIncidentNonEmergencyOtherHelpMethodEmail' =>
+				$communityConfigOtherHelpMethods->Email,
+			'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' =>
+				$communityConfigOtherHelpMethods->ContactCommunity,
 		] );
 		// Add the ReportIncident module, including the JS and Vue code for the dialog.
 		$output->addModules( 'ext.reportIncident' );
