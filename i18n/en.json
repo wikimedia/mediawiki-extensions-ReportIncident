@@ -205,5 +205,21 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-contactadmin-placeholder": "e.g. Project:Administrators' noticeboard",
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-label}}",
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-description}}",
-	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "e.g. incidents@example.com"
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "e.g. incidents@example.com",
+	"reportincident-nonemergency-spam-header": "Spam or promotional content",
+	"reportincident-nonemergency-spam-nextsteps-configured": "[[$1|Spam content]] is the inappropriate addition of content to Wikipedia with the intention of promoting an outside organization, individual or idea, and is considered harmful to the encyclopedia.\n\n{{int:reportincident-nonemergency-spam-nextstep-common}}",
+	"reportincident-nonemergency-spam-nextstep-default": "Spam content is the inappropriate addition of content to Wikipedia with the intention of promoting an outside organization, individual or idea, and is considered harmful to the encyclopedia.\n\n{{int:reportincident-nonemergency-spam-nextstep-common}}",
+	"reportincident-nonemergency-spam-nextstep-common": "If you find spam, please remove or rewrite the content.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam-label": "Spam or promotional content",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_spamcontenturl-label": "Spam or vandalism page (optional)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_spamcontenturl-description": "A link to a page defining on-wiki spam or vandalism. This might be your local policy page.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_spamcontenturl-placeholder": "e.g. Project:Spam",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-label": "How to report obvious spam",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-description": "Select at least one contact method to display to the user",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-label": "Contact an Admin to report active, obvious and persistent spammers",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-placeholder": "e.g. Project:Administrator intervention against vandalism",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "e.g. spam@example.com"
 }

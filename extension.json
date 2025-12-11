@@ -312,7 +312,11 @@
 				"reportincident-nonemergency-trolling-header",
 				"reportincident-nonemergency-trolling-nextstep",
 				"reportincident-nonemergency-hatespeech-header",
-				"reportincident-nonemergency-hatespeech-nextstep"
+				"reportincident-nonemergency-hatespeech-nextstep",
+				"reportincident-nonemergency-spam-header",
+				"reportincident-nonemergency-spam-nextstep-default",
+				"reportincident-nonemergency-spam-nextsteps-configured",
+				"reportincident-nonemergency-spam-nextstep-common"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",

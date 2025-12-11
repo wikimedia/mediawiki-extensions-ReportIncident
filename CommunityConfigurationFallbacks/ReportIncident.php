@@ -56,4 +56,13 @@ return (object) array(
      'ContactAdmin' => '',
      'Email' => '',
   ),
+   'ReportIncident_NonEmergency_Spam' => 
+  (object) array(
+  ),
+   'ReportIncident_NonEmergency_Spam_SpamContentURL' => '',
+   'ReportIncident_NonEmergency_Spam_HelpMethod' => 
+  (object) array(
+     'ContactAdmin' => '',
+     'Email' => '',
+  ),
 );

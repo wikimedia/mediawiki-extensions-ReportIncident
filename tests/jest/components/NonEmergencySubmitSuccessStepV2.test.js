@@ -144,6 +144,26 @@ describe( 'NonEmergencySubmitSuccessStepV2', () => {
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
+		},
+		{
+			title: 'spam resolution',
+			config: {
+				inputBehavior: Constants.harassmentTypes.SPAM
+			},
+			expected: {
+				headers: [
+					'reportincident-nonemergency-nextsteps-header',
+					'reportincident-nonemergency-requesthelp-header',
+					'reportincident-nonemergency-other-header'
+				],
+				copy: [
+					'reportincident-nonemergency-spam-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-spam-nextstep-default',
+					'reportincident-nonemergency-helpmethod-default',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
 		}
 	];
 
@@ -310,6 +330,27 @@ describe( 'NonEmergencySubmitSuccessStepV2', () => {
 					'reportincident-nonemergency-hatespeech-header',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-hatespeech-nextstep',
+					'reportincident-nonemergency-helpmethod-contactadmin',
+					'reportincident-nonemergency-helpmethod-email',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'spam resolution, configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.SPAM,
+				get: {
+					wgReportIncidentNonEmergencySpamSpamContentURL: 'url',
+					wgReportIncidentNonEmergencySpamHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencySpamHelpMethodEmail: 'bar'
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-spam-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-spam-nextsteps-configured',
 					'reportincident-nonemergency-helpmethod-contactadmin',
 					'reportincident-nonemergency-helpmethod-email',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
