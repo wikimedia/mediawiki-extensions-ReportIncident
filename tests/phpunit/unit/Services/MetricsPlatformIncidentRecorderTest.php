@@ -79,7 +79,8 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 	 */
 	public function testShouldRecordNonEmergencyReport(
 		?UserIdentity $reportedUser,
-		string $behaviorType
+		string $behaviorType,
+		?string $somethingElseDetails
 	): void {
 		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageReferenceValue::LOCAL );
 
@@ -95,7 +96,7 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 			IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR,
 			$behaviorType,
 			null,
-			null,
+			$somethingElseDetails,
 			'Details'
 		);
 
@@ -110,6 +111,13 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 			->willReturn( $performer );
 
 		$metricsClient = $this->createMock( MetricsClient::class );
+		$actionContext = [
+			'type' => $behaviorType,
+			'reportedUserId' => $reportedUser ? $reportedUser->getId() : null,
+		];
+		if ( $somethingElseDetails ) {
+			$actionContext['somethingElseDetails'] = substr( $somethingElseDetails, 0, 200 );
+		}
 		$metricsClient->expects( $this->once() )
 			->method( 'submitInteraction' )
 			->with(
@@ -118,17 +126,14 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 				'submit',
 				[
 					'action_source' => 'api',
-					'action_context' => json_encode( [
-						'type' => $behaviorType,
-						'reportedUserId' => $reportedUser ? $reportedUser->getId() : null,
-					] ),
+					'action_context' => json_encode( $actionContext ),
 				]
 			)
 			->willReturnCallback( function ( string $streamName, string $schema, string $action, array $event ) {
 				$this->assertLessThanOrEqual(
-					64,
+					320,
 					mb_strlen( $event['action_context'] ),
-					'Metrics Platform instruments only allow max. 64 characters in action_context'
+					'Metrics Platform instruments only allow max. 320 characters in action_context'
 				);
 			} );
 
@@ -151,9 +156,17 @@ class MetricsPlatformIncidentRecorderTest extends MediaWikiUnitTestCase {
 		// alongside a large user ID for the reported user.
 		$reportedUser = new UserIdentityValue( 17_000_000_000, 'Reported' );
 		foreach ( IncidentReport::behaviorTypes() as $behaviorType ) {
-			yield "behavior type \"$behaviorType\"" => [ $reportedUser, $behaviorType ];
+			yield "behavior type \"$behaviorType\"" => [ $reportedUser, $behaviorType, null ];
 		}
 
-		yield 'null reported user' => [ null, 'spam' ];
+		// test that the action context is passed through, even truncated
+		yield 'something else details' => [ $reportedUser, 'something-else', 'foo' ];
+		yield 'something else details, truncated' => [
+			$reportedUser,
+			'something-else',
+			bin2hex( random_bytes( 512 ) )
+		];
+
+		yield 'null reported user' => [ null, 'spam', null ];
 	}
 }

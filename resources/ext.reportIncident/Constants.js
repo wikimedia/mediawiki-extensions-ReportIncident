@@ -39,7 +39,11 @@ const Constants = {
 	/**
 	 * The number of Unicode codepoints accepted by textareas holding report details.
 	 */
-	detailsCodepointLimit: 1000
+	detailsCodepointLimit: 1000,
+	// When selecting "something else" in the non-emergency workflow, the user is prompted
+	// to add additional context which is then recorded via instrumentation, which limits
+	// the character length possible. Set this limit here.
+	somethingElseDetailsCodepointLimit: 200
 };
 
 module.exports = Constants;

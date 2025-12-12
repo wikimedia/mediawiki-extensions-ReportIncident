@@ -136,7 +136,7 @@ describe( 'useInstrument', () => {
 		const store = useFormStore();
 
 		logEvent( 'view', { context: 'test' } );
-		logEvent( 'view', { context: 'e'.repeat( 128 ) } );
+		logEvent( 'view', { context: 'e'.repeat( 512 ) } );
 
 		expect( submitInteraction ).toHaveBeenCalledTimes( 2 );
 		expect( submitInteraction ).toHaveBeenNthCalledWith( 1, 'view', {
@@ -147,7 +147,7 @@ describe( 'useInstrument', () => {
 		} );
 		expect( submitInteraction ).toHaveBeenNthCalledWith( 2, 'view', {
 			// eslint-disable-next-line camelcase
-			action_context: 'e'.repeat( 64 ),
+			action_context: 'e'.repeat( 200 ),
 			// eslint-disable-next-line camelcase
 			funnel_entry_token: store.funnelEntryToken
 		} );

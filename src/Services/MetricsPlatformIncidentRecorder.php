@@ -41,16 +41,22 @@ class MetricsPlatformIncidentRecorder implements IReportIncidentRecorder {
 
 		$client = $this->metricsClientFactory->newMetricsClient( $context );
 
+		$actionContext = [
+			'type' => $incidentReport->getBehaviorType(),
+			'reportedUserId' => $reportedUser ? $reportedUser->getId() : null,
+		];
+		$details = $incidentReport->getSomethingElseDetails();
+		if ( $details ) {
+			$actionContext['somethingElseDetails'] = substr( $details, 0, 200 );
+		}
+
 		$client->submitInteraction(
 			'mediawiki.product_metrics.incident_reporting_system_interaction',
 			'/analytics/product_metrics/web/base/1.3.0',
 			'submit',
 			[
 				'action_source' => 'api',
-				'action_context' => json_encode( [
-					'type' => $incidentReport->getBehaviorType(),
-					'reportedUserId' => $reportedUser ? $reportedUser->getId() : null,
-				] ),
+				'action_context' => json_encode( $actionContext ),
 			]
 		);
 
