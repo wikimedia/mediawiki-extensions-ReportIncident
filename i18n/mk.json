@@ -18,7 +18,7 @@
 	"reportincident-dialog-violator-placeholder-text": "Кого {{GENDER:|пријавувате}}?",
 	"reportincident-dialog-harassment-type-doxing": "Откривање на приватни лични информации (доксирање)",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Говор на омраза или дискриминација",
-	"reportincident-dialog-harassment-type-intimidation": "Заплашување, малтретирање, закани или постојани навреди",
+	"reportincident-dialog-harassment-type-intimidation": "Заплашување, малтретирање, закани или навреди",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Сексуално вознемирување",
 	"reportincident-dialog-harassment-type-something-else": "Нешто друго",
 	"reportincident-dialog-harassment-type-spam": "Спам или промотивни содржини",

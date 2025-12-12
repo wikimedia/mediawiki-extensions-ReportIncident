@@ -4,6 +4,7 @@
 			"Diskdance",
 			"ExoHyper2026",
 			"Peterxy12",
+			"Plana",
 			"TeaSummer",
 			"沈澄心"
 		]
@@ -98,5 +99,7 @@
 	"reportincident-nonemergency-submitsuccess-title": "支持信息",
 	"reportincident-nonemergency-nextsteps-header": "接下来做什么",
 	"reportincident-nonemergency-requesthelp-header": "如何请求帮助",
-	"reportincident-nonemergency-other-header": "找不到您要找的内容？"
+	"reportincident-nonemergency-other-header": "找不到您要找的内容？",
+	"reportincident-nonemergency-sexualharassment-header": "性骚扰",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "性骚扰"
 }

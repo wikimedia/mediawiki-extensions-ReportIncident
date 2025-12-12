@@ -153,5 +153,11 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-label": "Sorğunuzu stüardlara e-poçt göndərin (qlobal gizlətmə sorğusu)",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-description": "Bu metoddan yalnız vikinizdə \"gizlətmə\" istifadəçi hüququna malik heç bir istifadəçi yoxdursa istifadə edin",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-control-label": "stewards-oversight@wikimedia.org ünvanına yazmaq üçün təlimatları göstər",
-	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-help-text": "Bunu seçmək bütün digər əlaqə üsullarını gizlədəcək."
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-help-text": "Bunu seçmək bütün digər əlaqə üsullarını gizlədəcək.",
+	"reportincident-nonemergency-sexualharassment-header": "Cinsi zorakılıq",
+	"reportincident-nonemergency-sexualharassment-nextstep": "Vikipediyada baş verən cinsi zorakılıq [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment rəsmi siyasətdə] qəbuledilməz davranış hesab olunur.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Cinsi zorakılıq",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactadmin-placeholder": "məsələn, Layihə:İnzibatçılara müraciət",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-placeholder": "məsələn, incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "məsələn, Layihə:Kənd meydanı"
 }

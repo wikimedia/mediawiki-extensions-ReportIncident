@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Cigaryno",
-			"Meno25"
+			"Meno25",
+			"Mohammed Qays"
 		]
 	},
 	"reportincident-desc": "تمديد نظام الإبلاغ عن الحوادث.",
@@ -68,5 +69,8 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "صفحة ويكي حيث يمكن للمستخدمين العثور على معلومات حول حل النزاعات على الويكي.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "مساحات الأسماء الممكّنة",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "المساحات الأسماء حيث تم تمكين نظام الإبلاغ عن الحوادث.",
-	"communityconfiguration-reportincident-invalid-title": "يجب أن تكون الصفحة صفحة ويكي محلية موجودة."
+	"communityconfiguration-reportincident-invalid-title": "يجب أن تكون الصفحة صفحة ويكي محلية موجودة.",
+	"reportincident-nonemergency-helpmethod-wikiemailurl": "أرسل طلبك عبر [[$1|البريد الإلكتروني]] باستخدام حساب ويكيبيديا الخاص بك.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-placeholder": "مثل oversight@en-wpwikipedia.org",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-placeholder": "مثل incidents@example.com"
 }

@@ -160,5 +160,16 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Sexuelle Belästigung",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactadmin-placeholder": "z. B. Projekt:Administratoren-Schwarzes Brett",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-placeholder": "z. B. incidents@example.com",
-	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "z. B. Projekt:Dorfpumpe"
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "z. B. Projekt:Dorfpumpe",
+	"reportincident-nonemergency-trolling-header": "Trollen oder Verfolgen (Stalking)",
+	"reportincident-nonemergency-trolling-nextstep": "Trolling oder Verfolgung (Stalking) im Wiki wird in der [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment offiziellen Richtlinie] als inakzeptabel angesehen.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling-label": "Trollen oder Verfolgen (Stalking)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactadmin-placeholder": "z.B. Projekt:Administratoren",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-email-placeholder": "z.B. incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-placeholder": "Beispiel: Projekt:Dorfpumpe",
+	"reportincident-nonemergency-hatespeech-header": "Hasserfüllter und diskriminierender Inhalt",
+	"reportincident-nonemergency-hatespeech-nextstep": "Hasserfüllte oder diskriminierende Inhalte auf der Wiki-Seite gelten gemäß der [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_%E2%80%93_Content_vandalism_and_abuse_of_the_projects offiziellen Richtlinie] als inakzeptables Verhalten.\n\nWenn du dich dabei sicher fühlst, kannst du versuchen, mit der Person auf ihrer Benutzerdiskussionsseite zu sprechen. Erinnere sie an die [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_%E2%80%93_Content_vandalism_and_abuse_of_the_projects offizielle Richtlinie] und weise sie darauf hin, dass ihr Verhalten zu einer vorübergehenden Sperre für Bearbeitungen führen kann.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Hasserfüllter und diskriminierender Inhalt",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-contactadmin-placeholder": "z.B. Projekt:Administratoren",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "z.B. incidents@example.com"
 }

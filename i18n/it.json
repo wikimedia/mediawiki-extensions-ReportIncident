@@ -24,5 +24,7 @@
 	"reportincident-nonemergency-submitsuccess-title": "Assistenza",
 	"reportincident-nonemergency-nextsteps-header": "Cosa faccio ora?",
 	"reportincident-nonemergency-requesthelp-header": "Come chiedere aiuto",
-	"reportincident-nonemergency-other-header": "Non riesci a trovare ciò che cerchi?"
+	"reportincident-nonemergency-other-header": "Non riesci a trovare ciò che cerchi?",
+	"reportincident-nonemergency-sexualharassment-header": "Molestie sessuali",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Molestie sessuali"
 }

@@ -152,5 +152,11 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-label": "Envía a túa solicitude por correo electrónico aos stewards (solicitude de supresión global)",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-description": "Usa este método unicamente se o teu wiki non ten ningún usuario co dereito de usuario «suprimir».",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-control-label": "Mostrar as instrucións para enviar un correo electrónico a stewards-oversight@wikimedia.org",
-	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-help-text": "Ao seleccionar esta opción, agocharanse os demais métodos de contacto."
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-help-text": "Ao seleccionar esta opción, agocharanse os demais métodos de contacto.",
+	"reportincident-nonemergency-sexualharassment-header": "Acoso sexual",
+	"reportincident-nonemergency-sexualharassment-nextstep": "O acoso sexual que se produce no wiki considérase un comportamento inaceptable segundo as [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment normas oficiais].",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Acoso sexual",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactadmin-placeholder": "por exemplo, Proxecto:Taboleiro dos administradores",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-placeholder": "por exemplo, incidentes@exemplo.gal",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "por exemplo, Proxecto:A Taberna"
 }
