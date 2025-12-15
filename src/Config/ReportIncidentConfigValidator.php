@@ -125,6 +125,128 @@ class ReportIncidentConfigValidator implements IValidator {
 			}
 		}
 
+		// Non-emergency v2 configuration options
+		$wikiPages = [
+			'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL',
+			[ 'ReportIncident_NonEmergency_Intimidation_HelpMethod', 'ContactAdmin' ],
+			[ 'ReportIncident_NonEmergency_Intimidation_HelpMethod', 'ContactCommunity' ],
+			'ReportIncident_NonEmergency_Doxing_HideEditURL',
+			[ 'ReportIncident_NonEmergency_Doxing_HelpMethod', 'WikiEmailURL' ],
+			[ 'ReportIncident_NonEmergency_Doxing_HelpMethod', 'OtherURL' ],
+			[ 'ReportIncident_NonEmergency_SexualHarassment_HelpMethod', 'ContactAdmin' ],
+			[ 'ReportIncident_NonEmergency_SexualHarassment_HelpMethod', 'ContactCommunity' ],
+			[ 'ReportIncident_NonEmergency_Trolling_HelpMethod', 'ContactAdmin' ],
+			[ 'ReportIncident_NonEmergency_Trolling_HelpMethod', 'ContactCommunity' ],
+			[ 'ReportIncident_NonEmergency_HateSpeech_HelpMethod', 'ContactAdmin' ],
+			'ReportIncident_NonEmergency_Spam_SpamContentURL',
+			[ 'ReportIncident_NonEmergency_Spam_HelpMethod', 'ContactAdmin' ],
+			'ReportIncident_NonEmergency_Other_DisputeResolutionURL',
+			[ 'ReportIncident_NonEmergency_Other_HelpMethod', 'ContactAdmin' ],
+			[ 'ReportIncident_NonEmergency_Other_HelpMethod', 'ContactCommunity' ],
+		];
+		foreach ( $wikiPages as $key ) {
+			try {
+				// If key is an array, it represents a nested value
+				if ( is_array( $key ) ) {
+					$value = $config;
+					foreach ( $key as $singleKey ) {
+						$value = $value->$singleKey ?? '';
+					}
+
+					// Convert key into a string so that it can be displayed in the error
+					$key = implode( '_', $key );
+				} else {
+					// Treat an empty string value as if the value was not set.
+					$value = $config->$key ?? '';
+				}
+				if ( $value === '' ) {
+					continue;
+				}
+
+				$title = $this->titleParser->parseTitle( $value );
+
+				if ( $title->isExternal() ) {
+					continue;
+				}
+
+				if ( $title->getNamespace() <= NS_SPECIAL ) {
+					$status->addFatal(
+						$key,
+						"/$key",
+						$this->context->msg( 'communityconfiguration-reportincident-invalid-title' )->text()
+					);
+					continue;
+				}
+
+				$page = $this->pageLookup->getPageForLink( $title );
+				if ( !$page->exists() ) {
+					$status->addFatal(
+						$key,
+						"/$key",
+						$this->context->msg( 'communityconfiguration-reportincident-invalid-title' )->text()
+					);
+				}
+			} catch ( MalformedTitleException $e ) {
+				$status->addFatal(
+					$key,
+					"/$key",
+					$this->context->msg( $e->getMessageObject() )->text()
+				);
+			}
+		}
+
+		$emails = [
+			[ 'ReportIncident_NonEmergency_Intimidation_HelpMethod', 'Email' ],
+			[ 'ReportIncident_NonEmergency_Doxing_HelpMethod', 'Email' ],
+			[ 'ReportIncident_NonEmergency_SexualHarassment_HelpMethod', 'Email' ],
+			[ 'ReportIncident_NonEmergency_Trolling_HelpMethod', 'Email' ],
+			[ 'ReportIncident_NonEmergency_HateSpeech_HelpMethod', 'Email' ],
+			[ 'ReportIncident_NonEmergency_Spam_HelpMethod', 'Email' ],
+			[ 'ReportIncident_NonEmergency_Other_HelpMethod', 'Email' ],
+		];
+		foreach ( $emails as $key ) {
+			// If key is an array, it represents a nested value
+			if ( is_array( $key ) ) {
+				$value = $config;
+				foreach ( $key as $singleKey ) {
+					$value = $value->$singleKey ?? '';
+				}
+
+				// Convert key into a string so that it can be displayed in the error
+				$key = implode( '_', $key );
+			} else {
+				// Treat an empty string value as if the value was not set.
+				$value = $config->$key ?? '';
+			}
+			if ( $value === '' ) {
+				continue;
+			}
+
+			// Taken from Parser's Sanitizer::validateEmail
+			// Please note strings below are enclosed in brackets [], this make the
+			// hyphen "-" a range indicator. Hence it is double backslashed below.
+			// See T28948
+			$rfc5322_atext = "a-z0-9!#$%&'*+\\-\/=?^_`{|}~";
+			$rfc1034_ldh_str = "a-z0-9\\-";
+			$html5_email_regexp = "/
+			^                      # start of string
+			[$rfc5322_atext\\.]+    # user part which is liberal :p
+			@                      # 'apostrophe'
+			[$rfc1034_ldh_str]+       # First domain part
+			(\\.[$rfc1034_ldh_str]+)*  # Following part prefixed with a dot
+			$                      # End of string
+			/ix";
+			// ^ case Insensitive, eXtended
+			if ( !(bool)preg_match( $html5_email_regexp, $value ) ) {
+				$status->addFatal(
+					$key,
+					"/$key",
+					$this->context->msg( 'communityconfiguration-reportincident-invalid-email' )->text()
+				);
+			}
+			continue;
+		}
+
 		return $status;
 	}
 
