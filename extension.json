@@ -110,7 +110,7 @@
 			"description": "Custom subject line to use in Zendesk requests created for emergency reports."
 		},
 		"ReportIncidentUseV2NonEmergencyFlow": {
-			"value": true,
+			"value": false,
 			"description": "Whether to use the v2 nonemergency workflow instead of the legacy unacceptable behavior workflow"
 		}
 	},
