@@ -23,5 +23,7 @@
 	"reportincident-submit-behavior-section-support-item-info-is-public": "All Ënnerhalungen op de Wikie sinn ëffentlech, deelt also wgl. keng perséinlech Informatioune mat.",
 	"reportincident-submit-back-to-page": "Zeréck op $1",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Aktivéiert Nummraim",
-	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_helpmethod-email-placeholder": "z.&nbsp;B. incidents@example.com"
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_helpmethod-email-placeholder": "z.&nbsp;B. incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Sexuell Belästegung",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-placeholder": "z.&nbsp;B. Wikipedia:De Stamminee"
 }

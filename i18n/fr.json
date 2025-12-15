@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Asteralee",
 			"BlueCamille",
 			"Gomoko",
 			"JLTRY",
@@ -26,7 +27,7 @@
 	"reportincident-dialog-violator-placeholder-text": "Qui signalez-{{GENDER:|vous}} ?",
 	"reportincident-dialog-harassment-type-doxing": "Révélation d'informations personnelles privées (doxing en anglais)",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Discours de haine ou discrimination",
-	"reportincident-dialog-harassment-type-intimidation": "Harcèlement, intimidation ou insultes répétées",
+	"reportincident-dialog-harassment-type-intimidation": "Harcèlement, intimidation ou insultes",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Harcèlement sexuel",
 	"reportincident-dialog-harassment-type-something-else": "Quelque chose d’autre",
 	"reportincident-dialog-harassment-type-spam": "Spam",
@@ -100,5 +101,7 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Une page wiki où les utilisateurs peuvent trouver des informations sur la résolution des conflits sur le wiki.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Espaces de nom autorisés",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Espaces de noms où le système de signalement d’incidents est activé.",
-	"communityconfiguration-reportincident-invalid-title": "La page doit exister sur le wiki local."
+	"communityconfiguration-reportincident-invalid-title": "La page doit exister sur le wiki local.",
+	"reportincident-nonemergency-sexualharassment-header": "Harcèlement sexuel",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Harcèlement sexuel"
 }

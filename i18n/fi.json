@@ -144,9 +144,20 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-control-label": "Näytä ohje lähettää sähköpostia osoitteeseen stewards-oversight@wikimedia.org",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-emailstewards-help-text": "Tämän asetuksen valitseminen piilottaa kaikki muut yhteydenottotavat.",
 	"reportincident-nonemergency-sexualharassment-header": "Seksuaalinen häirintä",
-	"reportincident-nonemergency-sexualharassment-nextstep": "Wikissä tapahtuva seksuaalinen häirintää pidetään ei-hyväksyttävänä käytöksenä [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment virallisen käytännön] nojalla.",
+	"reportincident-nonemergency-sexualharassment-nextstep": "Wikissä tapahtuvaa seksuaalinen häirintää pidetään ei-hyväksyttävänä käytöksenä [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment virallisen käytännön] nojalla.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Seksuaalinen häirintä",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactadmin-placeholder": "esim. Projekti:Ylläpitäjien ilmoitustaulu",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-placeholder": "esim. ylläpitäjät@esimerkki.fi",
-	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "esim. Projekti:Kahvihuone"
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "esim. Projekti:Kahvihuone",
+	"reportincident-nonemergency-trolling-header": "Trollaus tai vainoaminen (stalkkaus)",
+	"reportincident-nonemergency-trolling-nextstep": "Wikissä tapahtuvaa trollausta tai vainoamista (stalkkaus) pidetään ei-hyväksyttävänä käytöksenä [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment virallisen käytännön] nojalla.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling-label": "Trollaus tai vainoaminen (stalkkaus)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactadmin-placeholder": "esim. Projekti:Ylläpitäjien ilmoitustaulu",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-email-placeholder": "esim. ylläpitäjät@esimerkki.fi",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-placeholder": "esim. Projekti:Kahvihuone",
+	"reportincident-nonemergency-hatespeech-header": "Vihamielinen tai syrjivä sisältö",
+	"reportincident-nonemergency-hatespeech-nextstep": "Wikissä tapahtuvaa vihamielistä tai syrjivää käytöstä pidetään ei-hyväksyttävänä käytöksenä [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment virallisen käytännön] nojalla.\n\nVoit yrittää keskustella kyseisen käyttäjän kanssa hänen keskustelusivullaan, jos se tuntuu sinusta turvalliselta. Muistuta häntä [https\n://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_%E2%80%93_Content_vandalism_and_abuse_of_the_projects virallisesta käytännöstä] ja kerro, että hänen käytöksensä saattaa johtaa muokkausoikeuksien väliaikaiseen menettämiseen.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Vihamielinen ja syrjivä sisältö",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-contactadmin-placeholder": "esim. Projekti:Ylläpitäjien ilmoitustaulu",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "esim. ylläpitäjät@esimerkki.fi"
 }

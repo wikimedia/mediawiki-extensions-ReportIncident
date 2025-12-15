@@ -158,5 +158,16 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Acoso sexual",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactadmin-placeholder": "por exemplo, Proxecto:Taboleiro dos administradores",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-placeholder": "por exemplo, incidentes@exemplo.gal",
-	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "por exemplo, Proxecto:A Taberna"
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "por exemplo, Proxecto:A Taberna",
+	"reportincident-nonemergency-trolling-header": "Trol ou espreita",
+	"reportincident-nonemergency-trolling-nextstep": "Os casos de trol ou espreita que se producen no wiki considéranse un comportamento inaceptable segundo as [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment normas oficiais].",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling-label": "Trol ou espreita",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactadmin-placeholder": "por exemplo, Proxecto:Taboleiro dos administradores",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-email-placeholder": "por exemplo, incidentes@exemplo.gal",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-placeholder": "por exemplo, Proxecto:A Taberna",
+	"reportincident-nonemergency-hatespeech-header": "Contido de odio ou discriminatorio",
+	"reportincident-nonemergency-hatespeech-nextstep": "O contido de odio ou discriminatorio que se produce no wiki considérase un comportamento inaceptable segundo as [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_%E2%80%93_Content_vandalism_and_abuse_of_the_projects normas oficiais].\n\nSe sentes que é seguro facelo, podes intentar falar coa persoa na súa páxina de conversa. Lémbralle a [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_%E2%80%93_Content_vandalism_and_abuse_of_the_projects política oficial] e faille saber de que o seu comportamento podería levar a unha prohibición temporal de edición.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Contido de odio ou discriminatorio",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-contactadmin-placeholder": "por exemplo, Proxecto:Taboleiro dos administradores",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "por exemplo, incidentes@exemplo.gal"
 }

@@ -26,5 +26,7 @@
 	"reportincident-nonemergency-requesthelp-header": "Come chiedere aiuto",
 	"reportincident-nonemergency-other-header": "Non riesci a trovare ciò che cerchi?",
 	"reportincident-nonemergency-sexualharassment-header": "Molestie sessuali",
-	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Molestie sessuali"
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Molestie sessuali",
+	"reportincident-nonemergency-hatespeech-header": "Contenuti odiosi o discriminatori",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Contenuti odiosi o discriminatori"
 }

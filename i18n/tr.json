@@ -19,7 +19,7 @@
 	"reportincident-dialog-violator-label": "Bildirmek {{GENDER:|istediğiniz}} kullanıcı",
 	"reportincident-dialog-violator-placeholder-text": "Kimi bildiriyorsunuz?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Nefret söylemi ve ayrımcılık içeren içerik",
-	"reportincident-dialog-harassment-type-intimidation": "Zorbalık, sindirme, tehdit veya tekrar eden hakaretler",
+	"reportincident-dialog-harassment-type-intimidation": "Zorbalık, yıldırma, tehdit veya hakaret",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Cinsel taciz",
 	"reportincident-dialog-harassment-type-something-else": "Başka bir şey",
 	"reportincident-dialog-harassment-type-spam": "Spam veya reklam içeriği",

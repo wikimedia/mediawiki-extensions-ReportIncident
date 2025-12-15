@@ -159,5 +159,16 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Cinsi zorakılıq",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactadmin-placeholder": "məsələn, Layihə:İnzibatçılara müraciət",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-placeholder": "məsələn, incidents@example.com",
-	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "məsələn, Layihə:Kənd meydanı"
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-contactcommunity-placeholder": "məsələn, Layihə:Kənd meydanı",
+	"reportincident-nonemergency-trolling-header": "Trollinq və ya təqib etmə (stalk)",
+	"reportincident-nonemergency-trolling-nextstep": "Vikipediyada baş verən troll və ya təqib (izləmə) [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment rəsmi siyasətdə] qəbuledilməz davranış hesab olunur.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling-label": "Trollinq və ya təqib etmə (stalk)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactadmin-placeholder": "məsələn, Layihə:İnzibatçılara müraciət",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-email-placeholder": "məsələn, incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-placeholder": "məsələn, Layihə:Kənd meydanı",
+	"reportincident-nonemergency-hatespeech-header": "Nifrət və diskriminasiyadan ibarət məzmun",
+	"reportincident-nonemergency-hatespeech-nextstep": "Vikipediyada yer alan nifrət dolu və ya ayrı-seçkilik xarakterli məzmun [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_ %E2% 80%93_Content_vandalism_and_abuse_of_the_projects rəsmi siyasətdə] qəbuledilməz davranış hesab olunur.\n\nİstəyirsinizsə müzakirə səhifəsi vasitəsilə şəxslə danışmağa cəhd edə bilərsiniz. Ona [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_ %E2% 80%93_Content_vandalism_and_abuse_of_the_projects rəsmi siyasəti] xatırladın və davranışlarının müvəqqəti olaraq redaktə blokuna səbəb ola biləcəyini bildirin.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Nifrət və diskriminasiyadan ibarət məzmun",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-contactadmin-placeholder": "məsələn, Layihə:İnzibatçılara müraciət",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "məsələn, incidents@example.com"
 }
