@@ -170,5 +170,18 @@
 	"reportincident-nonemergency-hatespeech-nextstep": "Vikipediyada yer alan nifrət dolu və ya ayrı-seçkilik xarakterli məzmun [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_ %E2% 80%93_Content_vandalism_and_abuse_of_the_projects rəsmi siyasətdə] qəbuledilməz davranış hesab olunur.\n\nİstəyirsinizsə müzakirə səhifəsi vasitəsilə şəxslə danışmağa cəhd edə bilərsiniz. Ona [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_ %E2% 80%93_Content_vandalism_and_abuse_of_the_projects rəsmi siyasəti] xatırladın və davranışlarının müvəqqəti olaraq redaktə blokuna səbəb ola biləcəyini bildirin.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Nifrət və diskriminasiyadan ibarət məzmun",
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-contactadmin-placeholder": "məsələn, Layihə:İnzibatçılara müraciət",
-	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "məsələn, incidents@example.com"
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "məsələn, incidents@example.com",
+	"reportincident-nonemergency-spam-header": "Spam və reklam məzmunu",
+	"reportincident-nonemergency-spam-nextsteps-configured": "[[$1|Spam]], kənar təşkilatı, fərdi və ya ideyanı təşviq etmək məqsədi ilə Vikipediyaya uyğunsuz məzmun əlavə etməkdir və ensiklopediya üçün zərərli hesab olunur.\n\n{{int:reportincident-nonemergency-spam-nextstep-common}}",
+	"reportincident-nonemergency-spam-nextstep-default": "Spam, kənar təşkilatı, fərdi və ya ideyanı təşviq etmək məqsədi ilə Vikipediyaya uyğunsuz məzmun əlavə etməkdir və ensiklopediya üçün zərərli hesab olunur.\n\n{{int:reportincident-nonemergency-spam-nextstep-common}}",
+	"reportincident-nonemergency-spam-nextstep-common": "Spam aşkar etmisinizsə, zəhmət olmasa, məzmunu silin və ya yenidən yazın.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam-label": "Spam və reklam məzmunu",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_spamcontenturl-label": "Spam və ya vandalizm səhifəsi (məcburi deyil)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_spamcontenturl-description": "Vikipediyadakı spam və ya vandalizmi müəyyən edən səhifəyə keçid. Bu, sizin lokal siyasət səhifəniz ola bilər.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_spamcontenturl-placeholder": "məs. Layihə:Spam",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-label": "Spam barədə necə məlumat vermək olar",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-description": "İstifadəçiyə göstərmək üçün ən azı bir əlaqə metodu əlavə edin",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-label": "Aktiv, aşkar və davamlı spam göndərənləri bildirmək üçün inzibatçılar ilə əlaqə saxlayın",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-placeholder": "məs. Layihə:İnzibatçılara müraciət",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "məs. spam@example.com"
 }

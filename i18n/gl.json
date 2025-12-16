@@ -116,7 +116,7 @@
 	"reportincident-nonemergency-helpmethod-contactcommunity": "Se non sabes o que facer, [[$1|pídelle axuda á comunidade]]",
 	"reportincident-nonemergency-generic-nextstep-otheraction": "Se os pasos anteriores non che axudaron, considera [[meta:Special:MyLanguage/Universal_Code_of_Conduct/Coordinating_Committee/Cases|presentar unha queixa á U4C]] ou [[foundation:Special:MyLanguage/Legal:Wikimedia_Foundation_Legal_and_Safety_Contact_Information|poñerte en contacto coa organización sen ánimo de lucro]] que aloxa este sitio web.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label": "Como solicitar axuda",
-	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description": "Engade polo menos un método de contacto para mostrarlle ao usuario",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description": "Engade polo menos un método de contacto para mostrarllo ao usuario",
 	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-label": "Ponte en contacto coa administración para obter axuda con incidentes urxentes e en curso",
 	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-description": "Engade a ligazón á páxina á que o usuario debe ir",
 	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_helpmethod-contactadmin-placeholder": "por exemplo, Proxecto:Taboleiro da administración",
@@ -169,5 +169,18 @@
 	"reportincident-nonemergency-hatespeech-nextstep": "O contido de odio ou discriminatorio que se produce no wiki considérase un comportamento inaceptable segundo as [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_%E2%80%93_Content_vandalism_and_abuse_of_the_projects normas oficiais].\n\nSe sentes que é seguro facelo, podes intentar falar coa persoa na súa páxina de conversa. Lémbralle a [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_%E2%80%93_Content_vandalism_and_abuse_of_the_projects política oficial] e faille saber de que o seu comportamento podería levar a unha prohibición temporal de edición.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Contido de odio ou discriminatorio",
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-contactadmin-placeholder": "por exemplo, Proxecto:Taboleiro dos administradores",
-	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "por exemplo, incidentes@exemplo.gal"
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "por exemplo, incidentes@exemplo.gal",
+	"reportincident-nonemergency-spam-header": "Spam ou contido promocional",
+	"reportincident-nonemergency-spam-nextsteps-configured": "O [[$1|spam]] é a adición inapropiada de contido á Wikipedia coa intención de promover unha organización, persoa ou idea. Isto considérase prexudicial para a enciclopedia.\n\n{{int:reportincident-nonemergency-spam-nextstep-common}}",
+	"reportincident-nonemergency-spam-nextstep-default": "O spam é a adición inapropiada de contido á Wikipedia coa intención de promover unha organización, persoa ou idea. Isto considérase prexudicial para a enciclopedia.\n\n{{int:reportincident-nonemergency-spam-nextstep-common}}",
+	"reportincident-nonemergency-spam-nextstep-common": "Se atopas spam, elimina ou reescribe o contido.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam-label": "Spam ou contido promocional",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_spamcontenturl-label": "Páxina de spam ou vandalismo (opcional)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_spamcontenturl-description": "Unha ligazón a unha páxina que define o spam ou o vandalismo no wiki. Esta podería ser a túa páxina de normas locais.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_spamcontenturl-placeholder": "por exemplo, Proxecto:Spam",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-label": "Como denunciar spam evidente",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-description": "Selecciona polo menos un método de contacto para mostrarllo ao usuario",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-label": "Ponte en contacto coa administración para denunciar persoas que fan spam de xeito activo, evidente e persistente",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-placeholder": "por exemplo, Proxecto:Intervención administrativa contra o vandalismo",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "por exemplo, spam@exemplo.gal"
 }
