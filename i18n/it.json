@@ -21,6 +21,8 @@
 	"reportincident-radio-header-nonemergency": "Ottieni aiuto con:",
 	"reportincident-choose-option": "Scegli un'opzione",
 	"reportincident-submit-behavior-section-support-item-info-is-public": "Tutte le conversazioni sui wiki sono pubbliche, non condividere informazioni personali.",
+	"communityconfiguration-reportincident-invalid-title": "La pagina deve essere una pagina wiki locale esistente",
+	"communityconfiguration-reportincident-invalid-email": "Il valore deve essere un indirizzo email valido",
 	"reportincident-nonemergency-submitsuccess-title": "Assistenza",
 	"reportincident-nonemergency-nextsteps-header": "Cosa faccio ora?",
 	"reportincident-nonemergency-requesthelp-header": "Come chiedere aiuto",
@@ -28,5 +30,6 @@
 	"reportincident-nonemergency-sexualharassment-header": "Molestie sessuali",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Molestie sessuali",
 	"reportincident-nonemergency-hatespeech-header": "Contenuti odiosi o discriminatori",
-	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Contenuti odiosi o discriminatori"
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Contenuti odiosi o discriminatori",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "Qualcos'altro"
 }
