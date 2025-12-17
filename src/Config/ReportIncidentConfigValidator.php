@@ -9,6 +9,7 @@ use MediaWiki\Extension\CommunityConfiguration\Validation\IValidator;
 use MediaWiki\Extension\CommunityConfiguration\Validation\ValidationStatus;
 use MediaWiki\Extension\CommunityConfiguration\Validation\ValidatorFactory;
 use MediaWiki\Page\PageLookup;
+use MediaWiki\Revision\ArchivedRevisionLookup;
 use MediaWiki\Title\MalformedTitleException;
 use MediaWiki\Title\TitleParser;
 
@@ -21,12 +22,14 @@ class ReportIncidentConfigValidator implements IValidator {
 		private readonly TitleParser $titleParser,
 		private readonly PageLookup $pageLookup,
 		private readonly IContextSource $context,
+		private readonly ArchivedRevisionLookup $archivedRevisionLookup,
 	) {
 	}
 
 	public static function factory(
 		TitleParser $titleParser,
 		PageLookup $pageLookup,
+		ArchivedRevisionLookup $archivedRevisionLookup,
 		ValidatorFactory $validatorFactory,
 		string $jsonSchema,
 		?IContextSource $context = null
@@ -43,7 +46,8 @@ class ReportIncidentConfigValidator implements IValidator {
 			$jsonSchemaValidator,
 			$titleParser,
 			$pageLookup,
-			$context
+			$context,
+			$archivedRevisionLookup
 		);
 	}
 
@@ -109,7 +113,13 @@ class ReportIncidentConfigValidator implements IValidator {
 				}
 
 				$page = $this->pageLookup->getPageForLink( $title );
-				if ( !$page->exists() ) {
+
+				// Check if the page was deleted, defined by a revision id being associated with the archived
+				// page. These still need to be considered valid as if a page is deleted, the input will be rendered
+				// invalid and CommunityConfig will fail to load.
+				$archivedPage = $this->archivedRevisionLookup->getLastRevisionId( $page );
+
+				if ( !$page->exists() && !$archivedPage ) {
 					$status->addFatal(
 						$key,
 						"/$key",
@@ -154,7 +164,7 @@ class ReportIncidentConfigValidator implements IValidator {
 					}
 
 					// Convert key into a string so that it can be displayed in the error
-					$key = implode( '_', $key );
+					$key = implode( '/', $key );
 				} else {
 					// Treat an empty string value as if the value was not set.
 					$value = $config->$key ?? '';
@@ -179,7 +189,13 @@ class ReportIncidentConfigValidator implements IValidator {
 				}
 
 				$page = $this->pageLookup->getPageForLink( $title );
-				if ( !$page->exists() ) {
+
+				// Check if the page was deleted, defined by a revision id being associated with the archived
+				// page. These still need to be considered valid as if a page is deleted, the input will be rendered
+				// invalid and CommunityConfig will fail to load.
+				$archivedPage = $this->archivedRevisionLookup->getLastRevisionId( $page );
+
+				if ( !$page->exists() && !$archivedPage ) {
 					$status->addFatal(
 						$key,
 						"/$key",
@@ -213,7 +229,7 @@ class ReportIncidentConfigValidator implements IValidator {
 				}
 
 				// Convert key into a string so that it can be displayed in the error
-				$key = implode( '_', $key );
+				$key = implode( '/', $key );
 			} else {
 				// Treat an empty string value as if the value was not set.
 				$value = $config->$key ?? '';
@@ -237,14 +253,13 @@ class ReportIncidentConfigValidator implements IValidator {
 			$                      # End of string
 			/ix";
 			// ^ case Insensitive, eXtended
-			if ( !(bool)preg_match( $html5_email_regexp, $value ) ) {
+			if ( !preg_match( $html5_email_regexp, $value ) ) {
 				$status->addFatal(
 					$key,
 					"/$key",
 					$this->context->msg( 'communityconfiguration-reportincident-invalid-email' )->text()
 				);
 			}
-			continue;
 		}
 
 		return $status;

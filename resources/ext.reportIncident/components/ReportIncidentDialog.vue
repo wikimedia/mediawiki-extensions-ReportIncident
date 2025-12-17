@@ -121,8 +121,7 @@ module.exports = exports = {
 		const primaryButtonLabel = computed( () => {
 			if ( isSuccessStep.value ) {
 				return mw.msg(
-					'reportincident-submit-back-to-page',
-					mw.config.get( 'wgPageName' ).replace( /_/g, ' ' )
+					'reportincident-submit-back-to-page'
 				);
 			}
 

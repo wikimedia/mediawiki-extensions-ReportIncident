@@ -379,5 +379,7 @@ module.exports = exports = {
 <style lang="less">
 .ext-reportincident-dialog__submit-success-section-header {
 	font-size: 100%;
+	padding: 0;
+	margin: 1em 0 0 0;
 }
 </style>

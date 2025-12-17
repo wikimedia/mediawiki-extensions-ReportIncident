@@ -86,7 +86,7 @@
 	"reportincident-submit-behavior-section-other-options-title": "Can't find what {{GENDER:|you're}} looking for?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "If {{GENDER:|you're}} unsure what to do, [[$1|please ask the community]] for help.",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "If the steps above did not help {{GENDER:|you}}, {{GENDER:|you}} can contact the [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|non-profit organization]] that hosts this website.",
-	"reportincident-submit-back-to-page": "Back to $1",
+	"reportincident-submit-back-to-page": "Back to talk page",
 	"communityconfiguration-reportincident-title": "Incident Reporting System",
 	"communityconfiguration-reportincident-description": "Configure local links used by the non-emergency flow of the Incident Reporting System and manage the namespaces the system is enabled on.",
 	"communityconfiguration-reportincident-info-text": "The Incident Reporting System directs users who submit reports through its non-emergency flow to appropriate local wiki pages. These may be customized here. Leaving a field empty will cause it to use default values from deployed configuration.",

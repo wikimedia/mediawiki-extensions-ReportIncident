@@ -25,6 +25,7 @@
 					"services": [
 						"TitleParser",
 						"PageStore",
+						"ArchivedRevisionLookup",
 						"CommunityConfiguration.ValidatorFactory"
 					],
 					"args": [

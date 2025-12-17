@@ -90,7 +90,7 @@
 	"reportincident-submit-behavior-section-other-options-title": "Section header for informational text shown in the incident report dialog after successfully submitting a report.",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Paragraph with informational text shown in the incident report dialog after successfully submitting a report. Parameters:\n* $1 - title of a local wiki page used for general questions.",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Paragraph with informational text shown in the incident report dialog after successfully submitting a report.",
-	"reportincident-submit-back-to-page": "Label used for the primary button on the incident report dialog. Parameters:\n* $1 - the title of the current page.",
+	"reportincident-submit-back-to-page": "Label used for the primary button on the incident report dialog.",
 	"communityconfiguration-reportincident-title": "Title used for the configuration section related to the Incident Reporting System on Special:CommunityConfiguration.",
 	"communityconfiguration-reportincident-description": "Short description used for the configuration section related to the Incident Reporting System on Special:CommunityConfiguration.",
 	"communityconfiguration-reportincident-info-text": "Help text displayed on the Special:CommunityConfiguration editor subpage of the Incident Reporting System.",

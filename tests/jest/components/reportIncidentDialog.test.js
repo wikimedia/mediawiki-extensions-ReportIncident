@@ -636,38 +636,33 @@ describe( 'Report Incident Dialog', () => {
 			'on initial screen': [
 				Constants.DIALOG_STEP_1,
 				'',
-				'reportincident-dialog-continue',
-				[]
+				'reportincident-dialog-continue'
 			],
 			'when reporting unacceptable behavior': [
 				Constants.DIALOG_STEP_2,
 				Constants.typeOfIncident.unacceptableUserBehavior,
-				'reportincident-dialog-continue',
-				[]
+				'reportincident-dialog-continue'
 			],
 			'when reporting immediate threat': [
 				Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM,
 				Constants.typeOfIncident.immediateThreatPhysicalHarm,
-				'reportincident-dialog-submit-btn',
-				[]
+				'reportincident-dialog-submit-btn'
 			],
 			'on success screen after reporting immediate threat': [
 				Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS,
 				Constants.typeOfIncident.immediateThreatPhysicalHarm,
-				'reportincident-submit-back-to-page',
-				[ 'Test multiple underscores' ]
+				'reportincident-submit-back-to-page'
 			],
 			'on success screen after reporting unacceptable behavior': [
 				Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
 				Constants.typeOfIncident.unacceptableUserBehavior,
-				'reportincident-submit-back-to-page',
-				[ 'Test multiple underscores' ]
+				'reportincident-submit-back-to-page'
 			]
 		};
 
 		for ( const testName of Object.keys( primaryButtonLabelTestCases ) ) {
 			const [
-				initialStep, incidentType, expectedMsg, expectedArgs
+				initialStep, incidentType, expectedMsg
 			] = primaryButtonLabelTestCases[ testName ];
 
 			it( testName, () => {
@@ -690,7 +685,7 @@ describe( 'Report Incident Dialog', () => {
 				const mwMsgArgs = mw.msg.mock.calls.find( ( args ) => args[ 0 ] === expectedMsg );
 
 				expect( primaryButton.text() ).toBe( expectedMsg );
-				expect( mwMsgArgs ).toEqual( [ expectedMsg, ...expectedArgs ] );
+				expect( mwMsgArgs ).toEqual( [ expectedMsg ] );
 			} );
 		}
 	} );
