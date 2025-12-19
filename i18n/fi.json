@@ -80,7 +80,7 @@
 	"reportincident-submit-behavior-section-other-options-title": "Etkö löydä {{GENDER:|etsimääsi}}?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Mikäli olet epävarma siitä, mitä sinun pitäisi tehdä, [[$1|kysy yhteisöltä apua]].",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Jos edellä mainitut tavat eivät auttaneet sinua, voit ottaa yhteyttä tämän sivuston palvelemia isännöivään [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|voittoa tavoittelemattomaan järjestöön]].",
-	"reportincident-submit-back-to-page": "Takaisin sivulle $1",
+	"reportincident-submit-back-to-page": "Takaisin keskustelusivulle",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "Yhteisön neuvontasivu",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "Wikisivu, jossa käyttäjät voivat kysyä kysymyksiä yhteisöltä.",
 	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-help-text": "Wikisivu, jossa käyttäjät voivat ilmoittaa ongelmista paikallisille ylläpitäjille.",

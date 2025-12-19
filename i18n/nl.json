@@ -97,5 +97,5 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Een wikipagina waar gebruikers informatie kunnen vinden over het oplossen van geschillen op de wiki.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Ingeschakelde naamruimten",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Naamruimten waarin het Incidentmeldingssysteem is ingeschakeld.",
-	"communityconfiguration-reportincident-invalid-title": "De pagina moet een bestaande lokale wikipagina zijn."
+	"communityconfiguration-reportincident-invalid-title": "De pagina moet een bestaande lokale wikipagina zijn"
 }

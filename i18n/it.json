@@ -21,6 +21,7 @@
 	"reportincident-radio-header-nonemergency": "Ottieni aiuto con:",
 	"reportincident-choose-option": "Scegli un'opzione",
 	"reportincident-submit-behavior-section-support-item-info-is-public": "Tutte le conversazioni sui wiki sono pubbliche, non condividere informazioni personali.",
+	"reportincident-submit-back-to-page": "Torna alla pagina di discussione",
 	"communityconfiguration-reportincident-invalid-title": "La pagina deve essere una pagina wiki locale esistente",
 	"communityconfiguration-reportincident-invalid-email": "Il valore deve essere un indirizzo email valido",
 	"reportincident-nonemergency-submitsuccess-title": "Assistenza",
