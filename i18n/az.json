@@ -85,7 +85,7 @@
 	"reportincident-submit-behavior-section-other-options-title": "Axtardığınızı tapa bilmirsiniz?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Nə edəcəyinizi bilmirsinizsə, kömək üçün [[$1|icmadan]] xahiş edin.",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Yuxarıdakı addımlar sizə kömək etmədisə, bu veb-saytın sahibi olan [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|qeyri-kommersiya təşkilatı]] ilə əlaqə saxlaya bilərsiniz.",
-	"reportincident-submit-back-to-page": "$1 səhifəsinə qayıt",
+	"reportincident-submit-back-to-page": "Müzakirə səhifəsinə qayıt",
 	"communityconfiguration-reportincident-title": "İnsident Bildiriş Sistemi",
 	"communityconfiguration-reportincident-description": "İnsident Bildiriş Sisteminin fövqəladə olmayan axını tərəfindən istifadə edilən yerli bağlantıları konfiqurasiya edin və sistemin aktiv olduğu ad fəzalarını təyin edin.",
 	"communityconfiguration-reportincident-info-text": "İnsident Bildiriş Sistemi öz qeyri-fövqəladə axını vasitəsilə hesabat təqdim edən istifadəçiləri müvafiq lokal viki səhifələrinə yönləndirir. Bunlar burada fərdiləşdirilə bilər. Sahənin boş qalması onun yerləşdirilmiş konfiqurasiyadan defolt dəyərlərdən istifadə etməsinə səbəb olacaq.",

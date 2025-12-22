@@ -24,8 +24,9 @@
 	"reportincident-emaildialog-primary": "Иди у подешавања",
 	"reportincident-submit-emergency-section-important-title": "Важно",
 	"reportincident-submit-behavior-section-support-title": "Шта даље радити",
-	"reportincident-submit-back-to-page": "Назад на $1",
+	"reportincident-submit-back-to-page": "Назад на страницу за разговор",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Омогућени именски простори",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Сексуално узнемиравање",
-	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "нпр. spam@example.com"
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "нпр. spam@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "Нешто друго"
 }

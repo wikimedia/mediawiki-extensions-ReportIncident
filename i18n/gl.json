@@ -84,7 +84,7 @@
 	"reportincident-submit-behavior-section-other-options-title": "Non atopas o que {{GENDER:|estás}} a buscar?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "Se non {{GENDER:|sabes}} que facer, [[$1|pídelle axuda á comunidade]].",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Se os pasos anteriores non foron de axuda, {{GENDER:|podes}} contactar coa [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|organización sen ánimo de lucro]] que aloxa este sitio web.",
-	"reportincident-submit-back-to-page": "Volver a «$1»",
+	"reportincident-submit-back-to-page": "Volver á páxina de conversa",
 	"communityconfiguration-reportincident-title": "Sistema de notificación de incidentes",
 	"communityconfiguration-reportincident-description": "Configura as ligazóns locais utilizadas polo fluxo que non é de emerxencia do sistema de notificación de incidentes e xestiona os espazos de nomes nos que está activado o sistema.",
 	"communityconfiguration-reportincident-info-text": "O sistema de notificación de incidentes dirixe os usuarios que envían informes a través do seu fluxo que non é de emerxencia ás páxinas wiki locais axeitadas. Estas poden personalizarse aquí. Se deixas o campo baleiro provocarás que se usen os valores predeterminados da configuración despregada.",
