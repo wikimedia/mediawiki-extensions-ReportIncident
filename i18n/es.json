@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Avengium",
 			"MarcoAurelio",
 			"No se"
 		]
@@ -25,5 +26,33 @@
 	"reportincident-dialog-something-else-empty": "Describe brevemente el comportamiento.",
 	"reportincident-unable-to-send": "No se ha podido enviar por correo electrónico el informe del incidente.",
 	"right-reportincident": "Reportar un incidente",
-	"action-reportincident": "reportar un incidente"
+	"action-reportincident": "reportar un incidente",
+	"reportincident-submit-back-to-page": "Volver a la página de discusión",
+	"communityconfiguration-reportincident-invalid-title": "La página debe ser una página wiki local existente",
+	"communityconfiguration-reportincident-invalid-email": "El valor debe ser un correo electrónico válido",
+	"reportincident-nonemergency-intimidation-nextstep-common": "Si {{GENDER:|usted}} se siente seguro al hacerlo, {{GENDER:|usted}} puede intentar hablar con la persona que {{GENDER:|usted}} está denunciando en su página de discusión de usuario.",
+	"reportincident-nonemergency-spam-header": "Spam o contenido promocional",
+	"reportincident-nonemergency-spam-nextsteps-configured": "[[$1|Contenido spam]] es la adición inapropiada de contenido a esta wiki con la intención de promover una organización, individuo o idea externa, y se considera perjudicial para la enciclopedia.\n\n{{int:reportincident-nonemergency-spam-nextstep-common}}",
+	"reportincident-nonemergency-spam-nextstep-default": "El contenido spam es la adición inapropiada de contenido a esta wiki con la intención de promover una organización, individuo o idea externa, y se considera perjudicial para la enciclopedia.\n\n{{int:reportincident-nonemergency-spam-nextstep-common}}",
+	"reportincident-nonemergency-spam-nextstep-common": "Si encuentra spam, elimine o reescriba el contenido.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam-label": "Spam o contenido promocional",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_spamcontenturl-label": "Página de spam o vandalismo (opcional)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_spamcontenturl-description": "Un enlace a una página que define el spam o el vandalismo en la wiki. Esta podría ser la página de políticas locales.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_spamcontenturl-placeholder": "p. ej. Proyecto:Spam",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-label": "Cómo denunciar spam evidente",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-description": "Seleccione al menos un método de contacto para mostrar al usuario",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-label": "Contacta a un administrador para informar sobre spammers activos, obvios y persistentes.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-placeholder": "p. ej. Proyecto:Intervención del administrador contra el vandalismo",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "p. ej. spam@ejemplo.com",
+	"reportincident-nonemergency-other-nextstep-configured": "La [[$1|resolución de disputas]] suele ser el primer paso para problemas simples en la wiki.\n\nRecuérdeles la [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_ %E2% 80%93_Harassment política oficial] e infórmeles que su comportamiento podría dar lugar a una prohibición temporal de edición.",
+	"reportincident-nonemergency-other-nextstep-default": "La resolución de disputas suele ser el primer paso para problemas simples en la wiki.\n\nRecuérdeles la [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_ %E2% 80%93_Harassment política oficial] e infórmeles que su comportamiento podría dar lugar a una prohibición temporal de edición.",
+	"reportincident-nonemergency-other-nextstep-common": "Si {{GENDER:|usted}} se siente seguro al hacerlo, {{GENDER:|usted}} puede intentar hablar con la persona que {{GENDER:|usted}} está denunciando en su página de discusión de usuario.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "Algo más",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-label": "Página de resolución de disputas (opcional)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-description": "Añadir el enlace para una página de resolución de disputas",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-placeholder": "p. ej. Proyecto:Resolución de disputas",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-help-text": "Esta podría ser su página de políticas locales",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "Por ejemplo, Proyecto:Tablón de anuncios del administrador.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "p. ej. incidentes@ejemplo.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "p. ej. Proyecto:Bomba de pueblo"
 }
