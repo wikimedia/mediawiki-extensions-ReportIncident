@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kareyac",
-			"Stjn"
+			"Stjn",
+			"Vonavy"
 		]
 	},
 	"reportincident-desc": "Расширение системы жалоб об инцидентах (Incident Reporting System).",
@@ -18,12 +19,12 @@
 	"reportincident-dialog-violator-disclaimer": "«Фонд Викимедиа» не будет раскрывать вашу личность без вашего согласия человеку, о котором вы жалуетесь",
 	"reportincident-dialog-violator-placeholder-text": "О ком {{GENDER:|вы}} жалуетесь?",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Язык вражды или дискриминация",
-	"reportincident-dialog-harassment-type-intimidation": "Запугивание, агрессия, оскорбления",
+	"reportincident-dialog-harassment-type-intimidation": "Травля, запугивание, угрозы или оскорбления",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Сексуальные домогательства",
 	"reportincident-dialog-harassment-type-something-else": "Другое",
-	"reportincident-dialog-harassment-type-trolling": "Троллинг",
+	"reportincident-dialog-harassment-type-trolling": "Троллинг или преследование (сталкинг)",
 	"reportincident-dialog-something-else-input-placeholder": "Укажите поведение, не перечисленное выше.",
-	"reportincident-dialog-unacceptable-behavior-community-managed": "{{SITENAME}} — сообщество, в котором [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|нет терпимости к неприемлемому поведению]] и с ним борется сообщество.",
+	"reportincident-dialog-unacceptable-behavior-community-managed": "{{SITENAME}} — сообщество, в котором [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|нет терпимости к неприемлемому поведению]] и с ним борется сообщество опытных пользователей.",
 	"reportincident-dialog-get-support-title": "Получить поддержку для инцидента",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|Вы}} должны выбрать хотя бы одно поведение.",
 	"reportincident-dialog-something-else-empty": "Пожалуйста, предоставьте краткое описание поведения.",
@@ -54,5 +55,5 @@
 	"reportincident-submit-emergency-section-important-title": "Важно",
 	"reportincident-submit-emergency-section-next-item-email": "Если вам нужно предоставить дополнительную информацию, пожалуйста, напишите на [mailto:emergency@wikimedia.org emergency@wikimedia.org].",
 	"reportincident-submit-behavior-section-support-item-info-is-public": "Все обсуждения на вики-сайтах являются публичными, пожалуйста, не делитесь личной информацией.",
-	"reportincident-submit-back-to-page": "Назад к «$1»"
+	"reportincident-submit-back-to-page": "Назад к странице обсуждения"
 }
