@@ -5,7 +5,7 @@
 			"Stefan2255"
 		]
 	},
-	"reportincident-dialog-internet-disconnected-error": "Du verkar inte ha någon internetanslutning. Försök att skicka in igen när din anslutning återupprättats.",
+	"reportincident-dialog-internet-disconnected-error": "{{GENDER:|Du}} verkar inte ha någon internetanslutning. Försök att skicka in igen när {{GENDER:|din}} anslutning återupprättats.",
 	"reportincident-submit-back-to-page": "Tillbaka till diskussionssidan",
 	"communityconfiguration-reportincident-invalid-title": "Sidan måste vara en befintlig lokal wikisida",
 	"communityconfiguration-reportincident-invalid-email": "Värdet måste vara en giltig e-postadress",
