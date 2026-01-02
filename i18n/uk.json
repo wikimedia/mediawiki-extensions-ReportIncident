@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Movses",
 			"Ата"
 		]
 	},
@@ -18,7 +19,7 @@
 	"reportincident-dialog-violator-placeholder-text": "На кого {{GENDER:|ви}} скаржитеся?",
 	"reportincident-dialog-harassment-type-doxing": "Розголошення приватної особистої інформації (доксинг)",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Мова ненависті чи дискримінація",
-	"reportincident-dialog-harassment-type-intimidation": "Булінг, залякування або повторювані образи",
+	"reportincident-dialog-harassment-type-intimidation": "Булінг, залякування, погрози або образи",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Сексуальні домагання",
 	"reportincident-dialog-harassment-type-something-else": "Щось інше",
 	"reportincident-dialog-harassment-type-spam": "Спам",

@@ -194,7 +194,7 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-description": "Füge den Link zu einer Seite zur Streitbeilegung hinzu.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-placeholder": "z. B. Projekt:Streitbeilegung",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-help-text": "Dies könnte deine lokale Richtlinienseite sein.",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "z.B. Projekt:Administratoren",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "z.B. incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "z. B. Projekt:Administratoren",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "z. B. incidents@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "Beispiel: Projekt:Dorfpumpe"
 }
