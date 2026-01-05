@@ -32,7 +32,7 @@
 	"reportincident-notification-link-to-comment-prefix": "報告されたコメントへのリンク",
 	"reportincident-notification-link-to-topic-prefix": "報告されたトピックへのリンク",
 	"right-reportincident": "インシデントを報告",
-	"action-reportincident": "インシデントを報告",
+	"action-reportincident": "インシデントの報告",
 	"reportincident-emaildialog-title": "確認済みのメールアドレスが必要です",
 	"reportincident-emaildialog-close-button": "キャンセル",
 	"reportincident-emaildialog-content": "レポートの更新情報を提供したり、必要に応じてフォローアップしたりするには、確認済みのメールアドレスが必要です。レポートを提出する前に、利用者アカウント設定からメールアドレスを追加または確認してください。",
