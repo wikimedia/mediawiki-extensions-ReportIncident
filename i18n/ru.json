@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kareyac",
-			"Stjn"
+			"Stjn",
+			"Vonavy"
 		]
 	},
 	"reportincident-desc": "Расширение системы жалоб об инцидентах (Incident Reporting System).",

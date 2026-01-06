@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"MathXplore",
-			"Waki285"
+			"Waki285",
+			"Shirayuki"
 		]
 	},
 	"reportincident-desc": "インシデント報告システム拡張機能。",
@@ -54,7 +55,7 @@
 	"reportincident-email-link-to-topic-prefix": "報告されたトピックへのリンク",
 	"reportincident-email-something-else": "その他: 「$1」",
 	"right-reportincident": "インシデントを報告",
-	"action-reportincident": "インシデントを報告",
+	"action-reportincident": "インシデントの報告",
 	"reportincident-emaildialog-title": "確認済みのメールアドレスが必要です",
 	"reportincident-emaildialog-close-button": "キャンセル",
 	"reportincident-emaildialog-content": "レポートの更新情報を提供したり、必要に応じてフォローアップしたりするには、確認済みのメールアドレスが必要です。レポートを提出する前に、利用者アカウント設定からメールアドレスを追加または確認してください。",

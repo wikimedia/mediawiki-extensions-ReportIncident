@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"MarcoAurelio",
-			"No se"
+			"No se",
+			"Avengium"
 		]
 	},
 	"reportincident-desc": "Extensión que permite denunciar incidentes de forma privada.",

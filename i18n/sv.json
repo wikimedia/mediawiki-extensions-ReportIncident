@@ -5,5 +5,25 @@
 			"Stefan2255"
 		]
 	},
-	"reportincident-dialog-internet-disconnected-error": "Du verkar inte ha någon internetanslutning. Försök att skicka in igen när din anslutning återupprättats."
+	"reportincident-desc": "Incidentrapporteringssystems tillägg",
+	"reportincident-report-btn-label": "Rapportera",
+	"reportincident-dialog-close-btn": "Stäng",
+	"reportincident-dialog-back-btn": "Tillbaka",
+	"reportincident-dialog-optional-label": "(valfritt)",
+	"reportincident-dialog-violator-placeholder-text": "Vilka rapporterar {{GENDER:|du}}?",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Sexuella trakasserier",
+	"reportincident-dialog-harassment-type-something-else": "Något annat",
+	"reportincident-dialog-something-else-input-placeholder": "Ange de beteenden som inte listas ovan.",
+	"reportincident-dialog-harassment-empty": "{{GENDER:|Du}} måste välja minst ett beteende.",
+	"reportincident-dialog-something-else-empty": "Vänligen ge en kort beskrivning av beteendet.",
+	"reportincident-dialog-internet-disconnected-error": "Du verkar inte ha någon internetanslutning. Försök att skicka in igen när din anslutning återupprättats.",
+	"reportincident-dialog-server-error": "Tyvärr verkar vår server inte svara. Försök skicka in igen.",
+	"reportincident-dialog-generic-error": "{{GENDER:|Din}} begäran kunde inte skickas på grund av ett fel. Försök att skicka in den igen.",
+	"right-reportincident": "Rapportera en incident",
+	"action-reportincident": "rapportera en incident",
+	"reportincident-emaildialog-title": "Verifierad e-postadress krävs",
+	"reportincident-emaildialog-close-button": "Avbryt",
+	"reportincident-emaildialog-content": "Vi behöver {{GENDER:|din}} verifierade e-postadress för att kunna ge dig uppdateringar om rapporten eller följa upp vid behov. Vänligen lägg till eller verifiera {{GENDER:|din}} e-postadress från inställningarna för {{GENDER:|ditt}} användarkonto innan du skickar in en rapport.",
+	"reportincident-emaildialog-primary": "Gå till inställningarna",
+	"reportincident-confirmedemail-required": "En bekräftad e-postadress krävs för att skicka in en incidentrapport."
 }
