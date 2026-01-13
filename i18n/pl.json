@@ -111,5 +111,15 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-label": "Strona o rozwiązywaniu sporów (opcjonalna)",
 	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-description": "Dodaj link do strony o rozwiązywanie sporów",
 	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-placeholder": "np. Projekt:Rozwiązywanie sporów",
-	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-help-text": "To może być Twoja lokalna strona z zasadami"
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-help-text": "To może być Twoja lokalna strona z zasadami",
+	"reportincident-nonemergency-helpmethod-default": "W przypadku problemów występujących na wiki zaleca się kontakt z administratorem lub skorzystanie z tablicy zgłoszeń społeczności, aby uzyskać pomoc w przypadku pilnych i trwających incydentów.",
+	"reportincident-nonemergency-helpmethod-contactadmin": "[[$1|Skontaktuj się z administratorem]], aby uzyskać pomoc w przypadku pilnych lub trwających incydentów na wiki",
+	"reportincident-nonemergency-helpmethod-email": "Prześlij swoje obawy na adres e-mail [mailto:$1 $1]",
+	"reportincident-nonemergency-helpmethod-contactcommunity": "Jeśli nie wiesz, co zrobić, [[$1|poproś społeczność o pomoc]]",
+	"reportincident-nonemergency-generic-nextstep-otheraction": "Jeśli powyższe kroki nie pomogą, rozważ [[meta:Special:MyLanguage/Universal_Code_of_Conduct/Coordinating_Committee/Cases|złożenie skargi do U4C]] lub [[foundation:Special:MyLanguage/Legal:Wikimedia_Foundation_Legal_and_Safety_Contact_Information|skontaktuj się z organizacją non-profit]], która hostuje tę witrynę.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label": "Jak poprosić o pomoc",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description": "Dodaj co najmniej jedną metodę kontaktu, która będzie wyświetlana użytkownikowi",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-label": "Kontakt z administratorem, aby uzyskać pomoc w przypadku pilnych lub trwających incydentów na wiki",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-description": "Dodaj link do strony, do której użytkownik powinien przejść",
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_helpmethod-contactadmin-placeholder": "np. Projekt:Prośby do administratorów"
 }
