@@ -3,7 +3,6 @@ const Constants = {
 	DIALOG_STEP_REPORT_BEHAVIOR_TYPES: 'dialog_step_report_unacceptable_behavior',
 	DIALOG_STEP_REPORT_IMMEDIATE_HARM: 'dialog_step_report_immediate_harm',
 	DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS: 'dialog_step_emergency_submit_success',
-	DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS: 'dialog_step_nonemergency_submit_success',
 	DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2: 'dialog_step_nonemergency_submit_success_v2',
 
 	typeOfIncident: {

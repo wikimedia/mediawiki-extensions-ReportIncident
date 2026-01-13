@@ -6,7 +6,7 @@ $( () => {
 	const Pinia = require( 'pinia' );
 	const pinia = Pinia.createPinia();
 
-	const reportIncidentApp = Vue.createMwApp( App, { localLinks: mw.config.get( 'wgReportIncidentLocalLinks' ) } )
+	const reportIncidentApp = Vue.createMwApp( App, {} )
 		.use( pinia )
 		.mount( '#ext-reportincident-app' );
 

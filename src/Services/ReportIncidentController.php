@@ -102,16 +102,9 @@ class ReportIncidentController {
 			// If in developer mode, pretend the user has an email set if the query parameter is set to
 			// 'withemail=1', otherwise use DB value.
 			'wgReportIncidentUserHasEmail' => $pretendUserHasEmail ?: $user->getEmail() !== '',
-			// Add wiki-specific links used by the submit success step (T379242).
-			'wgReportIncidentLocalLinks' => [
-				'disputeResolution' => $this->getLocalConfig( 'ReportIncidentDisputeResolutionPage' ),
-				'localIncidentReport' => $this->getLocalConfig( 'ReportIncidentLocalIncidentReportPage' ),
-				'askTheCommunity' => $this->getLocalConfig( 'ReportIncidentCommunityQuestionsPage' )
-			],
 			// Control whether instrumentation is enabled pending approval (T372823).
 			'wgReportIncidentEnableInstrumentation' => $this->config->get( 'ReportIncidentEnableInstrumentation' ),
 			'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
-			'wgReportIncidentUseV2NonEmergencyFlow' => $this->config->get( 'ReportIncidentUseV2NonEmergencyFlow' ),
 			// Non-Emergency Intimidation CommunityConfig values
 			'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' =>
 				$this->localConfig->get( 'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL' ),

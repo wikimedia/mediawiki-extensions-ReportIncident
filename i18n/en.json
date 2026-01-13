@@ -74,7 +74,6 @@
 	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|Your}} report has been submitted to the [[meta:Special:MyLanguage/Threats_of_harm|Wikimedia Foundation emergency team]]. The team monitors emergency reports 24/7, and {{GENDER:|your}} request will be looked into within 3 hours.",
 	"reportincident-submit-emergency-section-next-item-review": "We will review it and determine whether the incident violates policies.",
 	"reportincident-submit-emergency-section-next-item-email": "If {{GENDER:|you}} need to submit additional details, please email [mailto:emergency@wikimedia.org emergency@wikimedia.org].",
-	"reportincident-submit-behavior-dialog-title": "Get support for an incident",
 	"reportincident-submit-behavior-notice": "Admins can help with [[$1|urgent incidents and ongoing problems]] with user behavior.",
 	"reportincident-submit-behavior-section-support-title": "What to do next",
 	"reportincident-submit-behavior-section-support-item-behavior": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|Unacceptable behavior]] is managed by the community of experienced {{SITENAME}} users:",

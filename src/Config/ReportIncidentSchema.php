@@ -13,21 +13,6 @@ class ReportIncidentSchema extends JsonSchema {
 
 	public const VERSION = '1.1.0';
 
-	public const ReportIncidentDisputeResolutionPage = [
-		self::TYPE => self::TYPE_STRING,
-		self::DEFAULT => ''
-	];
-
-	public const ReportIncidentLocalIncidentReportPage = [
-		self::TYPE => self::TYPE_STRING,
-		self::DEFAULT => ''
-	];
-
-	public const ReportIncidentCommunityQuestionsPage = [
-		self::TYPE => self::TYPE_STRING,
-		self::DEFAULT => ''
-	];
-
 	public const ReportIncidentEnabledNamespaces = [
 		self::REF => [
 			'class' => MediaWikiDefinitions::class,

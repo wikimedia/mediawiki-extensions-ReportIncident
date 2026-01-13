@@ -23,13 +23,6 @@ const Main = require( '../../../resources/ext.reportIncident/components/App.vue'
 const renderComponent = () => mount( Main, {
 	global: {
 		plugins: [ createTestingPinia( { stubActions: false } ) ]
-	},
-	props: {
-		localLinks: {
-			disputeResolution: 'Project:Dispute resolution',
-			askTheCommunity: 'Project:Village pump',
-			localIncidentReport: 'Project:Report an incident'
-		}
 	}
 } );
 

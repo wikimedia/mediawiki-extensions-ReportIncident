@@ -269,8 +269,6 @@ describe( 'Report Incident Dialog', () => {
 						return 1;
 					case 'wgPageName':
 						return 'Test_page';
-					case 'wgReportIncidentUseV2NonEmergencyFlow':
-						return true;
 					default:
 						throw new Error( 'Unknown key: ' + key );
 				}
@@ -490,9 +488,9 @@ describe( 'Report Incident Dialog', () => {
 		it( 'should clear and close dialog when exiting from submit success screen', async () => {
 			const wrapper = renderComponent( {
 				open: true,
-				initialStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS
+				initialStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2
 			} );
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS );
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2 );
 
 			const store = useFormStore();
 
@@ -608,7 +606,7 @@ describe( 'Report Incident Dialog', () => {
 	const closeTestCases = [
 		[ 'STEP_1', Constants.DIALOG_STEP_1, 'form' ],
 		[ 'REPORT_IMMEDIATE_HARM', Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM, 'submit_report' ],
-		[ 'SUCCESS', Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS, 'success' ],
+		[ 'SUCCESS', Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2, 'success' ],
 		[ 'SUCCESS', Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS, 'success' ]
 	];
 
@@ -654,7 +652,7 @@ describe( 'Report Incident Dialog', () => {
 				'reportincident-submit-back-to-page'
 			],
 			'on success screen after reporting unacceptable behavior': [
-				Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
+				Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2,
 				Constants.typeOfIncident.unacceptableUserBehavior,
 				'reportincident-submit-back-to-page'
 			]

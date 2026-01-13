@@ -80,63 +80,6 @@ class ReportIncidentConfigValidator implements IValidator {
 	private function validateConfig( $config ): ValidationStatus {
 		$status = new ValidationStatus();
 
-		$titleProps = [
-			'ReportIncidentDisputeResolutionPage',
-			'ReportIncidentLocalIncidentReportPage',
-			'ReportIncidentCommunityQuestionsPage',
-		];
-
-		foreach ( $titleProps as $key ) {
-			try {
-				// Treat an empty string value as if the value was not set.
-				$value = $config->$key ?? '';
-				if ( $value === '' ) {
-					continue;
-				}
-
-				$title = $this->titleParser->parseTitle( $value );
-				if ( $title->isExternal() ) {
-					$status->addFatal(
-						$key,
-						"/$key",
-						$this->context->msg( 'communityconfiguration-reportincident-invalid-title' )->text()
-					);
-					continue;
-				}
-
-				if ( $title->getNamespace() <= NS_SPECIAL ) {
-					$status->addFatal(
-						$key,
-						"/$key",
-						$this->context->msg( 'communityconfiguration-reportincident-invalid-title' )->text()
-					);
-					continue;
-				}
-
-				$page = $this->pageLookup->getPageForLink( $title );
-
-				// Check if the page was deleted, defined by a revision id being associated with the archived
-				// page. These still need to be considered valid as if a page is deleted, the input will be rendered
-				// invalid and CommunityConfig will fail to load.
-				$archivedPage = $this->archivedRevisionLookup->getLastRevisionId( $page );
-
-				if ( !$page->exists() && !$archivedPage ) {
-					$status->addFatal(
-						$key,
-						"/$key",
-						$this->context->msg( 'communityconfiguration-reportincident-invalid-title' )->text()
-					);
-				}
-			} catch ( MalformedTitleException $e ) {
-				$status->addFatal(
-					$key,
-					"/$key",
-					$this->context->msg( $e->getMessageObject() )->text()
-				);
-			}
-		}
-
-		// Non-emergency v2 configuration options
 		$wikiPages = [
 			'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL',
 			[ 'ReportIncident_NonEmergency_Intimidation_HelpMethod', 'ContactAdmin' ],

@@ -82,18 +82,6 @@
 			"value": 10800,
 			"description": "User accounts must be older than this value in order to submit a report. The default is 3 hours."
 		},
-		"ReportIncidentDisputeResolutionPage": {
-			"value": "Project:Dispute resolution",
-			"description": "A wiki page used for dispute resolution, referenced in the non-emergency flow.."
-		},
-		"ReportIncidentCommunityQuestionsPage": {
-			"value": "Project:Village pump",
-			"description": "A wiki page used for asking questions to the community, referenced in the non-emergency flow."
-		},
-		"ReportIncidentLocalIncidentReportPage": {
-			"value": "Project:Report an incident",
-			"description": "A wiki page used for reporting incidents to local functionaries, referenced in the non-emergency flow."
-		},
 		"ReportIncidentEnableInstrumentation": {
 			"value": false,
 			"description": "Controls whether instrumentation via EventLogging is enabled."
@@ -109,10 +97,6 @@
 		"ReportIncidentZendeskSubjectLine": {
 			"value": "Incident Reporting System emergency report",
 			"description": "Custom subject line to use in Zendesk requests created for emergency reports."
-		},
-		"ReportIncidentUseV2NonEmergencyFlow": {
-			"value": false,
-			"description": "Whether to use the v2 nonemergency workflow instead of the legacy unacceptable behavior workflow"
 		}
 	},
 	"AvailableRights": [
@@ -198,7 +182,6 @@
 				"components/ReportIncidentDialogTypesOfBehavior.vue",
 				"components/ReportImmediateHarmStep.vue",
 				"components/EmergencySubmitSuccessStep.vue",
-				"components/NonEmergencySubmitSuccessStep.vue",
 				"components/NonEmergencySubmitSuccessStepV2.vue",
 				"composables/useInstrument.js",
 				"stores/Form.js",
@@ -273,7 +256,6 @@
 				"reportincident-submit-emergency-section-next-item-team",
 				"reportincident-submit-emergency-section-next-item-review",
 				"reportincident-submit-emergency-section-next-item-email",
-				"reportincident-submit-behavior-dialog-title",
 				"reportincident-submit-behavior-notice",
 				"reportincident-submit-behavior-section-support-title",
 				"reportincident-submit-behavior-section-support-item-behavior",

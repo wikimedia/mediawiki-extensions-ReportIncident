@@ -95,7 +95,6 @@ module.exports = exports = {
 		);
 		const isSuccessStep = computed(
 			() => currentStep.value === Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ||
-				currentStep.value === Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ||
 				currentStep.value === Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2
 		);
 		const currentSlotName = computed( () => `${ currentStep.value }` );
@@ -109,7 +108,6 @@ module.exports = exports = {
 				[ Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ]: 'reportincident-dialog-describe-the-incident-title',
 				[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'reportincident-dialog-report-immediate-harm-title',
 				[ Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ]: 'reportincident-submit-emergency-dialog-title',
-				[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]: 'reportincident-submit-behavior-dialog-title',
 				[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2 ]: 'reportincident-nonemergency-submitsuccess-title'
 			};
 
@@ -179,13 +177,7 @@ module.exports = exports = {
 			if ( isEmergency.value ) {
 				currentStep.value = Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS;
 			} else {
-				if (
-					mw.config.get( 'wgReportIncidentUseV2NonEmergencyFlow' )
-				) {
-					currentStep.value = Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2;
-				} else {
-					currentStep.value = Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS;
-				}
+				currentStep.value = Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2;
 			}
 			formSubmissionInProgress.value = false;
 			footerErrorMessage.value = '';
@@ -379,7 +371,6 @@ module.exports = exports = {
 					[ Constants.DIALOG_STEP_1 ]: 'form',
 					[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'submit_report',
 					[ Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ]: 'success',
-					[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]: 'success',
 					[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2 ]: 'success'
 				};
 

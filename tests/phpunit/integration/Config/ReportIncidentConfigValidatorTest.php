@@ -69,11 +69,7 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 	 */
 	private static function getConfigUnderTest( $name, $value ) {
 		$baseConfig = [
-			'ReportIncidentDisputeResolutionPage' => '',
-			'ReportIncidentLocalIncidentReportPage' => '',
-			'ReportIncidentCommunityQuestionsPage' => '',
 			'ReportIncidentEnabledNamespaces' => [],
-			// v2 configurations
 			'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL' => '',
 			'ReportIncident_NonEmergency_Intimidation_HelpMethod' => (object)[
 				'ContactAdmin' => '',
@@ -152,9 +148,6 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$titleProps = [
-			'ReportIncidentDisputeResolutionPage',
-			'ReportIncidentLocalIncidentReportPage',
-			'ReportIncidentCommunityQuestionsPage',
 			'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL',
 			'ReportIncident_NonEmergency_Intimidation_HelpMethod/ContactAdmin',
 			'ReportIncident_NonEmergency_Intimidation_HelpMethod/ContactCommunity',
@@ -231,37 +224,14 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public static function provideValidConfig(): iterable {
-		yield 'no pages set' => [
+		yield 'namespaces set' => [
 			[
-				'ReportIncidentDisputeResolutionPage' => '',
-				'ReportIncidentLocalIncidentReportPage' => '',
-				'ReportIncidentCommunityQuestionsPage' => '',
-			],
-		];
-
-		yield 'some pages set' => [
-			[
-				'ReportIncidentDisputeResolutionPage' => self::TEST_EXISTING_PAGE,
-				'ReportIncidentLocalIncidentReportPage' => '',
-				'ReportIncidentCommunityQuestionsPage' => '',
-			],
-		];
-
-		yield 'some pages and namespaces set' => [
-			[
-				'ReportIncidentDisputeResolutionPage' => self::TEST_EXISTING_PAGE,
-				'ReportIncidentLocalIncidentReportPage' => '',
-				'ReportIncidentCommunityQuestionsPage' => '',
 				'ReportIncidentEnabledNamespaces' => [ NS_PROJECT ],
 			],
 		];
 
 		yield 'all pages set' => [
 			[
-				'ReportIncidentDisputeResolutionPage' => self::TEST_EXISTING_PAGE,
-				'ReportIncidentLocalIncidentReportPage' => self::TEST_EXISTING_PAGE,
-				'ReportIncidentCommunityQuestionsPage' => self::TEST_EXISTING_PAGE,
-				// v2 configurations
 				'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL' => self::TEST_EXISTING_PAGE,
 				'ReportIncident_NonEmergency_Intimidation_HelpMethod' => (object)[
 					'ContactAdmin' => self::TEST_EXISTING_PAGE,

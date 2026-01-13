@@ -22,22 +22,11 @@ use Wikimedia\TestingAccessWrapper;
 class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 	use MockServiceDependenciesTrait;
 
-	private const DEFAULT_LOCAL_LINKS = [
-		'ReportIncidentDisputeResolutionPage' => 'Project:Dispute resolution',
-		'ReportIncidentCommunityQuestionsPage' => 'Project:Village pump',
-		'ReportIncidentLocalIncidentReportPage' => 'Project:Report an incident',
-	];
-
 	private function newReportIncidentController(
 		array $globalConfig,
 		array $communityConfig = []
 	): ReportIncidentController {
-		$globalConfig += self::DEFAULT_LOCAL_LINKS;
-		$globalConfig['ReportIncidentUseV2NonEmergencyFlow'] = true;
 		$communityConfig += [
-			'ReportIncidentLocalIncidentReportPage' => '',
-			'ReportIncidentDisputeResolutionPage' => '',
-			'ReportIncidentCommunityQuestionsPage' => '',
 			'ReportIncidentEnabledNamespaces' => [],
 			'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL' => '',
 			'ReportIncident_NonEmergency_Intimidation_HelpMethod' => (object)[
@@ -230,15 +219,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
 			->with( [
 				'wgReportIncidentUserHasConfirmedEmail' => true,
-				'wgReportIncidentLocalLinks' => [
-					'disputeResolution' => 'Project:Dispute resolution',
-					'localIncidentReport' => 'Project:Report an incident',
-					'askTheCommunity' => 'Project:Village pump',
-				],
 				'wgReportIncidentEnableInstrumentation' => true,
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
-				'wgReportIncidentUseV2NonEmergencyFlow' => true,
 				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
@@ -298,11 +281,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
 			->with( [
 				'wgReportIncidentUserHasConfirmedEmail' => true,
-				'wgReportIncidentLocalLinks' => $expectedLocalLinks,
 				'wgReportIncidentEnableInstrumentation' => true,
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
-				'wgReportIncidentUseV2NonEmergencyFlow' => true,
 				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
@@ -395,15 +376,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
 			->with( [
 				'wgReportIncidentUserHasConfirmedEmail' => false,
-				'wgReportIncidentLocalLinks' => [
-					'disputeResolution' => 'Project:Dispute resolution',
-					'localIncidentReport' => 'Project:Report an incident',
-					'askTheCommunity' => 'Project:Village pump',
-				],
 				'wgReportIncidentEnableInstrumentation' => true,
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
-				'wgReportIncidentUseV2NonEmergencyFlow' => true,
 				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
