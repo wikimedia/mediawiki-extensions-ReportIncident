@@ -360,7 +360,7 @@ describe( 'Report Incident Dialog', () => {
 				expect( store.isFormValidForSubmission() ).toBe( true );
 
 				return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
-					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2 );
+					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS );
 					expect( wrapper.vm.footerErrorMessage ).toBe( '' );
 					expect( restPost ).toHaveBeenCalledWith(
 						'/reportincident/v0/report',
@@ -381,7 +381,7 @@ describe( 'Report Incident Dialog', () => {
 			const validSubmitTestCases = {
 				'valid form data': {
 					initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
-					finalStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2,
+					finalStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
 					initialState: {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
@@ -415,7 +415,7 @@ describe( 'Report Incident Dialog', () => {
 				},
 				'valid form data with "something else"': {
 					initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
-					finalStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2,
+					finalStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
 					initialState: {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 						inputBehavior: Constants.harassmentTypes.OTHER,
@@ -488,9 +488,9 @@ describe( 'Report Incident Dialog', () => {
 		it( 'should clear and close dialog when exiting from submit success screen', async () => {
 			const wrapper = renderComponent( {
 				open: true,
-				initialStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2
+				initialStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS
 			} );
-			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2 );
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS );
 
 			const store = useFormStore();
 
@@ -606,7 +606,7 @@ describe( 'Report Incident Dialog', () => {
 	const closeTestCases = [
 		[ 'STEP_1', Constants.DIALOG_STEP_1, 'form' ],
 		[ 'REPORT_IMMEDIATE_HARM', Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM, 'submit_report' ],
-		[ 'SUCCESS', Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2, 'success' ],
+		[ 'SUCCESS', Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS, 'success' ],
 		[ 'SUCCESS', Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS, 'success' ]
 	];
 
@@ -652,7 +652,7 @@ describe( 'Report Incident Dialog', () => {
 				'reportincident-submit-back-to-page'
 			],
 			'on success screen after reporting unacceptable behavior': [
-				Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS_V2,
+				Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
 				Constants.typeOfIncident.unacceptableUserBehavior,
 				'reportincident-submit-back-to-page'
 			]

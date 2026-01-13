@@ -5,15 +5,15 @@ jest.mock( '../../../resources/ext.reportIncident/components/icons.json', () => 
 	cdxIconUserGroup: ''
 } ), { virtual: true } );
 
-const NonEmergencySubmitSuccessStepV2 = require( '../../../resources/ext.reportIncident/components/NonEmergencySubmitSuccessStepV2.vue' ),
+const NonEmergencySubmitSuccessStep = require( '../../../resources/ext.reportIncident/components/NonEmergencySubmitSuccessStep.vue' ),
 	{ createTestingPinia } = require( '@pinia/testing' ),
 	utils = require( '@vue/test-utils' ),
 	Constants = require( '../../../resources/ext.reportIncident/Constants.js' ),
 	useInstrument = require( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
 
-describe( 'NonEmergencySubmitSuccessStepV2', () => {
+describe( 'NonEmergencySubmitSuccessStep', () => {
 	function mount( formStoreState ) {
-		return utils.mount( NonEmergencySubmitSuccessStepV2, {
+		return utils.mount( NonEmergencySubmitSuccessStep, {
 			global: {
 				plugins: [
 					createTestingPinia( {
@@ -424,7 +424,7 @@ describe( 'NonEmergencySubmitSuccessStepV2', () => {
 
 	it( 'records interaction event for links in non-emergency flow', async () => {
 		// Manually mount instead of using mount() in order to overwrite global.$i18n
-		const wrapper = utils.mount( NonEmergencySubmitSuccessStepV2, {
+		const wrapper = utils.mount( NonEmergencySubmitSuccessStep, {
 			global: {
 				mocks: {
 					$i18n: ( str ) => ( {
