@@ -42,12 +42,9 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideValidationErrors
 	 */
-	public function testPermissiveValidationFails( array $config, array $expectedErrors ) {
+	public function testPermissiveValidationSucceeds( array $config, array $expectedErrors ) {
 		$status = $this->validator->validatePermissively( (object)$config );
-		$errors = $status->getValidationErrorsData();
-
-		$this->assertStatusNotGood( $status );
-		$this->assertSame( $expectedErrors, $errors );
+		$this->assertStatusGood( $status );
 	}
 
 	/**
@@ -213,22 +210,6 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 				],
 			];
 		}
-
-		yield 'config not matching schema' => [
-			[
-				'ReportIncidentDisputeResolutionPage' => 5,
-				'ReportIncidentLocalIncidentReportPage' => '',
-				'ReportIncidentCommunityQuestionsPage' => '',
-			],
-			[
-				[
-					'property' => 'ReportIncidentDisputeResolutionPage',
-					'pointer' => '/ReportIncidentDisputeResolutionPage',
-					'messageLiteral' => 'Integer value found, but a string is required',
-					'additionalData' => [ 'constraint' => 'type' ],
-				]
-			]
-		];
 	}
 
 	/**

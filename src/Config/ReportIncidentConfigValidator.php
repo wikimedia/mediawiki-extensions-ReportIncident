@@ -61,14 +61,15 @@ class ReportIncidentConfigValidator implements IValidator {
 		return $this->validateConfig( $config );
 	}
 
-	/** @inheritDoc */
+	/**
+	 * Skip validateConfig on permissive validation (config reads) as it's very expensive. It's
+	 * only important to validate on write to ensure that configurations that require pages to
+	 * exist. If moving a page breaks the configuration, it shouldn't break the entire feature.
+	 *
+	 * @inheritDoc
+	 */
 	public function validatePermissively( $config, ?string $version = null ): ValidationStatus {
-		$status = $this->jsonSchemaValidator->validatePermissively( $config, $version );
-		if ( !$status->isOK() ) {
-			return $status;
-		}
-
-		return $this->validateConfig( $config );
+		return $this->jsonSchemaValidator->validatePermissively( $config, $version );
 	}
 
 	/**
