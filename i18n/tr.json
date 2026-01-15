@@ -3,6 +3,7 @@
 		"authors": [
 			"Hedda",
 			"Joseph",
+			"LisafBia",
 			"Sakblue",
 			"SaldırganSincap"
 		]
@@ -17,13 +18,20 @@
 	"reportincident-dialog-additional-details-input-placeholder": "İncelemeci için faydalı olabilecek bağlamı ekleyin (örneğin ek bağlantılar).",
 	"reportincident-dialog-optional-label": "(isteğe bağlı)",
 	"reportincident-dialog-violator-label": "Bildirmek {{GENDER:|istediğiniz}} kullanıcı",
+	"reportincident-dialog-violator-disclaimer": "Wikimedia Vakfı, {{GENDER:|kimliğinizi}} şikayette bulunan kişiye gönüllü olarak ifşa etmeyecektir.",
 	"reportincident-dialog-violator-placeholder-text": "Kimi bildiriyorsunuz?",
+	"reportincident-dialog-harassment-type-doxing": "Özel kişisel bilgilerin ifşa edilmesi (Doxing)",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Nefret söylemi ve ayrımcılık içeren içerik",
 	"reportincident-dialog-harassment-type-intimidation": "Zorbalık, yıldırma, tehdit veya hakaret",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Cinsel taciz",
 	"reportincident-dialog-harassment-type-something-else": "Başka bir şey",
 	"reportincident-dialog-harassment-type-spam": "Spam veya reklam içeriği",
+	"reportincident-dialog-harassment-type-trolling": "Taciz veya Takip Etme",
 	"reportincident-dialog-something-else-input-placeholder": "Yukarıda listelenmeyen davranışları belirtin.",
+	"reportincident-dialog-unacceptable-behavior-community-managed": "{{SITENAME}}, [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|uygunsuz davranışın hoş görülmediği]] bir topluluktur ve deneyimli kullanıcılar tarafından yönetilir.",
+	"reportincident-dialog-get-support-title": "Bir olay için destek alın.",
+	"right-reportincident": "Bir olayı bildirin",
+	"action-reportincident": "bir olayı bildirme",
 	"reportincident-dialog-main-title": "Ne yapmak istersin?",
 	"reportincident-nonemergency-help": "Zorbalık, taciz, özel bilgilerin ifşa edilmesi, trolleme, ayrımcı içerik veya spam",
 	"reportincident-radio-header-nonemergency": "Yardım alın:",
