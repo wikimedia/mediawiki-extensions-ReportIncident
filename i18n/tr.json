@@ -3,6 +3,7 @@
 		"authors": [
 			"Hedda",
 			"Joseph",
+			"Leo",
 			"LisafBia",
 			"Sakblue",
 			"SaldırganSincap"
@@ -33,7 +34,14 @@
 	"right-reportincident": "Bir olayı bildirin",
 	"action-reportincident": "bir olayı bildirme",
 	"reportincident-dialog-main-title": "Ne yapmak istersin?",
+	"reportincident-type-nonemergency": "Kabul edilemez kullanıcı davranışı",
 	"reportincident-nonemergency-help": "Zorbalık, taciz, özel bilgilerin ifşa edilmesi, trolleme, ayrımcı içerik veya spam",
+	"reportincident-type-emergency": "Acil fiziksel zarar tehdidi",
+	"reportincident-type-emergency-help": "Bir bireye karşı şiddet uygulama, kendine zarar verme veya kitlesel şiddet eylemi gerçekleştirme niyeti",
 	"reportincident-radio-header-nonemergency": "Yardım alın:",
-	"reportincident-radio-header-emergency": "Bildir"
+	"reportincident-radio-header-emergency": "Bildir",
+	"reportincident-type-incident-required": "Lütfen olay türünü seçin",
+	"reportincident-nonemergency-intimidation-nextstep-configured": "[[$1|Anlaşmazlık çözümü]] genellikle viki üzerindeki basit sorunlar için ilk adımdır.\n\nOnlara [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment resmî politikasını] hatırlatın ve davranışlarının geçici olarak düzenleme yasağına yol açabileceğini bildirin.",
+	"reportincident-nonemergency-other-nextstep-configured": "[[$1|Anlaşmazlık çözümü]] genellikle viki üzerindeki basit sorunlar için ilk adımdır.\n\nOnlara [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment resmî politikasını] hatırlatın ve davranışlarının geçici olarak düzenleme yasağına yol açabileceğini bildirin.",
+	"reportincident-nonemergency-other-nextstep-default": "Anlaşmazlık çözümü genellikle viki üzerindeki basit sorunlar için ilk adımdır.\n\nOnlara [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment resmî politikasını] hatırlatın ve davranışlarının geçici olarak düzenleme yasağına yol açabileceğini bildirin."
 }
