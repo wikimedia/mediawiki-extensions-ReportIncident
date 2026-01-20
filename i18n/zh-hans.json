@@ -74,7 +74,6 @@
 	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|您的}}报告已提交至[[meta:Special:MyLanguage/Threats_of_harm|维基媒体基金会紧急事务团队]]。该团队全天候监控紧急报告，并将在3小时内处理{{GENDER:|您的}}请求。",
 	"reportincident-submit-emergency-section-next-item-review": "我们将进行审核以确定其是否违反政策。",
 	"reportincident-submit-emergency-section-next-item-email": "如果{{GENDER:|您}}需要提交更多详细信息，请发送电子邮件至 [mailto:emergency@wikimedia.org emergency@wikimedia.org]。",
-	"reportincident-submit-behavior-dialog-title": "获取有关此事件的帮助",
 	"reportincident-submit-behavior-notice": "管理员可帮助处理有关用户行为的[[$1|紧急事件以及持续存在的问题]]。",
 	"reportincident-submit-behavior-section-support-title": "下一步做什么",
 	"reportincident-submit-behavior-section-support-item-behavior": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|不可接受的行为]]由有经验的{{SITENAME}}用户社群处理：",

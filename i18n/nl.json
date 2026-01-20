@@ -73,7 +73,6 @@
 	"reportincident-submit-emergency-section-next-item-team": "Uw melding is ingediend bij het [[meta:Special:MyLanguage/Threats_of_harm|noodhulpteam van de Wikimedia Foundation]]. Het team houdt noodmeldingen 24 uur per dag, 7 dagen per week in de gaten. Uw verzoek wordt binnen 3 uur behandeld.",
 	"reportincident-submit-emergency-section-next-item-review": "Wij zullen de melding beoordelen en bepalen of het incident in strijd is met het beleid.",
 	"reportincident-submit-emergency-section-next-item-email": "Als u nog gegevens wilt toevoegen, stuur dan een e-mail naar [mailto:emergency@wikimedia.org emergency@wikimedia.org].",
-	"reportincident-submit-behavior-dialog-title": "Ondersteuning bij een incident",
 	"reportincident-submit-behavior-notice": "Moderatoren kunnen helpen bij [[$1|dringende incidenten en aanhoudende problemen]] met gebruikersgedrag.",
 	"reportincident-submit-behavior-section-support-title": "Wat nu",
 	"reportincident-submit-behavior-section-support-item-behavior": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|Onaanvaardbaar gedrag]] wordt afgehandeld door de gemeenschap van ervaren {{SITENAME}}-gebruikers:",

@@ -72,7 +72,6 @@
 	"reportincident-submit-emergency-section-next-item-team": "A {{GENDER:|túa}} denuncia enviouse ao [[meta:Special:MyLanguage/Threats_of_harm|equipo de emerxencias da Fundación Wikimedia]]. O equipo supervisa as denuncias as 24 horas do día e os 7 días da semana; a {{GENDER:|túa}} solicitude analizarase nun prazo de 3 horas.",
 	"reportincident-submit-emergency-section-next-item-review": "Revisarémola e determinaremos se o incidente infrinxe as regras.",
 	"reportincident-submit-emergency-section-next-item-email": "Se {{GENDER:|tes}} que enviar detalles adicionais, envía un correo electrónico a [mailto:emergency@wikimedia.org emergency@wikimedia.org].",
-	"reportincident-submit-behavior-dialog-title": "Obtén asistencia en caso dun incidente",
 	"reportincident-submit-behavior-notice": "A administración pode axudar [[$1|cos incidentes urxentes e os problemas en curso]] en relación ao comportamento dos usuarios.",
 	"reportincident-submit-behavior-section-support-title": "Que facer a continuación",
 	"reportincident-submit-behavior-section-support-item-behavior": "A xestión do [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|comportamento inaceptable]] está delegada en usuarios experimentados da comunidade de {{SITENAME}}:",

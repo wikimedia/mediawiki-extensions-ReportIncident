@@ -68,7 +68,6 @@
 	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|Хьан}} хаам дӀакхачийна [[meta:Special:MyLanguage/Threats_of_harm|Викимедиа Фондан сиххалин команде]]. Командо 24/7 терго йо сиххалин хаамашна, ткъа {{GENDER:|хьан}} дехар 3 сахьт далале хьовсур ду.",
 	"reportincident-submit-emergency-section-next-item-review": "Цуьнга хьаьжна оха къастор ду оцу инциденто тхан политика йохош йу йа йац.",
 	"reportincident-submit-emergency-section-next-item-email": "Нагахь санна, {{GENDER:|хьайна}} кхин а хаамаш оьшуш белахь, дехар до, дӀадахьийта электронан кехат [mailto:emergency@wikimedia.org emergency@wikimedia.org] адресе.",
-	"reportincident-submit-behavior-dialog-title": "Цхьана инцидентана гӀо эца",
 	"reportincident-submit-behavior-notice": "Администраторша гӀо дан мега декъашхойн леларца доьхна долу [[$1|сиха хиламашца а, дӀайоьдуш йолу проблемашца а]].",
 	"reportincident-submit-behavior-section-support-title": "Кхин дӀа хӀун дан деза",
 	"reportincident-submit-behavior-section-support-item-behavior": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|ТӀеэца йиш йоцу леларан]] урхалла до зеделларг долу {{SITENAME}} декъашхойн йукъаралло:",

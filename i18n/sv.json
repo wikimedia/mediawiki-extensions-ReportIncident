@@ -73,7 +73,6 @@
 	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|Din}} rapport har skickats till [[meta:Special:MyLanguage/Threats_of_harm|Wikimedia Foundations nödteam]]. Teamet övervakar nödrapporter dygnet runt, och {{GENDER:|din}} begäran kommer att utredas inom 3 timmar.",
 	"reportincident-submit-emergency-section-next-item-review": "Vi kommer att granska det och avgöra om incidenten bryter mot policyerna.",
 	"reportincident-submit-emergency-section-next-item-email": "Om du behöver skicka in ytterligare information, vänligen skicka e-post till [mailto:emergency@wikimedia.org emergency@wikimedia.org].",
-	"reportincident-submit-behavior-dialog-title": "Få stöd för en incident",
 	"reportincident-submit-behavior-notice": "Administratörer kan hjälpa till med [[$1|brådskande incidenter och pågående problem]] gällande användarbeteende.",
 	"reportincident-submit-behavior-section-support-title": "Vad man ska göra härnäst",
 	"reportincident-submit-behavior-section-support-item-behavior": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|Oacceptabelt beteende]] hanteras av communityn av erfarna {{SITENAME}}-användare:",

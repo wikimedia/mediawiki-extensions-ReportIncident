@@ -72,7 +72,6 @@
 	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|Вашата}} пријава е поднесена кај [[meta:Special:MyLanguage/Threats_of_harm|Екипата за итни случаи на Фондацијата Викимедија]]. Екипата врши надзор врз пријавите на итни случаи 24/7, и {{GENDER:|вашето}} барање ќе биде разгледано во рок од 3 часа.",
 	"reportincident-submit-emergency-section-next-item-review": "Ќе го разгледаме и ќе одредиме дали инцидентот ги нарушува нашите правила.",
 	"reportincident-submit-emergency-section-next-item-email": "Ако треба да {{GENDER:|поднесете}} дополнителни поединости, испратете ги на [mailto:emergency@wikimedia.org emergency@wikimedia.org].",
-	"reportincident-submit-behavior-dialog-title": "Добијте поддршка за инцидент",
 	"reportincident-submit-behavior-notice": "Администраторите можат да помогнат со [[$1|итни инциденти и тековни проблеми]] со корисничкото поведение.",
 	"reportincident-submit-behavior-section-support-title": "Како да добиете поддршка",
 	"reportincident-submit-behavior-section-support-item-behavior": "Со [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|неприфатливото поведение]] се справува заедницата од искусни корисници на {{SITENAME}}:",

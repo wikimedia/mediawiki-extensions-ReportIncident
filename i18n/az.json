@@ -73,7 +73,6 @@
 	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|Sizin}} bildirişiniz [[meta:Special:MyLanguage/Threats_of_harm|Vikimedia Fondunun təcili yardım komandasına]] təqdim ediləcək. Komanda fövqəladə hallar bildirişlərinə 24/7 nəzarət edir və {{GENDER:|sizin}} müraciətinizə 3 saat ərzində baxılacaq.",
 	"reportincident-submit-emergency-section-next-item-review": "Biz onu nəzərdən keçirəcəyik və bunun qaydaları pozub-pozmadığını müəyyən edəcəyik.",
 	"reportincident-submit-emergency-section-next-item-email": "Əgər əlavə təfərrüatlar təqdim etmək lazımdırsa, zəhmət olmasa, [mailto:emergency@wikimedia.org emergency@wikimedia.org] e-poçt ünvanına göndərin.",
-	"reportincident-submit-behavior-dialog-title": "İnsident ilə bağlı dəstək alın",
 	"reportincident-submit-behavior-notice": "İnzibatçılar istifadəçi davranışı ilə bağlı [[$1|təcili insidentlər və davam edən problemlər]] ilə bağlı kömək edə bilər.",
 	"reportincident-submit-behavior-section-support-title": "Bundan sonra nə etməliyəm",
 	"reportincident-submit-behavior-section-support-item-behavior": "[[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|Uyğunsuz davranış]] təcrübəli {{SITENAME}} istifadəçiləri icması tərəfindən idarə edilir:",
