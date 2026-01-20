@@ -4,7 +4,9 @@
 			"Hedda",
 			"Joseph",
 			"Sakblue",
-			"SaldırganSincap"
+			"SaldırganSincap",
+			"Leo",
+			"LisafBia"
 		]
 	},
 	"reportincident-desc": "Olay Bildirim Sistemi uzantısı.",
@@ -38,5 +40,7 @@
 	"reportincident-dialog-harassment-example-trolling": "Trolleme",
 	"reportincident-dialog-engage-header": "Diyaloğa nasıl girilir",
 	"reportincident-dialog-engage-text": "Eğer kendinizi güvende hissediyorsanız sizi rahatsız eden kişiyle konuşmayı deneyebilirsiniz. Bu kişileri, Vikipedi'deki Evrensel Davranış Kuralları hakkında ve davranışlarının kabul edilemez olduğu konusunda bilgilendirin. Bu durum, bazen tacizin durdurulmasına yardımcı olabilir.",
-	"reportincident-dialog-admin-review": "Raporunuz incelenmek üzere [$1 bir hizmetliye] gönderilecek"
+	"reportincident-dialog-admin-review": "Raporunuz incelenmek üzere [$1 bir hizmetliye] gönderilecek",
+	"right-reportincident": "Bir olayı bildirin",
+	"action-reportincident": "bir olayı bildirme"
 }
