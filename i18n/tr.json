@@ -4,7 +4,9 @@
 			"Hedda",
 			"Joseph",
 			"Sakblue",
-			"SaldırganSincap"
+			"SaldırganSincap",
+			"Leo",
+			"LisafBia"
 		]
 	},
 	"reportincident-desc": "Olay Bildirim Sistemi uzantısı.",
@@ -17,10 +19,17 @@
 	"reportincident-dialog-additional-details-input-placeholder": "İncelemeci için faydalı olabilecek bağlamı ekleyin (örneğin ek bağlantılar).",
 	"reportincident-dialog-optional-label": "(isteğe bağlı)",
 	"reportincident-dialog-violator-label": "Bildirmek {{GENDER:|istediğiniz}} kullanıcı",
+	"reportincident-dialog-violator-disclaimer": "Wikimedia Vakfı, {{GENDER:|kimliğinizi}} şikayette bulunan kişiye gönüllü olarak ifşa etmeyecektir.",
 	"reportincident-dialog-violator-placeholder-text": "Kimi bildiriyorsunuz?",
+	"reportincident-dialog-harassment-type-doxing": "Özel kişisel bilgilerin ifşa edilmesi (Doxing)",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Nefret söylemi veya ayrımcılık",
 	"reportincident-dialog-harassment-type-intimidation": "Gözdağı, saldırganlık, isim takma",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Cinsel taciz",
 	"reportincident-dialog-harassment-type-something-else": "Başka bir şey",
-	"reportincident-dialog-something-else-input-placeholder": "Yukarıda listelenmeyen davranışları belirtin."
+	"reportincident-dialog-something-else-input-placeholder": "Yukarıda listelenmeyen davranışları belirtin.",
+	"reportincident-dialog-unacceptable-behavior-community-managed": "{{SITENAME}}, [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|uygunsuz davranışın hoş görülmediği]] bir topluluktur ve deneyimli kullanıcılar tarafından yönetilir.",
+	"reportincident-dialog-get-support-title": "Bir olay için destek alın.",
+	"right-reportincident": "Bir olayı bildirin",
+	"action-reportincident": "bir olayı bildirme",
+	"reportincident-type-incident-required": "Lütfen olay türünü seçin"
 }
