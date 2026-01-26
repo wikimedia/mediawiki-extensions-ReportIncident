@@ -4,6 +4,7 @@
 			"Cabal"
 		]
 	},
+	"reportincident-dialog-close-btn": "ਬੰਦ ਕਰੋ",
 	"reportincident-dialog-submit-btn": "ਇਤਲਾਹ ਜਮ੍ਹਾਂ ਕਰੋ",
 	"reportincident-dialog-violator-label": "ਵਰਤੋਂਕਾਰ {{GENDER:|ਤੁਸੀਂ}} ਇਤਲਾਹ ਦੇਣਾ ਚਾਹੁੰਦੇ ਹੋ",
 	"reportincident-submit-behavior-section-support-title": "ਅੱਗੇ ਕੀ ਕਰਨਾ ਏ"
