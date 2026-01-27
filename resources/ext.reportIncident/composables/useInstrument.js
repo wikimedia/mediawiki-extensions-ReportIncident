@@ -36,8 +36,12 @@ let instrument;
  * @return {LogEvent}
  */
 const useInstrument = () => {
-	// Disable instrumentation by default pending approval (T372823).
-	if ( !mw.config.get( 'wgReportIncidentEnableInstrumentation' ) ) {
+	if (
+		// Disable instrumentation by default pending approval (T372823).
+		!mw.config.get( 'wgReportIncidentEnableInstrumentation' ) ||
+		// Ignore instrumentation if the user is a tester (T414213)
+		mw.config.get( 'wgReportIncidentE2ETesterUsers' ).includes( mw.user.getName() )
+	) {
 		return () => {};
 	}
 

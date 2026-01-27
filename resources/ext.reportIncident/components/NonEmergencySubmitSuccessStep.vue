@@ -1,5 +1,8 @@
 <template>
 	<div v-if="page" ref="pageContent">
+		<cdx-message v-if="isTestReport" type="warning">
+			{{ $i18n( 'reportincident-e2e-tester-notice' ).text() }}
+		</cdx-message>
 		<cdx-message :icon="icons.cdxIconUserGroup">
 			<p v-if="page.description.header">
 				<strong>{{ page.description.header }}</strong>
@@ -365,12 +368,16 @@ module.exports = exports = {
 			helpMethods.push( mw.message( page.helpMethodDefault.msgKey ).parse() );
 		}
 
+		const testers = mw.config.get( 'wgReportIncidentE2ETesterUsers' ) || [];
+		const isTestReport = testers.includes( mw.user.getName() );
+
 		return {
 			page,
 			pageContent,
 			nextStepMsg,
 			helpMethods,
-			icons
+			icons,
+			isTestReport
 		};
 	}
 };

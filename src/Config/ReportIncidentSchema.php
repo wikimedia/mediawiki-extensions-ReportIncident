@@ -20,6 +20,19 @@ class ReportIncidentSchema extends JsonSchema {
 		],
 	];
 
+	public const ReportIncidentE2ETesterUsers = [
+		self::TYPE => self::TYPE_ARRAY,
+		self::ITEMS => [
+			self::TYPE => self::TYPE_STRING,
+			self::PROPERTIES => [
+				'User' => [
+					self::TYPE => self::TYPE_STRING,
+				],
+			],
+		],
+		self::DEFAULT => [],
+	];
+
 	// This is a hack to add a sub-header denoting the section
 	public const ReportIncident_NonEmergency_Intimidation = [
 		self::TYPE => self::TYPE_OBJECT,

@@ -16,12 +16,26 @@ describe( 'useInstrument', () => {
 
 	beforeEach( () => {
 		setActivePinia( createPinia() );
+		mw.user.getName = () => 'Foo';
 	} );
 
-	afterEach( () => jest.resetAllMocks() );
+	afterEach( () => {
+		jest.resetAllMocks();
+		delete mw.user.getName;
+	} );
 
 	it( 'should record events with new funnel entry token if enabled', () => {
-		const mwConfigGet = jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+		const mwConfigGet = jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wgReportIncidentEnableInstrumentation':
+					return true;
+				case 'wgReportIncidentE2ETesterUsers':
+					return [];
+				default:
+					return true;
+			}
+		} );
+		const mwName = jest.spyOn( mw.user, 'getName' );
 		const store = useFormStore();
 
 		const logEvent = useInstrument();
@@ -30,10 +44,12 @@ describe( 'useInstrument', () => {
 		logEvent( 'click', { context: 'something' } );
 		logEvent( 'click', { source: 'form', subType: 'foo', context: 'something' } );
 
+		expect( mwName ).toHaveBeenCalledTimes( 1 );
+
 		expect( typeof ( store.funnelEntryToken ) ).toEqual( 'string' );
 		expect( store.funnelEntryToken.length ).toBeGreaterThan( 0 );
 
-		expect( mwConfigGet ).toHaveBeenCalledTimes( 1 );
+		expect( mwConfigGet ).toHaveBeenCalledTimes( 2 );
 		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentEnableInstrumentation' );
 
 		expect( newInstrument ).toHaveBeenCalledTimes( 1 );
@@ -66,7 +82,16 @@ describe( 'useInstrument', () => {
 	} );
 
 	it( 'should reuse preexisting funnel entry token', () => {
-		jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wgReportIncidentEnableInstrumentation':
+					return true;
+				case 'wgReportIncidentE2ETesterUsers':
+					return [];
+				default:
+					return true;
+			}
+		} );
 		const store = useFormStore();
 		store.funnelEntryToken = 'test';
 
@@ -82,7 +107,16 @@ describe( 'useInstrument', () => {
 	} );
 
 	it( 'should generate new funnel entry token if reset after setup', () => {
-		jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wgReportIncidentEnableInstrumentation':
+					return true;
+				case 'wgReportIncidentE2ETesterUsers':
+					return [];
+				default:
+					return true;
+			}
+		} );
 		const store = useFormStore();
 		store.funnelEntryToken = 'test';
 
@@ -103,7 +137,16 @@ describe( 'useInstrument', () => {
 	} );
 
 	it( 'should provide funnel name if set', () => {
-		jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wgReportIncidentEnableInstrumentation':
+					return true;
+				case 'wgReportIncidentE2ETesterUsers':
+					return [];
+				default:
+					return true;
+			}
+		} );
 		const store = useFormStore();
 		store.funnelName = 'test';
 
@@ -121,7 +164,16 @@ describe( 'useInstrument', () => {
 	} );
 
 	it( 'should reuse instrument between calls', () => {
-		jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wgReportIncidentEnableInstrumentation':
+					return true;
+				case 'wgReportIncidentE2ETesterUsers':
+					return [];
+				default:
+					return true;
+			}
+		} );
 
 		useInstrument();
 		useInstrument();
@@ -130,7 +182,16 @@ describe( 'useInstrument', () => {
 	} );
 
 	it( 'should truncate overly long context values', () => {
-		jest.spyOn( mw.config, 'get' ).mockImplementation( () => true );
+		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wgReportIncidentEnableInstrumentation':
+					return true;
+				case 'wgReportIncidentE2ETesterUsers':
+					return [];
+				default:
+					return true;
+			}
+		} );
 
 		const logEvent = useInstrument();
 		const store = useFormStore();
@@ -153,8 +214,45 @@ describe( 'useInstrument', () => {
 		} );
 	} );
 
+	it( 'should not record events if user is considered a test user', () => {
+		const mwConfigGet = jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wgReportIncidentEnableInstrumentation':
+					return true;
+				case 'wgReportIncidentE2ETesterUsers':
+					return [ 'Foo' ];
+				default:
+					return true;
+			}
+		} );
+
+		const store = useFormStore();
+
+		const logEvent = useInstrument();
+
+		logEvent( 'view' );
+
+		expect( store.funnelEntryToken ).toBe( '' );
+
+		expect( mwConfigGet ).toHaveBeenCalledTimes( 2 );
+		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentEnableInstrumentation' );
+		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentE2ETesterUsers' );
+
+		expect( newInstrument ).not.toHaveBeenCalled();
+		expect( submitInteraction ).not.toHaveBeenCalled();
+	} );
+
 	it( 'should not record events if not enabled', () => {
-		const mwConfigGet = jest.spyOn( mw.config, 'get' ).mockImplementation( () => false );
+		const mwConfigGet = jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wgReportIncidentEnableInstrumentation':
+					return false;
+				case 'wgReportIncidentE2ETesterUsers':
+					return [];
+				default:
+					return true;
+			}
+		} );
 		const store = useFormStore();
 
 		const logEvent = useInstrument();

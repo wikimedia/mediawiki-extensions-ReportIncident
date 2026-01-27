@@ -41,17 +41,22 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 
 		logEvent = jest.fn();
 		useInstrument.mockImplementation( () => logEvent );
+		mw.user.getName = () => 'Foo';
 	} );
 
 	afterEach( () => {
 		jest.restoreAllMocks();
+		delete mw.user.getName;
 	} );
 
 	const defaultNonEmergencyPageCases = [
 		{
 			title: 'intimidation resolution',
 			config: {
-				inputBehavior: Constants.harassmentTypes.INTIMIDATION
+				inputBehavior: Constants.harassmentTypes.INTIMIDATION,
+				get: {
+					wgReportIncidentE2ETesterUsers: []
+				}
 			},
 			expected: {
 				headers: [
@@ -71,7 +76,10 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 		{
 			title: 'doxing resolution',
 			config: {
-				inputBehavior: Constants.harassmentTypes.DOXING
+				inputBehavior: Constants.harassmentTypes.DOXING,
+				get: {
+					wgReportIncidentE2ETesterUsers: []
+				}
 			},
 			expected: {
 				headers: [
@@ -91,7 +99,10 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 		{
 			title: 'sexual harassment resolution',
 			config: {
-				inputBehavior: Constants.harassmentTypes.SEXUAL_HARASSMENT
+				inputBehavior: Constants.harassmentTypes.SEXUAL_HARASSMENT,
+				get: {
+					wgReportIncidentE2ETesterUsers: []
+				}
 			},
 			expected: {
 				headers: [
@@ -111,7 +122,10 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 		{
 			title: 'trolling resolution',
 			config: {
-				inputBehavior: Constants.harassmentTypes.TROLLING
+				inputBehavior: Constants.harassmentTypes.TROLLING,
+				get: {
+					wgReportIncidentE2ETesterUsers: []
+				}
 			},
 			expected: {
 				headers: [
@@ -131,7 +145,10 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 		{
 			title: 'hate speech resolution',
 			config: {
-				inputBehavior: Constants.harassmentTypes.HATE_SPEECH
+				inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
+				get: {
+					wgReportIncidentE2ETesterUsers: []
+				}
 			},
 			expected: {
 				headers: [
@@ -151,7 +168,10 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 		{
 			title: 'spam resolution',
 			config: {
-				inputBehavior: Constants.harassmentTypes.SPAM
+				inputBehavior: Constants.harassmentTypes.SPAM,
+				get: {
+					wgReportIncidentE2ETesterUsers: []
+				}
 			},
 			expected: {
 				headers: [
@@ -171,7 +191,10 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 		{
 			title: 'other resolution',
 			config: {
-				inputBehavior: Constants.harassmentTypes.OTHER
+				inputBehavior: Constants.harassmentTypes.OTHER,
+				get: {
+					wgReportIncidentE2ETesterUsers: []
+				}
 			},
 			expected: {
 				headers: [
@@ -193,7 +216,10 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 		'renders the default page', ( { config, expected } ) => {
 			const wrapper = mount( {
 				incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-				inputBehavior: config.inputBehavior
+				inputBehavior: config.inputBehavior,
+				get: {
+					wgReportIncidentE2ETesterUsers: []
+				}
 			} );
 
 			const headers = wrapper.findAll( 'h3' ).map( ( h ) => h.text() );
@@ -236,7 +262,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 			config: {
 				inputBehavior: Constants.harassmentTypes.DOXING,
 				get: {
-					wgReportIncidentNonEmergencyDoxingShowWarning: true
+					wgReportIncidentNonEmergencyDoxingShowWarning: true,
+					wgReportIncidentE2ETesterUsers: []
 				}
 			},
 			expected: {

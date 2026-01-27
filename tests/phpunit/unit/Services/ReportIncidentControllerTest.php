@@ -28,6 +28,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 	): ReportIncidentController {
 		$communityConfig += [
 			'ReportIncidentEnabledNamespaces' => [],
+			'ReportIncidentE2ETesterUsers' => (object)[],
 			'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL' => '',
 			'ReportIncident_NonEmergency_Intimidation_HelpMethod' => (object)[
 				'ContactAdmin' => '',
@@ -222,6 +223,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentEnableInstrumentation' => true,
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
+				'wgReportIncidentE2ETesterUsers' => (object)[],
 				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
@@ -284,6 +286,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentEnableInstrumentation' => true,
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
+				'wgReportIncidentE2ETesterUsers' => (object)[],
 				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
@@ -379,6 +382,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentEnableInstrumentation' => true,
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
+				'wgReportIncidentE2ETesterUsers' => (object)[],
 				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',

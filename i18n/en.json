@@ -240,5 +240,9 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "e.g. incidents@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "e.g. Project:Village pump"
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "e.g. Project:Village pump",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-label": "End-to-end testers",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-description": "Add users whose reports will not be sent. This is useful for testing.",
+	"communityconfiguration-reportincident-nonexistent-user-error": "Only existing accounts can be made into a test user",
+	"reportincident-e2e-tester-notice": "This report was not sent, as you are currently considered an end-to-end tester."
 }

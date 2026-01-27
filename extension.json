@@ -26,6 +26,7 @@
 						"TitleParser",
 						"PageStore",
 						"ArchivedRevisionLookup",
+						"UserFactory",
 						"CommunityConfiguration.ValidatorFactory"
 					],
 					"args": [
@@ -302,7 +303,8 @@
 				"reportincident-nonemergency-spam-nextstep-common",
 				"reportincident-nonemergency-other-nextstep-default",
 				"reportincident-nonemergency-other-nextstep-configured",
-				"reportincident-nonemergency-other-nextstep-common"
+				"reportincident-nonemergency-other-nextstep-common",
+				"reportincident-e2e-tester-notice"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",

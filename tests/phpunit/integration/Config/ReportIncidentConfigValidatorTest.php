@@ -29,6 +29,7 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 			$this->getServiceContainer()->getTitleParser(),
 			$this->getServiceContainer()->getPageStore(),
 			$this->getServiceContainer()->getArchivedRevisionLookup(),
+			$this->getServiceContainer()->getUserFactory(),
 			CommunityConfigurationServices::wrap( $this->getServiceContainer() )->getValidatorFactory(),
 			ReportIncidentSchema::class,
 			$context
@@ -37,6 +38,9 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 
 	public function addDBDataOnce() {
 		$this->getExistingTestPage( self::TEST_EXISTING_PAGE );
+
+		// Guarantee a user exists to later test against the user input validator
+		$this->getTestSysop();
 	}
 
 	/**
@@ -70,6 +74,7 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 	private static function getConfigUnderTest( $name, $value ) {
 		$baseConfig = [
 			'ReportIncidentEnabledNamespaces' => [],
+			'ReportIncidentE2ETesterUsers' => [],
 			'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL' => '',
 			'ReportIncident_NonEmergency_Intimidation_HelpMethod' => (object)[
 				'ContactAdmin' => '',
@@ -269,6 +274,12 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 					'ContactCommunity' => self::TEST_EXISTING_PAGE,
 					'Email' => 'foo@bar.com',
 				],
+			],
+		];
+
+		yield 'valid test user enabled' => [
+			[
+				'ReportIncidentE2ETesterUsers' => [ 'UTSysop' ],
 			],
 		];
 	}

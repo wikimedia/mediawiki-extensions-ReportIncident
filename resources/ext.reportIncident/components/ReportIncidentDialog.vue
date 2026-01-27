@@ -232,6 +232,13 @@ module.exports = exports = {
 		}
 
 		function submitReport() {
+			// The user filing the report is set as an e2e tester in CommunityConfiguration,
+			// don't post the report and instead consider the submission as having succeeded
+			if ( mw.config.get( 'wgReportIncidentE2ETesterUsers' ).includes( mw.user.getName() ) ) {
+				onReportSubmitSuccess();
+				return;
+			}
+
 			const restPayload = store.restPayload;
 			restPayload.revisionId = mw.config.get( 'wgCurRevisionId' );
 			// TODO: Simulate mw.Api.postWithToken() by re-trying if the REST API call fails

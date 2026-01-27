@@ -5,6 +5,9 @@ return (object) array(
    'ReportIncidentEnabledNamespaces' => 
   array (
   ),
+   'ReportIncidentE2ETesterUsers' => 
+  array (
+  ),
    'ReportIncident_NonEmergency_Intimidation' => 
   (object) array(
   ),

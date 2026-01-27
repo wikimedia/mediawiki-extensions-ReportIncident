@@ -245,5 +245,9 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "Placeholder for a configurable email to be used in a help contact method",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-label": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-description": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "Placeholder for a configurable link to be used in a help contact method"
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "Placeholder for a configurable link to be used in a help contact method",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-label": "Label for a configuration option for ReportIncident CommunityConfiguration that allows users to be added to a tester set",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-description": "Description for a configuration option for ReportIncident CommunityConfiguration that allows users to be added to a tester set",
+	"communityconfiguration-reportincident-nonexistent-user-error": "Error shown when a nonexistent user is submitted in the cofiguration option",
+	"reportincident-e2e-tester-notice": "Message shown on the final step of a report submission to let the submitter know it was considered a test submission and not sent"
 }

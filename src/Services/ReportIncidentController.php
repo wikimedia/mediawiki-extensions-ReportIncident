@@ -105,10 +105,11 @@ class ReportIncidentController {
 			// Control whether instrumentation is enabled pending approval (T372823).
 			'wgReportIncidentEnableInstrumentation' => $this->config->get( 'ReportIncidentEnableInstrumentation' ),
 			'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
-			// Non-Emergency Intimidation CommunityConfig values
+			// Config that defines users who can e2e test without actually sending a report
+			'wgReportIncidentE2ETesterUsers' => $this->localConfig->get( 'ReportIncidentE2ETesterUsers' ) ?? [],
+			// Non-Emergency help methods
 			'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' =>
 				$this->localConfig->get( 'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL' ),
-			// Non-Emergency help methods
 			'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' =>
 				$communityConfigIntimidationHelpMethods->ContactAdmin,
 			'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' =>

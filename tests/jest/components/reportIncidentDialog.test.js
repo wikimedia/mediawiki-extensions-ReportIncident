@@ -68,10 +68,12 @@ describe( 'Report Incident Dialog', () => {
 
 	beforeEach( () => {
 		useInstrument.mockImplementation( () => logEvent );
+		mw.user.getName = () => 'Foo';
 	} );
 
 	afterEach( () => {
 		jest.restoreAllMocks();
+		delete mw.user.getName;
 	} );
 
 	it( 'mounts the component', () => {
@@ -269,6 +271,8 @@ describe( 'Report Incident Dialog', () => {
 						return 1;
 					case 'wgPageName':
 						return 'Test_page';
+					case 'wgReportIncidentE2ETesterUsers':
+						return [];
 					default:
 						throw new Error( 'Unknown key: ' + key );
 				}

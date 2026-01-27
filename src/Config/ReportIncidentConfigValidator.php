@@ -12,6 +12,7 @@ use MediaWiki\Page\PageLookup;
 use MediaWiki\Revision\ArchivedRevisionLookup;
 use MediaWiki\Title\MalformedTitleException;
 use MediaWiki\Title\TitleParser;
+use MediaWiki\User\UserFactory;
 
 /**
  * Validator class used by CommunityConfiguration for IRS local links.
@@ -23,6 +24,7 @@ class ReportIncidentConfigValidator implements IValidator {
 		private readonly PageLookup $pageLookup,
 		private readonly IContextSource $context,
 		private readonly ArchivedRevisionLookup $archivedRevisionLookup,
+		private readonly UserFactory $userFactory,
 	) {
 	}
 
@@ -30,6 +32,7 @@ class ReportIncidentConfigValidator implements IValidator {
 		TitleParser $titleParser,
 		PageLookup $pageLookup,
 		ArchivedRevisionLookup $archivedRevisionLookup,
+		UserFactory $userFactory,
 		ValidatorFactory $validatorFactory,
 		string $jsonSchema,
 		?IContextSource $context = null
@@ -47,7 +50,8 @@ class ReportIncidentConfigValidator implements IValidator {
 			$titleParser,
 			$pageLookup,
 			$context,
-			$archivedRevisionLookup
+			$archivedRevisionLookup,
+			$userFactory
 		);
 	}
 
@@ -79,6 +83,21 @@ class ReportIncidentConfigValidator implements IValidator {
 	 */
 	private function validateConfig( $config ): ValidationStatus {
 		$status = new ValidationStatus();
+
+		$testers = $config->ReportIncidentE2ETesterUsers ?? [];
+		if ( count( $testers ) ) {
+			foreach ( $testers as $testerUsername ) {
+				$testerUser = $this->userFactory->newFromName( $testerUsername );
+				if ( !$testerUser->getId() ) {
+					$status->addFatal(
+						'ReportIncidentE2ETesterUsers',
+						"/ReportIncidentE2ETesterUsers",
+						$this->context->msg( 'communityconfiguration-reportincident-nonexistent-user-error' )->text()
+					);
+					continue;
+				}
+			}
+		}
 
 		$wikiPages = [
 			'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL',
