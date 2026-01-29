@@ -52,6 +52,7 @@
 	"reportincident-behavior-required": "請選擇不可接受行為的類型",
 	"reportincident-threat-harm-required": "必須提供「傷害威脅」選項。",
 	"reportincident-submit-emergency-dialog-title": "感謝{{GENDER:|您}}採取行動讓{{SITENAME}}更安全、包容",
+	"reportincident-submit-emergency-section-important-title": "重要",
 	"reportincident-submit-emergency-section-important-item-services": "如果{{GENDER:|您}}已受傷或身處危機，請撥打{{GENDER:|您}}的當地緊急服務電話。",
 	"reportincident-submit-emergency-section-next-title": "接下來會發生什麼？",
 	"reportincident-submit-behavior-section-support-title": "接下來該做什麼",
