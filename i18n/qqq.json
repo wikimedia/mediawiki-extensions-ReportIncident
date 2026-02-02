@@ -6,7 +6,8 @@
 			"Ellen Rayfield",
 			"Essex Igyan",
 			"Julia Kieserman",
-			"Nemoralis"
+			"Nemoralis",
+			"Woytecr"
 		]
 	},
 	"reportincident-desc": "{{desc|name=ReportIncident|url=https://www.mediawiki.org/wiki/Extension:ReportIncident}}",
@@ -152,7 +153,7 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_showwarning-label": "Label for a configurable option to be used in a help contact method",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_showwarning-description": "Description for a configurable option to toggle a warning",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_showwarning-control-label": "Checkbox label for a configurable option to toggle a warning",
-	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-label": "Label for a configurable link to be used in a help contact method",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-label": "Label for a configurable link to be used in a help contact method - help page about edit suppression",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-description": "Description for a configurable link to be used in a help contact method",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-placeholder": "Placeholder for a configurable link to be used in a help contact method",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-help-text": "Help text for a configurable link to be used in a help contact method",
