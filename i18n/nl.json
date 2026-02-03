@@ -96,5 +96,12 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Een wikipagina waar gebruikers informatie kunnen vinden over het oplossen van geschillen op de wiki.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Ingeschakelde naamruimten",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Naamruimten waarin het Incidentmeldingssysteem is ingeschakeld.",
-	"communityconfiguration-reportincident-invalid-title": "De pagina moet een bestaande lokale wikipagina zijn"
+	"communityconfiguration-reportincident-invalid-title": "De pagina moet een bestaande lokale wikipagina zijn",
+	"communityconfiguration-reportincident-invalid-email": "De waarde moet een correct e-mailadres zijn",
+	"reportincident-nonemergency-submitsuccess-title": "Ondersteuningsinformatie",
+	"reportincident-nonemergency-nextsteps-header": "Wat nu",
+	"reportincident-nonemergency-requesthelp-header": "Hoe vraag ik hulp",
+	"reportincident-nonemergency-other-header": "Kunt u niet vinden wat u zoekt?",
+	"reportincident-nonemergency-generic-description": "De informatie op deze pagina is bedoeld om u te helpen het incident op te lossen.",
+	"reportincident-nonemergency-intimidation-header": "Pesten, intimidatie, bedreigingen of beledigingen"
 }
