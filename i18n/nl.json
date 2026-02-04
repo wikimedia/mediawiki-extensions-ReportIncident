@@ -103,5 +103,16 @@
 	"reportincident-nonemergency-requesthelp-header": "Hoe vraag ik hulp",
 	"reportincident-nonemergency-other-header": "Kunt u niet vinden wat u zoekt?",
 	"reportincident-nonemergency-generic-description": "De informatie op deze pagina is bedoeld om u te helpen het incident op te lossen.",
-	"reportincident-nonemergency-intimidation-header": "Pesten, intimidatie, bedreigingen of beledigingen"
+	"reportincident-nonemergency-intimidation-header": "Pesten, intimidatie, bedreigingen of beledigingen",
+	"reportincident-nonemergency-intimidation-nextstep-configured": "[[$1|Geschillenbeslechting]] is vaak de eerste stap bij eenvoudige problemen op de wiki.\n\n{{int:reportincident-nonemergency-intimidation-nextstep-common}} Herinner de persoon aan het [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment officiële beleid] en wijs erop dat diens gedrag kan leiden tot een tijdelijk bewerkingsverbod.",
+	"reportincident-nonemergency-intimidation-nextstep-default": "Geschillenbeslechting is vaak de eerste stap bij eenvoudige problemen op de wiki.\n\n{{int:reportincident-nonemergency-intimidation-nextstep-common}} Herinner de persoon aan het [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment officiële beleid] en wijs erop dat diens gedrag kan leiden tot een tijdelijk bewerkingsverbod.",
+	"reportincident-nonemergency-intimidation-nextstep-common": "Als u zich er veilig bij voelt, kunt u proberen om met de persoon die u hebt gemeld te praten via diens overlegpagina.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-label": "Pagina voor geschillenbeslechting (optioneel)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-description": "Voegt de link naar de pagina voor geschillenbeslechting toe",
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-placeholder": "bv. Project:Geschillenbeslechting",
+	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-help-text": "Dit kan de pagina met uw lokale beleid zijn",
+	"reportincident-nonemergency-helpmethod-default": "Voor problemen die zich op de wiki voordoen, is het raadzaam contact op te nemen met een moderator of via het mededelingenbord van de gemeenschap hulp te vragen bij dringende en aanhoudende incidenten.",
+	"reportincident-nonemergency-helpmethod-contactadmin": "[[$1|Neem contact op met een moderator]] voor hulp bij dringende of lopende incidenten op de wiki",
+	"reportincident-nonemergency-helpmethod-email": "Stuur uw vraag per e-mail naar [mailto:$1 $1]",
+	"reportincident-nonemergency-helpmethod-contactcommunity": "Als u niet zeker weet wat u moet doen, [[$1|vraag dan de gemeenschap om hulp]]"
 }
