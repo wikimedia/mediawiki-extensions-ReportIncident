@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
+			"Neriah",
 			"YaronSh"
 		]
 	},
@@ -19,7 +20,7 @@
 	"reportincident-dialog-violator-placeholder-text": "את מי {{GENDER:|אתה מדווח|את מדווחת}}?",
 	"reportincident-dialog-harassment-type-doxing": "חשיפת מידע אישי פרטי (דוקסינג)",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "תוכן מעורר שנאה ומפלה",
-	"reportincident-dialog-harassment-type-intimidation": "בריונות, הפחדה, איום או עלבונות חוזרים ונשנים",
+	"reportincident-dialog-harassment-type-intimidation": "בריונות, הפחדה, איום או עלבונות",
 	"reportincident-dialog-harassment-type-sexual-harassment": "הטרדה מינית",
 	"reportincident-dialog-harassment-type-something-else": "משהו אחר",
 	"reportincident-dialog-harassment-type-spam": "ספאם או תוכן פרסומי",
@@ -84,7 +85,7 @@
 	"reportincident-submit-behavior-section-other-options-title": "לא מצאת את מה {{GENDER:|שאתה מחפש|שאת מחפשת}}?",
 	"reportincident-submit-behavior-section-other-options-item-ask": "אם {{GENDER:|אתה לא בטוח|את לא בטוחה}} מה לעשות, [[$1|{{GENDER:|בקש|בקשי}} עזרה מהקהילה]].",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "אם השלבים לעיל לא עזרו לך, {{GENDER:|אתה יכול|את יכולה}} ליצור קשר עם [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|המוסד ללא כוונת רווח]] שמארח את האתר הזה.",
-	"reportincident-submit-back-to-page": "חזרה אל $1",
+	"reportincident-submit-back-to-page": "חזרה אל דף השיחה",
 	"communityconfiguration-reportincident-title": "מערכת דיווח תקריות",
 	"communityconfiguration-reportincident-description": "הגדרת קישורים מקומיים שמשמשים את זרימת העבודה למצבים שאינם מצבי חירום של מערכת דיווח התקריות וניהול מרחבי השמות שהמערכת מופעלת בהם.",
 	"communityconfiguration-reportincident-info-text": "מערכת דיווח התקריות מפנה משתמשים שמגישים דו\"חות דרך זרימת העבודה שלה למצבים שאינם מצבי חירום לדפי ויקי מקומיים מתאימים. אפשר להגדיר אותם כאן. אם השדה יושאר ריק, זה יגרום לשימוש בערכי ברירת מחדל מהתצורה המותקנת.",
@@ -96,9 +97,15 @@
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "דף ויקי שמשתמשים יכולים למצוא בו מידע על פתרון מחלוקות בוויקי.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "מרחבי שם מופעלים",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "מרחבי שמות שמערכת דיווח האירועים מופעלת בהם.",
-	"communityconfiguration-reportincident-invalid-title": "הדף חייב להיות דף ויקי מקומי קיים.",
+	"communityconfiguration-reportincident-invalid-title": "הדף חייב להיות דף ויקי מקומי קיים",
+	"communityconfiguration-reportincident-invalid-email": "הערך חייב להיות כתובת דוא\"ל תקינה",
 	"reportincident-nonemergency-submitsuccess-title": "מידע על תמיכה",
 	"reportincident-nonemergency-nextsteps-header": "מה לעשות הלאה",
 	"reportincident-nonemergency-requesthelp-header": "איך לבקש עזרה",
-	"reportincident-nonemergency-other-header": "לא מצאת את מה שחיפשת?"
+	"reportincident-nonemergency-other-header": "לא מצאת את מה שחיפשת?",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_showwarning-control-label": "הפעלת הודעות אזהרה",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "הטרדה מינית",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-placeholder": "לדוגמה: incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-email-placeholder": "לדוגמה: incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "לדוגמה: spam@example.com"
 }
