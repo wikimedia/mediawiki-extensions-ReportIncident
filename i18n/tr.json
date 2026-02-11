@@ -31,5 +31,8 @@
 	"reportincident-dialog-get-support-title": "Bir olay için destek alın.",
 	"right-reportincident": "Bir olayı bildirin",
 	"action-reportincident": "bir olayı bildirme",
+	"reportincident-choose-option": "Bir seçenek seçin",
+	"reportincident-dialog-cancel": "İptal",
+	"reportincident-dialog-continue": "Devam",
 	"reportincident-type-incident-required": "Lütfen olay türünü seçin"
 }
