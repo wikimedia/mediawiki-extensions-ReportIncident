@@ -37,10 +37,8 @@
 		<h3 class="ext-reportincident-dialog__submit-success-section-header">
 			{{ $i18n( 'reportincident-nonemergency-other-header' ).text() }}
 		</h3>
-		<!-- eslint-disable vue/no-v-html-->
-		<p v-html="$i18n( 'reportincident-nonemergency-generic-nextstep-otheraction' ).parse()">
+		<p v-i18n-html:reportincident-nonemergency-generic-nextstep-otheraction>
 		</p>
-		<!-- eslint-disable vue/no-v-html-->
 	</div>
 </template>
 

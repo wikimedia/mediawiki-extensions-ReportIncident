@@ -453,16 +453,14 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 		// Manually mount instead of using mount() in order to overwrite global.$i18n
 		const wrapper = utils.mount( NonEmergencySubmitSuccessStep, {
 			global: {
-				mocks: {
-					$i18n: ( str ) => ( {
-						text: () => str,
-						parse: () => {
-							if ( str === 'reportincident-nonemergency-generic-nextstep-otheraction' ) {
-								return 'Test message <a href="https://example.com">link</a>';
-							}
-							return str;
+				directives: {
+					'i18n-html': ( el, binding ) => {
+						if ( binding.arg === 'reportincident-nonemergency-generic-nextstep-otheraction' ) {
+							el.innerHTML = 'Test message <a href="https://example.com">link</a>';
+							return;
 						}
-					} )
+						el.innerHTML = binding.value ? `${ binding.arg } (${ binding.value })` : binding.arg;
+					}
 				},
 				plugins: [
 					createTestingPinia( {
