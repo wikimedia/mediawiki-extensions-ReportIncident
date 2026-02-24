@@ -194,5 +194,9 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-help-text": "Bu, lokal siyasət səhifəniz ola bilər",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "məsələn, Layihə:İnzibatçılara müraciət",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "məsələn, incidents@example.com",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "məsələn, Layihə:Kənd meydanı"
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "məsələn, Layihə:Kənd meydanı",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-label": "Testerlər",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-description": "Şikayətləri göndərilməyəcək istifadəçiləri əlavə edin. Bu, test etmək üçündür.",
+	"communityconfiguration-reportincident-nonexistent-user-error": "Yalnız mövcud hesablar test istifadəçisinə çevrilə bilər",
+	"reportincident-e2e-tester-notice": "Tester olaraq əlavə olunduğunuz üçün bu şikayət göndərilmədi."
 }

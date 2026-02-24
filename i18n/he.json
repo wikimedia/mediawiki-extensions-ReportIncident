@@ -107,5 +107,6 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "הטרדה מינית",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment_helpmethod-email-placeholder": "לדוגמה: incidents@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-email-placeholder": "לדוגמה: incidents@example.com",
-	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "לדוגמה: spam@example.com"
+	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "לדוגמה: spam@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "משהו אחר"
 }
