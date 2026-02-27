@@ -193,5 +193,9 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-help-text": "Isto pote esser tu pagina de politica local",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "p.ex. Project:Administratores",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "p.ex. incidentes@example.com",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "p.ex. Project:Taverna"
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "p.ex. Project:Taverna",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-label": "Probatores de tote le systema",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-description": "Adde usatores cuje reportos non essera inviate. Isto es utile pro exequer tests.",
+	"communityconfiguration-reportincident-nonexistent-user-error": "Solmente contos existente pote esser convertite in un usator de test",
+	"reportincident-e2e-tester-notice": "Iste reporto non ha essite inviate perque tu es actualmente considerate como un probator de tote le systema."
 }
