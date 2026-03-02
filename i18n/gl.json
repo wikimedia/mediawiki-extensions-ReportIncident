@@ -193,5 +193,9 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-help-text": "Esta podería ser a túa páxina de normas local",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "por exemplo, Proxecto:Taboleiro dos administradores",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "por exemplo, incidentes@exemplo.gal",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "por exemplo, Proxecto:A Taberna"
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "por exemplo, Proxecto:A Taberna",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-label": "Probadores do sistema",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-description": "Engade usuarios cuxos informes non se enviarán. Isto é útil para facer probas.",
+	"communityconfiguration-reportincident-nonexistent-user-error": "Só as contas existentes poden converterse nun usuario de proba",
+	"reportincident-e2e-tester-notice": "Este informe non se enviou porque nestes intres es un probador do sistema."
 }

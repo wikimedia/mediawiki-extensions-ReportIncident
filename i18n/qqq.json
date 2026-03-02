@@ -211,7 +211,7 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-label": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-label}}",
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-description": "{{msg-mw:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-description}}",
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "Placeholder for a configurable email to be used in a help contact method",
-	"reportincident-nonemergency-spam-header": "Type of non-emergency incidentt",
+	"reportincident-nonemergency-spam-header": "Type of non-emergency incident",
 	"reportincident-nonemergency-spam-nextsteps-configured": "Suggested next step for this kind of non-emergency incident.\n\nParameters:\n* $1 - Link to page describing how to work through dispute resolution.\n\nSee also: {{msg-mw|reportincident-nonemergency-spam-nextstep-common}}",
 	"reportincident-nonemergency-spam-nextstep-default": "Suggested next step for this kind of non-emergency incident. See also: {{msg-mw|reportincident-nonemergency-spam-nextstep-common}}",
 	"reportincident-nonemergency-spam-nextstep-common": "Part of the suggested next step shared between {{msg-mw|reportincident-nonemergency-spam-nextsteps-configured}} and {{msg-mw|reportincident-nonemergency-spam-nextstep-default}}",
