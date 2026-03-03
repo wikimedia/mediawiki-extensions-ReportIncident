@@ -5,15 +5,27 @@
 			"Saurmandal"
 		]
 	},
+	"reportincident-desc": "घटना रिपोर्टिंग प्रणाली का एक्सटेंशन।",
 	"reportincident-report-btn-label": "रिपोर्ट करें",
 	"reportincident-dialog-close-btn": "बंद करें",
 	"reportincident-dialog-back-btn": "पीछे",
 	"reportincident-dialog-submit-btn": "जमा करें",
 	"reportincident-dialog-optional-label": "(वैकल्पिक)",
+	"reportincident-dialog-violator-placeholder-text": "आप किसके बारे में रिपोर्ट कर रहे हैं?",
+	"reportincident-dialog-harassment-type-sexual-harassment": "यौन उत्पीड़न",
+	"reportincident-dialog-harassment-type-something-else": "कुछ और",
+	"reportincident-dialog-something-else-input-placeholder": "ऊपर सूचीबद्ध न किए गए व्यवहारों का उल्लेख करें।",
 	"reportincident-dialog-harassment-example-threats": "धमकियां",
+	"reportincident-dialog-harassment-empty": "आपको कम-से-कम एक व्यवहार चुनना होगा।",
+	"reportincident-dialog-something-else-empty": "कृपया व्यवहार का संक्षिप्त विवरण प्रदान करें।",
+	"reportincident-dialog-server-error": "क्षमा करें, ऐसा लगता है कि हमारा सर्वर उत्तर नहीं दे रहा है। कृपया पुनः जमा करें।",
+	"reportincident-dialog-generic-error": "आपका अनुरोध एक त्रुटि के कारण जमा नहीं किया जा सका। कृपया पुनः जमा करें।",
 	"reportincident-success-message-close": "बंद करें",
 	"reportincident-email-something-else": "कुछ और: \"$1\"",
 	"right-reportincident": "घटना रिपोर्ट करना",
 	"action-reportincident": "घटना रिपोर्ट करने",
-	"reportincident-emaildialog-close-button": "रद्द करें"
+	"reportincident-emaildialog-title": "प्रमाणित ईमेल पता आवश्यक है",
+	"reportincident-emaildialog-close-button": "रद्द करें",
+	"reportincident-emaildialog-primary": "सेटिंग्स में जाएँ",
+	"reportincident-confirmedemail-required": "घटना रिपोर्ट जमा करने के लिए एक प्रमाणित ईमेल पता आवश्यक है।"
 }
