@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eduardoaddad"
+		]
+	},
+	"reportincident-desc": "Extensão para Sistema de notificação de incidentes.",
+	"reportincident-report-btn-label": "Reportar",
+	"reportincident-dialog-close-btn": "Fechar",
+	"reportincident-dialog-back-btn": "Voltar",
+	"reportincident-dialog-submit-btn": "Enviar relatório",
+	"reportincident-dialog-harassment-type-label": "Tipo de comportamento inaceitável",
+	"reportincident-dialog-additional-details-input-label": "Informação adicional",
+	"reportincident-dialog-additional-details-input-placeholder": "Adicionar contexto que possa ser útil para quem for analisar a denúncia (ex: links)",
+	"reportincident-dialog-optional-label": "(opcional)",
+	"reportincident-dialog-violator-label": "O usuário que {{GENDER:|você}} deseja denunciar",
+	"reportincident-dialog-violator-disclaimer": "A Fundação Wikimedia não liberará voluntariamente a {{GENDER:|sua}} identidade para a pessoa que {{GENDER:|você está}} denunciando",
+	"reportincident-dialog-violator-placeholder-text": "Quem {{GENDER:|você}} está denunciando?",
+	"reportincident-dialog-harassment-type-doxing": "Exposição de informações pessoais privadas (Doxing)",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Assédio sexual",
+	"reportincident-dialog-harassment-type-something-else": "Outras",
+	"reportincident-dialog-something-else-input-placeholder": "Especifique os comportamentos não listados acima.",
+	"reportincident-dialog-unacceptable-behavior-community-managed": "{{SITENAME}} é uma comunidade onde [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|comportamento inapropriado não é tolerado]] e é administrado por pessoas usuárias experientes.",
+	"reportincident-dialog-get-support-title": "Buscar ajuda sobre um incidente",
+	"right-reportincident": "Denunciar um incidente",
+	"reportincident-emaildialog-close-button": "Cancelar",
+	"communityconfiguration-reportincident-description": "Configure os links locais usados pelo fluxo não emergencial do Sistema de notificação de incidentes e gerencie os espaços nominais nos quais o sistema está ativado.",
+	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Espaços nominais ativados"
+}
