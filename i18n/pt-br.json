@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eduardoaddad"
+		]
+	},
+	"reportincident-desc": "Extensão para Sistema de notificação de incidentes.",
+	"reportincident-report-btn-label": "Reportar",
+	"reportincident-dialog-close-btn": "Fechar",
+	"reportincident-dialog-back-btn": "Voltar",
+	"reportincident-dialog-optional-label": "(opcional)",
+	"reportincident-dialog-violator-placeholder-text": "Quem {{GENDER:|você}} está denunciando?",
+	"reportincident-dialog-harassment-type-sexual-harassment": "Assédio sexual",
+	"reportincident-dialog-harassment-type-something-else": "Outras",
+	"reportincident-dialog-something-else-input-placeholder": "Especifique os comportamentos não listados acima.",
+	"right-reportincident": "Denunciar um incidente",
+	"reportincident-emaildialog-close-button": "Cancelar"
+}
