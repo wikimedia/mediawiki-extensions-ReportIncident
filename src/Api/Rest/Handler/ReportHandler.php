@@ -176,12 +176,13 @@ class ReportHandler extends SimpleHandler {
 		} else {
 			// Treat a revision ID of zero as a nonexistent page
 			// to allow reporting nonexistent talk pages (T381363)
+			$inputTitle = $body['page'];
 			try {
-				$title = $this->titleParser->parseTitle( $body['page'] );
+				$title = $this->titleParser->parseTitle( $inputTitle );
 				$body['page'] = PageReferenceValue::localReference( $title->getNamespace(), $title->getDBkey() );
 			} catch ( MalformedTitleException ) {
 				throw new LocalizedHttpException(
-					new MessageValue( 'rest-invalid-title', [ $body['page'] ] ),
+					new MessageValue( 'rest-invalid-title', [ $inputTitle ] ),
 					422
 				);
 			}
