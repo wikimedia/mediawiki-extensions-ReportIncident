@@ -194,5 +194,9 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-help-text": "Dit kan de pagina met uw lokale beleid zijn",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "bijv. Project:Beheerdersprikbord",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "bijv. incidents@example.com",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "bijv. Project:De Kroeg"
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "bijv. Project:De Kroeg",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-label": "End-to-end testers",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-description": "Gebruikers toevoegen van wie de rapporten niet verzonden hoeven te worden. Dit is handig voor testdoeleinden.",
+	"communityconfiguration-reportincident-nonexistent-user-error": "Alleen bestaande accounts kunnen als testgebruiker worden ingesteld",
+	"reportincident-e2e-tester-notice": "Dit rapport is niet verzonden, omdat u momenteel wordt beschouwd als een end-to-end tester."
 }
