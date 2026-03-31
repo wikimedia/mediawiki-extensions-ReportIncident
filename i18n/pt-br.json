@@ -13,6 +13,15 @@
 	"reportincident-dialog-harassment-type-sexual-harassment": "Assédio sexual",
 	"reportincident-dialog-harassment-type-something-else": "Outras",
 	"reportincident-dialog-something-else-input-placeholder": "Especifique os comportamentos não listados acima.",
+	"reportincident-dialog-harassment-empty": "Tem de selecionar pelo menos um comportamento.",
+	"reportincident-dialog-something-else-empty": "Forneça uma descrição breve do comportamento, por favor.",
+	"reportincident-dialog-server-error": "Desculpe, parece que o nosso servidor não está respondendo. Tente reenviar, por favor.",
+	"reportincident-dialog-generic-error": "Não foi possível enviar o seu pedido devido a um erro. Tente reenviar, por favor.",
 	"right-reportincident": "Denunciar um incidente",
-	"reportincident-emaildialog-close-button": "Cancelar"
+	"action-reportincident": "denunciar um incidente",
+	"reportincident-emaildialog-title": "É necessário um endereço de e-mail verificado",
+	"reportincident-emaildialog-close-button": "Cancelar",
+	"reportincident-emaildialog-content": "Precisamos do seu endereço de e-mail verificado, para fornecer atualizações sobre a denúncia ou para seguimento da mesma, se necessário. Adicione ou verifique o endereço de e-mail nas configurações da sua conta de usuário antes de apresentar uma denúncia.",
+	"reportincident-emaildialog-primary": "Ir para as configurações",
+	"reportincident-confirmedemail-required": "É necessário um endereço de e-mail confirmado para enviar uma denúncia de incidente."
 }
