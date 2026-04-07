@@ -1,6 +1,4 @@
-'use strict';
-
-const Page = require( 'wdio-mediawiki/Page' );
+import Page from 'wdio-mediawiki/Page';
 
 class ReportIncidentPage extends Page {
 	get actionsMenu() {
@@ -104,4 +102,4 @@ class ReportIncidentPage extends Page {
 	}
 }
 
-module.exports = new ReportIncidentPage();
+export default new ReportIncidentPage();

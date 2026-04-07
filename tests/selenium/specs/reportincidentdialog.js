@@ -1,14 +1,12 @@
-'use strict';
-
-const ReportIncidentPage = require( '../pageobjects/reportincident.page' );
-const Api = require( 'wdio-mediawiki/Api' );
-const UserLoginPage = require( 'wdio-mediawiki/LoginPage' );
-const Util = require( 'wdio-mediawiki/Util' );
+import ReportIncidentPage from '../pageobjects/reportincident.page.js';
+import { createApiClient } from 'wdio-mediawiki/Api';
+import LoginPage from 'wdio-mediawiki/LoginPage';
+import { getTestString } from 'wdio-mediawiki/Util';
 
 describe( 'ReportIncident dialog', () => {
 	const waitOpts = { timeout: 30000 };
 
-	let bot;
+	let apiClient;
 	let userName;
 	let reportUrl;
 	let userPassword;
@@ -41,12 +39,12 @@ describe( 'ReportIncident dialog', () => {
 			`${ MW_SCRIPT_PATH }/`
 		);
 
-		userPassword = Util.getTestString();
-		userName = Util.getTestString( 'Report-incident-' );
-		bot = await Api.bot();
+		userPassword = getTestString();
+		userName = getTestString( 'Report-incident-' );
+		apiClient = await createApiClient();
 
-		await Api.createAccount( bot, userName, userPassword );
-		await UserLoginPage.login( userName, userPassword );
+		await apiClient.createAccount( userName, userPassword );
+		await LoginPage.login( userName, userPassword );
 
 		reportUrl = `${ baseUri }rest.php/reportincident/v0/report`;
 	} );
@@ -241,7 +239,7 @@ describe( 'ReportIncident dialog', () => {
 
 	it( 'Should be able to fill a report from a thread', async () => {
 		const now = new Date();
-		await bot.edit(
+		await apiClient.edit(
 			`User talk:${ userName }`,
 			'== This is a test thread ==\n\nThis is the thread text ~~~ ' +
 			`${ now.toTimeString().slice( 0, 5 ) }, ${
@@ -253,7 +251,7 @@ describe( 'ReportIncident dialog', () => {
 
 		// Login as Admin again and go back to the talk page, otherwise
 		// the thread options button is not shown
-		await UserLoginPage.loginAdmin();
+		await LoginPage.loginAdmin();
 		await navigateToUserPage();
 
 		// Wait for the page to load, showing the "ellipsis" button next to the
@@ -321,8 +319,8 @@ describe( 'ReportIncident dialog', () => {
 		const requestBody = request.body;
 
 		// Check that a revision and threadId are provided
-		expect( requestBody ).toHaveAttr( 'revisionId' );
-		expect( requestBody ).toHaveAttr( 'threadId' );
+		expect( requestBody ).toHaveProperty( 'revisionId' );
+		expect( requestBody ).toHaveProperty( 'threadId' );
 		expect( requestBody.revisionId ).toBeGreaterThan( 0 );
 		expect( requestBody.threadId.length ).toBeGreaterThan( 0 );
 
@@ -335,7 +333,7 @@ describe( 'ReportIncident dialog', () => {
 		await expect( requestBody ).toStrictEqual( {
 			// The thread was created by the bot, therefore the reportedUser
 			// should match the login it uses to make edits.
-			reportedUser: bot.options.username,
+			reportedUser: browser.options.capabilities[ 'mw:user' ],
 			incidentType: 'unacceptable-user-behavior',
 			behaviorType: 'something-else',
 			somethingElseDetails: 'Testing456',
