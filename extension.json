@@ -77,7 +77,8 @@
 				13,
 				15
 			],
-			"description": "Determines what namespaces the Incident Reporting tool will render within. The default is 3 which defaults to the NS_USER_TALK namespace"
+			"description": "Determines what namespaces the Incident Reporting tool will render within.",
+			"merge_strategy": "provide_default"
 		},
 		"ReportIncidentMinimumAccountAgeInSeconds": {
 			"value": 10800,
