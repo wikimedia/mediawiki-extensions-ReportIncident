@@ -23,6 +23,36 @@ const Constants = {
 		TROLLING: 'trolling',
 		OTHER: 'something-else'
 	},
+	harassmentTypesV2: {
+		DOXING: {
+			id: 'doxing',
+			labelKey: 'reportincident-dialog-harassment-type-doxing'
+		},
+		HATE_SPEECH: {
+			id: 'hate-or-discrimination',
+			labelKey: 'reportincident-dialog-harassment-type-hate-speech-or-discrimination'
+		},
+		INTIMIDATION: {
+			id: 'intimidation',
+			labelKey: 'reportincident-dialog-harassment-type-intimidation'
+		},
+		SEXUAL_HARASSMENT: {
+			id: 'sexual-harassment',
+			labelKey: 'reportincident-dialog-harassment-type-sexual-harassment'
+		},
+		SPAM: {
+			id: 'spam',
+			labelKey: 'reportincident-dialog-harassment-type-spam'
+		},
+		TROLLING: {
+			id: 'trolling',
+			labelKey: 'reportincident-dialog-harassment-type-trolling'
+		},
+		OTHER: {
+			id: 'something-else',
+			labelKey: 'reportincident-dialog-harassment-type-something-else'
+		}
+	},
 	/**
 	 * The number of Unicode codepoints accepted by textareas holding report details.
 	 */

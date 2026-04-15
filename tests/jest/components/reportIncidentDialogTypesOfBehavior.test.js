@@ -52,6 +52,25 @@ describe( 'Report Incident Dialog Types of Behavior', () => {
 		expect( wrapper.find( '.ext-reportincident-dialog-types-of-behavior__something-else-textarea' ).exists() ).toBe( false );
 	} );
 
+	it( 'shows non-emergency categories as defined by ReportIncidentEnabledNonEmergencyCategories', async () => {
+		global.mw.config.get = jest.fn();
+		global.mw.config.get.mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wgReportIncidentEnableInstrumentation':
+					return false;
+				case 'wgReportIncidentEnabledNonEmergencyCategories':
+					return [
+						'INTIMIDATION'
+					];
+				default:
+					throw new Error( 'Unknown key: ' + key );
+			}
+		} );
+		const wrapper = renderComponent();
+		expect( wrapper.find( 'input[value="intimidation"]' ).exists() ).toBe( true );
+		expect( wrapper.find( 'input[value="sexual-harassment"]' ).exists() ).toBe( false );
+	} );
+
 	it( 'Gets correct error messages for display', () => {
 		const wrapper = renderComponent();
 		const store = useFormStore();

@@ -65,6 +65,16 @@ describe( 'Main Component Test Suite', () => {
 			switch ( key ) {
 				case 'wgReportIncidentUserHasConfirmedEmail':
 					return true;
+				case 'wgReportIncidentEnabledNonEmergencyCategories':
+					return [
+						'INTIMIDATION',
+						'SEXUAL_HARASSMENT',
+						'DOXING',
+						'TROLLING',
+						'HATE_SPEECH',
+						'SPAM',
+						'OTHER'
+					];
 				default:
 					throw new Error( 'Unknown key: ' + key );
 			}
@@ -112,6 +122,16 @@ describe( 'Main Component Test Suite', () => {
 			switch ( key ) {
 				case 'wgReportIncidentUserHasConfirmedEmail':
 					return false;
+				case 'wgReportIncidentEnabledNonEmergencyCategories':
+					return [
+						'INTIMIDATION',
+						'SEXUAL_HARASSMENT',
+						'DOXING',
+						'TROLLING',
+						'HATE_SPEECH',
+						'SPAM',
+						'OTHER'
+					];
 				default:
 					throw new Error( 'Unknown key: ' + key );
 			}

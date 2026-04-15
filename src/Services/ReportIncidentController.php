@@ -107,6 +107,9 @@ class ReportIncidentController {
 			'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 			// Config that defines users who can e2e test without actually sending a report
 			'wgReportIncidentE2ETesterUsers' => $this->localConfig->get( 'ReportIncidentE2ETesterUsers' ) ?? [],
+			// Config that defines what categories are shown
+			'wgReportIncidentEnabledNonEmergencyCategories' =>
+				$this->config->get( 'ReportIncidentEnabledNonEmergencyCategories' ) ?? [],
 			// Non-Emergency help methods
 			'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' =>
 				$this->localConfig->get( 'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL' ),

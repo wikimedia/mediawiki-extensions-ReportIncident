@@ -224,6 +224,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
 				'wgReportIncidentE2ETesterUsers' => (object)[],
+				'wgReportIncidentEnabledNonEmergencyCategories' => [],
 				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
@@ -264,6 +265,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$objectUnderTest = $this->newReportIncidentController( [
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentEnableInstrumentation' => true,
+			'ReportIncidentEnabledNonEmergencyCategories' => [],
 		] );
 		$objectUnderTest->addModulesAndConfigVars( $outputPageMock );
 	}
@@ -287,6 +289,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
 				'wgReportIncidentE2ETesterUsers' => (object)[],
+				'wgReportIncidentEnabledNonEmergencyCategories' => [],
 				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
@@ -326,6 +329,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$globalConfig += [
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentEnableInstrumentation' => true,
+			'ReportIncidentEnabledNonEmergencyCategories' => [],
 		];
 		/** @var ReportIncidentController $objectUnderTest */
 		$objectUnderTest = $this->newReportIncidentController( $globalConfig, $communityConfig );
@@ -383,6 +387,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
 				'wgReportIncidentE2ETesterUsers' => (object)[],
+				'wgReportIncidentEnabledNonEmergencyCategories' => [],
 				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
@@ -423,6 +428,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$objectUnderTest = $this->newReportIncidentController( [
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentEnableInstrumentation' => true,
+			'ReportIncidentEnabledNonEmergencyCategories' => [],
 		] );
 		$objectUnderTest->addModulesAndConfigVars( $outputPageMock );
 	}

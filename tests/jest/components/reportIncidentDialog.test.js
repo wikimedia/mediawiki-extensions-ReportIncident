@@ -69,6 +69,24 @@ describe( 'Report Incident Dialog', () => {
 	beforeEach( () => {
 		useInstrument.mockImplementation( () => logEvent );
 		mw.user.getName = () => 'Foo';
+		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wgReportIncidentUserHasConfirmedEmail':
+					return true;
+				case 'wgReportIncidentEnabledNonEmergencyCategories':
+					return [
+						'INTIMIDATION',
+						'SEXUAL_HARASSMENT',
+						'DOXING',
+						'TROLLING',
+						'HATE_SPEECH',
+						'SPAM',
+						'OTHER'
+					];
+				default:
+					throw new Error( 'Unknown key: ' + key );
+			}
+		} );
 	} );
 
 	afterEach( () => {
@@ -227,7 +245,9 @@ describe( 'Report Incident Dialog', () => {
 					xhr: { status: 404, responseJSON: { errorKey: 'some-example-error', messageTranslations: { en: errMsg } } }
 				} );
 
-				expect( mw.config.get.mock.calls ).toEqual( [ [ 'wgUserLanguage' ] ] );
+				expect( mw.config.get.mock.calls ).toEqual(
+					[ [ 'wgReportIncidentEnabledNonEmergencyCategories' ], [ 'wgUserLanguage' ] ]
+				);
 				expect( wrapper.vm.footerErrorMessage ).toBe( errMsg );
 			} );
 
@@ -243,7 +263,9 @@ describe( 'Report Incident Dialog', () => {
 					xhr: { status: 404, responseJSON: { errorKey: 'some-example-error', messageTranslations: { en: errMsg } } }
 				} );
 
-				expect( mw.config.get.mock.calls ).toEqual( [ [ 'wgUserLanguage' ] ] );
+				expect( mw.config.get.mock.calls ).toEqual(
+					[ [ 'wgReportIncidentEnabledNonEmergencyCategories' ], [ 'wgUserLanguage' ] ]
+				);
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-generic-error' );
 			} );
 
@@ -263,7 +285,8 @@ describe( 'Report Incident Dialog', () => {
 
 	describe( 'footer navigation', () => {
 		beforeEach( () => {
-			jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+			global.mw.config.get = jest.fn();
+			global.mw.config.get.mockImplementation( ( key ) => {
 				switch ( key ) {
 					case 'wgReportIncidentUserHasConfirmedEmail':
 						return true;
@@ -273,6 +296,16 @@ describe( 'Report Incident Dialog', () => {
 						return 'Test_page';
 					case 'wgReportIncidentE2ETesterUsers':
 						return [];
+					case 'wgReportIncidentEnabledNonEmergencyCategories':
+						return [
+							'INTIMIDATION',
+							'SEXUAL_HARASSMENT',
+							'DOXING',
+							'TROLLING',
+							'HATE_SPEECH',
+							'SPAM',
+							'OTHER'
+						];
 					default:
 						throw new Error( 'Unknown key: ' + key );
 				}
