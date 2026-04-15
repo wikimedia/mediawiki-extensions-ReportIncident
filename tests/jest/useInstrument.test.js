@@ -31,6 +31,16 @@ describe( 'useInstrument', () => {
 					return true;
 				case 'wgReportIncidentE2ETesterUsers':
 					return [];
+				case 'wgReportIncidentEnabledNonEmergencyCategories':
+					return [
+						'INTIMIDATION',
+						'SEXUAL_HARASSMENT',
+						'DOXING',
+						'TROLLING',
+						'HATE_SPEECH',
+						'SPAM',
+						'OTHER'
+					];
 				default:
 					return true;
 			}
@@ -49,7 +59,7 @@ describe( 'useInstrument', () => {
 		expect( typeof ( store.funnelEntryToken ) ).toEqual( 'string' );
 		expect( store.funnelEntryToken.length ).toBeGreaterThan( 0 );
 
-		expect( mwConfigGet ).toHaveBeenCalledTimes( 2 );
+		expect( mwConfigGet ).toHaveBeenCalledTimes( 3 );
 		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentEnableInstrumentation' );
 
 		expect( newInstrument ).toHaveBeenCalledTimes( 1 );
@@ -88,6 +98,16 @@ describe( 'useInstrument', () => {
 					return true;
 				case 'wgReportIncidentE2ETesterUsers':
 					return [];
+				case 'wgReportIncidentEnabledNonEmergencyCategories':
+					return [
+						'INTIMIDATION',
+						'SEXUAL_HARASSMENT',
+						'DOXING',
+						'TROLLING',
+						'HATE_SPEECH',
+						'SPAM',
+						'OTHER'
+					];
 				default:
 					return true;
 			}
@@ -113,6 +133,16 @@ describe( 'useInstrument', () => {
 					return true;
 				case 'wgReportIncidentE2ETesterUsers':
 					return [];
+				case 'wgReportIncidentEnabledNonEmergencyCategories':
+					return [
+						'INTIMIDATION',
+						'SEXUAL_HARASSMENT',
+						'DOXING',
+						'TROLLING',
+						'HATE_SPEECH',
+						'SPAM',
+						'OTHER'
+					];
 				default:
 					return true;
 			}
@@ -143,6 +173,16 @@ describe( 'useInstrument', () => {
 					return true;
 				case 'wgReportIncidentE2ETesterUsers':
 					return [];
+				case 'wgReportIncidentEnabledNonEmergencyCategories':
+					return [
+						'INTIMIDATION',
+						'SEXUAL_HARASSMENT',
+						'DOXING',
+						'TROLLING',
+						'HATE_SPEECH',
+						'SPAM',
+						'OTHER'
+					];
 				default:
 					return true;
 			}
@@ -170,6 +210,16 @@ describe( 'useInstrument', () => {
 					return true;
 				case 'wgReportIncidentE2ETesterUsers':
 					return [];
+				case 'wgReportIncidentEnabledNonEmergencyCategories':
+					return [
+						'INTIMIDATION',
+						'SEXUAL_HARASSMENT',
+						'DOXING',
+						'TROLLING',
+						'HATE_SPEECH',
+						'SPAM',
+						'OTHER'
+					];
 				default:
 					return true;
 			}
@@ -188,6 +238,16 @@ describe( 'useInstrument', () => {
 					return true;
 				case 'wgReportIncidentE2ETesterUsers':
 					return [];
+				case 'wgReportIncidentEnabledNonEmergencyCategories':
+					return [
+						'INTIMIDATION',
+						'SEXUAL_HARASSMENT',
+						'DOXING',
+						'TROLLING',
+						'HATE_SPEECH',
+						'SPAM',
+						'OTHER'
+					];
 				default:
 					return true;
 			}
@@ -221,6 +281,16 @@ describe( 'useInstrument', () => {
 					return true;
 				case 'wgReportIncidentE2ETesterUsers':
 					return [ 'Foo' ];
+				case 'wgReportIncidentEnabledNonEmergencyCategories':
+					return [
+						'INTIMIDATION',
+						'SEXUAL_HARASSMENT',
+						'DOXING',
+						'TROLLING',
+						'HATE_SPEECH',
+						'SPAM',
+						'OTHER'
+					];
 				default:
 					return true;
 			}
@@ -234,7 +304,7 @@ describe( 'useInstrument', () => {
 
 		expect( store.funnelEntryToken ).toBe( '' );
 
-		expect( mwConfigGet ).toHaveBeenCalledTimes( 2 );
+		expect( mwConfigGet ).toHaveBeenCalledTimes( 3 );
 		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentEnableInstrumentation' );
 		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentE2ETesterUsers' );
 
@@ -249,6 +319,16 @@ describe( 'useInstrument', () => {
 					return false;
 				case 'wgReportIncidentE2ETesterUsers':
 					return [];
+				case 'wgReportIncidentEnabledNonEmergencyCategories':
+					return [
+						'INTIMIDATION',
+						'SEXUAL_HARASSMENT',
+						'DOXING',
+						'TROLLING',
+						'HATE_SPEECH',
+						'SPAM',
+						'OTHER'
+					];
 				default:
 					return true;
 			}
@@ -261,7 +341,7 @@ describe( 'useInstrument', () => {
 
 		expect( store.funnelEntryToken ).toBe( '' );
 
-		expect( mwConfigGet ).toHaveBeenCalledTimes( 1 );
+		expect( mwConfigGet ).toHaveBeenCalledTimes( 2 );
 		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentEnableInstrumentation' );
 
 		expect( newInstrument ).not.toHaveBeenCalled();

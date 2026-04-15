@@ -99,6 +99,19 @@
 		"ReportIncidentZendeskSubjectLine": {
 			"value": "Incident Reporting System emergency report",
 			"description": "Custom subject line to use in Zendesk requests created for emergency reports."
+		},
+		"ReportIncidentEnabledNonEmergencyCategories": {
+			"value": [
+				"INTIMIDATION",
+				"SEXUAL_HARASSMENT",
+				"DOXING",
+				"TROLLING",
+				"HATE_SPEECH",
+				"SPAM",
+				"OTHER"
+			],
+			"description": "Defines what non-emergency categories are seen and in what order. See Constants.harassmentTypes for a list of available categories.",
+			"merge_strategy": "provide_default"
 		}
 	},
 	"AvailableRights": [
