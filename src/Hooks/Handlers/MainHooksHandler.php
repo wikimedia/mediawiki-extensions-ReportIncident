@@ -20,9 +20,9 @@
 namespace MediaWiki\Extension\ReportIncident\Hooks\Handlers;
 
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
-use MediaWiki\Hook\SidebarBeforeOutputHook;
-use MediaWiki\Hook\SkinTemplateNavigation__UniversalHook;
 use MediaWiki\Output\Hook\BeforePageDisplayHook;
+use MediaWiki\Skin\Hook\SidebarBeforeOutputHook;
+use MediaWiki\Skin\Hook\SkinTemplateNavigation__UniversalHook;
 
 class MainHooksHandler implements
 	BeforePageDisplayHook,
