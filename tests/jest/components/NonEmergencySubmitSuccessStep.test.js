@@ -209,6 +209,29 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
+		},
+		{
+			title: 'sockpuppetry resolution',
+			config: {
+				inputBehavior: Constants.harassmentTypes.SOCKPUPPETRY,
+				get: {
+					wgReportIncidentE2ETesterUsers: []
+				}
+			},
+			expected: {
+				headers: [
+					'reportincident-nonemergency-nextsteps-header',
+					'reportincident-nonemergency-requesthelp-header',
+					'reportincident-nonemergency-other-header'
+				],
+				copy: [
+					'reportincident-dialog-harassment-type-sockpuppetry',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-sockpuppetry-nextstep-default',
+					'reportincident-nonemergency-helpmethod-default',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
 		}
 	];
 
@@ -421,6 +444,28 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 				copy: [
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-other-nextstep-configured',
+					'reportincident-nonemergency-helpmethod-contactadmin',
+					'reportincident-nonemergency-helpmethod-email',
+					'reportincident-nonemergency-helpmethod-contactcommunity',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'sockpuppetry resolution, configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.SOCKPUPPETRY,
+				get: {
+					wgReportIncidentNonEmergencySockpuppetryHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencySockpuppetryHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencySockpuppetryHelpMethodContactCommunity: 'baz'
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-dialog-harassment-type-sockpuppetry',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-sockpuppetry-nextstep-default',
 					'reportincident-nonemergency-helpmethod-contactadmin',
 					'reportincident-nonemergency-helpmethod-email',
 					'reportincident-nonemergency-helpmethod-contactcommunity',

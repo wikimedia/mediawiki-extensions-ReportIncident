@@ -68,6 +68,11 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'Email' => '',
 				'ContactCommunity' => '',
 			],
+			'ReportIncident_NonEmergency_Sockpuppetry_HelpMethod' => (object)[
+				'ContactAdmin' => '',
+				'Email' => '',
+				'ContactCommunity' => '',
+			],
 		];
 		return new ReportIncidentController(
 			new HashConfig( $globalConfig ),
@@ -250,6 +255,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyOtherHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' => '',
+				'wgReportIncidentNonEmergencySockpuppetryHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencySockpuppetryHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencySockpuppetryHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -315,6 +323,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyOtherHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' => '',
+				'wgReportIncidentNonEmergencySockpuppetryHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencySockpuppetryHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencySockpuppetryHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -413,6 +424,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyOtherHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' => '',
+				'wgReportIncidentNonEmergencySockpuppetryHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencySockpuppetryHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencySockpuppetryHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );

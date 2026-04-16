@@ -116,6 +116,8 @@ class ReportIncidentConfigValidator implements IValidator {
 			'ReportIncident_NonEmergency_Other_DisputeResolutionURL',
 			[ 'ReportIncident_NonEmergency_Other_HelpMethod', 'ContactAdmin' ],
 			[ 'ReportIncident_NonEmergency_Other_HelpMethod', 'ContactCommunity' ],
+			[ 'ReportIncident_NonEmergency_Sockpuppetry_HelpMethod', 'ContactAdmin' ],
+			[ 'ReportIncident_NonEmergency_Sockpuppetry_HelpMethod', 'ContactCommunity' ],
 		];
 		foreach ( $wikiPages as $key ) {
 			try {
@@ -182,6 +184,7 @@ class ReportIncidentConfigValidator implements IValidator {
 			[ 'ReportIncident_NonEmergency_HateSpeech_HelpMethod', 'Email' ],
 			[ 'ReportIncident_NonEmergency_Spam_HelpMethod', 'Email' ],
 			[ 'ReportIncident_NonEmergency_Other_HelpMethod', 'Email' ],
+			[ 'ReportIncident_NonEmergency_Sockpuppetry_HelpMethod', 'Email' ],
 		];
 		foreach ( $emails as $key ) {
 			// If key is an array, it represents a nested value

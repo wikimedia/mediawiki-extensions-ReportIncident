@@ -21,7 +21,8 @@ const Constants = {
 		SEXUAL_HARASSMENT: 'sexual-harassment',
 		SPAM: 'spam',
 		TROLLING: 'trolling',
-		OTHER: 'something-else'
+		OTHER: 'something-else',
+		SOCKPUPPETRY: 'sockpuppetry'
 	},
 	harassmentTypesV2: {
 		DOXING: {
@@ -51,6 +52,10 @@ const Constants = {
 		OTHER: {
 			id: 'something-else',
 			labelKey: 'reportincident-dialog-harassment-type-something-else'
+		},
+		SOCKPUPPETRY: {
+			id: 'sockpuppetry',
+			labelKey: 'reportincident-dialog-harassment-type-sockpuppetry'
 		}
 	},
 	/**
