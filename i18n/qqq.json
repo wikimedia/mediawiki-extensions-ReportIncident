@@ -249,5 +249,19 @@
 	"communityconfiguration-reportincident-reportincidente2etesterusers-label": "Label for a configuration option for ReportIncident CommunityConfiguration that allows users to be added to a tester set",
 	"communityconfiguration-reportincident-reportincidente2etesterusers-description": "Description for a configuration option for ReportIncident CommunityConfiguration that allows users to be added to a tester set",
 	"communityconfiguration-reportincident-nonexistent-user-error": "Error shown when a nonexistent user is submitted in the cofiguration option",
-	"reportincident-e2e-tester-notice": "Message shown on the final step of a report submission to let the submitter know it was considered a test submission and not sent"
+	"reportincident-e2e-tester-notice": "Message shown on the final step of a report submission to let the submitter know it was considered a test submission and not sent",
+	"reportincident-dialog-harassment-type-sockpuppetry": "Label for type of harassment: Illegitimate use of multiple accounts (sockpuppetry)",
+	"reportincident-nonemergency-sockpuppetry-nextstep-default": "Suggested next step for this kind of non-emergency incident.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry-label": "Header for a subsection on ReportIncident's CommunityConfiguration page",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-label": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-description": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactadmin-label": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactadmin-description": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactadmin-placeholder": "Placeholder for a configurable link to be used in a help contact method",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-email-label": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-email-description": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-email-placeholder": "Placeholder for a configurable email to be used in a help contact method",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-label": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-description": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-placeholder": "Placeholder for a configurable link to be used in a help contact method"
 }

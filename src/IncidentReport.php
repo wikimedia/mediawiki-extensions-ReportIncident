@@ -49,7 +49,8 @@ class IncidentReport {
 			'sexual-harassment',
 			'spam',
 			'trolling',
-			'something-else'
+			'something-else',
+			'sockpuppetry'
 		];
 	}
 

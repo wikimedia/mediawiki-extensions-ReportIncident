@@ -75,4 +75,13 @@ return (object) array(
      'Email' => '',
      'ContactCommunity' => '',
   ),
+   'ReportIncident_NonEmergency_Sockpuppetry' => 
+  (object) array(
+  ),
+   'ReportIncident_NonEmergency_Sockpuppetry_HelpMethod' => 
+  (object) array(
+     'ContactAdmin' => '',
+     'Email' => '',
+     'ContactCommunity' => '',
+  ),
 );
