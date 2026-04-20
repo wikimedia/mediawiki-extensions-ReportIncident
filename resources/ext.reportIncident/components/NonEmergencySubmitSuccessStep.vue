@@ -421,6 +421,38 @@ module.exports = exports = {
 			}
 		};
 
+		pages[ Constants.harassmentTypes.OTHER ] = {
+			description: {
+				text: mw.msg( 'reportincident-nonemergency-generic-description' )
+			},
+			notice: {
+				text: mw.msg( 'reportincident-nonemergency-other-notice' ),
+				shouldDisplay: true
+			},
+			nextSteps: [
+				{
+					msgKey: 'reportincident-nonemergency-other-nextstep-default'
+				}
+			],
+			helpMethods: [
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-contactadmin',
+					requiredParams: [ 'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-email',
+					requiredParams: [ 'wgReportIncidentNonEmergencyOtherHelpMethodEmail' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
+					requiredParams: [ 'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' ]
+				}
+			],
+			helpMethodDefault: {
+				msgKey: 'reportincident-nonemergency-helpmethod-default'
+			}
+		};
+
 		const page = pages[ behavior ];
 
 		// A message is considered valid if the requiredParams are found via mw.config.get()
