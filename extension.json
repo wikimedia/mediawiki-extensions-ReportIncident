@@ -322,7 +322,9 @@
 				"reportincident-dialog-harassment-type-sockpuppetry",
 				"reportincident-nonemergency-sockpuppetry-nextstep-default",
 				"reportincident-dialog-harassment-type-vandalism",
-				"reportincident-nonemergency-vandalism-nextstep-default"
+				"reportincident-nonemergency-vandalism-nextstep-default",
+				"reportincident-dialog-harassment-type-userdispute",
+				"reportincident-nonemergency-userdispute-nextstep-default"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",

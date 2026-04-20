@@ -51,7 +51,8 @@ class IncidentReport {
 			'trolling',
 			'something-else',
 			'sockpuppetry',
-			'vandalism'
+			'vandalism',
+			'userdispute'
 		];
 	}
 

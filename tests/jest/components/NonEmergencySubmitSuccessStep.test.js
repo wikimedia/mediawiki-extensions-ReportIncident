@@ -255,6 +255,29 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
+		},
+		{
+			title: 'user dispute resolution',
+			config: {
+				inputBehavior: Constants.harassmentTypes.USER_DISPUTE,
+				get: {
+					wgReportIncidentE2ETesterUsers: []
+				}
+			},
+			expected: {
+				headers: [
+					'reportincident-nonemergency-nextsteps-header',
+					'reportincident-nonemergency-requesthelp-header',
+					'reportincident-nonemergency-other-header'
+				],
+				copy: [
+					'reportincident-dialog-harassment-type-userdispute',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-userdispute-nextstep-default',
+					'reportincident-nonemergency-helpmethod-default',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
 		}
 	];
 
@@ -511,6 +534,28 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-dialog-harassment-type-vandalism',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-vandalism-nextstep-default',
+					'reportincident-nonemergency-helpmethod-contactadmin',
+					'reportincident-nonemergency-helpmethod-email',
+					'reportincident-nonemergency-helpmethod-contactcommunity',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'user dispute resolution, configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.USER_DISPUTE,
+				get: {
+					wgReportIncidentNonEmergencyUserDisputeHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyUserDisputeHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencyUserDisputeHelpMethodContactCommunity: 'baz'
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-dialog-harassment-type-userdispute',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-userdispute-nextstep-default',
 					'reportincident-nonemergency-helpmethod-contactadmin',
 					'reportincident-nonemergency-helpmethod-email',
 					'reportincident-nonemergency-helpmethod-contactcommunity',
