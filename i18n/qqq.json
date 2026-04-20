@@ -263,5 +263,19 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-email-placeholder": "Placeholder for a configurable email to be used in a help contact method",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-label": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-description": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
-	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-placeholder": "Placeholder for a configurable link to be used in a help contact method"
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-placeholder": "Placeholder for a configurable link to be used in a help contact method",
+	"reportincident-dialog-harassment-type-vandalism": "Label for type of harassment: Vandalism",
+	"reportincident-nonemergency-vandalism-nextstep-default": "Suggested next step for this kind of non-emergency incident.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism-label": "Header for a subsection on ReportIncident's CommunityConfiguration page",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-label": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-description": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactadmin-label": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactadmin-description": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactadmin-placeholder": "Placeholder for a configurable link to be used in a help contact method",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-email-label": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-email-description": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-email-placeholder": "Placeholder for a configurable email to be used in a help contact method",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactcommunity-label": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactcommunity-description": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactcommunity-placeholder": "Placeholder for a configurable link to be used in a help contact method"
 }

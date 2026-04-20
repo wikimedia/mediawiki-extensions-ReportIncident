@@ -84,4 +84,13 @@ return (object) array(
      'Email' => '',
      'ContactCommunity' => '',
   ),
+   'ReportIncident_NonEmergency_Vandalism' => 
+  (object) array(
+  ),
+   'ReportIncident_NonEmergency_Vandalism_HelpMethod' => 
+  (object) array(
+     'ContactAdmin' => '',
+     'Email' => '',
+     'ContactCommunity' => '',
+  ),
 );

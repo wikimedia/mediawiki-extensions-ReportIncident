@@ -320,7 +320,9 @@
 				"reportincident-nonemergency-other-nextstep-common",
 				"reportincident-e2e-tester-notice",
 				"reportincident-dialog-harassment-type-sockpuppetry",
-				"reportincident-nonemergency-sockpuppetry-nextstep-default"
+				"reportincident-nonemergency-sockpuppetry-nextstep-default",
+				"reportincident-dialog-harassment-type-vandalism",
+				"reportincident-nonemergency-vandalism-nextstep-default"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",
