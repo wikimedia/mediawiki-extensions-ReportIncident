@@ -83,6 +83,11 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'Email' => '',
 				'ContactCommunity' => '',
 			],
+			'ReportIncident_NonEmergency_DisruptiveEditing_HelpMethod' => (object)[
+				'ContactAdmin' => '',
+				'Email' => '',
+				'ContactCommunity' => '',
+			],
 		];
 		return new ReportIncidentController(
 			new HashConfig( $globalConfig ),
@@ -274,6 +279,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyUserDisputeHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyUserDisputeHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyUserDisputeHelpMethodContactCommunity' => '',
+				'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -348,6 +356,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyUserDisputeHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyUserDisputeHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyUserDisputeHelpMethodContactCommunity' => '',
+				'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );
@@ -455,6 +466,9 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyUserDisputeHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencyUserDisputeHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencyUserDisputeHelpMethodContactCommunity' => '',
+				'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactAdmin' => '',
+				'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodEmail' => '',
+				'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactCommunity' => '',
 			] );
 		$outputPageMock->expects( $this->once() )->method( 'addModules' )
 			->with( 'ext.reportIncident' );

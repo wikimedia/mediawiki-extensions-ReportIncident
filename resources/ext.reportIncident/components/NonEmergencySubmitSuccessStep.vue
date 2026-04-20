@@ -392,6 +392,35 @@ module.exports = exports = {
 			}
 		};
 
+		pages[ Constants.harassmentTypes.DISRUPTIVE_EDITING ] = {
+			description: {
+				header: mw.msg( 'reportincident-dialog-harassment-type-disruptiveediting' ),
+				text: mw.msg( 'reportincident-nonemergency-generic-description' )
+			},
+			nextSteps: [
+				{
+					msgKey: 'reportincident-nonemergency-disruptiveediting-nextstep-default'
+				}
+			],
+			helpMethods: [
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-contactadmin',
+					requiredParams: [ 'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactAdmin' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-email',
+					requiredParams: [ 'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodEmail' ]
+				},
+				{
+					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
+					requiredParams: [ 'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactCommunity' ]
+				}
+			],
+			helpMethodDefault: {
+				msgKey: 'reportincident-nonemergency-helpmethod-default'
+			}
+		};
+
 		const page = pages[ behavior ];
 
 		// A message is considered valid if the requiredParams are found via mw.config.get()
