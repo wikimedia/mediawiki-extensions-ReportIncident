@@ -25,7 +25,8 @@ const Constants = {
 		SOCKPUPPETRY: 'sockpuppetry',
 		VANDALISM: 'vandalism',
 		USER_DISPUTE: 'userdispute',
-		DISRUPTIVE_EDITING: 'disruptiveediting'
+		DISRUPTIVE_EDITING: 'disruptiveediting',
+		OTHER: 'other'
 	},
 	harassmentTypesV2: {
 		DOXING: {
@@ -71,6 +72,10 @@ const Constants = {
 		DISRUPTIVE_EDITING: {
 			id: 'disruptiveediting',
 			labelKey: 'reportincident-dialog-harassment-type-disruptiveediting'
+		},
+		OTHER: {
+			id: 'other',
+			labelKey: 'reportincident-dialog-harassment-type-other'
 		}
 	},
 	/**

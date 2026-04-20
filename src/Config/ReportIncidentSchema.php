@@ -306,4 +306,27 @@ class ReportIncidentSchema extends JsonSchema {
 			],
 		],
 	];
+
+	// sub-header hack
+	public const ReportIncident_NonEmergency_Other = [
+		self::TYPE => self::TYPE_OBJECT,
+	];
+
+	public const ReportIncident_NonEmergency_Other_HelpMethod = [
+		self::TYPE => self::TYPE_OBJECT,
+		self::PROPERTIES => [
+			'ContactAdmin' => [
+				self::TYPE => self::TYPE_STRING,
+				self::DEFAULT => ''
+			],
+			'Email' => [
+				self::TYPE => self::TYPE_STRING,
+				self::DEFAULT => ''
+			],
+			'ContactCommunity' => [
+				self::TYPE => self::TYPE_STRING,
+				self::DEFAULT => ''
+			],
+		],
+	];
 }

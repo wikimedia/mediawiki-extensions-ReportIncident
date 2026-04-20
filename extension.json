@@ -326,7 +326,10 @@
 				"reportincident-dialog-harassment-type-userdispute",
 				"reportincident-nonemergency-userdispute-nextstep-default",
 				"reportincident-dialog-harassment-type-disruptiveediting",
-				"reportincident-nonemergency-disruptiveediting-nextstep-default"
+				"reportincident-nonemergency-disruptiveediting-nextstep-default",
+				"reportincident-dialog-harassment-type-other",
+				"reportincident-nonemergency-other-notice",
+				"reportincident-nonemergency-other-nextstep-default"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",
