@@ -93,4 +93,13 @@ return (object) array(
      'Email' => '',
      'ContactCommunity' => '',
   ),
+   'ReportIncident_NonEmergency_UserDispute' => 
+  (object) array(
+  ),
+   'ReportIncident_NonEmergency_UserDispute_HelpMethod' => 
+  (object) array(
+     'ContactAdmin' => '',
+     'Email' => '',
+     'ContactCommunity' => '',
+  ),
 );
