@@ -148,5 +148,9 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-help-text": "قد تكون هذه صفحة السياسة المحلية الخاصة بك",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "على سبيل المثال Project:Administrator's noticeboard",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "مثال: incidents@example.com",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "مثال على المشروع: مضخة القرية"
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "مثال على المشروع: مضخة القرية",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-label": "مختبرون شاملون",
+	"communityconfiguration-reportincident-reportincidente2etesterusers-description": "أضف المستخدمين الذين لن تُرسل تقاريرهم. هذا مفيد للاختبار.",
+	"communityconfiguration-reportincident-nonexistent-user-error": "لا يمكن تحويل سوى الحسابات الموجودة إلى مستخدم تجريبي",
+	"reportincident-e2e-tester-notice": "لم يتم إرسال هذا التقرير، لأنك تعتبر حاليًا مختبرًا شاملاً."
 }

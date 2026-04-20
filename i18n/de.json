@@ -199,5 +199,11 @@
 	"communityconfiguration-reportincident-reportincidente2etesterusers-label": "Ende-zu-Ende-Tester",
 	"communityconfiguration-reportincident-reportincidente2etesterusers-description": "Fügt Benutzer hinzu, deren Berichte nicht versendet werden. Dies ist für Testzwecke nützlich.",
 	"communityconfiguration-reportincident-nonexistent-user-error": "Nur bestehende Konten können zu Testbenutzern gemacht werden.",
-	"reportincident-e2e-tester-notice": "Dieser Bericht wurde nicht gesendet, da du derzeit als Ende-zu-Ende-Tester giltst."
+	"reportincident-e2e-tester-notice": "Dieser Bericht wurde nicht gesendet, da du derzeit als Ende-zu-Ende-Tester giltst.",
+	"reportincident-dialog-harassment-type-sockpuppetry": "Unrechtmäßige Nutzung mehrerer Konten (Sockpupperei)",
+	"reportincident-nonemergency-sockpuppetry-nextstep-default": "Die Verwendung mehrerer Konten ist nur unter bestimmten Umständen erlaubt. Der Missbrauch mehrerer Konten wird als Sockenpuppen-Taktik bezeichnet. Es ist unzulässig, mehrere Konten zu verwenden, um andere Benutzer zu täuschen oder irrezuführen, Diskussionen zu stören, den Konsens zu verfälschen, Sanktionen zu umgehen, Sperren zu umgehen oder auf andere Weise gegen die Community-Standards und -Richtlinien zu verstoßen. Wenn du Sockenpuppen-Taktik vermutest, melde bitte die verdächtigen Benutzernamen und lege Beweise vor, die deine Behauptung stützen.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry-label": "Unrechtmäßige Nutzung mehrerer Konten (Sockpupperei)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactadmin-placeholder": "z. B. Projekt:Administratoren",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-email-placeholder": "z.B. incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-placeholder": "Beispiel: Projekt:Dorfpumpe"
 }
