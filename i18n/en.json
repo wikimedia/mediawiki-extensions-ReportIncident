@@ -258,5 +258,19 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-email-placeholder": "e.g. incidents@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
-	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-placeholder": "e.g. Project:Village pump"
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-placeholder": "e.g. Project:Village pump",
+	"reportincident-dialog-harassment-type-vandalism": "Vandalism",
+	"reportincident-nonemergency-vandalism-nextstep-default": "Vandalism is the malicious defacement of encyclopedic content, such as by adding [[:en:w:Special:MyLanguage/Wikipedia:Offensive_material|obscenities or crude humor]] to a page, illegitimately [[:en:w:Special:MyLanguage/Wikipedia:Page_blanking|blanking pages]], and inserting obvious nonsense into a page. Any good-faith effort to improve the encyclopedia is not vandalism, even if misguided, willfully against [[:en:w:Special:MyLanguage/Wikipedia:Consensus|consensus]], or [[:en:w:Special:MyLanguage/Wikipedia:Disruptive_editing|disruptive]].\n\nIf you see vandalism, you may be bold and fix it yourself! If you are unable to fix the vandalism, seek help.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism-label": "Vandalism",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactadmin-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactadmin-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactadmin-placeholder": "e.g. Project:Administrator's noticeboard",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-email-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-email-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-email-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-email-placeholder": "e.g. incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactcommunity-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactcommunity-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactcommunity-placeholder": "e.g. Project:Village pump"
 }

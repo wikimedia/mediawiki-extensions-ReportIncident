@@ -97,6 +97,8 @@ class ReportIncidentController {
 			->get( 'ReportIncident_NonEmergency_Other_HelpMethod' );
 		$communityConfigSockpuppetryHelpMethods = $this->localConfig
 			->get( 'ReportIncident_NonEmergency_Sockpuppetry_HelpMethod' );
+		$communityConfigVandalismHelpMethods = $this->localConfig
+			->get( 'ReportIncident_NonEmergency_Vandalism_HelpMethod' );
 		$output->addJsConfigVars( [
 			// If in developer mode, pretend the user has a confirmed email if the query parameter is set to
 			// 'withconfirmedemail=1', otherwise use DB value.
@@ -170,6 +172,12 @@ class ReportIncidentController {
 				$communityConfigSockpuppetryHelpMethods->Email,
 			'wgReportIncidentNonEmergencySockpuppetryHelpMethodContactCommunity' =>
 				$communityConfigSockpuppetryHelpMethods->ContactCommunity,
+			'wgReportIncidentNonEmergencyVandalismHelpMethodContactAdmin' =>
+				$communityConfigVandalismHelpMethods->ContactAdmin,
+			'wgReportIncidentNonEmergencyVandalismHelpMethodEmail' =>
+				$communityConfigVandalismHelpMethods->Email,
+			'wgReportIncidentNonEmergencyVandalismHelpMethodContactCommunity' =>
+				$communityConfigVandalismHelpMethods->ContactCommunity,
 		] );
 		// Add the ReportIncident module, including the JS and Vue code for the dialog.
 		$output->addModules( 'ext.reportIncident' );
