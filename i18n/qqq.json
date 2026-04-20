@@ -320,5 +320,7 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "Placeholder for a configurable email to be used in a help contact method",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-label": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-description": "{{msg-mw|communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "Placeholder for a configurable link to be used in a help contact method"
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "Placeholder for a configurable link to be used in a help contact method",
+	"communityconfiguration-reportincident-invalid-usehttps": "Validation error shown on the Special:CommunityConfiguration editor subpage of the Incident Reporting System when an invalid URL is provided.",
+	"communityconfiguration-reportincident-invalid-queryparameter": "Validation error shown on the Special:CommunityConfiguration editor subpage of the Incident Reporting System when an invalid URL is provided."
 }
