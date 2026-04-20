@@ -146,6 +146,45 @@ class ReportIncidentConfigValidator implements IValidator {
 					continue;
 				}
 
+				// If the value is a URL, check if it's valid and let it pass if so before Title checks
+				if ( filter_var( $value, FILTER_VALIDATE_URL ) ) {
+					$url = parse_url( $value );
+
+					// Force https
+					if ( !isset( $url['scheme'] ) || $url['scheme'] !== 'https' ) {
+						$status->addFatal(
+							$key,
+							"/$key",
+							$this->context->msg( 'communityconfiguration-reportincident-invalid-usehttps' )->text()
+						);
+						continue;
+					}
+
+					// If parameters are set, all of them must have a value
+					$parameters = [];
+					if ( isset( $url['query'] ) ) {
+						parse_str( $url['query'], $parameters );
+					}
+					foreach ( $parameters as $parameter => $parameterValue ) {
+						if ( $parameterValue === '' ) {
+							$status->addFatal(
+								$key,
+								"/$key",
+								$this
+									->context
+									->msg(
+										'communityconfiguration-reportincident-invalid-queryparameter', $parameter
+									)
+									->text()
+							);
+						}
+						continue;
+					}
+
+					// Valid URL; pass
+					continue;
+				}
+
 				$title = $this->titleParser->parseTitle( $value );
 
 				if ( $title->isExternal() ) {

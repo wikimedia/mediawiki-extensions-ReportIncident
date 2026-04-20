@@ -113,9 +113,9 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-placeholder": "e.g. Project:Dispute resolution",
 	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-help-text": "This might be your local policy page",
 	"reportincident-nonemergency-helpmethod-default": "For issues that occur on-wiki it is recommended that you contact an admin or use a community noticeboard for help with urgent and ongoing incidents.",
-	"reportincident-nonemergency-helpmethod-contactadmin": "[[$1|Contact an Admin]] for help with urgent or ongoing incidents on-wiki",
+	"reportincident-nonemergency-helpmethod-contactadmin": "[$1 Contact an Admin] for help with urgent or ongoing incidents on-wiki",
 	"reportincident-nonemergency-helpmethod-email": "Email your concern to [mailto:$1 $1]",
-	"reportincident-nonemergency-helpmethod-contactcommunity": "If you’re unsure what to do, [[$1|ask the community for help]]",
+	"reportincident-nonemergency-helpmethod-contactcommunity": "If you’re unsure what to do, [$1 ask the community for help]",
 	"reportincident-nonemergency-generic-nextstep-otheraction": "If the steps above did not help you, consider [[meta:Special:MyLanguage/Universal_Code_of_Conduct/Coordinating_Committee/Cases|making a complaint to the U4C]], or [[foundation:Special:MyLanguage/Legal:Wikimedia_Foundation_Legal_and_Safety_Contact_Information|contact the non-profit organization]] that hosts this website.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label": "How to request help",
 	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description": "Add at least one contact method to display to the user",
@@ -315,5 +315,7 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "e.g. incidents@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-label": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-label}}",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-description": "{{int:communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactcommunity-description}}",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "e.g. Project:Village pump"
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "e.g. Project:Village pump",
+	"communityconfiguration-reportincident-invalid-usehttps": "URL must use https",
+	"communityconfiguration-reportincident-invalid-queryparameter": "Query parameter '$1' must have a value"
 }
