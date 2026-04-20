@@ -75,6 +75,10 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 					// * reportincident-dialog-harassment-type-hate-speech-or-discrimination
 					// * reportincident-dialog-harassment-type-spam
 					// * reportincident-dialog-harassment-type-something-else
+					// * reportincident-dialog-harassment-type-sockpuppetry
+					// * reportincident-dialog-harassment-type-vandalism
+					// * reportincident-dialog-harassment-type-userdispute
+					// * reportincident-dialog-harassment-type-other
 					label: mw.msg( categoryDefinition.labelKey ),
 					value: categoryDefinition.id
 				} );
