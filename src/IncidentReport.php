@@ -52,7 +52,8 @@ class IncidentReport {
 			'something-else',
 			'sockpuppetry',
 			'vandalism',
-			'userdispute'
+			'userdispute',
+			'disruptiveediting'
 		];
 	}
 

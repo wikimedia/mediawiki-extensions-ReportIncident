@@ -278,6 +278,29 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
+		},
+		{
+			title: 'disruptive editing resolution',
+			config: {
+				inputBehavior: Constants.harassmentTypes.DISRUPTIVE_EDITING,
+				get: {
+					wgReportIncidentE2ETesterUsers: []
+				}
+			},
+			expected: {
+				headers: [
+					'reportincident-nonemergency-nextsteps-header',
+					'reportincident-nonemergency-requesthelp-header',
+					'reportincident-nonemergency-other-header'
+				],
+				copy: [
+					'reportincident-dialog-harassment-type-disruptiveediting',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-disruptiveediting-nextstep-default',
+					'reportincident-nonemergency-helpmethod-default',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
 		}
 	];
 
@@ -556,6 +579,28 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-dialog-harassment-type-userdispute',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-userdispute-nextstep-default',
+					'reportincident-nonemergency-helpmethod-contactadmin',
+					'reportincident-nonemergency-helpmethod-email',
+					'reportincident-nonemergency-helpmethod-contactcommunity',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'disruptive editing resolution, configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.DISRUPTIVE_EDITING,
+				get: {
+					wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactCommunity: 'baz'
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-dialog-harassment-type-disruptiveediting',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-disruptiveediting-nextstep-default',
 					'reportincident-nonemergency-helpmethod-contactadmin',
 					'reportincident-nonemergency-helpmethod-email',
 					'reportincident-nonemergency-helpmethod-contactcommunity',

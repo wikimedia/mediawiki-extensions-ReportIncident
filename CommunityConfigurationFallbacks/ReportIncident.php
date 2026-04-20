@@ -102,4 +102,13 @@ return (object) array(
      'Email' => '',
      'ContactCommunity' => '',
   ),
+   'ReportIncident_NonEmergency_DisruptiveEditing' => 
+  (object) array(
+  ),
+   'ReportIncident_NonEmergency_DisruptiveEditing_HelpMethod' => 
+  (object) array(
+     'ContactAdmin' => '',
+     'Email' => '',
+     'ContactCommunity' => '',
+  ),
 );
