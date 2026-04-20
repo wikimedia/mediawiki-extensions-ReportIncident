@@ -84,7 +84,7 @@ module.exports = exports = {
 		 * in the request body to the REST endpoint on form submission.
 		 */
 		const collectSomethingElseDetails =
-				computed( () => inputBehavior.value === Constants.harassmentTypes.OTHER );
+				computed( () => inputBehavior.value === Constants.harassmentTypes.SOMETHING_ELSE );
 
 		const formErrorMessages = computed( () => store.formErrorMessages );
 

@@ -39,7 +39,7 @@ describe( 'useInstrument', () => {
 						'TROLLING',
 						'HATE_SPEECH',
 						'SPAM',
-						'OTHER'
+						'SOMETHING_ELSE'
 					];
 				default:
 					return true;
@@ -106,7 +106,7 @@ describe( 'useInstrument', () => {
 						'TROLLING',
 						'HATE_SPEECH',
 						'SPAM',
-						'OTHER'
+						'SOMETHING_ELSE'
 					];
 				default:
 					return true;
@@ -141,7 +141,7 @@ describe( 'useInstrument', () => {
 						'TROLLING',
 						'HATE_SPEECH',
 						'SPAM',
-						'OTHER'
+						'SOMETHING_ELSE'
 					];
 				default:
 					return true;
@@ -181,7 +181,7 @@ describe( 'useInstrument', () => {
 						'TROLLING',
 						'HATE_SPEECH',
 						'SPAM',
-						'OTHER'
+						'SOMETHING_ELSE'
 					];
 				default:
 					return true;
@@ -218,7 +218,7 @@ describe( 'useInstrument', () => {
 						'TROLLING',
 						'HATE_SPEECH',
 						'SPAM',
-						'OTHER'
+						'SOMETHING_ELSE'
 					];
 				default:
 					return true;
@@ -246,7 +246,7 @@ describe( 'useInstrument', () => {
 						'TROLLING',
 						'HATE_SPEECH',
 						'SPAM',
-						'OTHER'
+						'SOMETHING_ELSE'
 					];
 				default:
 					return true;
@@ -289,7 +289,7 @@ describe( 'useInstrument', () => {
 						'TROLLING',
 						'HATE_SPEECH',
 						'SPAM',
-						'OTHER'
+						'SOMETHING_ELSE'
 					];
 				default:
 					return true;
@@ -327,7 +327,7 @@ describe( 'useInstrument', () => {
 						'TROLLING',
 						'HATE_SPEECH',
 						'SPAM',
-						'OTHER'
+						'SOMETHING_ELSE'
 					];
 				default:
 					return true;

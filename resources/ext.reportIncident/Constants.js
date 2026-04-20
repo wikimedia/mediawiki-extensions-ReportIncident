@@ -21,7 +21,7 @@ const Constants = {
 		SEXUAL_HARASSMENT: 'sexual-harassment',
 		SPAM: 'spam',
 		TROLLING: 'trolling',
-		OTHER: 'something-else',
+		SOMETHING_ELSE: 'something-else',
 		SOCKPUPPETRY: 'sockpuppetry',
 		VANDALISM: 'vandalism',
 		USER_DISPUTE: 'userdispute',
@@ -52,7 +52,7 @@ const Constants = {
 			id: 'trolling',
 			labelKey: 'reportincident-dialog-harassment-type-trolling'
 		},
-		OTHER: {
+		SOMETHING_ELSE: {
 			id: 'something-else',
 			labelKey: 'reportincident-dialog-harassment-type-something-else'
 		},

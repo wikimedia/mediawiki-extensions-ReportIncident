@@ -108,7 +108,7 @@
 				"TROLLING",
 				"HATE_SPEECH",
 				"SPAM",
-				"OTHER"
+				"SOMETHING_ELSE"
 			],
 			"description": "Defines what non-emergency categories are seen and in what order. See Constants.harassmentTypes for a list of available categories.",
 			"merge_strategy": "provide_default"
@@ -315,9 +315,9 @@
 				"reportincident-nonemergency-spam-nextstep-default",
 				"reportincident-nonemergency-spam-nextsteps-configured",
 				"reportincident-nonemergency-spam-nextstep-common",
-				"reportincident-nonemergency-other-nextstep-default",
-				"reportincident-nonemergency-other-nextstep-configured",
-				"reportincident-nonemergency-other-nextstep-common",
+				"reportincident-nonemergency-somethingelse-nextstep-default",
+				"reportincident-nonemergency-somethingelse-nextstep-configured",
+				"reportincident-nonemergency-somethingelse-nextstep-common",
 				"reportincident-e2e-tester-notice",
 				"reportincident-dialog-harassment-type-sockpuppetry",
 				"reportincident-nonemergency-sockpuppetry-nextstep-default",

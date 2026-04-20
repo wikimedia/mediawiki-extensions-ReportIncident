@@ -93,8 +93,8 @@ class ReportIncidentController {
 			->get( 'ReportIncident_NonEmergency_HateSpeech_HelpMethod' );
 		$communityConfigSpamHelpMethods = $this->localConfig
 			->get( 'ReportIncident_NonEmergency_Spam_HelpMethod' );
-		$communityConfigOtherHelpMethods = $this->localConfig
-			->get( 'ReportIncident_NonEmergency_Other_HelpMethod' );
+		$communityConfigSomethingElseHelpMethods = $this->localConfig
+			->get( 'ReportIncident_NonEmergency_SomethingElse_HelpMethod' );
 		$communityConfigSockpuppetryHelpMethods = $this->localConfig
 			->get( 'ReportIncident_NonEmergency_Sockpuppetry_HelpMethod' );
 		$communityConfigVandalismHelpMethods = $this->localConfig
@@ -164,12 +164,12 @@ class ReportIncidentController {
 				$communityConfigSpamHelpMethods->Email,
 			'wgReportIncidentNonEmergencyOtherDisputeResolutionURL' =>
 				$this->localConfig->get( 'ReportIncident_NonEmergency_Other_DisputeResolutionURL' ),
-			'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' =>
-				$communityConfigOtherHelpMethods->ContactAdmin,
-			'wgReportIncidentNonEmergencyOtherHelpMethodEmail' =>
-				$communityConfigOtherHelpMethods->Email,
-			'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' =>
-				$communityConfigOtherHelpMethods->ContactCommunity,
+			'wgReportIncidentNonEmergencySomethingElseHelpMethodContactAdmin' =>
+				$communityConfigSomethingElseHelpMethods->ContactAdmin,
+			'wgReportIncidentNonEmergencySomethingElseHelpMethodEmail' =>
+				$communityConfigSomethingElseHelpMethods->Email,
+			'wgReportIncidentNonEmergencySomethingElseHelpMethodContactCommunity' =>
+				$communityConfigSomethingElseHelpMethods->ContactCommunity,
 			'wgReportIncidentNonEmergencySockpuppetryHelpMethodContactAdmin' =>
 				$communityConfigSockpuppetryHelpMethods->ContactAdmin,
 			'wgReportIncidentNonEmergencySockpuppetryHelpMethodEmail' =>

@@ -191,7 +191,7 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 		{
 			title: 'other resolution',
 			config: {
-				inputBehavior: Constants.harassmentTypes.OTHER,
+				inputBehavior: Constants.harassmentTypes.SOMETHING_ELSE,
 				get: {
 					wgReportIncidentE2ETesterUsers: []
 				}
@@ -204,7 +204,7 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 				],
 				copy: [
 					'reportincident-nonemergency-generic-description',
-					'reportincident-nonemergency-other-nextstep-default',
+					'reportincident-nonemergency-somethingelse-nextstep-default',
 					'reportincident-nonemergency-helpmethod-default',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
@@ -501,18 +501,18 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 		{
 			title: 'other resolution, configured',
 			config: {
-				inputBehavior: Constants.harassmentTypes.OTHER,
+				inputBehavior: Constants.harassmentTypes.SOMETHING_ELSE,
 				get: {
 					wgReportIncidentNonEmergencyOtherDisputeResolutionURL: 'url',
-					wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin: 'foo',
-					wgReportIncidentNonEmergencyOtherHelpMethodEmail: 'bar',
-					wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity: 'baz'
+					wgReportIncidentNonEmergencySomethingElseHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencySomethingElseHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencySomethingElseHelpMethodContactCommunity: 'baz'
 				}
 			},
 			expected: {
 				copy: [
 					'reportincident-nonemergency-generic-description',
-					'reportincident-nonemergency-other-nextstep-configured',
+					'reportincident-nonemergency-somethingelse-nextstep-configured',
 					'reportincident-nonemergency-helpmethod-contactadmin',
 					'reportincident-nonemergency-helpmethod-email',
 					'reportincident-nonemergency-helpmethod-contactcommunity',

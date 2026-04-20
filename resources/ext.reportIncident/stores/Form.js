@@ -34,14 +34,14 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		// Validate that the "Something else" box is filled if something-else
 		// is selected as a behaviour.
 		if (
-			inputBehavior.value === Constants.harassmentTypes.OTHER &&
+			inputBehavior.value === Constants.harassmentTypes.SOMETHING_ELSE &&
 			inputSomethingElseDetails.value === '' &&
 			displaySomethingElseTextboxRequiredError.value
 		) {
 			displayBehaviorsRequiredError.value = true;
 			formErrors.inputBehaviors = { error: mw.msg( 'reportincident-dialog-something-else-empty' ) };
 		} else if (
-			inputBehavior.value === Constants.harassmentTypes.OTHER &&
+			inputBehavior.value === Constants.harassmentTypes.SOMETHING_ELSE &&
 			inputSomethingElseDetails.value !== ''
 		) {
 			displaySomethingElseTextboxRequiredError.value = true;
@@ -195,7 +195,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	 * @return {boolean}
 	 */
 	function isSomethingElse() {
-		return inputBehavior.value === Constants.harassmentTypes.OTHER;
+		return inputBehavior.value === Constants.harassmentTypes.SOMETHING_ELSE;
 	}
 
 	/**
