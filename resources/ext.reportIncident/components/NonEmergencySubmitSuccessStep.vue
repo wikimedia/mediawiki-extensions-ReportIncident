@@ -273,31 +273,31 @@ module.exports = exports = {
 			}
 		};
 
-		pages[ Constants.harassmentTypes.OTHER ] = {
+		pages[ Constants.harassmentTypes.SOMETHING_ELSE ] = {
 			description: {
 				text: mw.msg( 'reportincident-nonemergency-generic-description' )
 			},
 			nextSteps: [
 				{
-					msgKey: 'reportincident-nonemergency-other-nextstep-configured',
+					msgKey: 'reportincident-nonemergency-somethingelse-nextstep-configured',
 					requiredParams: [ 'wgReportIncidentNonEmergencyOtherDisputeResolutionURL' ]
 				},
 				{
-					msgKey: 'reportincident-nonemergency-other-nextstep-default'
+					msgKey: 'reportincident-nonemergency-somethingelse-nextstep-default'
 				}
 			],
 			helpMethods: [
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-contactadmin',
-					requiredParams: [ 'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencySomethingElseHelpMethodContactAdmin' ]
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-email',
-					requiredParams: [ 'wgReportIncidentNonEmergencyOtherHelpMethodEmail' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencySomethingElseHelpMethodEmail' ]
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
-					requiredParams: [ 'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencySomethingElseHelpMethodContactCommunity' ]
 				}
 			],
 			helpMethodDefault: {

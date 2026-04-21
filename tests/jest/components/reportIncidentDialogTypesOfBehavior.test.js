@@ -95,7 +95,7 @@ describe( 'Report Incident Dialog Types of Behavior', () => {
 		const wrapper = renderComponent();
 		const store = useFormStore();
 
-		store.inputBehavior = Constants.harassmentTypes.OTHER;
+		store.inputBehavior = Constants.harassmentTypes.SOMETHING_ELSE;
 		expect( wrapper.vm.collectSomethingElseDetails ).toBe( true );
 	} );
 } );

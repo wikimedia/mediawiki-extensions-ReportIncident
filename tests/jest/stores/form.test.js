@@ -55,11 +55,11 @@ describe( 'Form Store', () => {
 			behaviorType: Constants.harassmentTypes.INTIMIDATION
 		} );
 
-		form.inputBehavior = Constants.harassmentTypes.OTHER;
+		form.inputBehavior = Constants.harassmentTypes.SOMETHING_ELSE;
 		expect( form.restPayload ).toStrictEqual( {
 			reportedUser: 'test user',
 			incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-			behaviorType: Constants.harassmentTypes.OTHER,
+			behaviorType: Constants.harassmentTypes.SOMETHING_ELSE,
 			somethingElseDetails: 'test something else details'
 		} );
 
@@ -67,7 +67,7 @@ describe( 'Form Store', () => {
 		expect( form.restPayload ).toStrictEqual( {
 			reportedUser: 'test user',
 			incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-			behaviorType: Constants.harassmentTypes.OTHER,
+			behaviorType: Constants.harassmentTypes.SOMETHING_ELSE,
 			somethingElseDetails: 'test something else details',
 			threadId: 'c-test_user-20230605040302'
 		} );
@@ -97,7 +97,7 @@ describe( 'Form Store', () => {
 		// Test that no error messages are generated when the data is correct
 		//
 		form.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
-		form.inputBehavior = Constants.harassmentTypes.OTHER;
+		form.inputBehavior = Constants.harassmentTypes.SOMETHING_ELSE;
 
 		form.isFormValidForSubmission(); // Triggers validations
 
@@ -141,7 +141,7 @@ describe( 'Form Store', () => {
 		const form = useFormStore();
 		// Test that emptying the something-else field while 'Something else' is a selected
 		// behaviour causes an error
-		form.inputBehavior = Constants.harassmentTypes.OTHER;
+		form.inputBehavior = Constants.harassmentTypes.SOMETHING_ELSE;
 		form.inputReportedUser = 'test value';
 		form.inputDetails = 'test details';
 		form.inputSomethingElseDetails = 'test something else details';

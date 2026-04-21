@@ -73,7 +73,7 @@ describe( 'Main Component Test Suite', () => {
 						'TROLLING',
 						'HATE_SPEECH',
 						'SPAM',
-						'OTHER'
+						'SOMETHING_ELSE'
 					];
 				default:
 					throw new Error( 'Unknown key: ' + key );
@@ -130,7 +130,7 @@ describe( 'Main Component Test Suite', () => {
 						'TROLLING',
 						'HATE_SPEECH',
 						'SPAM',
-						'OTHER'
+						'SOMETHING_ELSE'
 					];
 				default:
 					throw new Error( 'Unknown key: ' + key );

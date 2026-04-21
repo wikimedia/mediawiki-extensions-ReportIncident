@@ -81,7 +81,7 @@ describe( 'Report Incident Dialog', () => {
 						'TROLLING',
 						'HATE_SPEECH',
 						'SPAM',
-						'OTHER'
+						'SOMETHING_ELSE'
 					];
 				default:
 					throw new Error( 'Unknown key: ' + key );
@@ -304,7 +304,7 @@ describe( 'Report Incident Dialog', () => {
 							'TROLLING',
 							'HATE_SPEECH',
 							'SPAM',
-							'OTHER'
+							'SOMETHING_ELSE'
 						];
 					default:
 						throw new Error( 'Unknown key: ' + key );
@@ -381,7 +381,7 @@ describe( 'Report Incident Dialog', () => {
 			const restPost = mockRestPost( Promise.resolve() );
 
 			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
-			store.inputBehavior = Constants.harassmentTypes.OTHER;
+			store.inputBehavior = Constants.harassmentTypes.SOMETHING_ELSE;
 			expect( store.isFormValidForSubmission() ).toBe( false );
 
 			// Set the footerErrorMessage value as it should be cleared if the
@@ -403,7 +403,7 @@ describe( 'Report Incident Dialog', () => {
 						'/reportincident/v0/report',
 						{
 							incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-							behaviorType: Constants.harassmentTypes.OTHER,
+							behaviorType: Constants.harassmentTypes.SOMETHING_ELSE,
 							reportedUser: '',
 							somethingElseDetails: 'test details',
 							page: 'Test_page',
@@ -455,13 +455,13 @@ describe( 'Report Incident Dialog', () => {
 					finalStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
 					initialState: {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-						inputBehavior: Constants.harassmentTypes.OTHER,
+						inputBehavior: Constants.harassmentTypes.SOMETHING_ELSE,
 						inputSomethingElseDetails: 'details',
 						inputReportedUser: 'test user'
 					},
 					expectedRestPayload: {
 						incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-						behaviorType: Constants.harassmentTypes.OTHER,
+						behaviorType: Constants.harassmentTypes.SOMETHING_ELSE,
 						somethingElseDetails: 'details',
 						reportedUser: 'test user',
 						page: 'Test_page',

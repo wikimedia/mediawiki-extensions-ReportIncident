@@ -65,11 +65,11 @@ return (object) array(
      'ContactAdmin' => '',
      'Email' => '',
   ),
-   'ReportIncident_NonEmergency_Other' => 
+   'ReportIncident_NonEmergency_SomethingElse' => 
   (object) array(
   ),
    'ReportIncident_NonEmergency_Other_DisputeResolutionURL' => '',
-   'ReportIncident_NonEmergency_Other_HelpMethod' => 
+   'ReportIncident_NonEmergency_SomethingElse_HelpMethod' => 
   (object) array(
      'ContactAdmin' => '',
      'Email' => '',

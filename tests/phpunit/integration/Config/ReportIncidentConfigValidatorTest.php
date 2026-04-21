@@ -107,7 +107,7 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 				'Email' => '',
 			],
 			'ReportIncident_NonEmergency_Other_DisputeResolutionURL' => '',
-			'ReportIncident_NonEmergency_Other_HelpMethod' => (object)[
+			'ReportIncident_NonEmergency_SomethingElse_HelpMethod' => (object)[
 				'ContactAdmin' => '',
 				'ContactCommunity' => '',
 				'Email' => '',
@@ -135,7 +135,7 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 			'ReportIncident_NonEmergency_Trolling_HelpMethod/Email',
 			'ReportIncident_NonEmergency_HateSpeech_HelpMethod/Email',
 			'ReportIncident_NonEmergency_Spam_HelpMethod/Email',
-			'ReportIncident_NonEmergency_Other_HelpMethod/Email',
+			'ReportIncident_NonEmergency_SomethingElse_HelpMethod/Email',
 		];
 
 		foreach ( $emailProps as $name ) {
@@ -167,8 +167,8 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 			'ReportIncident_NonEmergency_Spam_SpamContentURL',
 			'ReportIncident_NonEmergency_Spam_HelpMethod/ContactAdmin',
 			'ReportIncident_NonEmergency_Other_DisputeResolutionURL',
-			'ReportIncident_NonEmergency_Other_HelpMethod/ContactAdmin',
-			'ReportIncident_NonEmergency_Other_HelpMethod/ContactCommunity',
+			'ReportIncident_NonEmergency_SomethingElse_HelpMethod/ContactAdmin',
+			'ReportIncident_NonEmergency_SomethingElse_HelpMethod/ContactCommunity',
 		];
 
 		foreach ( $titleProps as $name ) {
@@ -269,7 +269,7 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 					'Email' => 'foo@bar.com',
 				],
 				'ReportIncident_NonEmergency_Other_DisputeResolutionURL' => self::TEST_EXISTING_PAGE,
-				'ReportIncident_NonEmergency_Other_HelpMethod' => (object)[
+				'ReportIncident_NonEmergency_SomethingElse_HelpMethod' => (object)[
 					'ContactAdmin' => self::TEST_EXISTING_PAGE,
 					'ContactCommunity' => self::TEST_EXISTING_PAGE,
 					'Email' => 'foo@bar.com',
