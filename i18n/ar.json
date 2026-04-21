@@ -152,5 +152,11 @@
 	"communityconfiguration-reportincident-reportincidente2etesterusers-label": "مختبرون شاملون",
 	"communityconfiguration-reportincident-reportincidente2etesterusers-description": "أضف المستخدمين الذين لن تُرسل تقاريرهم. هذا مفيد للاختبار.",
 	"communityconfiguration-reportincident-nonexistent-user-error": "لا يمكن تحويل سوى الحسابات الموجودة إلى مستخدم تجريبي",
-	"reportincident-e2e-tester-notice": "لم يتم إرسال هذا التقرير، لأنك تعتبر حاليًا مختبرًا شاملاً."
+	"reportincident-e2e-tester-notice": "لم يتم إرسال هذا التقرير، لأنك تعتبر حاليًا مختبرًا شاملاً.",
+	"reportincident-dialog-harassment-type-sockpuppetry": "الاستخدام غير المشروع لحسابات متعددة (الحسابات الوهمية)",
+	"reportincident-nonemergency-sockpuppetry-nextstep-default": "يُسمح باستخدام حسابات متعددة في ظروف محددة فقط. يُطلق على الاستخدام غير السليم للحسابات المتعددة اسم \"الحسابات الوهمية\". من غير اللائق استخدام حسابات متعددة لخداع أو تضليل المحررين الآخرين، أو تعطيل المناقشات، أو تشويه الإجماع، أو التهرب من العقوبات، أو التحايل على الحظر، أو انتهاك معايير وسياسات المنتدى بأي شكل من الأشكال. إذا كنت تشك في وجود حسابات وهمية، يُرجى الإبلاغ عن أسماء المستخدمين المشتبه بها وتقديم أدلة تدعم ادعاءك.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry-label": "الاستخدام غير المشروع لحسابات متعددة (الحسابات الوهمية)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactadmin-placeholder": "على سبيل المثال المشروع: لوحة إعلانات المسؤول",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-email-placeholder": "مثال: incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-placeholder": "مثال Project:Village pump"
 }

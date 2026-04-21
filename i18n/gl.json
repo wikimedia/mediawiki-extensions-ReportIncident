@@ -197,5 +197,11 @@
 	"communityconfiguration-reportincident-reportincidente2etesterusers-label": "Probadores do sistema",
 	"communityconfiguration-reportincident-reportincidente2etesterusers-description": "Engade usuarios cuxos informes non se enviarán. Isto é útil para facer probas.",
 	"communityconfiguration-reportincident-nonexistent-user-error": "Só as contas existentes poden converterse nun usuario de proba",
-	"reportincident-e2e-tester-notice": "Este informe non se enviou porque nestes intres es un probador do sistema."
+	"reportincident-e2e-tester-notice": "Este informe non se enviou porque nestes intres es un probador do sistema.",
+	"reportincident-dialog-harassment-type-sockpuppetry": "Uso ilexítimo de varias contas (monicreques)",
+	"reportincident-nonemergency-sockpuppetry-nextstep-default": "O uso de varias contas só está permitido en determinadas circunstancias. As contas alternativas chámanse monicreques. Non é axeitado usar varias contas para enganar ou inducir a erro a outros editores, interromper debates, distorsionar o consenso, evitar sancións, evadir bloqueos ou incumprir doutro xeito os estándares e normas da comunidade.\n\nSe sospeitas do uso de monicreques, informa dos nomes de usuario sospeitosos e proporciona probas que apoien a túa afirmación.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry-label": "Uso ilexítimo de varias contas (monicreques)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactadmin-placeholder": "por exemplo, Proxecto:Taboleiro dos administradores",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-email-placeholder": "por exemplo, incidentes@exemplo.gal",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-placeholder": "por exemplo, Proxecto:A Taberna"
 }
