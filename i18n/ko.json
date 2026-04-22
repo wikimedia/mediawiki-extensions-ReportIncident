@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Ykhwong",
-			"YeBoy371"
+			"YeBoy371",
+			"Tensama0415"
 		]
 	},
+	"reportincident-dialog-close-btn": "닫기",
 	"reportincident-dialog-submit-btn": "보고서 제출",
 	"reportincident-dialog-additional-details-input-label": "추가 정보",
 	"reportincident-dialog-harassment-type-spam": "스팸",
