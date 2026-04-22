@@ -8,6 +8,7 @@
 			"MacOS Weed",
 			"Mahabarata",
 			"Obscaeris",
+			"Pa2chant.bis",
 			"SleaY",
 			"Urhixidur",
 			"Wladek92"
@@ -102,5 +103,12 @@
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-help-text": "Espaces de noms où le système de signalement d’incidents est activé.",
 	"communityconfiguration-reportincident-invalid-title": "La page doit exister sur le wiki local.",
 	"reportincident-nonemergency-sexualharassment-header": "Harcèlement sexuel",
-	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Harcèlement sexuel"
+	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Harcèlement sexuel",
+	"reportincident-dialog-harassment-type-vandalism": "Vandalisme",
+	"reportincident-nonemergency-vandalism-nextstep-default": "Le vandalisme consiste à dégrader malicieusement le contenu encyclopédique, par exemple en ajoutant des obscénités ou de l'humour grossier à une page, en supprimant illégitimement des pages ou en y insérant des absurdités. Toute tentative de bonne foi d'améliorer l'encyclopédie n'est pas du vandalisme, même si elle est malavisée, délibérément contraire au consensus ou perturbatrice. Si vous constatez du vandalisme, n'hésitez pas à le corriger vous-même ! Si vous n'y parvenez pas, demandez de l'aide.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactadmin-placeholder": "Par exemple, requête aux administrateurs",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism_helpmethod-contactcommunity-placeholder": "Exemple de projet : Le Bistro",
+	"reportincident-dialog-harassment-type-userdispute": "Désaccords avec un autre utilisateur",
+	"communityconfiguration-reportincident-reportincident_nonemergency_userdispute-label": "Désaccords avec un autre utilisateur",
+	"communityconfiguration-reportincident-reportincident_nonemergency_userdispute_helpmethod-contactadmin-placeholder": "Par exemple, Projet : Requête aux administrateurs"
 }

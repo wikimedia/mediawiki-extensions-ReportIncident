@@ -131,9 +131,9 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-label": "如何举报明显的垃圾内容",
 	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-label": "联系管理员来举报持续活跃且明显的垃圾内容发布者",
 	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-placeholder": "例如：项目:当前的破坏",
-	"reportincident-nonemergency-other-nextstep-common": "如果{{GENDER:|你}}觉得这样做是安全的，{{GENDER:|你}}可以尝试在被举报人的用户讨论页与其交流。",
+	"reportincident-nonemergency-somethingelse-nextstep-common": "如果{{GENDER:|你}}觉得这样做是安全的，{{GENDER:|你}}可以尝试在被举报人的用户讨论页与其交流。",
+	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_disputeresolutionurl-placeholder": "例如：项目:解决争议",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "其他情况",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-placeholder": "例如：项目:解决争议",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "例如：项目:管理员布告板",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "例如：incident@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "例如：项目:互助客栈"

@@ -26,5 +26,7 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_helpmethod-email-placeholder": "z.&nbsp;B. incidents@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Sexuell Belästegung",
 	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-placeholder": "z.&nbsp;B. Wikipedia:De Stamminee",
-	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-email-placeholder": "z.&nbsp;B. incidents@example.com"
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-email-placeholder": "z.&nbsp;B. incidents@example.com",
+	"reportincident-dialog-harassment-type-vandalism": "Vandalismus",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism-label": "Vandalismus"
 }
