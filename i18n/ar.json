@@ -141,6 +141,7 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-label": "اتصل بأحد المسؤولين للإبلاغ عن مرسلي البريد العشوائي النشطين والواضحين والمستمرين",
 	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-placeholder": "مثال: مشروع: تدخل الإدارة ضد التخريب",
 	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "مثال: spam@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse-label": "شيء آخر",
 	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_disputeresolutionurl-label": "صفحة حل النزاعات (اختياري)",
 	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_disputeresolutionurl-description": "أضف رابط صفحة حل النزاعات",
 	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_disputeresolutionurl-placeholder": "مثال: مشروع: حل النزاعات",
@@ -155,8 +156,16 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactadmin-placeholder": "على سبيل المثال المشروع: لوحة إعلانات المسؤول",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-email-placeholder": "مثال: incidents@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry_helpmethod-contactcommunity-placeholder": "مثال Project:Village pump",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "شيء آخر",
+	"reportincident-dialog-harassment-type-vandalism": "تخريب",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism-label": "تخريب",
+	"reportincident-dialog-harassment-type-disruptiveediting": "تحرير مُتلازم",
+	"communityconfiguration-reportincident-reportincident_nonemergency_disruptiveediting-label": "تحرير مُتلازم",
+	"reportincident-dialog-harassment-type-other": "أخرى",
+	"reportincident-nonemergency-other-notice": "إذا كان تقريرك يحتوي على معلومات حساسة أو خاصة، يرجى إرسالها عبر البريد الإلكتروني فقط.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "آخر",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "على سبيل المثال Project:Administrator's noticeboard",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "مثال: incidents@example.com",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "مثال على المشروع: مضخة القرية"
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "مثال على المشروع: مضخة القرية",
+	"communityconfiguration-reportincident-invalid-usehttps": "يجب أن يستخدم عنوان URL https",
+	"communityconfiguration-reportincident-invalid-queryparameter": "يجب أن يكون لدى المعيار \"$1\" قيمة"
 }

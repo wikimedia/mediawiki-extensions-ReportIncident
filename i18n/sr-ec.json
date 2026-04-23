@@ -26,7 +26,19 @@
 	"reportincident-submit-behavior-section-support-title": "Шта даље радити",
 	"reportincident-submit-back-to-page": "Назад на страницу за разговор",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Омогућени именски простори",
+	"reportincident-nonemergency-helpmethod-contactcommunity": "Ако нисте сигурни шта чинити, [$1 тражите помоћ од заједнице]",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Сексуално узнемиравање",
 	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "нпр. spam@example.com",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "Нешто друго"
+	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse-label": "Нешто друго",
+	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_helpmethod-contactadmin-placeholder": "нпр. Project:Administrator's noticeboard",
+	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_helpmethod-contactcommunity-placeholder": "нпр. Project:Village pump",
+	"reportincident-dialog-harassment-type-sockpuppetry": "Неовлашћено коришћење више налога (Луткарство)",
+	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry-label": "Неовлашћено коришћење више налога (Луткарство)",
+	"reportincident-dialog-harassment-type-vandalism": "Вандализам",
+	"reportincident-dialog-harassment-type-disruptiveediting": "Реметилачко уређивање",
+	"communityconfiguration-reportincident-reportincident_nonemergency_disruptiveediting-label": "Реметилачко уређивање",
+	"communityconfiguration-reportincident-reportincident_nonemergency_disruptiveediting_helpmethod-contactcommunity-placeholder": "нпр. Project:Village pump",
+	"reportincident-dialog-harassment-type-other": "Друго",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "Друго",
+	"communityconfiguration-reportincident-invalid-usehttps": "URL мора имати https"
 }

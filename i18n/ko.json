@@ -26,6 +26,7 @@
 	"reportincident-submit-behavior-section-support-item-info-is-public": "위키에서의 모든 대화는 공개되므로 개인 정보를 공유하지 마십시오.",
 	"reportincident-submit-back-to-page": "토론 문서로 돌아가기",
 	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_helpmethod-email-placeholder": "예: incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism-label": "문서 훼손",
 	"communityconfiguration-reportincident-reportincident_nonemergency_disruptiveediting_helpmethod-email-placeholder": "예: incidents@example.com",
 	"reportincident-dialog-harassment-type-other": "기타",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "기타",

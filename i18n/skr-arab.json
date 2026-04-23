@@ -11,5 +11,7 @@
 	"reportincident-emaildialog-close-button": "منسوخ",
 	"reportincident-emaildialog-primary": "ترتیباں تے ون٘ڄو",
 	"reportincident-dialog-cancel": "منسوخ",
-	"reportincident-dialog-continue": "جاری"
+	"reportincident-dialog-continue": "جاری",
+	"reportincident-dialog-harassment-type-other": "ٻیا",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "ٻیا"
 }

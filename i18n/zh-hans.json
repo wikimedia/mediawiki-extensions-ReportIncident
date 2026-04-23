@@ -8,6 +8,7 @@
 			"Peterxy12",
 			"Plana",
 			"TeaSummer",
+			"TigerZhang",
 			"Wilf233",
 			"沈澄心"
 		]
@@ -106,7 +107,7 @@
 	"reportincident-nonemergency-intimidation-header": "欺凌、恐吓、威胁或侮辱",
 	"reportincident-nonemergency-intimidation-nextstep-common": "如果{{GENDER:|你}}觉得这样做是安全的，{{GENDER:|你}}可以尝试在被举报人的用户讨论页与其交流。",
 	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_disputeresolutionurl-placeholder": "例如：项目:解决争议",
-	"reportincident-nonemergency-helpmethod-contactcommunity": "如果你不确定怎么做，请[[$1|向社区寻求帮助]]",
+	"reportincident-nonemergency-helpmethod-contactcommunity": "如果你不确定怎么做，请[[$1 向社区寻求帮助]]",
 	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_helpmethod-contactadmin-placeholder": "例如：项目:管理员布告板",
 	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_helpmethod-email-placeholder": "例如：incidents@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_helpmethod-contactcommunity-placeholder": "例如：项目:互助客栈",
@@ -133,6 +134,11 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-placeholder": "例如：项目:当前的破坏",
 	"reportincident-nonemergency-somethingelse-nextstep-common": "如果{{GENDER:|你}}觉得这样做是安全的，{{GENDER:|你}}可以尝试在被举报人的用户讨论页与其交流。",
 	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_disputeresolutionurl-placeholder": "例如：项目:解决争议",
+	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_helpmethod-email-placeholder": "例如：incidents@example.com",
+	"reportincident-dialog-harassment-type-disruptiveediting": "扰乱性编辑",
+	"communityconfiguration-reportincident-reportincident_nonemergency_disruptiveediting_helpmethod-email-placeholder": "例如：incidents@example.com",
+	"communityconfiguration-reportincident-reportincident_nonemergency_disruptiveediting_helpmethod-contactcommunity-placeholder": "例如：项目:互助客栈",
+	"reportincident-dialog-harassment-type-other": "其他",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "其他情况",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "例如：项目:管理员布告板",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "例如：incident@example.com",
