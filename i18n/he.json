@@ -110,5 +110,5 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "לדוגמה: spam@example.com",
 	"reportincident-dialog-harassment-type-vandalism": "השחתה",
 	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism-label": "השחתה",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "משהו אחר"
+	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "אחר"
 }

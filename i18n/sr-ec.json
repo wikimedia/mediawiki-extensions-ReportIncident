@@ -35,6 +35,7 @@
 	"reportincident-dialog-harassment-type-sockpuppetry": "Неовлашћено коришћење више налога (Луткарство)",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sockpuppetry-label": "Неовлашћено коришћење више налога (Луткарство)",
 	"reportincident-dialog-harassment-type-vandalism": "Вандализам",
+	"communityconfiguration-reportincident-reportincident_nonemergency_vandalism-label": "Вандализам",
 	"reportincident-dialog-harassment-type-disruptiveediting": "Реметилачко уређивање",
 	"communityconfiguration-reportincident-reportincident_nonemergency_disruptiveediting-label": "Реметилачко уређивање",
 	"communityconfiguration-reportincident-reportincident_nonemergency_disruptiveediting_helpmethod-contactcommunity-placeholder": "нпр. Project:Village pump",

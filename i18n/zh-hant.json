@@ -102,8 +102,8 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "例如：incidents@example.com",
 	"reportincident-nonemergency-spam-header": "垃圾郵件或促銷內容",
 	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-email-placeholder": "例如：spam@example.com",
-	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_disputeresolutionurl-label": "爭議解決頁面（可選）",
-	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_disputeresolutionurl-description": "新增爭議解決頁面的連結",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-label": "爭議解決頁面（可選）",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-description": "新增爭議解決頁面的連結",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "其他",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "例如：incidents@example.com"
 }

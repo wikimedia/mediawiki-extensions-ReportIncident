@@ -133,7 +133,7 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-label": "联系管理员来举报持续活跃且明显的垃圾内容发布者",
 	"communityconfiguration-reportincident-reportincident_nonemergency_spam_helpmethod-contactadmin-placeholder": "例如：项目:当前的破坏",
 	"reportincident-nonemergency-somethingelse-nextstep-common": "如果{{GENDER:|你}}觉得这样做是安全的，{{GENDER:|你}}可以尝试在被举报人的用户讨论页与其交流。",
-	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_disputeresolutionurl-placeholder": "例如：项目:解决争议",
+	"communityconfiguration-reportincident-reportincident_nonemergency_other_disputeresolutionurl-placeholder": "例如：项目:解决争议",
 	"communityconfiguration-reportincident-reportincident_nonemergency_somethingelse_helpmethod-email-placeholder": "例如：incidents@example.com",
 	"reportincident-dialog-harassment-type-disruptiveediting": "扰乱性编辑",
 	"communityconfiguration-reportincident-reportincident_nonemergency_disruptiveediting_helpmethod-email-placeholder": "例如：incidents@example.com",
