@@ -2,17 +2,20 @@
 
 namespace MediaWiki\Extension\ReportIncident\Tests\Unit;
 
+use MediaWiki\Block\Block;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\Request\WebRequest;
 use MediaWiki\Skin\Skin;
 use MediaWiki\Tests\Unit\MockServiceDependenciesTrait;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiUnitTestCase;
 use Wikimedia\TestingAccessWrapper;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * @group ReportIncident
@@ -128,14 +131,31 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 	}
 
 	/** @dataProvider provideShouldShowButtonForUser */
-	public function testShouldShowButtonForUser( $isUserNamed ) {
+	public function testShouldShowButtonForUser(
+		$isUserNamed,
+		$editCount,
+		$isBlocked,
+		$accountAgeOverMinimum,
+		$shouldShow
+	) {
 		$mockUser = $this->createMock( User::class );
 		$mockUser->method( 'isNamed' )
 			->willReturn( $isUserNamed );
-		$objectUnderTest = $this->newReportIncidentController( [] );
+		$mockUser->method( 'getEditCount' )
+			->willReturn( $editCount );
+		$mockUser->method( 'getBlock' )
+			->willReturn( $isBlocked ? $this->createMock( Block::class ) : null );
+		$accountAge = $accountAgeOverMinimum ? 0 : (int)ConvertibleTimestamp::now();
+		$mockUser->method( 'getRegistration' )
+			->willReturn( $accountAge );
+
+		$objectUnderTest = $this->newReportIncidentController( [
+			'ReportIncidentMinimumAccountAgeInSeconds' => (int)ConvertibleTimestamp::now() - 86400,
+			'ReportIncidentDeveloperMode' => false,
+		] );
 		$objectUnderTest = TestingAccessWrapper::newFromObject( $objectUnderTest );
 		$this->assertSame(
-			$isUserNamed,
+			$shouldShow,
 			$objectUnderTest->shouldShowButtonForUser( $mockUser ),
 			'::shouldShowButtonForUser did not return the expected boolean.'
 		);
@@ -143,8 +163,11 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 
 	public static function provideShouldShowButtonForUser() {
 		return [
-			'User is named' => [ true ],
-			'User is not named' => [ false ],
+			'User isn\'t named' => [ false, 1, false, true, false ],
+			'User has no edits' => [ true, 0, false, true, false ],
+			'User is  blocked' => [ true, 1, true, true, false ],
+			'User account age does not meet threshold' => [ true, 1, false, false, false ],
+			'User is eligible' => [ true, 1, false, true, true ],
 		];
 	}
 
@@ -166,6 +189,10 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$mockSkin = $this->createMock( Skin::class );
 		$mockSkin->method( 'getSkinName' )->willReturn( $skinName );
 		$mockContext->method( 'getSkin' )->willReturn( $mockSkin );
+		// Mock the test helper config
+		$mockRequest = $this->createMock( WebRequest::class );
+		$mockRequest->method( 'getBool' )->willReturn( false );
+		$mockContext->method( 'getRequest' )->willReturn( $mockRequest );
 		// Get the object under test
 		/** @var ReportIncidentController $objectUnderTest */
 		$objectUnderTest = $this->newReportIncidentController( $config );
@@ -183,6 +210,8 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentReportButtonEnabled' => false,
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 					'ReportIncidentEnableInstrumentation' => true,
+					'ReportIncidentMinimumAccountAgeInSeconds' => 0,
+					'ReportIncidentDeveloperMode' => false,
 				],
 				NS_TEMPLATE,
 				'minerva',
@@ -194,6 +223,8 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentReportButtonEnabled' => false,
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 					'ReportIncidentEnableInstrumentation' => true,
+					'ReportIncidentMinimumAccountAgeInSeconds' => 0,
+					'ReportIncidentDeveloperMode' => false,
 				],
 				NS_USER_TALK,
 				'vector',
@@ -206,6 +237,8 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncident' => [ 'vector' ],
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 					'ReportIncidentEnableInstrumentation' => true,
+					'ReportIncidentMinimumAccountAgeInSeconds' => 0,
+					'ReportIncidentDeveloperMode' => false,
 				],
 				NS_TEMPLATE,
 				'vector',
@@ -217,6 +250,8 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentReportButtonEnabled' => true,
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 					'ReportIncidentEnableInstrumentation' => true,
+					'ReportIncidentMinimumAccountAgeInSeconds' => 0,
+					'ReportIncidentDeveloperMode' => false,
 				],
 				NS_USER_TALK,
 				'vector',
@@ -228,6 +263,8 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentReportButtonEnabled' => true,
 					'ReportIncidentEnabledNamespaces' => [ NS_USER_TALK ],
 					'ReportIncidentEnableInstrumentation' => true,
+					'ReportIncidentMinimumAccountAgeInSeconds' => 0,
+					'ReportIncidentDeveloperMode' => false,
 				],
 				NS_USER_TALK,
 				'vector',

@@ -8,6 +8,7 @@ use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * Controls whether the reporting links and dialog should be shown.
@@ -33,11 +34,48 @@ class ReportIncidentController {
 	/**
 	 * Should the reporting link / button be shown for the current user
 	 *
+	 * This should only be shown to users eligible to send a report unless their
+	 * only ineligibility is an unverified email address in which case, show anyway
+	 * to improve discoveribility.
+	 *
 	 * @param User $user
+	 * @param bool $skipEligibilityChecks For developer use and for testing (selenium)
 	 * @return bool
 	 */
-	private function shouldShowButtonForUser( User $user ): bool {
-		return $user->isNamed();
+	private function shouldShowButtonForUser( User $user, $skipEligibilityChecks = false ): bool {
+		// User should be named, regardless of any subsequent bypasses
+		if ( !$user->isNamed() ) {
+			return false;
+		}
+
+		$isDeveloperMode = $this->config->get( 'ReportIncidentDeveloperMode' );
+
+		// If pretending like the user is eligible, ignore all checks.
+		if ( $isDeveloperMode && $skipEligibilityChecks ) {
+			return true;
+		}
+
+		if ( $user->getEditCount() === 0 ) {
+			return false;
+		}
+
+		// Prevent users targeted by any block, including unrelated partial blocks, from submitting reports.
+		// (T378778)
+		if ( $user->getBlock() ) {
+			return false;
+		}
+
+		$now = (int)ConvertibleTimestamp::now();
+		$registrationTime = (int)$user->getRegistration();
+		$reportIncidentMinimumAccountAgeInSeconds = $this->config->get( 'ReportIncidentMinimumAccountAgeInSeconds' );
+		if ( $registrationTime &&
+			$reportIncidentMinimumAccountAgeInSeconds &&
+			!$isDeveloperMode &&
+			( ( $now - $registrationTime ) < $reportIncidentMinimumAccountAgeInSeconds ) ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -62,7 +100,11 @@ class ReportIncidentController {
 	public function shouldAddMenuItem( IContextSource $context ): bool {
 		return $this->isButtonEnabled() &&
 			$this->shouldShowButtonForNamespace( $context->getTitle()->getNamespace() ) &&
-			$this->shouldShowButtonForUser( $context->getUser() );
+			$this->shouldShowButtonForUser(
+				$context->getUser(),
+				$context->getRequest() ?
+					$context->getRequest()->getBool( 'withconfirmedemail' ) : false
+			);
 	}
 
 	/**
