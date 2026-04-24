@@ -171,6 +171,51 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		];
 	}
 
+	/** @dataProvider provideShouldShowButtonForUserBypasses */
+	public function testShouldShowButtonForUserBypasses(
+		$isDeveloperMode,
+		$shouldSkipEligibilityChecks,
+		$isE2ETester,
+		$shouldShowButton
+	) {
+		// Mock a user who fails all eligibility checks by default
+		$mockUser = $this->createMock( User::class );
+		$mockUser->method( 'getName' )
+			->willReturn( 'Foo' );
+		$mockUser->method( 'isNamed' )
+			->willReturn( true );
+		$mockUser->method( 'getEditCount' )
+			->willReturn( 0 );
+		$mockUser->method( 'getBlock' )
+			->willReturn( $this->createMock( Block::class ) );
+		$accountAge = (int)ConvertibleTimestamp::now();
+		$mockUser->method( 'getRegistration' )
+			->willReturn( $accountAge );
+
+		$objectUnderTest = $this->newReportIncidentController( [
+			'ReportIncidentMinimumAccountAgeInSeconds' => (int)ConvertibleTimestamp::now(),
+			'ReportIncidentDeveloperMode' => $isDeveloperMode,
+		], [
+			'ReportIncidentE2ETesterUsers' => $isE2ETester ? [ 'Foo' ] : [],
+		] );
+		$objectUnderTest = TestingAccessWrapper::newFromObject( $objectUnderTest );
+		$this->assertSame(
+			$shouldShowButton,
+			$objectUnderTest->shouldShowButtonForUser( $mockUser, $shouldSkipEligibilityChecks ),
+			'::shouldShowButtonForUser did not return the expected boolean.'
+		);
+	}
+
+	public static function provideShouldShowButtonForUserBypasses() {
+		return [
+			'no developer mode, should skip eligibility checks' => [ false, true, false, false ],
+			'developer mode, don\'t skip eligibility checks' => [ true, false, false, false ],
+			'developer mode, skip eligibility checks' => [ true, true, false, true ],
+			'not an e2e tester' => [ false, false, false, false ],
+			'e2e tester' => [ false, false, true, true, ]
+		];
+	}
+
 	/** @dataProvider provideShouldAddMenuItem */
 	public function testShouldAddMenuItem(
 		array $config, int $namespace, ?string $skinName, bool $isUserNamed, bool $expectedReturnResult

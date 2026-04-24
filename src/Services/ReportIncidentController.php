@@ -55,6 +55,12 @@ class ReportIncidentController {
 			return true;
 		}
 
+		// if user is an e2e tester, show them the button regardless of eligibility
+		$e2eTesters = (array)$this->localConfig->get( 'ReportIncidentE2ETesterUsers' );
+		if ( in_array( $user->getName(), $e2eTesters ) ) {
+			return true;
+		}
+
 		if ( $user->getEditCount() === 0 ) {
 			return false;
 		}
