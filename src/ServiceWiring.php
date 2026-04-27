@@ -56,7 +56,10 @@ return [
 		} else {
 			$localLinksConfig = $services->getMainConfig();
 		}
-		return new ReportIncidentController( $services->getMainConfig(), $localLinksConfig );
+		$experimentManager = ExtensionRegistry::getInstance()->isLoaded( 'TestKitchen' ) ?
+			MediaWikiServices::getInstance()->getService( 'TestKitchen.ExperimentManager' ) :
+			null;
+		return new ReportIncidentController( $services->getMainConfig(), $localLinksConfig, $experimentManager );
 	}
 ];
 // @codeCoverageIgnoreEnd

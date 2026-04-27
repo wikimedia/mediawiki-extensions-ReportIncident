@@ -7,6 +7,8 @@ use MediaWiki\Config\HashConfig;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
+use MediaWiki\Extension\TestKitchen\Sdk\Experiment;
+use MediaWiki\Extension\TestKitchen\Sdk\ExperimentManager;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\WebRequest;
 use MediaWiki\Skin\Skin;
@@ -27,7 +29,8 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 
 	private function newReportIncidentController(
 		array $globalConfig,
-		array $communityConfig = []
+		array $communityConfig = [],
+		?ExperimentManager $experimentManager = null
 	): ReportIncidentController {
 		$communityConfig += [
 			'ReportIncidentEnabledNamespaces' => [],
@@ -99,7 +102,8 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		];
 		return new ReportIncidentController(
 			new HashConfig( $globalConfig ),
-			new HashConfig( $communityConfig )
+			new HashConfig( $communityConfig ),
+			$experimentManager
 		);
 	}
 
@@ -152,6 +156,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$objectUnderTest = $this->newReportIncidentController( [
 			'ReportIncidentMinimumAccountAgeInSeconds' => (int)ConvertibleTimestamp::now() - 86400,
 			'ReportIncidentDeveloperMode' => false,
+			'ReportIncidentIsStaggeredRollout' => false,
 		] );
 		$objectUnderTest = TestingAccessWrapper::newFromObject( $objectUnderTest );
 		$this->assertSame(
@@ -168,6 +173,57 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'User is  blocked' => [ true, 1, true, true, false ],
 			'User account age does not meet threshold' => [ true, 1, false, false, false ],
 			'User is eligible' => [ true, 1, false, true, true ],
+		];
+	}
+
+	/** @dataProvider provideTestShouldShowButtonForUserInExperiment */
+	public function testShouldShowButtonForUserInExperiment(
+		$isExperimentRunning,
+		$isEnrolled,
+		$shouldShow
+	) {
+		if ( !class_exists( ExperimentManager::class ) ) {
+			$this->markTestSkipped( 'TestKitchen not loaded' );
+		}
+
+		$mockUser = $this->createMock( User::class );
+		$mockUser->method( 'isNamed' )
+			->willReturn( true );
+		$mockUser->method( 'getEditCount' )
+			->willReturn( 1 );
+		$mockUser->method( 'getBlock' )
+			->willReturn( null );
+		$mockUser->method( 'getRegistration' )
+			->willReturn( 0 );
+
+		$mockExperiment = $this->createMock( Experiment::class );
+		$mockExperiment->method( 'isAssignedGroup' )
+			->willReturn( $isEnrolled );
+		$mockExperimentManager = $this->createMock( ExperimentManager::class );
+		$mockExperimentManager->method( 'getExperiment' )
+			->willReturn( $mockExperiment );
+		$objectUnderTest = $this->newReportIncidentController(
+			[
+				'ReportIncidentMinimumAccountAgeInSeconds' => (int)ConvertibleTimestamp::now() - 86400,
+				'ReportIncidentDeveloperMode' => false,
+				'ReportIncidentIsStaggeredRollout' => $isExperimentRunning,
+			],
+			[],
+			$mockExperimentManager,
+		);
+		$objectUnderTest = TestingAccessWrapper::newFromObject( $objectUnderTest );
+		$this->assertSame(
+			$shouldShow,
+			$objectUnderTest->shouldShowButtonForUser( $mockUser ),
+			'::shouldShowButtonForUser did not return the expected boolean.'
+		);
+	}
+
+	public static function provideTestShouldShowButtonForUserInExperiment() {
+		return [
+			'experiment not running' => [ false, false, true ],
+			'experiment running, not enrolled' => [ true, false, false ],
+			'experiment running, enrolled' => [ true, true, true ],
 		];
 	}
 
@@ -195,6 +251,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$objectUnderTest = $this->newReportIncidentController( [
 			'ReportIncidentMinimumAccountAgeInSeconds' => (int)ConvertibleTimestamp::now(),
 			'ReportIncidentDeveloperMode' => $isDeveloperMode,
+			'ReportIncidentIsStaggeredRollout' => false,
 		], [
 			'ReportIncidentE2ETesterUsers' => $isE2ETester ? [ 'Foo' ] : [],
 		] );
@@ -257,6 +314,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentEnableInstrumentation' => true,
 					'ReportIncidentMinimumAccountAgeInSeconds' => 0,
 					'ReportIncidentDeveloperMode' => false,
+					'ReportIncidentIsStaggeredRollout' => false,
 				],
 				NS_TEMPLATE,
 				'minerva',
@@ -270,6 +328,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentEnableInstrumentation' => true,
 					'ReportIncidentMinimumAccountAgeInSeconds' => 0,
 					'ReportIncidentDeveloperMode' => false,
+					'ReportIncidentIsStaggeredRollout' => false,
 				],
 				NS_USER_TALK,
 				'vector',
@@ -284,6 +343,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentEnableInstrumentation' => true,
 					'ReportIncidentMinimumAccountAgeInSeconds' => 0,
 					'ReportIncidentDeveloperMode' => false,
+					'ReportIncidentIsStaggeredRollout' => false,
 				],
 				NS_TEMPLATE,
 				'vector',
@@ -297,6 +357,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentEnableInstrumentation' => true,
 					'ReportIncidentMinimumAccountAgeInSeconds' => 0,
 					'ReportIncidentDeveloperMode' => false,
+					'ReportIncidentIsStaggeredRollout' => false,
 				],
 				NS_USER_TALK,
 				'vector',
@@ -310,6 +371,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 					'ReportIncidentEnableInstrumentation' => true,
 					'ReportIncidentMinimumAccountAgeInSeconds' => 0,
 					'ReportIncidentDeveloperMode' => false,
+					'ReportIncidentIsStaggeredRollout' => false,
 				],
 				NS_USER_TALK,
 				'vector',

@@ -112,6 +112,10 @@
 			],
 			"description": "Defines what non-emergency categories are seen and in what order. See Constants.harassmentTypes for a list of available categories.",
 			"merge_strategy": "provide_default"
+		},
+		"ReportIncidentIsStaggeredRollout": {
+			"value": false,
+			"description": "Whether or not IRS is being deployed as a staggered rollout via the Test Kitchen experimentation platform"
 		}
 	},
 	"AvailableRights": [
