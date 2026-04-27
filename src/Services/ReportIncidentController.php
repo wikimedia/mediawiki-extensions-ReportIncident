@@ -5,6 +5,7 @@ namespace MediaWiki\Extension\ReportIncident\Services;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Extension\ReportIncident\Api\Rest\Handler\ReportHandler;
+use MediaWiki\Extension\TestKitchen\Sdk\ExperimentManager;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
@@ -18,6 +19,7 @@ class ReportIncidentController {
 	public function __construct(
 		private readonly Config $config,
 		private readonly Config $localConfig,
+		private readonly ?ExperimentManager $experimentManager,
 	) {
 	}
 
@@ -59,6 +61,14 @@ class ReportIncidentController {
 		$e2eTesters = (array)$this->localConfig->get( 'ReportIncidentE2ETesterUsers' );
 		if ( in_array( $user->getName(), $e2eTesters ) ) {
 			return true;
+		}
+
+		// If an experiment is running, don't show the button to users not part of the enrollment
+		if ( $this->config->get( 'ReportIncidentIsStaggeredRollout' ) && $this->experimentManager ) {
+			$experiment = $this->experimentManager->getExperiment( 'incident_reporting_system_interaction' );
+			if ( !$experiment->isAssignedGroup( 'control' ) ) {
+				return false;
+			}
 		}
 
 		if ( $user->getEditCount() === 0 ) {
