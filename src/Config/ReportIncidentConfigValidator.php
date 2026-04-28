@@ -178,7 +178,6 @@ class ReportIncidentConfigValidator implements IValidator {
 									->text()
 							);
 						}
-						continue;
 					}
 
 					// Valid URL; pass

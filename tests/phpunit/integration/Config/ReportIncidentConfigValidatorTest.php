@@ -221,12 +221,12 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 			];
 
 			yield "URL for \"$name\" doesn't have a valid query string" => [
-				self::getConfigUnderTest( $name, 'http://example.com?foo=bar&baz=' ),
+				self::getConfigUnderTest( $name, 'https://example.com?foo=bar&baz=' ),
 				[
 					[
 						'property' => $name,
 						'pointer' => "/$name",
-						'messageLiteral' => '(communityconfiguration-reportincident-invalid-usehttps)',
+						'messageLiteral' => '(communityconfiguration-reportincident-invalid-queryparameter: baz)',
 						'additionalData' => [],
 					],
 				],
