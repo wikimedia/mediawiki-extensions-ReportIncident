@@ -344,7 +344,10 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 			expect( copy ).toEqual( expected.copy );
 
 			expect( logEvent ).toHaveBeenCalledTimes( 1 );
-			expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'get_support' } );
+			expect( logEvent ).toHaveBeenCalledWith(
+				'view',
+				{ source: `get_support_${ config.inputBehavior }` }
+			);
 		}
 	);
 
@@ -704,10 +707,10 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 		await wrapper.find( 'a' ).trigger( 'click' );
 
 		expect( logEvent ).toHaveBeenCalledTimes( 2 );
-		expect( logEvent ).toHaveBeenNthCalledWith( 1, 'view', { source: 'get_support' } );
+		expect( logEvent ).toHaveBeenNthCalledWith( 1, 'view', { source: 'get_support_intimidation' } );
 		expect( logEvent ).toHaveBeenNthCalledWith( 2, 'click', {
 			context: 'https://example.com',
-			source: 'get_support'
+			source: 'get_support_intimidation'
 		} );
 	} );
 } );

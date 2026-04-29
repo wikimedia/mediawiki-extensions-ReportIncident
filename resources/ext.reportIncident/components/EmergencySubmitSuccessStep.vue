@@ -1,5 +1,5 @@
 <template>
-	<form id="reportincident-form">
+	<form id="reportincident-form" ref="pageContent">
 		<cdx-message :type="messageType">
 			<parsed-message class="ext-reportincident-dialog__message" :message="banner">
 			</parsed-message>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-const { defineComponent, onMounted } = require( 'vue' );
+const { defineComponent, onMounted, ref, watch } = require( 'vue' );
 const { CdxMessage } = require( '@wikimedia/codex' );
 const ParsedMessage = require( './ParsedMessage.vue' );
 const useInstrument = require( '../composables/useInstrument.js' );
@@ -36,6 +36,18 @@ module.exports = exports = defineComponent( {
 	},
 	setup() {
 		const logEvent = useInstrument();
+		const pageContent = ref( null );
+
+		watch( () => pageContent.value, async () => {
+			$( pageContent.value ).find( 'a' ).off( 'click' );
+
+			$( pageContent.value ).find( 'a' ).on( 'click', function () {
+				logEvent( 'click', {
+					context: $( this ).attr( 'href' ),
+					source: 'submitted'
+				} );
+			} );
+		} );
 
 		onMounted( () => {
 			logEvent( 'view', { source: 'submitted' } );
@@ -62,6 +74,7 @@ module.exports = exports = defineComponent( {
 		];
 
 		return {
+			pageContent,
 			banner,
 			sections,
 			messageType

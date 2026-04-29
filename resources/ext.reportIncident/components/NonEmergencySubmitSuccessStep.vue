@@ -58,19 +58,19 @@ module.exports = exports = {
 	setup() {
 		const logEvent = useInstrument();
 		const pageContent = ref( null );
+		const store = useFormStore();
+		const behavior = store.inputBehavior;
+
 		onMounted( () => {
-			logEvent( 'view', { source: 'get_support' } );
+			logEvent( 'view', { source: `get_support_${ behavior }` } );
 
 			$( pageContent.value ).find( 'a' ).on( 'click', function () {
 				logEvent( 'click', {
 					context: $( this ).attr( 'href' ),
-					source: 'get_support'
+					source: `get_support_${ behavior }`
 				} );
 			} );
 		} );
-
-		const store = useFormStore();
-		const behavior = store.inputBehavior;
 
 		const pages = {};
 
