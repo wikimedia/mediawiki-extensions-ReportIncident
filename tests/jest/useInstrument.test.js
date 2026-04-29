@@ -5,6 +5,8 @@ const useFormStore = require( '../../resources/ext.reportIncident/stores/Form.js
 describe( 'useInstrument', () => {
 	let submitInteraction;
 	let newInstrument;
+	let send;
+	let getExperiment;
 
 	beforeAll( () => {
 		submitInteraction = jest.fn();
@@ -12,6 +14,13 @@ describe( 'useInstrument', () => {
 			submitInteraction
 		} ) );
 		mw.eventLog = { newInstrument };
+
+		send = jest.fn();
+		getExperiment = jest.fn( () => ( {
+			send
+		} ) );
+		mw.testKitchen = { getExperiment };
+
 	} );
 
 	beforeEach( () => {

@@ -293,7 +293,7 @@ module.exports = exports = {
 			} else {
 				// if on the second page, validate, then POST the data
 				logEvent( 'click', {
-					subType: 'continue',
+					subType: 'submit_report',
 					source: 'submit_report',
 					context: JSON.stringify( {
 						// eslint-disable-next-line camelcase
@@ -364,6 +364,10 @@ module.exports = exports = {
 			} else {
 				// if on the second page, navigate back to the first page
 				currentStep.value = Constants.DIALOG_STEP_1;
+				logEvent( 'click', {
+					source: 'form',
+					subType: 'back'
+				} );
 			}
 		}
 

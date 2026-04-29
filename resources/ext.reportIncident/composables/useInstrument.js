@@ -24,6 +24,7 @@ const useFormStore = require( '../stores/Form.js' );
  * Lazy singleton instance of the underlying Metrics Platform instrument.
  */
 let instrument;
+let experiment;
 
 /**
  * Composable to create an event logging function configured to log events to the IRS event stream.
@@ -52,6 +53,9 @@ const useInstrument = () => {
 			'mediawiki.product_metrics.incident_reporting_system_interaction',
 			'/analytics/product_metrics/web/base/1.3.0'
 		);
+	}
+	if ( !experiment ) {
+		experiment = mw.testKitchen.getExperiment( 'incident_reporting_system_interaction' );
 	}
 
 	const store = useFormStore();
@@ -90,6 +94,7 @@ const useInstrument = () => {
 		}
 
 		instrument.submitInteraction( action, interactionData );
+		experiment.send( action, interactionData );
 	};
 };
 

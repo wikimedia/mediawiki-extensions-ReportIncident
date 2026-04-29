@@ -6,6 +6,12 @@ const EmailAlertDialog = require( '../../../resources/ext.reportIncident/compone
 const realLocation = window.location;
 
 describe( 'Report Incident email alert dialog', () => {
+	const mockFire = jest.fn();
+	beforeEach( () => {
+		mw.hook = jest.fn().mockReturnValue( {
+			fire: mockFire
+		} );
+	} );
 	afterEach( () => {
 		// Tests may replace the window.location, but this should
 		// always be restored afterwards.
@@ -49,6 +55,10 @@ describe( 'Report Incident email alert dialog', () => {
 		// Method should have attempted to redirect the user to the email confirmation page
 		// using window.location.assign.
 		expect( assignMock ).toHaveBeenCalledWith( 'testing url' );
+		expect( mockFire ).toHaveBeenCalledWith( 'click', {
+			source: 'email_verification',
+			subType: 'go_to_settings'
+		} );
 	} );
 
 	it( 'Call to onPrimaryAction with an e-mail not set', () => {
@@ -77,5 +87,21 @@ describe( 'Report Incident email alert dialog', () => {
 		// Method should have attempted to redirect the user to the preferences
 		// section to set the e-mail using window.location.assign.
 		expect( assignMock ).toHaveBeenCalledWith( 'testing url#mw-prefsection-personal-email' );
+	} );
+
+	it( 'Fires the logging event on modal closing actions', () => {
+		const wrapper = utils.mount( EmailAlertDialog, { props: { open: true } } );
+
+		wrapper.vm.onDefaultAction();
+		expect( mockFire ).toHaveBeenCalledWith( 'click', {
+			source: 'email_verification',
+			subType: 'cancel'
+		} );
+
+		wrapper.vm.onDialogUpdateOpen( false );
+		expect( mockFire ).toHaveBeenCalledWith( 'click', {
+			source: 'email_verification',
+			subType: 'close'
+		} );
 	} );
 } );
