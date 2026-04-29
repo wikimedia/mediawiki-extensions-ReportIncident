@@ -12,7 +12,7 @@
 	"reportincident-dialog-submit-btn": "Şikayəti göndər",
 	"reportincident-dialog-harassment-type-label": "Arzuolunmaz davranış növü",
 	"reportincident-dialog-additional-details-input-label": "Əlavə məlumat",
-	"reportincident-dialog-additional-details-input-placeholder": "Şikayətə baxacaq şəxs üçün üçün faydalı ola biləcək kontekst əlavə edin (əlavə bağlantılar və s.).",
+	"reportincident-dialog-additional-details-input-placeholder": "Şikayətə baxacaq şəxs üçün üçün faydalı ola biləcək kontekst əlavə edin (əlavə keçidlər və s.).",
 	"reportincident-dialog-optional-label": "(məcburi deyil)",
 	"reportincident-dialog-violator-label": "Şikayət etmək {{GENDER:|istədiyiniz}} istifadəçi",
 	"reportincident-dialog-violator-disclaimer": "Vikimedia Fondu kimliyinizi şikayət etdiyiniz şəxsə ötürməyəcək",
