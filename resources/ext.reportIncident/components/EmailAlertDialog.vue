@@ -9,6 +9,7 @@
 		:default-action="defaultAction"
 		@primary="onPrimaryAction"
 		@default="onDefaultAction"
+		@update:open="onDialogUpdateOpen"
 	>
 		<p>{{ $i18n( 'reportincident-emaildialog-content' ).text() }}</p>
 	</cdx-dialog>
@@ -36,8 +37,22 @@ module.exports = exports = {
 			label: mw.msg( 'reportincident-emaildialog-close-button' )
 		};
 
+		function onDialogUpdateOpen( isOpen ) {
+			if ( !isOpen ) {
+				mw.hook( 'reportincident.logEvent' ).fire( 'click', {
+					source: 'email_verification',
+					subType: 'close'
+				} );
+			}
+		}
+
 		function onPrimaryAction() {
 			wrappedOpen.value = false;
+
+			mw.hook( 'reportincident.logEvent' ).fire( 'click', {
+				source: 'email_verification',
+				subType: 'go_to_settings'
+			} );
 
 			if ( mw.config.get( 'wgReportIncidentUserHasEmail' ) ) {
 				window.location.assign(
@@ -55,6 +70,11 @@ module.exports = exports = {
 
 		function onDefaultAction() {
 			wrappedOpen.value = false;
+
+			mw.hook( 'reportincident.logEvent' ).fire( 'click', {
+				source: 'email_verification',
+				subType: 'cancel'
+			} );
 		}
 
 		return {
@@ -62,7 +82,8 @@ module.exports = exports = {
 			primaryAction,
 			defaultAction,
 			onPrimaryAction,
-			onDefaultAction
+			onDefaultAction,
+			onDialogUpdateOpen
 		};
 	}
 };

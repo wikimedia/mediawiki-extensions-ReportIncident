@@ -55,15 +55,25 @@ module.exports = exports = {
 		const store = useFormStore();
 		const logEvent = useInstrument();
 
+		// Capture instrumentation events from children components,
+		// allowing them to use the store without needing to pass down refs
+		mw.hook( 'reportincident.logEvent' ).add( ( action, data ) => {
+			logEvent( action, data );
+		} );
+
 		/**
 		 * Open the main dialog if user has confirmed email, otherwise show email alert dialog.
+		 *
+		 * @param {string} source what link was clicked (discussion tools or sidebar)
 		 */
-		function showDialogDependingOnEmailConfirmationStatus() {
+		function showDialogDependingOnEmailConfirmationStatus( source ) {
+			logEvent( 'click', { source: source } );
 			if ( mw.config.get( 'wgReportIncidentUserHasConfirmedEmail' ) ) {
 				reportIncidentOpen.value = true;
 				logEvent( 'view', { source: 'form' } );
 			} else {
 				emailAlertOpen.value = true;
+				logEvent( 'view', { source: 'email_verification' } );
 			}
 		}
 
@@ -79,7 +89,7 @@ module.exports = exports = {
 			if ( Object.keys( store.overflowMenuData ).length ) {
 				store.$reset();
 			}
-			showDialogDependingOnEmailConfirmationStatus();
+			showDialogDependingOnEmailConfirmationStatus( 'sidebar' );
 		}
 
 		/**
@@ -148,7 +158,7 @@ module.exports = exports = {
 					store.inputReportedUser = '';
 				}
 				store.overflowMenuData = menuItem.getData();
-				showDialogDependingOnEmailConfirmationStatus();
+				showDialogDependingOnEmailConfirmationStatus( 'discussion_tool' );
 				// Only set the reported user input as disabled if
 				// the allusers API says this is a user or the
 				// user is an IP address.

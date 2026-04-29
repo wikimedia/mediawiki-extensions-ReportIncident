@@ -354,7 +354,7 @@ describe( 'Report Incident Dialog', () => {
 
 			// Clicking back once should put us on STEP 1
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_1 );
-			expect( logEvent ).not.toHaveBeenCalled();
+			expect( logEvent ).toHaveBeenCalledTimes( 1 );
 
 			await wrapper.get( '.ext-reportincident-dialog-footer__back-btn' ).trigger( 'click' );
 
@@ -363,10 +363,14 @@ describe( 'Report Incident Dialog', () => {
 			expect( store.inputBehavior ).toBe( '' );
 			expect( store.inputReportedUser ).toBe( '' );
 
-			expect( logEvent ).toHaveBeenCalledTimes( 1 );
+			expect( logEvent ).toHaveBeenCalledTimes( 2 );
 			expect( logEvent ).toHaveBeenCalledWith( 'click', {
 				source: 'form',
 				subType: 'cancel'
+			} );
+			expect( logEvent ).toHaveBeenCalledWith( 'click', {
+				source: 'form',
+				subType: 'back'
 			} );
 		} );
 
@@ -502,7 +506,7 @@ describe( 'Report Incident Dialog', () => {
 
 					if ( store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm ) {
 						expect( logEvent ).toHaveBeenCalledWith( 'click', {
-							subType: 'continue',
+							subType: 'submit_report',
 							source: 'submit_report',
 							context: JSON.stringify( {
 								// eslint-disable-next-line camelcase
@@ -620,7 +624,7 @@ describe( 'Report Incident Dialog', () => {
 
 				if ( store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm ) {
 					expect( logEvent ).toHaveBeenCalledWith( 'click', {
-						subType: 'continue',
+						subType: 'submit_report',
 						source: 'submit_report',
 						context: JSON.stringify( {
 							// eslint-disable-next-line camelcase

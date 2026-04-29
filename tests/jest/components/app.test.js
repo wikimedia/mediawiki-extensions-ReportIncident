@@ -59,8 +59,19 @@ function mockIsIPAddress( returnValue ) {
 }
 
 describe( 'Main Component Test Suite', () => {
+	const hooks = {};
 	let logEvent;
 	beforeEach( () => {
+		mw.hook = ( name ) => ( {
+			add: ( callback ) => {
+				hooks[ name ] = callback;
+			},
+			fire: ( ...args ) => {
+				if ( typeof hooks[ name ] === 'function' ) {
+					hooks[ name ]( ...args );
+				}
+			}
+		} );
 		jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
 			switch ( key ) {
 				case 'wgReportIncidentUserHasConfirmedEmail':
@@ -112,7 +123,7 @@ describe( 'Main Component Test Suite', () => {
 		expect( store.inputReportedUserDisabled ).toBe( false );
 		expect( store.inputReportedUser ).toBe( '' );
 
-		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledTimes( 2 );
 		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
@@ -144,7 +155,8 @@ describe( 'Main Component Test Suite', () => {
 		await nextTick();
 		expect( wrapper.find( '.ext-reportincident-emaildialog' ).exists() ).toEqual( true );
 
-		expect( logEvent ).not.toHaveBeenCalled();
+		expect( logEvent ).toHaveBeenCalledTimes( 2 );
+		expect( logEvent ).toHaveBeenCalledWith( 'click', { source: 'sidebar' } );
 	} );
 
 	it( 'Does nothing when firing discussionToolsOverflowMenuOnChoose for not reportincident menu item', async () => {
@@ -186,7 +198,7 @@ describe( 'Main Component Test Suite', () => {
 		expect( store.overflowMenuData ).toStrictEqual( { 'thread-id': 'c-1.2.3.4-20230504030201' } );
 		expect( store.inputReportedUserDisabled ).toBe( false );
 
-		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledTimes( 2 );
 		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
@@ -225,7 +237,7 @@ describe( 'Main Component Test Suite', () => {
 		// Expect that mw.util.isIPAddress was called with the correct name
 		expect( isIPAddress ).toBeCalledWith( '1.2.3.4' );
 
-		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledTimes( 2 );
 		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
@@ -264,7 +276,7 @@ describe( 'Main Component Test Suite', () => {
 		// Expect that mw.util.isIPAddress was called with the correct name
 		expect( isIPAddress ).toBeCalledWith( 'testuser' );
 
-		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledTimes( 2 );
 		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
@@ -299,7 +311,7 @@ describe( 'Main Component Test Suite', () => {
 		// Expect that mw.util.isIPAddress was called with the correct name
 		expect( isIPAddress ).toBeCalledWith( 'testuser' );
 
-		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledTimes( 2 );
 		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
@@ -339,7 +351,7 @@ describe( 'Main Component Test Suite', () => {
 		// Expect that mw.util.isIPAddress was called with the correct name
 		expect( isIPAddress ).toBeCalledWith( 'testuser' );
 
-		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledTimes( 2 );
 		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
@@ -381,7 +393,7 @@ describe( 'Main Component Test Suite', () => {
 		// Expect that mw.util.isIPAddress was called with the correct name
 		expect( isIPAddress ).toBeCalledWith( 'testuser' );
 
-		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledTimes( 2 );
 		expect( logEvent ).toHaveBeenCalledWith( 'view', { source: 'form' } );
 	} );
 
@@ -402,5 +414,21 @@ describe( 'Main Component Test Suite', () => {
 		const apiGet = mockApiGet( rejectedPromise );
 		await expect( wrapper.vm.checkUsernameExists( 'testuser3' ) ).rejects.toBeUndefined();
 		return expectApiGetParameters( apiGet, 'testuser3' );
+	} );
+
+	it( 'listens for emitted logging events from child components', () => {
+		mw.hook( 'reportincident.logEvent' ).add( ( action, data ) => {
+			logEvent( action, data );
+		} );
+		mw.hook( 'reportincident.logEvent' ).fire( 'click', {
+			source: 'email_verification',
+			subType: 'close'
+		} );
+
+		expect( logEvent ).toHaveBeenCalledTimes( 1 );
+		expect( logEvent ).toHaveBeenCalledWith( 'click', {
+			source: 'email_verification',
+			subType: 'close'
+		} );
 	} );
 } );
