@@ -19,7 +19,9 @@ describe( 'useInstrument', () => {
 		getExperiment = jest.fn( () => ( {
 			send
 		} ) );
-		mw.testKitchen = { getExperiment };
+		mw.testKitchen = {
+			compat: { getExperiment }
+		};
 
 	} );
 
