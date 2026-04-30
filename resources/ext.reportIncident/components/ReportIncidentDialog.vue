@@ -363,9 +363,17 @@ module.exports = exports = {
 				store.$reset();
 			} else {
 				// if on the second page, navigate back to the first page
+				let source;
+				if ( currentStep.value === Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ) {
+					source = 'describe_unacceptable_behavior';
+				} else if ( currentStep.value === Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ) {
+					source = 'submit_report';
+				} else {
+					source = 'form';
+				}
 				currentStep.value = Constants.DIALOG_STEP_1;
 				logEvent( 'click', {
-					source: 'form',
+					source: source,
 					subType: 'back'
 				} );
 			}

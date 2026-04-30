@@ -369,7 +369,7 @@ describe( 'Report Incident Dialog', () => {
 				subType: 'cancel'
 			} );
 			expect( logEvent ).toHaveBeenCalledWith( 'click', {
-				source: 'form',
+				source: 'describe_unacceptable_behavior',
 				subType: 'back'
 			} );
 		} );
