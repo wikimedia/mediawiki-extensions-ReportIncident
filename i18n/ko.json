@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Ykhwong",
-			"YeBoy371"
+			"YeBoy371",
+			"Tensama0415"
 		]
 	},
+	"reportincident-dialog-close-btn": "닫기",
 	"reportincident-dialog-submit-btn": "보고서 제출",
 	"reportincident-dialog-additional-details-input-label": "추가 정보",
 	"reportincident-dialog-harassment-type-spam": "스팸",
@@ -19,7 +21,7 @@
 	"reportincident-dialog-continue": "계속",
 	"reportincident-threats-physical-harm": "신체적 해를 끼칠 위협",
 	"reportincident-type-incident-required": "사건 유형을 선택해 주십시오",
-	"reportincident-submit-emergency-success": "검토를 위해 제출된 보고서",
+	"reportincident-submit-emergency-success": "검토를 위해 보고서가 제출되었습니다. {{GENDER:|당신의}} 요청은 3시간 이내에 검토될 예정입니다.",
 	"reportincident-submit-emergency-section-important-title": "중요",
 	"reportincident-submit-behavior-section-support-title": "다음에 할 일",
 	"reportincident-submit-behavior-section-support-item-info-is-public": "위키에서의 모든 대화는 공개되므로 개인 정보를 공유하지 마십시오.",
