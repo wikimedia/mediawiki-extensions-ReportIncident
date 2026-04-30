@@ -59,6 +59,19 @@ function mockIsIPAddress( returnValue ) {
 }
 
 describe( 'Main Component Test Suite', () => {
+	let sendExposure;
+	let getExperiment;
+	beforeAll( () => {
+		sendExposure = jest.fn();
+		getExperiment = jest.fn( () => ( {
+			sendExposure
+		} ) );
+		mw.testKitchen = {
+			compat: { getExperiment }
+		};
+
+	} );
+
 	const hooks = {};
 	let logEvent;
 	beforeEach( () => {

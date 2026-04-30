@@ -67,6 +67,9 @@ module.exports = exports = {
 		 * @param {string} source what link was clicked (discussion tools or sidebar)
 		 */
 		function showDialogDependingOnEmailConfirmationStatus( source ) {
+			mw.loader.using( 'ext.testKitchen' ).then(
+				() => mw.testKitchen.compat.getExperiment( 'incident_reporting_system_interaction' ).sendExposure()
+			);
 			logEvent( 'click', { source: source } );
 			if ( mw.config.get( 'wgReportIncidentUserHasConfirmedEmail' ) ) {
 				reportIncidentOpen.value = true;

@@ -55,7 +55,9 @@ const useInstrument = () => {
 		);
 	}
 	if ( !experiment ) {
-		experiment = mw.testKitchen.compat.getExperiment( 'incident_reporting_system_interaction' );
+		mw.loader.using( 'ext.testKitchen' ).then(
+			experiment = mw.testKitchen.compat.getExperiment( 'incident_reporting_system_interaction' )
+		);
 	}
 
 	const store = useFormStore();
@@ -94,7 +96,9 @@ const useInstrument = () => {
 		}
 
 		instrument.submitInteraction( action, interactionData );
-		experiment.send( action, interactionData );
+		if ( experiment ) {
+			experiment.send( action, interactionData );
+		}
 	};
 };
 
