@@ -73,7 +73,7 @@ module.exports = exports = {
 			logEvent( 'click', { source: source } );
 			if ( mw.config.get( 'wgReportIncidentUserHasConfirmedEmail' ) ) {
 				reportIncidentOpen.value = true;
-				logEvent( 'view', { source: 'form' } );
+				logEvent( 'view', { source: 'form', subType: 'report' } );
 			} else {
 				emailAlertOpen.value = true;
 				logEvent( 'view', { source: 'email_verification' } );

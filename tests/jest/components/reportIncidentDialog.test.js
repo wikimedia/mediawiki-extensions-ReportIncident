@@ -646,9 +646,14 @@ describe( 'Report Incident Dialog', () => {
 
 	const closeTestCases = [
 		[ 'STEP_1', Constants.DIALOG_STEP_1, 'form' ],
+		[
+			'DIALOG_STEP_REPORT_BEHAVIOR_TYPES',
+			Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
+			'describe_unacceptable_behavior'
+		],
 		[ 'REPORT_IMMEDIATE_HARM', Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM, 'submit_report' ],
-		[ 'SUCCESS', Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS, 'success' ],
-		[ 'SUCCESS', Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS, 'success' ]
+		[ 'SUCCESS', Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS, 'get_support_' ],
+		[ 'SUCCESS', Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS, 'submitted' ]
 	];
 
 	for ( const [ stepName, initialStep, source ] of closeTestCases ) {

@@ -24,7 +24,8 @@ const useFormStore = require( '../stores/Form.js' );
  * Lazy singleton instance of the underlying Metrics Platform instrument.
  */
 let instrument;
-let experiment;
+let experimentPromise;
+let funnelEventSequencePosition = 1;
 
 /**
  * Composable to create an event logging function configured to log events to the IRS event stream.
@@ -54,9 +55,9 @@ const useInstrument = () => {
 			'/analytics/product_metrics/web/base/1.3.0'
 		);
 	}
-	if ( !experiment ) {
-		mw.loader.using( 'ext.testKitchen' ).then(
-			experiment = mw.testKitchen.compat.getExperiment( 'incident_reporting_system_interaction' )
+	if ( !experimentPromise ) {
+		experimentPromise = mw.loader.using( 'ext.testKitchen' ).then(
+			() => mw.testKitchen.getExperiment( 'incident_reporting_system_interaction' )
 		);
 	}
 
@@ -96,8 +97,12 @@ const useInstrument = () => {
 		}
 
 		instrument.submitInteraction( action, interactionData );
-		if ( experiment ) {
-			experiment.send( action, interactionData );
+		if ( experimentPromise ) {
+			// manually add funnel_event_sequence_position, as it's
+			// not built into experiments like it is in instruments
+			// eslint-disable-next-line camelcase
+			interactionData.funnel_event_sequence_position = funnelEventSequencePosition++;
+			experimentPromise.then( ( experiment ) => experiment.send( action, interactionData ) );
 		}
 	};
 };

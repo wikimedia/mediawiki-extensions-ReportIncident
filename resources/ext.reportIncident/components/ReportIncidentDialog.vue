@@ -388,9 +388,10 @@ module.exports = exports = {
 			if ( !isOpen ) {
 				const sourcesByStep = {
 					[ Constants.DIALOG_STEP_1 ]: 'form',
+					[ Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ]: 'describe_unacceptable_behavior',
 					[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'submit_report',
-					[ Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ]: 'success',
-					[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]: 'success'
+					[ Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ]: 'submitted',
+					[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]: `get_support_${ store.inputBehavior }`
 				};
 
 				logEvent( 'click', {
