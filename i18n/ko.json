@@ -6,9 +6,12 @@
 			"Ykhwong"
 		]
 	},
+	"reportincident-report-btn-label": "신고",
 	"reportincident-dialog-close-btn": "닫기",
+	"reportincident-dialog-back-btn": "뒤로",
 	"reportincident-dialog-submit-btn": "보고서 제출",
 	"reportincident-dialog-additional-details-input-label": "추가 정보",
+	"reportincident-dialog-optional-label": "(선택 사항)",
 	"reportincident-dialog-harassment-type-spam": "스팸 또는 홍보성 콘텐츠",
 	"reportincident-dialog-harassment-type-trolling": "트롤링 또는 하운딩 (스토킹)",
 	"reportincident-emaildialog-close-button": "취소",
