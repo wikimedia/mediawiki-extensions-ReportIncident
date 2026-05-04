@@ -40,6 +40,7 @@
 					{{ secondaryButtonText }}
 				</cdx-button>
 				<cdx-button
+					v-if="primaryButtonText"
 					class="ext-reportincident-dialog-footer__next-btn"
 					weight="primary"
 					action="progressive"
@@ -125,8 +126,25 @@ module.exports = exports = {
 					return;
 
 				case Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS:
+					if ( store.isDirectReportingCategory ) {
+						// After direct reporting, there'll be a submit success page
+						isSuccessStep.value = false;
+						stepTitleText.value = mw.msg( 'reportincident-nonemergency-directreport-header' );
+						primaryButtonText.value = mw.msg( 'reportincident-dialog-submit-btn' );
+						secondaryButtonText.value = mw.msg( 'reportincident-dialog-back-btn' );
+						return;
+					}
+
+					// If information page, this is the end of the workflow
 					isSuccessStep.value = true;
 					stepTitleText.value = mw.msg( 'reportincident-nonemergency-submitsuccess-title' );
+					primaryButtonText.value = mw.msg( 'reportincident-submit-back-to-page' );
+					secondaryButtonText.value = '';
+					return;
+
+				case Constants.DIALOG_STEP_NONEMERGENCY_POST_SUBMIT_SUCCESS:
+					isSuccessStep.value = true;
+					stepTitleText.value = mw.msg( 'reportincident-nonemergency-directreport-submitsuccess-header' );
 					primaryButtonText.value = mw.msg( 'reportincident-submit-back-to-page' );
 					secondaryButtonText.value = '';
 					return;
@@ -161,9 +179,10 @@ module.exports = exports = {
 		const currentSlotName = computed( () => `${ currentStep.value }` );
 
 		// Footer text state is calculated separately from the other step-dependent
-		// components because it is actually incident type-dependent and can change
-		// even when the step hasn't.
+		// components because it is actually both incident and step type-dependent and
+		// can change even when the step hasn't.
 		const footerHelpText = computed( () => {
+			// No success step has a footer because all actions have been taken
 			if ( isSuccessStep.value ) {
 				return {
 					icon: null,
@@ -171,6 +190,19 @@ module.exports = exports = {
 				};
 			}
 
+			// The direct report step has a unique footer
+			if (
+				currentStep.value === Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS &&
+				!isSuccessStep.value
+			) {
+				return {
+					icon: icons.cdxIconLock,
+					msg: mw.message( 'reportincident-nonemergency-directreport-footer' )
+				};
+			}
+
+			// Otherwise, show a footer depending on if the user
+			// has opted into the non-emergency or emergency workflow
 			switch ( store.incidentType ) {
 				case Constants.typeOfIncident.unacceptableUserBehavior:
 					return {
@@ -292,7 +324,10 @@ module.exports = exports = {
 		}
 
 		function navigateNext() {
-			const { showValidationError } = storeToRefs( store );
+			const {
+				showValidationError,
+				shouldShowDirectReportFormValidationError
+			} = storeToRefs( store );
 			footerErrorMessage.value = '';
 
 			// If on any success/final step, close and reset
@@ -359,9 +394,14 @@ module.exports = exports = {
 					subType: 'continue'
 				} );
 
-				// Even though no actual report will be submitted,
-				// call the server anyway for logging purposes
-				if ( store.isFormValidForSubmission() ) {
+				if ( !store.isFormValidForSubmission() ) {
+					return;
+				}
+
+				// If navigating next here would be end of the nonemergency workflow, submit
+				// the report before doing so. Even though no actual report will be submitted,
+				// call the server anyway for logging and rate-limiting purposes.
+				if ( !store.isDirectReportingCategory ) {
 					submitReportPromise()
 						.then( () => {
 							onReportSubmitSuccess();
@@ -370,7 +410,34 @@ module.exports = exports = {
 						.catch( ( err ) => {
 							onReportSubmitFailure( err.object );
 						} );
+
+					return;
 				}
+
+				// Otherwise, navigate to the next step in the nonemergency workflow without
+				// submitting as it will display the direct report form to be filled out instead.
+				setStep( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS );
+				return;
+			}
+
+			// If DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS is showing a direct report form,
+			// it needs to submit the form on navigateNext and then show a success page.
+			if (
+				currentStep.value === Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS &&
+				!isSuccessStep.value
+			) {
+				if ( !store.isDirectReportFormValid ) {
+					shouldShowDirectReportFormValidationError.value = true;
+					return;
+				}
+				submitReportPromise()
+					.then( () => {
+						onReportSubmitSuccess();
+						setStep( Constants.DIALOG_STEP_NONEMERGENCY_POST_SUBMIT_SUCCESS );
+					} )
+					.catch( ( err ) => {
+						onReportSubmitFailure( err.object );
+					} );
 
 				return;
 			}
@@ -419,16 +486,22 @@ module.exports = exports = {
 				} );
 				closeDialog();
 			} else {
-				// if on the second page, navigate back to the first page
+				// Otherwise, nagivate back as necessary
+				let prevPage = Constants.DIALOG_STEP_1;
 				let source;
 				if ( currentStep.value === Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ) {
 					source = 'describe_unacceptable_behavior';
+				} else if (
+					currentStep.value === Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS &&
+					!isSuccessStep.value
+				) {
+					prevPage = Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES;
 				} else if ( currentStep.value === Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ) {
 					source = 'submit_report';
 				} else {
 					source = 'form';
 				}
-				setStep( Constants.DIALOG_STEP_1 );
+				setStep( prevPage );
 				logEvent( 'click', {
 					source: source,
 					subType: 'back'

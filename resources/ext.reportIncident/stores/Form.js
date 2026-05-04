@@ -14,12 +14,130 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const inputReportedUserDisabled = ref( false );
 	const inputDetails = ref( '' );
 	const inputSomethingElseDetails = ref( '' );
+	const directReportTextInput = ref( '' );
 	const displaySomethingElseDetailsEmptyError = ref( false );
 	const displaySomethingElseTextboxRequiredError = ref( false );
 	const showValidationError = ref( false );
 	const missingBehaviorSelection = ref( false );
 	const funnelEntryToken = ref( '' );
 	const funnelName = ref( '' );
+
+	/**
+	 * Whether or not the step is intended to be a direct report or not.
+	 * This needs to be known outside the scope of NonEmergencySubmitSuccessStep
+	 * and before the step is even rendered as it affects form submission and
+	 * object visibility in the parent component, ReportIncidentDialog.
+	 *
+	 * It's calculated by the computed method validNonEmergencyHelpMethods
+	 */
+	const isDirectReportingCategory = ref( false );
+
+	/**
+	 * Since the form is only validated on submit and the submit button exists
+	 * in the parent component, store a flag whether or not any validation errors
+	 * should be displayed for the direct report form
+	 */
+	const shouldShowDirectReportFormValidationError = ref( false );
+
+	/**
+	 * Form validation for the direct report. This only tracks validity, which
+	 * is used in both the form vue (error display) and the parent vue (form
+	 * submission check). NonEmergencySubmitSuccessStep, which owns the form,
+	 * manages the error message shown.
+	 */
+	const isDirectReportFormValid = computed( () => {
+		// It's not a direct report, valid by default
+		if ( !isDirectReportingCategory.value ) {
+			return true;
+		}
+
+		return directReportTextInput.value.length &&
+		directReportTextInput.value.length <= Constants.detailsCodepointLimit;
+	} );
+
+	// A message is considered valid if the requiredParams are found via mw.config.get()
+	// If no requiredParams are found, the message is considered valid by default.
+	function getValidMsgParams( msg ) {
+		// No required params, message is automatically considered valid
+		if ( !msg.requiredParams ) {
+			return [];
+		}
+
+		// Check if all required parameters exist. No other validation is done here.
+		// If all required parameters exist, message is considered valid.
+		const msgParams = [];
+		for ( const param of msg.requiredParams ) {
+			const paramValue = mw.config.get( param );
+			if ( !paramValue ) {
+				// Found an invalid value, break as the message is considered invalid now
+				break;
+			}
+			msgParams.push( paramValue );
+		}
+
+		// If all required parameters weren't found, message is invalid
+		if ( msgParams.length !== msg.requiredParams.length ) {
+			return false;
+		}
+		return msgParams;
+	}
+
+	/**
+	 * Help methods that should be shown on the DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS
+	 * step. This is needed to determine whether or not to display a direct report page
+	 * or not on that step and is needed before the step is rendered.
+	 */
+	const validNonEmergencyHelpMethods = ref( [] );
+	watch( inputBehavior, ( behavior ) => {
+		if (
+			incidentType.value !== Constants.typeOfIncident.unacceptableUserBehavior ||
+			!behavior
+		) {
+			isDirectReportingCategory.value = false;
+			validNonEmergencyHelpMethods.value = [];
+			return;
+		}
+		const page = Object.values( Constants.harassmentTypesV2 )
+			.find( ( obj ) => obj.id === behavior );
+
+		if ( !page ) {
+			isDirectReportingCategory.value = false;
+			validNonEmergencyHelpMethods.value = [];
+			return;
+		}
+
+		// Cycle through all help method messages and return all valid ones
+		const helpMethods = [];
+		isDirectReportingCategory.value = false;
+		for ( const msg of page.helpMethods ) {
+			const msgParams = getValidMsgParams( msg );
+			if ( msgParams !== false ) {
+				// * reportincident-nonemergency-helpmethod-contactadmin
+				// * reportincident-nonemergency-helpmethod-email
+				// * reportincident-nonemergency-helpmethod-contactcommunity
+				helpMethods.push( mw.message( msg.msgKey, msgParams ).parse() );
+
+				// if the message is valid, is a direct override method,and
+				// direct reporting is enabled, flag that this step should show
+				// the form instead of any other contact methods
+				if (
+					msg.directReportOverride &&
+					mw.config.get( 'wgReportIncidentEnableDirectReporting' )
+				) {
+					isDirectReportingCategory.value = true;
+				}
+			}
+		}
+
+		// If no valid (configured) help methods were found, return the default fallback
+		if ( !helpMethods.length ) {
+			// * reportincident-nonemergency-helpmethod-default
+			// * HACK: linter wants at least 2 messages, remove when second one added
+			helpMethods.push( mw.message( page.helpMethodDefault.msgKey ).parse() );
+		}
+
+		validNonEmergencyHelpMethods.value = helpMethods;
+	} );
 
 	/**
 	 * A dictionary of error messages for display in step 2 of the dialog.
@@ -276,6 +394,11 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		inputReportedUser.value = '';
 		inputDetails.value = '';
 		inputSomethingElseDetails.value = '';
+		isDirectReportingCategory.value = false;
+		validNonEmergencyHelpMethods.value = [];
+		directReportTextInput.value = '';
+		isDirectReportFormValid.value = true;
+		shouldShowDirectReportFormValidationError.value = false;
 		overflowMenuData.value = {};
 		showValidationError.value = false;
 		// Disable the required fields error again until
@@ -302,6 +425,11 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		inputReportedUserDisabled,
 		inputDetails,
 		inputSomethingElseDetails,
+		isDirectReportingCategory,
+		validNonEmergencyHelpMethods,
+		directReportTextInput,
+		isDirectReportFormValid,
+		shouldShowDirectReportFormValidationError,
 		displaySomethingElseTextboxRequiredError,
 		displaySomethingElseDetailsEmptyError,
 		restPayload,

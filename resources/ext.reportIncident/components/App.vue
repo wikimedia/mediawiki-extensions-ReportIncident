@@ -18,6 +18,10 @@
 			<non-emergency-submit-success-step>
 			</non-emergency-submit-success-step>
 		</template>
+		<template #dialog_step_nonemergency_post_submit_success>
+			<non-emergency-post-submit-success-step>
+			</non-emergency-post-submit-success-step>
+		</template>
 	</report-incident-dialog>
 </template>
 
@@ -29,6 +33,7 @@ const ReportIncidentDialogTypesOfBehavior = require( './ReportIncidentDialogType
 const ReportImmediateHarmStep = require( './ReportImmediateHarmStep.vue' );
 const EmergencySubmitSuccessStep = require( './EmergencySubmitSuccessStep.vue' );
 const NonEmergencySubmitSuccessStep = require( './NonEmergencySubmitSuccessStep.vue' );
+const NonEmergencyPostSubmitSuccessStep = require( './NonEmergencyPostSubmitSuccessStep.vue' );
 const useFormStore = require( '../stores/Form.js' );
 const useInstrument = require( '../composables/useInstrument.js' );
 const { ref } = require( 'vue' );
@@ -46,7 +51,8 @@ module.exports = exports = {
 		ReportImmediateHarmStep,
 		ReportIncidentDialogTypesOfBehavior,
 		EmergencySubmitSuccessStep,
-		NonEmergencySubmitSuccessStep
+		NonEmergencySubmitSuccessStep,
+		NonEmergencyPostSubmitSuccessStep
 	},
 	setup() {
 		const emailAlertOpen = ref( false );

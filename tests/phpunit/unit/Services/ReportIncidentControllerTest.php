@@ -44,10 +44,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'ReportIncident_NonEmergency_Doxing_ShowWarning' => true,
 			'ReportIncident_NonEmergency_Doxing_HideEditURL' => '',
 			'ReportIncident_NonEmergency_Doxing_HelpMethod' => (object)[
-				'WikiEmailURL' => '',
 				'Email' => '',
-				'OtherURL' => '',
-				'EmailStewards' => false,
 			],
 			'ReportIncident_NonEmergency_SexualHarassment_HelpMethod' => (object)[
 				'ContactAdmin' => '',
@@ -100,11 +97,19 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'ContactCommunity' => '',
 			],
 		];
-		return new ReportIncidentController(
-			new HashConfig( $globalConfig ),
-			new HashConfig( $communityConfig ),
-			$experimentManager
-		);
+
+		// getFullURL is not under test here and will make a call to the service container otherwise
+		$objectUnderTest = $this->getMockBuilder( ReportIncidentController::class )
+			->setConstructorArgs( [
+				new HashConfig( $globalConfig ),
+				new HashConfig( $communityConfig ),
+				$experimentManager
+			] )
+			->onlyMethods( [ 'getFullURL' ] )
+			->getMock();
+		$objectUnderTest->method( 'getFullURL' )
+			->willReturnArgument( 0 );
+		return $objectUnderTest;
 	}
 
 	/** @dataProvider provideShouldShowButtonForNamespace */
@@ -157,6 +162,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentMinimumAccountAgeInSeconds' => (int)ConvertibleTimestamp::now() - 86400,
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentIsStaggeredRollout' => false,
+			'ReportIncidentEnableDirectReporting' => false,
 		] );
 		$objectUnderTest = TestingAccessWrapper::newFromObject( $objectUnderTest );
 		$this->assertSame(
@@ -207,6 +213,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'ReportIncidentMinimumAccountAgeInSeconds' => (int)ConvertibleTimestamp::now() - 86400,
 				'ReportIncidentDeveloperMode' => false,
 				'ReportIncidentIsStaggeredRollout' => $isExperimentRunning,
+				'ReportIncidentEnableDirectReporting' => false,
 			],
 			[],
 			$mockExperimentManager,
@@ -252,6 +259,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentMinimumAccountAgeInSeconds' => (int)ConvertibleTimestamp::now(),
 			'ReportIncidentDeveloperMode' => $isDeveloperMode,
 			'ReportIncidentIsStaggeredRollout' => false,
+			'ReportIncidentEnableDirectReporting' => false,
 		], [
 			'ReportIncidentE2ETesterUsers' => $isE2ETester ? [ 'Foo' ] : [],
 		] );
@@ -393,6 +401,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
 				'wgReportIncidentE2ETesterUsers' => (object)[],
+				'wgReportIncidentEnableDirectReporting' => false,
 				'wgReportIncidentEnabledNonEmergencyCategories' => [],
 				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
@@ -400,10 +409,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' => '',
 				'wgReportIncidentNonEmergencyDoxingShowWarning' => true,
 				'wgReportIncidentNonEmergencyDoxingHideEditURL' => '',
-				'wgReportIncidentNonEmergencyDoxingHelpMethodWikiEmailURL' => '',
-				'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => '',
-				'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' => '',
-				'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' => false,
+				'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => 'stewards-oversight@wikimedia.org',
 				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity' => '',
@@ -450,6 +456,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentEnableInstrumentation' => true,
 			'ReportIncidentEnabledNonEmergencyCategories' => [],
+			'ReportIncidentEnableDirectReporting' => false,
 		] );
 		$objectUnderTest->addModulesAndConfigVars( $outputPageMock );
 	}
@@ -473,6 +480,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
 				'wgReportIncidentE2ETesterUsers' => (object)[],
+				'wgReportIncidentEnableDirectReporting' => false,
 				'wgReportIncidentEnabledNonEmergencyCategories' => [],
 				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
@@ -480,10 +488,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' => '',
 				'wgReportIncidentNonEmergencyDoxingShowWarning' => true,
 				'wgReportIncidentNonEmergencyDoxingHideEditURL' => '',
-				'wgReportIncidentNonEmergencyDoxingHelpMethodWikiEmailURL' => '',
-				'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => '',
-				'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' => '',
-				'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' => false,
+				'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => 'stewards-oversight@wikimedia.org',
 				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity' => '',
@@ -529,6 +534,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentEnableInstrumentation' => true,
 			'ReportIncidentEnabledNonEmergencyCategories' => [],
+			'ReportIncidentEnableDirectReporting' => false,
 		];
 		/** @var ReportIncidentController $objectUnderTest */
 		$objectUnderTest = $this->newReportIncidentController( $globalConfig, $communityConfig );
@@ -586,6 +592,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
 				'wgReportIncidentUserHasEmail' => false,
 				'wgReportIncidentE2ETesterUsers' => (object)[],
+				'wgReportIncidentEnableDirectReporting' => false,
 				'wgReportIncidentEnabledNonEmergencyCategories' => [],
 				'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
@@ -593,10 +600,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 				'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' => '',
 				'wgReportIncidentNonEmergencyDoxingShowWarning' => true,
 				'wgReportIncidentNonEmergencyDoxingHideEditURL' => '',
-				'wgReportIncidentNonEmergencyDoxingHelpMethodWikiEmailURL' => '',
-				'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => '',
-				'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' => '',
-				'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' => false,
+				'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => 'stewards-oversight@wikimedia.org',
 				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin' => '',
 				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' => '',
 				'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity' => '',
@@ -643,7 +647,229 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentEnableInstrumentation' => true,
 			'ReportIncidentEnabledNonEmergencyCategories' => [],
+			'ReportIncidentEnableDirectReporting' => false,
 		] );
 		$objectUnderTest->addModulesAndConfigVars( $outputPageMock );
+	}
+
+	/** @dataProvider provideTestCommunityConfigPriorityOptionOverrides */
+	public function testCommunityConfigPriorityOptionOverrides(
+		$communityConfig,
+		$expectedJsConfigVars
+	) {
+		$expectedJsConfigVars += [
+			'wgReportIncidentUserHasConfirmedEmail' => true,
+			'wgReportIncidentEnableInstrumentation' => true,
+			'wgReportIncidentDetailsCodePointLength' => ReportHandler::MAX_DETAILS_LENGTH,
+			'wgReportIncidentUserHasEmail' => false,
+			'wgReportIncidentE2ETesterUsers' => (object)[],
+			'wgReportIncidentEnableDirectReporting' => true,
+			'wgReportIncidentEnabledNonEmergencyCategories' => [],
+			'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' => '',
+			'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' => '',
+			'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => '',
+			'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' => '',
+			'wgReportIncidentNonEmergencyDoxingShowWarning' => true,
+			'wgReportIncidentNonEmergencyDoxingHideEditURL' => '',
+			'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => 'stewards-oversight@wikimedia.org',
+			'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin' => '',
+			'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' => '',
+			'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity' => '',
+			'wgReportIncidentNonEmergencyTrollingHelpMethodContactAdmin' => '',
+			'wgReportIncidentNonEmergencyTrollingHelpMethodEmail' => '',
+			'wgReportIncidentNonEmergencyTrollingHelpMethodContactCommunity' => '',
+			'wgReportIncidentNonEmergencyHateSpeechHelpMethodContactAdmin' => '',
+			'wgReportIncidentNonEmergencyHateSpeechHelpMethodEmail' => '',
+			'wgReportIncidentNonEmergencySpamSpamContentURL' => '',
+			'wgReportIncidentNonEmergencySpamHelpMethodContactAdmin' => '',
+			'wgReportIncidentNonEmergencySpamHelpMethodEmail' => '',
+			'wgReportIncidentNonEmergencyOtherDisputeResolutionURL' => '',
+			'wgReportIncidentNonEmergencySomethingElseHelpMethodContactAdmin' => '',
+			'wgReportIncidentNonEmergencySomethingElseHelpMethodEmail' => '',
+			'wgReportIncidentNonEmergencySomethingElseHelpMethodContactCommunity' => '',
+			'wgReportIncidentNonEmergencySockpuppetryHelpMethodContactAdmin' => '',
+			'wgReportIncidentNonEmergencySockpuppetryHelpMethodEmail' => '',
+			'wgReportIncidentNonEmergencySockpuppetryHelpMethodContactCommunity' => '',
+			'wgReportIncidentNonEmergencyVandalismHelpMethodContactAdmin' => '',
+			'wgReportIncidentNonEmergencyVandalismHelpMethodEmail' => '',
+			'wgReportIncidentNonEmergencyVandalismHelpMethodContactCommunity' => '',
+			'wgReportIncidentNonEmergencyUserDisputeHelpMethodContactAdmin' => '',
+			'wgReportIncidentNonEmergencyUserDisputeHelpMethodEmail' => '',
+			'wgReportIncidentNonEmergencyUserDisputeHelpMethodContactCommunity' => '',
+			'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactAdmin' => '',
+			'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodEmail' => '',
+			'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactCommunity' => '',
+			'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' => '',
+			'wgReportIncidentNonEmergencyOtherHelpMethodEmail' => '',
+			'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' => '',
+		];
+		$outputPageMock = $this->createMock( OutputPage::class );
+		$userMock = $this->createMock( User::class );
+		$userMock->method( 'isEmailConfirmed' )->willReturn( true );
+		$outputPageMock->method( 'getUser' )->willReturn( $userMock );
+		$outputPageMock->expects( $this->once() )->method( 'addJsConfigVars' )
+			->with( $expectedJsConfigVars );
+		$outputPageMock->expects( $this->once() )->method( 'addModules' )
+			->with( 'ext.reportIncident' );
+		$outputPageMock->expects( $this->never() )->method( 'addModuleStyles' )
+			->with( 'ext.reportIncident.menuStyles' );
+		$mockSkin = $this->createMock( Skin::class );
+		$mockSkin->method( 'getSkinName' )
+			->willReturn( 'vector' );
+		$outputPageMock->expects( $this->once() )->method( 'getSkin' )
+			->willReturn( $mockSkin );
+		$globalConfig = [
+			'ReportIncidentDeveloperMode' => false,
+			'ReportIncidentEnableInstrumentation' => true,
+			'ReportIncidentEnabledNonEmergencyCategories' => [],
+			'ReportIncidentEnableDirectReporting' => true,
+		];
+		/** @var ReportIncidentController $objectUnderTest */
+		$objectUnderTest = $this->newReportIncidentController( $globalConfig, $communityConfig );
+		$objectUnderTest->addModulesAndConfigVars( $outputPageMock );
+	}
+
+	public static function provideTestCommunityConfigPriorityOptionOverrides() {
+		return [
+			'Intimidation category prioritizes the email method' => [
+				[
+					'ReportIncident_NonEmergency_Intimidation_HelpMethod' => (object)[
+						'ContactAdmin' => 'Main_Page',
+						'Email' => 'foo@bar.com',
+						'ContactCommunity' => 'Main_Page',
+					],
+				], [
+					'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' => 'foo@bar.com',
+				],
+			],
+			'Doxing category defaults to the stewards email if another email is not set' => [
+				[
+					'ReportIncident_NonEmergency_Doxing_HelpMethod' => (object)[
+						'Email' => '',
+					],
+				], [
+					'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => 'stewards-oversight@wikimedia.org',
+				],
+			],
+			'Doxing category prioritizes the email method if stewards email method is false' => [
+				[
+					'ReportIncident_NonEmergency_Doxing_HelpMethod' => (object)[
+						'Email' => 'foo@bar.com',
+					],
+				], [
+					'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' => 'foo@bar.com',
+				],
+			],
+			'Sexual harassment category prioritizes the email method' => [
+				[
+					'ReportIncident_NonEmergency_SexualHarassment_HelpMethod' => (object)[
+						'ContactAdmin' => 'Main_Page',
+						'Email' => 'foo@bar.com',
+						'ContactCommunity' => 'Main_Page',
+					]
+				], [
+					'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' => 'foo@bar.com',
+				],
+			],
+			'Trolling category prioritizes the email method' => [
+				[
+					'ReportIncident_NonEmergency_Trolling_HelpMethod' => (object)[
+						'ContactAdmin' => 'Main_Page',
+						'Email' => 'foo@bar.com',
+						'ContactCommunity' => 'Main_Page',
+					],
+				], [
+					'wgReportIncidentNonEmergencyTrollingHelpMethodEmail' => 'foo@bar.com',
+				],
+			],
+			'Hate speech category prioritizes the email method' => [
+				[
+					'ReportIncident_NonEmergency_HateSpeech_HelpMethod' => (object)[
+						'ContactAdmin' => 'Main_Page',
+						'Email' => 'foo@bar.com',
+					],
+				], [
+					'wgReportIncidentNonEmergencyHateSpeechHelpMethodEmail' => 'foo@bar.com',
+				],
+			],
+			'Spam category prioritizes the email method' => [
+				[
+					'ReportIncident_NonEmergency_Spam_HelpMethod' => (object)[
+						'ContactAdmin' => 'Main_Page',
+						'Email' => 'foo@bar.com',
+					],
+				], [
+					'wgReportIncidentNonEmergencySpamHelpMethodEmail' => 'foo@bar.com',
+				],
+			],
+			'Something else category passes through configs as-is' => [
+				[
+					'ReportIncident_NonEmergency_SomethingElse_HelpMethod' => (object)[
+						'ContactAdmin' => 'Main_Page',
+						'Email' => 'foo@bar.com',
+						'ContactCommunity' => 'Main_Page',
+					],
+				], [
+					'wgReportIncidentNonEmergencySomethingElseHelpMethodContactAdmin' => 'Main_Page',
+					'wgReportIncidentNonEmergencySomethingElseHelpMethodEmail' => 'foo@bar.com',
+					'wgReportIncidentNonEmergencySomethingElseHelpMethodContactCommunity' => 'Main_Page'
+				],
+			],
+			'Sockpuppetry category prioritizes the email method' => [
+				[
+					'ReportIncident_NonEmergency_Sockpuppetry_HelpMethod' => (object)[
+						'ContactAdmin' => 'Main_Page',
+						'Email' => 'foo@bar.com',
+						'ContactCommunity' => 'Main_Page',
+					],
+				], [
+					'wgReportIncidentNonEmergencySockpuppetryHelpMethodEmail' => 'foo@bar.com',
+				],
+			],
+			'Vandalism category prioritizes the email method' => [
+				[
+					'ReportIncident_NonEmergency_Vandalism_HelpMethod' => (object)[
+						'ContactAdmin' => 'Main_Page',
+						'Email' => 'foo@bar.com',
+						'ContactCommunity' => 'Main_Page',
+					],
+				], [
+					'wgReportIncidentNonEmergencyVandalismHelpMethodEmail' => 'foo@bar.com',
+				],
+			],
+			'User dispute category prioritizes the email method' => [
+				[
+					'ReportIncident_NonEmergency_UserDispute_HelpMethod' => (object)[
+						'ContactAdmin' => 'Main_Page',
+						'Email' => 'foo@bar.com',
+						'ContactCommunity' => 'Main_Page',
+					],
+				], [
+					'wgReportIncidentNonEmergencyUserDisputeHelpMethodEmail' => 'foo@bar.com',
+				],
+			],
+			'Disruptive editing category prioritizes the email method' => [
+				[
+					'ReportIncident_NonEmergency_DisruptiveEditing_HelpMethod' => (object)[
+						'ContactAdmin' => 'Main_Page',
+						'Email' => 'foo@bar.com',
+						'ContactCommunity' => 'Main_Page',
+					],
+				], [
+					'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodEmail' => 'foo@bar.com',
+				],
+			],
+			'Other category prioritizes the email method' => [
+				[
+					'ReportIncident_NonEmergency_Other_HelpMethod' => (object)[
+						'ContactAdmin' => 'Main_Page',
+						'Email' => 'foo@bar.com',
+						'ContactCommunity' => 'Main_Page',
+					],
+				], [
+					'wgReportIncidentNonEmergencyOtherHelpMethodEmail' => 'foo@bar.com',
+				],
+			],
+		];
 	}
 }

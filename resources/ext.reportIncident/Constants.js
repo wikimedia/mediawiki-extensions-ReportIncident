@@ -4,7 +4,7 @@ const Constants = {
 	DIALOG_STEP_REPORT_IMMEDIATE_HARM: 'dialog_step_report_immediate_harm',
 	DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS: 'dialog_step_emergency_submit_success',
 	DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS: 'dialog_step_nonemergency_submit_success',
-
+	DIALOG_STEP_NONEMERGENCY_POST_SUBMIT_SUCCESS: 'dialog_step_nonemergency_post_submit_success',
 	typeOfIncident: {
 		unacceptableUserBehavior: 'unacceptable-user-behavior',
 		immediateThreatPhysicalHarm: 'immediate-threat-physical-harm'
@@ -66,20 +66,9 @@ const Constants = {
 			],
 			helpMethods: [
 				{
-					msgKey: 'reportincident-nonemergency-helpmethod-wikiemailurl',
-					requiredParams: [ 'wgReportIncidentNonEmergencyDoxingHelpMethodWikiEmailURL' ]
-				},
-				{
 					msgKey: 'reportincident-nonemergency-helpmethod-email',
-					requiredParams: [ 'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' ]
-				},
-				{
-					msgKey: 'reportincident-nonemergency-helpmethod-otherurl',
-					requiredParams: [ 'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' ]
-				},
-				{
-					msgKey: 'reportincident-nonemergency-helpmethod-emailstewards',
-					requiredParams: [ 'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' ],
+					directReportOverride: true
 				}
 			],
 			helpMethodDefault: {
@@ -105,7 +94,8 @@ const Constants = {
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-email',
-					requiredParams: [ 'wgReportIncidentNonEmergencyHateSpeechHelpMethodEmail' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencyHateSpeechHelpMethodEmail' ],
+					directReportOverride: true
 				}
 			],
 			helpMethodDefault: {
@@ -135,7 +125,8 @@ const Constants = {
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-email',
-					requiredParams: [ 'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' ],
+					directReportOverride: true
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
@@ -165,7 +156,8 @@ const Constants = {
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-email',
-					requiredParams: [ 'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' ],
+					directReportOverride: true
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
@@ -199,7 +191,8 @@ const Constants = {
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-email',
-					requiredParams: [ 'wgReportIncidentNonEmergencySpamHelpMethodEmail' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencySpamHelpMethodEmail' ],
+					directReportOverride: true
 				}
 			],
 			helpMethodDefault: {
@@ -225,7 +218,8 @@ const Constants = {
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-email',
-					requiredParams: [ 'wgReportIncidentNonEmergencyTrollingHelpMethodEmail' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencyTrollingHelpMethodEmail' ],
+					directReportOverride: true
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
@@ -288,7 +282,8 @@ const Constants = {
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-email',
-					requiredParams: [ 'wgReportIncidentNonEmergencySockpuppetryHelpMethodEmail' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencySockpuppetryHelpMethodEmail' ],
+					directReportOverride: true
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
@@ -318,7 +313,8 @@ const Constants = {
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-email',
-					requiredParams: [ 'wgReportIncidentNonEmergencyVandalismHelpMethodEmail' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencyVandalismHelpMethodEmail' ],
+					directReportOverride: true
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
@@ -348,7 +344,8 @@ const Constants = {
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-email',
-					requiredParams: [ 'wgReportIncidentNonEmergencyUserDisputeHelpMethodEmail' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencyUserDisputeHelpMethodEmail' ],
+					directReportOverride: true
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
@@ -378,7 +375,8 @@ const Constants = {
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-email',
-					requiredParams: [ 'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodEmail' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodEmail' ],
+					directReportOverride: true
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',
@@ -411,7 +409,8 @@ const Constants = {
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-email',
-					requiredParams: [ 'wgReportIncidentNonEmergencyOtherHelpMethodEmail' ]
+					requiredParams: [ 'wgReportIncidentNonEmergencyOtherHelpMethodEmail' ],
+					directReportOverride: true
 				},
 				{
 					msgKey: 'reportincident-nonemergency-helpmethod-contactcommunity',

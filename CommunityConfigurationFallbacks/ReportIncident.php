@@ -25,10 +25,7 @@ return (object) array(
    'ReportIncident_NonEmergency_Doxing_HideEditURL' => '',
    'ReportIncident_NonEmergency_Doxing_HelpMethod' => 
   (object) array(
-     'WikiEmailURL' => '',
-     'Email' => '',
-     'OtherURL' => '',
-     'EmailStewards' => false,
+     'Email' => 'stewards-oversight@wikimedia.org',
   ),
    'ReportIncident_NonEmergency_SexualHarassment' => 
   (object) array(

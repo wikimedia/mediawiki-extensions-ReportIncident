@@ -147,6 +147,7 @@ class ReportIncidentController {
 		$isDeveloperMode = $this->config->get( 'ReportIncidentDeveloperMode' );
 		$pretendUserHasConfirmedEmail = $isDeveloperMode && $output->getRequest()->getBool( 'withconfirmedemail' );
 		$pretendUserHasEmail = $isDeveloperMode && $output->getRequest()->getBool( 'withemail' );
+		$directReportingEnabled = $this->config->get( 'ReportIncidentEnableDirectReporting' );
 
 		$communityConfigIntimidationHelpMethods = $this->localConfig
 			->get( 'ReportIncident_NonEmergency_Intimidation_HelpMethod' );
@@ -187,50 +188,62 @@ class ReportIncidentController {
 			// Config that defines what categories are shown
 			'wgReportIncidentEnabledNonEmergencyCategories' =>
 				$this->config->get( 'ReportIncidentEnabledNonEmergencyCategories' ) ?? [],
-			// Non-Emergency help methods
+			// Config that defines whether or not direct reporting is enabled
+			'wgReportIncidentEnableDirectReporting' => $directReportingEnabled,
+			// Non-Emergency help methods; if an email method is enabled it should disable all other methods
+			// Intimidation help methods
 			'wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL' =>
 				$this->localConfig->get( 'ReportIncident_NonEmergency_Intimidation_DisputeResolutionURL' ),
 			'wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin' =>
-				$this->getFullUrl( $communityConfigIntimidationHelpMethods->ContactAdmin ),
+				$communityConfigIntimidationHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigIntimidationHelpMethods->ContactAdmin ),
 			'wgReportIncidentNonEmergencyIntimidationHelpMethodEmail' =>
 				$communityConfigIntimidationHelpMethods->Email,
 			'wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity' =>
-				$this->getFullUrl( $communityConfigIntimidationHelpMethods->ContactCommunity ),
+				$communityConfigIntimidationHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigIntimidationHelpMethods->ContactCommunity ),
+			// Doxing help methods
 			'wgReportIncidentNonEmergencyDoxingShowWarning' =>
 				$this->localConfig->get( 'ReportIncident_NonEmergency_Doxing_ShowWarning' ),
 			'wgReportIncidentNonEmergencyDoxingHideEditURL' =>
 				$this->localConfig->get( 'ReportIncident_NonEmergency_Doxing_HideEditURL' ),
-			// For doxing help methods, disable all other configured methods if stewards email is enabled
-			'wgReportIncidentNonEmergencyDoxingHelpMethodWikiEmailURL' =>
-				$communityConfigDoxingHelpMethods->EmailStewards ? '' : $communityConfigDoxingHelpMethods->WikiEmailURL,
+			// For doxing, default to stewards email method
 			'wgReportIncidentNonEmergencyDoxingHelpMethodEmail' =>
-				$communityConfigDoxingHelpMethods->EmailStewards ? '' : $communityConfigDoxingHelpMethods->Email,
-			'wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL' =>
-				$communityConfigDoxingHelpMethods->EmailStewards ? '' : $communityConfigDoxingHelpMethods->OtherURL,
-			'wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards' =>
-				$communityConfigDoxingHelpMethods->EmailStewards,
+				$communityConfigDoxingHelpMethods->Email ?:
+					'stewards-oversight@wikimedia.org',
+			// Sexual harassment help methods
 			'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin' =>
-				$this->getFullUrl( $communityConfigSexualHarassmentHelpMethods->ContactAdmin ),
+				$communityConfigSexualHarassmentHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigSexualHarassmentHelpMethods->ContactAdmin ),
 			'wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail' =>
 				$communityConfigSexualHarassmentHelpMethods->Email,
 			'wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity' =>
-				$this->getFullUrl( $communityConfigSexualHarassmentHelpMethods->ContactCommunity ),
+				$communityConfigSexualHarassmentHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigSexualHarassmentHelpMethods->ContactCommunity ),
+			// Trolling help methods
 			'wgReportIncidentNonEmergencyTrollingHelpMethodContactAdmin' =>
-				$this->getFullUrl( $communityConfigTrollingHelpMethods->ContactAdmin ),
+				$communityConfigTrollingHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigTrollingHelpMethods->ContactAdmin ),
 			'wgReportIncidentNonEmergencyTrollingHelpMethodEmail' =>
 				$communityConfigTrollingHelpMethods->Email,
 			'wgReportIncidentNonEmergencyTrollingHelpMethodContactCommunity' =>
-				$this->getFullUrl( $communityConfigTrollingHelpMethods->ContactCommunity ),
+				$communityConfigTrollingHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigTrollingHelpMethods->ContactCommunity ),
+			// Hate speech help methods
 			'wgReportIncidentNonEmergencyHateSpeechHelpMethodContactAdmin' =>
-				$this->getFullUrl( $communityConfigHateSpeechHelpMethods->ContactAdmin ),
+				$communityConfigHateSpeechHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigHateSpeechHelpMethods->ContactAdmin ),
 			'wgReportIncidentNonEmergencyHateSpeechHelpMethodEmail' =>
 				$communityConfigHateSpeechHelpMethods->Email,
+			// Spam help methods
 			'wgReportIncidentNonEmergencySpamSpamContentURL' =>
 				$this->localConfig->get( 'ReportIncident_NonEmergency_Spam_SpamContentURL' ),
 			'wgReportIncidentNonEmergencySpamHelpMethodContactAdmin' =>
-				$this->getFullUrl( $communityConfigSpamHelpMethods->ContactAdmin ),
+				$communityConfigSpamHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigSpamHelpMethods->ContactAdmin ),
 			'wgReportIncidentNonEmergencySpamHelpMethodEmail' =>
 				$communityConfigSpamHelpMethods->Email,
+			// Something else help methods
 			'wgReportIncidentNonEmergencyOtherDisputeResolutionURL' =>
 				$this->localConfig->get( 'ReportIncident_NonEmergency_Other_DisputeResolutionURL' ),
 			'wgReportIncidentNonEmergencySomethingElseHelpMethodContactAdmin' =>
@@ -239,36 +252,51 @@ class ReportIncidentController {
 				$communityConfigSomethingElseHelpMethods->Email,
 			'wgReportIncidentNonEmergencySomethingElseHelpMethodContactCommunity' =>
 				$this->getFullUrl( $communityConfigSomethingElseHelpMethods->ContactCommunity ),
+			// Sockpuppetry help methods
 			'wgReportIncidentNonEmergencySockpuppetryHelpMethodContactAdmin' =>
-				$this->getFullUrl( $communityConfigSockpuppetryHelpMethods->ContactAdmin ),
+				$communityConfigSockpuppetryHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigSockpuppetryHelpMethods->ContactAdmin ),
 			'wgReportIncidentNonEmergencySockpuppetryHelpMethodEmail' =>
 				$communityConfigSockpuppetryHelpMethods->Email,
 			'wgReportIncidentNonEmergencySockpuppetryHelpMethodContactCommunity' =>
-				$this->getFullUrl( $communityConfigSockpuppetryHelpMethods->ContactCommunity ),
+				$communityConfigSockpuppetryHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigSockpuppetryHelpMethods->ContactCommunity ),
+			// Vandalism help methods
 			'wgReportIncidentNonEmergencyVandalismHelpMethodContactAdmin' =>
-				$this->getFullUrl( $communityConfigVandalismHelpMethods->ContactAdmin ),
+				$communityConfigVandalismHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigVandalismHelpMethods->ContactAdmin ),
 			'wgReportIncidentNonEmergencyVandalismHelpMethodEmail' =>
 				$communityConfigVandalismHelpMethods->Email,
 			'wgReportIncidentNonEmergencyVandalismHelpMethodContactCommunity' =>
-				$this->getFullUrl( $communityConfigVandalismHelpMethods->ContactCommunity ),
+				$communityConfigVandalismHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigVandalismHelpMethods->ContactCommunity ),
+			// User dispute help methods
 			'wgReportIncidentNonEmergencyUserDisputeHelpMethodContactAdmin' =>
-				$this->getFullUrl( $communityConfigUserDisputeHelpMethods->ContactAdmin ),
+				$communityConfigUserDisputeHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigUserDisputeHelpMethods->ContactAdmin ),
 			'wgReportIncidentNonEmergencyUserDisputeHelpMethodEmail' =>
 				$communityConfigUserDisputeHelpMethods->Email,
 			'wgReportIncidentNonEmergencyUserDisputeHelpMethodContactCommunity' =>
-				$this->getFullUrl( $communityConfigUserDisputeHelpMethods->ContactCommunity ),
+				$communityConfigUserDisputeHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigUserDisputeHelpMethods->ContactCommunity ),
+			// Disruptive editing help methods
 			'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactAdmin' =>
-				$this->getFullUrl( $communityConfigDisruptiveEditingHelpMethods->ContactAdmin ),
+				$communityConfigDisruptiveEditingHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigDisruptiveEditingHelpMethods->ContactAdmin ),
 			'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodEmail' =>
 				$communityConfigDisruptiveEditingHelpMethods->Email,
 			'wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactCommunity' =>
-				$this->getFullUrl( $communityConfigDisruptiveEditingHelpMethods->ContactCommunity ),
+				$communityConfigDisruptiveEditingHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigDisruptiveEditingHelpMethods->ContactCommunity ),
+			// Other help methods
 			'wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin' =>
-				$this->getFullUrl( $communityConfigOtherHelpMethods->ContactAdmin ),
+				$communityConfigOtherHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigOtherHelpMethods->ContactAdmin ),
 			'wgReportIncidentNonEmergencyOtherHelpMethodEmail' =>
 				$communityConfigOtherHelpMethods->Email,
 			'wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity' =>
-				$this->getFullUrl( $communityConfigOtherHelpMethods->ContactCommunity ),
+				$communityConfigOtherHelpMethods->Email && $directReportingEnabled ?
+				'' : $this->getFullUrl( $communityConfigOtherHelpMethods->ContactCommunity ),
 		] );
 		// Add the ReportIncident module, including the JS and Vue code for the dialog.
 		$output->addModules( 'ext.reportIncident' );
@@ -299,7 +327,7 @@ class ReportIncidentController {
 	 * @param string $value Either a Title or a URL
 	 * @return string
 	 */
-	private function getFullUrl( string $value ) {
+	public function getFullUrl( string $value ) {
 		if ( !$value ) {
 			return '';
 		}

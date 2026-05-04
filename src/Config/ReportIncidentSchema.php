@@ -79,21 +79,9 @@ class ReportIncidentSchema extends JsonSchema {
 	public const ReportIncident_NonEmergency_Doxing_HelpMethod = [
 		self::TYPE => self::TYPE_OBJECT,
 		self::PROPERTIES => [
-			'WikiEmailURL' => [
-				self::TYPE => self::TYPE_STRING,
-				self::DEFAULT => ''
-			],
 			'Email' => [
 				self::TYPE => self::TYPE_STRING,
-				self::DEFAULT => ''
-			],
-			'OtherURL' => [
-				self::TYPE => self::TYPE_STRING,
-				self::DEFAULT => ''
-			],
-			'EmailStewards' => [
-				self::TYPE => self::TYPE_BOOLEAN,
-				self::DEFAULT => false
+				self::DEFAULT => 'stewards-oversight@wikimedia.org'
 			],
 		],
 	];

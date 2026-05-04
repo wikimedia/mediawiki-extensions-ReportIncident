@@ -1,11 +1,349 @@
 const { setActivePinia, createPinia } = require( 'pinia' );
+const { nextTick } = require( 'vue' );
 const useFormStore = require( '../../../resources/ext.reportIncident/stores/Form.js' );
 const Constants = require( '../../../resources/ext.reportIncident/Constants.js' );
 
 describe( 'Form Store', () => {
 	beforeEach( () => {
 		setActivePinia( createPinia() );
+		jest.spyOn( mw, 'message' ).mockImplementation( ( key ) => ( {
+			text() {
+				return key;
+			},
+			parse() {
+				return key;
+			}
+		} ) );
 	} );
+
+	afterEach( () => {
+		jest.restoreAllMocks();
+	} );
+
+	const defaultNonEmergencyPageCases = [
+		{
+			title: 'intimidation resolution',
+			configMocks: {},
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.INTIMIDATION,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-default' ]
+		},
+		{
+			title: 'doxing resolution',
+			configMocks: {},
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.DOXING,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-default' ]
+		},
+		{
+			title: 'sexual harassment resolution',
+			configMocks: {},
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.SEXUAL_HARASSMENT,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-default' ]
+		},
+		{
+			title: 'trolling resolution',
+			configMocks: {},
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.TROLLING,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-default' ]
+		},
+		{
+			title: 'hate speech resolution',
+			configMocks: {},
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-default' ]
+		},
+		{
+			title: 'spam resolution',
+			configMocks: {},
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.SPAM,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-default' ]
+		},
+		{
+			title: 'other resolution',
+			configMocks: {},
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.SOMETHING_ELSE,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-default' ]
+		},
+		{
+			title: 'sockpuppetry resolution',
+			configMocks: {},
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.SOCKPUPPETRY,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-default' ]
+		},
+		{
+			title: 'vandalism resolution',
+			configMocks: {},
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.VANDALISM,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-default' ]
+		},
+		{
+			title: 'user dispute resolution',
+			configMocks: {},
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.USER_DISPUTE,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-default' ]
+		},
+		{
+			title: 'disruptive editing resolution',
+			configMocks: {},
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.DISRUPTIVE_EDITING,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-default' ]
+		},
+		{
+			title: 'other resolution',
+			configMocks: {},
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.OTHER,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-default' ]
+		},
+		{
+			title: 'intimidation resolution, configured',
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.INTIMIDATION,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			configMocks: {
+				wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin: 'foo',
+				wgReportIncidentNonEmergencyIntimidationHelpMethodEmail: 'bar',
+				wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity: 'baz',
+				wgReportIncidentEnableDirectReporting: false
+			},
+			expected: [
+				'reportincident-nonemergency-helpmethod-contactadmin',
+				'reportincident-nonemergency-helpmethod-email',
+				'reportincident-nonemergency-helpmethod-contactcommunity'
+			]
+		},
+		{
+			title: 'doxing resolution, configured',
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.DOXING,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			configMocks: {
+				wgReportIncidentNonEmergencyDoxingHelpMethodEmail: 'foo'
+			},
+			expected: [ 'reportincident-nonemergency-helpmethod-email' ]
+		},
+		{
+			title: 'sexual harassment resolution, configured',
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.SEXUAL_HARASSMENT,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			configMocks: {
+				wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin: 'foo',
+				wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail: 'bar',
+				wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity: 'baz'
+			},
+			expected: [
+				'reportincident-nonemergency-helpmethod-contactadmin',
+				'reportincident-nonemergency-helpmethod-email',
+				'reportincident-nonemergency-helpmethod-contactcommunity'
+			]
+		},
+		{
+			title: 'trolling resolution, configured',
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.TROLLING,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			configMocks: {
+				wgReportIncidentNonEmergencyTrollingHelpMethodContactAdmin: 'foo',
+				wgReportIncidentNonEmergencyTrollingHelpMethodEmail: 'bar',
+				wgReportIncidentNonEmergencyTrollingHelpMethodContactCommunity: 'baz'
+			},
+			expected: [
+				'reportincident-nonemergency-helpmethod-contactadmin',
+				'reportincident-nonemergency-helpmethod-email',
+				'reportincident-nonemergency-helpmethod-contactcommunity'
+			]
+		},
+		{
+			title: 'hate speech resolution, configured',
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			configMocks: {
+				wgReportIncidentNonEmergencyHateSpeechHelpMethodContactAdmin: 'foo',
+				wgReportIncidentNonEmergencyHateSpeechHelpMethodEmail: 'bar'
+			},
+			expected: [
+				'reportincident-nonemergency-helpmethod-contactadmin',
+				'reportincident-nonemergency-helpmethod-email'
+			]
+		},
+		{
+			title: 'spam resolution, configured',
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.SPAM,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			configMocks: {
+				wgReportIncidentNonEmergencySpamHelpMethodContactAdmin: 'foo',
+				wgReportIncidentNonEmergencySpamHelpMethodEmail: 'bar'
+			},
+			expected: [
+				'reportincident-nonemergency-helpmethod-contactadmin',
+				'reportincident-nonemergency-helpmethod-email'
+			]
+		},
+		{
+			title: 'something else resolution, configured',
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.SOMETHING_ELSE,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			configMocks: {
+				wgReportIncidentNonEmergencySomethingElseHelpMethodContactAdmin: 'foo',
+				wgReportIncidentNonEmergencySomethingElseHelpMethodEmail: 'bar',
+				wgReportIncidentNonEmergencySomethingElseHelpMethodContactCommunity: 'baz'
+			},
+			expected: [
+				'reportincident-nonemergency-helpmethod-contactadmin',
+				'reportincident-nonemergency-helpmethod-email',
+				'reportincident-nonemergency-helpmethod-contactcommunity'
+			]
+		},
+		{
+			title: 'sockpuppetry resolution, configured',
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.SOCKPUPPETRY,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			configMocks: {
+				wgReportIncidentNonEmergencySockpuppetryHelpMethodContactAdmin: 'foo',
+				wgReportIncidentNonEmergencySockpuppetryHelpMethodEmail: 'bar',
+				wgReportIncidentNonEmergencySockpuppetryHelpMethodContactCommunity: 'baz'
+			},
+			expected: [
+				'reportincident-nonemergency-helpmethod-contactadmin',
+				'reportincident-nonemergency-helpmethod-email',
+				'reportincident-nonemergency-helpmethod-contactcommunity'
+			]
+		},
+		{
+			title: 'vandalism resolution, configured',
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.VANDALISM,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			configMocks: {
+				wgReportIncidentNonEmergencyVandalismHelpMethodContactAdmin: 'foo',
+				wgReportIncidentNonEmergencyVandalismHelpMethodEmail: 'bar',
+				wgReportIncidentNonEmergencyVandalismHelpMethodContactCommunity: 'baz'
+			},
+			expected: [
+				'reportincident-nonemergency-helpmethod-contactadmin',
+				'reportincident-nonemergency-helpmethod-email',
+				'reportincident-nonemergency-helpmethod-contactcommunity'
+			]
+		},
+		{
+			title: 'user dispute resolution, configured',
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.USER_DISPUTE,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			configMocks: {
+				wgReportIncidentNonEmergencyUserDisputeHelpMethodContactAdmin: 'foo',
+				wgReportIncidentNonEmergencyUserDisputeHelpMethodEmail: 'bar',
+				wgReportIncidentNonEmergencyUserDisputeHelpMethodContactCommunity: 'baz'
+			},
+			expected: [
+				'reportincident-nonemergency-helpmethod-contactadmin',
+				'reportincident-nonemergency-helpmethod-email',
+				'reportincident-nonemergency-helpmethod-contactcommunity'
+			]
+		},
+		{
+			title: 'disruptive editing resolution, configured',
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.DISRUPTIVE_EDITING,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			configMocks: {
+				wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactAdmin: 'foo',
+				wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodEmail: 'bar',
+				wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactCommunity: 'baz'
+			},
+			expected: [
+				'reportincident-nonemergency-helpmethod-contactadmin',
+				'reportincident-nonemergency-helpmethod-email',
+				'reportincident-nonemergency-helpmethod-contactcommunity'
+			]
+		},
+		{
+			title: 'other resolution, configured',
+			storeInputs: {
+				inputBehavior: Constants.harassmentTypes.OTHER,
+				incidentType: Constants.typeOfIncident.unacceptableUserBehavior
+			},
+			configMocks: {
+				wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin: 'foo',
+				wgReportIncidentNonEmergencyOtherHelpMethodEmail: 'bar',
+				wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity: 'baz'
+			},
+			expected: [
+				'reportincident-nonemergency-helpmethod-contactadmin',
+				'reportincident-nonemergency-helpmethod-email',
+				'reportincident-nonemergency-helpmethod-contactcommunity'
+			]
+		}
+	];
+
+	it.each( defaultNonEmergencyPageCases )(
+		'$title renders the page with expected help methods',
+		async ( { storeInputs, configMocks, expected } ) => {
+			jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
+				if ( key in configMocks ) {
+					return configMocks[ key ];
+				} else {
+					return null;
+				}
+			} );
+			const form = useFormStore();
+			Object.entries( storeInputs ).forEach( ( [ key, value ] ) => {
+				form[ key ] = value;
+			} );
+			await nextTick();
+			expect( form.validNonEmergencyHelpMethods ).toStrictEqual( expected );
+		}
+	);
 
 	it( 'resets the form properly on call to $reset', () => {
 		const form = useFormStore();

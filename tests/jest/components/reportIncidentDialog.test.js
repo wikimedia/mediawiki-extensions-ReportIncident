@@ -328,7 +328,7 @@ describe( 'Report Incident Dialog', () => {
 							'SOMETHING_ELSE'
 						];
 					default:
-						throw new Error( 'Unknown key: ' + key );
+						return null;
 				}
 			} );
 		} );
@@ -552,6 +552,7 @@ describe( 'Report Incident Dialog', () => {
 				open: true,
 				initialStep: Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS
 			} );
+
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS );
 
 			const store = useFormStore();
@@ -711,8 +712,13 @@ describe( 'Report Incident Dialog', () => {
 				Constants.typeOfIncident.immediateThreatPhysicalHarm,
 				'reportincident-submit-back-to-page'
 			],
-			'on success screen after reporting unacceptable behavior': [
-				Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
+			'on success screen after reporting unacceptable behavior, information page': [
+				Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS,
+				Constants.typeOfIncident.unacceptableUserBehavior,
+				'reportincident-submit-back-to-page'
+			],
+			'on success screen after reporting unacceptable behavior, direct report': [
+				Constants.DIALOG_STEP_NONEMERGENCY_POST_SUBMIT_SUCCESS,
 				Constants.typeOfIncident.unacceptableUserBehavior,
 				'reportincident-submit-back-to-page'
 			]

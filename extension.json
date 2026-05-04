@@ -116,6 +116,10 @@
 		"ReportIncidentIsStaggeredRollout": {
 			"value": false,
 			"description": "Whether or not IRS is being deployed as a staggered rollout via the Test Kitchen experimentation platform"
+		},
+		"ReportIncidentEnableDirectReporting": {
+			"value": false,
+			"description": "Whether or not to enable direct emails of reports to community-configured email-based help methods. Direct reporting overrides any other configured methods for a category."
 		}
 	},
 	"AvailableRights": [
@@ -202,6 +206,7 @@
 				"components/ReportImmediateHarmStep.vue",
 				"components/EmergencySubmitSuccessStep.vue",
 				"components/NonEmergencySubmitSuccessStep.vue",
+				"components/NonEmergencyPostSubmitSuccessStep.vue",
 				"composables/useInstrument.js",
 				"stores/Form.js",
 				{
@@ -333,7 +338,16 @@
 				"reportincident-nonemergency-disruptiveediting-nextstep-default",
 				"reportincident-dialog-harassment-type-other",
 				"reportincident-nonemergency-other-notice",
-				"reportincident-nonemergency-other-nextstep-default"
+				"reportincident-nonemergency-other-nextstep-default",
+				"reportincident-nonemergency-directreport-header",
+				"reportincident-nonemergency-directreport-nextsteps",
+				"reportincident-nonemergency-directreport-footer",
+				"reportincident-nonemergency-directreport-submitsuccess-header",
+				"reportincident-nonemergency-directreport-submitsuccess-banner",
+				"reportincident-nonemergency-directreport-submitsuccess-next-header",
+				"reportincident-nonemergency-directreport-submitsuccess-next-info",
+				"reportincident-nonemergency-directreport-reportlabel",
+				"reportincident-nonemergency-directreport-inputempty-error"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",

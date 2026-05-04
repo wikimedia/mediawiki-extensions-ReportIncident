@@ -1,5 +1,11 @@
 'use strict';
 
+const { mockCodePointLength } = require( '../utils.js' );
+
+// Need to run this here as the import of ReportIncidentDialogTypesOfBehavior.vue
+// without mediawiki.String defined causes errors in running these tests.
+mockCodePointLength();
+
 jest.mock( '../../../resources/ext.reportIncident/composables/useInstrument.js' );
 jest.mock( '../../../resources/ext.reportIncident/components/icons.json', () => ( {
 	cdxIconUserGroup: ''
@@ -328,7 +334,7 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 	];
 
 	it.each( defaultNonEmergencyPageCases )(
-		'renders the default page', ( { config, expected } ) => {
+		'$title renders the default page', async ( { config, expected } ) => {
 			const wrapper = mount( {
 				incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 				inputBehavior: config.inputBehavior,
@@ -336,6 +342,7 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					wgReportIncidentE2ETesterUsers: []
 				}
 			} );
+			await wrapper.vm.$nextTick();
 
 			const headers = wrapper.findAll( 'h3' ).map( ( h ) => h.text() );
 			expect( headers ).toEqual( expected.headers );
@@ -371,6 +378,28 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-helpmethod-contactadmin',
 					'reportincident-nonemergency-helpmethod-email',
 					'reportincident-nonemergency-helpmethod-contactcommunity',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'intimidation resolution, direct reporting enabled and email configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.INTIMIDATION,
+				get: {
+					wgReportIncidentNonEmergencyIntimidationDisputeResolutionURL: 'url',
+					wgReportIncidentNonEmergencyIntimidationHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyIntimidationHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencyIntimidationHelpMethodContactCommunity: 'baz',
+					wgReportIncidentEnableDirectReporting: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-intimidation-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-intimidation-nextstep-configured',
+					'reportincident-nonemergency-directreport-nextsteps',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -414,16 +443,13 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 			}
 		},
 		{
-			title: 'doxing resolution, configured',
+			title: 'doxing resolution, direct reporting disabled and email configured',
 			config: {
 				inputBehavior: Constants.harassmentTypes.DOXING,
 				get: {
 					wgReportIncidentNonEmergencyDoxingShowWarning: false,
 					wgReportIncidentNonEmergencyDoxingHideEditURL: 'url',
-					wgReportIncidentNonEmergencyDoxingHelpMethodWikiEmailURL: 'foo',
-					wgReportIncidentNonEmergencyDoxingHelpMethodEmail: 'bar',
-					wgReportIncidentNonEmergencyDoxingHelpMethodOtherURL: 'baz',
-					wgReportIncidentNonEmergencyDoxingHelpMethodEmailStewards: true
+					wgReportIncidentNonEmergencyDoxingHelpMethodEmail: 'foo'
 				}
 			},
 			expected: {
@@ -431,10 +457,28 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-doxing-header',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-doxing-nextsteps-configured',
-					'reportincident-nonemergency-helpmethod-wikiemailurl',
 					'reportincident-nonemergency-helpmethod-email',
-					'reportincident-nonemergency-helpmethod-otherurl',
-					'reportincident-nonemergency-helpmethod-emailstewards',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'doxing resolution, direct reporting enabled and email configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.DOXING,
+				get: {
+					wgReportIncidentNonEmergencyDoxingShowWarning: false,
+					wgReportIncidentNonEmergencyDoxingHideEditURL: 'url',
+					wgReportIncidentNonEmergencyDoxingHelpMethodEmail: 'foo',
+					wgReportIncidentEnableDirectReporting: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-doxing-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-doxing-nextsteps-configured',
+					'reportincident-nonemergency-directreport-nextsteps',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -462,6 +506,27 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 			}
 		},
 		{
+			title: 'sexual harassment resolution, direct reporting enabled and email configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.SEXUAL_HARASSMENT,
+				get: {
+					wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencySexualHarassmentHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencySexualHarassmentHelpMethodContactCommunity: 'baz',
+					wgReportIncidentEnableDirectReporting: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-sexualharassment-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-sexualharassment-nextstep',
+					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
 			title: 'trolling resolution, configured',
 			config: {
 				inputBehavior: Constants.harassmentTypes.TROLLING,
@@ -484,6 +549,27 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 			}
 		},
 		{
+			title: 'trolling resolution, direct reporting enabled and email configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.TROLLING,
+				get: {
+					wgReportIncidentNonEmergencyTrollingHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyTrollingHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencyTrollingHelpMethodContactCommunity: 'baz',
+					wgReportIncidentEnableDirectReporting: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-trolling-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-trolling-nextstep',
+					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
 			title: 'hate speech resolution, configured',
 			config: {
 				inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
@@ -499,6 +585,26 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-hatespeech-nextstep',
 					'reportincident-nonemergency-helpmethod-contactadmin',
 					'reportincident-nonemergency-helpmethod-email',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'hate speech resolution, direct reporting enabled and email configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.HATE_SPEECH,
+				get: {
+					wgReportIncidentNonEmergencyHateSpeechHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyHateSpeechHelpMethodEmail: 'bar',
+					wgReportIncidentEnableDirectReporting: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-hatespeech-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-hatespeech-nextstep',
+					'reportincident-nonemergency-directreport-nextsteps',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -525,7 +631,28 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 			}
 		},
 		{
-			title: 'other resolution, configured',
+			title: 'spam resolution, direct reporting enabled and email configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.SPAM,
+				get: {
+					wgReportIncidentNonEmergencySpamSpamContentURL: 'url',
+					wgReportIncidentNonEmergencySpamHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencySpamHelpMethodEmail: 'bar',
+					wgReportIncidentEnableDirectReporting: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-spam-header',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-spam-nextsteps-configured',
+					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'something else resolution, configured',
 			config: {
 				inputBehavior: Constants.harassmentTypes.SOMETHING_ELSE,
 				get: {
@@ -569,6 +696,27 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 			}
 		},
 		{
+			title: 'sockpuppetry resolution, direct reporting enabled and email configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.SOCKPUPPETRY,
+				get: {
+					wgReportIncidentNonEmergencySockpuppetryHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencySockpuppetryHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencySockpuppetryHelpMethodContactCommunity: 'baz',
+					wgReportIncidentEnableDirectReporting: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-dialog-harassment-type-sockpuppetry',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-sockpuppetry-nextstep-default',
+					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
 			title: 'vandalism resolution, configured',
 			config: {
 				inputBehavior: Constants.harassmentTypes.VANDALISM,
@@ -586,6 +734,27 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-helpmethod-contactadmin',
 					'reportincident-nonemergency-helpmethod-email',
 					'reportincident-nonemergency-helpmethod-contactcommunity',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'vandalism resolution, direct reporting enabled and email configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.VANDALISM,
+				get: {
+					wgReportIncidentNonEmergencyVandalismHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyVandalismHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencyVandalismHelpMethodContactCommunity: 'baz',
+					wgReportIncidentEnableDirectReporting: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-dialog-harassment-type-vandalism',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-vandalism-nextstep-default',
+					'reportincident-nonemergency-directreport-nextsteps',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -613,6 +782,27 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 			}
 		},
 		{
+			title: 'user dispute resolution, direct reporting enabled and email configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.USER_DISPUTE,
+				get: {
+					wgReportIncidentNonEmergencyUserDisputeHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyUserDisputeHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencyUserDisputeHelpMethodContactCommunity: 'baz',
+					wgReportIncidentEnableDirectReporting: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-dialog-harassment-type-userdispute',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-userdispute-nextstep-default',
+					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
 			title: 'disruptive editing resolution, configured',
 			config: {
 				inputBehavior: Constants.harassmentTypes.DISRUPTIVE_EDITING,
@@ -630,6 +820,27 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-helpmethod-contactadmin',
 					'reportincident-nonemergency-helpmethod-email',
 					'reportincident-nonemergency-helpmethod-contactcommunity',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
+		},
+		{
+			title: 'disruptive editing resolution, direct reporting enabled and email configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.DISRUPTIVE_EDITING,
+				get: {
+					wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencyDisruptiveEditingHelpMethodContactCommunity: 'baz',
+					wgReportIncidentEnableDirectReporting: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-dialog-harassment-type-disruptiveediting',
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-disruptiveediting-nextstep-default',
+					'reportincident-nonemergency-directreport-nextsteps',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -655,11 +866,32 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
+		},
+		{
+			title: 'other resolution, direct reporting enabled and email configured',
+			config: {
+				inputBehavior: Constants.harassmentTypes.OTHER,
+				get: {
+					wgReportIncidentNonEmergencyOtherHelpMethodContactAdmin: 'foo',
+					wgReportIncidentNonEmergencyOtherHelpMethodEmail: 'bar',
+					wgReportIncidentNonEmergencyOtherHelpMethodContactCommunity: 'baz',
+					wgReportIncidentEnableDirectReporting: true
+				}
+			},
+			expected: {
+				copy: [
+					'reportincident-nonemergency-generic-description',
+					'reportincident-nonemergency-other-notice',
+					'reportincident-nonemergency-other-nextstep-default',
+					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-generic-nextstep-otheraction'
+				]
+			}
 		}
 	];
 
 	it.each( configuredNonEmergencyPageCases )(
-		'renders the configured page', ( { config, expected } ) => {
+		'$title renders the configured page', async ( { config, expected } ) => {
 			jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => {
 				if ( key in config.get ) {
 					return config.get[ key ];
@@ -672,6 +904,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 				incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
 				inputBehavior: config.inputBehavior
 			} );
+			await wrapper.vm.$nextTick();
+
 			const copy = wrapper.findAll( 'p, li' ).map( ( c ) => c.text() );
 			expect( copy ).toEqual( expected.copy );
 		}

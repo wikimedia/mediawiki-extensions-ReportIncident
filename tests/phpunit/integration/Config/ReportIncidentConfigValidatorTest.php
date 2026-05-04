@@ -157,8 +157,6 @@ class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {
 			'ReportIncident_NonEmergency_Intimidation_HelpMethod/ContactAdmin',
 			'ReportIncident_NonEmergency_Intimidation_HelpMethod/ContactCommunity',
 			'ReportIncident_NonEmergency_Doxing_HideEditURL',
-			'ReportIncident_NonEmergency_Doxing_HelpMethod/WikiEmailURL',
-			'ReportIncident_NonEmergency_Doxing_HelpMethod/OtherURL',
 			'ReportIncident_NonEmergency_SexualHarassment_HelpMethod/ContactAdmin',
 			'ReportIncident_NonEmergency_SexualHarassment_HelpMethod/ContactCommunity',
 			'ReportIncident_NonEmergency_Trolling_HelpMethod/ContactAdmin',
