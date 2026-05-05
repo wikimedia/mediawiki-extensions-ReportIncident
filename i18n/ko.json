@@ -6,8 +6,17 @@
 			"Tensama0415"
 		]
 	},
+	"reportincident-desc": "사건 신고 시스템 확장 기능입니다.",
+	"reportincident-report-btn-label": "신고",
 	"reportincident-dialog-close-btn": "닫기",
+	"reportincident-dialog-back-btn": "뒤로",
+	"reportincident-dialog-optional-label": "(선택 사항)",
+	"reportincident-dialog-harassment-type-sexual-harassment": "성희롱",
+	"reportincident-dialog-harassment-type-something-else": "그 외",
 	"reportincident-success-message-close": "닫기",
+	"right-reportincident": "사건 신고",
+	"action-reportincident": "사건을 신고할",
+	"reportincident-emaildialog-title": "인증된 이메일 주소 필요",
 	"reportincident-emaildialog-close-button": "취소",
 	"reportincident-emaildialog-primary": "설정으로 이동"
 }
