@@ -228,5 +228,6 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "p.ex. Project:Administratores",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "p.ex. incidentes@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "p.ex. Project:Taverna",
-	"communityconfiguration-reportincident-invalid-usehttps": "URL debe usar https"
+	"communityconfiguration-reportincident-invalid-usehttps": "URL debe usar https",
+	"communityconfiguration-reportincident-invalid-queryparameter": "Le parametro de consulta ‘$1’ debe haber un valor"
 }
