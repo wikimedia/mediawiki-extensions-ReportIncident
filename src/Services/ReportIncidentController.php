@@ -114,13 +114,21 @@ class ReportIncidentController {
 	 * @return bool Whether the button / link should be shown.
 	 */
 	public function shouldAddMenuItem( IContextSource $context ): bool {
-		return $this->isButtonEnabled() &&
+		$shouldAdd = $this->isButtonEnabled() &&
 			$this->shouldShowButtonForNamespace( $context->getTitle()->getNamespace() ) &&
 			$this->shouldShowButtonForUser(
 				$context->getUser(),
 				$context->getRequest() ?
 					$context->getRequest()->getBool( 'withconfirmedemail' ) : false
 			);
+		if ( $shouldAdd ) {
+			// User is on a page which will load this feature. Mark the exposure for instrumentation.
+			if ( $this->config->get( 'ReportIncidentIsStaggeredRollout' ) && $this->experimentManager ) {
+				$experiment = $this->experimentManager->getExperiment( 'incident_reporting_system_interaction' );
+				$experiment->sendExposure();
+			}
+		}
+		return $shouldAdd;
 	}
 
 	/**
