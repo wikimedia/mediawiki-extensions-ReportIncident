@@ -27,25 +27,46 @@ const steps = {
  * be used to expect that the post() method is
  * called with the correct arguments.
  *
- * If a function is provided as the returnValue,
- * the return value of that function is used.
+ * If no argument, the POST is treated like a success.
+ * Otherwise, pass an error object eg.
+ * { type: 'http', errObj: { xhr: {} } }
  *
- * @param {*} returnValue
+ * @param {*} error
  * @return {jest.fn}
  */
-function mockRestPost( returnValue ) {
+function mockRestPost( error ) {
 	mw.Rest = () => {};
-	const restPost = jest.fn();
-	restPost.mockImplementation( () => {
-		if ( returnValue instanceof Function ) {
-			return returnValue();
+	const restPost = jest.fn().mockImplementation( () => {
+		const postDeferred = $.Deferred();
+
+		if ( error ) {
+			postDeferred.reject( error.type, error.errObj );
+		} else {
+			postDeferred.resolve();
 		}
-		return returnValue;
+		return postDeferred.promise();
 	} );
+
 	jest.spyOn( mw, 'Rest' ).mockImplementation( () => ( {
 		post: restPost
 	} ) );
+
 	return restPost;
+}
+
+/**
+ * The post function is a Deferred object caught by
+ * a Promise and needs two ticks to fully resolve
+ */
+async function resolvePostResponse() {
+	await new Promise( ( resolve ) => {
+		setTimeout( resolve, 0 );
+
+	} );
+	await new Promise( ( resolve ) => {
+		setTimeout( resolve, 0 );
+
+	} );
 }
 
 const renderComponent = ( props, slots, initialState = {} ) => {
@@ -199,7 +220,7 @@ describe( 'Report Incident Dialog', () => {
 				} );
 				jest.spyOn( navigator, 'onLine', 'get' ).mockReturnValue( true );
 				// No JSON in the error object should lead the generic error to display.
-				wrapper.vm.onReportSubmitFailure( 'http', {
+				wrapper.vm.onReportSubmitFailure( {
 					xhr: { status: 0 }
 				} );
 				expect( wrapper.vm.footerErrorMessage ).toBe( 'reportincident-dialog-generic-error' );
@@ -212,7 +233,7 @@ describe( 'Report Incident Dialog', () => {
 				} );
 				// Mock that navigator.onLine is false.
 				jest.spyOn( navigator, 'onLine', 'get' ).mockReturnValue( false );
-				wrapper.vm.onReportSubmitFailure( 'http', {
+				wrapper.vm.onReportSubmitFailure( {
 					xhr: { status: 0 }
 				} );
 				// As navigator.onLine is false, the internet disconnected error should be shown
@@ -225,7 +246,7 @@ describe( 'Report Incident Dialog', () => {
 				} );
 				jest.spyOn( navigator, 'onLine', 'get' ).mockReturnValue( true );
 				// Set the HTTP status code to 501, which is a 5XX code.
-				wrapper.vm.onReportSubmitFailure( 'http', {
+				wrapper.vm.onReportSubmitFailure( {
 					xhr: { status: 501 }
 				} );
 
@@ -241,7 +262,7 @@ describe( 'Report Incident Dialog', () => {
 
 				jest.spyOn( mw.config, 'get' ).mockReturnValue( 'en' );
 
-				wrapper.vm.onReportSubmitFailure( 'http', {
+				wrapper.vm.onReportSubmitFailure( {
 					xhr: { status: 404, responseJSON: { errorKey: 'some-example-error', messageTranslations: { en: errMsg } } }
 				} );
 
@@ -259,7 +280,7 @@ describe( 'Report Incident Dialog', () => {
 
 				jest.spyOn( mw.config, 'get' ).mockReturnValue( 'de' );
 
-				wrapper.vm.onReportSubmitFailure( 'http', {
+				wrapper.vm.onReportSubmitFailure( {
 					xhr: { status: 404, responseJSON: { errorKey: 'some-example-error', messageTranslations: { en: errMsg } } }
 				} );
 
@@ -274,7 +295,7 @@ describe( 'Report Incident Dialog', () => {
 					open: true,
 					initialStep: Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES
 				} );
-				wrapper.vm.onReportSubmitFailure( 'http', {
+				wrapper.vm.onReportSubmitFailure( {
 					xhr: { status: 403, responseJSON: { errorKey: 'apierror-permissiondenied' } }
 				} );
 				// This error is not handled separately, so the generic error should be shown.
@@ -382,7 +403,7 @@ describe( 'Report Incident Dialog', () => {
 			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES );
 
 			const store = useFormStore();
-			const restPost = mockRestPost( Promise.resolve() );
+			const restPost = mockRestPost();
 
 			store.incidentType = Constants.typeOfIncident.unacceptableUserBehavior;
 			store.inputBehavior = Constants.harassmentTypes.SOMETHING_ELSE;
@@ -397,25 +418,25 @@ describe( 'Report Incident Dialog', () => {
 
 			// Wait until the next tick so that the callback set for nextTick in
 			// the code under-test has run.
-			return nextTick( () => {
-				expect( store.isFormValidForSubmission() ).toBe( true );
+			await nextTick();
+			expect( store.isFormValidForSubmission() ).toBe( true );
 
-				return wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' ).then( () => {
-					expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS );
-					expect( wrapper.vm.footerErrorMessage ).toBe( '' );
-					expect( restPost ).toHaveBeenCalledWith(
-						'/reportincident/v0/report',
-						{
-							incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
-							behaviorType: Constants.harassmentTypes.SOMETHING_ELSE,
-							reportedUser: '',
-							somethingElseDetails: 'test details',
-							page: 'Test_page',
-							revisionId: 1
-						}
-					);
-				} );
-			} );
+			await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
+			expect( restPost ).toHaveBeenCalledWith(
+				'/reportincident/v0/report',
+				{
+					incidentType: Constants.typeOfIncident.unacceptableUserBehavior,
+					behaviorType: Constants.harassmentTypes.SOMETHING_ELSE,
+					reportedUser: '',
+					somethingElseDetails: 'test details',
+					page: 'Test_page',
+					revisionId: 1
+				}
+			);
+			await resolvePostResponse();
+			await wrapper.vm.$nextTick();
+			expect( wrapper.vm.currentSlotName ).toBe( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS );
+			expect( wrapper.vm.footerErrorMessage ).toBe( '' );
 		} );
 
 		describe( 'attempts to submit form when next is clicked on STEP 2', () => {
@@ -486,20 +507,20 @@ describe( 'Report Incident Dialog', () => {
 					expect( wrapper.vm.currentSlotName ).toBe( initialStep );
 
 					const store = useFormStore();
-					const restPost = mockRestPost( Promise.resolve() );
+					const restPost = mockRestPost();
 
 					expect( store.isFormValidForSubmission() ).toBe( true );
 
 					await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
-
-					expect( wrapper.vm.currentSlotName ).toBe( finalStep );
-
 					expect( restPost ).toHaveBeenCalledWith(
 						'/reportincident/v0/report',
 						expectedRestPayload
 					);
 					expect( logEvent ).toHaveBeenCalledTimes( 1 );
 
+					await resolvePostResponse();
+					await wrapper.vm.$nextTick();
+					expect( wrapper.vm.currentSlotName ).toBe( finalStep );
 					expect(
 						wrapper.find( '.ext-reportincident-dialog__form-error-text' ).exists()
 					).toBe( false );
@@ -586,17 +607,9 @@ describe( 'Report Incident Dialog', () => {
 							throw new Error( 'Unknown token type: ' + tokenType );
 					}
 				} );
-				const restPost = mockRestPost( () => {
-					// Form should be in submission when the REST API is called.
-					expect( wrapper.vm.formSubmissionInProgress ).toBe( true );
-					return {
-						then: ( _resolveHandler, rejectHandler ) => {
-							rejectHandler(
-								'http',
-								{ xhr: { responseJSON: {} } }
-							);
-						}
-					};
+				const restPost = mockRestPost( {
+					type: 'http',
+					errObj: { xhr: { responseJSON: {} } }
 				} );
 
 				store.incidentType = incidentType;
@@ -609,13 +622,14 @@ describe( 'Report Incident Dialog', () => {
 
 				await wrapper.get( '.ext-reportincident-dialog-footer__next-btn' ).trigger( 'click' );
 
+				expect( wrapper.vm.formSubmissionInProgress ).toBe( true );
 				expect( wrapper.vm.currentSlotName ).toBe( initialStep );
-
 				expect( restPost ).toHaveBeenCalledTimes( 1 );
 				expect( userTokensSpy ).toHaveBeenCalledWith( 'csrfToken' );
-				// Form should not be in submission if the form has finished submitting.
-				expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
 
+				await resolvePostResponse();
+				await wrapper.vm.$nextTick();
+				expect( wrapper.vm.formSubmissionInProgress ).toBe( false );
 				expect(
 					wrapper.find( '.ext-reportincident-dialog__form-error-text' ).text()
 				).toBe( 'reportincident-dialog-generic-error' );

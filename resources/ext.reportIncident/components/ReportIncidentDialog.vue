@@ -1,7 +1,7 @@
 <template>
 	<cdx-dialog
 		v-model:open="wrappedOpen"
-		:title="title"
+		:title="stepTitleText"
 		:use-close-button="true"
 		:close-button-label="$i18n( 'reportincident-dialog-close-btn' ).text()"
 		class="ext-reportincident-dialog"
@@ -32,12 +32,12 @@
 			</cdx-message>
 			<div class="ext-reportincident-dialog-footer">
 				<cdx-button
-					v-if="showCancelOrBackButton"
+					v-if="secondaryButtonText"
 					class="ext-reportincident-dialog-footer__back-btn"
 					:disabled="formSubmissionInProgress || null"
 					@click="navigatePrevious"
 				>
-					{{ cancelOrBackButtonLabel }}
+					{{ secondaryButtonText }}
 				</cdx-button>
 				<cdx-button
 					class="ext-reportincident-dialog-footer__next-btn"
@@ -46,7 +46,7 @@
 					:disabled="formSubmissionInProgress || null"
 					@click="navigateNext"
 				>
-					{{ primaryButtonLabel }}
+					{{ primaryButtonText }}
 				</cdx-button>
 			</div>
 		</template>
@@ -82,64 +82,87 @@ module.exports = exports = {
 	emits: [ 'update:open' ],
 
 	setup( props, { emit } ) {
-		const wrappedOpen = useModelWrapper( toRef( props, 'open' ), emit, 'update:open' );
-		const currentStep = ref( props.initialStep );
-		const footerErrorMessage = ref( '' );
-		const formSubmissionInProgress = ref( false );
-
+		// Initialize global refs
 		const store = useFormStore();
 		const logEvent = useInstrument();
 
-		const isEmergency = computed(
-			() => store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm
-		);
-		const isSuccessStep = computed(
-			() => currentStep.value === Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ||
-				currentStep.value === Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS
-		);
-		const currentSlotName = computed( () => `${ currentStep.value }` );
-		const showCancelOrBackButton = computed(
-			() => !isSuccessStep.value
-		);
+		// Initialize dialog-level state refs
+		const wrappedOpen = useModelWrapper( toRef( props, 'open' ), emit, 'update:open' );
+		const footerErrorMessage = ref( '' );
+		const formSubmissionInProgress = ref( false );
 
-		const title = computed( () => {
-			const titlesByStep = {
-				[ Constants.DIALOG_STEP_1 ]: 'reportincident-dialog-main-title',
-				[ Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ]: 'reportincident-dialog-describe-the-incident-title',
-				[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'reportincident-dialog-report-immediate-harm-title',
-				[ Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ]: 'reportincident-submit-emergency-dialog-title',
-				[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]: 'reportincident-nonemergency-submitsuccess-title'
-			};
+		// Initialize all the refs needed to manage step state
+		const currentStep = ref( '' );
+		const isSuccessStep = ref( false );
+		const stepTitleText = ref( '' );
+		const primaryButtonText = ref( '' );
+		const secondaryButtonText = ref( '' );
 
-			// Possible message keys used here are listed above.
-			// eslint-disable-next-line mediawiki/msg-doc
-			return mw.msg( titlesByStep[ currentStep.value ] );
-		} );
+		/**
+		 * Change what step is being shown. This should contain all components the
+		 * step affects like the title, button texts, and whether or not the workflow
+		 * has ended (isSuccessStep).
+		 *
+		 * @param {string} stepName
+		 */
+		function setStep( stepName ) {
+			currentStep.value = stepName;
 
-		const primaryButtonLabel = computed( () => {
-			if ( isSuccessStep.value ) {
-				return mw.msg(
-					'reportincident-submit-back-to-page'
-				);
-			}
-
-			switch ( currentStep.value ) {
+			switch ( stepName ) {
 				case Constants.DIALOG_STEP_1:
-					return mw.msg( 'reportincident-dialog-continue' );
+					isSuccessStep.value = false;
+					stepTitleText.value = mw.msg( 'reportincident-dialog-main-title' );
+					primaryButtonText.value = mw.msg( 'reportincident-dialog-continue' );
+					secondaryButtonText.value = mw.msg( 'reportincident-dialog-cancel' );
+					return;
 
+				// Non-emergency workflow
 				case Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES:
-					return mw.msg( 'reportincident-dialog-continue' );
+					isSuccessStep.value = false;
+					stepTitleText.value = mw.msg( 'reportincident-dialog-describe-the-incident-title' );
+					primaryButtonText.value = mw.msg( 'reportincident-dialog-continue' );
+					secondaryButtonText.value = mw.msg( 'reportincident-dialog-back-btn' );
+					return;
 
+				case Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS:
+					isSuccessStep.value = true;
+					stepTitleText.value = mw.msg( 'reportincident-nonemergency-submitsuccess-title' );
+					primaryButtonText.value = mw.msg( 'reportincident-submit-back-to-page' );
+					secondaryButtonText.value = '';
+					return;
+
+				// Emergency workflow
+				case Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM:
+					isSuccessStep.value = false;
+					stepTitleText.value = mw.msg( 'reportincident-dialog-report-immediate-harm-title' );
+					primaryButtonText.value = mw.msg( 'reportincident-dialog-submit-btn' );
+					secondaryButtonText.value = mw.msg( 'reportincident-dialog-back-btn' );
+					return;
+
+				case Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS:
+					isSuccessStep.value = true;
+					stepTitleText.value = mw.msg( 'reportincident-submit-emergency-dialog-title' );
+					primaryButtonText.value = mw.msg( 'reportincident-submit-back-to-page' );
+					secondaryButtonText.value = '';
+					return;
+
+				// This should never be hit so make it clear something has gone wrong
 				default:
-					return mw.msg( 'reportincident-dialog-submit-btn' );
+					isSuccessStep.value = false;
+					stepTitleText.value = '';
+					primaryButtonText.value = '';
+					secondaryButtonText.value = '';
 			}
-		} );
+		}
 
-		const cancelOrBackButtonLabel = computed(
-			() => currentStep.value === Constants.DIALOG_STEP_1 ?
-				mw.msg( 'reportincident-dialog-cancel' ) :
-				mw.msg( 'reportincident-dialog-back-btn' ) );
+		// Initialize on load after all necessary variables and functions have been declared
+		currentStep.value = props.initialStep;
+		setStep( currentStep.value );
+		const currentSlotName = computed( () => `${ currentStep.value }` );
 
+		// Footer text state is calculated separately from the other step-dependent
+		// components because it is actually incident type-dependent and can change
+		// even when the step hasn't.
 		const footerHelpText = computed( () => {
 			if ( isSuccessStep.value ) {
 				return {
@@ -174,11 +197,6 @@ module.exports = exports = {
 		 * ReportIncident reporting REST API succeeds.
 		 */
 		function onReportSubmitSuccess() {
-			if ( isEmergency.value ) {
-				currentStep.value = Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS;
-			} else {
-				currentStep.value = Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS;
-			}
 			formSubmissionInProgress.value = false;
 			footerErrorMessage.value = '';
 		}
@@ -187,10 +205,9 @@ module.exports = exports = {
 		 * Function called when the POST request to the
 		 * ReportIncident reporting REST API fails.
 		 *
-		 * @param {string} _err
 		 * @param {Object} errObject
 		 */
-		function onReportSubmitFailure( _err, errObject ) {
+		function onReportSubmitFailure( errObject ) {
 			let errorKey = null;
 			let errorText = null;
 			const errJson = errObject.xhr.responseJSON;
@@ -231,11 +248,16 @@ module.exports = exports = {
 			formSubmissionInProgress.value = false;
 		}
 
-		function submitReport() {
+		/**
+		 * POST request to the ReportIncident reporting REST API.
+		 * Validation should be done before this is called.
+		 *
+		 * @return {Promise}
+		 */
+		async function submitReportPromise() {
 			// The user filing the report is set as an e2e tester in CommunityConfiguration,
 			// don't post the report and instead consider the submission as having succeeded
 			if ( mw.config.get( 'wgReportIncidentE2ETesterUsers' ).includes( mw.user.getName() ) ) {
-				onReportSubmitSuccess();
 				return;
 			}
 
@@ -249,15 +271,36 @@ module.exports = exports = {
 			restPayload.page = mw.config.get( 'wgPageName' );
 
 			formSubmissionInProgress.value = true;
-			new mw.Rest().post(
+			return new mw.Rest().post(
 				'/reportincident/v0/report',
 				restPayload
-			).then( onReportSubmitSuccess, onReportSubmitFailure );
+			).catch(
+				( errorType, errObject ) => {
+					const error = new Error( errorType );
+					error.object = errObject;
+					throw error;
+				}
+			);
+		}
+
+		/**
+		 * Convenience function to close the dialog
+		 */
+		function closeDialog() {
+			wrappedOpen.value = false;
+			store.$reset();
 		}
 
 		function navigateNext() {
 			const { showValidationError } = storeToRefs( store );
 			footerErrorMessage.value = '';
+
+			// If on any success/final step, close and reset
+			if ( isSuccessStep.value ) {
+				closeDialog();
+				setStep( Constants.DIALOG_STEP_1 );
+				return;
+			}
 
 			// if on the first page, navigate to the second page, if the user has
 			// made the necessary selections
@@ -270,11 +313,11 @@ module.exports = exports = {
 					showValidationError.value = true;
 					return;
 				}
-				// Validation passed, so we can proceed to step 2.
+				// Validation passed so we can proceed to either workflow.
 				if ( store.incidentType === Constants.typeOfIncident.immediateThreatPhysicalHarm ) {
-					currentStep.value = Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM;
+					setStep( Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM );
 				} else {
-					currentStep.value = Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES;
+					setStep( Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES );
 				}
 
 				logEvent( 'click', {
@@ -283,15 +326,62 @@ module.exports = exports = {
 					source: 'form',
 					subType: 'continue'
 				} );
-			} else if ( isSuccessStep.value ) {
-				wrappedOpen.value = false;
-				store.$reset();
-				currentStep.value = Constants.DIALOG_STEP_1;
-			} else if ( ( currentStep.value === Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ) &&
-					store.isUnacceptableBehavior() ) {
-				unacceptableBehaviorNavigateNextFromStep2();
-			} else {
-				// if on the second page, validate, then POST the data
+
+				return;
+			}
+
+			// Non-emergency workflow
+			// If navigating from DIALOG_STEP_REPORT_BEHAVIOR_TYPES, validate that a behavior
+			// type was selected and if one is, submit the form and navigate to success page.
+			if ( currentStep.value === Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ) {
+				const {
+					displaySomethingElseDetailsEmptyError,
+					missingBehaviorSelection
+				} = storeToRefs( store );
+
+				if ( store.noBehaviorIsSelected() ) {
+					showValidationError.value = true;
+					missingBehaviorSelection.value = true;
+					return;
+				}
+
+				missingBehaviorSelection.value = false;
+
+				if ( store.isSomethingElse() && !store.areSomethingElseDetailsProvided() ) {
+					showValidationError.value = true;
+					displaySomethingElseDetailsEmptyError.value = true;
+					return;
+				}
+
+				logEvent( 'click', {
+					context: store.inputBehavior,
+					source: 'describe_unacceptable_behavior',
+					subType: 'continue'
+				} );
+
+				// Even though no actual report will be submitted,
+				// call the server anyway for logging purposes
+				if ( store.isFormValidForSubmission() ) {
+					submitReportPromise()
+						.then( () => {
+							onReportSubmitSuccess();
+							setStep( Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS );
+						} )
+						.catch( ( err ) => {
+							onReportSubmitFailure( err.object );
+						} );
+				}
+
+				return;
+			}
+
+			// Emergency workflow
+			// If navigating from DIALOG_STEP_REPORT_IMMEDIATE_HARM, validate that
+			// the report is filled out, POST it, and navigate to the success page
+			if ( currentStep.value === Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ) {
+				if ( !store.isFormValidForSubmission() ) {
+					return;
+				}
 				logEvent( 'click', {
 					subType: 'submit_report',
 					source: 'submit_report',
@@ -304,43 +394,14 @@ module.exports = exports = {
 						reported_user: store.inputReportedUser
 					} )
 				} );
-
-				if ( store.isFormValidForSubmission() ) {
-					submitReport();
-				}
-			}
-		}
-
-		function unacceptableBehaviorNavigateNextFromStep2() {
-			const {
-				showValidationError,
-				displaySomethingElseDetailsEmptyError,
-				missingBehaviorSelection
-			} = storeToRefs( store );
-
-			logEvent( 'click', {
-				context: store.inputBehavior,
-				source: 'describe_unacceptable_behavior',
-				subType: 'continue'
-			} );
-
-			if ( store.noBehaviorIsSelected() ) {
-				showValidationError.value = true;
-				missingBehaviorSelection.value = true;
-				return;
-			}
-
-			missingBehaviorSelection.value = false;
-
-			if ( store.isSomethingElse() && !store.areSomethingElseDetailsProvided() ) {
-				showValidationError.value = true;
-				displaySomethingElseDetailsEmptyError.value = true;
-				return;
-			}
-
-			// Call the report API for unacceptable behavior as well for server-side event logging.
-			if ( store.isFormValidForSubmission() ) {
-				submitReport();
+				submitReportPromise()
+					.then( () => {
+						onReportSubmitSuccess();
+						setStep( Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS );
+					} )
+					.catch( ( err ) => {
+						onReportSubmitFailure( err.object );
+					} );
 			}
 		}
 
@@ -348,19 +409,15 @@ module.exports = exports = {
 			footerErrorMessage.value = '';
 
 			if ( currentStep.value === Constants.DIALOG_STEP_1 ) {
-				// if on the first page, close the dialog
-				wrappedOpen.value = false;
-
+				// if on the first page, close the dialog and clear
+				// any form data, as the user has had to navigate back
+				// from the second page to the first to cancel which
+				// suggests they don't want to submit this report.
 				logEvent( 'click', {
 					source: 'form',
 					subType: 'cancel'
 				} );
-
-				// Also clear any form data, as the user has had to
-				// navigate back from the second page to the first to
-				// cancel which suggests they don't want to submit this
-				// report.
-				store.$reset();
+				closeDialog();
 			} else {
 				// if on the second page, navigate back to the first page
 				let source;
@@ -371,7 +428,7 @@ module.exports = exports = {
 				} else {
 					source = 'form';
 				}
-				currentStep.value = Constants.DIALOG_STEP_1;
+				setStep( Constants.DIALOG_STEP_1 );
 				logEvent( 'click', {
 					source: source,
 					subType: 'back'
@@ -403,18 +460,17 @@ module.exports = exports = {
 
 		return {
 			wrappedOpen,
-			primaryButtonLabel,
-			cancelOrBackButtonLabel,
 			currentSlotName,
 			navigateNext,
 			navigatePrevious,
-			footerHelpText,
 			footerErrorMessage,
-			showCancelOrBackButton,
 			formSubmissionInProgress,
 			onReportSubmitFailure,
-			title,
-			onDialogOpenStateChanged
+			onDialogOpenStateChanged,
+			stepTitleText,
+			primaryButtonText,
+			secondaryButtonText,
+			footerHelpText
 		};
 	},
 	expose: [
