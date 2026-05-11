@@ -1,10 +1,10 @@
 <template>
 	<!-- eslint-disable-next-line vue/no-v-html -->
-	<p ref="content" v-html="message.parse()"></p>
+	<p v-html="content"></p>
 </template>
 
 <script>
-const { defineComponent, nextTick, onMounted, ref, toRef, watch } = require( 'vue' );
+const { defineComponent, computed } = require( 'vue' );
 
 // A rendered MediaWiki message, with any links within set to open in a new tab.
 module.exports = exports = defineComponent( {
@@ -16,24 +16,17 @@ module.exports = exports = defineComponent( {
 		message: { type: Object, required: true }
 	},
 	setup( props ) {
-		const content = ref( null );
-		const message = toRef( props, 'message' );
+		const content = computed( () => {
+			if ( !props.message ) {
+				return '';
+			}
 
-		/**
-		 * Update the "target" attribute of anchors within the rendered message content
-		 * to ensure they all open in a new tab.
-		 */
-		function setTarget() {
-			nextTick( () => {
-				if ( content.value ) {
-					$( content.value ).find( 'a' ).attr( 'target', '_blank' );
-				}
-			} );
-		}
-
-		watch( message, setTarget );
-
-		onMounted( setTarget );
+			// Update the "target" attribute of anchors within the rendered
+			// message content to ensure they all open in a new tab.
+			const $parsedMsg = $( `<div>${ props.message.parse() }</div>` );
+			$parsedMsg.find( 'a' ).attr( 'target', '_blank' );
+			return $parsedMsg.html();
+		} );
 
 		return { content };
 	}
