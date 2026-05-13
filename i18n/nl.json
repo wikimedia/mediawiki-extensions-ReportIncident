@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"McDutchie",
-			"Siebrand"
+			"Siebrand",
+			"Sjoerddebruin"
 		]
 	},
 	"reportincident-desc": "Uitbreiding voor een incidentmeldingssysteem.",
@@ -18,14 +19,14 @@
 	"reportincident-dialog-violator-disclaimer": "De Wikimedia Foundation maakt uw identiteit niet vrijwillig bekend aan degene die u meldt.",
 	"reportincident-dialog-violator-placeholder-text": "Wie meldt u?",
 	"reportincident-dialog-harassment-type-doxing": "Het blootstellen van persoonlijke privé-informatie (doxxing)",
-	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Haatdragende en discriminerende inhoud",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Haatdragend of discriminerend gedrag",
 	"reportincident-dialog-harassment-type-intimidation": "Pesten, intimidatie, bedreigingen of beledigingen",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Seksuele intimidatie",
 	"reportincident-dialog-harassment-type-something-else": "Iets anders",
 	"reportincident-dialog-harassment-type-spam": "Spam of promotionele inhoud",
 	"reportincident-dialog-harassment-type-trolling": "Trollen of stalken",
 	"reportincident-dialog-something-else-input-placeholder": "Omschrijf de hierboven niet vermelde gedragingen.",
-	"reportincident-dialog-unacceptable-behavior-community-managed": "{{SITENAME}} is een gemeenschap waar [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|ongepast gedrag niet wordt getolereerd]] en wordt afgehandeld door de gemeenschap van ervaren gebruikers.",
+	"reportincident-dialog-unacceptable-behavior-community-managed": "Selecteer het type [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|onaanvaardbaar gedrag]] en u krijgt op de volgende pagina ondersteunende informatie te zien.",
 	"reportincident-dialog-get-support-title": "Ondersteuning bij een incident",
 	"reportincident-dialog-harassment-empty": "Selecteer ten minste één gedrag.",
 	"reportincident-dialog-something-else-empty": "Geef een korte beschrijving van het gedrag.",
@@ -55,7 +56,7 @@
 	"reportincident-choose-option": "Kies een optie",
 	"reportincident-dialog-cancel": "Annuleren",
 	"reportincident-dialog-continue": "Doorgaan",
-	"reportincident-unacceptable-behavior-footer": "U wordt doorverwezen naar de ondersteuningsinformatie om u te helpen het incident op te lossen. [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|Ongepast gedrag]] wordt beheerd door de Wikipedia-community",
+	"reportincident-unacceptable-behavior-footer": "{{SITENAME}} is een gemeenschap waar [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|onaanvaardbaar gedrag]] niet wordt getolereerd en wordt beheerd door de gemeenschap van ervaren gebruikers. Als u ergens anders hulp bij nodig hebt, zie [[foundation:Special:MyLanguage/Legal:Wikimedia_Foundation_Legal_and_Safety_Contact_Information|Contactgegevens voor juridische en veiligheidszaken van de Wikimedia Foundation]].",
 	"reportincident-physical-harm-infotext": "Een koppeling naar het incident dat u meldt (inclusief de gerapporteerde gebruiker) en uw eigen gebruikersnaam en e-mailadres worden <b>privé gedeeld met het [[meta:Special:MyLanguage/Threats_of_harm|Wikimedia Foundation noodhulpteam]]</b> .",
 	"reportincident-physical-harm-footer": "Uw melding is [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|privé]] en wordt ter beoordeling naar het [[meta:Special:MyLanguage/Threats_of_harm|noodhulpteam van de Wikimedia Foundation]] gestuurd.",
 	"reportincident-threats-physical-harm": "Bedreigingen met fysiek geweld",
@@ -166,9 +167,9 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactadmin-placeholder": "bijv. Project:Beheerdersprikbord",
 	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-email-placeholder": "bijv. incidents@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_trolling_helpmethod-contactcommunity-placeholder": "bijv. Project:De Kroeg",
-	"reportincident-nonemergency-hatespeech-header": "Haatdragende en discriminerende inhoud",
-	"reportincident-nonemergency-hatespeech-nextstep": "Haatdragende of discriminerende inhoud op de wiki wordt beschouwd als onacceptabel gedrag volgens het [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_%E2%80%93_Content_vandalism_and_abuse_of_the_projects officiële beleid].\n\nAls het veilig genoeg voor u voelt, kunt u proberen met de persoon in kwestie contact op te nemen via hun overlegpagina. Herinner hun aan het [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_%E2%80%93_Content_vandalism_and_abuse_of_the_projects officiële beleid] en laat weten dat hun gedrag kan leiden tot een tijdelijk bewerkingsverbod.",
-	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Haatdragende en discriminerende inhoud",
+	"reportincident-nonemergency-hatespeech-header": "Haatdragend of discriminerend gedrag",
+	"reportincident-nonemergency-hatespeech-nextstep": "Haatzaaiende of discriminerende taal wordt op de wiki beschouwd als onacceptabel gedrag volgens het [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_%E2%80%93_Content_vandalism_and_abuse_of_the_projects officiële beleid].\n\nAls het veilig genoeg voor u voelt, kunt u proberen met de persoon in kwestie contact op te nemen via hun overlegpagina. Herinner hun aan het [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.3_%E2%80%93_Content_vandalism_and_abuse_of_the_projects officiële beleid] en laat weten dat hun gedrag kan leiden tot een tijdelijk bewerkingsverbod.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Haatdragend of discriminerend gedrag",
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-contactadmin-placeholder": "bijv. Project:Beheerdersprikbord",
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech_helpmethod-email-placeholder": "bijv. incidents@example.com",
 	"reportincident-nonemergency-spam-header": "Spam of promotionele inhoud",
