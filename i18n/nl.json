@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"McDutchie",
-			"Siebrand"
+			"Siebrand",
+			"Sjoerddebruin"
 		]
 	},
 	"reportincident-desc": "Uitbreiding voor een incidentmeldingssysteem.",
