@@ -37,7 +37,7 @@
 	"reportincident-dialog-generic-error": "오류로 인해 요청이 제출되지 않았습니다. 다시 제출해 주세요.",
 	"reportincident-unable-to-send": "사건 보고서를 만들 수 없습니다. 문제가 계속되면, emergency@wikimedia.org로 사건 보고서를 보내주세요.",
 	"right-reportincident": "사건 신고",
-	"action-reportincident": "사건을 신고할",
+	"action-reportincident": "사건 신고",
 	"reportincident-emaildialog-title": "인증된 이메일 주소 필요",
 	"reportincident-emaildialog-close-button": "취소",
 	"reportincident-emaildialog-content": "보고서 관련 업데이트 또는 필요한 경우 후속 조치를 위해 인증된 이메일 주소가 필요합니다. 보고서를 제출하기 전에 사용자 계정 설정에서 이메일 주소를 추가하거나 인증해 주세요.",
