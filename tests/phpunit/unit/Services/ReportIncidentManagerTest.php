@@ -22,6 +22,7 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 
 	private IReportIncidentNotifier $notifier;
 	private IReportIncidentRecorder $recorder;
+	private IReportIncidentNotifier $directReportNotifier;
 
 	private ReportIncidentManager $reportIncidentManager;
 
@@ -30,10 +31,12 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 
 		$this->notifier = $this->createMock( IReportIncidentNotifier::class );
 		$this->recorder = $this->createMock( IReportIncidentRecorder::class );
+		$this->directReportNotifier = $this->createMock( IReportIncidentNotifier::class );
 
 		$this->reportIncidentManager = new ReportIncidentManager(
 			$this->notifier,
-			$this->recorder
+			$this->recorder,
+			$this->directReportNotifier
 		);
 	}
 
@@ -59,7 +62,24 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 		$this->assertStatusGood( $this->reportIncidentManager->notify( $incidentReport ) );
 	}
 
-	private function newIncidentReport(): IncidentReport {
+	public function testDirectReport() {
+		$incidentReport = $this->newIncidentReport( [
+			'incidentType' => IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR,
+			'behaviorType' => 'doxing',
+			'physicalHarmType' => null,
+			'details' => null,
+			'directReport' => 'Dirct report'
+		] );
+
+		$this->directReportNotifier->expects( $this->once() )
+			->method( 'notify' )
+			->with( $incidentReport )
+			->willReturn( StatusValue::newGood() );
+
+		$this->assertStatusGood( $this->reportIncidentManager->sendDirectReport( $incidentReport ) );
+	}
+
+	private function newIncidentReport( array $overrides = [] ): IncidentReport {
 		$page = new PageIdentityValue( 1, NS_TALK, 'TestPage', PageIdentityValue::LOCAL );
 
 		$revRecord = $this->createMock( RevisionRecord::class );
@@ -71,11 +91,13 @@ class ReportIncidentManagerTest extends MediaWikiUnitTestCase {
 			new UserIdentityValue( 2, 'Reported' ),
 			$revRecord,
 			$page,
-			IncidentReport::THREAT_TYPE_IMMEDIATE,
+			$overrides['incidentType'] ?? IncidentReport::THREAT_TYPE_IMMEDIATE,
+			$overrides['behaviorType'] ?? null,
+			$overrides['physicalHarmType'] ?? 'threats-physical-harm',
 			null,
-			'threats-physical-harm',
+			$overrides['details'] ?? 'Details',
 			null,
-			'Details'
+			$overrides['directReport'] ?? null
 		);
 	}
 

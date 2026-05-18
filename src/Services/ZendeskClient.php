@@ -171,4 +171,9 @@ class ZendeskClient implements IReportIncidentNotifier {
 
 		return [ $linkPrefixText, $linkToPageAtRevision ];
 	}
+
+	public function getSendToEmail( IncidentReport $incidentReport ): string {
+		// TODO: Implement if this is ever used
+		return '';
+	}
 }

@@ -19,6 +19,7 @@
 	"reportincident-dialog-violator-placeholder-text": "Who are {{GENDER:|you}} reporting?",
 	"reportincident-dialog-harassment-type-doxing": "Exposing private personal information (Doxing)",
 	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "Hateful or discriminatory behavior",
+	"reportincident-dialog-harassment-type-hate-or-discrimination": "{{int:reportincident-dialog-harassment-type-hate-speech-or-discrimination}}",
 	"reportincident-dialog-harassment-type-intimidation": "Bullying, intimidation, threats or insults",
 	"reportincident-dialog-harassment-type-sexual-harassment": "Sexual harassment",
 	"reportincident-dialog-harassment-type-something-else": "Something else",
@@ -315,5 +316,9 @@
 	"reportincident-nonemergency-directreport-submitsuccess-next-header": "{{int:reportincident-submit-emergency-section-next-title}}",
 	"reportincident-nonemergency-directreport-submitsuccess-next-info": "Your report has been submitted to community administrators.\n\nCommunity administrators will review it and determine whether the incident violates policies.",
 	"reportincident-nonemergency-directreport-reportlabel": "Report to Community Administrators",
-	"reportincident-nonemergency-directreport-inputempty-error": "{{int:reportincident-dialog-something-else-empty}}"
+	"reportincident-nonemergency-directreport-inputempty-error": "{{int:reportincident-dialog-something-else-empty}}",
+	"reportincident-directreport-email-subject": "Incident Reporting System non-emergency direct report",
+	"reportincident-directreport-email-body": "Reporting user: $1\nReported user: $2\n$3: $4\n\nType of unacceptable user behavior: $5\nDetails: $6\n\nRespond to reporting user: $7",
+	"reportincident-directreport-send-error": "Unable to create your incident report. If the issue persists, please email $1 with {{GENDER:|your}} incident report.",
+	"reportincident-directreport-featuredisabled-error": "Unable to create your incident report. Direct reporting is disabled."
 }

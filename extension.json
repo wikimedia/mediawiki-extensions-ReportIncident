@@ -159,7 +159,7 @@
 		"reportincident": {
 			"&can-bypass": false,
 			"user": [
-				5,
+				50,
 				86400
 			],
 			"newbie": [

@@ -14,6 +14,7 @@ class ReportIncidentManager {
 	public function __construct(
 		private readonly IReportIncidentNotifier $notifier,
 		private readonly IReportIncidentRecorder $recorder,
+		private readonly IReportIncidentNotifier $directReportNotifier,
 	) {
 	}
 
@@ -27,6 +28,20 @@ class ReportIncidentManager {
 
 	public function notify( IncidentReport $incidentReport ): StatusValue {
 		return $this->notifier->notify( $incidentReport );
+	}
+
+	public function sendDirectReport( IncidentReport $incidentReport ): StatusValue {
+		return $this->directReportNotifier->notify( $incidentReport );
+	}
+
+	/**
+	 * For direct reports, expose the send to email for use in error messages
+	 *
+	 * @param IncidentReport $incidentReport
+	 * @return string
+	 */
+	public function getDirectReportSendToEmail( IncidentReport $incidentReport ): string {
+		return $this->directReportNotifier->getSendToEmail( $incidentReport );
 	}
 
 }

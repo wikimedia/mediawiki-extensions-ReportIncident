@@ -2,6 +2,7 @@
 declare( strict_types=1 );
 
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Extension\ReportIncident\Services\DirectReportIncidentNotifier;
 use MediaWiki\Extension\ReportIncident\Services\IReportIncidentNotifier;
 use MediaWiki\Extension\ReportIncident\Services\IReportIncidentRecorder;
 use MediaWiki\Extension\ReportIncident\Services\MetricsPlatformIncidentRecorder;
@@ -24,7 +25,8 @@ return [
 	): ReportIncidentManager {
 		return new ReportIncidentManager(
 			$services->getService( 'ReportIncidentNotifier' ),
-			$services->getService( 'ReportIncidentRecorder' )
+			$services->getService( 'ReportIncidentRecorder' ),
+			$services->getService( 'DirectReportIncidentNotifier' )
 		);
 	},
 	'ReportIncidentNotifier' => static function ( MediaWikiServices $services ): IReportIncidentNotifier {
@@ -40,6 +42,26 @@ return [
 			$services->getTitleFactory(),
 			LoggerFactory::getInstance( 'ReportIncident' ),
 			new ServiceOptions( ZendeskClient::CONSTRUCTOR_OPTIONS, $services->getMainConfig() )
+		);
+	},
+	'DirectReportIncidentNotifier' => static function ( MediaWikiServices $services ): IReportIncidentNotifier {
+		// Direct reports are only possible if an email is configured in CommunityConfiguration.
+		// No-op if it's not available.
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CommunityConfiguration' ) ) {
+			return new NullReportIncidentNotifier();
+		}
+
+		return new DirectReportIncidentNotifier(
+			$services->getMainConfig(),
+			$services->getService( 'CommunityConfiguration.MediaWikiConfigReader' ),
+			new ServiceOptions( DirectReportIncidentNotifier::CONSTRUCTOR_OPTIONS, $services->getMainConfig() ),
+			LoggerFactory::getInstance( 'ReportIncident' ),
+			$services->getEmailer(),
+			$services->getMessageFormatterFactory()->getTextFormatter(
+				$services->getContentLanguageCode()->toString()
+			),
+			$services->getUrlUtils(),
+			$services->getTitleFactory()
 		);
 	},
 	'ReportIncidentRecorder' => static function ( MediaWikiServices $services ): IReportIncidentRecorder {

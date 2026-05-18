@@ -373,6 +373,12 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 			} );
 		}
 
+		if ( isDirectReportingCategory.value && isDirectReportFormValid.value ) {
+			return Object.assign( restData, {
+				directReport: directReportTextInput.value,
+				behaviorType: inputBehavior.value
+			} );
+		}
 		return Object.assign( restData, { behaviorType: inputBehavior.value } );
 	} );
 

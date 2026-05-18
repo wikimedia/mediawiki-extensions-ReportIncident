@@ -16,4 +16,11 @@ interface IReportIncidentNotifier {
 	 * @return StatusValue Status holding the result of the notification creation process.
 	 */
 	public function notify( IncidentReport $incidentReport ): StatusValue;
+
+	/**
+	 * Get the send to email for an incident report if one exists
+	 * @param IncidentReport $incidentReport
+	 * @return string
+	 */
+	public function getSendToEmail( IncidentReport $incidentReport ): string;
 }

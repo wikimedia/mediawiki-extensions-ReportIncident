@@ -216,7 +216,7 @@ class ReportHandler extends SimpleHandler {
 		} else {
 			if ( !isset( $body['behaviorType'] ) ) {
 				throw new LocalizedHttpException(
-					new MessageValue( 'rest-missing-body-field', [ 'physicalHarmType' ] ),
+					new MessageValue( 'rest-missing-body-field', [ 'behaviorType' ] ),
 					422
 				);
 			}
@@ -298,9 +298,28 @@ class ReportHandler extends SimpleHandler {
 			);
 		}
 
-		// For reports of unacceptable behavior, only create a private record
-		// without notifying the emergency team.
+		// For reports of unacceptable behavior, if a direct report is available, attempt to forward it
+		// to the configured address on file. Otherwise, no-op as the page shown to the user was informational.
 		if ( $incidentReport->getIncidentType() === IncidentReport::THREAT_TYPE_UNACCEPTABLE_BEHAVIOR ) {
+			if ( $incidentReport->getDirectReport() ) {
+				// In theory, a direct report should only be sent when the front-end has verified
+				// that the feature is available but guard against the alternative otherwise here too.
+				if ( !$this->config->get( 'ReportIncidentEnableDirectReporting' ) ) {
+					throw new LocalizedHttpException(
+						new MessageValue( 'reportincident-directreport-featuredisabled-error' ),
+						500
+					);
+				}
+				$status = $this->reportIncidentManager->sendDirectReport( $incidentReport );
+				if ( !$status->isGood() ) {
+					$directReportSendToEmail = $this->reportIncidentManager
+						->getDirectReportSendToEmail( $incidentReport );
+					throw new LocalizedHttpException(
+						new MessageValue( 'reportincident-directreport-send-error', [ $directReportSendToEmail ] ),
+						500
+					);
+				}
+			}
 			return $this->getResponseFactory()->createNoContent();
 		}
 
@@ -375,6 +394,12 @@ class ReportHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
+			'directReport' => [
+				static::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
+				StringDef::PARAM_MAX_CHARS => self::MAX_DETAILS_LENGTH,
+			]
 		] + $this->getTokenParamDefinition();
 	}
 

@@ -26,6 +26,7 @@ class IncidentReport {
 		private readonly ?string $somethingElseDetails = null,
 		private readonly ?string $details = null,
 		private readonly ?string $threadId = null,
+		private readonly ?string $directReport = null,
 	) {
 		$page->assertWiki( PageReference::LOCAL );
 
@@ -73,7 +74,8 @@ class IncidentReport {
 			$data['physicalHarmType'] ?? null,
 			$data['somethingElseDetails'] ?? null,
 			$data['details'] ?? null,
-			$data['threadId'] ?? null
+			$data['threadId'] ?? null,
+			$data['directReport'] ?? null
 		);
 	}
 
@@ -115,5 +117,9 @@ class IncidentReport {
 
 	public function getThreadId(): ?string {
 		return $this->threadId;
+	}
+
+	public function getDirectReport(): ?string {
+		return $this->directReport;
 	}
 }

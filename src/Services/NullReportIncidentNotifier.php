@@ -13,4 +13,8 @@ class NullReportIncidentNotifier implements IReportIncidentNotifier {
 	public function notify( IncidentReport $incidentReport ): StatusValue {
 		return StatusValue::newGood();
 	}
+
+	public function getSendToEmail( IncidentReport $incidentReport ): string {
+		return '';
+	}
 }
