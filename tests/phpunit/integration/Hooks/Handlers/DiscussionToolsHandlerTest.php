@@ -14,6 +14,12 @@ use MediaWikiIntegrationTestCase;
  * @covers \MediaWiki\Extension\ReportIncident\Hooks\Handlers\DiscussionToolsHandler
  */
 class DiscussionToolsHandlerTest extends MediaWikiIntegrationTestCase {
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->markTestSkippedIfExtensionNotLoaded( 'DiscussionTools' );
+	}
+
 	/**
 	 * @dataProvider provideOnDiscussionToolsAddOverflowMenuItems
 	 */
@@ -23,8 +29,6 @@ class DiscussionToolsHandlerTest extends MediaWikiIntegrationTestCase {
 		array $threadItemData,
 		bool $shouldAddMenuItemMockResult
 	) {
-		// Skip the test if DiscussionTools is not loaded.
-		$this->markTestSkippedIfExtensionNotLoaded( 'DiscussionTools' );
 		$overflowMenuItems = [];
 		$resourceLoaderModules = [];
 
