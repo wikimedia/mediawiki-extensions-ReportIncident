@@ -94,8 +94,6 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_showwarning-control-label": "開啟警告訊息",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-label": "隱藏編輯連結（可選）",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-help-text": "這可能是您當地的政策頁面",
-	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-wikiemailurl-label": "請使用維基百科帳號在 Special:EmailUser 上透過電郵提出您的請求。",
-	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-wikiemailurl-description": "新增使用者應依順序造訪的頁面連結到電子郵件。",
 	"reportincident-nonemergency-sexualharassment-header": "性騷擾",
 	"reportincident-nonemergency-sexualharassment-nextstep": "根據[https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct/zh#3.1%E2%80%94%E9%A8%B7%E6%93%BE 官方政策]，在 wiki 上發生性騷擾被認為是不可接受的行為。",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "性騷擾",

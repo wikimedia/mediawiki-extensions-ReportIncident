@@ -32,5 +32,7 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "Molestie sessuali",
 	"reportincident-nonemergency-hatespeech-header": "Comportamento odioso o discriminatorio",
 	"communityconfiguration-reportincident-reportincident_nonemergency_hatespeech-label": "Comportamento odioso o discriminatorio",
-	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "Altro"
+	"communityconfiguration-reportincident-reportincident_nonemergency_other-label": "Altro",
+	"reportincident-nonemergency-directreport-footer": "Il tuo nome utente e il tuo indirizzo di posta elettronica verranno inviati agli amministratori della comunità.",
+	"reportincident-nonemergency-directreport-reportlabel": "Segnala agli amministratori della comunità"
 }
