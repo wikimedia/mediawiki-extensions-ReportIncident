@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 // phpcs:ignoreFile
 // This file was automatically generated. Please update it via extensions/CommunityConfiguration/UpdateEmergencyDefaults.php maintenance script
 return (object) array(
