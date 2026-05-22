@@ -660,25 +660,56 @@ describe( 'Report Incident Dialog', () => {
 	} );
 
 	const closeTestCases = [
-		[ 'STEP_1', Constants.DIALOG_STEP_1, 'form' ],
+		[
+			'STEP_1',
+			Constants.DIALOG_STEP_1,
+			false,
+			'form'
+		],
 		[
 			'DIALOG_STEP_REPORT_BEHAVIOR_TYPES',
 			Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES,
+			false,
 			'describe_unacceptable_behavior'
 		],
-		[ 'REPORT_IMMEDIATE_HARM', Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM, 'submit_report' ],
-		[ 'SUCCESS', Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS, 'get_support_' ],
-		[ 'SUCCESS', Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS, 'submitted' ]
+		[
+			'REPORT_IMMEDIATE_HARM',
+			Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM,
+			false,
+			'submit_report'
+		],
+		[
+			'DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS - informational page',
+			Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
+			false,
+			'get_support_'
+		],
+		[
+			'DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS - direct report page',
+			Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS,
+			true,
+			'direct_reporting'
+		],
+		[
+			'DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS',
+			Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS,
+			false,
+			'submitted'
+		]
 	];
 
-	for ( const [ stepName, initialStep, source ] of closeTestCases ) {
+	for ( const [ stepName, initialStep, isDirectReportingCategory, source ] of closeTestCases ) {
 		it( `closes the dialog via the close button on step ${ stepName }`, async () => {
 			const mockConfig = {
 				wgPageName: 'test'
 			};
 			jest.spyOn( mw.config, 'get' ).mockImplementation( ( key ) => mockConfig[ key ] );
 
-			const wrapper = renderComponent( { open: true, initialStep } );
+			const wrapper = renderComponent(
+				{ open: true, initialStep },
+				null,
+				{ isDirectReportingCategory }
+			);
 
 			await wrapper.get( '.cdx-dialog__header__close-button' ).trigger( 'click' );
 

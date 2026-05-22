@@ -403,7 +403,6 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		isDirectReportingCategory.value = false;
 		validNonEmergencyHelpMethods.value = [];
 		directReportTextInput.value = '';
-		isDirectReportFormValid.value = true;
 		shouldShowDirectReportFormValidationError.value = false;
 		overflowMenuData.value = {};
 		showValidationError.value = false;

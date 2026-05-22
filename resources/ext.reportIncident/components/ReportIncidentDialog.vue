@@ -430,6 +430,10 @@ module.exports = exports = {
 					shouldShowDirectReportFormValidationError.value = true;
 					return;
 				}
+				logEvent( 'click', {
+					subType: 'direct_reporting',
+					source: 'submit'
+				} );
 				submitReportPromise()
 					.then( () => {
 						onReportSubmitSuccess();
@@ -495,6 +499,7 @@ module.exports = exports = {
 					currentStep.value === Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS &&
 					!isSuccessStep.value
 				) {
+					source = 'direct_reporting';
 					prevPage = Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES;
 				} else if ( currentStep.value === Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ) {
 					source = 'submit_report';
@@ -521,7 +526,10 @@ module.exports = exports = {
 					[ Constants.DIALOG_STEP_REPORT_BEHAVIOR_TYPES ]: 'describe_unacceptable_behavior',
 					[ Constants.DIALOG_STEP_REPORT_IMMEDIATE_HARM ]: 'submit_report',
 					[ Constants.DIALOG_STEP_EMERGENCY_SUBMIT_SUCCESS ]: 'submitted',
-					[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]: `get_support_${ store.inputBehavior }`
+					[ Constants.DIALOG_STEP_NONEMERGENCY_SUBMIT_SUCCESS ]:
+						store.isDirectReportingCategory ?
+							'direct_reporting' :
+							`get_support_${ store.inputBehavior }`
 				};
 
 				logEvent( 'click', {
@@ -543,13 +551,15 @@ module.exports = exports = {
 			stepTitleText,
 			primaryButtonText,
 			secondaryButtonText,
-			footerHelpText
+			footerHelpText,
+			isSuccessStep
 		};
 	},
 	expose: [
 		// Expose internal functions called from tests in order
 		// to prevent linter errors about unused properties
-		'onReportSubmitFailure'
+		'onReportSubmitFailure',
+		'isSuccessStep'
 	]
 };
 </script>

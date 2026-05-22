@@ -16,13 +16,19 @@
 </template>
 
 <script>
-const { defineComponent } = require( 'vue' );
+const { defineComponent, onMounted } = require( 'vue' );
 const { CdxMessage } = require( '@wikimedia/codex' );
+const useInstrument = require( '../composables/useInstrument.js' );
 
 module.exports = exports = defineComponent( {
 	name: 'NonEmergencyPostSubmitSuccessStep',
 	components: { CdxMessage },
 	setup() {
+		const logEvent = useInstrument();
+
+		onMounted( () => {
+			logEvent( 'view', { source: 'direct_reporting_confirmation' } );
+		} );
 		let nextInfoMsg = mw
 			.message( 'reportincident-nonemergency-directreport-submitsuccess-next-info' )
 			.parse();

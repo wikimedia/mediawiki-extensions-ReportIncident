@@ -908,6 +908,15 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 
 			const copy = wrapper.findAll( 'p, li' ).map( ( c ) => c.text() );
 			expect( copy ).toEqual( expected.copy );
+
+			expect( logEvent ).toHaveBeenCalledTimes( 1 );
+			expect( logEvent ).toHaveBeenCalledWith(
+				'view',
+				{
+					source: config.get.wgReportIncidentEnableDirectReporting ?
+						'direct_reporting' : `get_support_${ config.inputBehavior }`
+				}
+			);
 		}
 	);
 

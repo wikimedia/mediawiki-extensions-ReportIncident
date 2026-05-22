@@ -99,12 +99,15 @@ module.exports = exports = {
 		} = storeToRefs( store );
 
 		onMounted( () => {
-			logEvent( 'view', { source: `get_support_${ behavior }` } );
+			const source = isDirectReportingCategory.value ?
+				'direct_reporting' :
+				`get_support_${ behavior }`;
+			logEvent( 'view', { source: source } );
 
 			$( pageContent.value ).find( 'a' ).on( 'click', function () {
 				logEvent( 'click', {
 					context: $( this ).attr( 'href' ),
-					source: `get_support_${ behavior }`
+					source: source
 				} );
 			} );
 		} );
