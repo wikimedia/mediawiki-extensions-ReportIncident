@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"AhmedG612"
+		]
+	},
+	"reportincident-dialog-violator-placeholder-text": "Yaa laga soo dacwaynayaa?",
+	"reportincident-dialog-harassment-type-disruptiveediting": "Tafatir carqaladeyn ah",
+	"communityconfiguration-reportincident-reportincident_nonemergency_disruptiveediting-label": "Tafatir carqaladeyn ah",
+	"reportincident-dialog-harassment-type-other": "Kale",
+	"reportincident-nonemergency-other-notice": "Haddii warbixintaadu ay ka kooban tahay xog xasaasi ah ama gaar ah, fadlan ku dir oo keliya iimayl.",
+	"communityconfiguration-reportincident-invalid-usehttps": "URL-ku waa inuu isticmaalaa https",
+	"communityconfiguration-reportincident-invalid-queryparameter": "Qodobka raadinta '$1' waa inuu leeyahay qiime"
+}
