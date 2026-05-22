@@ -144,6 +144,8 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-description": "De koppeling naar een pagina waarop het toezichts-/onderdrukkingsbeleid wordt uitgelegd.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-placeholder": "bijv. Project:Toezicht",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-help-text": "Dit kan de pagina met uw lokale beleid zijn",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-label": "Directe melden via e-mail",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-description": "De gebruiker kan een formulier invullen om direct te melden. Standaard wordt dit bericht verzonden naar stewards-oversight@wikimedia.org. Als u deze berichten naar een ander e-mailadres wilt laten verzenden, kunt u dit in het onderstaande veld invullen.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-placeholder": "bijv. oversight@en-wpwikipedia.org",
 	"reportincident-nonemergency-sexualharassment-header": "Seksuele intimidatie",
 	"reportincident-nonemergency-sexualharassment-nextstep": "Seksuele intimidatie op wiki wordt als onaanvaardbaar beschouwd in het [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Hassage officiële beleid].",
@@ -221,5 +223,11 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "bijv. incidents@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "bijv. Project:De Kroeg",
 	"communityconfiguration-reportincident-invalid-usehttps": "De URL moet https gebruiken.",
-	"communityconfiguration-reportincident-invalid-queryparameter": "De zoekparameter '$1' moet een waarde hebben"
+	"communityconfiguration-reportincident-invalid-queryparameter": "De zoekparameter '$1' moet een waarde hebben",
+	"reportincident-nonemergency-directreport-header": "Meld het incident aan de beheerders van de gemeenschap",
+	"reportincident-nonemergency-directreport-nextsteps": "Als u dit probleem rechtstreeks aan de gemeenschapsbeheerders wilt melden, kunt u onderstaand formulier invullen.",
+	"reportincident-nonemergency-directreport-footer": "Uw gebruikersnaam en e-mailadres worden naar de gemeenschapsbeheerders gestuurd.",
+	"reportincident-nonemergency-directreport-submitsuccess-banner": "De melding is ter beoordeling ingediend. Uw verzoek wordt door de gemeenschapsbeheerders bekeken.",
+	"reportincident-nonemergency-directreport-submitsuccess-next-info": "Uw melding is ingediend bij de gemeenschapsbeheerders. De gemeenschapsbeheerders beoordelen de melding en stellen vast of het incident in strijd is met het beleid.",
+	"reportincident-nonemergency-directreport-reportlabel": "Melden aan gemeenschapsbeheerders"
 }

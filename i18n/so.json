@@ -5,10 +5,21 @@
 		]
 	},
 	"reportincident-dialog-violator-placeholder-text": "Yaa laga soo dacwaynayaa?",
+	"reportincident-dialog-something-else-empty": "Fadlan bixi sharaxaad kooban oo ku saabsan dhaqanka.",
+	"reportincident-submit-emergency-dialog-title": "{{GENDER:|Mahadsanid}} inaad qaaday tallaabooyin lagu hagaajinayo amniga iyo ka mid noqoshada {{SITENAME}}.",
+	"reportincident-submit-emergency-section-next-title": "Maxaa xiga?",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-label": "Warbixin toos ah oo iimayl ah",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-description": "Warbixinta tooska ah waxay soo bandhigtaa foom uu isticmaalehu buuxin karo si uu u soo gudbiyo fariin. Sida caadiga ah fariintan waxaa loo diri doonaa stewards-oversight@wikimedia.org. Haddii aad rabto in fariimahan loo diro ciwaan iimayl oo kale, ku dar hoos goobtaas.",
 	"reportincident-dialog-harassment-type-disruptiveediting": "Tafatir carqaladeyn ah",
 	"communityconfiguration-reportincident-reportincident_nonemergency_disruptiveediting-label": "Tafatir carqaladeyn ah",
 	"reportincident-dialog-harassment-type-other": "Kale",
 	"reportincident-nonemergency-other-notice": "Haddii warbixintaadu ay ka kooban tahay xog xasaasi ah ama gaar ah, fadlan ku dir oo keliya iimayl.",
 	"communityconfiguration-reportincident-invalid-usehttps": "URL-ku waa inuu isticmaalaa https",
-	"communityconfiguration-reportincident-invalid-queryparameter": "Qodobka raadinta '$1' waa inuu leeyahay qiime"
+	"communityconfiguration-reportincident-invalid-queryparameter": "Qodobka raadinta '$1' waa inuu leeyahay qiime",
+	"reportincident-nonemergency-directreport-header": "U gudbi dhacdada maamulayaasha bulshada",
+	"reportincident-nonemergency-directreport-nextsteps": "Haddii aad rabto inaad si toos ah uga warbixiso arrintan maamulayaasha bulshada, fadlan buuxi foomka hoose.",
+	"reportincident-nonemergency-directreport-footer": "Magacaaga isticmaalaha iyo ciwaanka iimaylka waxaa loo diri doonaa maamulayaasha bulshada.",
+	"reportincident-nonemergency-directreport-submitsuccess-banner": "Warbixinta waa la gudbiyay si loo eego. Codsigaaga waxaa dib u eegi doona maamulayaasha bulshada.",
+	"reportincident-nonemergency-directreport-submitsuccess-next-info": "Warbixintaada waxaa loo gudbiyay maamulayaasha bulshada.\n\nMaamulayaasha bulshada ayaa dib u eegi doona oo go’aamin doona in dhacdadu jabinayso siyaasadaha.",
+	"reportincident-nonemergency-directreport-reportlabel": "U gudbi Maamulayaasha Bulshada"
 }

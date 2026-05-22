@@ -145,6 +145,7 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-placeholder": "z. B. Projekt:Oversight",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-help-text": "Dies könnte deine lokale Richtlinienseite sein.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-label": "Direkte Meldung per E-Mail",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-description": "Bei der direkten Meldung wird ein Formular angezeigt, das der Benutzer ausfüllen kann, um eine Nachricht zu senden. Standardmäßig wird diese Nachricht an stewards-oversight@wikimedia.org gesendet. Wenn du möchtest, dass diese Nachrichten an eine andere E-Mail-Adresse gesendet wird, gib diese bitte in das untenstehende Feld ein.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-placeholder": "z. B. oversight@en-wpwikipedia.org",
 	"reportincident-nonemergency-sexualharassment-header": "Sexuelle Belästigung",
 	"reportincident-nonemergency-sexualharassment-nextstep": "Sexuelle Belästigung im Wiki wird in der [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_ %E2% 80%93_Harassment offiziellen Richtlinie] als inakzeptables Verhalten betrachtet.",
@@ -222,5 +223,11 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "z. B. incidents@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "Beispiel: Projekt:Dorfpumpe",
 	"communityconfiguration-reportincident-invalid-usehttps": "Die URL muss https verwenden",
-	"communityconfiguration-reportincident-invalid-queryparameter": "Der Abfrageparameter „$1“ muss einen Wert haben."
+	"communityconfiguration-reportincident-invalid-queryparameter": "Der Abfrageparameter „$1“ muss einen Wert haben.",
+	"reportincident-nonemergency-directreport-header": "Melde den Vorfall den Community-Administratoren",
+	"reportincident-nonemergency-directreport-nextsteps": "Wenn du dieses Problem direkt den Community-Administratoren melden möchtest, fülle bitte das untenstehende Formular aus.",
+	"reportincident-nonemergency-directreport-footer": "Dein Benutzername und deine E-Mail-Adresse werden an die Community-Administratoren gesendet.",
+	"reportincident-nonemergency-directreport-submitsuccess-banner": "Der Bericht wurde zur Prüfung eingereicht. Deine Anfrage wird von den Community-Administratoren geprüft.",
+	"reportincident-nonemergency-directreport-submitsuccess-next-info": "Deine Meldung wurde an die Community-Administratoren weitergeleitet.\n\nDie Community-Administratoren werden sie prüfen und entscheiden, ob der Vorfall gegen die Richtlinien verstößt.",
+	"reportincident-nonemergency-directreport-reportlabel": "Meldung an die Community-Administratoren"
 }

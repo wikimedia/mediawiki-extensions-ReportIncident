@@ -142,6 +142,8 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-description": "A ligazón a unha páxina que explica as normas de supervisión/supresión",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-placeholder": "por exemplo, Proxecto:Supresión",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-help-text": "Esta podería ser a túa páxina de normas local",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-label": "Denuncia directa por correo electrónico",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-description": "As denuncias directas mostran un formulario que o usuario pode encher para enviar unha mensaxe. Por defecto, a mensaxe envíase ao enderezo «stewards-oversight@wikimedia.org». Se queres que estas mensaxes se envíen a outro enderezo, indícao embaixo.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-placeholder": "por exemplo, oversight@en-wpwikipedia.org",
 	"reportincident-nonemergency-sexualharassment-header": "Acoso sexual",
 	"reportincident-nonemergency-sexualharassment-nextstep": "O acoso sexual que se produce no wiki considérase un comportamento inaceptable segundo as [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment normas oficiais].",
@@ -219,5 +221,11 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "por exemplo, incidentes@exemplo.gal",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "por exemplo, Proxecto:A Taberna",
 	"communityconfiguration-reportincident-invalid-usehttps": "O enderezo URL debe usar «https»",
-	"communityconfiguration-reportincident-invalid-queryparameter": "O parámetro de consulta «$1» debe ter un valor"
+	"communityconfiguration-reportincident-invalid-queryparameter": "O parámetro de consulta «$1» debe ter un valor",
+	"reportincident-nonemergency-directreport-header": "Denunciar o incidente á administración da comunidade",
+	"reportincident-nonemergency-directreport-nextsteps": "Se queres denunciar este problema directamente á administración da comunidade, enche o formulario inferior.",
+	"reportincident-nonemergency-directreport-footer": "O teu nome de usuario e enderezo de correo electrónico serán enviados á administración da comunidade.",
+	"reportincident-nonemergency-directreport-submitsuccess-banner": "A denuncia enviouse para a súa revisión. A administración da comunidade examinará a túa solicitude.",
+	"reportincident-nonemergency-directreport-submitsuccess-next-info": "A túa denuncia enviouse á administración da comunidade.\n\nA administración da comunidade revisaraa e determinará se o incidente infrinxe as normas.",
+	"reportincident-nonemergency-directreport-reportlabel": "Denunciar á administración da comunidade"
 }
