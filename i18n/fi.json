@@ -201,5 +201,6 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactadmin-placeholder": "esim. Projekti:Ylläpitäjien ilmoitustaulu",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "esim. ylläpitäjät@esimerkki.fi",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "esim. Projekti:Kahvihuone",
-	"communityconfiguration-reportincident-invalid-usehttps": "URL-osoitteen on käytettävä https:ää"
+	"communityconfiguration-reportincident-invalid-usehttps": "URL-osoitteen on käytettävä https:ää",
+	"reportincident-nonemergency-directreport-reportlabel": "Ilmoita yhteisön ylläpitäjille"
 }

@@ -142,6 +142,8 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-description": "Le ligamine a un pagina que explica le politica de supervision/suppression",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-placeholder": "p.ex. Project:Supervision",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-help-text": "Isto pote esser tu pagina de politica local",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-label": "Signalation directe per e-mail",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-description": "Le signalation directe monstra un formulario que le usator pote completar pro inviar un message. Per predefinition, iste message essera inviate a stewards-oversight@wikimedia.org. Si tu vole que iste messages se invia a un altere adresse de e-mail, adde lo al campo infra.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-placeholder": "p.ex. oversight@ia.wikipedia.example.org",
 	"reportincident-nonemergency-sexualharassment-header": "Molestia sexual",
 	"reportincident-nonemergency-sexualharassment-nextstep": "Le molestia sexual occurrente sur le wiki se considera comportamento inacceptabile secundo le [https://foundation.wikimedia.org/wiki/Policy:Universal_Code_of_Conduct#3.1_%E2%80%93_Harassment politica official].",
@@ -219,5 +221,11 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-email-placeholder": "p.ex. incidentes@example.com",
 	"communityconfiguration-reportincident-reportincident_nonemergency_other_helpmethod-contactcommunity-placeholder": "p.ex. Project:Taverna",
 	"communityconfiguration-reportincident-invalid-usehttps": "URL debe usar https",
-	"communityconfiguration-reportincident-invalid-queryparameter": "Le parametro de consulta ‘$1’ debe haber un valor"
+	"communityconfiguration-reportincident-invalid-queryparameter": "Le parametro de consulta ‘$1’ debe haber un valor",
+	"reportincident-nonemergency-directreport-header": "Signalar le incidente al administratores del communitate",
+	"reportincident-nonemergency-directreport-nextsteps": "Si tu vole signalar iste problema directemente al administratores del communitate, alora per favor completa le formulario sequente.",
+	"reportincident-nonemergency-directreport-footer": "Tu nomine de usator e adresse de e-mail essera inviate al administratores del communitate.",
+	"reportincident-nonemergency-directreport-submitsuccess-banner": "Le reporto ha essite submittite al revision. Tu requesta essera examinate per le administratores del communitate.",
+	"reportincident-nonemergency-directreport-submitsuccess-next-info": "Tu reporto ha essite inviate al administratores del communitate.\n\nLe administratores del communitate lo revidera e determinara si le incidente infringe le politicas.",
+	"reportincident-nonemergency-directreport-reportlabel": "Signalar al administratores del communitate"
 }
