@@ -4,7 +4,7 @@
 			"Toliño"
 		]
 	},
-	"reportincident-desc": "Extensión para o sistema de denuncia de incidentes.",
+	"reportincident-desc": "Extensión para o sistema de notificación de incidentes.",
 	"reportincident-report-btn-label": "Denunciar",
 	"reportincident-dialog-close-btn": "Pechar",
 	"reportincident-dialog-back-btn": "Volver",
@@ -85,12 +85,12 @@
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "Se os pasos anteriores non foron de axuda, {{GENDER:|podes}} contactar coa [[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|organización sen ánimo de lucro]] que aloxa este sitio web.",
 	"reportincident-submit-back-to-page": "Volver á páxina de conversa",
 	"communityconfiguration-reportincident-title": "Sistema de notificación de incidentes",
-	"communityconfiguration-reportincident-description": "Configura as ligazóns locais utilizadas polo fluxo que non é de emerxencia do sistema de notificación de incidentes e xestiona os espazos de nomes nos que está activado o sistema.",
-	"communityconfiguration-reportincident-info-text": "O sistema de notificación de incidentes dirixe os usuarios que envían informes a través do seu fluxo que non é de emerxencia ás páxinas wiki locais axeitadas. Estas poden personalizarse aquí. Se deixas o campo baleiro provocarás que se usen os valores predeterminados da configuración despregada.",
+	"communityconfiguration-reportincident-description": "Configura as ligazóns locais utilizadas polo fluxo non urxente do sistema de notificación de incidentes e xestiona os espazos de nomes nos que está activado o sistema.",
+	"communityconfiguration-reportincident-info-text": "O sistema de notificación de incidentes dirixe os usuarios que envían informes a través do seu fluxo non urxente ás páxinas wiki locais axeitadas. Estas poden personalizarse aquí. Se deixas o campo baleiro provocarás que se usen os valores predeterminados da configuración despregada.",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "Páxina de preguntas da comunidade",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "Unha páxina wiki onde os usuarios poden facer preguntas á comunidade.",
 	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "Páxina de notificación de incidentes locais",
-	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-help-text": "Unha páxina wiki onde os usuarios poden informar de incidencias á administración local.",
+	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-help-text": "Unha páxina wiki onde os usuarios poden informar de incidentes á administración local.",
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-label": "Páxina de resolución de liortas",
 	"communityconfiguration-reportincident-reportincidentdisputeresolutionpage-help-text": "Unha páxina wiki onde os usuarios poden atopar información sobre a resolución de liortas no wiki.",
 	"communityconfiguration-reportincident-reportincidentenablednamespaces-label": "Espazos de nomes activados",
@@ -227,5 +227,9 @@
 	"reportincident-nonemergency-directreport-footer": "O teu nome de usuario e enderezo de correo electrónico serán enviados á administración da comunidade.",
 	"reportincident-nonemergency-directreport-submitsuccess-banner": "A denuncia enviouse para a súa revisión. A administración da comunidade examinará a túa solicitude.",
 	"reportincident-nonemergency-directreport-submitsuccess-next-info": "A túa denuncia enviouse á administración da comunidade.\n\nA administración da comunidade revisaraa e determinará se o incidente infrinxe as normas.",
-	"reportincident-nonemergency-directreport-reportlabel": "Denunciar á administración da comunidade"
+	"reportincident-nonemergency-directreport-reportlabel": "Denunciar á administración da comunidade",
+	"reportincident-directreport-email-subject": "Sistema de notificación de incidentes, denuncia directa non urxente",
+	"reportincident-directreport-email-body": "Usuario denunciante: $1\nUsuario denunciado: $2\n$3: $4\n\nTipo de comportamento inaceptable do usuario: $5\nDetalles: $6\n\nResponder ao usuario denunciante: $7",
+	"reportincident-directreport-send-error": "Non se puido crear a denuncia do incidente. Se o problema persiste, envía un correo electrónico a $1 coa {{GENDER:|túa}} denuncia do incidente.",
+	"reportincident-directreport-featuredisabled-error": "Non se puido crear a denuncia do incidente. O denuncia directa está desactivada."
 }

@@ -231,5 +231,9 @@
 	"reportincident-nonemergency-directreport-footer": "당신의 사용자 이름과 이메일 주소는 커뮤니티 관리자에게 전송됩니다.",
 	"reportincident-nonemergency-directreport-submitsuccess-banner": "신고가 검토를 위해 제출되었습니다. 요청은 커뮤니티 관리자에 의해 검토될 것입니다.",
 	"reportincident-nonemergency-directreport-submitsuccess-next-info": "당신의 신고가 커뮤니티 관리자에게 제출되었습니다.\n\n커뮤니티 관리자가 이 사건을 검토하고 정책에 위반되는지를 결정할 것입니다.",
-	"reportincident-nonemergency-directreport-reportlabel": "커뮤니티 관리자에게 신고"
+	"reportincident-nonemergency-directreport-reportlabel": "커뮤니티 관리자에게 신고",
+	"reportincident-directreport-email-subject": "사고 신고 시스템 비상 상황 외 직접 보고",
+	"reportincident-directreport-email-body": "신고 사용자: $1\n신고된 사용자: $2\n$3: $4\n\n용납되지 않는 사용자 행동 유형: $5\n세부 정보: $6\n\n신고 사용자에게의 응답: $7",
+	"reportincident-directreport-send-error": "사건 보고서를 만들 수 없습니다. 문제가 계속되면, $1(으)로 사건 보고서를 보내주세요.",
+	"reportincident-directreport-featuredisabled-error": "사건 보고서를 만들 수 없습니다. 직접 보고 기능이 비활성화되어 있습니다."
 }

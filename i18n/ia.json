@@ -227,5 +227,9 @@
 	"reportincident-nonemergency-directreport-footer": "Tu nomine de usator e adresse de e-mail essera inviate al administratores del communitate.",
 	"reportincident-nonemergency-directreport-submitsuccess-banner": "Le reporto ha essite submittite al revision. Tu requesta essera examinate per le administratores del communitate.",
 	"reportincident-nonemergency-directreport-submitsuccess-next-info": "Tu reporto ha essite inviate al administratores del communitate.\n\nLe administratores del communitate lo revidera e determinara si le incidente infringe le politicas.",
-	"reportincident-nonemergency-directreport-reportlabel": "Signalar al administratores del communitate"
+	"reportincident-nonemergency-directreport-reportlabel": "Signalar al administratores del communitate",
+	"reportincident-directreport-email-subject": "Systema de reportage de incidentes, reporto directe de non-emergentia",
+	"reportincident-directreport-email-body": "Usator reportante: $1\nUsator reportate: $2\n$3: $4\n\nTypo de comportamento inacceptabile del usator: $5\nDetalios: $6\n\nResponder al usator reportante: $7",
+	"reportincident-directreport-send-error": "Le reporto de incidente non pote esser create. Si iste problema persiste, per favor invia un e-mail a $1 con tu reporto de incidente.",
+	"reportincident-directreport-featuredisabled-error": "Le reporto de incidente non pote esser create. Le reportage directe es disactivate."
 }
