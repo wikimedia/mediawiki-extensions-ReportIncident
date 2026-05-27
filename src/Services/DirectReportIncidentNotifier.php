@@ -110,7 +110,7 @@ class DirectReportIncidentNotifier implements IReportIncidentNotifier {
 		$behaviorCategory = $incidentReport->getBehaviorType();
 		$emailUserLink = $this->titleFactory
 			->newFromTextThrow( 'EmailUser', NS_SPECIAL )
-			->getFullURL( [ 'wpTarget' => $reportingUser->getName() ] );
+			->getFullURL( [ 'wpTarget' => $reportingUser->getName() ], false, PROTO_HTTPS );
 		[ $linkPrefixText, $linkToPageAtRevision ] = $this->getLinkToReportedContent( $incidentReport );
 
 		// Generate the email body with the following parameters passed through:
@@ -161,7 +161,14 @@ class DirectReportIncidentNotifier implements IReportIncidentNotifier {
 			return StatusValue::newFatal( 'reportincident-directreport-featuredisabled-error' );
 		}
 		$sendTo = new MailAddress( $sendTo );
-		$subject = $this->textFormatter->format( new MessageValue( 'reportincident-directreport-email-subject' ) );
+		$subject = $this->textFormatter->format( new MessageValue(
+			'reportincident-directreport-email-subject',
+				[
+					$reportingUser->getName(),
+					date( 'Y-m-d' ),
+					date( 'H:i' )
+				]
+		) );
 
 		$sendEmailStatus = Status::wrap( $this->emailer->send( $sendTo, $sender, $subject, $body ) );
 
@@ -192,7 +199,7 @@ class DirectReportIncidentNotifier implements IReportIncidentNotifier {
 
 		if ( $revision === null ) {
 			$title = $this->titleFactory->newFromPageReference( $incidentReport->getPage() );
-			return [ $linkPrefixText, $title->getFullURL() ];
+			return [ $linkPrefixText, $title->getFullURL( '', false, PROTO_HTTPS ) ];
 		}
 
 		// In theory UrlUtils::expand() could return null, this seems pretty unlikely in practice;

@@ -99,7 +99,10 @@ class DirectReportIncidentNotifierTest extends MediaWikiUnitTestCase {
 				'<text>Direct report</text><text>Special:EmailUser?wpTarget=Reporter</text>' .
 				'</message>';
 
-				$this->assertSame( '<message key="reportincident-directreport-email-subject"></message>', $subject );
+				$this->assertStringContainsString(
+					'<message key="reportincident-directreport-email-subject"><text>Reporter</text>',
+					$subject
+				);
 				$this->assertSame( $expectedBody, $body );
 				return StatusValue::newGood();
 			} );
