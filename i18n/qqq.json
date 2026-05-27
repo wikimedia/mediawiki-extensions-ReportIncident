@@ -322,7 +322,7 @@
 	"reportincident-nonemergency-directreport-submitsuccess-next-info": "Paragraph with informational text shown in the incident report dialog after successfully submitting a report.",
 	"reportincident-nonemergency-directreport-reportlabel": "Label for the textarea input that takes a direct report in the IRS workflow.",
 	"reportincident-nonemergency-directreport-inputempty-error": "Error if a direct report is submitted without a report.",
-	"reportincident-directreport-email-subject": "Subject text of the direct report email",
+	"reportincident-directreport-email-subject": "Subject text of the direct report email\n\nParameters:\n* $1 - Name of reporting user\n* $2 - Date that the report is being sent on\n* $3 - Time the report is being sent at",
 	"reportincident-directreport-email-body": "Body text of the direct report email\n\nParameters:\n* $1 - Name of reporting user\n* $2 - Name of reported user (if available)\n* $3 - Type of link being linked to that the report originated from (page or thread)\n* $4 - Link to revision/thread (if available)\n* $5 - Behavior being reported\n* $6 - The report from the reporting user\n* $7 - Link to the reporting users's Special:EmailUser",
 	"reportincident-directreport-send-error": "Error shown to user when their direct report wasn't sent for any reason.\n\nParameters:\n* $1 - Email to send report to",
 	"reportincident-directreport-featuredisabled-error": "Error shown to user when a direct report was attempted but the feature is disabled or misconfigured."
