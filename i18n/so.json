@@ -22,7 +22,7 @@
 	"reportincident-nonemergency-directreport-submitsuccess-banner": "Warbixinta waa la gudbiyay si loo eego. Codsigaaga waxaa dib u eegi doona maamulayaasha bulshada.",
 	"reportincident-nonemergency-directreport-submitsuccess-next-info": "Warbixintaada waxaa loo gudbiyay maamulayaasha bulshada.\n\nMaamulayaasha bulshada ayaa dib u eegi doona oo go’aamin doona in dhacdadu jabinayso siyaasadaha.",
 	"reportincident-nonemergency-directreport-reportlabel": "U gudbi Maamulayaasha Bulshada",
-	"reportincident-directreport-email-subject": "Nidaamka Warbixinta Dhacdooyinka – warbixin toos ah oo aan degdeg ahayn",
+	"reportincident-directreport-email-subject": "Warbixin IRS oo ka timid $1 taariikhda $2 waqtiga $3",
 	"reportincident-directreport-email-body": "Isticmaalaha warbixinta gudbinaya: $1\nIsticmaalaha la warbixinayo: $2\n$3: $4\n\nNooca dabeecadda aan la aqbali karin ee isticmaalaha: $5\nFaahfaahin: $6\n\nJawaab u dir isticmaalaha warbixinta gudbiyay: $7",
 	"reportincident-directreport-send-error": "Lama abuuri karo warbixintaada dhacdada. Haddii dhibaatadu sii socoto, fadlan iimayl u dir $1 adigoo ku lifaaqaya {{GENDER:|warbixintaada dhacdada}}.",
 	"reportincident-directreport-featuredisabled-error": "Lama abuuri karo warbixintaada dhacdada. Warbixin toos ah waa la damiyay."

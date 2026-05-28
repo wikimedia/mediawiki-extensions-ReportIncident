@@ -228,7 +228,7 @@
 	"reportincident-nonemergency-directreport-submitsuccess-banner": "A denuncia enviouse para a súa revisión. A administración da comunidade examinará a túa solicitude.",
 	"reportincident-nonemergency-directreport-submitsuccess-next-info": "A túa denuncia enviouse á administración da comunidade.\n\nA administración da comunidade revisaraa e determinará se o incidente infrinxe as normas.",
 	"reportincident-nonemergency-directreport-reportlabel": "Denunciar á administración da comunidade",
-	"reportincident-directreport-email-subject": "Sistema de notificación de incidentes, denuncia directa non urxente",
+	"reportincident-directreport-email-subject": "Denuncia de $1 procedente do sistema de notificación de incidentes o $2 ás $3",
 	"reportincident-directreport-email-body": "Usuario denunciante: $1\nUsuario denunciado: $2\n$3: $4\n\nTipo de comportamento inaceptable do usuario: $5\nDetalles: $6\n\nResponder ao usuario denunciante: $7",
 	"reportincident-directreport-send-error": "Non se puido crear a denuncia do incidente. Se o problema persiste, envía un correo electrónico a $1 coa {{GENDER:|túa}} denuncia do incidente.",
 	"reportincident-directreport-featuredisabled-error": "Non se puido crear a denuncia do incidente. O denuncia directa está desactivada."
