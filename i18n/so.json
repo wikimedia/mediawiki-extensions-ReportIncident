@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"AhmedG612"
+		]
+	},
+	"reportincident-dialog-violator-placeholder-text": "Yaa laga soo dacwaynayaa?",
+	"reportincident-dialog-something-else-empty": "Fadlan bixi sharaxaad kooban oo ku saabsan dhaqanka.",
+	"reportincident-submit-emergency-dialog-title": "{{GENDER:|Mahadsanid}} inaad qaaday tallaabooyin lagu hagaajinayo amniga iyo ka mid noqoshada {{SITENAME}}.",
+	"reportincident-submit-emergency-section-next-title": "Maxaa xiga?"
+}
