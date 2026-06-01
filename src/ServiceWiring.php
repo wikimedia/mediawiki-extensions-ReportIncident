@@ -61,7 +61,8 @@ return [
 				$services->getContentLanguageCode()->toString()
 			),
 			$services->getUrlUtils(),
-			$services->getTitleFactory()
+			$services->getTitleFactory(),
+			$services->getUserFactory()
 		);
 	},
 	'ReportIncidentRecorder' => static function ( MediaWikiServices $services ): IReportIncidentRecorder {
