@@ -12,6 +12,7 @@ use MediaWiki\Mail\MailAddress;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\TitleFactory;
+use MediaWiki\User\UserFactory;
 use MediaWiki\Utils\UrlUtils;
 use Psr\Log\LoggerInterface;
 use StatusValue;
@@ -35,6 +36,7 @@ class DirectReportIncidentNotifier implements IReportIncidentNotifier {
 		private readonly ITextFormatter $textFormatter,
 		private readonly UrlUtils $urlUtils,
 		private readonly TitleFactory $titleFactory,
+		private readonly UserFactory $userFactory,
 	) {
 		$serviceOptions->assertRequiredOptions( self::CONSTRUCTOR_OPTIONS );
 	}
@@ -170,7 +172,15 @@ class DirectReportIncidentNotifier implements IReportIncidentNotifier {
 				]
 		) );
 
-		$sendEmailStatus = Status::wrap( $this->emailer->send( $sendTo, $sender, $subject, $body ) );
+		$reporterEmail = $this->userFactory
+			->newFromUserIdentity( $incidentReport->getReportingUser() )
+			->getEmail();
+
+		$sendEmailStatus = Status::wrap(
+			$this->emailer->send(
+				$sendTo, $sender, $subject, $body, null, [ 'replyTo' => new MailAddress( $reporterEmail ) ]
+			)
+		);
 
 		if ( !$sendEmailStatus->isOK() ) {
 			$this->logger->error(

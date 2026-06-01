@@ -340,14 +340,15 @@
 				"reportincident-nonemergency-other-notice",
 				"reportincident-nonemergency-other-nextstep-default",
 				"reportincident-nonemergency-directreport-header",
-				"reportincident-nonemergency-directreport-nextsteps",
 				"reportincident-nonemergency-directreport-footer",
 				"reportincident-nonemergency-directreport-submitsuccess-header",
 				"reportincident-nonemergency-directreport-submitsuccess-banner",
 				"reportincident-nonemergency-directreport-submitsuccess-next-header",
 				"reportincident-nonemergency-directreport-submitsuccess-next-info",
 				"reportincident-nonemergency-directreport-reportlabel",
-				"reportincident-nonemergency-directreport-inputempty-error"
+				"reportincident-nonemergency-directreport-inputempty-error",
+				"reportincident-nonemergency-directreport-requesthelp-1",
+				"reportincident-nonemergency-directreport-requesthelp-2"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg",

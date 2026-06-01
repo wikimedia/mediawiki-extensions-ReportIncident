@@ -14,6 +14,8 @@ use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
+use MediaWiki\User\User;
+use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserIdentityValue;
 use MediaWiki\Utils\UrlUtils;
 use MediaWikiUnitTestCase;
@@ -32,6 +34,7 @@ class DirectReportIncidentNotifierTest extends MediaWikiUnitTestCase {
 	private LoggerInterface $logger;
 	private MediaWikiConfigReader $communityConfigReader;
 	private IEmailer $emailer;
+	private UserFactory $userFactory;
 
 	private DirectReportIncidentNotifier $directReportIncidentNotifier;
 
@@ -40,6 +43,7 @@ class DirectReportIncidentNotifierTest extends MediaWikiUnitTestCase {
 		$this->urlUtils = $this->createMock( UrlUtils::class );
 		$this->logger = $this->createMock( LoggerInterface::class );
 		$this->emailer = $this->createMock( IEmailer::class );
+		$this->userFactory = $this->createMock( UserFactory::class );
 
 		$this->communityConfigReader = $this->createMock( MediaWikiConfigReader::class );
 		$this->communityConfigReader->method( 'get' )
@@ -66,6 +70,12 @@ class DirectReportIncidentNotifierTest extends MediaWikiUnitTestCase {
 			}
 		};
 
+		$user = $this->createMock( User::class );
+		$user->method( 'getEmail' )
+			->willReturn( 'reporter@example.com' );
+		$this->userFactory->method( 'newFromUserIdentity' )
+			->willReturn( $user );
+
 		$this->directReportIncidentNotifier = new DirectReportIncidentNotifier(
 			new HashConfig( [
 				'PasswordSender' => 'foo@example.com'
@@ -78,7 +88,8 @@ class DirectReportIncidentNotifierTest extends MediaWikiUnitTestCase {
 			$this->emailer,
 			$formatter,
 			$this->urlUtils,
-			$this->titleFactory
+			$this->titleFactory,
+			$this->userFactory
 
 		);
 	}
@@ -88,7 +99,7 @@ class DirectReportIncidentNotifierTest extends MediaWikiUnitTestCase {
 
 		$this->emailer->expects( $this->once() )
 			->method( 'send' )
-			->willReturnCallback( function ( $sendTo, $sender, $subject, $body ) {
+			->willReturnCallback( function ( $sendTo, $sender, $subject, $body, $bodyHtml, $params ) {
 				$this->assertSame( 'bar@example.com', $sendTo->address );
 				$this->assertStringContainsString( 'foo@example.com', $sender->toString() );
 				$expectedBody = '<message key="reportincident-directreport-email-body">' .
@@ -104,6 +115,7 @@ class DirectReportIncidentNotifierTest extends MediaWikiUnitTestCase {
 					$subject
 				);
 				$this->assertSame( $expectedBody, $body );
+				$this->assertSame( 'reporter@example.com', $params['replyTo']->address );
 				return StatusValue::newGood();
 			} );
 		$this->logger->expects( $this->once() )
