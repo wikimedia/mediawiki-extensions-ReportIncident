@@ -399,7 +399,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-intimidation-header',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-intimidation-nextstep-configured',
-					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-directreport-requesthelp-1',
+					'reportincident-nonemergency-directreport-requesthelp-2',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -478,7 +479,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-doxing-header',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-doxing-nextsteps-configured',
-					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-directreport-requesthelp-1',
+					'reportincident-nonemergency-directreport-requesthelp-2',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -521,7 +523,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-sexualharassment-header',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-sexualharassment-nextstep',
-					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-directreport-requesthelp-1',
+					'reportincident-nonemergency-directreport-requesthelp-2',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -564,7 +567,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-trolling-header',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-trolling-nextstep',
-					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-directreport-requesthelp-1',
+					'reportincident-nonemergency-directreport-requesthelp-2',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -604,7 +608,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-hatespeech-header',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-hatespeech-nextstep',
-					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-directreport-requesthelp-1',
+					'reportincident-nonemergency-directreport-requesthelp-2',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -646,7 +651,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-spam-header',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-spam-nextsteps-configured',
-					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-directreport-requesthelp-1',
+					'reportincident-nonemergency-directreport-requesthelp-2',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -711,7 +717,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-dialog-harassment-type-sockpuppetry',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-sockpuppetry-nextstep-default',
-					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-directreport-requesthelp-1',
+					'reportincident-nonemergency-directreport-requesthelp-2',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -754,7 +761,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-dialog-harassment-type-vandalism',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-vandalism-nextstep-default',
-					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-directreport-requesthelp-1',
+					'reportincident-nonemergency-directreport-requesthelp-2',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -797,7 +805,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-dialog-harassment-type-userdispute',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-userdispute-nextstep-default',
-					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-directreport-requesthelp-1',
+					'reportincident-nonemergency-directreport-requesthelp-2',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -840,7 +849,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-dialog-harassment-type-disruptiveediting',
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-disruptiveediting-nextstep-default',
-					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-directreport-requesthelp-1',
+					'reportincident-nonemergency-directreport-requesthelp-2',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}
@@ -883,7 +893,8 @@ describe( 'NonEmergencySubmitSuccessStep', () => {
 					'reportincident-nonemergency-generic-description',
 					'reportincident-nonemergency-other-notice',
 					'reportincident-nonemergency-other-nextstep-default',
-					'reportincident-nonemergency-directreport-nextsteps',
+					'reportincident-nonemergency-directreport-requesthelp-1',
+					'reportincident-nonemergency-directreport-requesthelp-2',
 					'reportincident-nonemergency-generic-nextstep-otheraction'
 				]
 			}

@@ -21,10 +21,21 @@
 			:key="key"
 			v-html="paragraph"
 		></p>
+		<h3 class="ext-reportincident-dialog__submit-success-section-header">
+			{{ $i18n( 'reportincident-nonemergency-requesthelp-header' ).text() }}
+		</h3>
 		<template v-if="isDirectReportingCategory">
-			<p>
-				{{ $i18n( 'reportincident-nonemergency-directreport-nextsteps' ).text() }}
-			</p>
+			<ul>
+				<li>
+					{{ $i18n( 'reportincident-nonemergency-directreport-requesthelp-1' ).text() }}
+				</li>
+				<li
+					v-html="$i18n(
+						'reportincident-nonemergency-directreport-requesthelp-2',
+						...directReportMethodParams
+					).parse()"
+				></li>
+			</ul>
 			<form id="directreporting-form" class="ext-reportincident-dialog-nonemergency">
 				<cdx-field
 					class="ext-reportincident-dialog-nonemergency__direct-report"
@@ -47,18 +58,12 @@
 			</form>
 		</template>
 		<template v-else>
-			<!-- eslint-enable vue/no-v-html-->
-			<h3 class="ext-reportincident-dialog__submit-success-section-header">
-				{{ $i18n( 'reportincident-nonemergency-requesthelp-header' ).text() }}
-			</h3>
 			<ul>
-				<!-- eslint-disable vue/no-v-html-->
 				<li
 					v-for="( helpMethod, key ) in validNonEmergencyHelpMethods"
 					:key="key"
 					v-html="helpMethod"
 				></li>
-				<!-- eslint-enable vue/no-v-html-->
 			</ul>
 		</template>
 		<h3 class="ext-reportincident-dialog__submit-success-section-header">
@@ -92,6 +97,7 @@ module.exports = exports = {
 		const directReportCharacterLimit = Constants.detailsCodepointLimit;
 		const {
 			isDirectReportingCategory,
+			directReportMethodParams,
 			validNonEmergencyHelpMethods,
 			directReportTextInput,
 			shouldShowDirectReportFormValidationError,
@@ -178,6 +184,7 @@ module.exports = exports = {
 			nextStepMsg,
 			validNonEmergencyHelpMethods,
 			isDirectReportingCategory,
+			directReportMethodParams,
 			directReportFormStatus,
 			shouldShowDirectReportFormValidationError,
 			directReportCharacterLimit,

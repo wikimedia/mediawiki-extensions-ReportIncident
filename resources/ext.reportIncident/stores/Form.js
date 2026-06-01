@@ -33,6 +33,13 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 	const isDirectReportingCategory = ref( false );
 
 	/**
+	 * The email the direct report will be sent to. While this is only used by
+	 * NonEmergencySubmitSuccessStep, it's calculated as part of the store's
+	 * isDirectReportingCategory calculation so save it here to avoid a re-calc.
+	 */
+	const directReportMethodParams = ref( [] );
+
+	/**
 	 * Since the form is only validated on submit and the submit button exists
 	 * in the parent component, store a flag whether or not any validation errors
 	 * should be displayed for the direct report form
@@ -125,6 +132,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 					mw.config.get( 'wgReportIncidentEnableDirectReporting' )
 				) {
 					isDirectReportingCategory.value = true;
+					directReportMethodParams.value = msgParams;
 				}
 			}
 		}
@@ -401,6 +409,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		inputDetails.value = '';
 		inputSomethingElseDetails.value = '';
 		isDirectReportingCategory.value = false;
+		directReportMethodParams.value = [];
 		validNonEmergencyHelpMethods.value = [];
 		directReportTextInput.value = '';
 		shouldShowDirectReportFormValidationError.value = false;
@@ -431,6 +440,7 @@ const useFormStore = Pinia.defineStore( 'form', () => {
 		inputDetails,
 		inputSomethingElseDetails,
 		isDirectReportingCategory,
+		directReportMethodParams,
 		validNonEmergencyHelpMethods,
 		directReportTextInput,
 		isDirectReportFormValid,
