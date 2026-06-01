@@ -3,23 +3,21 @@ const useInstrument = require( '../../resources/ext.reportIncident/composables/u
 const useFormStore = require( '../../resources/ext.reportIncident/stores/Form.js' );
 
 describe( 'useInstrument', () => {
-	let submitInteraction;
-	let newInstrument;
-	let send;
+	let instrumentSend;
+	let getInstrument;
+	let experimentSend;
 	let getExperiment;
 
 	beforeAll( () => {
-		submitInteraction = jest.fn();
-		newInstrument = jest.fn( () => ( {
-			submitInteraction
+		instrumentSend = jest.fn();
+		getInstrument = jest.fn( () => ( {
+			send: instrumentSend
 		} ) );
-		mw.eventLog = { newInstrument };
-
-		send = jest.fn();
+		experimentSend = jest.fn();
 		getExperiment = jest.fn( () => ( {
-			send
+			send: experimentSend
 		} ) );
-		mw.testKitchen = { getExperiment };
+		mw.testKitchen = { getInstrument, getExperiment };
 
 	} );
 
@@ -71,24 +69,23 @@ describe( 'useInstrument', () => {
 		expect( mwConfigGet ).toHaveBeenCalledTimes( 3 );
 		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentEnableInstrumentation' );
 
-		expect( newInstrument ).toHaveBeenCalledTimes( 1 );
-		expect( newInstrument ).toHaveBeenCalledWith(
-			'mediawiki.product_metrics.incident_reporting_system_interaction',
-			'/analytics/product_metrics/web/base/1.3.0'
+		expect( getInstrument ).toHaveBeenCalledTimes( 1 );
+		expect( getInstrument ).toHaveBeenCalledWith(
+			'incident-reporting-system-interaction-instrument'
 		);
 
-		expect( submitInteraction ).toHaveBeenCalledTimes( 3 );
-		expect( submitInteraction ).toHaveBeenNthCalledWith( 1, 'view', {
+		expect( instrumentSend ).toHaveBeenCalledTimes( 3 );
+		expect( instrumentSend ).toHaveBeenNthCalledWith( 1, 'view', {
 			// eslint-disable-next-line camelcase
 			funnel_entry_token: store.funnelEntryToken
 		} );
-		expect( submitInteraction ).toHaveBeenNthCalledWith( 2, 'click', {
+		expect( instrumentSend ).toHaveBeenNthCalledWith( 2, 'click', {
 			// eslint-disable-next-line camelcase
 			action_context: 'something',
 			// eslint-disable-next-line camelcase
 			funnel_entry_token: store.funnelEntryToken
 		} );
-		expect( submitInteraction ).toHaveBeenNthCalledWith( 3, 'click', {
+		expect( instrumentSend ).toHaveBeenNthCalledWith( 3, 'click', {
 			// eslint-disable-next-line camelcase
 			action_source: 'form',
 			// eslint-disable-next-line camelcase
@@ -128,8 +125,8 @@ describe( 'useInstrument', () => {
 
 		logEvent( 'view' );
 
-		expect( submitInteraction ).toHaveBeenCalledTimes( 1 );
-		expect( submitInteraction ).toHaveBeenCalledWith( 'view', {
+		expect( instrumentSend ).toHaveBeenCalledTimes( 1 );
+		expect( instrumentSend ).toHaveBeenCalledWith( 'view', {
 			// eslint-disable-next-line camelcase
 			funnel_entry_token: 'test'
 		} );
@@ -168,8 +165,8 @@ describe( 'useInstrument', () => {
 		expect( typeof ( store.funnelEntryToken ) ).toEqual( 'string' );
 		expect( store.funnelEntryToken.length ).toBeGreaterThan( 0 );
 
-		expect( submitInteraction ).toHaveBeenCalledTimes( 1 );
-		expect( submitInteraction ).toHaveBeenCalledWith( 'view', {
+		expect( instrumentSend ).toHaveBeenCalledTimes( 1 );
+		expect( instrumentSend ).toHaveBeenCalledWith( 'view', {
 			// eslint-disable-next-line camelcase
 			funnel_entry_token: store.funnelEntryToken
 		} );
@@ -203,8 +200,8 @@ describe( 'useInstrument', () => {
 
 		logEvent( 'view' );
 
-		expect( submitInteraction ).toHaveBeenCalledTimes( 1 );
-		expect( submitInteraction ).toHaveBeenCalledWith( 'view', {
+		expect( instrumentSend ).toHaveBeenCalledTimes( 1 );
+		expect( instrumentSend ).toHaveBeenCalledWith( 'view', {
 			// eslint-disable-next-line camelcase
 			funnel_entry_token: store.funnelEntryToken,
 			// eslint-disable-next-line camelcase
@@ -237,7 +234,7 @@ describe( 'useInstrument', () => {
 		useInstrument();
 		useInstrument();
 
-		expect( newInstrument.mock.calls.length ).toBeLessThanOrEqual( 1 );
+		expect( getInstrument.mock.calls.length ).toBeLessThanOrEqual( 1 );
 	} );
 
 	it( 'should truncate overly long context values', () => {
@@ -268,14 +265,14 @@ describe( 'useInstrument', () => {
 		logEvent( 'view', { context: 'test' } );
 		logEvent( 'view', { context: 'e'.repeat( 512 ) } );
 
-		expect( submitInteraction ).toHaveBeenCalledTimes( 2 );
-		expect( submitInteraction ).toHaveBeenNthCalledWith( 1, 'view', {
+		expect( instrumentSend ).toHaveBeenCalledTimes( 2 );
+		expect( instrumentSend ).toHaveBeenNthCalledWith( 1, 'view', {
 			// eslint-disable-next-line camelcase
 			action_context: 'test',
 			// eslint-disable-next-line camelcase
 			funnel_entry_token: store.funnelEntryToken
 		} );
-		expect( submitInteraction ).toHaveBeenNthCalledWith( 2, 'view', {
+		expect( instrumentSend ).toHaveBeenNthCalledWith( 2, 'view', {
 			// eslint-disable-next-line camelcase
 			action_context: 'e'.repeat( 200 ),
 			// eslint-disable-next-line camelcase
@@ -317,8 +314,8 @@ describe( 'useInstrument', () => {
 		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentEnableInstrumentation' );
 		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentE2ETesterUsers' );
 
-		expect( newInstrument ).not.toHaveBeenCalled();
-		expect( submitInteraction ).not.toHaveBeenCalled();
+		expect( getInstrument ).not.toHaveBeenCalled();
+		expect( instrumentSend ).not.toHaveBeenCalled();
 	} );
 
 	it( 'should not record events if not enabled', () => {
@@ -353,7 +350,7 @@ describe( 'useInstrument', () => {
 		expect( mwConfigGet ).toHaveBeenCalledTimes( 2 );
 		expect( mwConfigGet ).toHaveBeenCalledWith( 'wgReportIncidentEnableInstrumentation' );
 
-		expect( newInstrument ).not.toHaveBeenCalled();
-		expect( submitInteraction ).not.toHaveBeenCalled();
+		expect( getInstrument ).not.toHaveBeenCalled();
+		expect( instrumentSend ).not.toHaveBeenCalled();
 	} );
 } );

@@ -42,7 +42,9 @@ const useInstrument = () => {
 		// Disable instrumentation by default pending approval (T372823).
 		!mw.config.get( 'wgReportIncidentEnableInstrumentation' ) ||
 		// Ignore instrumentation if the user is a tester (T414213)
-		mw.config.get( 'wgReportIncidentE2ETesterUsers' ).includes( mw.user.getName() )
+		mw.config.get( 'wgReportIncidentE2ETesterUsers' ).includes( mw.user.getName() ) ||
+		// Testkitchen is not available
+		( !mw.testKitchen )
 	) {
 		return () => {};
 	}
@@ -50,9 +52,8 @@ const useInstrument = () => {
 	// Reuse the underlying Metrics Platform instrument independently of form state
 	// to preserve event sequence positions.
 	if ( !instrument ) {
-		instrument = mw.eventLog.newInstrument(
-			'mediawiki.product_metrics.incident_reporting_system_interaction',
-			'/analytics/product_metrics/web/base/1.3.0'
+		instrument = mw.testKitchen.getInstrument(
+			'incident-reporting-system-interaction-instrument'
 		);
 	}
 	if ( !experimentPromise ) {
@@ -96,7 +97,7 @@ const useInstrument = () => {
 			interactionData.funnel_name = funnelName.value;
 		}
 
-		instrument.submitInteraction( action, interactionData );
+		instrument.send( action, interactionData );
 		if ( experimentPromise ) {
 			// manually add funnel_event_sequence_position, as it's
 			// not built into experiments like it is in instruments
