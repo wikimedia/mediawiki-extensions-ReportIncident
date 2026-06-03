@@ -229,7 +229,6 @@
 	"communityconfiguration-reportincident-invalid-usehttps": "URL https kullanmalıdır",
 	"communityconfiguration-reportincident-invalid-queryparameter": "'$1' sorgu parametresinin bir değeri olmalıdır",
 	"reportincident-nonemergency-directreport-header": "Olayı topluluk yöneticilerine bildirin",
-	"reportincident-nonemergency-directreport-nextsteps": "Bu sorunu doğrudan topluluk yöneticilerine bildirmek istiyorsanız lütfen aşağıdaki formu doldurun.",
 	"reportincident-nonemergency-directreport-footer": "Kullanıcı adınız ve e-posta adresiniz topluluk yöneticilerine gönderilecektir.",
 	"reportincident-nonemergency-directreport-submitsuccess-banner": "Rapor incelenmek üzere gönderildi. İsteğiniz topluluk yöneticileri tarafından incelenecektir.",
 	"reportincident-nonemergency-directreport-submitsuccess-next-info": "Raporunuz topluluk yöneticilerine gönderildi.\n\nTopluluk yöneticileri bunu inceleyecek ve olayın politikaları ihlal edip etmediğini belirleyecektir.",

@@ -3,6 +3,7 @@
 		"authors": [
 			"MathXplore",
 			"Shirayuki",
+			"Tensama0415",
 			"Waki285"
 		]
 	},
@@ -10,9 +11,9 @@
 	"reportincident-report-btn-label": "報告",
 	"reportincident-dialog-close-btn": "閉じる",
 	"reportincident-dialog-back-btn": "戻る",
-	"reportincident-dialog-submit-btn": "送信",
+	"reportincident-dialog-submit-btn": "報告を送信する",
 	"reportincident-dialog-harassment-type-label": "どのような行動ですか？",
-	"reportincident-dialog-additional-details-input-label": "追加の詳細",
+	"reportincident-dialog-additional-details-input-label": "追加情報",
 	"reportincident-dialog-additional-details-input-placeholder": "レビュー担当者にとって役立つ可能性のあるコンテキストを追加します。インシデントを強調するリンクを含めることができます。",
 	"reportincident-dialog-optional-label": "(省略可能)",
 	"reportincident-dialog-violator-label": "報告したい利用者",

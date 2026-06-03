@@ -225,7 +225,6 @@
 	"communityconfiguration-reportincident-invalid-usehttps": "De URL moet https gebruiken.",
 	"communityconfiguration-reportincident-invalid-queryparameter": "De zoekparameter '$1' moet een waarde hebben",
 	"reportincident-nonemergency-directreport-header": "Meld het incident aan de beheerders van de gemeenschap",
-	"reportincident-nonemergency-directreport-nextsteps": "Als u dit probleem rechtstreeks aan de gemeenschapsbeheerders wilt melden, kunt u onderstaand formulier invullen.",
 	"reportincident-nonemergency-directreport-footer": "Uw gebruikersnaam en e-mailadres worden naar de gemeenschapsbeheerders gestuurd.",
 	"reportincident-nonemergency-directreport-submitsuccess-banner": "De melding is ter beoordeling ingediend. Uw verzoek wordt door de gemeenschapsbeheerders bekeken.",
 	"reportincident-nonemergency-directreport-submitsuccess-next-info": "Uw melding is ingediend bij de gemeenschapsbeheerders. De gemeenschapsbeheerders beoordelen de melding en stellen vast of het incident in strijd is met het beleid.",
