@@ -6,7 +6,8 @@
 			"Sakblue",
 			"SaldırganSincap",
 			"Leo",
-			"LisafBia"
+			"LisafBia",
+			"HakanIST"
 		]
 	},
 	"reportincident-desc": "Olay Bildirim Sistemi uzantısı.",
@@ -41,6 +42,15 @@
 	"reportincident-dialog-engage-header": "Diyaloğa nasıl girilir",
 	"reportincident-dialog-engage-text": "Eğer kendinizi güvende hissediyorsanız sizi rahatsız eden kişiyle konuşmayı deneyebilirsiniz. Bu kişileri, Vikipedi'deki Evrensel Davranış Kuralları hakkında ve davranışlarının kabul edilemez olduğu konusunda bilgilendirin. Bu durum, bazen tacizin durdurulmasına yardımcı olabilir.",
 	"reportincident-dialog-admin-review": "Raporunuz incelenmek üzere [$1 bir hizmetliye] gönderilecek",
+	"reportincident-dialog-harassment-empty": "En az bir davranış türü {{GENDER:|seçmelisiniz}}.",
+	"reportincident-dialog-something-else-empty": "Lütfen davranışın kısa bir açıklamasını yazın.",
+	"reportincident-dialog-server-error": "Üzgünüz, sunucumuz yanıt vermiyor gibi görünüyor. Lütfen yeniden göndermeyi deneyin.",
+	"reportincident-dialog-generic-error": "Bir hata nedeniyle {{GENDER:|isteğiniz}} gönderilemedi. Lütfen yeniden göndermeyi deneyin.",
 	"right-reportincident": "Bir olayı bildirin",
-	"action-reportincident": "bir olayı bildirme"
+	"action-reportincident": "bir olayı bildirme",
+	"reportincident-emaildialog-title": "Doğrulanmış e-posta adresi gerekli",
+	"reportincident-emaildialog-close-button": "İptal",
+	"reportincident-emaildialog-content": "Rapor hakkında güncellemeler sağlamak veya gerekirse takip etmek için doğrulanmış e-posta {{GENDER:|adresinize}} ihtiyacımız var. Lütfen rapor göndermeden önce kullanıcı hesabı {{GENDER:|ayarlarınızdan}} e-posta adresinizi ekleyin veya doğrulayın.",
+	"reportincident-emaildialog-primary": "Ayarlara git",
+	"reportincident-confirmedemail-required": "Olay raporu göndermek için onaylanmış bir e-posta adresi gereklidir."
 }

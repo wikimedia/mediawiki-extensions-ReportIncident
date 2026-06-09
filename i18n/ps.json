@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"شاه زمان پټان"
+		]
+	},
+	"reportincident-report-btn-label": "راپور",
+	"reportincident-dialog-close-btn": "تړل",
+	"reportincident-dialog-back-btn": "پر شا کېدل",
+	"reportincident-dialog-optional-label": "(اختياري)",
+	"reportincident-dialog-harassment-type-sexual-harassment": "جنسي ځورونه",
+	"reportincident-dialog-harassment-type-something-else": "بل څه",
+	"reportincident-emaildialog-close-button": "ناگارل",
+	"reportincident-emaildialog-primary": "اوڼنو ته ورتلل"
+}
