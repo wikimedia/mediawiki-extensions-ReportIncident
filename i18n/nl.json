@@ -234,5 +234,5 @@
 	"reportincident-directreport-email-subject": "IRS-melding van $1 op $2 om $3",
 	"reportincident-directreport-email-body": "Gemeld door: $1 \nGemeld over: $2 \n$3: $4 \n\nType onacceptabel gebruikersgedrag: $5 \nDetails: $6 \n\nReageren op de meldende gebruiker: $7",
 	"reportincident-directreport-send-error": "Het lukt niet om uw incidentmelding aan te maken. Als het probleem zich blijft voordoen, stuur dan een e-mail naar $1 met uw incidentmelding.",
-	"reportincident-directreport-featuredisabled-error": "Het lukt niet om een incidentmelding aan te maken. Direct rapporteren is uitgeschakeld."
+	"reportincident-directreport-featuredisabled-error": "Het lukt niet om een incidentmelding aan te maken. Direct melden is uitgeschakeld."
 }
