@@ -33,7 +33,6 @@
 	"reportincident-dialog-server-error": "দুঃখিত, মনে হচ্ছে আমাদের সার্ভার সাড়া দিচ্ছে না। অনুগ্রহ করে পুনরায় জমা দেওয়ার চেষ্টা করুন।",
 	"reportincident-dialog-generic-error": "{{GENDER:|আপনার}} অনুরোধ একটি ত্রুটির কারণে জমা দেওয়া যায়নি। অনুগ্রহ করে পুনরায় জমা দেওয়ার চেষ্টা করুন।",
 	"reportincident-unable-to-send": "ঘটনার প্রতিবেদন তৈরি করা যাচ্ছে না। যদি সমস্যাটি ঘটতেই থাকে, তাহলে অনুগ্রহ করে ঘটনার বিস্তারিত উল্লেখ করে  emergency@wikimedia.org ঠিকানায় ইমেল করুন।",
-	"reportincident-notification-link-to-page-prefix": "পাতার সাথে সংযুক্ত করুন",
 	"right-reportincident": "কোন ঘটনা সম্পর্কে অভিযোগ দায়ের করুন",
 	"action-reportincident": "কোন ঘটনার অভিযোগ দায়ের করুন",
 	"reportincident-emaildialog-title": "যাচাইকৃত ইমেইল ঠিকানা প্রয়োজন",
