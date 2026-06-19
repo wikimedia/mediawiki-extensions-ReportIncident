@@ -7,7 +7,8 @@
 			"Essex Igyan",
 			"Julia Kieserman",
 			"Nemoralis",
-			"Woytecr"
+			"Woytecr",
+			"Raymond"
 		]
 	},
 	"reportincident-desc": "{{desc|name=ReportIncident|url=https://www.mediawiki.org/wiki/Extension:ReportIncident}}",
@@ -38,9 +39,9 @@
 	"reportincident-dialog-server-error": "Error message shown to the user when they attempt to submit the form but the server has an error (status code of 5XX).",
 	"reportincident-dialog-generic-error": "Error message shown to the user when they attempt to submit the form but the submission fails and no other specific message is defined.",
 	"reportincident-unable-to-send": "Error message sent back via the REST API if creating an incident report fails.",
-	"reportincident-notification-link-to-page-prefix": "{{notranslate}}",
-	"reportincident-notification-link-to-comment-prefix": "{{notranslate}}",
-	"reportincident-notification-link-to-topic-prefix": "{{notranslate}}",
+	"reportincident-notification-link-to-page-prefix": "{{notranslate}}\nbecause the message is intended to be only ever seen by T&S.",
+	"reportincident-notification-link-to-comment-prefix": "{{notranslate}}\nbecause the message is intended to be only ever seen by T&S.",
+	"reportincident-notification-link-to-topic-prefix": "{{notranslate}}\nbecause the message is intended to be only ever seen by T&S.",
 	"reportincident-notification-message-body": "{{notranslate}}",
 	"right-reportincident": "{{doc-right|reportincident}}",
 	"action-reportincident": "{{doc-action|reportincident}}",
