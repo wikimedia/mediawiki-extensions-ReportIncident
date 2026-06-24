@@ -11,6 +11,7 @@ use MediaWiki\Output\OutputPage;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat;
 
 /**
  * Controls whether the reporting links and dialog should be shown.
@@ -82,8 +83,8 @@ class ReportIncidentController {
 			return false;
 		}
 
-		$now = (int)ConvertibleTimestamp::now();
-		$registrationTime = (int)$user->getRegistration();
+		$now = ConvertibleTimestamp::time();
+		$registrationTime = (int)ConvertibleTimestamp::convert( TimestampFormat::UNIX, $user->getRegistration() );
 		$reportIncidentMinimumAccountAgeInSeconds = $this->config->get( 'ReportIncidentMinimumAccountAgeInSeconds' );
 		if ( $registrationTime &&
 			$reportIncidentMinimumAccountAgeInSeconds &&

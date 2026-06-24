@@ -26,6 +26,7 @@ use Wikimedia\Message\MessageValue;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\ParamValidator\TypeDef\StringDef;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat;
 
 /**
  * REST handler for /reportincident/v0/report
@@ -121,8 +122,8 @@ class ReportHandler extends SimpleHandler {
 
 		$isDeveloperMode = $this->config->get( 'ReportIncidentDeveloperMode' );
 
-		$now = (int)ConvertibleTimestamp::now();
-		$registrationTime = (int)$user->getRegistration();
+		$now = ConvertibleTimestamp::time();
+		$registrationTime = (int)ConvertibleTimestamp::convert( TimestampFormat::UNIX, $user->getRegistration() );
 		$reportIncidentMinimumAccountAgeInSeconds = $this->config->get( 'ReportIncidentMinimumAccountAgeInSeconds' );
 		if ( $registrationTime &&
 			$reportIncidentMinimumAccountAgeInSeconds &&

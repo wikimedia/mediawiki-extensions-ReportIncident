@@ -155,12 +155,12 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			->willReturn( $editCount );
 		$mockUser->method( 'getBlock' )
 			->willReturn( $isBlocked ? $this->createMock( Block::class ) : null );
-		$accountAge = $accountAgeOverMinimum ? 0 : (int)ConvertibleTimestamp::now();
+		$accountAge = $accountAgeOverMinimum ? '20220405060708' : ConvertibleTimestamp::now();
 		$mockUser->method( 'getRegistration' )
 			->willReturn( $accountAge );
 
 		$objectUnderTest = $this->newReportIncidentController( [
-			'ReportIncidentMinimumAccountAgeInSeconds' => (int)ConvertibleTimestamp::now() - 86400,
+			'ReportIncidentMinimumAccountAgeInSeconds' => 86400,
 			'ReportIncidentDeveloperMode' => false,
 			'ReportIncidentIsStaggeredRollout' => false,
 			'ReportIncidentEnableDirectReporting' => false,
@@ -201,7 +201,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 		$mockUser->method( 'getBlock' )
 			->willReturn( null );
 		$mockUser->method( 'getRegistration' )
-			->willReturn( 0 );
+			->willReturn( '20250403020100' );
 
 		$mockExperiment = $this->createMock( Experiment::class );
 		$mockExperiment->method( 'isAssignedGroup' )
@@ -211,7 +211,7 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			->willReturn( $mockExperiment );
 		$objectUnderTest = $this->newReportIncidentController(
 			[
-				'ReportIncidentMinimumAccountAgeInSeconds' => (int)ConvertibleTimestamp::now() - 86400,
+				'ReportIncidentMinimumAccountAgeInSeconds' => 86400,
 				'ReportIncidentDeveloperMode' => false,
 				'ReportIncidentIsStaggeredRollout' => $isExperimentRunning,
 				'ReportIncidentEnableDirectReporting' => false,
@@ -252,12 +252,11 @@ class ReportIncidentControllerTest extends MediaWikiUnitTestCase {
 			->willReturn( 0 );
 		$mockUser->method( 'getBlock' )
 			->willReturn( $this->createMock( Block::class ) );
-		$accountAge = (int)ConvertibleTimestamp::now();
 		$mockUser->method( 'getRegistration' )
-			->willReturn( $accountAge );
+			->willReturn( ConvertibleTimestamp::now() );
 
 		$objectUnderTest = $this->newReportIncidentController( [
-			'ReportIncidentMinimumAccountAgeInSeconds' => (int)ConvertibleTimestamp::now(),
+			'ReportIncidentMinimumAccountAgeInSeconds' => 300,
 			'ReportIncidentDeveloperMode' => $isDeveloperMode,
 			'ReportIncidentIsStaggeredRollout' => false,
 			'ReportIncidentEnableDirectReporting' => false,
