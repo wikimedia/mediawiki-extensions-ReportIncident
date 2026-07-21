@@ -18,4 +18,12 @@ $( () => {
 
 	mw.hook( 'discussionToolsOverflowMenuOnChoose' )
 		.add( reportIncidentApp.discussionToolsOverflowMenuOnChooseHandler );
+
+	// DiscussionTools no longer renders the item id as a DOM id, so tag our
+	// thread menu item with a stable class for styling and tests.
+	mw.hook( 'discussionToolsOverflowMenuOnAddItem' ).add( ( id, menuItem ) => {
+		if ( id === 'reportincident' ) {
+			menuItem.$element.addClass( 'ext-reportincident-thread-link' );
+		}
+	} );
 } );

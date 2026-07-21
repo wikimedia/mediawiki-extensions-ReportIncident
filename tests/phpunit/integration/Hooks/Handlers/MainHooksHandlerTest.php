@@ -1,23 +1,26 @@
 <?php
 declare( strict_types=1 );
 
-namespace MediaWiki\Extension\ReportIncident\Tests\Unit;
+namespace MediaWiki\Extension\ReportIncident\Tests\Integration\Hooks\Handlers;
 
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Extension\ReportIncident\Hooks\Handlers\MainHooksHandler;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
+use MediaWiki\Extension\TestKitchen\Sdk\Instrument;
+use MediaWiki\Extension\TestKitchen\Sdk\InstrumentManager;
 use MediaWiki\Message\Message;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
-use MediaWikiUnitTestCase;
+use MediaWiki\User\User;
+use MediaWikiIntegrationTestCase;
 
 /**
  * @group ReportIncident
  *
  * @covers \MediaWiki\Extension\ReportIncident\Hooks\Handlers\MainHooksHandler
  */
-class MainHooksHandlerTest extends MediaWikiUnitTestCase {
+class MainHooksHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function testOnBeforePageLoadCommunityConfigurationMessages() {
 		$outputPageMock = $this->createMock( OutputPage::class );
@@ -118,6 +121,7 @@ class MainHooksHandlerTest extends MediaWikiUnitTestCase {
 		$mockReportIncidentController->expects( $this->never() )
 			->method( 'addModulesAndConfigVars' );
 
+		$this->expectExposureInstrumentation( false );
 		$objectUnderTest = new MainHooksHandler( $mockReportIncidentController );
 		$sidebar = [];
 		$objectUnderTest->$method( $mockSkin, $sidebar );
@@ -178,6 +182,8 @@ class MainHooksHandlerTest extends MediaWikiUnitTestCase {
 
 	/** @dataProvider provideToolLinksAddedWhenCorrectNamespaceAndSkin */
 	public function testToolLinksAddedWhenDisplayingButton( $method, $expectedSidebar ) {
+		$this->expectExposureInstrumentation( $method === 'onSkinTemplateNavigation__Universal' );
+
 		// Mock the Skin object that will be provided as an argument to the method under test.
 		$mockSkin = $this->createMock( Skin::class );
 		// Mock the skin name to be 'minerva' as both methods add items for that skin.
@@ -189,6 +195,7 @@ class MainHooksHandlerTest extends MediaWikiUnitTestCase {
 			->willReturn( $mockOutput );
 		// Mock the IContextSource returned by Skin::getContext
 		$mockContext = $this->createMock( IContextSource::class );
+		$mockContext->method( 'getUser' )->willReturn( $this->createMock( User::class ) );
 		$mockSkin->method( 'getContext' )
 			->willReturn( $mockContext );
 		// Create a mock Message object to always be returned by Skin::msg.
@@ -252,5 +259,29 @@ class MainHooksHandlerTest extends MediaWikiUnitTestCase {
 				]
 			],
 		];
+	}
+
+	private function expectExposureInstrumentation( bool $shouldSend ): void {
+		// Do nothing if TestKitchen isn't enabled
+		if ( !$this->getServiceContainer()->getService( 'ExtensionRegistry' )->isLoaded( 'TestKitchen' ) ) {
+			return;
+		}
+
+		$mockInstrument = $this->createMock( Instrument::class );
+		if ( $shouldSend ) {
+			$mockInstrument
+				->expects( $this->once() )
+				->method( 'send' )
+				->with( 'exposure' );
+		} else {
+			$mockInstrument
+				->expects( $this->never() )
+				->method( 'send' );
+		}
+		$mockInstrumentManager = $this->createMock( InstrumentManager::class );
+		$mockInstrumentManager
+			->method( 'getInstrument' )
+			->willReturn( $mockInstrument );
+		$this->setService( 'TestKitchen.InstrumentManager', $mockInstrumentManager );
 	}
 }
