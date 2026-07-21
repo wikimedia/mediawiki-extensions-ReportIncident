@@ -21,6 +21,7 @@ declare( strict_types=1 );
 namespace MediaWiki\Extension\ReportIncident\Hooks\Handlers;
 
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\Hook\BeforePageDisplayHook;
 use MediaWiki\Skin\Hook\SidebarBeforeOutputHook;
 use MediaWiki\Skin\Hook\SkinTemplateNavigation__UniversalHook;
@@ -89,6 +90,26 @@ class MainHooksHandler implements
 				'href' => '#',
 				'icon' => 'flag',
 			];
+
+			// Instrument an "exposure" here. This is the quasi-equivalent of the sendExposure event
+			// implemented in ReportIncidentController. Exposures are an experiment-only concept and
+			// support de-duping events within the request memory. As the controller is called in two
+			// different instances, the closest equivalent is to only instrument the more common event,
+			// the loading of the link in the sidebar.
+
+			// Don't instrument if it's an e2e tester user
+			if ( $this->controller->isE2ETesterUser( $sktemplate->getContext()->getUser()->getName() ) ) {
+				return;
+			}
+
+			// To avoid a hard dependency on TestKitchen, load and use services statically
+			$services = MediaWikiServices::getInstance();
+			if ( $services->getService( 'ExtensionRegistry' )->isLoaded( 'TestKitchen' ) ) {
+				$instrument = $services
+					->getService( 'TestKitchen.InstrumentManager' )
+					->getInstrument( 'incident-reporting-system-interaction-instrument' );
+				$instrument->send( 'exposure' );
+			}
 		}
 	}
 }

@@ -86,7 +86,7 @@ class ReportIncidentPage extends Page {
 	}
 
 	get reportLink() {
-		return $( '#reportincident .oo-ui-labelElement-label', this.threadOptions );
+		return $( '.ext-reportincident-thread-link .oo-ui-labelElement-label', this.threadOptions );
 	}
 
 	get successfulSubmissionSectionHeader() {
