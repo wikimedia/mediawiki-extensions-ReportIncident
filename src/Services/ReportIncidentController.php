@@ -36,6 +36,17 @@ class ReportIncidentController {
 	}
 
 	/**
+	 * Check if the user is configured to be an e2e tester via CommunityConfiguration
+	 *
+	 * @param string $userName
+	 * @return bool
+	 */
+	public function isE2ETesterUser( string $userName ): bool {
+		$e2eTesters = (array)$this->localConfig->get( 'ReportIncidentE2ETesterUsers' );
+		return in_array( $userName, $e2eTesters );
+	}
+
+	/**
 	 * Should the reporting link / button be shown for the current user
 	 *
 	 * This should only be shown to users eligible to send a report unless their
@@ -60,8 +71,7 @@ class ReportIncidentController {
 		}
 
 		// if user is an e2e tester, show them the button regardless of eligibility
-		$e2eTesters = (array)$this->localConfig->get( 'ReportIncidentE2ETesterUsers' );
-		if ( in_array( $user->getName(), $e2eTesters ) ) {
+		if ( $this->isE2ETesterUser( $user->getName() ) ) {
 			return true;
 		}
 
