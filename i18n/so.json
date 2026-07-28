@@ -4,6 +4,24 @@
 			"AhmedG612"
 		]
 	},
+	"reportincident-desc": "Kordhinta Nidaamka Warbixinta Dhacdooyinka.",
+	"reportincident-report-btn-label": "Warbixin",
+	"reportincident-dialog-close-btn": "Xir",
+	"reportincident-dialog-back-btn": "Dib u noqo",
+	"reportincident-dialog-optional-label": "(Ikhtiyaar)",
 	"reportincident-dialog-violator-placeholder-text": "Yaa laga soo dacwaynayaa?",
-	"reportincident-dialog-something-else-empty": "Fadlan bixi sharaxaad kooban oo ku saabsan dhaqanka."
+	"reportincident-dialog-harassment-type-sexual-harassment": "Dhibaatayn galmo",
+	"reportincident-dialog-harassment-type-something-else": "Wax kale",
+	"reportincident-dialog-something-else-input-placeholder": "Sheeg dhaqamada aan kor lagu xusin.",
+	"reportincident-dialog-harassment-empty": "{{GENDER:|Waa inaad}} doorataa ugu yaraan hal dhaqan.",
+	"reportincident-dialog-something-else-empty": "Fadlan bixi sharaxaad kooban oo ku saabsan dhaqanka.",
+	"reportincident-dialog-server-error": "Waan ka xunnahay, waxay u muuqataa in adeegu aanu ka jawaabayn. Fadlan isku day inaad dib u gudbiso.",
+	"reportincident-dialog-generic-error": "{{GENDER:|Codsigaaga}} lama gudbin karin sababo la xiriira khalad. Fadlan isku day inaad dib u gudbiso.",
+	"right-reportincident": "Ka warbixi dhacdo",
+	"action-reportincident": "Ka warbixi dhacdo",
+	"reportincident-emaildialog-title": "Iimayl la xaqiijiyay ayaa loo baahan yahay",
+	"reportincident-emaildialog-close-button": "Jooji",
+	"reportincident-emaildialog-content": "Waxaan u baahan nahay {{GENDER:|iimaylkaaga}} la xaqiijiyay si aan kuu siino warbixinno ku saabsan {{GENDER:|warbixinta}} ama aan kula soo xiriirno haddii loo baahdo. Fadlan ku dar ama xaqiiji {{GENDER:|iimaylkaaga}} adigoo ka adeegsanaya dejinta akoonkaaga ka hor intaadan gudbin warbixin.",
+	"reportincident-emaildialog-primary": "Ugu dub dejinta",
+	"reportincident-confirmedemail-required": "Cinwaan iimayl la xaqiijiyay ayaa loo baahan yahay si loo gudbiyo warbixinta dhacdada."
 }
