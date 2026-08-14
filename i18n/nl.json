@@ -115,7 +115,7 @@
 	"reportincident-nonemergency-helpmethod-contactcommunity": "Als u niet zeker weet wat u moet doen, [$1 vraag dan de gemeenschap om hulp]",
 	"reportincident-nonemergency-generic-nextstep-otheraction": "Als de bovenstaande stappen niet hebben geholpen, kunt u een [[meta:Special:MyLanguage/Universal_Code_of_Conduct/Coordinating_Committee/Cases|klacht indienen bij de U4C (Universal Code of Conduct)]] of [[foundation:Special:MyLanguage/Legal:Wikimedia_Foundation_Legal_and_Safety_Contact_Information|contact opnemen met de non-profitorganisatie]] die deze website beheert.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-label": "Hoe vraag ik hulp",
-	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description": "Voeg ten minste één contactmethode toe die aan de gebruiker wordt getoond.",
+	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-description": "Voeg ten minste één contactmethode toe die aan de gebruiker wordt weergegeven.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-label": "Neem contact op met een beheerder voor hulp bij dringende en lopende incidenten",
 	"communityconfiguration-reportincident-reportincident_nonemergency_helpmethod-contactadmin-description": "Voeg de koppeling toe naar de pagina waarnaar de gebruiker moet gaan",
 	"communityconfiguration-reportincident-reportincident_nonemergency_intimidation_helpmethod-contactadmin-placeholder": "bijv. Project:Beheerdersprikbord",
