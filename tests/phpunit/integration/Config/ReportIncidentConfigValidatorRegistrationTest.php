@@ -2,7 +2,7 @@
 declare( strict_types=1 );
 namespace MediaWiki\Extension\ReportIncident\Tests\Integration\Config;
 
-use MediaWiki\Extension\ReportIncident\Config\ReportIncidentConfigValidator;
+use MediaWiki\Extension\ReportIncident\Config\Schemas\ReportIncidentConfigValidator;
 use MediaWikiIntegrationTestCase;
 
 /**

@@ -20,8 +20,8 @@
 		"CommunityConfiguration": {
 			"Validators": {
 				"reportincident": {
-					"class": "MediaWiki\\Extension\\ReportIncident\\Config\\ReportIncidentConfigValidator",
-					"factory": "MediaWiki\\Extension\\ReportIncident\\Config\\ReportIncidentConfigValidator::factory",
+					"class": "MediaWiki\\Extension\\ReportIncident\\Config\\Schemas\\ReportIncidentConfigValidator",
+					"factory": "MediaWiki\\Extension\\ReportIncident\\Config\\Schemas\\ReportIncidentConfigValidator::factory",
 					"services": [
 						"TitleParser",
 						"PageStore",
@@ -30,7 +30,7 @@
 						"CommunityConfiguration.ValidatorFactory"
 					],
 					"args": [
-						"MediaWiki\\Extension\\ReportIncident\\Config\\ReportIncidentSchema"
+						"MediaWiki\\Extension\\ReportIncident\\Config\\Schemas\\ReportIncidentSchema"
 					]
 				}
 			},
@@ -52,6 +52,9 @@
 	},
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\ReportIncident\\": "src/"
+	},
+	"TestAutoloadClasses": {
+		"MediaWiki\\Extension\\CommunityConfiguration\\Maintenance\\MigrateConfig": "../CommunityConfiguration/maintenance/migrateConfig.php"
 	},
 	"config": {
 		"ReportIncidentReportButtonEnabled": {

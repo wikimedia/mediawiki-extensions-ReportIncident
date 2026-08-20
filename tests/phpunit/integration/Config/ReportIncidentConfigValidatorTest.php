@@ -5,13 +5,13 @@ namespace MediaWiki\Extension\ReportIncident\Tests\Integration\Config;
 
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Extension\CommunityConfiguration\CommunityConfigurationServices;
-use MediaWiki\Extension\ReportIncident\Config\ReportIncidentConfigValidator;
-use MediaWiki\Extension\ReportIncident\Config\ReportIncidentSchema;
+use MediaWiki\Extension\ReportIncident\Config\Schemas\ReportIncidentConfigValidator;
+use MediaWiki\Extension\ReportIncident\Config\Schemas\ReportIncidentSchema;
 use MediaWikiIntegrationTestCase;
 
 /**
- * @covers \MediaWiki\Extension\ReportIncident\Config\ReportIncidentConfigValidator
- * @covers \MediaWiki\Extension\ReportIncident\Config\ReportIncidentSchema
+ * @covers \MediaWiki\Extension\ReportIncident\Config\Schemas\ReportIncidentConfigValidator
+ * @covers \MediaWiki\Extension\ReportIncident\Config\Schemas\ReportIncidentSchema
  * @group Database
  */
 class ReportIncidentConfigValidatorTest extends MediaWikiIntegrationTestCase {

@@ -1,9 +1,10 @@
 <?php
 declare( strict_types=1 );
-namespace MediaWiki\Extension\ReportIncident\Config;
+namespace MediaWiki\Extension\ReportIncident\Config\Schemas;
 
 use MediaWiki\Extension\CommunityConfiguration\Schema\JsonSchema;
 use MediaWiki\Extension\CommunityConfiguration\Schemas\MediaWiki\MediaWikiDefinitions;
+use MediaWiki\Extension\ReportIncident\Config\Schemas\Converters\ReportIncidentSchema_Converter_1_1_0;
 
 // phpcs:disable Generic.NamingConventions.UpperCaseConstantName.ClassConstantNotUpperCase
 
@@ -11,8 +12,9 @@ use MediaWiki\Extension\CommunityConfiguration\Schemas\MediaWiki\MediaWikiDefini
  * JSON schema for community configuration used by the Incident Reporting System.
  */
 class ReportIncidentSchema extends JsonSchema {
-
+	public const SCHEMA_PREVIOUS_VERSION = '1.0.0';
 	public const VERSION = '1.1.0';
+	public const SCHEMA_CONVERTER = ReportIncidentSchema_Converter_1_1_0::class;
 
 	public const ReportIncidentEnabledNamespaces = [
 		self::REF => [

@@ -1,6 +1,6 @@
 <?php
 declare( strict_types=1 );
-namespace MediaWiki\Extension\ReportIncident\Config;
+namespace MediaWiki\Extension\ReportIncident\Config\Schemas;
 
 use Iterator;
 use MediaWiki\Context\IContextSource;
@@ -267,6 +267,13 @@ class ReportIncidentConfigValidator implements IValidator {
 			(\\.[$rfc1034_ldh_str]+)*  # Following part prefixed with a dot
 			$                      # End of string
 			/ix";
+			if ( !is_string( $value ) ) {
+				// Below was added to fix the following phan error
+				// src/Config/Schemas/ReportIncidentConfigValidator.php:271 PhanTypeMismatchArgumentInternal Argument 2
+				// ($subject) is $value of type \stdClass|array<string,string> but \preg_match() takes string
+				throw new \RuntimeException(
+					'value at ' . $key . ' must be a string but is of type ' . gettype( $value ) );
+			}
 			// ^ case Insensitive, eXtended
 			if ( !preg_match( $html5_email_regexp, $value ) ) {
 				$status->addFatal(
