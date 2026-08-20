@@ -11,7 +11,9 @@
 			"Pawsdt",
 			"Wilf233",
 			"TigerZhang",
-			"Peterxy"
+			"Peterxy",
+			"GuoPC",
+			"Ouclie"
 		]
 	},
 	"reportincident-desc": "事件报告系统扩展。",
@@ -87,7 +89,7 @@
 	"reportincident-submit-behavior-section-support-item-mentors": "如果{{GENDER:|您}}是新手，[[Special:Homepage|请咨询{{GENDER:|您的}}导师]]以帮助{{GENDER:|您}}完成整个流程。",
 	"reportincident-submit-behavior-section-support-item-info-is-public": "wiki上的所有对话都是公开的，请不要分享个人信息。",
 	"reportincident-submit-behavior-section-other-options-title": "找不到{{GENDER:|您}}要找的内容？",
-	"reportincident-submit-behavior-section-other-options-item-ask": "如果{{GENDER:|你}}不确定该怎么做，[[$1|请询问社群]]以寻求帮助。",
+	"reportincident-submit-behavior-section-other-options-item-ask": "如果{{GENDER:|您}}不确定该怎么做，请[[$1|向社群寻求帮助]]。",
 	"reportincident-submit-behavior-section-other-options-item-contact-host": "如果上述步骤对{{GENDER:|您}}没有帮助，{{GENDER:|您}}可以联系托管此网站的[[meta:Special:MyLanguage/Wikimedia_Foundation/Contact_us|非营利组织]]。",
 	"reportincident-submit-back-to-page": "返回$1",
 	"communityconfiguration-reportincident-title": "事件报告系统",

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Jeeputer",
-			"LordProfo"
+			"LordProfo",
+			"LProfo"
 		]
 	},
 	"reportincident-dialog-violator-label": "کاربری که {{GENDER:|می‌خواهید}} او را گزارش {{GENDER:|کنید}}",
