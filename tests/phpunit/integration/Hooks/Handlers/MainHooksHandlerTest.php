@@ -8,6 +8,7 @@ use MediaWiki\Extension\ReportIncident\Hooks\Handlers\MainHooksHandler;
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
 use MediaWiki\Extension\TestKitchen\Sdk\Instrument;
 use MediaWiki\Extension\TestKitchen\Sdk\InstrumentManager;
+use MediaWiki\Extension\TestKitchen\Sdk\InstrumentManagerInterface;
 use MediaWiki\Message\Message;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Skin\Skin;
@@ -37,7 +38,7 @@ class MainHooksHandlerTest extends MediaWikiIntegrationTestCase {
 		$outputPageMock->expects( $this->once() )
 			->method( 'addModules' );
 		$mockReportIncidentController = $this->createMock( ReportIncidentController::class );
-		( new MainHooksHandler( $mockReportIncidentController ) )
+		( new MainHooksHandler( $mockReportIncidentController, null ) )
 			->onBeforePageDisplay( $outputPageMock, $this->createMock( Skin::class ) );
 	}
 
@@ -65,7 +66,7 @@ class MainHooksHandlerTest extends MediaWikiIntegrationTestCase {
 			->with( $mockContext )
 			->willReturn( false );
 
-		( new MainHooksHandler( $mockReportIncidentController ) )
+		( new MainHooksHandler( $mockReportIncidentController, null ) )
 			->onBeforePageDisplay( $outputPageMock, $this->createMock( Skin::class ) );
 	}
 
@@ -93,7 +94,7 @@ class MainHooksHandlerTest extends MediaWikiIntegrationTestCase {
 			->with( $mockContext )
 			->willReturn( true );
 
-		( new MainHooksHandler( $mockReportIncidentController ) )
+		( new MainHooksHandler( $mockReportIncidentController, null ) )
 			->onBeforePageDisplay( $outputPageMock, $this->createMock( Skin::class ) );
 	}
 
@@ -121,8 +122,8 @@ class MainHooksHandlerTest extends MediaWikiIntegrationTestCase {
 		$mockReportIncidentController->expects( $this->never() )
 			->method( 'addModulesAndConfigVars' );
 
-		$this->expectExposureInstrumentation( false );
-		$objectUnderTest = new MainHooksHandler( $mockReportIncidentController );
+		$instrumentManager = $this->expectExposureInstrumentation( false );
+		$objectUnderTest = new MainHooksHandler( $mockReportIncidentController, $instrumentManager );
 		$sidebar = [];
 		$objectUnderTest->$method( $mockSkin, $sidebar );
 		$this->assertArrayEquals(
@@ -159,7 +160,7 @@ class MainHooksHandlerTest extends MediaWikiIntegrationTestCase {
 		$mockReportIncidentController->expects( $this->never() )
 			->method( 'addModulesAndConfigVars' );
 
-		$objectUnderTest = new MainHooksHandler( $mockReportIncidentController );
+		$objectUnderTest = new MainHooksHandler( $mockReportIncidentController, null );
 		$sidebar = [];
 		$objectUnderTest->onSidebarBeforeOutput( $mockSkin, $sidebar );
 		$this->assertArrayEquals(
@@ -182,7 +183,7 @@ class MainHooksHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/** @dataProvider provideToolLinksAddedWhenCorrectNamespaceAndSkin */
 	public function testToolLinksAddedWhenDisplayingButton( $method, $expectedSidebar ) {
-		$this->expectExposureInstrumentation( $method === 'onSkinTemplateNavigation__Universal' );
+		$instrumentManager = $this->expectExposureInstrumentation( $method === 'onSkinTemplateNavigation__Universal' );
 
 		// Mock the Skin object that will be provided as an argument to the method under test.
 		$mockSkin = $this->createMock( Skin::class );
@@ -218,7 +219,7 @@ class MainHooksHandlerTest extends MediaWikiIntegrationTestCase {
 			->method( 'addModulesAndConfigVars' )
 			->with( $mockOutput );
 
-		$objectUnderTest = new MainHooksHandler( $mockReportIncidentController );
+		$objectUnderTest = new MainHooksHandler( $mockReportIncidentController, $instrumentManager );
 		$sidebar = [];
 		$objectUnderTest->$method( $mockSkin, $sidebar );
 		$this->assertArrayEquals(
@@ -261,10 +262,10 @@ class MainHooksHandlerTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	private function expectExposureInstrumentation( bool $shouldSend ): void {
+	private function expectExposureInstrumentation( bool $shouldSend ): ?InstrumentManagerInterface {
 		// Do nothing if TestKitchen isn't enabled
 		if ( !$this->getServiceContainer()->getService( 'ExtensionRegistry' )->isLoaded( 'TestKitchen' ) ) {
-			return;
+			return null;
 		}
 
 		$mockInstrument = $this->createMock( Instrument::class );
@@ -282,6 +283,6 @@ class MainHooksHandlerTest extends MediaWikiIntegrationTestCase {
 		$mockInstrumentManager
 			->method( 'getInstrument' )
 			->willReturn( $mockInstrument );
-		$this->setService( 'TestKitchen.InstrumentManager', $mockInstrumentManager );
+		return $mockInstrumentManager;
 	}
 }

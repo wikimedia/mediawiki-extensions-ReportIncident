@@ -21,7 +21,7 @@ declare( strict_types=1 );
 namespace MediaWiki\Extension\ReportIncident\Hooks\Handlers;
 
 use MediaWiki\Extension\ReportIncident\Services\ReportIncidentController;
-use MediaWiki\MediaWikiServices;
+use MediaWiki\Extension\TestKitchen\Sdk\InstrumentManagerInterface;
 use MediaWiki\Output\Hook\BeforePageDisplayHook;
 use MediaWiki\Skin\Hook\SidebarBeforeOutputHook;
 use MediaWiki\Skin\Hook\SkinTemplateNavigation__UniversalHook;
@@ -34,6 +34,7 @@ class MainHooksHandler implements
 
 	public function __construct(
 		private readonly ReportIncidentController $controller,
+		private readonly ?InstrumentManagerInterface $instrumentManager,
 	) {
 	}
 
@@ -102,11 +103,8 @@ class MainHooksHandler implements
 				return;
 			}
 
-			// To avoid a hard dependency on TestKitchen, load and use services statically
-			$services = MediaWikiServices::getInstance();
-			if ( $services->getService( 'ExtensionRegistry' )->isLoaded( 'TestKitchen' ) ) {
-				$instrument = $services
-					->getService( 'TestKitchen.InstrumentManager' )
+			if ( $this->instrumentManager ) {
+				$instrument = $this->instrumentManager
 					->getInstrument( 'incident-reporting-system-interaction-instrument' );
 				$instrument->send( 'exposure' );
 			}

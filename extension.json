@@ -135,6 +135,9 @@
 			"class": "MediaWiki\\Extension\\ReportIncident\\Hooks\\Handlers\\MainHooksHandler",
 			"services": [
 				"ReportIncidentController"
+			],
+			"optional_services": [
+				"TestKitchen.InstrumentManager"
 			]
 		},
 		"DiscussionToolsHooks": {
