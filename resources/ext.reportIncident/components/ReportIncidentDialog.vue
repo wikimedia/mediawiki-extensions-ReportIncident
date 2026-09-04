@@ -106,7 +106,6 @@ module.exports = exports = {
 			};
 
 			// Possible message keys used here are listed above.
-			// eslint-disable-next-line mediawiki/msg-doc
 			return mw.msg( titlesByStep[ currentStep.value ] );
 		} );
 
