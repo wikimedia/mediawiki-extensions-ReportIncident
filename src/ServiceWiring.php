@@ -81,7 +81,7 @@ return [
 			$localLinksConfig = $services->getMainConfig();
 		}
 		$experimentManager = ExtensionRegistry::getInstance()->isLoaded( 'TestKitchen' ) ?
-			MediaWikiServices::getInstance()->getService( 'TestKitchen.ExperimentManager' ) :
+			$services->getService( 'TestKitchen.ExperimentManager' ) :
 			null;
 		return new ReportIncidentController( $services->getMainConfig(), $localLinksConfig, $experimentManager );
 	}
