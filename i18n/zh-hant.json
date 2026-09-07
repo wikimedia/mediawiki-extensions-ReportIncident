@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Kly",
+			"LowensteinYang",
 			"Winston Sung",
 			"沈澄心"
 		]
@@ -19,7 +20,7 @@
 	"reportincident-dialog-violator-disclaimer": "維基媒體基金會不會主動向{{GENDER:|您}}所舉報的人透露{{GENDER:|您}}的身分資訊。",
 	"reportincident-dialog-violator-placeholder-text": "{{GENDER:|您}}要報告誰？",
 	"reportincident-dialog-harassment-type-doxing": "洩漏私人個人資訊（人肉搜尋）",
-	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "仇恨和歧視性內容",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "仇恨或歧視的行為",
 	"reportincident-dialog-harassment-type-intimidation": "霸凌、恐嚇、威脅或侮辱",
 	"reportincident-dialog-harassment-type-sexual-harassment": "性騷擾",
 	"reportincident-dialog-harassment-type-something-else": "其他情況",
