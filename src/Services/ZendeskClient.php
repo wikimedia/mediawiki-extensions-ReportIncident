@@ -105,7 +105,7 @@ class ZendeskClient implements IReportIncidentNotifier {
 		// Attempt to parse Zendesk API errors if we get a JSON error response back with a 4xx status.
 		// https://developer.zendesk.com/api-reference/introduction/requests/#400-range
 		if (
-			$request->getResponseHeader( 'Content-Type' ) === 'application/json' &&
+			$request->getResponseHeader( 'content-type' ) === 'application/json' &&
 			$request->getStatus() >= 400 &&
 			$request->getStatus() < 500
 		) {
