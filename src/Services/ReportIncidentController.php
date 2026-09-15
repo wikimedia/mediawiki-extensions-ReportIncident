@@ -18,6 +18,12 @@ use Wikimedia\Timestamp\TimestampFormat;
  */
 class ReportIncidentController {
 
+	/** @var array<int,bool> Instance cache for {@link self::shouldShowButtonForNamespace} */
+	private array $shouldShowForNamespaceCache = [];
+
+	/** @var array<string,bool> Instance cache for {@link self::isE2ETesterUser} */
+	private array $isE2ETesterUserCache = [];
+
 	public function __construct(
 		private readonly Config $config,
 		private readonly Config $localConfig,
@@ -32,7 +38,11 @@ class ReportIncidentController {
 	 * @return bool
 	 */
 	private function shouldShowButtonForNamespace( int $namespace ): bool {
-		return in_array( $namespace, $this->getLocalConfig( 'ReportIncidentEnabledNamespaces' ) );
+		$this->shouldShowForNamespaceCache[$namespace] ??= in_array(
+			$namespace,
+			$this->getLocalConfig( 'ReportIncidentEnabledNamespaces' )
+		);
+		return $this->shouldShowForNamespaceCache[$namespace];
 	}
 
 	/**
@@ -42,8 +52,11 @@ class ReportIncidentController {
 	 * @return bool
 	 */
 	public function isE2ETesterUser( string $userName ): bool {
-		$e2eTesters = (array)$this->localConfig->get( 'ReportIncidentE2ETesterUsers' );
-		return in_array( $userName, $e2eTesters );
+		$this->isE2ETesterUserCache[$userName] ??= in_array(
+			$userName,
+			(array)$this->localConfig->get( 'ReportIncidentE2ETesterUsers' )
+		);
+		return $this->isE2ETesterUserCache[$userName];
 	}
 
 	/**
