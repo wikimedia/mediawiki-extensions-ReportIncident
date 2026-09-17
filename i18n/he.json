@@ -84,7 +84,7 @@
 	"reportincident-submit-back-to-page": "חזרה אל $1",
 	"communityconfiguration-reportincident-title": "מערכת דיווח תקריות",
 	"communityconfiguration-reportincident-description": "הגדרת קישורים מקומיים שמשמשים את זרימת העבודה למצבים שאינם מצבי חירום של מערכת דיווח התקריות וניהול מרחבי השמות שהמערכת מופעלת בהם.",
-	"communityconfiguration-reportincident-info-text": "מערכת דיווח התקריות מפנה משתמשים שמגישים דו\"חות דרך זרימת העבודה שלה למצבים שאינם מצבי חירום לדפי ויקי מקומיים מתאימים. אפשר להגדיר אותם כאן. אם השדה יושאר ריק, זה יגרום לשימוש בערכי ברירת מחדל מהתצורה המותקנת.",
+	"communityconfiguration-reportincident-info-text": "מערכת דיווח התקריות מפנה משתמשים שמגישים דו\"חות דרך זרימת העבודה שלה למצבים שאינם מצבי חירום לדפי ויקי מקומיים מתאימים. אפשר להגדיר אותם כאן. אם השדה יושאר ריק, זה יגרום לשימוש בערכי ברירת מחדל מהתצורה הפרוסה.",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-label": "דף שאלות קהילה",
 	"communityconfiguration-reportincident-reportincidentcommunityquestionspage-help-text": "דף ויקי שמשתמשים יכולים להפנות בו שאלות אל הקהילה.",
 	"communityconfiguration-reportincident-reportincidentlocalincidentreportpage-label": "דף דיווח תקריות מקומי",
