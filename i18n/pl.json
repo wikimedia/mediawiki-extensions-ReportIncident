@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"PanWor",
 			"Rail",
 			"Woytecr"
 		]
@@ -64,7 +65,7 @@
 	"reportincident-submit-emergency-dialog-title": "Dziękujemy {{GENDER:|Ci}} za podjęcie kroków, które mają na celu uczynienie {{GRAMMAR:D.lp|{{SITENAME}}}} bezpieczniejszą i bardziej inkluzywną",
 	"reportincident-submit-emergency-success": "Zgłoszenie zostało przesłane do rozpatrzenia, {{GENDER:|}}które nastąpi w ciągu 3 godzin.",
 	"reportincident-submit-emergency-section-important-title": "Ważne",
-	"reportincident-submit-emergency-section-important-item-services": "Jeśli {{GENDER:|zostałeś okaleczony|zostałaś okaleczona}} lub znajdujesz się w bezpośrednim niebezpieczeństwie, skontaktuj się z {{GENDER:|swoimi}} lokalnymi służbami ratunkowymi.",
+	"reportincident-submit-emergency-section-important-item-services": "Jeśli {{GENDER:|zostałeś okaleczony|zostałaś okaleczona|zostałeś(-aś) okaleczony(-a)}} lub znajdujesz się w bezpośrednim niebezpieczeństwie, skontaktuj się ze {{GENDER:|swoimi}} lokalnymi służbami ratunkowymi.",
 	"reportincident-submit-emergency-section-important-item-resources": "Jeśli {{GENDER:|uważasz}}, że możesz wyrządzić fizyczną krzywdę {{GENDER:|sobie}} lub innym, {{GENDER:|możesz}} zapoznać się z [[meta:Special:MyLanguage/Mental_health_resources|listą zasobów wsparcia psychicznego]].",
 	"reportincident-submit-emergency-section-next-title": "Co stanie się dalej?",
 	"reportincident-submit-emergency-section-next-item-team": "{{GENDER:|Twoje}} zgłoszenie zostanie przesłane do [[meta:Special:MyLanguage/Threats_of_harm|zespołu kryzysowego Wikimedia Foundation]]. Zespół ten monitoruje zgłoszenia dotyczące sytuacji nagłych 24/7, co oznacza, że {{GENDER:|Twój}} wniosek zostanie rozpatrzony w ciągu 3 godzin.",
