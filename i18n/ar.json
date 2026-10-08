@@ -109,6 +109,7 @@
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-placeholder": "مثال: مشروع: الإشراف",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_hideediturl-help-text": "قد تكون هذه صفحة السياسة المحلية الخاصة بك",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-label": "الإبلاغ المباشر عبر البريد الإلكتروني",
+	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-description": "يعرض نظام الإبلاغ المباشر نموذجًا يمكن للمستخدم تعبئته لإرسال رسالة. تُرسل هذه الرسالة افتراضيًا إلى البريد الإلكتروني stewards-oversight@wikimedia.org. إذا كنت ترغب في إرسال هذه الرسائل إلى عنوان بريد إلكتروني آخر، فأضفه إلى الحقل أدناه.",
 	"communityconfiguration-reportincident-reportincident_nonemergency_doxing_helpmethod-email-placeholder": "مثل oversight@en-wpwikipedia.org",
 	"reportincident-nonemergency-sexualharassment-header": "التحرش الجنسي",
 	"communityconfiguration-reportincident-reportincident_nonemergency_sexualharassment-label": "التحرش الجنسي",
