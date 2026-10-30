@@ -26,10 +26,11 @@ describe( 'Report Incident email alert dialog', () => {
 
 	it( 'Call to onPrimaryAction', () => {
 		const wrapper = utils.mount( EmailAlertDialog, { props: { open: true } } );
-		// Mock window.location.assign.
-		delete window.location;
+		// Mock window.location.assign. Deleting window.location first throws an error
+		// with newer versions of Node, so redefine it directly.
 		const assignMock = jest.fn();
 		Object.defineProperty( window, 'location', {
+			configurable: true,
 			writable: true,
 			value: { assign: assignMock }
 		} );
