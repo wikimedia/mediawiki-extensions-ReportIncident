@@ -14,7 +14,6 @@ use MediaWiki\Permissions\RateLimiter;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Rest\Response;
-use MediaWiki\Rest\ResponseFactory;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
@@ -794,7 +793,7 @@ class ReportHandlerTest extends MediaWikiUnitTestCase {
 			]
 		);
 		$handler = TestingAccessWrapper::newFromObject( $handler );
-		$handler->responseFactory = new ResponseFactory( [] );
+		$handler->responseFactory = $this->newResponseFactory();
 		/** @var Response $response */
 		$response = $handler->submitIncidentReport( $incidentReport );
 		$this->assertSame( 204, $response->getStatusCode() );
