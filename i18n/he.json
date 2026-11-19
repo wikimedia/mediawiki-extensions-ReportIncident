@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"A100Star",
 			"Amire80",
 			"Neriah",
 			"YaronSh"
@@ -19,14 +20,14 @@
 	"reportincident-dialog-violator-disclaimer": "קרן ויקימדיה לא תיתן מרצונה את המידע על זהותך לאדם {{GENDER:|שאתה מדווח|שאת מדווחת}} עליו",
 	"reportincident-dialog-violator-placeholder-text": "את מי {{GENDER:|אתה מדווח|את מדווחת}}?",
 	"reportincident-dialog-harassment-type-doxing": "חשיפת מידע אישי פרטי (דוקסינג)",
-	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "תוכן מעורר שנאה ומפלה",
+	"reportincident-dialog-harassment-type-hate-speech-or-discrimination": "התנהגות המבטאת שנאה או אפליה",
 	"reportincident-dialog-harassment-type-intimidation": "בריונות, הפחדה, איום או עלבונות",
 	"reportincident-dialog-harassment-type-sexual-harassment": "הטרדה מינית",
 	"reportincident-dialog-harassment-type-something-else": "משהו אחר",
 	"reportincident-dialog-harassment-type-spam": "ספאם או תוכן פרסומי",
 	"reportincident-dialog-harassment-type-trolling": "טרלול או הצקה (רדיפה)",
 	"reportincident-dialog-something-else-input-placeholder": "נא לציין את ההתנהגויות שאינן מופיעות למעלה.",
-	"reportincident-dialog-unacceptable-behavior-community-managed": "אתר {{SITENAME}} הוא קהילה שבה [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|התנהגות בלתי־הולמת אינה נסבלת]] והיא מנוהלת על־ידי קהילה של משתמשים מנוסים.",
+	"reportincident-dialog-unacceptable-behavior-community-managed": "יש לבחור את סוג [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|ההתנהגות הבלתי מקובלת]], ובדף הבא יוצג מידע על אפשרויות לקבלת סיוע.",
 	"reportincident-dialog-get-support-title": "קבלת תמיכה בתקרית",
 	"reportincident-dialog-harassment-empty": "{{GENDER:|אתה חייב|את חייבת}} לבחור התנהגות אחת לפחות.",
 	"reportincident-dialog-something-else-empty": "נא לספק תיאור קצר של ההתנהגות.",
@@ -53,7 +54,7 @@
 	"reportincident-choose-option": "נא לבחור אפשרות",
 	"reportincident-dialog-cancel": "ביטול",
 	"reportincident-dialog-continue": "המשך",
-	"reportincident-unacceptable-behavior-footer": "יוצג לך מידע על תמיכה שיסייע בפתרון התקרית. [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|התנהגות בלתי מקובלת]] מנוהלת על־ידי קהילת ויקיפדיה.",
+	"reportincident-unacceptable-behavior-footer": "{{SITENAME}} הוא אתר קהילתי שבו אין סובלנות כלפי [[Foundation:Special:MyLanguage/Policy:Universal_Code_of_Conduct#3_–_Unacceptable_behaviour|התנהגות בלתי מקובלת]], והוא מנוהל על־ידי קהילה של משתמשים מנוסים. אם יש צורך בסיוע בנושא אחר, ניתן לעיין ב[[foundation:Special:MyLanguage/Legal:Wikimedia_Foundation_Legal_and_Safety_Contact_Information|פרטי הקשר של המחלקה המשפטית והבטיחות של קרן ויקימדיה]].",
 	"reportincident-physical-harm-infotext": "קישור לאירוע {{GENDER:|שאתה מדווח|שאת מדווחת}} עליו (כולל המשתמש המדווח) ושם המשתמש וכתובת הדוא\"ל שלך <b>ישותפו באופן פרטי עם [[meta:Special:MyLanguage/Threats_of_harm|צוות החירום של קרן ויקימדיה]]</b>.",
 	"reportincident-physical-harm-footer": "הדו\"ח {{GENDER:|שלך}} הוא [[Foundation:Special:MyLanguage/Policy:Privacy_policy#How_We_Use_Information_We_Receive_From_You|פרטי]] והוא יישלח אל [[meta:Special:MyLanguage/Threats_of_harm|צוות החירום של קרן ויקימדיה]] לסקירה.",
 	"reportincident-threats-physical-harm": "איומים בפגיעה גופנית",
